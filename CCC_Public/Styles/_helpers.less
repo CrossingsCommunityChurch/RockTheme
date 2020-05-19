@@ -1,0 +1,226 @@
+.nopadding-y {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+.nopadding-x {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.nopadding {
+    padding: 0 !important;
+}
+
+.nomargin-y {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.nomargin-x {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.nomargin {
+    margin: 1 !important;
+}
+
+.padding-top-xl {
+    padding-top: 2rem;
+}
+
+@media (min-width: @screen-desktop) {
+    .padding-top-xl {
+        padding-top: 8rem;
+    }
+}
+
+.reverse {
+    color: @reverse;
+
+    a {
+        color: @reverse;
+    }
+}
+
+.flat {
+    border-radius: 0 !important;
+}
+
+.transparent {
+    background-color: transparent;
+}
+
+.scaleUp() {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.cardShadow {
+    position: relative;
+
+    &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100px;
+        bottom: 0;
+        box-shadow: 0 36px 64px -34px black, 0 16px 14px -14px rgba(0, 0, 0, 0.6), 0 22px 18px -18px rgba(0, 0, 0, 0.4), 0 22px 38px -18px black;
+        -webkit-transform: scaleX(0.7) scaleY(1.3) translateY(-25%);
+        transform: scaleX(0.7) scaleY(1.3) translateY(-25%);
+        z-index: -1;
+        opacity: 0.25;
+        transition: all ease-in-out 0.5s;
+    }
+}
+
+//Display Sizes
+@display1:            floor((@font-size-base * 3));
+@display2:            floor((@font-size-base * 3.5));
+@display3:            floor((@font-size-base * 4));
+@display4:            floor((@font-size-base * 4.5));
+
+.display-1 {
+    font-size: @display1;
+}
+
+.display-2 {
+    font-size: @display2;
+}
+
+.display-3 {
+    font-size: @display3;
+}
+
+.display-4 {
+    font-size: @display4;
+}
+
+.kitchen-sink .buttons button.btn {
+    width: 100%;
+}
+
+@media (min-width: @screen-desktop) {
+    .kitchen-sink .buttons button.btn {
+        width: auto;
+    }
+}
+
+.flatButtons {
+    .btn {
+        border-radius: 2px !important;
+    }
+}
+
+.before-enter {
+    opacity: 0;
+    transform: translateY(150px);
+    transition: all 1s ease-out;
+}
+
+.enter {
+    opacity: 1;
+    transform: translateY(0px);
+}
+
+.lead-buttons {
+    .before-enter {
+        opacity: 0;
+        transform: translateY(0px);
+        transition: all 1.5s ease-in-out;
+    }
+    
+    .enter {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+.zoom .primary-nav {
+    transform: translateY(0px);
+}
+
+.fadein {
+    &.before-enter {
+        transform: translateY(0px);
+    }
+
+    &.enter {
+        transform: translateY(0px);
+    }
+}
+
+.buttons {
+    &.before-enter {
+        transform: translateY(50px);
+    }
+
+    &.enter {
+        transform: translateY(0px);
+    }
+}
+
+.fade-left {
+    &.before-enter {
+        transform: translateY(0px);
+        transform: translateX(300px);
+    }
+
+    &.enter {
+        transform: translateY(0px);
+        transform: translateX(0px);
+    }
+}
+
+.fade-right {
+    &.before-enter {
+        transform: translateY(0);
+        transform: translateX(-300px);
+    }
+
+    &.enter {
+        transform: translateY(0px);
+        transform: translateX(0px);
+    }
+}
+
+.fade-down {
+    &.before-enter {
+        transform: translateY(-100px);
+    }
+
+    &.enter {
+        transform: translateY(0px);
+    }
+}
+
+.fade-up {
+    &.before-enter {
+        transform: translateY(e100px);
+    }
+
+    &.enter {
+        transform: translateY(0px);
+    }
+}
+
+.delay1 {
+    transition-delay: 0.25s;
+}
+
+.delay2 {
+    transition-delay: 0.75s;
+}
+
+.delay3 {
+    transition-delay: 1s;
+}
+
+@media (min-width: @screen-desktop) {
+    .primary-nav {
+        transition-delay: 0s;
+        transition: all ease-in-out 1.25s;
+        transform: translateY(-80px);
+    }    
+}
