@@ -18,15 +18,14 @@
 </script>
 
 <html class="no-js">
-<head runat="server">
+    <head runat="server">
+        <meta charset="utf-8">
+        <title></title>
 
-    <meta charset="utf-8">
-    <title></title>
+        <script src="<%# System.Web.Optimization.Scripts.Url("~/Scripts/Bundles/RockJQueryLatest" ) %>"></script>
 
-    <script src="<%# System.Web.Optimization.Scripts.Url("~/Scripts/Bundles/RockJQueryLatest" ) %>"></script>
-
-    <!-- Set the viewport width to device width for mobile -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <!-- Set the viewport width to device width for mobile -->
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <asp:ContentPlaceHolder ID="css" runat="server" />
 
@@ -43,47 +42,16 @@
 
     <form id="form1" runat="server">
 
-        <!-- Page Header -->
-        <header>
+        <div id="navigation">
+            <Rock:Zone Name="Login" runat="server"/>
+            <Rock:Zone Name="Navigation" runat="server"/>
+        </div>
 
-            <!-- Brand Bar -->
-            <nav class="navbar navbar-inverse navbar-static-top">
-                <div class="container">
-			        <div class="navbar-header">
-                        <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <Rock:Zone Name="Header" runat="server" />
-			        </div>
-                    <div class="navbar-collapse collapse">
-                        <!-- Main Navigation -->
-                        <div class="pull-right">
-                            <Rock:Zone Name="Login" runat="server" />
-                        </div>
-                        <Rock:Zone Name="Navigation" runat="server" />
-			        </div>
-                </div>
-            </nav>
-
-        </header>
-
-        <asp:ContentPlaceHolder ID="feature" runat="server"></asp:ContentPlaceHolder>
-
-        <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>
-
-	    <footer>
-            <div class="container">
-
-                <hr />
-
-                <div class="row">
-			        <div class="col-md-12">
-				        <Rock:Zone Name="Footer" runat="server" />
-			        </div>
-		        </div>
-
+        <div id="content" class="clearfix">
+                <asp:ContentPlaceHolder ID="feature" runat="server"></asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>
+                <Rock:Zone Name="Footer" runat="server" />                
             </div>
-	    </footer>
 
         <%-- controls for scriptmanager and update panel --%>
         <asp:ScriptManager ID="sManager" runat="server"/>
