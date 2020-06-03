@@ -241,7 +241,7 @@
     color: @text;
 
     &:hover {
-        background-color: darken(@color; @darken);
+        background-color: ~"darken(@color; @darken)";
         color: @text;
     }
 }
