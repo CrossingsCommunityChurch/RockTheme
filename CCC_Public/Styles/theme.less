@@ -1,5 +1,10 @@
-@import url('../../../node_modules/bootstrap/less/bootstrap.less');
+@base-spacing-unit: 30px;
+@nav-width: 75px;
 
+@import "../../../Styles/Bootstrap/variables.less";
+@import "../../../Styles/_rock-core.less";
+@import "../../../Styles/_store.less";
+@import "../../../Styles/_rock-variables.less";
 @import '_custom-variables.less';
 @import '_helpers.less';
 
@@ -37,3 +42,9 @@
 @import 'pages/_sermon-series-page.less';
 
 @import '_crossings.less';
+
+#cms-admin-footer,
+.zone-configuration-bar,
+.block-configuration-bar {
+	font-family: "colfax-web",Helvetica,Arial,sans-serif;
+}
