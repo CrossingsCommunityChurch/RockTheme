@@ -241,7 +241,7 @@
     color: @text;
 
     &:hover {
-        background-color: ~"darken(@color; @darken)";
+        background-color: darken(@color, @darken);
         color: @text;
     }
 }
@@ -255,7 +255,7 @@
     transition: all 0.5s ease-in-out;
 
     &:hover {
-        background-color: fade(@color; @darken);
+        background-color: fade(@color, @darken);
         color: @text;
     }
 }
