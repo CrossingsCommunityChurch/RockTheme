@@ -1,0 +1,47 @@
+
+.alert-text {
+    display: block;
+    margin-bottom: 0;
+}
+
+.alert {
+    font-size: 0.8rem;
+}
+
+.alert.alert-heading {
+    margin: 0;
+    border: 0 none;
+    border-radius: 0;
+    padding: @spacingSmall @spacing @spacingSmall;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    &.alert-info {
+        background-color: @alert-color;
+        color: @white;
+    }
+
+    .btn-sm {
+        margin-top: 7px;
+        margin-bottom: 0;
+        font-size: 0.625rem;
+        padding: @spacingSmall @spacingLarger;
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .alert-text {
+        display: inline;
+        margin-right: @spacingSmall;
+    }
+
+    .alert {
+        .btn.btn-sm {
+            margin: 0 0 @spacingSmall*.25;
+
+            &:hover {
+                background-color: lighten(@brand-info, 20%);
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+.special-message {
+    background-color: #1d242b !important;
+    border: 15px solid transparent;
+    //border-color: lighten(@brand-primary, 10%);
+    border-top: 0 none;
+    border-color: @white;
+    text-align: center;
+    padding-left: @spacing3x;
+    padding-right: @spacing3x;
+    padding-top: @spacing5x;
+    padding-bottom: @spacing5x;
+}
+
+.darkmode {
+    .special-message {
+        border-top: 15px solid;
+    }
+}
+
+.icon-divider {
+    position: relative;
+    width: 200px;
+    margin: auto;
+    svg {
+        fill: @brand-primary;
+        width: 50px;
+        height: 50px;
+        position: relative;
+        z-index: 1;
+    }
+
+    &:before {
+        content: '';
+        height: 4px;
+        width: 65px;
+        margin: auto;
+        background-color: @brand-primary;
+        position: absolute;
+        left: 0;
+        top: 25px;
+    }
+
+    &:after {
+        content: '';
+        height: 4px;
+        width: 60px;
+        margin: auto;
+        background-color: @brand-primary;
+        position: absolute;
+        right: 0;
+        top: 25px;
+    }
+}

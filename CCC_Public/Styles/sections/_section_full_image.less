@@ -1,0 +1,54 @@
+.simple-section-with-image {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-bottom: 0;
+    position: relative;
+
+    &:after {
+        .overlay();
+    }
+
+    h2,
+    p {
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    .content-area {
+        position: relative;
+        z-index: 2;
+    }
+
+    .btn {
+        border-color: @white;
+        border-width: 3px;
+        background-color: rgba(0, 0, 0, 0.5);
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.85);
+        }
+    }
+}
+
+@media(min-width: @screen-desktop) {
+    .section.simple-section-with-image .content-area {
+        padding: @spacing*20 0 @spacing4x;
+    }
+
+    .simple-section-with-image {
+        background-size: 100%;
+        transition: background-size 1s ease-in-out;
+    
+        &:after {
+            .overlay();
+        }
+    
+        &:hover {
+            background-size: 120%;
+    
+            &::after {
+                .overlay-hover();
+            }
+        }
+    }
+}

@@ -1,0 +1,146 @@
+.mobile-navbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: darken(@brand-primary, 5%);
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 1px;
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);
+
+    .btn {
+        color: @white;
+        text-align: center;
+        padding: @spacingSmall;
+        margin: 0;
+        border-radius: 0;
+        background-color: @brand-primary;
+
+        .fas,
+        span {
+            display: block;
+        }
+        
+        .fas {
+            font-size: 1rem;
+        }
+
+        span {
+            margin: 0;
+            margin-top: 5px;
+            font-size: 0.6rem;
+        }
+
+        &.active {
+            background-color: darken(@brand-primary, 10%);
+        }
+    }
+}
+
+.mobile-slideout {
+    min-height: 60vh;
+    position: fixed;
+    right: @spacing2x;
+    left: 0;
+    bottom: -1000vh;
+    z-index: 9;
+    transition: all ease-in-out 0.3s;
+    background-color: darken(@brand-primary, 10%);
+
+    &.active {
+        bottom: 58px;
+    }
+
+    .icon-btn {
+        right: -10px;
+        position: absolute;
+        top: -10px;
+        background-color: @white;
+        color: @brand-primary;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 40px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+    }
+
+    h5 {
+        margin-top: @spacing2x;
+    }
+
+    h3,
+    h5,
+    a,
+    .btn {
+        color: @light;
+        text-decoration: none;
+    }
+
+    h3 > span {
+        display: block;
+        font-size: 1rem;
+        margin-top: @spacingSmall;
+    }
+
+    h3 {
+        margin-top: @spacingSmall;
+    }
+
+    .locations {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        
+        > div {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 @spacing2x;
+            
+            .btn {
+                text-align: left;
+            }
+
+            .btn[aria-expanded="true"] {
+                display: none;
+            }
+        }
+    }
+
+    .sub-headings {
+        margin-top: @spacing2x;
+        margin-bottom: @spacing;
+
+        h5 {
+            margin: 0;
+            margin-bottom: @spacing;
+            font-weight: normal;
+        }
+    }
+}
+
+.mobile-overlay {
+    background-color: rgba(0, 0, 0, 0.75);
+    position: fixed;
+    z-index: 8;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    z-index: 2;
+
+    &.active {
+        display: block;
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .mobile-navbar {
+        display: none;
+    }
+}
