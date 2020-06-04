@@ -1,0 +1,147 @@
+.contact-item {
+    display: flex;
+    margin-top: @spacing;
+    justify-content: center;
+    text-decoration: none;
+
+    .fas {
+        display: block;
+        line-height: 1.6;
+        margin-right: @spacing;
+        //display: none;
+    }
+
+    address,
+    p {
+        margin-bottom: 0;
+    }
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.pastor-image {
+    img {
+        max-height: 150px;
+    }
+}
+
+.location-details.special-message {
+    background-color: #efefef !important;
+    border: 0 none;
+    //box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 9;
+    text-align: center;
+    padding-left: @spacing;
+    padding-right: @spacing;
+
+    .icon-divider {
+        position: absolute;
+        left: 50%;
+        margin-left: -100px;
+        margin-top: -95px;
+
+        svg {
+            fill: lighten(@brand-primary, 20%);
+        }
+
+        &:after,
+        &:before {
+            display: none;
+        }
+
+        &:before {
+            content: '';
+            display: block;
+            background-color: #efefef; //#1d242b
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            margin-left: -30px;
+        }
+    }
+
+    .contact-item {
+        .fas {
+            display: none;
+        }
+    }
+}
+
+.location-buttons {
+    margin-top: @spacing;
+    //background-color: #eee;
+}
+
+@media (min-width: @screen-desktop) {
+    .contact-item {
+        justify-content: left;
+    }
+
+    .services {
+        #collapseServices.collapse {
+            display: block;
+        }
+
+        #collapseServices {
+            &.collapsing {
+                height: auto;
+                overflow: visible;
+                transition: none;
+            }
+        }
+
+        > h4 {
+            display: none;
+        }
+
+        h4 > a {
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+
+    .location {
+        .hero {
+            .jumbotron {
+                bottom: 10vh;
+            }
+        }
+    }
+
+    .pastor-item {
+        display: flex;
+        justify-content: flex-end;
+        
+        .pastor-image {
+            padding: @spacing @spacingLarger;
+            max-width: 200px;
+        }
+    }
+
+    .location-content {
+        text-align: left;
+    }
+
+    .location-details.special-message {
+        .contact-item {
+            .fas {
+                display: block;
+            }
+        }
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .location {
+        .cta-buttons {
+            padding: @spacing2x 0;
+        }
+    }
+}

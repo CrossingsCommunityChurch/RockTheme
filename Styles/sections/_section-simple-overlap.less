@@ -1,0 +1,40 @@
+.simple-section-with-image-overlap {
+    padding-top: 0;
+    //background-color: darken(@brand-primary, 10%);
+    background-color: #eee;
+    padding-left: @spacingLarger;
+    padding-right: @spacingLarger;
+
+    .heading-image {
+        margin-left: -@spacingLarger;
+        margin-right: -@spacingLarger;
+        
+        img {
+            height: auto;
+            min-width: none;
+            object-fit: cover;
+        }
+    }
+
+    .content-area {
+
+        .col-md-12 {
+            background-color: @white;
+            padding: @spacingLarger @spacing3x;
+            margin-top: -@spacing3x;
+        }
+    }
+}
+
+@media (min-width: @screen-desktop) {
+
+    .simple-section-with-image-overlap { 
+        .content-area {
+            .col-md-12 {
+                text-align: center;
+                padding: @spacing3x @spacing6x;
+                margin-top: -@spacing8x;
+            }
+        }
+    }
+}

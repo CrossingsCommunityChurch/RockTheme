@@ -23,9 +23,11 @@
         <title></title>
 
         <script src="<%# System.Web.Optimization.Scripts.Url("~/Scripts/Bundles/RockJQueryLatest" ) %>"></script>
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 
         <!-- Set the viewport width to device width for mobile -->
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
 
     <asp:ContentPlaceHolder ID="css" runat="server" />
 
@@ -41,10 +43,27 @@
 <body runat="server" id="body">
 
     <form id="form1" runat="server">
-
-        <div id="navigation">
-            <Rock:Zone Name="Login" runat="server"/>
-            <Rock:Zone Name="Navigation" runat="server"/>
+        <div class="testnav">
+        <nav class="primary-nav flat reverse"> 
+            <div class="navigation">
+            <!--Need to set this up to use lava to check login status? -->
+            <a href="#" class="login-btn btn btn-outline-thin"><i class="fas fa-user"></i><span> Login</span></a>
+            <ul class="primary-nav-links">
+                <li class="active"> Locations </li>
+                <li> Media </li>
+                <li class="primary-nav-logo">
+                  <Logo />
+                  <h3 class="sr-only">Crossings Community Church</h3>
+                </li>
+                <li>About Us</li>
+                <li><a href="#">Give</a></li>
+            </ul>
+            <div>
+                <div class="menu-btn btn search btn-outline-thin"><i class="fas fa-search"></i><span>Search</span></div>
+                <div class="menu-btn btn menu btn-outline-thin"><i class="fas fa-bars"></i><span>Menu</span></div>
+            </div>
+            </div>
+        </nav>
         </div>
 
         <div id="content" class="clearfix">

@@ -23,16 +23,16 @@
 }
 
 .nomargin {
-    margin: 1 !important;
+    margin: 0 !important;
 }
 
 .padding-top-xl {
-    padding-top: 2rem;
+    padding-top: @spacing3x !important;
 }
 
 @media (min-width: @screen-desktop) {
     .padding-top-xl {
-        padding-top: 8rem;
+        padding-top: @spacing8x !important;
     }
 }
 
@@ -77,10 +77,10 @@
 }
 
 //Display Sizes
-@display1:            floor((@font-size-base * 3));
-@display2:            floor((@font-size-base * 3.5));
-@display3:            floor((@font-size-base * 4));
-@display4:            floor((@font-size-base * 4.5));
+@display1:            floor((@font-size-base * 2));
+@display2:            floor((@font-size-base * 2.5));
+@display3:            floor((@font-size-base * 3));
+@display4:            floor((@font-size-base * 3.5));
 
 .display-1 {
     font-size: @display1;
@@ -116,7 +116,7 @@
 
 .before-enter {
     opacity: 0;
-    transform: translateY(150px);
+    transform: translateY(50px);
     transition: all 1s ease-out;
 }
 
@@ -136,9 +136,6 @@
         opacity: 1;
         transform: translateY(0px);
     }
-}
-.zoom .primary-nav {
-    transform: translateY(0px);
 }
 
 .fadein {
@@ -164,7 +161,7 @@
 .fade-left {
     &.before-enter {
         transform: translateY(0px);
-        transform: translateX(300px);
+        transform: translateX(100px);
     }
 
     &.enter {
@@ -176,7 +173,7 @@
 .fade-right {
     &.before-enter {
         transform: translateY(0);
-        transform: translateX(-300px);
+        transform: translateX(-50px);
     }
 
     &.enter {
@@ -187,7 +184,7 @@
 
 .fade-down {
     &.before-enter {
-        transform: translateY(-100px);
+        transform: translateY(-50px);
     }
 
     &.enter {
@@ -197,7 +194,7 @@
 
 .fade-up {
     &.before-enter {
-        transform: translateY(e100px);
+        transform: translateY(-50px);
     }
 
     &.enter {
@@ -217,10 +214,56 @@
     transition-delay: 1s;
 }
 
-@media (min-width: @screen-desktop) {
-    .primary-nav {
-        transition-delay: 0s;
-        transition: all ease-in-out 1.25s;
-        transform: translateY(-80px);
-    }    
+.shadowDepth0 { box-shadow: 0 1px 3px rgba(0,0,0, 0.12); }
+
+.shadowDepth1 {
+   box-shadow: 
+  		0 1px 3px rgba(0,0,0, 0.12),
+    	0 1px 2px rgba(0,0,0, 0.24);      
+}
+
+.shadowDepth2 {
+    box-shadow: 0 2px 4px rgba(0,0,0, 0.12), 0 2px 4px rgba(0,0,0, 0.24);
+}
+
+@media(min-width: @screen-desktop) {
+    .flex-row {
+        display: flex;
+
+        > [class^="col"] {
+            display: flex;
+        }
+    }
+}
+
+.buttonFill(@color; @text; @darken) {
+    background-color: @color;
+    color: @text;
+
+    &:hover {
+        background-color: darken(@color, @darken);
+        color: @text;
+    }
+}
+
+.buttonOutline(@color; @text; @darken) {
+    border-style: solid;
+    border-width: 3px;
+    background: transparent;
+    color: @color;
+    border-color: @color;
+    transition: all 0.5s ease-in-out;
+
+    &:hover {
+        background-color: fade(@color, @darken);
+        color: @text;
+    }
+}
+
+.bg-gray {
+    background-color: @softLight;
+}
+
+.bg-white {
+    background-color: @white;
 }

@@ -1,0 +1,50 @@
+.text-set {
+    height: 150px;
+    margin-bottom: 100px;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.text-slider {
+    height: 100px;
+    overflow: hidden;
+}
+
+@media (min-width: @screen-desktop) {
+    .text-slider{
+        height: 150px;
+    }
+}
+
+.set-1 {
+    animation: slide 11s ease-in-out;
+}
+
+@keyframes slide {
+  0% {
+      margin-top: -750px;
+  }
+  10% {
+      margin-top: -750px;
+  }
+  25% {
+      margin-top: -750px;
+  }
+  35% {
+    margin-top: -500px;
+  }
+  50% {
+      margin-top: -500px;
+  }
+  60% {
+    margin-top: -250px;
+  }
+  75% {
+    margin-top: -250px;
+  }
+  85% {
+    margin-top: 0px;
+  }
+  100% {
+    margin-top: 0px;
+  }
+}

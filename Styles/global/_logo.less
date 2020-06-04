@@ -1,0 +1,36 @@
+.logo {
+    display: flex;
+    justify-content: center;
+    > svg {
+        width: 150px;
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .logo {
+        border: 0 none;
+        margin-left: @spacing2x;
+        margin-right: @spacing2x;
+        padding: 25px 0;
+        text-align: center;
+        
+        > svg {
+            width: 200px;
+            padding: 0 @spacingLarger;
+            fill: @white;
+        }
+    }
+
+    .fixed.primary-nav {
+        .logo {
+            padding-top: 9px;
+            padding-bottom: 9px;
+    
+            > svg {
+                padding-left: @spacing2x;
+                padding-right: @spacing2x;
+                fill: @brand-primary;
+            }
+        }
+    }
+}

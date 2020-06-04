@@ -1,0 +1,46 @@
+input[type="text"],
+input[type="password"] {
+    padding-left: 0;
+    border-radius: 0;
+    height: 40px;
+    font-size: 1.3rem;
+    border: 0 none;
+    outline: 0;
+    box-shadow: none;
+    border-bottom: 2px solid #eee;
+    padding-right: 0;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+        font-weight: bold;
+        border-color: @brand-primary;
+    }
+}
+
+label {
+    font-weight: normal;
+    margin-top: @spacing2x;
+}
+
+.checkbox {
+    margin-bottom: 32px;
+}  
+
+.login {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    background-color: @white;
+    padding: @spacing @spacing2x;
+    margin-bottom: @spacing6x;
+    margin-top: -@spacing5x;
+
+    legend {
+        display: none;
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .login {
+        padding: @spacing5x;
+    } 
+}

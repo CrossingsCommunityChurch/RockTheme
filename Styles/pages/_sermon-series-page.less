@@ -1,0 +1,91 @@
+.sermon-series-page {
+    .video {
+        margin-top: -255px;
+
+        .video-player {
+            background-color: @white;
+            box-shadow: @box-shadow;
+        }
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .sermon-series-page {
+        .video {
+            margin-top: -185px;
+        }
+    }    
+}
+
+.tags {
+    text-transform: lowercase;
+    //border: 1px solid #eee;
+    //padding: @spacing;
+    padding-top: @spacingLarger;
+    
+    .fas {
+       margin-right: @spacing;
+       color: @brand-primary;
+       font-size: 1rem;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    a {
+        //background-color: @softLight;
+        background: @softLight;
+        border-radius: 3px 0 0 3px;
+        color: @brand-primary;
+        display: inline-block;
+        height: 26px;
+        line-height: 26px;
+        padding: 0 @spacingLarger 0 @spacing;
+        position: relative;
+        margin: 0 10px 10px 0;
+        text-decoration: none;
+        transition: all ease-in-out 0.3s;
+
+        &::after {
+            transition: all ease-in-out 0.3s;
+            background: @white;
+            border-bottom: 13px solid transparent;
+            border-left: 10px solid @softLight;
+            border-top: 13px solid transparent;
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        &:hover {
+            background-color: @brand-secondary;
+            color: @white;
+
+            &::after {
+                background: @white;
+                border-left-color: @brand-secondary;
+                color: @white;
+            }
+        }
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .tags {
+        width: 50%;
+        margin: auto;
+    }
+}
+
+.series-list {
+    .card {
+        border: 1px solid @softLight;
+
+        .thumb {
+            border-top-right-radius: @spacingSmall;
+            border-top-left-radius: @spacingSmall;
+        }
+    }
+}

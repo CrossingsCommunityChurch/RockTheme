@@ -1,0 +1,42 @@
+.request-prayer {
+    display: none;
+}
+
+@media (min-width: @screen-desktop) {
+    .request-prayer {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        right: -110px;
+        z-index: 9;
+        transition: all ease-in-out 0.3s;
+
+        &:hover {
+            right: 0;
+        }
+        
+        > .btn {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding-left: @spacingLarger;
+            padding-right: @spacingLarger;
+            font-size: 0.625rem;
+            margin: 0;
+            border-radius: 0;
+            transition: all ease-in-out 0.5s;
+
+            span {
+                opacity: 0;
+            }
+
+            &:hover {
+                span {
+                    opacity: 1;
+                }
+            }
+
+            .fas {
+                font-size: 21px;
+            }
+        }
+    }
+}
