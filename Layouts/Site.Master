@@ -44,7 +44,7 @@
 
     <form id="form1" runat="server">
         <div class="testnav">
-        <nav class="primary-nav flat reverse" style="background-color: #000;"> 
+        <nav class="primary-nav flat reverse"> 
             <div class="navigation">
             <!--Need to set this up to use lava to check login status? -->
             <a href="#" class="login-btn btn btn-outline-thin"><i class="fas fa-user"></i><span> Login</span></a>
@@ -123,7 +123,7 @@
             </div>
         </nav>
         </div>
-
+        <asp:ContentPlaceHolder ID="homeTest" runat="server"></asp:ContentPlaceHolder>
         <div id="content" class="clearfix">
                 <asp:ContentPlaceHolder ID="feature" runat="server"></asp:ContentPlaceHolder>
                 <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>
