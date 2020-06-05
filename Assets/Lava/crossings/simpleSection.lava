@@ -1,0 +1,29 @@
+{%- assign subheading = ContentChannel | Attribute: 'subheading' -%}
+{%- assign heading = ContentChannel | Attribute: 'heading' -%}
+{%- assign contentText = ContentChannel | Attribute:'contentText' -%}
+{%- assign showButton = ContentChannel | Attribute:'showButton' -%}
+
+<div class="container-fluid section simple-section">
+      <div class="row">
+          <div class="container content-area">
+              <div class="row">
+                  <div class="col-md-12">
+                      <h4 class="subheading">{{ subheading }}</h4>
+                      <h2 class="heading">{{ heading }}</h2>
+                      <hr class="sep">
+                      <p>{{ contentText }}</p>
+                      {%- if showButton -%}
+                      <div class="buttons">
+                          <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#locationsModal">
+                              <span>Connect with a Campus</span>
+                          </a>
+                          <a href="#" class="btn btn-primary">
+                              <span>Connecting with Crossings Class</span>
+                          </a>
+                      </div>
+                      {%- endif -%}
+                  </div>
+              </div>
+          </div>
+      </div>
+</div>

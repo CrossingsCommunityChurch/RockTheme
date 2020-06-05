@@ -1,7 +1,42 @@
 ﻿<%@ Page Language="C#" MasterPageFile="Site.Master" AutoEventWireup="true" Inherits="Rock.Web.UI.RockPage" %>
 
 <asp:Content ID="ctHomeTest" ContentPlaceHolderID="homeTest" runat="server">
-    <div class="home page-wrapper">
+    
+        <!--
+            Simple Section
+                - Use this simple section to test lava first
+        -->
+        <div class="container-fluid section simple-section">
+            <div class="row">
+                <div class="container content-area">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="subheading">New to Crossings?</h4>
+                            <h2 class="heading">Get Connected</h2>
+                            <hr class="sep">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus molestie eleifend. Pellentesque mattis nunc laoreet, pellentesque libero suscipit, lobortis enim. Vestibulum ut orci maximus, ultricies mi at, bibendum turpis. Proin dictum semper massa, vel gravida turpis mollis at. Aliquam sed venenatis lacus, vitae eleifend mauris. Suspendisse potenti. Proin quis orci pretium, vehicula dui nec, aliquet ex.</p>
+                            <div class="buttons">
+                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#locationsModal">
+                                    <span>Connect with a Campus</span>
+                                </a>
+                                <a href="#" class="btn btn-primary">
+                                    <span>Connecting with Crossings Class</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
+            End Simple Section
+        -->
+       
+    </div>
+</asp:Content>
+
+<asp:Content ID="ctFeature" ContentPlaceHolderID="feature" runat="server">
+<div class="home page-wrapper">
         <div class="container-fluid hero-wrapper navOn">
             <div class="hero" style="overflow:hidden;">
                 <div class="Masthead" style="height: 80vh;">
@@ -39,36 +74,29 @@
                 </div>
             </div>
         </div>
-        <!--
-            Simple Section
-                - Use this simple section to test lava first
-        -->
-        <div class="container-fluid section simple-section">
-            <div class="row">
-                <div class="container content-area">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 class="subheading">New to Crossings?</h4>
-                            <h2 class="heading">Get Connected</h2>
-                            <hr class="sep">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus molestie eleifend. Pellentesque mattis nunc laoreet, pellentesque libero suscipit, lobortis enim. Vestibulum ut orci maximus, ultricies mi at, bibendum turpis. Proin dictum semper massa, vel gravida turpis mollis at. Aliquam sed venenatis lacus, vitae eleifend mauris. Suspendisse potenti. Proin quis orci pretium, vehicula dui nec, aliquet ex.</p>
-                            <div class="buttons">
-                                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#locationsModal">
-                                    <span>Connect with a Campus</span>
-                                </a>
-                                <a href="#" class="btn btn-primary">
-                                    <span>Connecting with Crossings Class</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <Rock:Zone Name="Feature" runat="server" />
+</asp:Content>
+
+<asp:Content ID="ctMain" ContentPlaceHolderID="main" runat="server">
+
+	<main class="container">
+
+        <!-- Start Content Area -->
+
+        <!-- Ajax Error -->
+        <div class="alert alert-danger ajax-error no-index" style="display:none">
+            <p><strong>Error</strong></p>
+            <span class="ajax-error-message"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <Rock:Zone Name="Sub Feature" runat="server" />
             </div>
         </div>
-        <!--
-            End Simple Section
-        -->
-        <div class="container-fluid section split-section split-section-overlap">
+
+        <div class="row">
+             <div class="container-fluid section split-section split-section-overlap">
             <div class="row flex-row">
                 <div class="col-md-6 nopadding-x image-bg">
                 <img src="https://vigilant-hermann-e71ba3.netlify.app/img/series.be863231.png">
@@ -149,45 +177,7 @@
                 </div>
             </div>
         </div>
-    </div>
-</asp:Content>
-
-<asp:Content ID="ctFeature" ContentPlaceHolderID="feature" runat="server">
-
-    <section class="main-feature">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <Rock:Zone Name="Feature" runat="server" />
-                </div>
-            </div>
-        </div>
-    </section>
-
-</asp:Content>
-
-<asp:Content ID="ctMain" ContentPlaceHolderID="main" runat="server">
-
-	<main class="container">
-
-        <!-- Start Content Area -->
-
-        <!-- Ajax Error -->
-        <div class="alert alert-danger ajax-error no-index" style="display:none">
-            <p><strong>Error</strong></p>
-            <span class="ajax-error-message"></span>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <Rock:Zone Name="Sub Feature" runat="server" />
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12">
                 <Rock:Zone Name="Section A" runat="server" />
-            </div>
         </div>
 
         <div class="row">
