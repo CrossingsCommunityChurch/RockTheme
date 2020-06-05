@@ -88,15 +88,8 @@
             <p><strong>Error</strong></p>
             <span class="ajax-error-message"></span>
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <Rock:Zone Name="Sub Feature" runat="server" />
-            </div>
-        </div>
-
-        <div class="row">
-             <div class="container-fluid section split-section split-section-overlap">
+        <!-- place this in a zone -->
+        <div class="container-fluid section split-section split-section-overlap">
             <div class="row flex-row">
                 <div class="col-md-6 nopadding-x image-bg">
                 <img src="https://vigilant-hermann-e71ba3.netlify.app/img/series.be863231.png">
@@ -177,21 +170,11 @@
                 </div>
             </div>
         </div>
-                <Rock:Zone Name="Section A" runat="server" />
-        </div>
-
-        <div class="row">
-            <div class="col-md-4">
-                <Rock:Zone Name="Section B" runat="server" />
-            </div>
-            <div class="col-md-4">
-                <Rock:Zone Name="Section C" runat="server" />
-            </div>
-            <div class="col-md-4">
-                <Rock:Zone Name="Section D" runat="server" />
-            </div>
-        </div>
-
+        <Rock:Zone Name="Sub Feature" runat="server" />
+        <Rock:Zone Name="Section A" runat="server" />
+        <Rock:Zone Name="Section B" runat="server" />
+        <Rock:Zone Name="Section C" runat="server" />
+        <Rock:Zone Name="Section D" runat="server" />
         <!-- End Content Area -->
 
 	</main>
