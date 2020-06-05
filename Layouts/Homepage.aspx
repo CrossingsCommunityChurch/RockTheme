@@ -78,9 +78,6 @@
 </asp:Content>
 
 <asp:Content ID="ctMain" ContentPlaceHolderID="main" runat="server">
-
-	<main class="container">
-
         <!-- Start Content Area -->
 
         <!-- Ajax Error -->
@@ -176,8 +173,5 @@
         <Rock:Zone Name="Section C" runat="server" />
         <Rock:Zone Name="Section D" runat="server" />
         <!-- End Content Area -->
-
-	</main>
-
 </asp:Content>
 
