@@ -1,6 +1,6 @@
 {%- assign subheading = ContentChannel | Attribute: 'subheading' -%}
-{%- assign heading = ContentChannel | Attribute: 'heading' -%}
-{%- assign contentText = ContentChannel | Attribute:'contentText' -%}
+{%- assign title = ContentChannel | Attribute: 'Title' -%}
+{%- assign contentText = ContentChannel | Attribute:'Content' -%}
 {%- assign showButton = ContentChannel | Attribute:'showButton' -%}
 
 <div class="container-fluid section simple-section">
@@ -9,7 +9,7 @@
               <div class="row">
                   <div class="col-md-12">
                       <h4 class="subheading">{{ subheading }}</h4>
-                      <h2 class="heading">{{ heading }}</h2>
+                      <h2 class="heading">{{ title }}</h2>
                       <hr class="sep">
                       <p>{{ contentText }}</p>
                       {%- if showButton -%}
