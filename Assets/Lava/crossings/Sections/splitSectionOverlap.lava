@@ -1,4 +1,4 @@
-{%- for item in Items -%} <!-- Do we need to run a loop here? is this always returned as an array? -->
+{%- for item in Items -%} {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
 <div class="container-fluid section split-section split-section-overlap">
       <div class="row flex-row">
           <div class="col-md-6 nopadding-x image-bg">
@@ -21,7 +21,7 @@
                   {[button buttonlink:'{{ item.buttonLink | Trim }}' buttonicon:'{{ item.ButtonIcon }}' buttontext:'{{ item.buttonText }}' buttonoutline:'true' buttontarget:'{{ item.buttonTarget }}' buttonsize: '']}
               </div>
               {%- endif -%}
-              <!-- This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons -->
+              {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
               {%- if item.lava -%}
                 {{ item.lava | HtmlDecode }}
               {%- endif -%}

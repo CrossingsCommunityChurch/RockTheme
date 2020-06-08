@@ -1,4 +1,4 @@
-<!--
+{% comment %}
   Params
 
   @buttonlink - Accepts a url
@@ -8,11 +8,13 @@
   @buttontext
   @buttonicon
 
--->
+{% endcomment %}
 
-<!-- If we dont set a button style, set it to be primary by default -->
-{%- unless buttonstyle %}
-  {%- assign buttonstyle = 'primary' -%}
-{%- endunless -%}
+{% comment %}
+  If we dont set a button style, set it to be primary by default
+{% endcomment %}
+{% unless buttonstyle %}
+  {% assign buttonstyle = 'primary' %}
+{% endunless %}
 
 <a href="{{ buttonlink }}" {% if buttontarget and buttontarget != empty %}target="{{ buttontarget }}"{% endif %} class="btn btn-{{ buttonstyle }} {% if buttonoutline and buttonstyle != empty %}btn-outline-{{ buttonstyle }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if buttonicon %}<i class="fas fa-{{ buttonicon }}"></i> {% endif %}<span>{{ buttontext }}</span></a>
