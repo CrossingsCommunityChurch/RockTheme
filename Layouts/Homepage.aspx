@@ -51,22 +51,6 @@
             <span class="ajax-error-message"></span>
         </div>
         <!-- place this in a zone -->
-        <div class="container-fluid section split-section split-section-overlap">
-            <div class="row flex-row">
-                <div class="col-md-6 nopadding-x image-bg">
-                <img src="https://vigilant-hermann-e71ba3.netlify.app/img/series.be863231.png">
-                </div>
-                <div class="col-md-6 split-section-text">
-                    <h4 class="subheading">Current Sermon Series</h4>
-                    <h2 class="heading">How Then Should We Live?</h2>
-                    <hr class="sep">
-                    <p>Senior Pastor Marty Grubbs helps us take advantage of the opportunities we have to strengthen our faith, ask God for wisdom during this unsettling time, and create a new normal in our lives as Christians.</p>
-                    <div class="buttons">
-                        <a href="#" class="btn btn-outline-primary"><i class="fas fa-play"></i><span>Watch Series</span></a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container-fluid section bgimg reverse simple-section-with-image" style="background-image: url('https://vigilant-hermann-e71ba3.netlify.app/img/worship.4eedf85a.jpg');">
             <div class="row">
                 <div class="container content-area">

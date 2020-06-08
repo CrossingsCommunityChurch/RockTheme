@@ -1,0 +1,20 @@
+{%- for item in Items -%}
+<div class="container-fluid section split-section split-section-overlap">
+            <div class="row flex-row">
+                <div class="col-md-6 nopadding-x image-bg">
+                <img src="https://vigilant-hermann-e71ba3.netlify.app/img/series.be863231.png">
+                </div>
+                <div class="col-md-6 split-section-text">
+                    <h4 class="subheading">{{ item.subheading }}</h4>
+                    <h2 class="heading">{{ item.Title }}</h2>
+                    <hr class="sep">
+                    <p>{{ item.Content }}</p>
+                    {%- if item.Showbutton -%}
+                      <div class="buttons">
+                        <a href="#" class="btn btn-outline-primary"><i class="fas fa-play"></i><span>Watch Series</span></a>
+                      </div>
+                    {%- endif -%}
+                </div>
+            </div>
+        </div>
+{%- endfor -%}
