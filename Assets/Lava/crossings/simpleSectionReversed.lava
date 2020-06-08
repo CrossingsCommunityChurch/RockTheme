@@ -1,0 +1,21 @@
+{%- for item in Items -%}
+  <div class="container-fluid section bgimg reverse simple-section-with-image" style="background-image: url('https://vigilant-hermann-e71ba3.netlify.app/img/worship.4eedf85a.jpg');">
+    <div class="row">
+      <div class="container content-area">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="subheading">{{ item.subheading }}</h4>
+            <h2 class="heading">{{ item.Title }}</h2>
+            <hr class="sep">
+            <p>{{ item.Content }}</p>
+            {%- if item.showButton -%}
+              <a href="#" class="btn btn-primary">
+                <i class="fas fa-play"></i><span>Listen</span>
+              </a>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endfor -%}

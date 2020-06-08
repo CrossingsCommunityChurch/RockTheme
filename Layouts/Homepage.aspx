@@ -51,23 +51,6 @@
             <span class="ajax-error-message"></span>
         </div>
         <!-- place this in a zone -->
-        <div class="container-fluid section bgimg reverse simple-section-with-image" style="background-image: url('https://vigilant-hermann-e71ba3.netlify.app/img/worship.4eedf85a.jpg');">
-            <div class="row">
-                <div class="container content-area">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h4 class="subheading">Sanctuary | Venue</h4>
-                            <h2 class="heading">Worship Music</h2>
-                            <hr class="sep">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus molestie eleifend.</p>
-                            <a href="#" class="btn btn-primary">
-                                <i class="fas fa-play"></i><span>Listen</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container-fluid section split-section split-section-with-images reverse">
             <div class="row flex-row">
                 <div class="col-md-6 bgimg split-section-text">
