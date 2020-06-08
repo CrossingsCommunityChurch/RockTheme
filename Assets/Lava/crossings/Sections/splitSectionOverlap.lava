@@ -1,0 +1,31 @@
+{%- for item in Items -%} <!-- Do we need to run a loop here? is this always returned as an array? -->
+<div class="container-fluid section split-section split-section-overlap">
+      <div class="row flex-row">
+          <div class="col-md-6 nopadding-x image-bg">
+            {% if item.Image %}
+              {% assign imageUrl = item | Attribute:'Image', 'RawValue' %}
+              <img src="/GetImage.ashx?guid={{ imageUrl }}" alt="{{ item.Title }}" />
+            {% endif %}
+          </div>
+          <div class="col-md-6 split-section-text">
+              {%- if item.subheading -%}
+                <h4 class="subheading">{{ item.subheading }}</h4>
+              {% endif %}
+              {%- if item.Title -%}
+              <h2 class="heading">{{ item.Title }}</h2>
+              {% endif %}
+              <hr class="sep">
+              <p>{{ item.Content }}</p>
+              {%- if item.Showbutton -%}
+              <div class="buttons">
+                  {[button buttonlink:'{{ item.buttonLink | Trim }}' buttonicon:'{{ item.ButtonIcon }}' buttontext:'{{ item.buttonText }}' buttonoutline:'true' buttontarget:'{{ item.buttonTarget }}' buttonsize: '']}
+              </div>
+              {%- endif -%}
+              <!-- This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons -->
+              {%- if item.lava -%}
+                {{ item.lava | HtmlDecode }}
+              {%- endif -%}
+          </div>
+      </div>
+</div>
+{%- endfor -%}

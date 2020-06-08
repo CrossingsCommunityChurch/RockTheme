@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"workbench.settings.editor": "json",
+		"files.eol": "\r\n",
+		"less.compile": {
+			"main": [
+			"${workspaceRoot}\\Styles\\theme.less",
+			"${workspaceRoot}\\Styles\\bootstrap.less",
+			],
+			"compress":  false,  // true => remove surplus whitespace
+			"sourceMap": true,  // true => generate source maps (.css.map files)
+			"out":       true
+		}
+	}
+}

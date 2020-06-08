@@ -1,0 +1,53 @@
+{%- for item in Items -%} <!-- Do we need to run a loop here? is this always returned as an array? -->
+{% if item.Image %}
+    {% assign imageUrl = item | Attribute:'Image', 'RawValue' %}
+{% endif %}
+{% if item.SecondImage %}
+    {% assign secondImageUrl = item | Attribute:'SecondImage', 'RawValue' %}
+{% endif %}
+<div class="container-fluid section split-section split-section-with-images reverse">
+      <div class="row flex-row">
+          <div class="col-md-6 bgimg split-section-text">
+              <div {% if imageUrl %} style="background-image: url('/GetImage.ashx?guid={{ imageUrl }}')" {% endif %}>
+                <div>
+                  {%- if item.subheading -%}
+                    <h4 class="reverse subheading">{{ item.subheading }}</h4>
+                  {%- endif -%}
+                  {%- if item.Title -%}
+                  <h2 class="reverse heading">{{ item.Title }}</h2>
+                  {%- endif -%}
+                  <p>{{ item.Content }}</p>
+                  {%- if item.Showbutton -%}
+                  {[button buttonlink:'{{ item.buttonLink | Trim }}' buttontext:'{{ item.buttonText }}' buttontarget:'{{ item.buttonTarget }}' buttonsize: '']}
+                  {%- endif -%}
+                  <!-- This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons -->
+                  {%- if item.lava -%}
+                    {{ item.lava | HtmlDecode }}
+                  {%- endif -%}
+              </div>
+            </div>
+          </div>
+          <!-- Has to be a better way to do this -->
+          <div class="col-md-6 bgimg split-section-text">
+            <div {% if secondImageUrl %} style="background-image: url('/GetImage.ashx?guid={{ secondImageUrl }}')" {% endif %}>
+              <div>
+              {%- if item.SecondSubheading -%}
+                <h4 class="reverse subheading">{{ item.SecondSubheading }}</h4>
+              {%- endif -%}
+              {%- if item.SecondTitle -%}
+              <h2 class="reverse heading">{{ item.SecondTitle }}</h2>
+              {%- endif -%}
+              <p>{{ item.SecondContent }}</p>
+              {%- if item.SecondShowButton -%}
+              {[button buttonlink:'{{ item.SecondButtonLink | Trim }}' buttontext:'{{ item.SecondButtonText }}' buttontarget:'{{ item.SecondButtonTarget }}' buttonsize: '']}
+              {%- endif -%}
+              <!-- This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons -->
+              {%- if item.secondLava -%}
+                {{ item.secondLava | HtmlDecode }}
+              {%- endif -%}
+              </div>
+            </div>
+          </div>
+      </div>
+</div>
+{%- endfor -%}

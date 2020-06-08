@@ -1,0 +1,15 @@
+{
+    "workbench.settings.editor": "json",
+    "settings": {
+        "files.eol": "\r\n",
+        "less.compile": {
+        "main": [
+        "${workspaceRoot}\\RockWeb\\Themes\\Rock\\Styles\\theme.less",
+        "${workspaceRoot}\\RockWeb\\Themes\\Rock\\Styles\\bootstrap.less",
+        "${workspaceRoot}\\RockWeb\\Themes\\Rock\\Styles\\group-scheduler.less"
+        ],
+        "compress":  false,  // true => remove surplus whitespace
+        "sourceMap": true,  // true => generate source maps (.css.map files)
+        "out":       true,
+    },
+}

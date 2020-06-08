@@ -1,0 +1,32 @@
+{%- for item in Items -%} <!-- Do we need to run a loop here? is this always returned as an array? -->
+{% if item.Image %}
+    {% assign imageUrl = item | Attribute:'Image', 'RawValue' %}
+{% endif %}
+<div class="container-fluid section simple-section {% if item.UseBackgroundImage == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}" {% if item.UseBackgroundImage == 'Yes' & imageUrl %} style="background-image: url('/GetImage.ashx?guid={{ imageUrl }}')" {% endif %}>
+      <div class="row">
+          <div class="container content-area">
+              <div class="row">
+                  <div class="col-md-12">
+                      {%- if item.subheading -%}
+                        <h4 class="subheading">{{ item.subheading }}</h4>
+                      {%- endif -%}
+                      {%- if item.Title -%}
+                      <h2 class="heading">{{ item.Title }}</h2>
+                      {%- endif -%}
+                      <hr class="sep">
+                      <p>{{ item.Content }}</p>
+                      {%- if item.Showbutton -%}
+                      <div class="buttons">
+                          {[button buttonlink:'{{ item.buttonLink | Trim }}' buttonicon:'{{ item.ButtonIcon }}' buttontext:'{{ item.buttonText }}' buttontarget:'{{ item.buttonTarget }}' buttonsize: '']}
+                      </div>
+                      {%- endif -%}
+                      <!-- This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons -->
+                      {%- if item.lava -%}
+                        {{ item.lava | HtmlDecode }}
+                      {%- endif -%}
+                  </div>
+              </div>
+          </div>
+      </div>
+</div>
+{%- endfor -%}
