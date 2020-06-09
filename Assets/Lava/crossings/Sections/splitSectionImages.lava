@@ -12,11 +12,8 @@
         <h2 class="reverse heading">{{ item.Title }}</h2>
         {%- endif -%}
         <p>{{ item.Content }}</p>
-        {%- if item.Showbutton -%}
-        {[button buttonlink:'{{ item.buttonLink | Trim }}' buttontext:'{{ item.buttonText }}' buttontarget:'{{ item.buttonTarget }}' buttonsize: '']}
-        {%- endif -%}
         {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
-        {%- if item.lava -%}
+        {%- if item.lava != empty -%}
           {{ item.lava | HtmlDecode }}
         {%- endif -%}
     </div>
