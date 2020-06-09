@@ -51,59 +51,12 @@
             <span class="ajax-error-message"></span>
         </div>
         <!-- place this in a zone -->
-        <div class="container-fluid section split-section split-section-with-images reverse">
-            <div class="row flex-row">
-                <div class="col-md-6 bgimg split-section-text">
-                    <div style="background-image: url('https://vigilant-hermann-e71ba3.netlify.app/img/teaching-series.cbf32bdb.jpg');">
-                        <div>
-                            <h4 class="reverse subheading">Teaching Series and Group</h4>
-                            <h2 class="reverse heading">Wednesday Nights</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <a href="#" class="btn btn-primary">
-                                <span>Learn More</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 bgimg split-section-text">
-                    <div style="background-image: url('https://vigilant-hermann-e71ba3.netlify.app/img/small-group.8d0cdbac.jpg');">
-                        <div>
-                            <h4 class="reverse subheading">LifeCare</h4>
-                            <h2 class="reverse heading">Counseling &amp; Support</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <a href="#" class="btn btn-primary">
-                            <span>Learn More</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid section simple-section">
-            <div class="row">
-                <div class="container content-area">
-                    <div class="row">
-                        <div class="col-md-12">
-                                <h4 class="subheading">Children's Center | Community Center | Community Clinic | Prison Campuses</h4>
-                                <h2 class="heading">LIVE BY FAITH. BE A VOICE OF HOPE.<br>BE KNOWN BY LOVE.</h2>
-                                <hr class="sep">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus molestie eleifend. Pellentesque mattis nunc laoreet, pellentesque libero suscipit, lobortis enim. Vestibulum ut orci maximus, ultricies mi at, bibendum turpis.</p>
-                                <div class="buttons">
-                                    <a href="#" class="btn btn-primary">
-                                        <span>Get Involved</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <Rock:Zone Name="Sub Feature" runat="server" />
         <Rock:Zone Name="Section A" runat="server" />
         <Rock:Zone Name="Section B" runat="server" />
         <Rock:Zone Name="Section C" runat="server" />
         <Rock:Zone Name="Section D" runat="server" />
         <!-- End Content Area -->
+</div>
 </asp:Content>
 
