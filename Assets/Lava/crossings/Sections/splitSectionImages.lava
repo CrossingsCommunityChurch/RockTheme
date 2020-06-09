@@ -14,7 +14,7 @@
         <p>{{ item.Content }}</p>
         {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
 
-          {{ item.lava | HtmlDecode }}
+          {{ item.lava }}
 
     </div>
   </div>
