@@ -1,10 +1,12 @@
 {%- for item in Items -%} {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
+{% if item.AssetImage %}
+    {% assign imageUrl = item.AssetImage %}
+{% endif %}
 <div class="container-fluid section split-section split-section-overlap">
       <div class="row flex-row">
           <div class="col-md-6 nopadding-x image-bg">
-            {% if item.Image %}
-              {% assign imageUrl = item | Attribute:'Image', 'RawValue' %}
-              <img src="/GetImage.ashx?guid={{ imageUrl }}" alt="{{ item.Title }}" />
+            {% if imageUrl %}
+              <img src="{{ imageUrl }}" alt="{{ item.Title }}" />
             {% endif %}
           </div>
           <div class="col-md-6 split-section-text">

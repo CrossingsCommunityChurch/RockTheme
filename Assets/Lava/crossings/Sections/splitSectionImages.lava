@@ -1,9 +1,9 @@
 {%- for item in Items -%}  {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
-{% if item.Image %}
-    {% assign imageUrl = item | Attribute:'AssetImage', 'RawValue' %}
+{% if item.AssetImage %}
+    {% assign imageUrl = item.AssetImage %}
 {% endif %}
 <div class="col-md-6 bgimg split-section-text">
-    <div {% if imageUrl %} style="background-image: url('/GetImage.ashx?guid={{ imageUrl }}')" {% endif %}>
+    <div {% if imageUrl %} style="background-image: url('{{ imageUrl }}')" {% endif %}>
       <div>
         {%- if item.subheading -%}
           <h4 class="reverse subheading">{{ item.subheading }}</h4>
