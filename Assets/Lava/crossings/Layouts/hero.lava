@@ -1,0 +1,18 @@
+{% for item in Items %}
+{% if item.Image %}
+    {% assign imageUrl = item | Attribute:'Image', 'RawValue' %}
+{% endif %}
+
+<div class="container-fluid hero-wrapper navOn">
+    <div class="hero" style="overflow:hidden;">
+        <div class="Masthead" style="height: 80vh;">
+            <div class="is-parallax Masthead__image">
+                <img src="/GetImage.ashx?guid={{ imageUrl }}">
+            </div>
+        </div>
+        <div class="jumbotron flat home-hero transparent reverse">
+            {{ item.Content }}
+        </div>
+    </div>
+</div>
+{% endfor %}

@@ -1,6 +1,6 @@
 {%- for item in Items -%}  {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
 {% if item.Image %}
-    {% assign imageUrl = item | Attribute:'Image', 'RawValue' %}
+    {% assign imageUrl = item | Attribute:'AssetImage', 'RawValue' %}
 {% endif %}
 <div class="col-md-6 bgimg split-section-text">
     <div {% if imageUrl %} style="background-image: url('/GetImage.ashx?guid={{ imageUrl }}')" {% endif %}>
@@ -14,7 +14,9 @@
         <p>{{ item.Content }}</p>
         {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
         {%- if item.lava != empty -%}
-          {{ item.lava | HtmlDecode }}
+          <div class="buttons">
+            {{ item.lava | HtmlDecode }}
+          </div>
         {%- endif -%}
     </div>
   </div>
