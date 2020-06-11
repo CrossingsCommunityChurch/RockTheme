@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="Site.Master" AutoEventWireup="true" Inherits="Rock.Web.UI.RockPage" %>
 
 <asp:Content ID="ctMain" ContentPlaceHolderID="main" runat="server">
-
+        <Rock:Zone Name="PageHeading" runat="server" />
         <!-- Start Content Area -->
         <div class="Main">
         <!-- Breadcrumbs -->
@@ -13,7 +13,9 @@
             <span class="ajax-error-message"></span>
         </div>
         <Rock:Zone Name="Feature" runat="server"/>
-        <Rock:Zone Name="Main" runat="server"/>
+        <div class="container main">
+            <Rock:Zone Name="Main" runat="server"/>
+        </div>
         <Rock:Zone Name="Section A" runat="server"/>
         <Rock:Zone Name="Section B" runat="server"/>
         <Rock:Zone Name="Section C" runat="server"/>

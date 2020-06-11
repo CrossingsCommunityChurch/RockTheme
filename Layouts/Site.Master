@@ -45,7 +45,7 @@
 
     <form id="form1" runat="server">
         <Rock:Zone Name="Navigation" runat="server" />
-        <div id="content" class="clearfix">
+        <div id="content" class="clearfix page-wrapper">
             <asp:ContentPlaceHolder ID="feature" runat="server"></asp:ContentPlaceHolder>
             <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>              
         </div>
