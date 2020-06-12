@@ -12,12 +12,12 @@
 {% if imageUrl != empty %}
     <div class="container-fluid hero-wrapper">
         <div class="hero" style="overflow:hidden;">
-            <div class="Masthead" style="height: 80vh;">
+            <div class="Masthead" style="height: 100vh;">
                 <div class="is-parallax Masthead__image">
                     <img src="{{ imageUrl }}">
                 </div>
             </div>
-            <div class="jumbotron flat home-hero transparent reverse">
+            <div class="jumbotron flat transparent reverse">
                 {% if layout == 'Homepage' %}
                     {{ buttons }}
                 {% else %}

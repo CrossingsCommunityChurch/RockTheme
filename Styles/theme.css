@@ -11905,7 +11905,7 @@ label {
 .hero .jumbotron {
   position: absolute;
   z-index: 1;
-  bottom: 0;
+  bottom: 10vh;
   left: 0;
   right: 0;
 }
