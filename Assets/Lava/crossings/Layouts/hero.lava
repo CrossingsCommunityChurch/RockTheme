@@ -1,9 +1,13 @@
 {% assign title = CurrentPage.PageTitle %}
 {% assign subTitle = CurrentPage.Subheading %}
-{% assign imageUrl = CurrentPage.AssetImage %}
 {% assign showButtons = CurrentPage.UseButtons %}
 {% assign buttons = CurrentPage.Buttons %}
 {% assign layout = CurrentPage.Layout.Name %}
+
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/2000x1300' %}
+{% assign imageUrlPath = CurrentPage.AssetImage | Url:'localpath' %}
+{% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
 {%- comment -%}
     I think this will make more sense to add this to the page level and not within a block (may change this to page-heading or something and not call it hero)

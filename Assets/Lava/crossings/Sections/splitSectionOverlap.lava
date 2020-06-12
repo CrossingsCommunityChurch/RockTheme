@@ -1,6 +1,9 @@
 {%- for item in Items -%} {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
 {% if item.AssetImage %}
-    {% assign imageUrl = item.AssetImage %}
+    {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+    {% assign imageSize = '/fit-in/900x600' %}
+    {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 {% endif %}
 <div class="container-fluid section split-section split-section-overlap">
       <div class="row flex-row">
