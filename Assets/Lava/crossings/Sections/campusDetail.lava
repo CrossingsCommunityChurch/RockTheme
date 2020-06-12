@@ -1,7 +1,14 @@
 {%- for item in Items -%}
   {% if item.Campus and item.Campus != empty %}
     {% assign campus = Campuses | Where:'Name', item.Campus | First %}
-      <h2>{{ campus.Id }} {{ campus.Name }}</h2>
+    {% assign address = campus.Location.Street1 %}
+    {% assign city = campus.Location.City %}
+    {% assign state = campus.Location.State %}
+    {% assign zip = campus.Location.PostalCode %}
+    {% assign phone = campus.PhoneNumber %}
+    {% assign serviceTimes = campus.ServiceTimes | Map:'Time' | Join:', '%}
+    {% assign campusLeader = campus.LeaderPersonAliasId | PersonByAliasId %}
+
       <div class="section special-message simple-section location-details">
         <div class="container">
           <div class="row">
@@ -21,23 +28,23 @@
                 <div class="row location-content">
                   <div class="col-md-6">
                     <h4 class="subheading">Sunday Services</h4>
-                    <h2 class="heading">8:15AM, 9:15AM, 10:45AM</h2>
+                    <h2 class="heading">{{ serviceTimes }}</h2>
                     <p class="lead">
                       <a href="#" class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i><span>14600 N. Portland Ave. <br> Oklahoma City, OK 73134</span>
+                        <i class="fas fa-map-marker-alt"></i><span>{{ address }} <br> {{ city }}, {{ state }} {{ zip }}</span>
                       </a>
                       <a href="#" class="contact-item">
-                        <i class="fas fa-phone"></i> <span>405.755.2227</span>
+                        <i class="fas fa-phone"></i> <span>{{ phone }}</span>
                       </a>
                     </p>
                   </div>
                   <div class="col-md-6"><div class="pastor-item">
                     <div class="pastor-image">
-                      <img src="/img/marty.f10d56d1.png">
+                      <img src="{{ campusLeader.Photo.Url }}">
                     </div>
                     <div class="past-details">
                       <h4 class="subheading">Campus Pastor</h4>
-                      <h2 class="heading">Marty Grubbs</h2>
+                      <h2 class="heading">{{ campusLeader.FullName }}</h2>
                       <p class="lead">Senior Pastor</p>
                       <p>
                         <a href="#">View All Staff <i class="fas fa-angle-right"></i></a>
