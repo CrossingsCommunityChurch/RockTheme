@@ -8,6 +8,7 @@
     {% assign phone = campus.PhoneNumber %}
     {% assign serviceTimes = campus.ServiceTimes | Map:'Time' | Join:', '%}
     {% assign campusLeader = campus.LeaderPersonAliasId | PersonByAliasId %}
+    {% assign directionsURL = campus | Attribute: 'DirectionsURL' %}
 
       <div class="section special-message simple-section location-details">
         <div class="container">
@@ -56,7 +57,7 @@
                 <div class="row">
                   <div class="col">
                     <div class="buttons location-buttons delay1 before-enter enter">
-                    {[ button icon:'location-arrow' buttonlink:'#' buttontext:'Directions' ]}
+                    {[ button icon:'location-arrow' buttonlink:'{{ directionsURL }}' buttontarget:'_blank' buttontext:'Directions' ]}
                     {[ button buttonlink:'#connect' buttontext:'Get Connected' ]}
                     </div>
                   </div>

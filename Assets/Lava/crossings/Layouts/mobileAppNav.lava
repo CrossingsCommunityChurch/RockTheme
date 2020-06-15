@@ -1,0 +1,6 @@
+<div class="mobile-navbar">
+  {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item' buttonicon:'map-marker-alt' buttontext:'Locations' ]}
+  {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item' buttonicon:'video' buttontext:'Media' ]}
+  {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item' buttonicon:'heart' buttontext:'Give' ]}
+  {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item' buttonicon:'search' buttontext:'Search' ]}
+</div>
