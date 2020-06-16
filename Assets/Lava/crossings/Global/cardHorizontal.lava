@@ -1,0 +1,22 @@
+{%- comment -%}
+title
+subtitle
+img
+{%- endcomment -%}
+
+<div class="card listing">
+  <div class="row flex-row">
+    <div class="col-sm-4">
+      <img src="{{ img }}" class="object-cover">
+    </div>
+    <div class="col-sm-8">
+      <div>
+        <h3>{{ title }}</h3>
+        {% if subtitle %}
+          <h4>{{ subtitle }}</h4>
+        {% endif %}
+        <p>{{ text }}</p>
+      </div>
+    </div>
+  </div>
+</div>
