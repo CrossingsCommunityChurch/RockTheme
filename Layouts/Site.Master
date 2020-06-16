@@ -23,7 +23,6 @@
         <title></title>
 
         <script src="<%# System.Web.Optimization.Scripts.Url("~/Scripts/Bundles/RockJQueryLatest" ) %>"></script>
-        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
         <script src='<%# ResolveRockUrl("~~/Scripts/theme.js", true) %>' ></script>
 
         <!-- Set the viewport width to device width for mobile -->

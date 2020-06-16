@@ -12,7 +12,7 @@
 {% if imageUrlPath != empty %}
     <div class="container-fluid hero-wrapper">
         <div class="hero" style="overflow:hidden;">
-            <div class="Masthead" style="height: {{ height }};">
+            <div class="Masthead" style="height: 100vh;">
                 <div class="is-parallax Masthead__image">
                     <img src="{{ imageUrl }}">
                 </div>
