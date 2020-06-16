@@ -13,7 +13,7 @@
     I think this will make more sense to add this to the page level and not within a block (may change this to page-heading or something and not call it hero)
 {%- endcomment -%}
 
-{% if imageUrl != empty %}
+{% if imageUrlPath != empty %}
     <div class="container-fluid hero-wrapper">
         <div class="hero" style="overflow:hidden;">
             <div class="Masthead" style="height: 100vh;">

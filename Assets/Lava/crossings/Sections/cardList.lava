@@ -1,0 +1,46 @@
+{%- for item in Items -%}
+
+{% assign title = item.Title %}
+{% assign subTitle = item.subheading %}
+
+{% if item.AssetImage %}
+    {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+    {% assign imageSize = '/fit-in/2000x1300' %}
+    {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{% endif %}
+
+{%- comment -%}
+  Replace this with Hero Shortcode
+{%- endcomment -%}
+<div class="container-fluid hero-wrapper">
+  <div class="hero" style="overflow: hidden;">
+    <div class="Masthead" style="height: 75vh;">
+      <div class="is-parallax Masthead__image">
+        <img src="{{ imageUrl }}">
+      </div>
+    </div>
+    <div class="jumbotron flat transparent reverse delay1 fadein before-enter enter">
+        {% if subTitle != empty %}
+          <h3 class="subheading reverse">{{ subTitle }}</h3>
+        {% endif %}
+        {% if title != empty %}
+          <h1 class="heading">{{ title }}</h1>
+        {% endif %}
+    </div>
+  </div>
+</div>
+<div class="container card-list">
+  <div class="row">
+    <div class="col-md-3 col-lg-4 card-wrapper">
+      <a href="#" class="card">
+        <div class="title">
+          <h3>Ministry Title <i class="fas fa-arrow-right pull-right"></i></h3>
+          <p class="subtitle">Ministry Subtitle</p>
+        </div>
+        <p class="learn-more">Learn More</p>
+      </a>
+    </div>
+  </div>
+</div>
+{%- endfor -%}
