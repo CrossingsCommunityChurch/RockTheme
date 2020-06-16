@@ -1,0 +1,35 @@
+{%- comment -%}
+  img
+  title
+  series
+  speaker
+  date
+  link
+  actiontext
+{%- endcomment -%}
+
+<div class="col-sm-6 col-md-4">
+  <div class="card cardShadow">
+    <div class="thumb">
+    <img src="{{ img }}" class="object-fit">
+    </div>
+    <div class="row card-content-row">
+      <div class="card-content">
+        <a data-v-754fb1e6="" href="{{ link }}" class="btn icon-button shadowDepth2">
+          <i data-v-754fb1e6="" class="fas fa-play"></i>
+          <span data-v-754fb1e6="">{{ actiontext }}</span>
+        </a>
+        <div class="col">
+          <div>
+            <h3>{{ title }}</h3>
+            {% if series %}
+              <h5 class="series">{{ series }}</h5>
+            {% endif %}
+            <h5>{{ speaker }}</h5>
+            <p class="date">{{ date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="media-list">
+  <div class="media-search">
+    <div class="container">
+      {[ mediaFilters ]}
+      <div class="media-list-items">
+        <div class="row">
+          {%- comment -%}
+            This will need to change to a for loop from a content channel
+          {%- endcomment -%}
+            {[ cardMedia link:'#' title:'Name of Message' series:'Series Title' img:'https://placehold.it/450x325' actiontext: 'Watch' date:'May 10, 2020' ]}
+          {%- comment -%}
+            End Loop over this card
+          {%- endcomment -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
