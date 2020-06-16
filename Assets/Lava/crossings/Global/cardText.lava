@@ -11,7 +11,7 @@ actiontext
 {% endunless %}
 
 <div class="{{columnstyle}} card-wrapper">
-  <a href="#" class="card">
+  <a href="{{ link }}" class="card">
     <div class="title">
       <h3>{{title}} <i class="fas fa-arrow-right pull-right"></i></h3>
       {% if subtitle %}
