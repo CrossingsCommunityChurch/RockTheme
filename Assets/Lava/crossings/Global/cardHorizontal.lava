@@ -2,6 +2,7 @@
 title
 subtitle
 img
+text
 {%- endcomment -%}
 
 <div class="card listing">
