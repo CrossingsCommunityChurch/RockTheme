@@ -1,0 +1,23 @@
+{%- comment -%}
+columnstyle
+link
+title
+subtitle
+actiontext
+{%- endcomment -%}
+
+{% unless columnstyle %}
+  {% assign columnstyle = 'col-md-3 col-lg-4' %}
+{% endunless %}
+
+<div class="{{columnstyle}} card-wrapper">
+  <a href="#" class="card">
+    <div class="title">
+      <h3>{{title}} <i class="fas fa-arrow-right pull-right"></i></h3>
+      {% if subtitle %}
+        <p class="subtitle">{{subtitle}}</p>
+      {% endif %}
+    </div>
+    <p class="learn-more">{{ actiontext }}</p>
+  </a>
+</div>
