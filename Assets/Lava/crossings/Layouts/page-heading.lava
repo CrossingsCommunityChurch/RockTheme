@@ -9,6 +9,17 @@
 {% assign imageUrlPath = CurrentPage.AssetImage | Url:'localpath' %}
 {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
+{% assign PageID = PageParameter.PageId %}
+{% if PageParameter.Item %}
+  {%- comment -%} We can assume it is a content channel detail page. Override page heading with content channel stuff {%- endcomment -%}
+  {% assign ItemID = PageParameter.Item %}
+  {% contentchannelitem id:'{{ ItemID }}' %}
+    {% assign title = contentchannelitem.Title %}
+    {% assign imageUrlPath = contentchannelitem | Attribute:'AssetImage' | Url:'localpath' %}
+    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+  {% endcontentchannelitem %}
+{% endif %}
+
 {% if imageUrlPath != empty %}
     <div class="container-fluid hero-wrapper">
         <div class="hero" style="overflow:hidden;">
