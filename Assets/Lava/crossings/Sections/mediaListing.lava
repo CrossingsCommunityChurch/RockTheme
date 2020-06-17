@@ -1,3 +1,6 @@
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/450x325' %}
+
 <div class="media-list">
   <div class="media-search">
     <div class="container">
@@ -7,7 +10,23 @@
           {%- comment -%}
             This will need to change to a for loop from a content channel
           {%- endcomment -%}
-            {[ cardMedia link:'#' title:'Name of Message' series:'Series Title' img:'https://placehold.it/450x325' actiontext: 'Watch' date:'May 10, 2020' ]}
+            {%- for item in Items -%}
+              {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+              {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+              {% capture itemLink %}
+                  {{ LinkedPages.DetailPage }}?Item={{ item.Id }}
+              {% endcapture %}
+              {% assign date = item.StartDate %}
+              {% assign title = item.Title %}
+              {% assign subTitle = item.SubTitle %}
+              {% assign date = item.StartDateTime | Date:'MMM d, yyyy' %}
+
+              {% for series in item.ParentItems | First %}
+                  {% assign seriesTitle = series.ContentChannelItem.Title %}
+              {% endfor %}
+
+              {[ cardMedia link:'{{ itemLink }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext: 'Watch' date:'{{ date }}' ]}
+            {% endfor %}
           {%- comment -%}
             End Loop over this card
           {%- endcomment -%}
