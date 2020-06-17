@@ -33,4 +33,4 @@ text
   </div>
 </div>
 
-{% -endfor -%}
+{%- endfor -%}
