@@ -1,0 +1,33 @@
+{% if PageParameter.Item %}
+  {%- comment -%} We can assume it is a content channel detail page. Override page heading with content channel stuff {%- endcomment -%}
+  {% assign ItemID = PageParameter.Item %}
+  {% contentchannelitem id:'{{ ItemID }}' %}
+    {% assign video = contentchannelitem.videoUrl %}
+  {% endcontentchannelitem %}
+{% endif %}
+
+{[ videoPLayer vimeourl:'{{ video }}' ]}
+
+{%- for item in Items -%}
+
+{% assign title = item.Title %}
+{% assign speaker = item.Speaker %}
+{% assign date = item.Date | Date:'MMM d, yyyy' %}
+{% assign summary = item.Summary %}
+
+<div class="series-details section text-center">
+  <hr class="sep">
+  <h1 class="heading">{{ title }}</h1>
+  <h3 class="subheading">{{ speaker }} | {{ date }}</h3>
+  <p>{{ summary }}</p>
+  <a href="#" class="btn-outline-primary btn"><i class="fas fa-share"></i><span>Share</span></a>
+  <div class="tags">
+    <p class="small"><i class="fas fa-tags"></i>
+      {% for tag in item.Tags %}
+        <a href="media/category/{{ tag.Slug }}">{{ tag.Title }}</a>
+      {% endfor %}
+    </p>
+  </div>
+</div>
+
+{%- endfor -%}
