@@ -5,10 +5,21 @@ img
 text
 {%- endcomment -%}
 
+{%- for item in Items -%}
+
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/600x600' %}
+{% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+{% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+
+{% assign title = item.Title %}
+{% assign subtitle = item.subheading %}
+{% assign content = item.Content %}
+
 <div class="card listing">
   <div class="row flex-row">
     <div class="col-sm-4">
-      <img src="{{ img }}" class="object-cover">
+      <img src="{{ imageUrl }}" class="object-cover">
     </div>
     <div class="col-sm-8">
       <div>
@@ -16,8 +27,10 @@ text
         {% if subtitle %}
           <h4>{{ subtitle }}</h4>
         {% endif %}
-        <p>{{ text }}</p>
+        {{ content }}
       </div>
     </div>
   </div>
 </div>
+
+{% -endfor -%}
