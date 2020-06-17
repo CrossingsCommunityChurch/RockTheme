@@ -2,8 +2,6 @@ console.log('loading theme js');
 
 $(document).ready(function() {
 
-    $('.primary-nav').addClass('fixed');
-
     $(".has-subnav").hover(function(){
         $(this).find('.fas').toggleClass('fa-angle-up');
     });
@@ -20,6 +18,8 @@ $(document).ready(function() {
 
     $(window).scroll(function() {    
         var scroll = $(window).scrollTop();
+
+        console.log(scroll);
 
         if (scroll >= 100) {
             $('.primary-nav').addClass('fixed');
