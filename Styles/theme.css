@@ -10777,9 +10777,15 @@ fieldset[disabled] .btn-danger-solid.focus {
 .padding-top-xl {
   padding-top: 45px !important;
 }
+.padding-bottom-xl {
+  padding-bottom: 45px !important;
+}
 @media (min-width: 992px) {
   .padding-top-xl {
     padding-top: 120px !important;
+  }
+  .padding-bottom-xl {
+    padding-bottom: 120px !important;
   }
 }
 .reverse {
