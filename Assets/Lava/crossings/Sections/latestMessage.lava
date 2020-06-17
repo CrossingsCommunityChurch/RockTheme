@@ -1,0 +1,39 @@
+{%- comment -%}
+  title
+  subtitle
+  image
+  link
+  summary
+  date
+{%- endcomment -%}
+
+{%- comment -%}
+  Figure out a way to set this globally so that we can pull from a content channel id. rock entities are not available unless configured by the template
+{%- endcomment -%}
+{%- for item in Items -%}
+
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/1000x600' %}
+{% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+{% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{% assign title = item.Title %}
+{% assign speaker = item.Speaker %}
+{% assign date = item.Date | Date:'MMM d, yyyy' %}
+{% assign summary = item.Summary %}
+{% assign linkUrl = item.Link %}
+
+<div class="latest-message">
+  <div class="message-image">
+    <img src="{{ imageUrl }}">
+    </div>
+    <div class="latest-message-details delay-1 before-enter enter">
+    <h4 class="subheading">Latest Message</h4>
+    <h2 class="heading">{{ title }}</h2>
+    <h5>{{ speaker }}</h5>
+    <p class="date">{{ date }}</p>
+    <p>{{ summary }}</p>
+    <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+  </div>
+</div>
+
+{%- endfor -%}
