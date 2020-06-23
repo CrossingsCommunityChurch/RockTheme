@@ -12844,12 +12844,11 @@ label {
   }
 }
 .latest-message-wrapper {
-  margin-top: -280px;
   padding-top: 0;
 }
 @media (min-width: 992px) {
   .latest-message-wrapper {
-    margin-top: -160px;
+    margin-top: 30px;
   }
 }
 .media-filter h3 {
@@ -12908,6 +12907,10 @@ label {
   padding-top: 30px;
   background-color: #eee;
 }
+.latest-message {
+  position: relative;
+  z-index: 9;
+}
 .latest-message-details {
   background-color: #fff;
   position: relative;
@@ -12924,6 +12927,7 @@ label {
 @media (min-width: 992px) {
   .latest-message {
     display: flex;
+    margin-bottom: 60px;
   }
   .latest-message img {
     border-radius: 0;
@@ -12961,6 +12965,30 @@ label {
 }
 .media-list-items {
   margin-top: 2rem;
+}
+.media-hero {
+  padding-top: 90px;
+}
+@media (min-width: 992px) {
+  .media-hero {
+    height: 60vh;
+    padding-top: 225px;
+    background-color: #313e48;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}
+.media-hero.gradient-bg::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 50%;
+  right: 0;
+  left: 0;
+  background-image: linear-gradient(19deg, rgba(78, 67, 118, 0.75) 0%, rgba(49, 62, 72, 0.75) 100%) !important;
+  bottom: 0 !important;
 }
 .sermon-series-page .video {
   margin-top: -255px;
@@ -13036,5 +13064,8 @@ label {
 .zone-configuration-bar,
 .block-configuration-bar {
   font-family: "colfax-web", Helvetica, Arial, sans-serif;
+}
+.input-group-addon {
+  padding: 10px 13px;
 }
 /*# sourceMappingURL=./theme.css.map */
