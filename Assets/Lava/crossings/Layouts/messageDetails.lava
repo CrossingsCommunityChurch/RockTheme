@@ -1,4 +1,5 @@
 {% assign item = Item %}
+
 {% if item %}
   {% assign title = item.Title %}
   {% assign speaker = item | Attribute:'Speaker' %}

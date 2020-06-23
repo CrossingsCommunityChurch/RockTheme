@@ -11838,6 +11838,7 @@ label {
 }
 .subnav {
   display: none;
+  background-color: #000000;
 }
 @media (min-width: 992px) {
   .primary-nav-links > li:hover .subnav {
@@ -11848,6 +11849,9 @@ label {
   }
   .primary-nav-links > li:hover .subnav > ul a {
     color: #fff;
+  }
+  .primary-nav-links > li.has-subnav-parent:hover {
+    background-color: #000000;
   }
   .subnav {
     display: block;

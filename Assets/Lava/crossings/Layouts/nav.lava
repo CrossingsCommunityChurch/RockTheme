@@ -3,7 +3,7 @@
     <!--Need to set this up to use lava to check login status? -->
     <a href="#" class="login-btn btn btn-outline-thin"><i class="fas fa-user"></i><span> Login</span></a>
     <ul class="primary-nav-links">
-        <li class="active"><a href="#">Locations <i class="fa fa-angle-down"></i></a>
+        <li class="has-subnav-parent"><a href="#">Locations <i class="fa fa-angle-down"></i></a>
             <div class="subnav">
                 <ul>
                     <li><a href="/location" class="">OKC</a></li>
