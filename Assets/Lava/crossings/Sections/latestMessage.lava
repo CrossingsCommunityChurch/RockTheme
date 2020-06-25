@@ -25,7 +25,7 @@
 {% assign speaker = item.Speaker %}
 {% assign date = item.Date | Date:'MMM d, yyyy' %}
 {% assign summary = item.Content %}
-{% assign linkUrl = item.Link %}
+{% assign linkUrl = item | Attribute:'Link', 'RawValue' %}
 
 <div class="media-hero gradient-bg" {% if heroUrlPath %} style="background-image: url('{{ heroUrl }}')" {% endif %}>
   <div class="container-fluid section latest-message-wrapper">
