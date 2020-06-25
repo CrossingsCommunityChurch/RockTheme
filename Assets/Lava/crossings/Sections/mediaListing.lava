@@ -13,6 +13,11 @@
             {%- for item in Items -%}
               {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
               {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+
+              {% if item.Image != empty %}
+                {% assign imageUrl = item | Attribute: 'Image', 'RawValue' %}
+              {% endif %}
+
               {% capture itemLink %}
                   {{ LinkedPages.DetailPage }}?Item={{ item.Id }}
               {% endcapture %}
