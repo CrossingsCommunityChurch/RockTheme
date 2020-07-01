@@ -12011,13 +12011,16 @@ label {
     font-size: 0.8rem !important;
   }
 }
-.hero {
+.hero,
+.hero-wrapper {
   position: relative;
 }
-.hero .btn {
+.hero .btn,
+.hero-wrapper .btn {
   display: block;
 }
-.hero .jumbotron {
+.hero .jumbotron,
+.hero-wrapper .jumbotron {
   position: absolute;
   z-index: 1;
   bottom: 10vh;
@@ -12025,11 +12028,14 @@ label {
   right: 0;
 }
 .hero .heading,
-.hero .subheading {
+.hero-wrapper .heading,
+.hero .subheading,
+.hero-wrapper .subheading {
   margin-top: 0;
   margin-bottom: 0;
 }
-.hero .lead-buttons {
+.hero .lead-buttons,
+.hero-wrapper .lead-buttons {
   margin-top: 3rem;
 }
 .home-hero {
@@ -12050,7 +12056,8 @@ label {
 .hero-wrapper p {
   text-shadow: 0 0 10px rgba(0, 0, 0, 0.85);
 }
-.hasAlert .hero .Masthead {
+.hasAlert .hero .Masthead,
+.hasAlert .hero-wrapper .parallax-content {
   height: calc(100vh - 160px) !important;
 }
 .zoom .hero .Masthead .is-parallax img {
@@ -12063,15 +12070,18 @@ label {
   z-index: 1;
 }
 @media (min-width: 768px) {
-  .hero .btn {
+  .hero .btn,
+  .hero-wrapper .btn {
     margin-right: 1rem;
     display: inline-block;
   }
-  .hero .jumbotron {
+  .hero .jumbotron,
+  .hero-wrapper .jumbotron {
     padding-left: 60px;
     padding-right: 60px;
   }
-  .hero .Masthead {
+  .hero .Masthead,
+  .hero-wrapper .parallax-content {
     min-height: 0;
   }
 }
@@ -12085,49 +12095,71 @@ label {
     padding-left: 15px;
     padding-right: 15px;
   }
-  .hero {
+  .hero,
+  .parallax-content {
     z-index: 9;
   }
-  .hero .heading {
+  .hero .heading,
+  .parallax-content .heading {
     font-size: 6.25rem;
     margin: 0;
   }
-  .hero .subheading {
+  .hero .subheading,
+  .parallax-content .subheading {
     margin: 0;
   }
-  .hero .lead-buttons {
+  .hero .lead-buttons,
+  .parallax-content .lead-buttons {
     margin-top: 3rem;
   }
-  .hero .btn {
+  .hero .btn,
+  .parallax-content .btn {
     border-color: #fff;
     border-width: 3px;
     font-size: 0.825rem;
     background-color: transparent;
   }
-  .hero .btn:hover {
+  .hero .btn:hover,
+  .parallax-content .btn:hover {
     background-color: #273139;
   }
-  .hero .btn.btn-latest {
+  .hero .btn.btn-latest,
+  .parallax-content .btn.btn-latest {
     background-color: #313e48;
     text-shadow: none;
   }
-  .hero .btn.btn-latest:hover {
+  .hero .btn.btn-latest:hover,
+  .parallax-content .btn.btn-latest:hover {
     background-color: #1c242a;
   }
-  .hero .btn-primary {
+  .hero .btn-primary,
+  .parallax-content .btn-primary {
     background-color: rgba(0, 0, 0, 0.5);
   }
-  .hero .btn-primary:hover {
+  .hero .btn-primary:hover,
+  .parallax-content .btn-primary:hover {
     background-color: #313e48;
   }
-  .hero .jumbotron {
+  .hero .jumbotron,
+  .parallax-content .jumbotron {
     max-width: 1170px;
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
     padding-bottom: 48px;
   }
-  .hero .Masthead::after {
+  .hero .Masthead::after,
+  .parallax-content .Masthead::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 50%;
+    right: 0;
+    left: 0;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+  }
+  .parallax-content::after {
     display: block;
     content: '';
     position: absolute;
@@ -12145,12 +12177,16 @@ label {
   .home-hero.jumbotron {
     bottom: 10vh;
   }
-  .hasAlert .hero .Masthead {
+  .hasAlert .hero .Masthead,
+  .hasAlert .hero-wrapper .parallax-content {
     height: calc(100vh - 184px) !important;
   }
   .page-wrapper .hero-wrapper {
     padding-left: 0;
     padding-right: 0;
+  }
+  .page-wrapper .hero-wrapper .parallax-content {
+    height: 100vh !important;
   }
   .page-wrapper > .hero-wrapper .hero .Masthead {
     height: 100vh !important;
@@ -12171,7 +12207,8 @@ label {
   bottom: 0 !important;
 }
 @media (min-width: 992px) {
-  .gradient-bg.page-wrapper > .hero-wrapper .hero .Masthead {
+  .gradient-bg.page-wrapper > .hero-wrapper .hero .Masthead,
+  .gradient-bg.page-wrapper > .hero-wrapper .parallax-content {
     height: 80vh !important;
   }
 }
