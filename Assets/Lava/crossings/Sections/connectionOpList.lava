@@ -1,0 +1,22 @@
+{% assign opportunityCount = Opportunities | Size %}
+
+{% if opportunityCount == 0 %}
+  <div class="panel panel-default margin-t-md">
+    <div class="margin-all-md"> There are no opportunities that match the criteria</div>
+  </div>
+{% endif %}
+
+<div class="container card-list">
+  <div class="row">
+    {% for opportunity in Opportunities %}
+      {% assign title = opportunity.PublicName%}
+      {% assign subtitle = opportunity.Summary %}
+      {% if DetailPage contains "?" %}
+			  {% assign itemLink = '{{ DetailPage }}&OpportunityId={{ opportunity.Id }}' %}
+		  {% else %}
+			  {% assign itemLink = '{{ DetailPage }}?OpportunityId={{ opportunity.Id }}' %}
+		  {% endif %}
+            {[ cardText title:'{{ title }}' subtitle:'{{ subTitle }}' link:'{{ itemLink }}' actiontext:'Learn More' ]}
+    {% endfor %}
+</div>
+</div>
