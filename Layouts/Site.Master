@@ -44,7 +44,7 @@
 
     <form id="form1" runat="server">
         
-             <nav class="primary-nav flazt reverse">
+             <nav class="primary-nav flat reverse">
                 <div class="navigation">
                     <Rock:Zone name="Login" runat="server"/>
                     <Rock:Zone Name="Navigation" runat="server" />

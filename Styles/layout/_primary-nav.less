@@ -18,6 +18,106 @@
 }
 
 @media (min-width: @screen-desktop) {
+    .navigation {
+        #zone-search {
+            justify-content: flex-end;
+        }
+
+        #zone-navigation {
+            justify-content: center;
+        }
+
+        #zone-login {
+            .dropdown {
+                margin: 0 auto 0 15px;
+
+                > a {
+                    line-height: 1.6;
+                    text-align: center;
+                    vertical-align: middle;
+                    touch-action: manipulation;
+                    cursor: pointer;
+                    background-image: none;
+                    border: 1px solid transparent;
+                    transition: all .3s ease-in-out;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    font-weight: 600;
+                    color: @white;
+                    border-color: @white;
+                    display: block;
+                    padding: 10px 30px;
+                    background-color: transparent;
+                    padding-right: @spacing2x;
+                    padding-left: @spacing2x;
+                    font-size: 0.75rem;
+                    border-radius: @spacing4x;
+
+                    > span::before {
+                        margin-right: 0.5rem;
+                        -moz-osx-font-smoothing: grayscale;
+                        -webkit-font-smoothing: antialiased;
+                        display: inline-block;
+                        font-style: normal;
+                        font-variant: normal;
+                        text-rendering: auto;
+                        line-height: 1;
+                        font-weight: 900;
+                        font-family: 'FontAwesome';
+                        content: "\f007";
+                    }
+            
+                    &:focus {
+                        color: @white;
+                    }
+            
+                    > span {
+                        display: inline;
+                    }
+            
+                    &:hover {
+                        color: @white;
+                        box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+                    }
+                }
+
+                &.open {
+                    > a {
+                        border-radius: 0;
+                        background-color: #000000;
+                        border-color: #000000;
+                    }
+                }
+                
+                .dropdown-menu {
+                    text-shadow: none;
+                    background-color: #000;
+                    width: 100%;
+                    border: 0 none;
+
+                    > li {
+                        > a {
+                            padding: 10px @spacing 10px @spacing2x;
+                            color: @white;
+                            font-weight: 600;
+                            font-size: 0.75rem;
+                            text-transform: uppercase;
+
+                            &:hover {
+                                background-color: @brand-primary;
+                            }
+                        }
+                    }
+
+                    .divider {
+                        margin: 0;
+                        background-color: #333;
+                    }
+                }
+            }
+        }
+    }
+
     .login-btn,
     .menu-btn {
         color: @white;
@@ -155,6 +255,42 @@
             .menu-btn {
                 color: @brand-primary;
                 border-color: @brand-primary;
+            }
+
+            #zone-login {
+                .dropdown {
+                    > a {
+                        color: @brand-primary;
+                        border-color: @brand-primary;
+                    }
+
+                    &.open {
+                        > a {
+                            border-radius: 0;
+                            background-color: @white;
+                            border-color: @white;
+                        }
+                    }
+
+                    .dropdown-menu {
+                        background-color: @white;
+
+                        .divider {
+                            background-color: #dddddd;
+                        }
+
+                        > li {
+                            > a {
+                                border-color: @brand-primary;
+                                color: @brand-primary;
+
+                                &:hover {
+                                    background-color: #eeeeee;
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
