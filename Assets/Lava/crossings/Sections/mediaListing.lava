@@ -18,9 +18,20 @@
                 {% assign imageUrl = item | Attribute: 'Image', 'RawValue' %}
               {% endif %}
 
-              {% capture itemLink %}
-                  {{ LinkedPages.DetailPage }}?Item={{ item.Id }}
-              {% endcapture %}
+              {%- comment -%}
+                Swapped this to use slugs, we need to make sure the route is setup - we may need to figure out how to make slugs unique if there is no logic for that built-in
+              {%- endcomment -%}
+              {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
+              {%- if LinkedPages.DetailPage contains '{Slug}' and itemPrimarySlug != '' -%}
+                {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.PrimarySlug | Prepend:'/' -%}
+              {%- else -%}
+                {%- if LinkedPages.DetailPage contains '{Slug}' -%}
+                  {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.Id | Prepend:'/' -%}
+                {%- else -%}
+                  {%- capture itemLink -%}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{%- endcapture -%}
+                {%- endif -%}
+              {%- endif -%}
+
               {% assign date = item.StartDate %}
               {% assign title = item.Title %}
               {% assign subTitle = item.SubTitle %}

@@ -458,6 +458,8 @@
     .fixed {
         .primary-nav-links {
             .subnav {
+                background-color: transparent;
+
                 > ul {
                     background-color: @white;
 
@@ -469,6 +471,12 @@
                     .view-all a {
                         font-size: 0.8rem !important;
                     }
+                }
+            }
+
+            >li.has-subnav-parent {
+                &:hover {
+                    background-color: @white;
                 }
             }
         }

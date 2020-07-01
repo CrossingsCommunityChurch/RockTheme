@@ -2,8 +2,8 @@ console.log('loading theme js');
 
 $(document).ready(function() {
 
-    $('.has-subnav').hover(function(){
-        $(this).find('.fas').toggleClass('fa-angle-up');
+    $('.has-subnav-parent').hover(function(){
+        $(this).find('.fa').toggleClass('fa-angle-up');
     });
 
     $('a[data-toggle="collapse"').click(function(){
