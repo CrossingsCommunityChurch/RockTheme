@@ -28,7 +28,12 @@
         }
 
         #zone-login {
-            .dropdown {
+            .profile-photo {
+                display: none;
+            }
+
+            .dropdown,
+            .loginstatus > li {
                 margin: 0 auto 0 15px;
 
                 > a {
@@ -53,7 +58,7 @@
                     font-size: 0.75rem;
                     border-radius: @spacing4x;
 
-                    > span::before {
+                    &::before {
                         margin-right: 0.5rem;
                         -moz-osx-font-smoothing: grayscale;
                         -webkit-font-smoothing: antialiased;
@@ -258,7 +263,8 @@
             }
 
             #zone-login {
-                .dropdown {
+                .dropdown,
+                .loginstatus > li {
                     > a {
                         color: @brand-primary;
                         border-color: @brand-primary;
