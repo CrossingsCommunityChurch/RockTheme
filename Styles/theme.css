@@ -12024,6 +12024,9 @@ label {
   .subnav > ul > li > a:hover:after {
     width: 50%;
   }
+  .fixed .primary-nav-links .subnav {
+    background-color: transparent;
+  }
   .fixed .primary-nav-links .subnav > ul {
     background-color: #fff;
   }
