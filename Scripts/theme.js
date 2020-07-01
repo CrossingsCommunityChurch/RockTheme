@@ -2,12 +2,16 @@ console.log('loading theme js');
 
 $(document).ready(function() {
 
-    $(".has-subnav").hover(function(){
+    $('.has-subnav').hover(function(){
         $(this).find('.fas').toggleClass('fa-angle-up');
     });
 
     $('a[data-toggle="collapse"').click(function(){
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
+    });
+
+    $('.dropdown-toggle').click(function(){
+        $(this).find('.fa-caret-down').toggleClass('fa-caret-up');
     });
 
     $('.primary-locations h3 > a').click(function(){
