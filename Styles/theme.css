@@ -12034,6 +12034,9 @@ label {
   .fixed .primary-nav-links .subnav > ul .view-all a {
     font-size: 0.8rem !important;
   }
+  .fixed .primary-nav-links > li.has-subnav-parent:hover {
+    background-color: #fff;
+  }
 }
 .hero,
 .hero-wrapper {
