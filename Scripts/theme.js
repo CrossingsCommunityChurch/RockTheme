@@ -27,6 +27,7 @@ $(document).ready(function() {
     });
     
     //Init Animate on Scroll
+    // For options on settings - https://github.com/michalsnik/aos
     AOS.init({
         easing: 'ease-in-out',
         duration: '1000'

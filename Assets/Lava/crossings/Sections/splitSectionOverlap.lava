@@ -12,7 +12,7 @@
               <img src="{{ imageUrl }}" alt="{{ item.Title }}" />
             {% endif %}
           </div>
-          <div class="col-md-6 split-section-text">
+          <div class="col-md-6 split-section-text" data-aos="fade-left">
               {%- if item.subheading -%}
                 <h4 class="subheading">{{ item.subheading }}</h4>
               {% endif %}
@@ -23,7 +23,7 @@
               <p>{{ item.Content }}</p>
               {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
               {%- if item.lava != empty -%}
-                <div class="buttons">
+                <div class="buttons" data-aos="fade-left">
                   {{ item.lava | HtmlDecode }}
                 </div>
               {%- endif -%}

@@ -10941,6 +10941,9 @@ html {
 body {
   margin-bottom: 58px;
 }
+.page-wrapper {
+  overflow: hidden;
+}
 @media (min-width: 992px) {
   body {
     margin-bottom: 0;

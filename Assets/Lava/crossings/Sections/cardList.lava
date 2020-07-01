@@ -1,4 +1,4 @@
-<div class="container card-list">
+<div class="container card-list" data-aos="fade-up">
   <div class="row">
     {%- comment -%}
       Probably needs to pull from a content channel for ministries and loop?

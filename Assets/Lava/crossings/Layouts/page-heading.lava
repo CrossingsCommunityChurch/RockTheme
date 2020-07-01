@@ -23,7 +23,7 @@
 {% if imageUrlPath != empty %}
     <div class="container-fluid hero-wrapper">
         {[ parallax image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
-            <div class="jumbotron flat transparent reverse">
+            <div class="jumbotron flat transparent reverse" data-aos="fade-in">
                 {% if layout == 'Homepage' %}
                     {{ buttons }}
                 {% else %}
@@ -65,7 +65,7 @@
 {% else %}
     <div class="section page-title reverse">
         <div class="container">
-            <div class="jumbotron text-center">
+            <div class="jumbotron text-center" data-aos="fade-in">
                 {%if subTitle %}
                     <h3 class="subheading reverse">{{ subTitle }}</h3>
                 {% endif %}

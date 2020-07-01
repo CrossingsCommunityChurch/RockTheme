@@ -31,10 +31,10 @@
   <div class="container-fluid section latest-message-wrapper">
     <div class="col-md-10 col-md-offset-1">
       <div class="latest-message">
-        <div class="message-image">
+        <div class="message-image" data-aos="fade-in">
           <img src="{{ imageUrl }}">
-          </div>
-          <div class="latest-message-details delay-1 before-enter enter">
+        </div>
+        <div class="latest-message-details" data-aos="fade-up">
           <h4 class="subheading">Latest Message</h4>
           <h2 class="heading">{{ title }}</h2>
           <h5>{{ speaker }}</h5>

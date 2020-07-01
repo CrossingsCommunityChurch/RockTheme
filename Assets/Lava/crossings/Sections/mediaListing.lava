@@ -5,7 +5,7 @@
   <div class="media-search">
     <div class="container">
       {[ mediaFilters ]}
-      <div class="media-list-items">
+      <div class="media-list-items" data-aos="fade-up">
         <div class="row flex-row flex-wrap">
           {%- comment -%}
             This will need to change to a for loop from a content channel
