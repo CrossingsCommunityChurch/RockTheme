@@ -12192,6 +12192,9 @@ label {
   .page-wrapper .hero-wrapper .parallax-content {
     height: 100vh !important;
   }
+  .page-wrapper .hero-wrapper.page-hero .parallax-content {
+    height: 70vh !important;
+  }
   .page-wrapper > .hero-wrapper .hero .Masthead {
     height: 100vh !important;
   }
