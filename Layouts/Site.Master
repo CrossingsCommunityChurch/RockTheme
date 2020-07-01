@@ -43,7 +43,14 @@
 <body runat="server" id="body">
 
     <form id="form1" runat="server">
-        <Rock:Zone Name="Navigation" runat="server" />
+        
+             <nav class="primary-nav flazt reverse">
+                <div class="navigation">
+                    <Rock:Zone name="Login" runat="server"/>
+                    <Rock:Zone Name="Navigation" runat="server" />
+                    <Rock:Zone Name="Search" runat="server"/>
+                </div>
+            </nav>
         <div id="content" class="clearfix page-wrapper">
             <asp:ContentPlaceHolder ID="feature" runat="server"></asp:ContentPlaceHolder>
             <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>              
