@@ -20,6 +20,11 @@ $(document).ready(function() {
         $('body').removeClass('modal-open');
     });
 
+    $('.toggle-locations, .mobile-slideout-close').click(function(e){
+        e.preventDefault();
+        $(this).add('.mobile-slideout.locations, .mobile-overlay').toggleClass('active');
+    });
+
     $(window).scroll(function() {    
         var scroll = $(window).scrollTop();
 

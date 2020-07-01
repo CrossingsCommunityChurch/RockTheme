@@ -39,24 +39,6 @@
                 {% endif %}
             </div>
         {[ endparallax ]}
-        <!--<div class="hero" style="overflow:hidden;">
-            <div class="Masthead" style="height: {{ height }};">
-                <div class="is-parallax Masthead__image">
-                    <img src="{{ imageUrl }}">
-                </div>
-            </div>
-            <div class="jumbotron flat transparent reverse">
-               {%if subTitle %}
-                    <h3 class="subheading reverse">{{ subTitle }}</h3>
-                {% endif %}
-                <h2 class="heading reverse">{{ title }}</h1>
-                {%if showButtons == 'Yes' %}
-                    <div class="lead-buttons">
-                        {{ buttons }}
-                    </div>
-                {% endif %}
-            </div>
-        </div>-->
     </div>
 {% else %}
     <div class="section page-title reverse">
