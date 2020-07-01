@@ -7,7 +7,7 @@
 {% endif %}
 <div class="container-fluid section simple-section {% if item.UseBackgroundImage == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}" {% if item.UseBackgroundImage == 'Yes' & imageUrl %} style="background-image: url('{{ imageUrl }}')" {% endif %}>
       <div class="row">
-          <div class="container content-area">
+          <div class="container content-area" data-aos="fade-up">
               <div class="row">
                   <div class="col-md-12">
                       {%- if item.subheading -%}
@@ -21,7 +21,7 @@
 
                       {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons.{% endcomment %}
                       {%- if item.lava != empty -%}
-                        <div class="buttons">
+                        <div class="buttons" data-aos="fade-up">
                             {{ item.lava | HtmlDecode }}
                         </div>
                       {%- endif -%}

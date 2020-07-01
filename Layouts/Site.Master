@@ -23,6 +23,7 @@
         <title></title>
 
         <script src="<%# System.Web.Optimization.Scripts.Url("~/Scripts/Bundles/RockJQueryLatest" ) %>"></script>
+        <script src='<%# ResolveRockUrl("~~/Scripts/aos.js", true) %>' ></script>
         <script src='<%# ResolveRockUrl("~~/Scripts/theme.js", true) %>' ></script>
 
         <!-- Set the viewport width to device width for mobile -->

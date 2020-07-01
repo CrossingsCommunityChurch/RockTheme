@@ -19,13 +19,17 @@ $(document).ready(function() {
     $(window).scroll(function() {    
         var scroll = $(window).scrollTop();
 
-        console.log(scroll);
-
-        if (scroll >= 100) {
+        if (scroll >= 140) {
             $('.primary-nav').addClass('fixed');
         } else {
             $('.primary-nav').removeClass('fixed');
         }
+    });
+    
+    //Init Animate on Scroll
+    AOS.init({
+        easing: 'ease-in-out',
+        duration: '1000'
     });
 
 });
