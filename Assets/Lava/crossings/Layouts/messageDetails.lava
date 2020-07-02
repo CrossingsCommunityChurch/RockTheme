@@ -42,6 +42,61 @@
         </div>
       </div>
     </div>
+    {%- comment -%}
+      TODO: This needs to get reworked to use some common shortcodes (card)
+      TODO: This cannot be very performant, nested for loops serveral times
+    {%- endcomment -%}
+    {% if item.ParentItems != 'empty' %}
+      {% assign ParentItem = item.ParentItems | First %}
+      {% assign ParentItemId = ParentItem.ContentChannelItemId %}
+      <div class="section media-list bg-gray">
+        <div class="container content-area">
+            <div class="media-list-items">
+              <div class="row">
+                  <div class="col-md-12">
+                    <h3 class="subheading" style="margin-bottom: 30px;">Other Messages in This Series</h3>
+                  </div>
+                  {% contentchannelitem where:'Id == {{ ParentItemId }}' %}
+                    {% for parent in contentchannelitemItems %}
+                        {% for child in parent.ChildItems %}
+                          {%if child.ChildContentChannelItem.Id != item.Id %}
+                            {% assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' %}
+                            {% assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' %}
+                            {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+                            {% assign imageSize = '/fit-in/450x325' %}
+                            {% assign imageUrlPath = child.ChildContentChannelItem.AssetImage | Url:'localpath' %}
+                            {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+                            {% if .Image != empty %}
+                              {% assign imageUrl = item | Attribute: 'Image', 'RawValue' %}
+                            {% endif %}
+                            {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
+                            <div class="col-sm-6 col-md-4">
+                              <div class="card cardShadow">
+                                <div class="thumb"><img src="{{ imageUrl }}" class="object-fit"></div>
+                                <div class="row card-content-row">
+                                  <div class="card-content">
+                                      <a href="/media/{{ childPrimarySlug }}" class="btn icon-button shadowDepth2"><i class="fas fa-play"></i><span>Watch</span></a>
+                                      <div class="col">
+                                          <div>
+                                            <h3>{{ child.ChildContentChannelItem.Title}}</h3>
+                                            <h5 class="series">{{ parent.Title }}</h5>
+                                            <h5>{{ speaker }}</h5>
+                                            <p class="date">{{ date }}</p>
+                                          </div>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                  {% endcontentchannelitem %}
+              </div>
+            </div>
+        </div>
+      </div>
+    {% endif %}
   </div>
 
 {% else %}
