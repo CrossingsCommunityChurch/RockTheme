@@ -1,0 +1,14 @@
+
+<div class="section special-message simple-section location-details">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8" data-aos="fade-up">
+              <div class="col-md-4 user-item">
+                <div class="user-image">
+                  <img src="{{ CurrentPerson.PhotoUrl }}">
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
