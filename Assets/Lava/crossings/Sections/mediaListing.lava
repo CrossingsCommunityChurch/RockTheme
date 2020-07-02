@@ -41,7 +41,7 @@
                   {% assign seriesTitle = series.ContentChannelItem.Title %}
               {% endfor %}
 
-              {[ cardMedia link:'{{ itemLink }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext: 'Watch' date:'{{ date }}' ]}
+              {[ cardMedia link:'{{ itemLink }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
             {% endfor %}
           {%- comment -%}
             End Loop over this card
