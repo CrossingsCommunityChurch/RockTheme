@@ -1,4 +1,8 @@
 {% comment %}
+{[ button type:'LatestMessage' ]}
+{% endcomment %}
+
+{% comment %}
   Params
 
   @buttonlink - Accepts a url
@@ -7,9 +11,12 @@
   @buttonsize - Accepts sm, lg
   @buttontext
   @buttonicon
-  @type - Sets @buttonlink and @buttontext to well-known values that specify default behaviors. Can be one of: LatestMessage
+  @type - Sets (overrides) other properties to well-known values for this button type. Can be one of: 'LatestMessage', ...more to come
 
 {% endcomment %}
+
+
+{% comment %} {% assign type = 'LatestMessage' %} {% endcomment %}
 
 {% comment %}
   If we dont set a button style, set it to be primary by default
@@ -23,14 +30,19 @@
   {% comment %}
   Get content channel id by name
   {% endcomment %}
-  {% contentchannel where:'Name == "Sermon Message"' %}
-    {% assign contentChannel = contentchannelItems | First %}
+  {% contentchannel where:'Name == "Sermon Message"' iterator:'contentChannels' %}
+    {% assign contentChannel = contentChannels | First %}
     {% assign contentChannelId = contentChannel.Id %}
   {% endcontentchannel %}
 
-  {% contentchannelitem | where:'ContentChannelId != 0' %}
-    {% assign contentChannelItems = contentchannelitemItems | Where:'ContentChannelId', contentChannelId | OrderBy:'StartDateTime desc' %}
+  {% assign now = 'Now' | Date %}
+
+  {% comment %}
+  Set well-known button properties
+  {% endcomment %}
+  {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
     {% assign latest = contentChannelItems | First %}
+    {% comment %} {{ latest | Debug }} {% endcomment %}
     {% assign link =  'https://vimeo.com/' | Append: latest.VimeoId %}
     {% assign text = 'Watch Latest Message' %}
     {% assign target = '_blank' %}
