@@ -7,6 +7,7 @@
   @buttonsize - Accepts sm, lg
   @buttontext
   @buttonicon
+  @type - Sets @buttonlink and @buttontext to well-known values that specify default behaviors. Can be one of: LatestMessage
 
 {% endcomment %}
 
@@ -17,4 +18,32 @@
   {% assign buttonstyle = 'primary' %}
 {% endunless %}
 
-<a href="{{ buttonlink }}" {% if buttontarget and buttontarget != empty %}target="{{ buttontarget }}"{% endif %} class="btn btn-{{ buttonstyle }} {% if buttonoutline and buttonstyle != empty %}btn-outline-{{ buttonstyle }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if buttonicon %}<i class="fas fa-{{ buttonicon }}"></i> {% endif %}<span>{{ buttontext }}</span></a>
+{% if type == 'LatestMessage' %}
+
+  {% comment %}
+  Get content channel id by name
+  {% endcomment %}
+  {% contentchannel where:'Name == "Sermon Message"' %}
+    {% assign contentChannel = contentchannelItems | First %}
+    {% assign contentChannelId = contentChannel.Id %}
+  {% endcontentchannel %}
+
+  {% contentchannelitem | where:'ContentChannelId != 0' %}
+    {% assign contentChannelItems = contentchannelitemItems | Where:'ContentChannelId', contentChannelId | OrderBy:'StartDateTime desc' %}
+    {% assign latest = contentChannelItems | First %}
+    {% assign link =  'https://vimeo.com/' | Append: latest.VimeoId %}
+    {% assign text = 'Watch Latest Message' %}
+    {% assign target = '_blank' %}
+    {% assign style = buttonstyle %}
+    {% assign icon = 'play' %}
+  {% endcontentchannelitem %}
+
+{% else %}
+  {% assign link =  buttonlink %}
+  {% assign text =  buttontext %}
+  {% assign target = buttontarget %}
+  {% assign style = buttonstyle %}
+  {% assign icon = buttonicon %}
+{% endif %}
+
+<a href="{{ link }}" {% if target and target != empty %}target="{{ target }}"{% endif %} class="btn btn-{{ style }} {% if buttonoutline and style != empty %}btn-outline-{{ style }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if icon %}<i class="fas fa-{{ icon }}"></i> {% endif %}<span>{{ text }}</span></a>
