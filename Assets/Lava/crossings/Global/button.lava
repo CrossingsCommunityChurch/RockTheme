@@ -1,4 +1,8 @@
 {% comment %}
+{[ button type:'LatestMessage' ]}
+{% endcomment %}
+
+{% comment %}
   Params
 
   @buttonlink - Accepts a url
@@ -7,8 +11,12 @@
   @buttonsize - Accepts sm, lg
   @buttontext
   @buttonicon
+  @type - Sets (overrides) other properties to well-known values for this button type. Can be one of: 'LatestMessage', ...more to come
 
 {% endcomment %}
+
+
+{% comment %} {% assign type = 'LatestMessage' %} {% endcomment %}
 
 {% comment %}
   If we dont set a button style, set it to be primary by default
@@ -17,4 +25,42 @@
   {% assign buttonstyle = 'primary' %}
 {% endunless %}
 
-<a href="{{ buttonlink }}" {% if buttontarget and buttontarget != empty %}target="{{ buttontarget }}"{% endif %} class="btn btn-{{ buttonstyle }} {% if buttonoutline and buttonstyle != empty %}btn-outline-{{ buttonstyle }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if buttonicon %}<i class="fas fa-{{ buttonicon }}"></i> {% endif %}<span>{{ buttontext }}</span></a>
+{% if type == 'LatestMessage' %}
+
+  {% comment %}
+  Get content channel id by name
+  {% endcomment %}
+  {% contentchannel where:'Name == "Sermon Message"' iterator:'contentChannels' %}
+    {% assign contentChannel = contentChannels | First %}
+    {% assign contentChannelId = contentChannel.Id %}
+  {% endcontentchannel %}
+
+  {% assign now = 'Now' | Date %}
+
+  {% comment %}
+  Set well-known button properties
+  {% endcomment %}
+  {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
+    {% assign latestMessage = contentChannelItems | First %}
+    {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
+    {% comment %} {{ parentSeries | Debug }} {% endcomment %}
+    {% assign parentSlug = parentSeries.PrimarySlug %}
+    {% if parentSlug == null %}
+      {% assign parentSlug = 'no-series' %}
+    {% endif %}
+    {% assign link =  '/media/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug %}
+    {% assign text = 'Watch Latest Message' %}
+    {% assign target = '_blank' %}
+    {% assign style = buttonstyle %}
+    {% assign icon = 'play' %}
+  {% endcontentchannelitem %}
+
+{% else %}
+  {% assign link =  buttonlink %}
+  {% assign text =  buttontext %}
+  {% assign target = buttontarget %}
+  {% assign style = buttonstyle %}
+  {% assign icon = buttonicon %}
+{% endif %}
+
+<a href="{{ link }}" {% if target and target != empty %}target="{{ target }}"{% endif %} class="btn btn-{{ style }} {% if buttonoutline and style != empty %}btn-outline-{{ style }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if icon %}<i class="fas fa-{{ icon }}"></i> {% endif %}<span>{{ text }}</span></a>
