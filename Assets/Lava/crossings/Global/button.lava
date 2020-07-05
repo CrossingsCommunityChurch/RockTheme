@@ -41,9 +41,14 @@
   Set well-known button properties
   {% endcomment %}
   {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
-    {% assign latest = contentChannelItems | First %}
-    {% comment %} {{ latest | Debug }} {% endcomment %}
-    {% assign link =  'https://vimeo.com/' | Append: latest.VimeoId %}
+    {% assign latestMessage = contentChannelItems | First %}
+    {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
+    {% comment %} {{ parentSeries | Debug }} {% endcomment %}
+    {% assign parentSlug = parentSeries.PrimarySlug %}
+    {% if parentSlug == null %}
+      {% assign parentSlug = 'no-series' %}
+    {% endif %}
+    {% assign link =  '/media/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug %}
     {% assign text = 'Watch Latest Message' %}
     {% assign target = '_blank' %}
     {% assign style = buttonstyle %}
