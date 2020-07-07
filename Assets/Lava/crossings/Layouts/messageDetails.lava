@@ -24,16 +24,25 @@
                 <a href="#" class="btn-outline-primary btn"><i class="fas fa-share"></i><span>Share</span></a>
                 <div class="tags">
                   <p class="small"><i class="fas fa-tags"></i>
-                      {% if item.ContentChannel.IsTaggingEnabled %}
-                      {% assign TagCategory = item.ContentChannel.ItemTagCategoryId %}
-                      {%- comment -%}
-                        I can get all tags for the category that this content channel is assigned to, but i need an additional where to get only the tags assigned to this item
-                      {%- endcomment -%}
-                      {% tag where:'CategoryId == {{ TagCategory }}' %}
-                          {% for tag in tagItems %}
-                              <a href="#">{{ tag.Name }}</a>
+                    {% if item.ContentChannel.IsTaggingEnabled %}
+
+                      {% comment %}
+                      Show the tags for this sermon message
+                      {% endcomment %}
+                      {% assign itemGuid = item.Guid %}
+                      {% assign tagCategory = item.ContentChannel.ItemTagCategoryId %}
+                      {% taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems' %}
+                        {% tag where:'CategoryId == {{ tagCategory }}' iterator:'tags'%}
+                          {% for taggedItem in taggedItems %}
+                            {% for tag in tags %}
+                              {% if taggedItem.TagId == tag.Id %}
+                                <a href="#">{{ tag.Name }}</a>
+                              {% endif %}
+                            {% endfor %}
                           {% endfor %}
-                      {% endtag %}
+                        {% endtag %}
+                      {% endtaggeditem %}
+
                     {% endif %}
                   </p>
                 </div>
