@@ -1,0 +1,22 @@
+[
+    {% assign now = 'Now' | Date %}
+    {% assign contentChannelId = 32 %}
+    {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
+    {% assign latestMessage = contentChannelItems | First %}
+    {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
+    {% assign parentSlug = parentSeries.PrimarySlug %}
+    {% if parentSlug == null %}
+      {% assign parentSlug = 'no-series' %}
+    {% endif %}
+    {
+        "title" : {{ latestMessage.Title | ToJSON }},
+        "image" : {{ latestMessage.AssetImage | Url:'localpath' | ToJSON }},
+        "date" : {{ latestMessage.StartDateTime | Date:'MMM d, yyyy' | ToJSON }},
+        "content" : {{ latestMessage.Content | ToJSON }},
+        "speaker" : {{ latestMessage.Speaker | ToJSON }},
+        "parentSeries" : {{ parentSeries.Title | ToJSON }},
+        "parentSlug" : {{ parentSlug | ToJSON }},
+        "link" : {{ '/media/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug | ToJSON }}
+    }
+    {% endcontentchannelitem %}
+]
