@@ -50,7 +50,6 @@
     {% endif %}
     {% assign link =  '/media/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug %}
     {% assign text = 'Watch Latest Message' %}
-    {% assign target = '_blank' %}
     {% assign style = buttonstyle %}
     {% assign icon = 'play' %}
   {% endcontentchannelitem %}

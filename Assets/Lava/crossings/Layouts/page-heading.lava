@@ -9,19 +9,32 @@
 {% assign imageUrlPath = CurrentPage.AssetImage | Url:'localpath' %}
 {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
+{% assign wrapperClass = 'page-item' %}
+
 {% assign PageID = PageParameter.PageId %}
 {% if PageParameter.Item %}
   {%- comment -%} We can assume it is a content channel detail page. Override page heading with content channel stuff {%- endcomment -%}
   {% assign ItemID = PageParameter.Item %}
+  {% assign wrapperClass = 'content-channel-item' %}
   {% contentchannelitem id:'{{ ItemID }}' %}
     {% assign title = contentchannelitem.Title %}
     {% assign imageUrlPath = contentchannelitem | Attribute:'AssetImage' | Url:'localpath' %}
     {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
   {% endcontentchannelitem %}
 {% endif %}
+{% if PageParameter.OpportunityId %}
+  {%- comment -%} We can assume it is a opportunity detail page. Override page heading with opportunity stuff {%- endcomment -%}
+  {% assign ItemID = PageParameter.OpportunityId %}
+  {% assign wrapperClass = 'connection-opportunity' %}
+  {% connectionopportunity id:'{{ ItemID }}' %}
+    {% assign title = connectionopportunity.Name %}
+    {% assign imageUrlPath = connectionopportunity | Attribute:'AssetImage' | Url:'localpath' %}
+    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+  {% endconnectionopportunity %}
+{% endif %}
 
 {% if imageUrlPath != empty %}
-    <div class="container-fluid hero-wrapper">
+    <div class="container-fluid hero-wrapper {{ wrapperClass }}">
         {[ parallax image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
             <div class="jumbotron flat transparent reverse" data-aos="fade-in">
                 {% if layout == 'Homepage' %}
