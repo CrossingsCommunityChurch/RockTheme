@@ -1,0 +1,23 @@
+{%- if sermonChannelId != empty && teachingChannelId != empty-%}}
+[
+    {%- contentchannelitem where:'ContentChannelId ==  4 || ContentChannelId == 32' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+
+    {%- for item in items -%}
+    {
+        "Id": {{ item.Id }},
+        "Title": {{ item.Title | Replace:"'","’" | ToJSON }},
+        "Slug": {{ item.PrimarySlug | ToJSON }},
+        "Guid": {{ item.Guid | ToJSON }},
+        "Status": {{ item.Status | ToJSON }},
+        "PublishDateTime": {{ item.StartDateTime | ToJSON }},
+        "ExpireDateTime": {{ item.ExpireDateTime | ToJSON }},
+        "ModifiedDateTime": {{ item.ModifiedDateTime | ToJSON }},
+        "ChannelId": {{ item.ContentChannel.Id }},
+        "ChannelName": {{ item.ContentChannel.Name | ToJSON }},
+        "ParentChannelId": {{ parentchannelid | ToJSON }},
+        "ChildChannelId": {{ childchannelid | ToJSON }}
+    }
+    {%- unless forloop.last -%}, {%- endunless -%}{%- endfor -%}
+    {%- endcontentchannelitem -%}
+]
+{%- endif -%}}
