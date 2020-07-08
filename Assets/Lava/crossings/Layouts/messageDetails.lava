@@ -81,11 +81,12 @@
                               {% assign imageUrl = item | Attribute: 'Image', 'RawValue' %}
                             {% endif %}
                             {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
+                            {% assign parentPrimarySlug = parent.PrimarySlug | Trim %}
                             {%- comment -%}
                               - Need better way to get links
                               - We are duplicating efforts to set images, may be a better way
                             {%- endcomment -%}
-                            {[ cardMedia link:'/media/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                            {[ cardMedia link:'/media/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
                           {% endif %}
                         {% endfor %}
                     {% endfor %}
