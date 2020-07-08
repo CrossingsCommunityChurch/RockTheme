@@ -11,12 +11,17 @@
     {% for opportunity in Opportunities %}
       {% assign title = opportunity.PublicName%}
       {% assign subtitle = opportunity.Summary %}
-      {% if DetailPage contains "?" %}
-			  {% assign itemLink = '{{ DetailPage }}&OpportunityId={{ opportunity.Id }}' %}
-		  {% else %}
-			  {% assign itemLink = '{{ DetailPage }}?OpportunityId={{ opportunity.Id }}' %}
-		  {% endif %}
-            {[ cardText title:'{{ title }}' subtitle:'{{ subTitle }}' link:'{{ itemLink }}' actiontext:'Learn More' ]}
+      {%- assign itemPrimarySlug = opportunity.PrimarySlug | Trim -%}
+      {%- if DetailPage contains '{OpportunitySlug}' and itemPrimarySlug != '' -%}
+        {%- assign itemLink = DetailPage | Replace:'{OpportunitySlug}', opportunity.PrimarySlug | Prepend:'/' -%}
+      {%- else -%}
+        {%- if DetailPage contains '{OpportunitySlug}' -%}
+          {%- assign itemLink = DetailPage | Replace:'{OpportunitySlug}', opportunity.Id | Prepend:'/' -%}
+        {%- else -%}
+          {%- capture itemLink -%}{{ DetailPage }}?OpportunityId={{ opportunity.Id }}{%- endcapture -%}
+        {%- endif -%}
+      {%- endif -%}
+      {[ cardText title:'{{ title }}' subtitle:'{{ subTitle }}' link:'{{ itemLink }}' actiontext:'Learn More' ]}
     {% endfor %}
-</div>
+  </div>
 </div>
