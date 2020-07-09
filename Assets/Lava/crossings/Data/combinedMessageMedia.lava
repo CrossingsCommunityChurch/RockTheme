@@ -1,14 +1,14 @@
 
 [
-    {%- contentchannel where:'Name == "Message Series"' iterator:'seriesItems' -%}
-    {%- assign seriesItemId = seriesItems | First | Property:'Id' -%}
+    {%- contentchannel where:'Name == "Teaching Message"' iterator:'teachingItems' -%}
+    {%- assign teachingItemId = teachingItems | First | Property:'Id' -%}
     {%- endcontentchannel -%}
     {%- contentchannel where:'Name == "Sermon Message"' iterator:'sermonItems' -%}
     {%- assign sermonItemId = sermonItems | First | Property:'Id' -%}
     {%- endcontentchannel -%}
 
-    {%- if sermonItemId != empty && seriesItemId != empty-%}
-    {%- contentchannelitem where:'ContentChannelId ==  {{seriesItemId}} || ContentChannelId == {{sermonItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+    {%- if sermonItemId != empty || teachingItemId != empty-%}
+    {%- contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
     {
         "Id": {{ item.Id }},
