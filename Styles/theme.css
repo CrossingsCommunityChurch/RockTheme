@@ -11758,6 +11758,17 @@ label {
 .group-schedule-toolbox .nav > li > a {
   padding: 7.5px 15px;
 }
+.login .photo > img,
+.account-entry .photo > img,
+.confirm-account .photo > img,
+.account-edit .photo > img,
+.forgot-username .photo > img,
+.change-password .photo > img,
+.photo-upload .photo > img,
+.public-profile-edit .photo > img,
+.group-schedule-toolbox .photo > img {
+  border-radius: 50%;
+}
 .login legend {
   display: none;
 }
