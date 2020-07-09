@@ -1,7 +1,13 @@
 {%- if sermonChannelId != empty && teachingChannelId != empty-%}}
 [
-    {%- contentchannelitem where:'ContentChannelId ==  4 || ContentChannelId == 32' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+    {%- contentchannel where:'Name == "Message Series"' iterator:'seriesItems' -%}
+    {%- assign seriesItemId = seriesItems | First | Property:'Id' -%}
+    {%- endcontentchannel -%}
+    {%- contentchannel where:'Name == "Sermon Message"' iterator:'sermonItems' -%}
+    {%- assign sermonItemId = sermonItems | First | Property:'Id' -%}
+    {%- endcontentchannel -%}
 
+    {%- contentchannelitem where:'ContentChannelId ==  {{seriesItemId}} || ContentChannelId == {{sermonItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
     {
         "Id": {{ item.Id }},
