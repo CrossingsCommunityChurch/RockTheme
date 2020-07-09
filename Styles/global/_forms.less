@@ -18,6 +18,10 @@ input[type="password"] {
     }
 }
 
+select.form-control {
+    padding-left: @spacing;
+}
+
 label {
     font-weight: normal;
     margin-top: @spacing2x;
@@ -25,9 +29,18 @@ label {
 
 .checkbox {
     margin-bottom: 32px;
-}  
+} 
 
-.login {
+.input-group-addon + .form-control {
+    padding-left: @spacing;
+}
+
+.login,
+.account-entry,
+.confirm-account,
+.account-edit,
+.forgot-username,
+.change-password {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     background-color: @white;
     padding: @spacing @spacing2x;
@@ -35,12 +48,68 @@ label {
     margin-top: -@spacing5x;
 
     legend {
+        display: block;
+        padding-top: @spacing3x;
+    }
+
+    .form-control-group {
+        &.js-datepartspicker {
+            .form-control {
+                width: auto;
+            }
+        }
+    }
+
+    .actions {
+        margin-top: @spacing2x;
+        padding: @spacing 0;
+
+        .btn {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .panel {
+        border: 0 none;
+        padding: 0;
+        box-shadow: none;
+
+        .panel-heading {
+            display: none;
+            border: 0 none;
+            padding: 0;
+            background-color: transparent;
+        }
+
+        .panel-body {
+            border: 0 none;
+        }
+    }
+}
+
+.login {
+    legend {
         display: none;
     }
 }
 
 @media (min-width: @screen-desktop) {
-    .login {
+    .login,
+    .account-entry,
+    .confirm-account,
+    .account-edit,
+    .forgot-username,
+    .change-password {
         padding: @spacing5x;
+
+        .actions {
+            display: flex;
+            justify-content: center;
+
+            .btn {
+                width: auto;
+            }
+        }
     } 
 }
