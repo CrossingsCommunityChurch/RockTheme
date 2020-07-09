@@ -10781,12 +10781,18 @@ fieldset[disabled] .btn-danger-solid.focus {
 .padding-bottom-xl {
   padding-bottom: 45px !important;
 }
+.padding-xl {
+  padding: 45px;
+}
 @media (min-width: 992px) {
   .padding-top-xl {
     padding-top: 120px !important;
   }
   .padding-bottom-xl {
     padding-bottom: 120px !important;
+  }
+  .padding-xl {
+    padding: 120px;
   }
 }
 .reverse {
@@ -11646,7 +11652,10 @@ label {
 .confirm-account,
 .account-edit,
 .forgot-username,
-.change-password {
+.change-password,
+.photo-upload,
+.public-profile-edit,
+.group-schedule-toolbox {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   padding: 15px 30px;
@@ -11658,7 +11667,10 @@ label {
 .confirm-account legend,
 .account-edit legend,
 .forgot-username legend,
-.change-password legend {
+.change-password legend,
+.photo-upload legend,
+.public-profile-edit legend,
+.group-schedule-toolbox legend {
   display: block;
   padding-top: 45px;
 }
@@ -11667,7 +11679,10 @@ label {
 .confirm-account .form-control-group.js-datepartspicker .form-control,
 .account-edit .form-control-group.js-datepartspicker .form-control,
 .forgot-username .form-control-group.js-datepartspicker .form-control,
-.change-password .form-control-group.js-datepartspicker .form-control {
+.change-password .form-control-group.js-datepartspicker .form-control,
+.photo-upload .form-control-group.js-datepartspicker .form-control,
+.public-profile-edit .form-control-group.js-datepartspicker .form-control,
+.group-schedule-toolbox .form-control-group.js-datepartspicker .form-control {
   width: auto;
 }
 .login .actions,
@@ -11675,7 +11690,10 @@ label {
 .confirm-account .actions,
 .account-edit .actions,
 .forgot-username .actions,
-.change-password .actions {
+.change-password .actions,
+.photo-upload .actions,
+.public-profile-edit .actions,
+.group-schedule-toolbox .actions {
   margin-top: 30px;
   padding: 15px 0;
 }
@@ -11684,7 +11702,10 @@ label {
 .confirm-account .actions .btn,
 .account-edit .actions .btn,
 .forgot-username .actions .btn,
-.change-password .actions .btn {
+.change-password .actions .btn,
+.photo-upload .actions .btn,
+.public-profile-edit .actions .btn,
+.group-schedule-toolbox .actions .btn {
   display: block;
   width: 100%;
 }
@@ -11693,7 +11714,10 @@ label {
 .confirm-account .panel,
 .account-edit .panel,
 .forgot-username .panel,
-.change-password .panel {
+.change-password .panel,
+.photo-upload .panel,
+.public-profile-edit .panel,
+.group-schedule-toolbox .panel {
   border: 0 none;
   padding: 0;
   box-shadow: none;
@@ -11703,7 +11727,10 @@ label {
 .confirm-account .panel .panel-heading,
 .account-edit .panel .panel-heading,
 .forgot-username .panel .panel-heading,
-.change-password .panel .panel-heading {
+.change-password .panel .panel-heading,
+.photo-upload .panel .panel-heading,
+.public-profile-edit .panel .panel-heading,
+.group-schedule-toolbox .panel .panel-heading {
   display: none;
   border: 0 none;
   padding: 0;
@@ -11714,11 +11741,63 @@ label {
 .confirm-account .panel .panel-body,
 .account-edit .panel .panel-body,
 .forgot-username .panel .panel-body,
-.change-password .panel .panel-body {
+.change-password .panel .panel-body,
+.photo-upload .panel .panel-body,
+.public-profile-edit .panel .panel-body,
+.group-schedule-toolbox .panel .panel-body {
   border: 0 none;
+}
+.login .nav > li > a,
+.account-entry .nav > li > a,
+.confirm-account .nav > li > a,
+.account-edit .nav > li > a,
+.forgot-username .nav > li > a,
+.change-password .nav > li > a,
+.photo-upload .nav > li > a,
+.public-profile-edit .nav > li > a,
+.group-schedule-toolbox .nav > li > a {
+  padding: 7.5px 15px;
 }
 .login legend {
   display: none;
+}
+.photo-upload {
+  margin-top: 0;
+  text-align: center;
+}
+.photo-upload .photoupload-photo .image-editor {
+  float: none;
+}
+.photo-upload .image-editor-group {
+  display: block;
+}
+.photo-upload .image-editor-photo {
+  margin: auto;
+  width: auto;
+}
+.photo-upload .image-editor-photo .image-container {
+  margin: auto;
+}
+.html-editor .note-frame .note-btn-group .btn {
+  padding: 7.5px 15px;
+  border-radius: 0;
+}
+.html-editor .note-frame .panel-body {
+  border: 1px solid #eee;
+}
+.communication-entry {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 15px 30px;
+  margin-bottom: 90px;
+  margin-top: -75px;
+}
+.communication-entry .panel,
+.communication-entry .panel-heading,
+.communication-entry .panel-body {
+  box-shadow: none;
+  border: 0 none;
+  background-color: transparent;
 }
 @media (min-width: 992px) {
   .login,
@@ -11726,7 +11805,11 @@ label {
   .confirm-account,
   .account-edit,
   .forgot-username,
-  .change-password {
+  .change-password,
+  .photo-upload,
+  .public-profile-edit,
+  .group-schedule-toolbox,
+  .communication-entry {
     padding: 75px;
   }
   .login .actions,
@@ -11734,7 +11817,11 @@ label {
   .confirm-account .actions,
   .account-edit .actions,
   .forgot-username .actions,
-  .change-password .actions {
+  .change-password .actions,
+  .photo-upload .actions,
+  .public-profile-edit .actions,
+  .group-schedule-toolbox .actions,
+  .communication-entry .actions {
     display: flex;
     justify-content: center;
   }
@@ -11743,9 +11830,50 @@ label {
   .confirm-account .actions .btn,
   .account-edit .actions .btn,
   .forgot-username .actions .btn,
-  .change-password .actions .btn {
+  .change-password .actions .btn,
+  .photo-upload .actions .btn,
+  .public-profile-edit .actions .btn,
+  .group-schedule-toolbox .actions .btn,
+  .communication-entry .actions .btn {
     width: auto;
   }
+  .photo-upload:after {
+    content: '';
+    clear: both;
+    display: table;
+  }
+  .photo-upload .photoupload-photo {
+    float: left;
+    width: 33.33%;
+  }
+}
+.assessment-list .panel .panel {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+}
+.assessment-list .panel .panel .panel-heading {
+  font-weight: bold;
+}
+.assessment-list .panel .panel .panel-heading > a {
+  margin-top: 15px;
+  padding: 7.5px 30px;
+  border-style: solid;
+  border-width: 3px;
+  background: transparent;
+  color: #313e48;
+  border-color: #313e48;
+  transition: all 0.5s ease-in-out;
+  margin-bottom: 15px;
+  border-radius: 90px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  display: inline-block;
+}
+.rockradiobuttonlist label,
+.checkbox label {
+  margin-top: 0;
 }
 .breadcrumb {
   max-width: 1170px;

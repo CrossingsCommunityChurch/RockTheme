@@ -40,7 +40,10 @@ label {
 .confirm-account,
 .account-edit,
 .forgot-username,
-.change-password {
+.change-password,
+.photo-upload,
+.public-profile-edit,
+.group-schedule-toolbox {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);
     background-color: @white;
     padding: @spacing @spacing2x;
@@ -86,11 +89,68 @@ label {
             border: 0 none;
         }
     }
+
+    .nav > li > a {
+        padding: 7.5px 15px;
+    }
 }
 
 .login {
     legend {
         display: none;
+    }
+}
+
+.photo-upload {
+    margin-top: 0;
+    text-align: center;
+
+    .photoupload-photo {
+        .image-editor {
+            float: none;
+        }
+    }
+
+    .image-editor-group {
+        display: block;
+    }
+
+    .image-editor-photo {
+        margin: auto;
+        width: auto;
+
+        .image-container {
+            margin: auto;
+        }
+    }
+}
+
+.html-editor {
+    .note-frame .note-btn-group {
+        .btn {
+            padding: @spacing*.5 @spacing;
+            border-radius: 0;
+        }
+    }
+
+    .note-frame .panel-body {
+        border: 1px solid #eee;
+    }
+}
+
+.communication-entry {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    background-color: @white;
+    padding: @spacing @spacing2x;
+    margin-bottom: @spacing6x;
+    margin-top: -@spacing5x;
+
+    .panel,
+    .panel-heading,
+    .panel-body {
+        box-shadow: none;
+        border: 0 none;
+        background-color: transparent;
     }
 }
 
@@ -100,7 +160,11 @@ label {
     .confirm-account,
     .account-edit,
     .forgot-username,
-    .change-password {
+    .change-password,
+    .photo-upload,
+    .public-profile-edit,
+    .group-schedule-toolbox,
+    .communication-entry {
         padding: @spacing5x;
 
         .actions {
@@ -112,4 +176,52 @@ label {
             }
         }
     } 
+
+    .photo-upload {
+        &:after {
+            content: '';
+            clear: both;
+            display: table;
+        }
+        .photoupload-photo {
+            float: left;
+            width: 33.33%;
+        }
+    }
+}
+
+.assessment-list {
+    .panel .panel {
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        padding: @spacing;
+
+        .panel-heading {
+            font-weight: bold;
+
+            > a {
+                margin-top: @spacing;
+                padding: @spacing*.5 @spacing2x;
+                border-style: solid;
+                border-width: 3px;
+                background: transparent;
+                color: #313e48;
+                border-color: #313e48;
+                transition: all 0.5s ease-in-out;
+                margin-bottom: 15px;
+                border-radius: 90px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: 600;
+                font-size: 0.75rem;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.rockradiobuttonlist,
+.checkbox {
+    label {
+        margin-top: 0;
+    }
 }
