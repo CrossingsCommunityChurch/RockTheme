@@ -10,10 +10,12 @@
     {%- if sermonItemId != empty || teachingItemId != empty-%}
     {%- contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
+    {% assign parentSeries = item.ParentItems | First | Property:'ContentChannelItem' %}
     {
         "Id": {{ item.Id }},
         "Title": {{ item.Title | Replace:"'","’" | ToJSON }},
-        "Slug": {{ item.PrimarySlug | ToJSON }},
+        "Content": {{item.Content |Replace:"'","’"}},
+        "PrimarySlug": {{ item.PrimarySlug | ToJSON }},
         "Guid": {{ item.Guid | ToJSON }},
         "Status": {{ item.Status | ToJSON }},
         "PublishDateTime": {{ item.StartDateTime | ToJSON }},
@@ -25,7 +27,9 @@
         "ChildChannelId": {{ childchannelid | ToJSON }},
         "VimeoId": {{ item | Attribute: 'VimeoId'| ToJSON }},
         "AssetImage": {{item | Attribute:'AssetImage' | ToJSON}},
-        "Image": {{ item | Attribute:'Image' | ToJson }}
+        "Image": {{ item | Attribute:'Image' | ToJson }},
+        "SpeakerGUID": {{item | Attribute:'Speaker' | ToJSON }},
+        "DataViews": {{item |Attribute:'Dataviews' |ToJSON}}
     }
     {%- unless forloop.last -%}, {%- endunless -%}{%- endfor -%}
     {%- endcontentchannelitem -%}

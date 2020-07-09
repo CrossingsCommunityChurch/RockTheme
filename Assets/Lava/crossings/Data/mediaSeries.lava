@@ -13,6 +13,7 @@
     {
         "Id": {{ item.Id }},
         "Title": {{ item.Title | Replace:"'","’" | ToJSON }},
+        "Content": {{item.Content |Replace:"'","’"}},
         "Slug": {{ item.PrimarySlug | ToJSON }},
         "Guid": {{ item.Guid | ToJSON }},
         "Status": {{ item.Status | ToJSON }},
