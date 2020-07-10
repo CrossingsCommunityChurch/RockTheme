@@ -9,9 +9,7 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Topic <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-            <li><a href="#">Faith</a></li>
-            <li><a href="#">Fear</a></li>
-            <li><a href="#">...</a></li>
+            {[ tagListItems category:'Topic Tags' ]}
           </ul>
         </div>
       </div>
@@ -20,9 +18,7 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Speaker <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-          <li><a href="#">First Lastname</a></li>
-          <li><a href="#">First Lastname</a></li>
-          <li><a href="#">...</a></li>
+            {[ tagListItems category:'Speaker Tags' ]}
           </ul>
         </div>
       </div>
@@ -31,9 +27,7 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Book <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-          <li><a href="#">Genesis</a></li>
-          <li><a href="#">Exodus</a></li>
-          <li><a href="#">...</a></li>
+            {[ tagListItems category:'Bible Books Tags' ]}
           </ul>
         </div>
       </div>
