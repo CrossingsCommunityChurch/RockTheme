@@ -6,10 +6,11 @@
 
     <div class="col-md-6">
         {% if ScheduledTransactions.size == 1 %}
-            <p>
-                You currently have <span class='label label-default'>1</span> giving profile active.
-            </p>
-            <p>
+           <div class="row">
+                <p>
+                    You currently have <span class='label label-default'>1</span> giving profile active.
+                </p>
+                <p>
                 {% if ScheduledTransactions[0].DaysTillNextPayment > 0 %}
                     Next gift is in {{ ScheduledTransactions[0].DaysTillNextPayment }} days.
                 {% endif %}
@@ -23,17 +24,30 @@
                         Last gift was today.
                     {% endif %}
                 {% endif %}
-            </p>
+                </p>
+            </div>
         {% elsif ScheduledTransactions.size > 1 %}
+        <div class="row">
+            <p>
             You currently have <span class='label label-default'>{{ ScheduledTransactions.size }}</span>
             giving profiles active.
-        {% else %}
-            You currently have no active profiles.
-        {% endif %}
-        <div class="clearfix">
-            <a class="btn btn-default pull-left" href="{{ LinkedPages.ManageScheduledTransactionsPage }}">Manage</a>
-            <a class="btn btn-default pull-right" href="{{ LinkedPages.TransactionHistoryPage }}">View History</a>
+            </p>
         </div>
-        <a class="btn btn-primary btn-block margin-t-md" href="{{ LinkedPages.TransactionEntryPage }}">Give Now</a>
+        {% else %}
+        <div class="row">
+        <p>
+            You currently have no active profiles.
+        </p>
+        </div>
+        {% endif %}
+        <div class="row">
+            <a class="btn btn-outline-primary btn-sm btn-block" href="{{ LinkedPages.ManageScheduledTransactionsPage }}">Manage</a>
+        </div>
+        <div class ="row">
+            <a class="btn btn-outline-primary btn-sm btn-block" href="{{ LinkedPages.TransactionHistoryPage }}">View History</a>
+        </div>
+        <div class="row">
+        <a class="btn btn-primary btn-block btn-sm btn-block" href="{{ LinkedPages.TransactionEntryPage }}">Give Now</a>
+        </div>
     </div>
 </div>
