@@ -13,12 +13,12 @@
             <span class="ajax-error-message"></span>
         </div>
         <Rock:Zone Name="Feature" runat="server"/>
-        <div class="container main padding-top-xl padding-bottom-xl">
+        <div class="container main">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <Rock:Zone Name="Sidebar 1" runat="server" />
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <Rock:Zone Name="Main" runat="server" />
                 </div>
             </div>
