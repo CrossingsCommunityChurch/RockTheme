@@ -9,10 +9,19 @@
       {[ mediaFilters lists:filterLists ]}
       <div class="media-list-items" data-aos="fade-up">
         <div class="row flex-row flex-wrap">
-          {%- comment -%}
-            This will need to change to a for loop from a content channel
-          {%- endcomment -%}
-            {%- for item in Items -%}
+
+            {% assign topicFilter = PageParameter['topic'] %}
+            {% assign speakerFilter = PageParameter['speaker'] %}
+            {% assign bookFilter = PageParameter['book'] %}
+
+            {% assign mediaItems = mediaData.Messages %}
+
+            {%- for item in mediaItems -%}
+
+              {% comment %} Filter out any messages that don't match the currently selected filter {% endcomment %}
+              {% if speakerFilter != null and speakerFilter != "" and item.Speaker != speakerFilter %}{% continue %}{% endif %}
+              {% comment %} Todo: Other filtering goes here! {% endcomment %}
+
               {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
               {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 

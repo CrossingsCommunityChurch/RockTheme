@@ -67,8 +67,8 @@
             "VimeoId": {{ item | Attribute: 'VimeoId'| ToJSON }},
             "AssetImage": {{item | Attribute:'AssetImage' | ToJSON}},
             "Image": {{ item | Attribute:'Image' | ToJSON }},
-            "SpeakerGUID": {{ item | Attribute:'Speaker' | ToJSON }},
-            "DataViews": {{ item |Attribute:'Dataviews' | ToJSON }}
+            "Speaker": {{ item | Attribute:'Speaker' | ToJSON }},
+            "DataViews": {{ item | Attribute:'Dataviews' | ToJSON }}
         }
         {% unless forloop.last %}, {% endunless %}{% endfor %}
         {% endcontentchannelitem %}
