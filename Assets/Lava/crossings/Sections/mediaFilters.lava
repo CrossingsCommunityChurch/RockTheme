@@ -9,7 +9,9 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Topic <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-            {[ tagListItems category:'Topic Tags' ]}
+            {% for topic in lists.Topics %}
+              <li><a href="#">{{topic.Name}}</a></li>
+            {% endfor %}
           </ul>
         </div>
       </div>
@@ -18,7 +20,9 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Speaker <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-            {[ tagListItems category:'Speaker Tags' ]}
+            {% for speaker in lists.Speakers %}
+              <li><a href="#">{{speaker.Name}}</a></li>
+            {% endfor %}
           </ul>
         </div>
       </div>
@@ -27,7 +31,9 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Book <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-            {[ tagListItems category:'Bible Books Tags' ]}
+            {% for book in lists.Books %}
+              <li><a href="#">{{book.Name}}</a></li>
+            {% endfor %}
           </ul>
         </div>
       </div>
