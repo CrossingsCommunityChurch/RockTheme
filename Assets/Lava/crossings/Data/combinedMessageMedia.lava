@@ -68,7 +68,23 @@
             "AssetImage": {{item | Attribute:'AssetImage' | ToJSON}},
             "Image": {{ item | Attribute:'Image' | ToJSON }},
             "Speaker": {{ item | Attribute:'Speaker' | ToJSON }},
-            "DataViews": {{ item | Attribute:'Dataviews' | ToJSON }}
+            "DataViews": {{ item | Attribute:'Dataviews' | ToJSON }},
+            "Tags": [
+                {% assign itemGuid = item.Guid %}
+                {% assign tagCategory = item.ContentChannel.ItemTagCategoryId %}
+                {% taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems' %}
+                {% tag where:'CategoryId == {{ tagCategory }}' iterator:'tags'%}
+                    {% for taggedItem in taggedItems %}
+                        {% for tag in tags %}
+                            {% if taggedItem.TagId == tag.Id %}
+                                {{ tag.Name | ToJSON }}
+                                {% unless forloop.last %}, {% endunless %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% endtag %}
+                {% endtaggeditem %}
+            ]
         }
         {% unless forloop.last %}, {% endunless %}{% endfor %}
         {% endcontentchannelitem %}
