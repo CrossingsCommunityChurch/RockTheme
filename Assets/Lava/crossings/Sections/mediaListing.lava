@@ -19,6 +19,12 @@
             {%- for item in mediaItems -%}
 
               {% comment %} Filter out any messages that don't match the currently selected filter {% endcomment %}
+              {% if topicFilter != null and topicFilter != "" %}
+                {% assign containsTopic = item.Topics | Contains:topicFilter %}
+                {% if containsTopic == false %}
+                  {% continue %}
+                {% endif %}
+              {% endif %}
               {% if speakerFilter != null and speakerFilter != "" and item.Speaker != speakerFilter %}{% continue %}{% endif %}
               {% comment %} Todo: Other filtering goes here! {% endcomment %}
 
