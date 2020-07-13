@@ -69,7 +69,7 @@
             "Image": {{ item | Attribute:'Image' | ToJSON }},
             "Speaker": {{ item | Attribute:'Speaker' | ToJSON }},
             "DataViews": {{ item | Attribute:'Dataviews' | ToJSON }},
-            "Tags": [
+            "Topics": [
                 {% assign itemGuid = item.Guid %}
                 {% assign tagCategory = item.ContentChannel.ItemTagCategoryId %}
                 {% taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems' %}
