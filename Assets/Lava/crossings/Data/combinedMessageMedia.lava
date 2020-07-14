@@ -13,22 +13,25 @@
             {% endcategory %}
         ],
         Speakers: [
-            {% sql return:'speakers' %}
-            select distinct p.FirstName + ' ' + p.LastName as [Name]
-            from contentchannelitem ci
-            inner join contentchannel cc on ci.contentchannelid = cc.id
-            inner join attributevalue av on ci.id = av.entityid
-            inner join attribute a on av.attributeid = a.id
-            inner join person p on av.valueaspersonid = p.id
-            where cc.[name] in ('Teaching Message', 'Sermon Message')
-            and a.[name] = 'Speaker'
-            order by [Name]
-            {% endsql %}
-            {% for speaker in speakers %}
-            {
-                "Name": {{ speaker.Name | ToJSON }}
-            }
-            {% unless forloop.last %}, {% endunless %}{% endfor %}
+            {% contentchannel where:'Name == "Teaching Message"' iterator:'teachingContentChannels' securityenabled:'false' %}
+            {% assign teachingItemId = teachingContentChannels | First | Property:'Id' %}
+            {% endcontentchannel %}
+            {% contentchannel where:'Name == "Sermon Message"' iterator:'sermonContentChannels' securityenabled:'false' %}
+            {% assign sermonItemId = sermonContentChannels | First | Property:'Id' %}
+            {% endcontentchannel %}
+            {% contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false' %}
+            {% assign existing = "" %}
+                {% for item in items %}
+                    {% assign match = existing | RegExMatch:item.Speaker %}
+                    {% if match == false %}
+                        {
+                            "Name": {{ item.Speaker | ToJSON }}
+                        }
+                        {% unless forloop.last %}, {% endunless %}
+                        {% assign existing = existing | Append:item.Speaker %}
+                    {% endif %}
+                {% endfor %}
+            {% endcontentchannelitem %}
         ],
         Books: [
             {% category where:'Name == "Bible Books Tags"' iterator:'bookCategories' securityenabled:'false' %}
