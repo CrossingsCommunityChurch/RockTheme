@@ -25,8 +25,13 @@
                   {% continue %}
                 {% endif %}
               {% endif %}
+              {% if bookFilter != null and bookFilter != "" %}
+                {% assign containsBook = item.Books | RegExMatch:bookFilter %}
+                {% if containsBook == false %}
+                  {% continue %}
+                {% endif %}
+              {% endif %}
               {% if speakerFilter != null and speakerFilter != "" and item.Speaker != speakerFilter %}{% continue %}{% endif %}
-              {% comment %} Todo: Other filtering goes here! {% endcomment %}
 
               {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
               {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}

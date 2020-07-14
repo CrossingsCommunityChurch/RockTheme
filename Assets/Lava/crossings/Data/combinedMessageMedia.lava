@@ -84,7 +84,8 @@
                     {% endfor %}
                 {% endtag %}
                 {% endtaggeditem %}
-            ]
+            ],
+            "Books": {{ item | Attribute:'Books' | ToJSON }}
         }
         {% unless forloop.last %}, {% endunless %}{% endfor %}
         {% endcontentchannelitem %}
