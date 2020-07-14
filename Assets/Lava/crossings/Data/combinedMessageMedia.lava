@@ -76,7 +76,7 @@
             "Series": {
                 {% for series in item.ParentItems | First %}
                     "Title": {{ series.ContentChannelItem.Title | ToJSON }},
-                    "Slug" : {{ series.ContentChannelItem.PrimarySlug | ToJSON }}
+                    "Slug" : {{ series.ContentChannelItem.PrimarySlug | ToJSON }},
 
               {% endfor %}
             },
