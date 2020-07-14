@@ -1,0 +1,39 @@
+  {% assign eventItemCount = EventItems | Size %}
+
+  {% if eventItemCount == 0 %}
+  <div class="panel panel-default margin-t-md">
+    <div class="margin-all-md"> There are no events in this time frame.</div>
+  </div>
+  {% endif %}
+
+  <div class="container card-list">
+    {% for eventItem in EventItems %}
+      {% assign firstOccurrence = eventItem | First %}
+
+      	{% if eventItemOccurrence.DetailPage != null %}
+				    {% assign link = firstOccurrence.DetailPage %}
+				{% else %}
+				{% assign link = DetailsPage | | Append:'?EventOccurrenceId='{{ eventItemOccurrence.EventItemOccurrence.Id }} %}
+				{% endif %}
+      {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+      {% assign imageSize = '/fit-in/600x600' %}
+      {% assign imageUrlPath = eventitem.EventItemOccurrence.EventItem | Attribute:'Imageasset' | Url:'localpath' %}
+      {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+      <div class="card listing">
+  <div class="row flex-row">
+    <div class="col-sm-4">
+      <img src="{{ imageUrl }}" class="object-cover">
+    </div>
+    <div class="col-sm-8">
+      <div>
+        <h3>{{ firstOccurrence.Name }}</h3>
+        {% if firstOccurrence.Summary %}
+          <h4>{{ firstOccurrence.Summary }}</h4>
+        {% endif %}
+        content
+      </div>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+  </div>
