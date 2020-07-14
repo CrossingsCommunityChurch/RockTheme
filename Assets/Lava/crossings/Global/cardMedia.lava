@@ -9,16 +9,16 @@
 {%- endcomment -%}
 
 <div class="col-sm-6 col-md-4">
-  <div class="card cardShadow">
+  <a href="{{ link }}" class="card cardShadow">
     <div class="thumb">
-    <img src="{{ img }}" class="object-fit">
+      <img src="{{ img }}" class="object-fit">
     </div>
     <div class="row card-content-row">
       <div class="card-content">
-        <a href="{{ link }}" class="btn icon-button shadowDepth2">
+        <div class="btn icon-button shadowDepth2">
           <i class="fas fa-play"></i>
           <span>{{ actiontext }}</span>
-        </a>
+        </div>
         <div class="col">
           <div>
             <h3>{{ title }}</h3>
@@ -31,5 +31,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </a>
 </div>

@@ -40,7 +40,7 @@
     </div>
   </div>
   <div class="col-md-6 col-lg-4">
-    <div role="group" aria-label="..." class="btn-group pull-right">
+    <div role="group" aria-label="..." class="btn-group pull-right card-list-filter">
       <button type="button" class="btn btn-primary" style="outline: none;"><i class="fas fa-bars"></i></button>
       <button type="button" class="btn btn-primary active" style="outline: none;"><i class="fas fa-th"></i></button>
     </div>

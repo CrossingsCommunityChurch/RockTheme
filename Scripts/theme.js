@@ -2,6 +2,13 @@ console.log('loading theme js');
 
 $(document).ready(function() {
 
+    $('.card-list-filter .btn').click(function(e){
+        e.preventDefault();
+        $('.card-list-filter .btn').removeClass('active');
+        $(this).toggleClass('active');
+        $('.media-list').toggleClass('list');
+    });
+
     $('.has-subnav-parent').hover(function(){
         $(this).find('.fa').toggleClass('fa-angle-up');
     });

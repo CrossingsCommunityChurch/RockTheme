@@ -64,13 +64,14 @@
               {% assign subTitle = item.SubTitle %}
               {% assign date = item.PublishDateTime %}
               {% assign itemLink = item.PrimarySlug | Prepend:'/media/' %}
+              {% assign speaker = item.Speaker %}
 
               {% if item.Series %}
                 {% assign seriesTitle = item.Series.Title %}
                 {% assign itemLink = item.PrimarySlug | Prepend: '/' | Prepend:item.Series.Slug | Prepend:'/media/'  %}
               {% endif %}
 
-              {[ cardMedia link:'{{ itemLink }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+              {[ cardMedia link:'{{ itemLink }}' title:'{{ title }}' speaker:'{{ speaker }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
             {% endfor %}
           {%- comment -%}
             End Loop over this card
