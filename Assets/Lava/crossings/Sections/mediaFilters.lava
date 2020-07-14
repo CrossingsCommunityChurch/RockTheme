@@ -9,9 +9,9 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Topic <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-            <li><a href="#">Faith</a></li>
-            <li><a href="#">Fear</a></li>
-            <li><a href="#">...</a></li>
+            {% for topic in lists.Topics %}
+              <li><a href="/media/?topic={{topic.Name}}">{{topic.Name}}</a></li>
+            {% endfor %}
           </ul>
         </div>
       </div>
@@ -20,9 +20,9 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Speaker <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-          <li><a href="#">First Lastname</a></li>
-          <li><a href="#">First Lastname</a></li>
-          <li><a href="#">...</a></li>
+            {% for speaker in lists.Speakers %}
+              <li><a href="/media/?speaker={{speaker.Name}}">{{speaker.Name}}</a></li>
+            {% endfor %}
           </ul>
         </div>
       </div>
@@ -31,9 +31,9 @@
         <div class="dropdown">
           <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Book <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-          <li><a href="#">Genesis</a></li>
-          <li><a href="#">Exodus</a></li>
-          <li><a href="#">...</a></li>
+            {% for book in lists.Books %}
+              <li><a href="/media/?book={{book.Name}}">{{book.Name}}</a></li>
+            {% endfor %}
           </ul>
         </div>
       </div>

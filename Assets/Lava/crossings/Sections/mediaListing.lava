@@ -1,16 +1,38 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/450x325' %}
+{% assign mediaData = 'Combinedmedia' | PersistedDataset %}
 
 <div class="media-list">
   <div class="media-search">
     <div class="container">
-      {[ mediaFilters ]}
+      {% assign filterLists = mediaData.FilterLists %}
+      {[ mediaFilters lists:filterLists ]}
       <div class="media-list-items" data-aos="fade-up">
         <div class="row flex-row flex-wrap">
-          {%- comment -%}
-            This will need to change to a for loop from a content channel
-          {%- endcomment -%}
-            {%- for item in Items -%}
+
+            {% assign topicFilter = PageParameter['topic'] %}
+            {% assign speakerFilter = PageParameter['speaker'] %}
+            {% assign bookFilter = PageParameter['book'] %}
+
+            {% assign mediaItems = mediaData.Messages %}
+
+            {%- for item in mediaItems -%}
+
+              {% comment %} Filter out any messages that don't match the currently selected filter {% endcomment %}
+              {% if topicFilter != null and topicFilter != "" %}
+                {% assign containsTopic = item.Topics | Contains:topicFilter %}
+                {% if containsTopic == false %}
+                  {% continue %}
+                {% endif %}
+              {% endif %}
+              {% if bookFilter != null and bookFilter != "" %}
+                {% assign containsBook = item.Books | RegExMatch:bookFilter %}
+                {% if containsBook == false %}
+                  {% continue %}
+                {% endif %}
+              {% endif %}
+              {% if speakerFilter != null and speakerFilter != "" and item.Speaker != speakerFilter %}{% continue %}{% endif %}
+
               {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
               {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
