@@ -10,10 +10,10 @@
     {% for eventItem in EventItems %}
       {% assign firstOccurrence = eventItem | First %}
 
-      	{% if eventItemOccurrence.DetailPage != null %}
+      	{% if eventItem.eventItemOccurrence.DetailPage != null %}
 				    {% assign link = firstOccurrence.DetailPage %}
 				{% else %}
-				{% assign link = DetailsPage | | Append:'?EventOccurrenceId='{{ eventItemOccurrence.EventItemOccurrence.Id }} %}
+				{% assign link = DetailsPage | Append:'?EventOccurrenceId='{{ eventItemOccurrence.EventItemOccurrence.Id }} %}
 				{% endif %}
       {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
       {% assign imageSize = '/fit-in/600x600' %}
@@ -30,7 +30,7 @@
         {% if firstOccurrence.Summary %}
           <h4>{{ firstOccurrence.Summary }}</h4>
         {% endif %}
-        content
+        {{ firstOccurrence.EventItemOccurrence.Schedule.FriendlyScheduleText }}
       </div>
     </div>
   </div>
