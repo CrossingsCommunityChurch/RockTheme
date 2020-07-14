@@ -61,7 +61,7 @@
       <div class="section media-list bg-gray">
         <div class="container content-area">
             <div class="media-list-items">
-              <div class="row">
+              <div class="row flex-row flex-wrap">
                   <div class="col-md-12">
                     <h3 class="subheading" style="margin-bottom: 30px;">Other Messages in This Series</h3>
                   </div>

@@ -1,20 +1,65 @@
 //Nav Buttons
 .login-btn,
-.menu-btn {
+.menu-btn,
+.dropdown-toggle.navbar-link {
     padding: 10px @spacing2x;
     display: block;
     margin-bottom: 0;
     border-radius: 0;
     background-color: transparent;
     color: @brand-primary;
-
     > span {
         display: none;
     }
+
+    &:hover,
+    &:focus {
+        background-color: transparent;
+    }
+}
+
+.menu-btn {
+    display: none;
+}
+
+.nav {
+    .dropdown-toggle {
+        padding: @spacing;
+    }
+}
+
+.dropdown-toggle.navbar-link {
+
+    .profile-photo {
+        display: none;
+    }
+
+    &::before {
+        margin-right: 0.5rem;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
+        font-weight: 900;
+        font-family: 'FontAwesome';
+        content: "\f007";
+    }
+}
+
+.navbar-nav.loginstatus > li {
+    min-width: auto;
+}
+
+.navbar-nav .open .dropdown-menu {
+    position: absolute;
+    background-color: @white;
 }
 
 .menu-btn.search {
-    display: none;
+    //display: none;
 }
 
 @media (min-width: @screen-desktop) {

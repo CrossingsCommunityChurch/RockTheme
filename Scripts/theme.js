@@ -49,4 +49,6 @@ $(document).ready(function() {
         duration: '1000'
     });
 
+    $('body').addClass('zoom');
+
 });

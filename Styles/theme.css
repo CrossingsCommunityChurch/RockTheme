@@ -10948,6 +10948,7 @@ body {
   margin-bottom: 58px;
 }
 .page-wrapper {
+  padding-top: 58px;
   overflow: hidden;
 }
 @media (min-width: 992px) {
@@ -10958,6 +10959,7 @@ body {
     line-height: 2;
   }
   .page-wrapper {
+    padding-top: 0;
     margin-top: 0;
   }
 }
@@ -11904,7 +11906,8 @@ label {
   font-size: 1rem;
 }
 .login-btn,
-.menu-btn {
+.menu-btn,
+.dropdown-toggle.navbar-link {
   padding: 10px 30px;
   display: block;
   margin-bottom: 0;
@@ -11913,11 +11916,46 @@ label {
   color: #313e48;
 }
 .login-btn > span,
-.menu-btn > span {
+.menu-btn > span,
+.dropdown-toggle.navbar-link > span {
   display: none;
 }
-.menu-btn.search {
+.login-btn:hover,
+.menu-btn:hover,
+.dropdown-toggle.navbar-link:hover,
+.login-btn:focus,
+.menu-btn:focus,
+.dropdown-toggle.navbar-link:focus {
+  background-color: transparent;
+}
+.menu-btn {
   display: none;
+}
+.nav .dropdown-toggle {
+  padding: 15px;
+}
+.dropdown-toggle.navbar-link .profile-photo {
+  display: none;
+}
+.dropdown-toggle.navbar-link::before {
+  margin-right: 0.5rem;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-weight: 900;
+  font-family: 'FontAwesome';
+  content: "\f007";
+}
+.navbar-nav.loginstatus > li {
+  min-width: auto;
+}
+.navbar-nav .open .dropdown-menu {
+  position: absolute;
+  background-color: #fff;
 }
 @media (min-width: 992px) {
   .navigation #zone-search {
@@ -12343,8 +12381,8 @@ label {
 .hasAlert .hero-wrapper .parallax-content {
   height: calc(100vh - 160px) !important;
 }
-.zoom .hero .Masthead .is-parallax img {
-  transform: scale(1);
+.hero-wrapper .parallax-content {
+  height: calc(100vh - 70px) !important;
 }
 .darkmode .hero-wrapper {
   background-color: #313e48;
