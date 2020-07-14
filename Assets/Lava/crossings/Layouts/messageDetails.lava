@@ -77,8 +77,8 @@
                             {% assign imageSize = '/fit-in/450x325' %}
                             {% assign imageUrlPath = child.ChildContentChannelItem.AssetImage | Url:'localpath' %}
                             {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-                            {% if .Image != empty %}
-                              {% assign imageUrl = item | Attribute: 'Image', 'RawValue' %}
+                            {% if child.ChildContentChannelItem.Image != empty %}
+                              {% assign imageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' %}
                             {% endif %}
                             {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                             {% assign parentPrimarySlug = parent.PrimarySlug | Trim %}
