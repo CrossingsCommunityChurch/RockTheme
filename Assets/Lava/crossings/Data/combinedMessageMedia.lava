@@ -62,16 +62,25 @@
             "PrimarySlug": {{ item.PrimarySlug | ToJSON }},
             "Guid": {{ item.Guid | ToJSON }},
             "Status": {{ item.Status | ToJSON }},
-            "PublishDateTime": {{ item.StartDateTime | ToJSON }},
+            "PublishDateTime": {{ item.StartDateTime | Date:'MMM d, yyyy' | ToJSON }},
             "ExpireDateTime": {{ item.ExpireDateTime | ToJSON }},
             "ModifiedDateTime": {{ item.ModifiedDateTime | ToJSON }},
             "ChannelId": {{ item.ContentChannel.Id | ToJSON }},
             "ChannelName": {{ item.ContentChannel.Name | ToJSON }},
             "VimeoId": {{ item | Attribute: 'VimeoId'| ToJSON }},
             "AssetImage": {{item | Attribute:'AssetImage' | ToJSON}},
-            "Image": {{ item | Attribute:'Image' | ToJSON }},
+            "Image": {{ item | Attribute:'Image', 'RawValue' | ToJSON }},
             "Speaker": {{ item | Attribute:'Speaker' | ToJSON }},
             "DataViews": {{ item | Attribute:'Dataviews' | ToJSON }},
+            {%if item.ParentItems %}
+            "Series": {
+                {% for series in item.ParentItems | First %}
+                    "Title": {{ series.ContentChannelItem.Title | ToJSON }},
+                    "Slug" : {{ series.ContentChannelItem.PrimarySlug | ToJSON }},
+
+              {% endfor %}
+            },
+            {%endif %}
             "Topics": [
                 {% assign itemGuid = item.Guid %}
                 {% assign tagCategory = item.ContentChannel.ItemTagCategoryId %}

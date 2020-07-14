@@ -37,12 +37,13 @@
               {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
               {% if item.Image != empty %}
-                {% assign imageUrl = item | Attribute: 'Image', 'RawValue' %}
+                {% assign imageUrl = item.Image %}
               {% endif %}
 
               {%- comment -%}
                 Swapped this to use slugs, we need to make sure the route is setup - we may need to figure out how to make slugs unique if there is no logic for that built-in
               {%- endcomment -%}
+              {%- comment -%} The link is coming from a mixture of data returned in the dataset now
               {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
                 {% assign parentSeries = item.ParentItems | First | Property:'ContentChannelItem' %}
                 {% assign parentSlug = parentSeries.PrimarySlug %}
@@ -56,14 +57,18 @@
                 {%- endif -%}
               {%- endif -%}
 
+              {%- endcomment -%}
+
               {% assign date = item.StartDate %}
               {% assign title = item.Title %}
               {% assign subTitle = item.SubTitle %}
-              {% assign date = item.StartDateTime | Date:'MMM d, yyyy' %}
+              {% assign date = item.PublishDateTime %}
+              {% assign itemLink = item.PrimarySlug | Prepend:'/media/' %}
 
-              {% for series in item.ParentItems | First %}
-                  {% assign seriesTitle = series.ContentChannelItem.Title %}
-              {% endfor %}
+              {% if item.Series %}
+                {% assign seriesTitle = item.Series.Title %}
+                {% assign itemLink = item.PrimarySlug | Prepend: '/' | Prepend:item.Series.Slug | Prepend:'/media/'  %}
+              {% endif %}
 
               {[ cardMedia link:'{{ itemLink }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
             {% endfor %}
