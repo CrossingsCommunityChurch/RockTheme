@@ -2,10 +2,9 @@
         <li class="has-subnav-parent"><a href="#">Locations <i class="fa fa-angle-down"></i></a>
             <div class="subnav">
                 <ul>
-                    <li><a href="/location/okc" class="">OKC</a></li>
-                    <li><a href="/location/edmond" class="">Edmond</a></li>
-                    <li><a href="/location/online" class="">Online</a></li>
-                    <li class="view-all"><a href="/location" class="">View More <i class="fas fa-angle-right"></i></a></li>
+                    <li><a href="/locations/okc" class="">OKC</a></li>
+                    <li><a href="/locations/edmond" class="">Edmond</a></li>
+                    <li><a href="/locations/online" class="">Online</a></li>
                 </ul>
             </div>
         </li>
