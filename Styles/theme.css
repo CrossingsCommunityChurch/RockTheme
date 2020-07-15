@@ -11646,8 +11646,41 @@ img {
   padding-top: 7.5px;
   padding-bottom: 7.5px;
 }
+.account-page .form-control {
+  height: 40px;
+}
+.account-page .breadcrumb {
+  display: none;
+}
 .bootstrap-timepicker-widget table td input {
   padding: 7.5px 12px;
+}
+.block-instance .panel.panel-block {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+}
+.block-instance .panel.panel-block .panel-heading {
+  border: 0 none;
+  background-color: transparent;
+  padding: 15px 0;
+}
+.block-instance .panel.panel-block .panel-heading h1.panel-title {
+  font-size: 1.4rem;
+}
+.block-instance .panel.panel-block .panel-default {
+  box-shadow: none;
+}
+.block-instance .panel.panel-block .panel-body {
+  padding: 0;
+}
+.block-instance .panel.panel-block .panel-body .panel-heading {
+  padding: 15px 0;
+}
+.block-instance .panel.panel-block .btn-group .btn {
+  padding: 7.5px 15px;
+}
+.block-instance .panel.panel-block .panel-labels .panel-text {
+  margin-top: 12px;
 }
 .login input[type="text"],
 .login input[type="password"] {
@@ -11783,42 +11816,42 @@ img {
   display: block;
   width: 100%;
 }
-.login .panel,
-.account-entry .panel,
-.confirm-account .panel,
-.account-edit .panel,
-.forgot-username .panel,
-.change-password .panel,
-.photo-upload .panel,
-.public-profile-edit .panel,
-.group-schedule-toolbox .panel {
+.login .panel.panel.panel-block,
+.account-entry .panel.panel.panel-block,
+.confirm-account .panel.panel.panel-block,
+.account-edit .panel.panel.panel-block,
+.forgot-username .panel.panel.panel-block,
+.change-password .panel.panel.panel-block,
+.photo-upload .panel.panel.panel-block,
+.public-profile-edit .panel.panel.panel-block,
+.group-schedule-toolbox .panel.panel.panel-block {
   border: 0 none;
   padding: 0;
   box-shadow: none;
 }
-.login .panel .panel-heading,
-.account-entry .panel .panel-heading,
-.confirm-account .panel .panel-heading,
-.account-edit .panel .panel-heading,
-.forgot-username .panel .panel-heading,
-.change-password .panel .panel-heading,
-.photo-upload .panel .panel-heading,
-.public-profile-edit .panel .panel-heading,
-.group-schedule-toolbox .panel .panel-heading {
+.login .panel.panel.panel-block .panel-heading,
+.account-entry .panel.panel.panel-block .panel-heading,
+.confirm-account .panel.panel.panel-block .panel-heading,
+.account-edit .panel.panel.panel-block .panel-heading,
+.forgot-username .panel.panel.panel-block .panel-heading,
+.change-password .panel.panel.panel-block .panel-heading,
+.photo-upload .panel.panel.panel-block .panel-heading,
+.public-profile-edit .panel.panel.panel-block .panel-heading,
+.group-schedule-toolbox .panel.panel.panel-block .panel-heading {
   display: none;
   border: 0 none;
   padding: 0;
   background-color: transparent;
 }
-.login .panel .panel-body,
-.account-entry .panel .panel-body,
-.confirm-account .panel .panel-body,
-.account-edit .panel .panel-body,
-.forgot-username .panel .panel-body,
-.change-password .panel .panel-body,
-.photo-upload .panel .panel-body,
-.public-profile-edit .panel .panel-body,
-.group-schedule-toolbox .panel .panel-body {
+.login .panel.panel.panel-block .panel-body,
+.account-entry .panel.panel.panel-block .panel-body,
+.confirm-account .panel.panel.panel-block .panel-body,
+.account-edit .panel.panel.panel-block .panel-body,
+.forgot-username .panel.panel.panel-block .panel-body,
+.change-password .panel.panel.panel-block .panel-body,
+.photo-upload .panel.panel.panel-block .panel-body,
+.public-profile-edit .panel.panel.panel-block .panel-body,
+.group-schedule-toolbox .panel.panel.panel-block .panel-body {
   border: 0 none;
 }
 .login .nav > li > a,
@@ -11953,33 +11986,6 @@ img {
   padding-left: 12px;
   padding-right: 12px;
 }
-.block-instance .panel.panel-block {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 30px;
-}
-.block-instance .panel.panel-block .panel-heading {
-  border: 0 none;
-  background-color: transparent;
-  padding: 15px 0;
-}
-.block-instance .panel.panel-block .panel-heading h1.panel-title {
-  font-size: 1.4rem;
-}
-.block-instance .panel.panel-block .panel-default {
-  box-shadow: none;
-}
-.block-instance .panel.panel-block .panel-body {
-  padding: 0;
-}
-.block-instance .panel.panel-block .panel-body .panel-heading {
-  padding: 15px 0;
-}
-.block-instance .panel.panel-block .btn-group .btn {
-  padding: 7.5px 15px;
-}
-.block-instance .panel.panel-block .panel-labels .panel-text {
-  margin-top: 12px;
-}
 .give-page .breadcrumb {
   display: none;
 }
@@ -12000,6 +12006,10 @@ img {
 }
 .give-page .container.main .row > div .nav-sub {
   padding: 30px 0;
+}
+.give-page .container.main .row .well .row {
+  flex-wrap: nowrap;
+  flex-direction: row;
 }
 .grid-actions {
   background-color: #eee;
@@ -13656,12 +13666,6 @@ img {
   padding: 15px;
   background-color: #eeeeee;
   border-color: #eeeeee;
-}
-.public-profile-edit .panel.panel-block .panel-body {
-  padding: 15px;
-}
-.public-profile-edit .panel.panel-block .panel-body .btn {
-  padding: 5px 22.5px;
 }
 .public-profile-edit .panel.panel-block .row.pull-right .btn {
   margin-right: 22.5px;
