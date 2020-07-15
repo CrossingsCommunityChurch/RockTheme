@@ -65,10 +65,11 @@
               {% assign date = item.PublishDateTime %}
               {% assign itemLink = item.PrimarySlug | Prepend:'/media/' %}
               {% assign speaker = item.Speaker %}
+              {% assign channelPath = item.ChannelPath %}
 
               {% if item.Series %}
                 {% assign seriesTitle = item.Series.Title %}
-                {% assign itemLink = item.PrimarySlug | Prepend: '/' | Prepend:item.Series.Slug | Prepend:'/media/'  %}
+                {% assign itemLink = item.PrimarySlug | Prepend: '/' | Prepend:item.Series.Slug | Prepend:item.ChannelPath | Prepend:'/media/'  %}
               {% endif %}
 
               {[ cardMedia link:'{{ itemLink }}' title:'{{ title }}' speaker:'{{ speaker }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
