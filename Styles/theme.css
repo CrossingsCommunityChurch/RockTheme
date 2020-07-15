@@ -11641,6 +11641,9 @@ img {
   padding-left: 60px;
   padding-right: 60px;
 }
+.bootstrap-timepicker-widget table td input {
+  padding: 7.5px 12px;
+}
 .login input[type="text"],
 .login input[type="password"] {
   padding-left: 0;
@@ -11659,6 +11662,37 @@ img {
   box-shadow: none;
   font-weight: bold;
   border-color: #313e48;
+}
+.login .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.login .row > div {
+  order: 1;
+  width: 100%;
+}
+.login .row > div:first-child {
+  order: 2;
+  padding-top: 30px;
+  text-align: center;
+}
+.login .row > div:first-child > p {
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+.login .btn-authentication {
+  height: 50px;
+  width: 50px;
+  font-size: 1.2rem;
+  line-height: 50px;
+  text-align: center;
+  border: 0 none;
+  border-radius: 50%;
+  padding: 0;
+}
+.login .btn-authentication::before {
+  margin: 0;
 }
 .login select.form-control {
   padding-left: 15px;

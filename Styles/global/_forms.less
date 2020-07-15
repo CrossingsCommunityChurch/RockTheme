@@ -20,6 +20,10 @@
     }
 }
 
+.bootstrap-timepicker-widget table td input {
+    padding: 7.5px 12px;
+}
+
 .login {
     input[type="text"],
     input[type="password"] {
@@ -38,6 +42,43 @@
             box-shadow: none;
             font-weight: bold;
             border-color: @brand-primary;
+        }
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+
+        > div {
+            order: 1;
+            width: 100%;
+
+            &:first-child {
+                order: 2;
+                padding-top: @spacing2x;
+                text-align: center;
+
+                > p {
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                    margin-top: @spacing;
+                }
+            }
+        }
+    }
+
+    .btn-authentication {
+        height: 50px;
+        width: 50px;
+        font-size: 1.2rem;
+        line-height: 50px;
+        text-align: center;
+        border: 0 none;
+        border-radius: 50%;
+        padding: 0;
+
+        &::before {
+            margin: 0;
         }
     }
 
