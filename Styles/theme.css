@@ -11634,13 +11634,12 @@ img {
   padding: 7.5px 12px;
 }
 .account-page .main .btn {
-  padding-left: 12px;
-  padding-right: 12px;
+  padding: 7.5px 12px;
   border-radius: 5px;
 }
-.account-page .main .actions .btn {
-  padding-left: 60px;
-  padding-right: 60px;
+.account-page .main .actions .btn,
+.account-page .scheduled-transaction-list-liquid .btn {
+  padding: 15px 45px;
   border-radius: 90px;
 }
 .account-page .btn-xs {
@@ -12001,6 +12000,13 @@ img {
 }
 .give-page .container.main .row > div .nav-sub {
   padding: 30px 0;
+}
+.grid-actions {
+  background-color: #eee;
+}
+.grid-actions .btn {
+  background-color: #fff;
+  border-color: #fff;
 }
 .breadcrumb {
   max-width: 1170px;
