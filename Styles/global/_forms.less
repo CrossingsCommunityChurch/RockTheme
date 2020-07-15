@@ -1,5 +1,5 @@
 .form-control {
-    padding: 7.5px 12px;
+    padding: 3px 12px;
 }
 
 .nav > li > a {
@@ -8,15 +8,22 @@
 
 .account-page {
     .main .btn {
-        padding-left: 7.5px;
-        padding-right: 7.5px;
+        padding-left: 12px;
+        padding-right: 12px;
+        border-radius: 5px;
     }
 
     .main .actions {
         .btn {
             padding-left: 60px;
             padding-right: 60px;
+            border-radius: 90px;
         }
+    }
+
+    .btn-xs {
+        padding-top: 7.5px;
+        padding-bottom: 7.5px;
     }
 }
 
@@ -52,6 +59,17 @@
         > div {
             order: 1;
             width: 100%;
+            text-align: center;
+
+            .form-group,
+            .checkbox {
+                text-align: left;
+            }
+
+            .btn-link {
+                display: block;
+                margin: auto !important;
+            }
 
             &:first-child {
                 order: 2;
@@ -162,7 +180,8 @@
 
     .photo {
         img {
-            border-radius: 50%;
+            //border-radius: 50%;
+            // not all images are square so making them circles wont work
         }
     }
 }
@@ -295,5 +314,82 @@
 .checkbox {
     label {
         margin-top: 0;
+    }
+}
+
+.picker .picker-label {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.block-instance {
+    .panel.panel-block {
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        padding: @spacing2x;
+
+        .panel-heading {
+            border: 0 none;
+            background-color: transparent;
+            padding: @spacing 0;
+
+            h1.panel-title {
+                font-size: 1.4rem;
+            }
+        }
+
+        .panel-default {
+            box-shadow: none;
+        }
+
+        .panel-body {
+            padding: 0;
+
+            .panel-heading {
+                padding: @spacing 0;
+            }
+        }
+
+        .btn-group {
+            .btn {
+                padding: 7.5px 15px;
+            }
+        }
+
+        .panel-labels {
+            .panel-text {
+                margin-top: 12px;
+            }
+        }
+    }
+}
+
+.give-page {
+    .breadcrumb {
+        display: none;
+    }
+
+    .container.main {
+        .row {
+            display: flex;
+            flex-direction: column;
+
+            > div {
+                width: 100%;
+
+                .nav-stacked {
+                    display: flex;
+                    justify-content: center;
+
+                    > li {
+                        margin: 0;
+                        margin-left: 5px;
+                    }
+                }
+
+                .nav-sub {
+                    padding: @spacing2x 0;
+                }
+            }
+        }
     }
 }

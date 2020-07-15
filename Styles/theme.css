@@ -11628,18 +11628,24 @@ img {
   }
 }
 .form-control {
-  padding: 7.5px 12px;
+  padding: 3px 12px;
 }
 .nav > li > a {
   padding: 7.5px 12px;
 }
 .account-page .main .btn {
-  padding-left: 7.5px;
-  padding-right: 7.5px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border-radius: 5px;
 }
 .account-page .main .actions .btn {
   padding-left: 60px;
   padding-right: 60px;
+  border-radius: 90px;
+}
+.account-page .btn-xs {
+  padding-top: 7.5px;
+  padding-bottom: 7.5px;
 }
 .bootstrap-timepicker-widget table td input {
   padding: 7.5px 12px;
@@ -11670,6 +11676,15 @@ img {
 .login .row > div {
   order: 1;
   width: 100%;
+  text-align: center;
+}
+.login .row > div .form-group,
+.login .row > div .checkbox {
+  text-align: left;
+}
+.login .row > div .btn-link {
+  display: block;
+  margin: auto !important;
 }
 .login .row > div:first-child {
   order: 2;
@@ -11818,17 +11833,6 @@ img {
 .group-schedule-toolbox .nav > li > a {
   padding: 7.5px 15px;
 }
-.login .photo img,
-.account-entry .photo img,
-.confirm-account .photo img,
-.account-edit .photo img,
-.forgot-username .photo img,
-.change-password .photo img,
-.photo-upload .photo img,
-.public-profile-edit .photo img,
-.group-schedule-toolbox .photo img {
-  border-radius: 50%;
-}
 .login legend {
   display: none;
 }
@@ -11945,6 +11949,58 @@ img {
 .rockradiobuttonlist label,
 .checkbox label {
   margin-top: 0;
+}
+.picker .picker-label {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.block-instance .panel.panel-block {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 30px;
+}
+.block-instance .panel.panel-block .panel-heading {
+  border: 0 none;
+  background-color: transparent;
+  padding: 15px 0;
+}
+.block-instance .panel.panel-block .panel-heading h1.panel-title {
+  font-size: 1.4rem;
+}
+.block-instance .panel.panel-block .panel-default {
+  box-shadow: none;
+}
+.block-instance .panel.panel-block .panel-body {
+  padding: 0;
+}
+.block-instance .panel.panel-block .panel-body .panel-heading {
+  padding: 15px 0;
+}
+.block-instance .panel.panel-block .btn-group .btn {
+  padding: 7.5px 15px;
+}
+.block-instance .panel.panel-block .panel-labels .panel-text {
+  margin-top: 12px;
+}
+.give-page .breadcrumb {
+  display: none;
+}
+.give-page .container.main .row {
+  display: flex;
+  flex-direction: column;
+}
+.give-page .container.main .row > div {
+  width: 100%;
+}
+.give-page .container.main .row > div .nav-stacked {
+  display: flex;
+  justify-content: center;
+}
+.give-page .container.main .row > div .nav-stacked > li {
+  margin: 0;
+  margin-left: 5px;
+}
+.give-page .container.main .row > div .nav-sub {
+  padding: 30px 0;
 }
 .breadcrumb {
   max-width: 1170px;
@@ -13603,6 +13659,9 @@ img {
 }
 .public-profile-edit .panel.panel-block .row.pull-right .btn {
   margin-right: 22.5px;
+}
+.fluidbox-wrap {
+  z-index: 4;
 }
 #cms-admin-footer .btn,
 .rock-modal .note-toolbar .btn {
