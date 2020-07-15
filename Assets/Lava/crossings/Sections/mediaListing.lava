@@ -10,11 +10,25 @@
       <div class="media-list-items" data-aos="fade-up">
         <div class="row flex-row flex-wrap">
 
+            {% assign mediaItems = mediaData.Messages %}
+
+            {% comment %} Filtering {% endcomment %}
             {% assign topicFilter = PageParameter['topic'] %}
             {% assign speakerFilter = PageParameter['speaker'] %}
             {% assign bookFilter = PageParameter['book'] %}
 
-            {% assign mediaItems = mediaData.Messages %}
+            {% comment %} Paging {% endcomment %}
+            {% assign itemsPerPage = 3 %}
+            {% assign page = PageParameter['page'] %}
+            {% assign size = mediaItems | Size %}
+            {% assign count = 0 %}
+
+            {% comment %} <h4>top</h4>
+            <ul>
+              <li>itemsPerPage = {{itemsPerPage}}</li>
+              <li>page = {{page}}</li>
+              <li>size = {{size}}</li>
+            </ul> {% endcomment %}
 
             {%- for item in mediaItems -%}
 
@@ -32,6 +46,23 @@
                 {% endif %}
               {% endif %}
               {% if speakerFilter != null and speakerFilter != "" and item.Speaker != speakerFilter %}{% continue %}{% endif %}
+
+              {% comment %} Also filter out items that don't belong in the current page {% endcomment %}
+              {% assign count = count | Plus:1 %}
+              {% assign pgIdx = page | Minus:1 %}
+              {% assign pgMin = pgIdx | Times:itemsPerPage | Plus:1 %}
+              {% assign pgItems = itemsPerPage | Minus:1 %}
+              {% assign pgMax = pgMin | Plus:pgItems %}
+              {% assign prev = pgIdx %}
+              {% assign next = page | Plus:1 %}
+
+              {% comment %} <h4>count = {{count}}</h4>
+              <ul>
+                <li>pgMin = {{pgMin}}</li>
+                <li>pgMax = {{pgMax}}</li>
+              </ul> {% endcomment %}
+
+              {% if count < pgMin or count > pgMax %}{% continue %}{% endif %}
 
               {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
               {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
@@ -71,7 +102,31 @@
             End Loop over this card
           {%- endcomment -%}
         </div>
+        <a class="btn btn-default" onclick="return goToPage({{prev}})" role="button">Back</a>
+        <a class="btn btn-default" onclick="return goToPage({{next}})" role="button">Next</a>
       </div>
     </div>
   </div>
 </div>
+<script>
+
+  function goToPage(pgNum) {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlNoParams = window.location.href.split('?')[0];
+
+    if (urlParams.has('page')) {
+      urlParams.set('page', pgNum);
+    }
+    else {
+      urlParams.append('page', pgNum);
+    }
+
+    const newUrl = urlNoParams + '?' + urlParams.toString();
+    //alert(newUrl);
+    window.location.href = newUrl;
+
+    return false;
+  }
+
+</script>
