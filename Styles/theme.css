@@ -11217,6 +11217,8 @@ img {
 }
 .card img {
   object-fit: cover;
+}
+.card:not('.listing') img {
   height: 100%;
 }
 .media-list .card {

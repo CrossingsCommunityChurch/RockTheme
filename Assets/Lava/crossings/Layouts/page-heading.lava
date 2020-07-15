@@ -13,7 +13,7 @@
 
 {% assign PageID = PageParameter.PageId %}
 {% if PageParameter.Item %}
-  {%- comment -%} We can assume it is a content channel detail page. Override page heading with content channel stuff {%- endcomment -%}
+  {%- comment -%} We can assume it is a content channel detail page. Override page heading with content channel stuff - This is not true when we use slugs {%- endcomment -%}
   {% assign ItemID = PageParameter.Item %}
   {% assign wrapperClass = 'content-channel-item' %}
   {% contentchannelitem id:'{{ ItemID }}' %}

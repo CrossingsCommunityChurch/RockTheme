@@ -1,5 +1,5 @@
-{% assign item = Item %}
-{% if item %}
+  {% if Item %}
+  {% assign item = Item %}
   {% assign title = item.Title %}
   {% assign speaker = item | Attribute:'Speaker' %}
   {% assign date = item.StartDateTime | Date:'MMM d, yyyy' %}

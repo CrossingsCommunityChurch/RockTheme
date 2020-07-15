@@ -1,0 +1,27 @@
+{% eventitemoccurrence where:'CampusId == 1' %}
+
+  <div class="container card-list">
+    {% for event in eventitemoccurrenceItems %}
+      {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+      {% assign imageSize = '/fit-in/600x600' %}
+      {% assign imageUrlPath = eventitem.EventItemOccurrence.EventItem | Attribute:'Imageasset' | Url:'localpath' %}
+      {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+      <div class="card listing">
+        <div class="row flex-row">
+          <div class="col-sm-4">
+            <img src="{{ imageUrl }}" class="object-cover">
+          </div>
+          <div class="col-sm-8">
+            <div>
+              <h3>{{ event.EventItem.Name }}</h3>
+              {% if event.EventItem.Summary %}
+                <h4>{{ event.EventItem.Summary }}</h4>
+              {% endif %}
+              {{ event.Schedule.FriendlyScheduleText }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endeventitemoccurrence %}
