@@ -1,5 +1,28 @@
-input[type="text"],
-input[type="password"] {
+.form-control {
+    padding: 7.5px 12px;
+}
+
+.nav > li > a {
+    padding: 7.5px 12px;
+}
+
+.account-page {
+    .main .btn {
+        padding-left: 7.5px;
+        padding-right: 7.5px;
+    }
+
+    .main .actions {
+        .btn {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+    }
+}
+
+.login {
+    input[type="text"],
+    input[type="password"] {
     padding-left: 0;
     border-radius: 0;
     height: 40px;
@@ -10,29 +33,31 @@ input[type="password"] {
     border-bottom: 2px solid #eee;
     padding-right: 0;
 
-    &:focus {
-        outline: none;
-        box-shadow: none;
-        font-weight: bold;
-        border-color: @brand-primary;
+        &:focus {
+            outline: none;
+            box-shadow: none;
+            font-weight: bold;
+            border-color: @brand-primary;
+        }
     }
-}
 
-select.form-control {
-    padding-left: @spacing;
-}
+    select.form-control {
+        padding-left: @spacing;
+    }
 
-label {
-    font-weight: normal;
-    margin-top: @spacing2x;
-}
+    label {
+        font-weight: normal;
+        margin-top: @spacing2x;
+    }
 
-.checkbox {
-    margin-bottom: 32px;
-} 
+    .checkbox {
+        margin-bottom: 32px;
+    } 
 
-.input-group-addon + .form-control {
-    padding-left: @spacing;
+    .input-group-addon + .form-control {
+        padding-left: @spacing;
+    }
+
 }
 
 .login,

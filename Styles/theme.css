@@ -11627,8 +11627,22 @@ img {
     fill: #313e48;
   }
 }
-input[type="text"],
-input[type="password"] {
+.form-control {
+  padding: 7.5px 12px;
+}
+.nav > li > a {
+  padding: 7.5px 12px;
+}
+.account-page .main .btn {
+  padding-left: 7.5px;
+  padding-right: 7.5px;
+}
+.account-page .main .actions .btn {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+.login input[type="text"],
+.login input[type="password"] {
   padding-left: 0;
   border-radius: 0;
   height: 40px;
@@ -11639,24 +11653,24 @@ input[type="password"] {
   border-bottom: 2px solid #eee;
   padding-right: 0;
 }
-input[type="text"]:focus,
-input[type="password"]:focus {
+.login input[type="text"]:focus,
+.login input[type="password"]:focus {
   outline: none;
   box-shadow: none;
   font-weight: bold;
   border-color: #313e48;
 }
-select.form-control {
+.login select.form-control {
   padding-left: 15px;
 }
-label {
+.login label {
   font-weight: normal;
   margin-top: 30px;
 }
-.checkbox {
+.login .checkbox {
   margin-bottom: 32px;
 }
-.input-group-addon + .form-control {
+.login .input-group-addon + .form-control {
   padding-left: 15px;
 }
 .login,
@@ -13555,6 +13569,41 @@ label {
 }
 .public-profile-edit .panel.panel-block .row.pull-right .btn {
   margin-right: 22.5px;
+}
+#cms-admin-footer .btn,
+.rock-modal .note-toolbar .btn {
+  padding: 7.5px 15px;
+  border-radius: 0;
+}
+.rock-modal,
+.rock-modal.modal-content {
+  overflow: visible;
+}
+.rock-modal .modal-footer,
+.rock-modal.modal-content .modal-footer,
+.rock-modal .modal-header,
+.rock-modal.modal-content .modal-header {
+  background-color: #fff;
+  border-top: 0 none;
+}
+.rock-modal .modal-footer .close,
+.rock-modal.modal-content .modal-footer .close,
+.rock-modal .modal-header .close,
+.rock-modal.modal-content .modal-header .close {
+  padding: 0;
+  color: #000;
+}
+.rock-modal .input-group .form-control,
+.rock-modal.modal-content .input-group .form-control {
+  border: 1px solid #ddd;
+  border-width: 1px;
+  font-size: 1rem;
+}
+.rock-modal .input-group .form-control[type="text"],
+.rock-modal.modal-content .input-group .form-control[type="text"],
+.rock-modal .input-group .form-control[type="password"],
+.rock-modal.modal-content .input-group .form-control[type="password"] {
+  padding-left: 7.5px;
 }
 #cms-admin-footer,
 .zone-configuration-bar,
