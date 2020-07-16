@@ -29,7 +29,7 @@
         "speaker" : {{ latestMessage.Speaker | ToJSON }},
         "parentSeries" : {{ parentSeries.Title | ToJSON }},
         "parentSlug" : {{ parentSlug | ToJSON }},
-        "link" : {{ '/media/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug | ToJSON }}
+        "link" : {{ '/media/sermons/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug | ToJSON }}
     }
     {% endcontentchannelitem %}
 ]

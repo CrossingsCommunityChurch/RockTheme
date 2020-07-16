@@ -48,7 +48,7 @@
     {% if parentSlug == null %}
       {% assign parentSlug = 'no-series' %}
     {% endif %}
-    {% assign link =  '/media/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug %}
+    {% assign link =  '/media/sermons/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug %}
     {% assign text = 'Watch Latest Message' %}
     {% assign style = buttonstyle %}
     {% assign icon = 'play' %}
