@@ -18,8 +18,11 @@
             {% assign bookFilter = PageParameter['book'] %}
 
             {% comment %} Paging {% endcomment %}
-            {% assign itemsPerPage = 3 %}
-            {% assign page = PageParameter['page'] %}
+            {% assign itemsPerPage = 6 %}
+            {% assign page = 1 %}
+            {%if PageParameter['page'] %}
+              {% assign page = PageParameter['page'] %}
+            {% endif %}
             {% assign size = mediaItems | Size %}
             {% assign count = 0 %}
 
@@ -114,8 +117,10 @@
             End Loop over this card
           {%- endcomment -%}
         </div>
-        <a class="btn btn-default" onclick="return goToPage({{prev}}, {{lastPage}})" role="button">Back</a>
-        <a class="btn btn-default" onclick="return goToPage({{next}}, {{lastPage}})" role="button">Next</a>
+        <div class="paginate-buttons text-center">
+          <a class="btn btn-default" onclick="return goToPage({{prev}}, {{lastPage}})" role="button">Back</a>
+          <a class="btn btn-default" onclick="return goToPage({{next}}, {{lastPage}})" role="button">Next</a>
+        </div>
       </div>
     </div>
   </div>
