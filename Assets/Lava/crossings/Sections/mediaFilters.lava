@@ -7,10 +7,12 @@
       <div class="form-group">
         <label for="exampleInputEmail1">Search by Topic</label>
         <div class="dropdown">
-          <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Topic <i class="fas fa-angle-down pull-right"></i></button>
+          <button type="button" id="topics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Topic <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
+            <li><a onclick="setFilter('topic','Any')" style="cursor: pointer;">Any</a></li>
+            <li role="separator" class="divider"></li>
             {% for topic in lists.Topics %}
-              <li><a href="#" onclick="setFilter('topic','{{topic.Name}}')">{{topic.Name}}</a></li>
+              <li><a onclick="setFilter('topic','{{topic.Name}}')" style="cursor: pointer;">{{topic.Name}}</a></li>
             {% endfor %}
           </ul>
         </div>
@@ -18,10 +20,12 @@
       <div class="form-group hidden-xs hidden-sm">
         <label for="exampleInputEmail1">Search by Speaker</label>
         <div class="dropdown">
-          <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Speaker <i class="fas fa-angle-down pull-right"></i></button>
+          <button type="button" id="speakers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Speaker <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
+            <li><a onclick="setFilter('speaker','Any')" style="cursor: pointer;">Any</a></li>
+            <li role="separator" class="divider"></li>
             {% for speaker in lists.Speakers %}
-              <li><a href="#" onclick="setFilter('speaker','{{speaker.Name}}')">{{speaker.Name}}</a></li>
+              <li><a onclick="setFilter('speaker','{{speaker.Name}}')" style="cursor: pointer;">{{speaker.Name}}</a></li>
             {% endfor %}
           </ul>
         </div>
@@ -29,10 +33,12 @@
       <div class="form-group hidden-xs hidden-sm">
         <label for="exampleInputEmail1">Book of the Bible</label>
         <div class="dropdown">
-          <button type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Book <i class="fas fa-angle-down pull-right"></i></button>
+          <button type="button" id="books" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Book <i class="fas fa-angle-down pull-right"></i></button>
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
+            <li><a onclick="setFilter('book','Any')" style="cursor: pointer;">Any</a></li>
+            <li role="separator" class="divider"></li>
             {% for book in lists.Books %}
-              <li><a href="#" onclick="setFilter('book','{{book.Name}}')">{{book.Name}}</a></li>
+              <li><a onclick="setFilter('book','{{book.Name}}')" style="cursor: pointer;">{{book.Name}}</a></li>
             {% endfor %}
           </ul>
         </div>
@@ -48,17 +54,41 @@
 </div>
 <script>
 
+  $( document ).ready(function() {
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    let topic = urlParams.get('topic');
+    if (!topic) topic = 'Select a topic';
+    $("#topics").html(topic + ' <i class="fas fa-angle-down pull-right"></i>');
+
+    let speaker = urlParams.get('speaker');
+    if (!speaker) speaker = 'Select a speaker';
+    $("#speakers").html(speaker + ' <i class="fas fa-angle-down pull-right"></i>');
+
+    let book = urlParams.get('book');
+    if (!book) book = 'Select a book';
+    $("#books").html(book + ' <i class="fas fa-angle-down pull-right"></i>');
+
+  });
+
   function setFilter(name, value) {
 
     const urlParams = new URLSearchParams(window.location.search);
     const urlNoParams = window.location.href.split('?')[0];
 
-    if (urlParams.has(name)) {
-      urlParams.set(name, value);
+    if (value == 'Any' && urlParams.has(name)) {
+      urlParams.delete(name);
     }
     else {
-      urlParams.append(name, value);
+      if (urlParams.has(name)) {
+        urlParams.set(name, value);
+      }
+      else {
+        urlParams.append(name, value);
+      }
     }
+
 
     const newUrl = urlNoParams + '?' + urlParams.toString();
     //alert(newUrl);
