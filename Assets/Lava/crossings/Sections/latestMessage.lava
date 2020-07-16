@@ -22,9 +22,11 @@
 {% assign latestMessageDataset = 'latestmessage' | PersistedDataset %}
 
 {% for message in latestMessageDataset %}
-
   {% assign imageUrlPath = message.image %}
   {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+  {% if message.useVimeoImage == True %}
+    {% assign imageUrl = message.image %}
+  {% endif %}
 
   {% assign title = message.title %}
   {% assign speaker = message.speaker %}

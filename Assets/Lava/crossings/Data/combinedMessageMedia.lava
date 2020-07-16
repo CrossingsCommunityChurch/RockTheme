@@ -61,6 +61,13 @@
             {%assign channelPath = 'teachings/' %}
         {% endif %}
 
+        {% assign imageUrl = item.AssetImage | Url:'localpath' %}
+        {% assign useVimeoImage = False %}
+        {% if item.Image != empty %}
+            {% assign imageUrl = item | Attribute:'Image', 'RawValue' %}
+            {% assign useVimeoImage = True %}
+        {% endif %}
+
         {
             "Id": {{ item.Id }},
             "Title": {{ item.Title | Replace:"'","’" | ToJSON }},
@@ -76,7 +83,8 @@
             "ChannelPath": {{ channelPath | ToJSON }},
             "VimeoId": {{ item | Attribute: 'VimeoId'| ToJSON }},
             "AssetImage": {{item | Attribute:'AssetImage' | ToJSON}},
-            "Image": {{ item | Attribute:'Image', 'RawValue' | ToJSON }},
+            "useVimeoImage" : {{ useVimeoImage | ToJSON }},
+            "Image": {{ imageUrl | ToJSON }},
             "Speaker": {{ item | Attribute:'Speaker' | ToJSON }},
             "DataViews": {{ item | Attribute:'Dataviews' | ToJSON }},
             {%if item.ParentItems %}

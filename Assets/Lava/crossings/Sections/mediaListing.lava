@@ -72,31 +72,11 @@
 
               {% if count < pgMin or count > pgMax %}{% continue %}{% endif %}
 
-              {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
-              {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+              {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:item.Image %}
 
-              {% if item.Image != empty %}
+              {% if item.useVimeoImage == True %}
                 {% assign imageUrl = item.Image %}
               {% endif %}
-
-              {%- comment -%}
-                Swapped this to use slugs, we need to make sure the route is setup - we may need to figure out how to make slugs unique if there is no logic for that built-in
-              {%- endcomment -%}
-              {%- comment -%} The link is coming from a mixture of data returned in the dataset now
-              {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
-                {% assign parentSeries = item.ParentItems | First | Property:'ContentChannelItem' %}
-                {% assign parentSlug = parentSeries.PrimarySlug %}
-              {%- if LinkedPages.DetailPage contains '{MediaSlug}' and itemPrimarySlug != '' -%}
-                {%- assign itemLink = LinkedPages.DetailPage | Replace:'{MediaSlug}', item.PrimarySlug | Replace:'{SeriesSlug}', parentSlug | Prepend:'/' -%}
-              {%- else -%}
-                {%- if LinkedPages.DetailPage contains '{MediaSlug}' -%}
-                  {%- assign itemLink = LinkedPages.DetailPage | Replace:'{MediaSlug}',item.Id | | Replace:'{SeriesSlug}', parentSlug | Prepend:'/' -%}
-                {%- else -%}
-                  {%- capture itemLink -%}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{%- endcapture -%}
-                {%- endif -%}
-              {%- endif -%}
-
-              {%- endcomment -%}
 
               {% assign date = item.StartDate %}
               {% assign title = item.Title %}

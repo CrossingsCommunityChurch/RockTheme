@@ -11,12 +11,19 @@
     {% assign latestMessage = contentChannelItems | First %}
     {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
     {% assign parentSlug = parentSeries.PrimarySlug %}
+    {% assign imageUrl = latestMessage.AssetImage | Url:'localpath' %}
+    {% assign useVimeoImage = False %}
+    {% if latestMessage.Image != empty %}
+      {% assign imageUrl = latestMessage | Attribute:'Image', 'RawValue' %}
+      {% assign useVimeoImage = True %}
+    {% endif %}
     {% if parentSlug == null %}
       {% assign parentSlug = 'no-series' %}
     {% endif %}
     {
         "title" : {{ latestMessage.Title | ToJSON }},
-        "image" : {{ latestMessage.AssetImage | Url:'localpath' | ToJSON }},
+        "image" : {{ imageUrl | ToJSON }},
+        "useVimeoImage" : {{ useVimeoImage | ToJSON }},
         "date" : {{ latestMessage.StartDateTime | Date:'MMM d, yyyy' | ToJSON }},
         "content" : {{ latestMessage.Content | ToJSON }},
         "speaker" : {{ latestMessage.Speaker | ToJSON }},
