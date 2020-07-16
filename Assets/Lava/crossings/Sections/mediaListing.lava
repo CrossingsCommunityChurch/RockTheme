@@ -55,6 +55,11 @@
               {% assign pgMax = pgMin | Plus:pgItems %}
               {% assign prev = pgIdx %}
               {% assign next = page | Plus:1 %}
+              {% assign lastPage = count | DividedBy:itemsPerPage %}
+              {% assign itemsOnLastPage = count | Modulo:itemsPerPage  %}
+              {% if itemsOnLastPage != 0 %}
+                {% assign lastPage = lastPage | Plus:1 %}
+              {% endif %}
 
               {% comment %} <h4>count = {{count}}</h4>
               <ul>
@@ -102,15 +107,17 @@
             End Loop over this card
           {%- endcomment -%}
         </div>
-        <a class="btn btn-default" onclick="return goToPage({{prev}})" role="button">Back</a>
-        <a class="btn btn-default" onclick="return goToPage({{next}})" role="button">Next</a>
+        <a class="btn btn-default" onclick="return goToPage({{prev}}, {{lastPage}})" role="button">Back</a>
+        <a class="btn btn-default" onclick="return goToPage({{next}}, {{lastPage}})" role="button">Next</a>
       </div>
     </div>
   </div>
 </div>
 <script>
 
-  function goToPage(pgNum) {
+  function goToPage(pgNum, lastPage) {
+
+    if (pgNum <= 1 || pgNum >= lastPage) return false;
 
     const urlParams = new URLSearchParams(window.location.search);
     const urlNoParams = window.location.href.split('?')[0];
