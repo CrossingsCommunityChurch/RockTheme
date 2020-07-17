@@ -1,0 +1,33 @@
+{%- comment -%}
+  img
+  eventName
+  contact
+  date
+  recurring
+  summary
+  detailLink
+{%- endcomment -%}
+
+<div class="col-sm-6 col-md-4">
+  <a href="{{ link }}" class="card cardShadow">
+    <div class="thumb">
+      <img src="{{ img }}" class="object-fit">
+    </div>
+    <div class="row card-content-row">
+      <div class="card-content">
+        <div class="col">
+          <div>
+            <h4>{{ eventname }}</h3>
+            <h5>{{ contact }}</h5>
+            <p class="date">{{ date }}</p>
+            <p>{{recurring}}</p>
+          </div>
+        </div>
+        <div class="btn icon-button shadowDepth2">
+          <span>Details</span>
+          <i class="fas fa-angle-right"></i>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

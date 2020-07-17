@@ -8,7 +8,6 @@
 
   {% for eventItem in EventItems %}
   {% assign firstOccurrence = eventItem | First %}
-{{'LAVA' | Debug}}
 		{% assign occurrenceCount = firstOccurrence.EventItemOccurrence.Schedule.FriendlyScheduleText %}
   <div class="panel panel-default margin-t-md">
     <div class="panel-heading clearfix">
