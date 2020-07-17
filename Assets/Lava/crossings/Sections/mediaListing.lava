@@ -26,13 +26,6 @@
             {% assign size = mediaItems | Size %}
             {% assign count = 0 %}
 
-            {% comment %} <h4>top</h4>
-            <ul>
-              <li>itemsPerPage = {{itemsPerPage}}</li>
-              <li>page = {{page}}</li>
-              <li>size = {{size}}</li>
-            </ul> {% endcomment %}
-
             {%- for item in mediaItems -%}
 
               {% comment %} Filter out any messages that don't match the currently selected filter {% endcomment %}
@@ -58,17 +51,11 @@
               {% assign pgMax = pgMin | Plus:pgItems %}
               {% assign prev = pgIdx %}
               {% assign next = page | Plus:1 %}
-              {% assign lastPage = count | DividedBy:itemsPerPage %}
+              {% assign lastPage = count | DividedBy:itemsPerPage | Floor %}
               {% assign itemsOnLastPage = count | Modulo:itemsPerPage  %}
               {% if itemsOnLastPage != 0 %}
                 {% assign lastPage = lastPage | Plus:1 %}
               {% endif %}
-
-              {% comment %} <h4>count = {{count}}</h4>
-              <ul>
-                <li>pgMin = {{pgMin}}</li>
-                <li>pgMax = {{pgMax}}</li>
-              </ul> {% endcomment %}
 
               {% if count < pgMin or count > pgMax %}{% continue %}{% endif %}
 
@@ -98,8 +85,8 @@
           {%- endcomment -%}
         </div>
         <div class="paginate-buttons text-center">
-          <a class="btn btn-default" onclick="return goToPage({{prev}}, {{lastPage}})" role="button">Back</a>
-          <a class="btn btn-default" onclick="return goToPage({{next}}, {{lastPage}})" role="button">Next</a>
+          <a class="btn btn-default" id="back" onclick="return goToPage({{prev}})" role="button">Back</a>
+          <a class="btn btn-default" id="next" onclick="return goToPage({{next}})" role="button">Next</a>
         </div>
       </div>
     </div>
@@ -107,9 +94,16 @@
 </div>
 <script>
 
-  function goToPage(pgNum, lastPage) {
+  $( document ).ready(function() {
 
-    if (pgNum <= 1 || pgNum >= lastPage) return false;
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if ({{page}} <= 1) $('#back').hide();
+    if ({{page}} >= {{lastPage}}) $('#next').hide();
+
+  });
+
+  function goToPage(pgNum) {
 
     const urlParams = new URLSearchParams(window.location.search);
     const urlNoParams = window.location.href.split('?')[0];
@@ -122,7 +116,6 @@
     }
 
     const newUrl = urlNoParams + '?' + urlParams.toString();
-    //alert(newUrl);
     window.location.href = newUrl;
 
     return false;
