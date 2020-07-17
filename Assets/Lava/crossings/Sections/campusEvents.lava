@@ -1,27 +1,33 @@
-{% eventitemoccurrence where:'CampusId == 1' %}
+{%- comment-%}}
+  need to change this to set the event calendar Id's based on the campus.
+{%- endcomment -%}
 
-  <div class="container card-list">
-    {% for event in eventitemoccurrenceItems %}
-      {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-      {% assign imageSize = '/fit-in/600x600' %}
-      {% assign imageUrlPath = eventitem.EventItemOccurrence.EventItem | Attribute:'Imageasset' | Url:'localpath' %}
-      {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-      <div class="card listing">
-        <div class="row flex-row">
-          <div class="col-sm-4">
-            <img src="{{ imageUrl }}" class="object-cover">
-          </div>
-          <div class="col-sm-8">
-            <div>
-              <h3>{{ event.EventItem.Name }}</h3>
-              {% if event.EventItem.Summary %}
-                <h4>{{ event.EventItem.Summary }}</h4>
-              {% endif %}
-              {{ event.Schedule.FriendlyScheduleText }}
-            </div>
-          </div>
-        </div>
+{% eventcalendaritem where:'EventCalendarId == 1 || EventCalendarId == 3' %}
+  <div class="event-list">
+    <div class="container event-list-items">
+      <div class="row flex-row">
+        {% for item in eventcalendaritemItems %}
+          {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+          {% assign imageSize = '/fit-in/600x600' %}
+          {% assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' %}
+          {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+          {% assign eventid = item.EventItem.Id%}
+          {% eventitem id:'{{ eventid }}' %}
+            {% assign name = eventitem.Name %}
+            {% assign summary = eventitem.Summary %}
+            {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
+            {% assign occurrence = eventitem.EventItemOccurrences | First %}
+            {% assign schedule = occurrence.Schedule%}
+            {% assign date = schedule.NextStartDateTime | Date: 'MMM d h:m tt'%}
+            {% assign schedule = occurrence.Schedule.FriendlyScheduleText %}
+            {% assign contact = occurrence.ContactPersonAliasId | PersonByAliasId %}
+            {% assign contact = contact.FullName%}
+            {% assign occurrenceId = occurrence.Id%}
+            {% assign link = occurrenceId | Prepend:'/events/'%}
+            {[ cardEvent link:'{{ link }}' eventname:'{{ name }}' contact:'{{ contact }}' img:'{{ imageUrl }}'  date:'{{ date }}' recurring:'{{ schedule }}' ]}
+          {% endeventitem %}
+        {% endfor %}
       </div>
-    {% endfor %}
+    </div>
   </div>
-{% endeventitemoccurrence %}
+{% endeventcalendaritem %}
