@@ -5,11 +5,6 @@
   {% assign date = item.StartDateTime | Date:'MMM d, yyyy' %}
   {% assign summary = item.Content %}
   {% assign video = item | Attribute:'VimeoId' %}
-  {% assign parentPath = 'sermons' %}
-
-  {% if item.ContentChannel.Name == 'Teaching Message' %}
-      {% assign parentPath = 'teachings' %}
-  {% endif %}
   <div class="sermon-series-page">
     <div class="section page-title reverse">
       <div class="container">
@@ -60,6 +55,7 @@
       TODO: This needs to get reworked to use some common shortcodes (card)
       TODO: This cannot be very performant, nested for loops serveral times
     {%- endcomment -%}
+    {%- comment -%}
     {% if item.ParentItems != 'empty' %}
       {% assign ParentItem = item.ParentItems | First %}
       {% assign ParentItemId = ParentItem.ContentChannelItemId %}
@@ -87,11 +83,7 @@
                             {% endif %}
                             {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                             {% assign parentPrimarySlug = parent.PrimarySlug | Trim %}
-                            {%- comment -%}
-                              - Need better way to get links
-                              - We are duplicating efforts to set images, may be a better way
-                            {%- endcomment -%}
-                            {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                            {[ cardMedia link:'/media/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
                           {% endif %}
                         {% endfor %}
                     {% endfor %}
@@ -101,6 +93,8 @@
         </div>
       </div>
     {% endif %}
+{%- endcomment -%}
+
   </div>
 
 {% else %}
