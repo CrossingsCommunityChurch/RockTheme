@@ -27,7 +27,7 @@
             </div>
               <div class="series-details section text-center">
                 <hr class="sep">
-                <h1 class="heading sr-only">{{ item.Title }}</h1>
+                <h1 class="heading">{{ item.Title }}</h1>
                 <p>{{ summary }}</p>
                 <a href="#" class="btn-outline-primary btn"><i class="fas fa-share"></i><span>Share</span></a>
                 {% if item.ContentChannel.IsTaggingEnabled %}
@@ -58,6 +58,7 @@
       TODO: This needs to get reworked to use some common shortcodes (card)
       TODO: This cannot be very performant, nested for loops serveral times
     {%- endcomment -%}
+
     {% if item.ChildItems != 'empty' %}
       <div class="section media-list bg-gray">
         <div class="container content-area">
