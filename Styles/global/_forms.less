@@ -176,11 +176,11 @@
 .photo-upload,
 .public-profile-edit,
 .group-schedule-toolbox {
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    //box-shadow: 0 0 10px rgba(0,0,0,0.2);
     background-color: @white;
-    padding: @spacing @spacing2x;
+    //padding: @spacing @spacing2x;
     margin-bottom: @spacing6x;
-    margin-top: -@spacing5x;
+    //margin-top: -@spacing5x;
 
     legend {
         display: block;
@@ -382,20 +382,6 @@
 
             > div {
                 width: 100%;
-
-                .nav-stacked {
-                    display: flex;
-                    justify-content: center;
-
-                    > li {
-                        margin: 0;
-                        margin-left: 5px;
-                    }
-                }
-
-                .nav-sub {
-                    padding: @spacing2x 0;
-                }
             }
 
             .well {
@@ -405,6 +391,20 @@
                 }
             }
         }
+    }
+
+    .nav-stacked {
+        display: flex;
+        justify-content: center;
+
+        > li {
+            margin: 0;
+            margin-left: 5px;
+        }
+    }
+
+    .nav-sub {
+        padding: @spacing2x 0;
     }
 }
 

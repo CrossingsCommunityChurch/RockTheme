@@ -11766,11 +11766,8 @@ img {
 .photo-upload,
 .public-profile-edit,
 .group-schedule-toolbox {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
-  padding: 15px 30px;
   margin-bottom: 90px;
-  margin-top: -75px;
 }
 .login legend,
 .account-entry legend,
@@ -11999,20 +11996,20 @@ img {
 .give-page .container.main .row > div {
   width: 100%;
 }
-.give-page .container.main .row > div .nav-stacked {
-  display: flex;
-  justify-content: center;
-}
-.give-page .container.main .row > div .nav-stacked > li {
-  margin: 0;
-  margin-left: 5px;
-}
-.give-page .container.main .row > div .nav-sub {
-  padding: 30px 0;
-}
 .give-page .container.main .row .well .row {
   flex-wrap: nowrap;
   flex-direction: row;
+}
+.give-page .nav-stacked {
+  display: flex;
+  justify-content: center;
+}
+.give-page .nav-stacked > li {
+  margin: 0;
+  margin-left: 5px;
+}
+.give-page .nav-sub {
+  padding: 30px 0;
 }
 .grid-actions {
   background-color: #eee;
