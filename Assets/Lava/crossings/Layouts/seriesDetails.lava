@@ -1,10 +1,12 @@
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/1140x640' %}
+
   {% if Item %}
   {% assign item = Item %}
   {% assign title = item.Title %}
-  {% assign speaker = item | Attribute:'Speaker' %}
-  {% assign date = item.StartDateTime | Date:'MMM d, yyyy' %}
   {% assign summary = item.Content %}
-  {% assign video = item | Attribute:'VimeoId' %}
+  {% assign seriesLogo = item.Serieslogo | Url:'localpath' %}
+  {% assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append: seriesLogo %}
   <div class="sermon-series-page">
     <div class="section page-title reverse">
       <div class="container">
@@ -14,12 +16,13 @@
     <div class="section video">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            {[ videoPlayer vimeourl:'{{ video }}' ]}
+          <div class="col-md-12 text-center">
+            <div class="series-logo">
+              <img src="{{ seriesLogoUrl}}" alt="{{ item.Title }}" />
+            </div>
               <div class="series-details section text-center">
                 <hr class="sep">
-                <h1 class="heading">{{ item.Title }}</h1>
-                <h3 class="subheading">{{ speaker }} | {{ date }}</h3>
+                <h1 class="heading sr-only">{{ item.Title }}</h1>
                 <p>{{ summary }}</p>
                 <a href="#" class="btn-outline-primary btn"><i class="fas fa-share"></i><span>Share</span></a>
                 <div class="tags">
