@@ -7,6 +7,11 @@
   {% assign summary = item.Content %}
   {% assign seriesLogo = item.Serieslogo | Url:'localpath' %}
   {% assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append: seriesLogo %}
+  {% assign parentPath = 'sermons' %}
+
+  {% if item.ContentChannel.Name == 'Teaching Message' %}
+      {% assign parentPath = 'teachings' %}
+  {% endif %}
   <div class="sermon-series-page">
     <div class="section page-title reverse">
       <div class="container">
@@ -25,13 +30,9 @@
                 <h1 class="heading sr-only">{{ item.Title }}</h1>
                 <p>{{ summary }}</p>
                 <a href="#" class="btn-outline-primary btn"><i class="fas fa-share"></i><span>Share</span></a>
-                <div class="tags">
-                  <p class="small"><i class="fas fa-tags"></i>
-                    {% if item.ContentChannel.IsTaggingEnabled %}
-
-                      {% comment %}
-                      Show the tags for this sermon message
-                      {% endcomment %}
+                {% if item.ContentChannel.IsTaggingEnabled %}
+                  <div class="tags">
+                    <p class="small"><i class="fas fa-tags"></i>
                       {% assign itemGuid = item.Guid %}
                       {% assign tagCategory = item.ContentChannel.ItemTagCategoryId %}
                       {% taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems' %}
@@ -45,10 +46,9 @@
                           {% endfor %}
                         {% endtag %}
                       {% endtaggeditem %}
-
-                    {% endif %}
-                  </p>
-                </div>
+                    </p>
+                  </div>
+                {% endif %}
               </div>
           </div>
         </div>
@@ -58,45 +58,35 @@
       TODO: This needs to get reworked to use some common shortcodes (card)
       TODO: This cannot be very performant, nested for loops serveral times
     {%- endcomment -%}
-    {%- comment -%}
-    {% if item.ParentItems != 'empty' %}
-      {% assign ParentItem = item.ParentItems | First %}
-      {% assign ParentItemId = ParentItem.ContentChannelItemId %}
+    {% if item.ChildItems != 'empty' %}
       <div class="section media-list bg-gray">
         <div class="container content-area">
             <div class="media-list-items">
               <div class="row flex-row flex-wrap">
                   <div class="col-md-12">
-                    <h3 class="subheading" style="margin-bottom: 30px;">Other Messages in This Series</h3>
+                    <h3 class="subheading" style="margin-bottom: 30px;">Messages in This Series</h3>
                   </div>
-                  {% contentchannelitem where:'Id == {{ ParentItemId }}' %}
-                    {% for parent in contentchannelitemItems %}
-                        {% for child in parent.ChildItems %}
-                          {%if child.ChildContentChannelItem.Id != item.Id %}
-                            {% assign title = child.ChildContentChannelItem.Title %}
-                            {% assign seriesTitle = parent.Title %}
-                            {% assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' %}
-                            {% assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' %}
-                            {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-                            {% assign imageSize = '/fit-in/450x325' %}
-                            {% assign imageUrlPath = child.ChildContentChannelItem.AssetImage | Url:'localpath' %}
-                            {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-                            {% if child.ChildContentChannelItem.Image != empty %}
-                              {% assign imageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' %}
-                            {% endif %}
-                            {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
-                            {% assign parentPrimarySlug = parent.PrimarySlug | Trim %}
-                            {[ cardMedia link:'/media/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
-                          {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                  {% endcontentchannelitem %}
+                  {% for child in item.ChildItems %}
+                      {% assign title = child.ChildContentChannelItem.Title %}
+                      {% assign seriesTitle = item.Title %}
+                      {% assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' %}
+                      {% assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' %}
+                      {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+                      {% assign imageSize = '/fit-in/450x325' %}
+                      {% assign imageUrlPath = child.ChildContentChannelItem.AssetImage | Url:'localpath' %}
+                      {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+                      {% if child.ChildContentChannelItem.Image != empty %}
+                        {% assign imageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' %}
+                      {% endif %}
+                      {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
+                      {% assign parentPrimarySlug = item.PrimarySlug | Trim %}
+                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                  {% endfor %}
               </div>
             </div>
         </div>
       </div>
     {% endif %}
-{%- endcomment -%}
 
   </div>
 
