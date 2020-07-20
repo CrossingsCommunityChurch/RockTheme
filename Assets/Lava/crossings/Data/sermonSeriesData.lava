@@ -9,9 +9,6 @@
     {%- for item in items -%}
 
     {% assign channelPath = '/media/sermons/' %}
-    {% if item.ContentChannel.Name == 'Teaching Message' %}
-        {%assign channelPath = '/media/teachings/' %}
-    {% endif %}
 
 
     {
