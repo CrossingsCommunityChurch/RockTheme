@@ -12237,7 +12237,8 @@ img {
   border-color: #fff;
 }
 .public-profile-edit,
-.group-list-personalized-lava {
+.group-list-personalized-lava,
+.transaction-entry {
   margin-top: 45px;
 }
 .group-list-personalized-lava .panel-default {
