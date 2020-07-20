@@ -1,14 +1,11 @@
 
 [
-    {%- contentchannel where:'Name == "Sermon Series"' iterator:'sermonSeriesItems' -%}
-    {%- assign sermonSeriesItemId = sermonSeriesItems | First | Property:'Id' -%}
-    {%- endcontentchannel -%}
     {%- contentchannel where:'Name == "Teaching Series"' iterator:'teachingSeriesItems' -%}
     {%- assign teachingSeriesItemId = teachingSeriesItems | First | Property:'Id' -%}
     {%- endcontentchannel -%}
 
-    {%- if sermonSeriesItemId != empty || teachingSeriesItemId != empty-%}
-    {%- contentchannelitem where:'ContentChannelId ==  {{sermonSeriesItemId}} || ContentChannelId == {{teachingSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+    {%- if teachingSeriesItemId != empty -%}
+    {%- contentchannelitem where:'ContentChannelId == {{teachingSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
 
     {% assign channelPath = '/media/sermons/' %}
