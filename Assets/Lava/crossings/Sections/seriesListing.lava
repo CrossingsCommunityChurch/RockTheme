@@ -1,16 +1,23 @@
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/450x450' %}
+{%- comment -%}
+  Default to sermon series dataset
+{%- endcomment -%}
+{% if data %}
+  {% assign dataset = data %}
 
-{% assign seriesData = 'mediaSeriesCombined' | PersistedDataset %}
-<div class="section media-list bg-gray">
-  <div class="container content-area">
-      <div class="media-list-items">
-        <div class="row flex-row flex-wrap">
-            {% for series in seriesData %}
-                  {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:series.Image %}
-                 {[ cardSeries link:'{{series.Slug}}' title:'{{ series.Title }}' img:'{{ imageUrl }}' ]}
-            {% endfor %}
+  {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+  {% assign imageSize = '/fit-in/450x450' %}
+
+  {% assign seriesData = data | PersistedDataset %}
+  <div class="section media-list bg-gray">
+    <div class="container content-area">
+        <div class="media-list-items">
+          <div class="row flex-row flex-wrap">
+              {% for series in seriesData %}
+                    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:series.Image %}
+                  {[ cardSeries link:'{{series.Slug}}' title:'{{ series.Title }}' img:'{{ imageUrl }}' ]}
+              {% endfor %}
+          </div>
         </div>
-      </div>
+    </div>
   </div>
-</div>
+{% endif %}
