@@ -4,8 +4,8 @@
 
 {% eventcalendaritem where:'EventCalendarId == 1 || EventCalendarId == 3' %}
   <div class="event-list">
-    <div class="container event-list-items">
-      <div class="row flex-row">
+    <div class="container event-list-items" data-aos="fade-up">
+      <div class="row flex-row flex-wrap">
         {% for item in eventcalendaritemItems %}
           {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
           {% assign imageSize = '/fit-in/600x600' %}
