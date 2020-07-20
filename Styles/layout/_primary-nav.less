@@ -246,7 +246,8 @@
         font-size ease-in-out 0.5s,
         padding ease-in-out 0.5s
     ;
-    position: fixed;
+    position: fixed; /* Fallback */
+    position: sticky;
     left: 0;
     right: 0;
     z-index: 99;
@@ -260,6 +261,7 @@
 
     &.fixed {
         position: fixed !important;
+        position: sticky !important;
         top: 0 !important;
         z-index: 99;
         left: 0;
@@ -295,6 +297,7 @@
 
         &.fixed {
             position: fixed !important;
+            position: sticky !important;
             top: 0;
             background-color: @white !important;
             text-shadow: none !important;
@@ -526,4 +529,8 @@
             }
         }
     }
+}
+
+.account-dashboard-sidebar {
+    padding: @spacing @spacing 0;
 }

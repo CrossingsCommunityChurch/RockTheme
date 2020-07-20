@@ -25,6 +25,7 @@
         <script async src="https://merlin.simpledonation.com/js/installScript.js?key=01E4ESB8Z1ANNJZ95F7JHP20Y6"></script>
         <script src="<%# System.Web.Optimization.Scripts.Url("~/Scripts/Bundles/RockJQueryLatest" ) %>"></script>
         <script src='<%# ResolveRockUrl("~~/Scripts/aos.js", true) %>' ></script>
+        <script src='<%# ResolveRockUrl("~~/Scripts/bigSlide.min.js", true) %>'></script>
         <script src='<%# ResolveRockUrl("~~/Scripts/theme.js", true) %>' ></script>
 
         <!-- Set the viewport width to device width for mobile -->
@@ -45,32 +46,45 @@
 <body runat="server" id="body">
 
     <form id="form1" runat="server">
-        
-             <nav class="primary-nav flat reverse">
+        <div class="slide-wrap push">
+            <nav class="primary-nav flat reverse">
                 <div class="navigation">
                     <Rock:Zone name="Login" runat="server"/>
                     <Rock:Zone Name="Navigation" runat="server" />
                     <Rock:Zone Name="Search" runat="server"/>
                 </div>
             </nav>
-        <div id="content" class="clearfix page-wrapper">
-            <asp:ContentPlaceHolder ID="feature" runat="server"></asp:ContentPlaceHolder>
-            <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>              
-        </div>
-        <Rock:Zone Name="Footer" runat="server" />  
-        <%-- controls for scriptmanager and update panel --%>
-        <asp:ScriptManager ID="sManager" runat="server"/>
-        <asp:UpdateProgress id="updateProgress" runat="server" DisplayAfter="800">
-		        <ProgressTemplate>
-		            <div class="updateprogress-status">
-                        <div class="spinner">
-                          <div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div>
+            <div id="content" class="clearfix page-wrapper">
+                <asp:ContentPlaceHolder ID="feature" runat="server"></asp:ContentPlaceHolder>
+                <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>              
+            </div>
+            <Rock:Zone Name="Footer" runat="server" />  
+            <%-- controls for scriptmanager and update panel --%>
+            <asp:ScriptManager ID="sManager" runat="server"/>
+            <asp:UpdateProgress id="updateProgress" runat="server" DisplayAfter="800">
+                    <ProgressTemplate>
+                        <div class="updateprogress-status">
+                            <div class="spinner">
+                            <div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="updateprogress-bg modal-backdrop"></div>
-		        </ProgressTemplate>
-        </asp:UpdateProgress>
-
+                        <div class="updateprogress-bg modal-backdrop"></div>
+                    </ProgressTemplate>
+            </asp:UpdateProgress>
+        </div>
+        <div id="account-menu" class="account-dashboard-sidebar">
+            <div class="profile">
+                <h4>First Last Name</h3>
+            </div>
+            <nav class="account-nav" role="navigation">
+                <ul>
+                    <li><a href="#">My Profile</a></li>
+                    <li><a href="#">My Giving</a></li>
+                    <li><a href="#">My Groups</a></li>
+                    <li><a href="#">Assessments</a></li>
+                </ul>
+            </nav>
+        </div>
     </form>
 
 </body>

@@ -36,9 +36,9 @@ $(document).ready(function() {
         var scroll = $(window).scrollTop();
 
         if (scroll >= 140) {
-            $('.primary-nav').addClass('fixed');
+            $('.primary-nav').addClass('fixed push');
         } else {
-            $('.primary-nav').removeClass('fixed');
+            $('.primary-nav').removeClass('fixed push');
         }
     });
     
@@ -47,6 +47,21 @@ $(document).ready(function() {
     AOS.init({
         easing: 'ease-in-out',
         duration: '1000'
+    });
+
+    let menuWidth = '30em';
+    let windowSize = $( window ).width();
+
+    if (windowSize < 992) {
+        menuWidth = '75%';
+    }
+
+    $('.loginstatus .dropdown-toggle').bigSlide({
+        menu: '#account-menu',
+        menuWidth: menuWidth,
+        easyClose: true,
+    }).click(function(e) {
+        e.preventDefault();
     });
 
     $('body').addClass('zoom');

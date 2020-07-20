@@ -5,10 +5,11 @@ html {
 
 body {
     margin-bottom: 58px;
+    overflow-x: hidden;
 }
 
 .page-wrapper {
-    padding-top: 58px;
+    //padding-top: 58px;
     overflow: hidden;
 }
 
@@ -30,4 +31,25 @@ body {
 .breadcrumb {
     background-color: @white;
     margin-bottom: 0;
+}
+
+#cms-admin-footer {
+    display: none;
+}
+
+@media (min-width: @screen-desktop) {
+    
+    #cms-admin-footer {
+        display: block;
+    }
+}
+
+.push.slide-wrap {
+    position: relative;
+}
+
+.account-dashboard-sidebar {
+    position: fixed;
+    left: -15.625em; /*left or right and the width of your navigation panel*/
+    width: 15.625em; /*should match the above value*/
 }
