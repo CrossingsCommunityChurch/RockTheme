@@ -1,0 +1,27 @@
+{[ eventDetail  ]}
+
+{% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
+{% assign assetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' %}
+{% if assetimage and assetimage != empty %}
+    {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+    {% assign imageSize = '/fit-in/900x600' %}
+    {% assign imageUrlPath = assetimage | Url:'localpath' %}
+    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{% endif %}
+<div class="container-fluid section split-section split-section-overlap">
+      <div class="row flex-row">
+          <div class="col-md-6 nopadding-x image-bg">
+            {% if imageUrl %}
+              <img src="{{ imageUrl }}" alt="{{ Event.Name }}" />
+            {% endif %}
+          </div>
+          <div class="col-md-6 split-section-text" data-aos="fade-left">
+              <h2 class="heading">{{ eventitemoccurrence.EventItem.Name }}</h2>
+              <h4 class="subheading">Event Description</h4>
+              <hr class="sep">
+              <p>{{ eventitemoccurrence.EventItem.Description }}</p>
+          </div>
+      </div>
+</div>
+{% endeventitemoccurrence %}
+
