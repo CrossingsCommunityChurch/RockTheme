@@ -11701,13 +11701,18 @@ img {
 }
 .page-title.section {
   background-color: #313e48;
-  padding-top: 120px;
 }
 .page-title.section .jumbotron {
   background-color: transparent;
+  padding: 0;
 }
 @media (min-width: 992px) {
-  padding-top: 180px;
+  .page-title.section {
+    padding-top: 120px;
+  }
+  .page-title.section .jumbotron {
+    padding: 30px 15px;
+  }
 }
 .request-prayer {
   display: none;
@@ -11949,14 +11954,14 @@ img {
 .login,
 .account-entry,
 .confirm-account,
-.account-edit,
 .forgot-username,
 .change-password,
-.photo-upload,
-.public-profile-edit,
-.group-schedule-toolbox {
+.photo-upload {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   background-color: #fff;
+  padding: 15px 30px;
   margin-bottom: 90px;
+  margin-top: -75px;
 }
 .login legend,
 .account-entry legend,
@@ -12005,19 +12010,6 @@ img {
   display: block;
   width: 100%;
 }
-.login .panel.panel.panel-block,
-.account-entry .panel.panel.panel-block,
-.confirm-account .panel.panel.panel-block,
-.account-edit .panel.panel.panel-block,
-.forgot-username .panel.panel.panel-block,
-.change-password .panel.panel.panel-block,
-.photo-upload .panel.panel.panel-block,
-.public-profile-edit .panel.panel.panel-block,
-.group-schedule-toolbox .panel.panel.panel-block {
-  border: 0 none;
-  padding: 0;
-  box-shadow: none;
-}
 .login .panel.panel.panel-block .panel-heading,
 .account-entry .panel.panel.panel-block .panel-heading,
 .confirm-account .panel.panel.panel-block .panel-heading,
@@ -12053,6 +12045,11 @@ img {
 .public-profile-edit .nav > li > a,
 .group-schedule-toolbox .nav > li > a {
   padding: 7.5px 15px;
+}
+.change-password .panel.panel.panel-block {
+  border: 0 none;
+  padding: 0;
+  box-shadow: none;
 }
 .login legend {
   display: none;
@@ -12099,13 +12096,9 @@ img {
   .login,
   .account-entry,
   .confirm-account,
-  .account-edit,
   .forgot-username,
   .change-password,
-  .photo-upload,
-  .public-profile-edit,
-  .group-schedule-toolbox,
-  .communication-entry {
+  .photo-upload {
     padding: 75px;
   }
   .login .actions,
@@ -12143,6 +12136,17 @@ img {
     width: 33.33%;
   }
 }
+.assessment-list .block-content > div > div.panel-default > .panel-heading {
+  display: none;
+}
+.assessment-list .block-content > div > div.panel-default > .panel-body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.assessment-list .block-content > div > div.panel-default > .panel-body > div {
+  margin: 15px;
+}
 .assessment-list .panel .panel {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 15px;
@@ -12175,29 +12179,54 @@ img {
   padding-left: 12px;
   padding-right: 12px;
 }
-.give-page .breadcrumb {
+.give-page,
+.account-page {
+  /*.container.main {
+        .row {
+            display: flex;
+            flex-direction: column;
+
+            > div {
+                width: 100%;
+            }
+
+            .well {
+                .row {
+                    flex-wrap: nowrap;
+                    flex-direction: row;
+                }
+            }
+        }
+    }*/
+}
+.give-page .breadcrumb,
+.account-page .breadcrumb {
   display: none;
 }
-.give-page .container.main .row {
-  display: flex;
-  flex-direction: column;
+.give-page #zone-feature .nav-sub,
+.account-page #zone-feature .nav-sub {
+  background-color: #eee;
 }
-.give-page .container.main .row > div {
-  width: 100%;
+.give-page #zone-main .block-content > .panel.panel-block > .panel-body,
+.account-page #zone-main .block-content > .panel.panel-block > .panel-body {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.give-page .container.main .row .well .row {
-  flex-wrap: nowrap;
-  flex-direction: row;
-}
-.give-page .nav-stacked {
+.give-page .nav-stacked,
+.account-page .nav-stacked {
   display: flex;
   justify-content: center;
 }
-.give-page .nav-stacked > li {
+.give-page .nav-stacked > li,
+.account-page .nav-stacked > li {
   margin: 0;
   margin-left: 5px;
 }
-.give-page .nav-sub {
+.give-page .nav-stacked > li > a,
+.account-page .nav-stacked > li > a {
+  transition: all ease-in-out 0.5s;
+}
+.give-page .nav-sub,
+.account-page .nav-sub {
   padding: 30px 0;
 }
 .grid-actions {
@@ -12206,6 +12235,76 @@ img {
 .grid-actions .btn {
   background-color: #fff;
   border-color: #fff;
+}
+.public-profile-edit,
+.group-list-personalized-lava {
+  margin-top: 45px;
+}
+.group-list-personalized-lava .panel-default {
+  box-shadow: none;
+}
+.group-list-personalized-lava .panel-heading {
+  display: none;
+}
+.group-list-personalized-lava .list-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.group-list-personalized-lava .list-group > li > a {
+  display: block;
+  padding: 45px 15px;
+  text-align: center;
+  margin: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  transition: all ease-in-out 0.5s;
+}
+.group-list-personalized-lava .list-group > li > a:hover {
+  text-decoration: none;
+  background-color: #313e48;
+  color: #fff;
+  border-color: #313e48;
+}
+.group-list-personalized-lava .sub-list .list-group > li > a {
+  padding: 7.5px 12px;
+  box-shadow: none;
+  background-color: #eee;
+  border-radius: 7px;
+}
+.group-list-personalized-lava .sub-list .list-group > li > a:hover {
+  background-color: #313e48;
+}
+.account-dashboard .account-page .nav-stacked {
+  max-width: 1170px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.account-dashboard .account-page .nav-stacked > li {
+  margin: 0;
+  width: 50%;
+  display: flex;
+  text-align: center;
+}
+.account-dashboard .account-page .nav-stacked > li > a {
+  background-color: #fff;
+  display: block;
+  border: 1px solid #fff;
+  padding: 45px 0;
+  margin: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  border-radius: 0;
+  font-weight: bold;
+}
+.account-dashboard .account-page .nav-stacked > li > a:hover {
+  background-color: #313e48;
+  color: #fff;
+  border-color: #313e48;
 }
 .breadcrumb {
   max-width: 1170px;
