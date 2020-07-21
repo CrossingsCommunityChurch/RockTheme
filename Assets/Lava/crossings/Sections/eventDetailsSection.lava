@@ -38,7 +38,7 @@
                       <h4 class="subheading">Schedule</h4>
                       <h4 class="heading">{{ eventitemoccurrence.Schedule.FriendlyScheduleText }}</h3>
                     {% endif %}
-                    {% if eventitemoccurrence.location and ventitemoccurrence.location != empty  %}
+                    {% if eventitemoccurrence.location and eventitemoccurrence.location != empty  %}
                       {%- comment -%}
                         Need to modify this to list the campus location if non is specified on the event
                       {%- endcomment -%}
@@ -70,43 +70,49 @@
                   <div class="col">
                     <div class="buttons location-buttons">
                     {%- comment -%}
-                      Need to see if it is possible to pull directions for events.
-                    {%- endcomment -%}
-                    {% if directionsURL != empty %}
-                      {[ button icon:'location-arrow' buttonstyle:'primary' buttonlink:'{{ directionsURL }}' buttontarget:'_blank' buttontext:'Directions' ]}
-                    {% endif %}
+                      Disabling this for now.
+
+                    {% if eventitemoccurrence.EventItem.directionsURL != empty %}
+                      {[ button icon:'location-arrow' buttonstyle:'primary' buttonlink:'{{ eventitemoccurrence.EventItem.directionsURL }}' buttontarget:'_blank' buttontext:'Directions' ]}
+                    {% endif %}{%- endcomment -%}
                     {%- comment -%}Make this the register button.{%- endcomment -%}
-                        {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'' buttontarget:'_blank' buttontext:'Register' ]}
+                    {% assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages %}
+
+
+                        {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
                     </div>
                   </div>
+                </div>
+                <div class="row">
+                  <p class="lead">Share this event:</p>
                 </div>
                 <div class="row">
                   <div class="col">
                     <div class="event-share">
                       <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
-    <script>function ics_click() { text = `{{ EventItemOccurrence.Schedule.iCalendarContent }}`.replace('END:VEVENT', 'SUMMARY: {{ Event.Name }}\r\nLOCATION: {{ EventItemOccurrence.Location }}\r\nEND:VEVENT'); var element = document.createElement('a'); element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text)); element.setAttribute('download', '{{ Event.Name }}.ics'); element.style.display = 'none'; document.body.appendChild(element); element.click(); document.body.removeChild(element); }</script>
-		<ul class="socialsharing">
-			<li>
-				<a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
-					<i class="fa fa-fw fa-facebook"></i>
-				</a>
-			</li>
-			<li>
-				<a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
-					<i class="fa fa-fw fa-twitter"></i>
-				</a>
-			</li>
-			<li>
-				<a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' | EscapeDataString }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
-					<i class="fa fa-fw fa-envelope-o"></i>
-				</a>
-			</li>
-      <li>
-        <a href="" onclick="return ics_click()" class="socialicon socialicon-calendar" title="" data-original-title="Download Event">
-          <i class="fa fa-fw fa-calendar"></i>
-        </a>
-      </li>
-		</ul>
+                      <script>function ics_click() { text = `{{ EventItemOccurrence.Schedule.iCalendarContent }}`.replace('END:VEVENT', 'SUMMARY: {{ Event.Name }}\r\nLOCATION: {{ EventItemOccurrence.Location }}\r\nEND:VEVENT'); var element = document.createElement('a'); element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text)); element.setAttribute('download', '{{ Event.Name }}.ics'); element.style.display = 'none'; document.body.appendChild(element); element.click(); document.body.removeChild(element); }</script>
+                      <ul class="socialsharing">
+                        <li>
+                          <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
+                            <i class="fa fa-fw fa-facebook"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
+                            <i class="fa fa-fw fa-twitter"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' | EscapeDataString }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
+                            <i class="fa fa-fw fa-envelope-o"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="" onclick="return ics_click()" class="socialicon socialicon-calendar" title="" data-original-title="Download Event">
+                            <i class="fa fa-fw fa-calendar"></i>
+                          </a>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
