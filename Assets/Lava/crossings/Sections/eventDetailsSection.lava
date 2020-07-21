@@ -21,11 +21,6 @@
                                   M23.3,14.6c-0.4,4.3-3.2,7.9-7.1,9.3v-9.5L23.3,14.6z" class="st0"></path></g></g>
                   </svg>
                 </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <h1 class="heading"> {{eventitemoccurrence.EventItem.Name}} </h1>
-                  </div>
-                </div>
                 <div class="row location-content">
                   <div class="col-md-6">
                     {%- comment -%}
@@ -55,9 +50,11 @@
                       Need to discuss if we want all contacts photos to be here or not.
                       Also need to add a way to get contact info. idealy around this area.
                     {%- endcomment -%}
+                    {% if contact.Photo.Url and contact.Photo.Url != empty %}
                     <div class="pastor-image">
                       <img src="{{ contact.Photo.Url }}">
                     </div>
+                    {% endif %}
                     <div class="past-details">
                       <h4 class="subheading">Contact</h4>
                       <h2 class="heading">{{ contact.FullName }}</h2>
@@ -66,7 +63,13 @@
                   </div>
                 </div>
               </div>
-                <div class="row">
+              <div class="row">
+                <div class="col">
+                  <h3 class="subheading">Summary</h3>
+                  <p>{{eventitemoccurrence.EventItem.Summary }}</p>
+                </div>
+              </div>
+              <div class="row">
                   <div class="col">
                     <div class="buttons location-buttons">
                     {%- comment -%}
@@ -76,15 +79,13 @@
                       {[ button icon:'location-arrow' buttonstyle:'primary' buttonlink:'{{ eventitemoccurrence.EventItem.directionsURL }}' buttontarget:'_blank' buttontext:'Directions' ]}
                     {% endif %}{%- endcomment -%}
                     {%- comment -%}Make this the register button.{%- endcomment -%}
-                    {% assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages %}
-
-
-                        {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
+                      {% assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages %}
+                      {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
                     </div>
                   </div>
                 </div>
                 <div class="row">
-                  <p class="lead">Share this event:</p>
+                  <p class="shareheading">Share this event:</p>
                 </div>
                 <div class="row">
                   <div class="col">
