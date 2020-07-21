@@ -7,25 +7,26 @@
     <div class="container event-list-items" data-aos="fade-up">
       <div class="row flex-row flex-wrap">
         {% for item in eventcalendaritemItems %}
-          {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-          {% assign imageSize = '/fit-in/600x600' %}
-          {% assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' %}
-          {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-          {% assign eventid = item.EventItem.Id%}
-          {% eventitem id:'{{ eventid }}' %}
-            {% assign name = eventitem.Name %}
-            {% assign summary = eventitem.Summary %}
-            {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
-            {% assign occurrence = eventitem.EventItemOccurrences | First %}
-            {% assign schedule = occurrence.Schedule%}
-            {% assign date = schedule.NextStartDateTime | Date: 'MMM d h:m tt'%}
-            {% assign schedule = occurrence.Schedule.FriendlyScheduleText %}
-            {% assign contact = occurrence.ContactPersonAliasId | PersonByAliasId %}
-            {% assign contact = contact.FullName%}
-            {% assign occurrenceId = occurrence.Id%}
-            {% assign link = occurrenceId | Prepend:'/events/'%}
-            {[ cardEvent link:'{{ link }}' eventname:'{{ name }}' contact:'{{ contact }}' img:'{{ imageUrl }}'  date:'{{ date }}' recurring:'{{ schedule }}' ]}
-          {% endeventitem %}
+            {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+            {% assign imageSize = '/fit-in/600x600' %}
+            {% assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' %}
+            {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+            {% assign eventid = item.EventItem.Id%}
+            {% eventitem id:'{{ eventid }}' %}
+              {% if eventitem.IsActive and eventitem.IsApproved %}
+                {% assign name = eventitem.Name %}
+                {% assign summary = eventitem.Summary %}
+                {% assign audiences = eventitem.EventItemAudiences %}
+                {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
+                {% assign occurrence = eventitem.EventItemOccurrences | First %}
+                {% assign schedule = occurrence.Schedule%}
+                {% assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
+                {% assign schedule = occurrence.Schedule.FriendlyScheduleText %}
+                {% assign occurrenceId = occurrence.Id%}
+                {% assign link = occurrenceId | Prepend:'/events/'%}
+                {[ cardEvent link:'{{ link }}' eventname:'{{ name }}' summary:'{{ summary }}' img:'{{ imageUrl }}' audiences:'{{ audienceString }}'  date:'{{ date }}' recurring:'{{ schedule }}' ]}
+              {% endif %}
+            {% endeventitem %}
         {% endfor %}
       </div>
     </div>

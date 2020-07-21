@@ -18,7 +18,11 @@
         <div class="col">
           <div>
             <h4>{{ eventname }}</h3>
-            <h5>{{ contact }}</h5>
+              <p style="margin-bottom: 1px;"> <i class="fas fa-tags"></i>
+                {% for audience in audiences%}
+                  <span>{{audience.DefinedValue.Value}},</span>
+                {% endfor %}
+              </p>
             <p class="date">{{ date }}</p>
             <p>{{recurring}}</p>
           </div>
