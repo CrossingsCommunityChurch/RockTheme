@@ -1,4 +1,4 @@
-{% eventcalendaritem where:'EventCalendarId == {{ calendarid }} || EventCalendarId == 3' %}
+{% eventcalendaritem where:'EventCalendarId == {{ calendarid }} || EventCalendarId == {{ allchurchid }}' %}
   <div class="event-list">
     <div class="container event-list-items" data-aos="fade-up">
       <div class="row flex-row flex-wrap">
