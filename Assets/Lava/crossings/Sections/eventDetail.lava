@@ -1,18 +1,18 @@
 {[ eventDetail  ]}
 
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
-{% assign assetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' %}
-{% if assetimage and assetimage != empty %}
-    {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-    {% assign imageSize = '/fit-in/900x600' %}
-    {% assign imageUrlPath = assetimage | Url:'localpath' %}
-    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{% assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' %}
+{% if eventassetimage and eventassetimage != empty %}
+    {% assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+    {% assign eventimageSize = '/fit-in/900x600' %}
+    {% assign eventimageUrlPath = eventassetimage | Url:'localpath' %}
+    {% assign imageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath %}
 {% endif %}
 <div class="container-fluid section split-section split-section-overlap">
       <div class="row flex-row">
           <div class="col-md-6 nopadding-x image-bg">
-            {% if imageUrl %}
-              <img src="{{ imageUrl }}" alt="{{ Event.Name }}" />
+            {% if eventimageUrl %}
+              <img src="{{ eventmageUrl }}" alt="{{ Event.Name }}" />
             {% endif %}
           </div>
           <div class="col-md-6 split-section-text" data-aos="fade-left">
