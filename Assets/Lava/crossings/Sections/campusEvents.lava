@@ -1,8 +1,4 @@
-{%- comment-%}}
-  need to change this to set the event calendar Id's based on the campus.
-{%- endcomment -%}
-
-{% eventcalendaritem where:'EventCalendarId == 1 || EventCalendarId == 3' %}
+{% eventcalendaritem where:'EventCalendarId == {{ calendarid }} || EventCalendarId == 3' %}
   <div class="event-list">
     <div class="container event-list-items" data-aos="fade-up">
       <div class="row flex-row flex-wrap">
