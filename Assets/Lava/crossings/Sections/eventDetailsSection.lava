@@ -4,6 +4,13 @@
 {%- endcomment -%}
 
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
+{%assign useContactImage = eventitemoccurrence | Attribute:'ShowContactPhoto' | AsBoolean %}
+{% if useContactImage != true %}
+  {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+  {% assign imageSize = '/fit-in/150x150' %}
+  {% assign imageUrlPath = eventitemoccurrence | Attribute:'DefaultContactImage' | Url:'localpath' %}
+  {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{% endif %}
 {% assign contact = eventitemoccurrence.ContactPersonAliasId | PersonByAliasId %}
 <div class="section special-message simple-section location-details">
         <div class="container">
@@ -50,9 +57,14 @@
                       Need to discuss if we want all contacts photos to be here or not.
                       Also need to add a way to get contact info. idealy around this area.
                     {%- endcomment -%}
-                    {% if contact.Photo.Url and contact.Photo.Url != empty %}
+                    {% if contact.Photo.Url and contact.Photo.Url != empty and useContactImage == true %}
                     <div class="pastor-image">
                       <img src="{{ contact.Photo.Url }}">
+                    </div>
+                    {% endif %}
+                    {% if useContactImage == false %}
+                    <div class="pastor-image">
+                      <img src="{{ imageUrl }}">
                     </div>
                     {% endif %}
                     <div class="past-details">
