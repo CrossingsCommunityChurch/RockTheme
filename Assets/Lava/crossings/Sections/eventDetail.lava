@@ -6,13 +6,13 @@
     {% assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
     {% assign eventimageSize = '/fit-in/900x600' %}
     {% assign eventimageUrlPath = eventassetimage | Url:'localpath' %}
-    {% assign imageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath %}
+    {% assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath %}
 {% endif %}
 <div class="container-fluid section split-section split-section-overlap">
       <div class="row flex-row">
           <div class="col-md-6 nopadding-x image-bg">
             {% if eventimageUrl %}
-              <img src="{{ eventmageUrl }}" alt="{{ Event.Name }}" />
+              <img src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
             {% endif %}
           </div>
           <div class="col-md-6 split-section-text" data-aos="fade-left">
