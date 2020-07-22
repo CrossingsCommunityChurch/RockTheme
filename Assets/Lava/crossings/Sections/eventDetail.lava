@@ -1,4 +1,4 @@
-{[ eventDetail  ]}
+{[ eventDetails  ]}
 
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
 {% assign eventimageUrl =''%}
