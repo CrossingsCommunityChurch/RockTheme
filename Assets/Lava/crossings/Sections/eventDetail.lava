@@ -1,6 +1,7 @@
 {[ eventDetail  ]}
 
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
+{% assign eventimageUrl =''%}
 {% assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' %}
 {% if eventassetimage and eventassetimage != empty %}
     {% assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
@@ -11,7 +12,7 @@
 <div class="container-fluid section split-section split-section-overlap">
       <div class="row flex-row">
           <div class="col-md-6 nopadding-x image-bg">
-            {% if eventimageUrl %}
+            {% if eventimageUrl != empty %}
               <img src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
             {% endif %}
           </div>
