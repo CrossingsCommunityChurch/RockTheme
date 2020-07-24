@@ -56,7 +56,7 @@ $(document).ready(function() {
         menuWidth = '75%';
     }
 
-    $('.loginstatus .dropdown-toggle').bigSlide({
+    $('.account-toggle').bigSlide({
         menu: '#account-menu',
         menuWidth: menuWidth,
         easyClose: true,

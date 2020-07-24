@@ -28,6 +28,12 @@
     }
 }
 
+@media (max-width: 991px) {
+    .login-btn {
+        color: @brand-primary !important;
+    }
+}
+
 .dropdown-toggle.navbar-link {
 
     .profile-photo {
@@ -532,5 +538,115 @@
 }
 
 .account-dashboard-sidebar {
-    padding: @spacing @spacing 0;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+    background-color: #eee;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+
+    .profile {
+        padding: @spacing @spacing @spacing2x;
+        text-align: center;
+
+        h4 {
+            margin-bottom: 0;
+        }
+
+        .profile-image {
+            width: 125px;
+            //padding-right: @spacing2x;
+            margin: auto;
+
+            > img {
+                border-radius: 50%;
+            }
+        }
+    }
+
+    .account-nav {
+
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: space-between;
+
+        ul,
+        li {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        > ul {
+            //padding-right: @spacing;
+
+            > li {
+                //padding: @spacing;
+
+                > a {
+                    display: block;
+                    padding: @spacingSmall 7.5px;
+                    text-align: center;
+                    text-transform: uppercase;
+                    border-bottom: 1px solid #ddd;
+                    font-family: @headings-font-family;
+                    font-weight: bold;
+                    //background-color: #fff;
+                    //box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                    //transition: all ease-in-out 0.3s;
+                    
+                    &:hover {
+                        text-decoration: none;
+                        background-color: @brand-primary;
+                        color: #fff;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .account-dashboard-sidebar {
+        .profile {
+            padding: @spacing2x;
+            display: flex;
+            align-items: center;
+            text-align: left;
+
+            .profile-image {
+                margin: 0;
+                padding-right: @spacing2x;
+            }
+        }
+
+        .account-nav {
+            > ul {
+                padding-left: @spacing;
+                padding-right: @spacing2x;
+                display: flex;
+                flex-wrap: wrap;
+
+                > li {
+                    width: 50%;
+                    padding: @spacing 0 @spacing @spacing;
+
+                    > a {
+                        display: block;
+                        padding: @spacing4x 7.5px;
+                        background-color: #fff;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+                        border: 0 none;
+
+                        &:hover {
+                            background-color: @brand-primary;
+                            color: #fff;
+                            box-shadow: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

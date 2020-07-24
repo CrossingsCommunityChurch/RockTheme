@@ -309,6 +309,22 @@
     }
 }
 
+#zone-feature {
+    .nav-sub {
+        .nav-stacked {
+            padding: @spacing2x @spacing;
+            justify-content: flex-start;
+            overflow: scroll;
+
+            > li {
+                > a {
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}
+
 @media (min-width: @screen-desktop) {
 
     .login,
@@ -350,6 +366,15 @@
         .photoupload-photo {
             float: left;
             width: 33.33%;
+        }
+    }
+
+    #zone-feature {
+        .nav-sub {
+            .nav-stacked {
+                justify-content: center;
+                overflow: hidden;
+            }
         }
     }
 }
@@ -468,7 +493,7 @@
     }
 
     .nav-sub {
-        padding: @spacing2x 0;
+        //padding: @spacing2x 0;
     }
 }
 
