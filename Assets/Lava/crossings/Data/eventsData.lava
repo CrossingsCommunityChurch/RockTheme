@@ -1,0 +1,53 @@
+[
+  {% eventcalendaritem where:'EventCalendarId != 0' %}
+    {% for item in eventcalendaritemItems %}
+            {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+            {% assign imageSize = '/fit-in/600x600' %}
+            {% assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' %}
+            {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+            {% assign eventid = item.EventItem.Id%}
+            {% eventitem id:'{{ eventid }}' %}
+              {% if eventitem.IsActive and eventitem.IsApproved %}
+                {% assign name = eventitem.Name %}
+                {% assign summary = eventitem.Summary %}
+                {% assign audiences = eventitem.EventItemAudiences %}
+                {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
+                {% assign occurrence = eventitem.EventItemOccurrences | First %}
+                {% assign schedule = occurrence.Schedule%}
+                {% assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
+                {% assign schedule = occurrence.Schedule.FriendlyScheduleText %}
+                {% assign occurrenceId = occurrence.Id%}
+                {% assign link = occurrenceId | Prepend:'/events/'%}
+                {
+                  "EventId": {{id | ToJSON}},
+                  "Name": {{name | ToJSON}},
+                  "Summary": {{summary | ToJSON}},
+                  "audiences": [
+                    {% for audience in audiences%}
+                    {{ audience.DefinedValue.Value | ToJSON }}
+                    {% endfor %}
+                  ],
+                  "occurrence": {
+                    "ContactPersonAliasId": {{occurrence.ContactPersonAliasId | ToJSON}},
+                    "ContactEmail": {{occurrence.ContactEmail | ToJSON}},
+                    "Linkages": [
+                      {% for linkage in occurrence.Linkages %}
+                        {
+                          "startDateTime": {{linkage.RegistrationInstance.StartDateTime | ToJSON}},
+                          "endDateTime": {{linkage.RegistrationInstance.EndDateTime | ToJSON}},
+                          "PublicName": {{linkage.PublicName | ToJSON}},
+                          "RegistrationInstanceId": {{linkage.RegistrationInstanceId | ToJSON}}
+                        }
+                      {% endfor %}
+                    ],
+                    "Note": {{occurrence.Note | ToJSON}},
+                    "Schedule": {{occurrence.Schedule.FriendlyScheduleText | ToJSON}}
+                  },
+                  "date": {{date | ToJSON}},
+                  "link": {{link | ToJSON}}
+                }
+              {% endif %}
+            {% endeventitem %}
+        {% endfor %}
+  {% endeventcalendaritem %}
+]
