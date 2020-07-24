@@ -72,19 +72,7 @@
                     </ProgressTemplate>
             </asp:UpdateProgress>
         </div>
-        <div id="account-menu" class="account-dashboard-sidebar">
-            <div class="profile">
-                <h4>First Last Name</h3>
-            </div>
-            <nav class="account-nav" role="navigation">
-                <ul>
-                    <li><a href="#">My Profile</a></li>
-                    <li><a href="#">My Giving</a></li>
-                    <li><a href="#">My Groups</a></li>
-                    <li><a href="#">Assessments</a></li>
-                </ul>
-            </nav>
-        </div>
+        <Rock:Zone name="AccountDashboard" runat="server"/>
     </form>
 
 </body>
