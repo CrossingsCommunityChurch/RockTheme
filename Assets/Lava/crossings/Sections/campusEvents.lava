@@ -1,70 +1,70 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/600x600/' %}
-{% eventcalendaritem where:'EventCalendarId == {{ calendarid }} || EventCalendarId == {{ allchurchid }}' %}
-  <div class="event-list">
-    <div class="container event-list-items" data-aos="fade-up">
-      <div class="row flex-row flex-wrap">
-      </div>
+
+<div class="event-list">
+  <div class="container event-list-items" data-aos="fade-up">
+    <div class="row flex-row flex-wrap">
     </div>
   </div>
-{% endeventcalendaritem %}
+</div>
 
-{% persisteddataset where:'Name == "events2"' iterator:'persistedDatasets' %}
-  {% assign eventsDatasetId = persistedDatasets | First | Property:'Id' %}
-{% endpersisteddataset %}
+{% assign evts = 'events2' | PersistedDataset | ToJSON %}
 
 <script>
 
   $(document).ready(() => {
 
+    const eventsJson = `{{evts}}`;
     const imageStorageUrl = '{{imageStorageUrl}}';
     const imageSize = '{{imageSize}}';
 
-    $.getJSON('/api/PersistedDatasets/{{eventsDatasetId}}')
-      .done((eventsDataset) => {
-        let events = JSON.parse(eventsDataset.ResultData);
-        let eventsContainer = $('.row.flex-row.flex-wrap');
-        $.each(events, (idx, event) => {
-          let div = $(
-            `<div class="col-sm-6 col-md-4">
-              <a href="LINK GOES HERE" class="card cardShadow">
-                <div class="thumb">
-                  <img src="IMG GOES HERE" class="object-fit">
-                </div>
-                <div class="row card-content-row">
-                  <div class="card-content">
-                    <div class="col">
-                      <div>
-                        <h4>EVENT NAME GOES HERE!</h4>
-                          <p style="margin-bottom: 1px;"> <i class="fas fa-tags"></i>
-                              <span>AUDIENCES GO HERE!</span>
-                          </p>
-                        <p class="date">DATE GOES HERE!</p>
-                        <p class="recurring">RECURRING GOES HERE!</p>
-                      </div>
-                    </div>
-                    <div class="btn icon-button shadowDepth2">
-                      <span>Details</span>
-                      <i class="fas fa-angle-right"></i>
+    let events = JSON.parse(eventsJson);
+    renderFilteredItems(events);
+
+    function renderFilteredItems(events) {
+
+      let eventsContainer = $('.row.flex-row.flex-wrap');
+
+      for (let event of events) {
+
+        let div = $(
+          `<div class="col-sm-6 col-md-4">
+            <a href="LINK GOES HERE" class="card cardShadow">
+              <div class="thumb">
+                <img src="IMG GOES HERE" class="object-fit">
+              </div>
+              <div class="row card-content-row">
+                <div class="card-content">
+                  <div class="col">
+                    <div>
+                      <h4>EVENT NAME GOES HERE!</h4>
+                        <p style="margin-bottom: 1px;"> <i class="fas fa-tags"></i>
+                            <span>AUDIENCES GO HERE!</span>
+                        </p>
+                      <p class="date">DATE GOES HERE!</p>
+                      <p class="recurring">RECURRING GOES HERE!</p>
                     </div>
                   </div>
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Details</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
                 </div>
-              </a>
-            </div>`
-          );
-          div.find('a.card.cardShadow').attr('href', event.link);
-          div.find('img.object-fit').attr('src', `${imageStorageUrl}${imageSize}${event.Imageasset}`);
-          div.find('h4').text(event.Name);
-          div.find('p.date').text(event.date);
-          div.find('p > i.fas.fa-tags').parent().find('span').text(event.audiences.join(', '));
-          div.find('p.recurring').text(event.occurrence.Schedule);
+              </div>
+            </a>
+          </div>`
+        );
+        div.find('a.card.cardShadow').attr('href', event.link);
+        div.find('img.object-fit').attr('src', `${imageStorageUrl}${imageSize}${event.Imageasset}`);
+        div.find('h4').text(event.Name);
+        div.find('p.date').text(event.date);
+        div.find('p > i.fas.fa-tags').parent().find('span').text(event.audiences.join(', '));
+        div.find('p.recurring').text(event.occurrence.Schedule);
 
-          eventsContainer.append(div);
-        });
-      })
-      .fail(() => {
-        alert('Unable to retrieve events!');
-      });
+        eventsContainer.append(div);
+
+      }
+    }
 
   });
 
