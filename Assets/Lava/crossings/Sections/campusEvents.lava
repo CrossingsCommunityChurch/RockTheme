@@ -1,6 +1,6 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/600x600/' %}
-{% assign evtData = 'events2' | PersistedDataset %}
+{% assign evtData = 'events' | PersistedDataset %}
 {% assign audiences = evtData.Audiences %}
 {% assign evts = evtData.Events | ToJSON %}
 
