@@ -62,4 +62,4 @@
   {% assign icon = buttonicon %}
 {% endif %}
 
-<a href="{{ link }}" {% if target and target != empty %}target="{{ target }}"{% endif %} class="btn btn-{{ style }} {% if buttonoutline and style != empty %}btn-outline-{{ style }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if icon %}<i class="fas fa-{{ icon }}"></i> {% endif %}<span>{{ text }}</span></a>
+<a href="{{ link }}" {% if target and target != empty %}target="{{ target }}"{% endif %} class="btn btn-{{ style }} {% if buttonoutline and style != empty %}btn-outline-{{ style }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if icon %}<i class="fas fa fa-{{ icon }}"></i> {% endif %}<span>{{ text }}</span></a>

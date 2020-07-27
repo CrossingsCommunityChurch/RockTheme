@@ -53,3 +53,13 @@ body {
     left: -15.625em; /*left or right and the width of your navigation panel*/
     width: 15.625em; /*should match the above value*/
 }
+
+.main {
+    padding-top: @spacing2x;
+}
+
+@media (min-width: @screen-desktop) {
+    .main {
+        padding-top: @spacing3x;
+    }
+}
