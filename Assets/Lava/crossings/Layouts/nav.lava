@@ -72,5 +72,5 @@
           </a>
         </li>
         <li><a href="#">About Us</a></li>
-        <li><a href="#" class="open-merlin">Give</a></li>
+        <li><a href="/giving">Give</a></li>
     </ul>

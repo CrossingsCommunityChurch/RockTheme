@@ -21,8 +21,6 @@
     <head runat="server">
         <meta charset="utf-8">
         <title></title>
-
-        <script async src="https://merlin.simpledonation.com/js/installScript.js?key=01E4ESB8Z1ANNJZ95F7JHP20Y6"></script>
         <script src="<%# System.Web.Optimization.Scripts.Url("~/Scripts/Bundles/RockJQueryLatest" ) %>"></script>
         <script src='<%# ResolveRockUrl("~~/Scripts/aos.js", true) %>' ></script>
         <script src='<%# ResolveRockUrl("~~/Scripts/bigSlide.min.js", true) %>'></script>
@@ -74,7 +72,7 @@
         </div>
         <Rock:Zone name="AccountDashboard" runat="server"/>
     </form>
-
+    <script async src="https://merlin.simpledonation.com/js/installScript.js?key=01E4ESB8Z1ANNJZ95F7JHP20Y6"></script>
 </body>
 
 </html>
