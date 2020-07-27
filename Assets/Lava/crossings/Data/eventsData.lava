@@ -21,7 +21,23 @@
       {% endfor %}
     {% endeventcalendaritem %}
   ],
-  "Events": [
+ "Events":
+    {% comment %}
+
+      We want to sort on 'item.EventItem.EventItemOccurrences[0].occurance.NextStartDateTime' here,
+      which isn't possible with event commands, so we do some crazy stuff here...
+
+      1. Capture JSON for events array to 'eventsJson' variable
+      2. Deserialize JSON into an array of objects
+      3. Sort that array
+      4. Serialize the results back to JSON
+      5. Output that sorted JSON to be captured into the persisted dataset
+
+      SQL would be an alternative here, but would maybe have compatibility issues in future versions of Rock.
+
+    {% endcomment %}
+    {% assign limit = 2 %}
+    {% assign eventsJson = "[" %}
     {% eventcalendaritem where:'EventCalendarId != 0' %}
       {% for item in eventcalendaritemItems %}
         {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
@@ -38,43 +54,49 @@
             {% assign occurrence = eventitem.EventItemOccurrences | First %}
             {% assign schedule = occurrence.Schedule%}
             {% assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
+            {% assign sortableDate = schedule.NextStartDateTime | Date: 'yyyy-MM-dd HH:mm'%}
             {% assign schedule = occurrence.Schedule.FriendlyScheduleText %}
             {% assign occurrenceId = occurrence.Id%}
             {% assign link = occurrenceId | Prepend:'/events/'%}
-            {
-              "EventId": {{id | ToJSON}},
-              "Name": {{name | ToJSON}},
-              "Summary": {{summary | ToJSON}},
-              "audiences": [
+            {% capture eventsJson %}{{eventsJson}} { {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"EventId": {{eventid | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"Name": {{name | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"Summary": {{summary | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"audiences": [ {%endcapture%}
                 {% for audience in audiences%}
-                {{ audience.DefinedValue.Value | StripNewlines | ToJSON }}
-                {% unless forloop.last %}, {% endunless %}
+                  {% capture eventsJson %}{{eventsJson}}{{ audience.DefinedValue.Value | StripNewlines | ToJSON }}{%endcapture%}
+                  {% unless forloop.last %}{% capture eventsJson %}{{eventsJson}} , {%endcapture%}{% endunless %}
                 {% endfor %}
-              ],
-              "occurrence": {
-                "ContactPersonAliasId": {{occurrence.ContactPersonAliasId | ToJSON}},
-                "ContactEmail": {{occurrence.ContactEmail | ToJSON}},
-                "Linkages": [
+              {% capture eventsJson %}{{eventsJson}} ], {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"occurrence": { {%endcapture%}
+                {% capture eventsJson %}{{eventsJson}}"ContactPersonAliasId": {{occurrence.ContactPersonAliasId | ToJSON}},{%endcapture%}
+                {% capture eventsJson %}{{eventsJson}}"ContactEmail": {{occurrence.ContactEmail | ToJSON}} , {%endcapture%}
+                {% capture eventsJson %}{{eventsJson}}"Linkages": [ {%endcapture%}
                   {% for linkage in occurrence.Linkages %}
-                    {
-                      "startDateTime": {{linkage.RegistrationInstance.StartDateTime | ToJSON}},
-                      "endDateTime": {{linkage.RegistrationInstance.EndDateTime | ToJSON}},
-                      "PublicName": {{linkage.PublicName | ToJSON}},
-                      "RegistrationInstanceId": {{linkage.RegistrationInstanceId | ToJSON}}
-                    }
-                    {% unless forloop.last %}, {% endunless %}
+                    {% capture eventsJson %}{{eventsJson}} { {%endcapture%}
+                      {% capture eventsJson %}{{eventsJson}}"startDateTime": {{linkage.RegistrationInstance.StartDateTime | ToJSON}} , {%endcapture%}
+                      {% capture eventsJson %}{{eventsJson}}"endDateTime": {{linkage.RegistrationInstance.EndDateTime | ToJSON}} , {%endcapture%}
+                      {% capture eventsJson %}{{eventsJson}}"PublicName": {{linkage.PublicName | ToJSON}} , {%endcapture%}
+                      {% capture eventsJson %}{{eventsJson}}"RegistrationInstanceId": {{linkage.RegistrationInstanceId | ToJSON}}{%endcapture%}
+                    {% capture eventsJson %}{{eventsJson}} } {%endcapture%}
+                    {% unless forloop.last %}{% capture eventsJson %}{{eventsJson}}, {%endcapture%}{% endunless %}
                   {% endfor %}
-                ],
-                "Note": {{occurrence.Note | StripNewlines | StripHtml | ToJSON}},
-                "Schedule": {{occurrence.Schedule.FriendlyScheduleText | ToJSON}}
-              },
-              "date": {{date | ToJSON}},
-              "link": {{link | ToJSON}}
-            }
-            {% unless forloop.last %},{% endunless %}
+                {% capture eventsJson %}{{eventsJson}} ], {%endcapture%}
+                {% capture eventsJson %}{{eventsJson}}"Note": {{occurrence.Note | StripNewlines | StripHtml | ToJSON}} , {%endcapture%}
+                {% capture eventsJson %}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | ToJSON}}{%endcapture%}
+              {% capture eventsJson %}{{eventsJson}} }, {% endcapture %}
+              {% capture eventsJson %}{{eventsJson}}"date": {{date | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"sortableDate": {{sortableDate | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"link": {{link | ToJSON}}{%endcapture%}
+            {% capture eventsJson %}{{eventsJson}} } {%endcapture%}
+            {% unless forloop.last %}{% capture eventsJson %}{{eventsJson}}, {%endcapture%}{% endunless %}
           {% endif %}
         {% endeventitem %}
       {% endfor %}
     {% endeventcalendaritem %}
-  ]
+    {% capture eventsJson %}{{eventsJson}} ] {%endcapture%}
+    {% assign events = eventsJson | FromJSON %}
+    {% assign sortedEvents = events | Sort:'sortableDate' %}
+    {{ sortedEvents | ToJSON }}
+
 }
