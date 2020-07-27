@@ -1,14 +1,32 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/600x600/' %}
+{% assign evtData = 'events2' | PersistedDataset %}
+{% assign audiences = evtData.Audiences %}
+{% assign evts = evtData.Events | ToJSON %}
 
 <div class="event-list">
   <div class="container event-list-items" data-aos="fade-up">
+    <div class="event-filter row">
+      <div class="form form-inline">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Event Filter</label>
+          <div class="dropdown">
+            <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
+              <li><a style="cursor: pointer;">Any</a></li>
+              <li role="separator" class="divider"></li>
+              {% for audience in audiences %}
+                <li><a style="cursor: pointer;">{{audience}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="row flex-row flex-wrap">
     </div>
   </div>
 </div>
-
-{% assign evts = 'events2' | PersistedDataset | ToJSON %}
 
 <script>
 
@@ -21,11 +39,23 @@
     let events = JSON.parse(eventsJson);
     renderFilteredItems(events);
 
-    function renderFilteredItems(events) {
+    $('#audiences').parent().find('li').click(function() {
+
+      let audience = $(this).text();
+      $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
+
+      renderFilteredItems(events, audience);
+
+    });
+
+    function renderFilteredItems(events, audience) {
 
       let eventsContainer = $('.row.flex-row.flex-wrap');
+      eventsContainer.empty();
 
       for (let event of events) {
+
+        if (audience && audience !== 'Any' && !event.audiences.includes(audience)) continue;
 
         let div = $(
           `<div class="col-sm-6 col-md-4">
