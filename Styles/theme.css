@@ -13310,6 +13310,7 @@ img {
   .card-list {
     overflow: inherit;
     margin-left: auto;
+    padding-bottom: 75px;
   }
   .card-list .row {
     flex-wrap: wrap;
@@ -13624,9 +13625,6 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-  }
-  .split-section-text.bgimg > div > div .btn {
-    width: 50%;
   }
   .split-section-text.bgimg + .split-section-text.bgimg > div {
     border-left: 1px solid #fff;
@@ -14124,6 +14122,53 @@ img {
 }
 .fluidbox-wrap {
   z-index: 4;
+}
+.universal-search.block-instance .panel.panel-block {
+  box-shadow: none;
+  padding: 0;
+  border: 0 none;
+}
+.universal-search.block-instance .panel.panel-block .panel-heading {
+  display: none;
+}
+.universal-search.block-instance .panel.panel-block .input-group.searchbox {
+  position: relative;
+  display: block;
+}
+.universal-search.block-instance .panel.panel-block .input-group.searchbox .input-group-addon {
+  background-color: transparent;
+  border-radius: 0;
+  border: 0 none;
+  height: 60px;
+  line-height: 60px;
+  padding: 0;
+  position: absolute;
+  left: 15px;
+  z-index: 4;
+}
+.universal-search.block-instance .panel.panel-block .input-group.searchbox .form-control {
+  height: 60px;
+  padding-left: 45px;
+  border: 0 none;
+  border-bottom: 1px solid #ddd;
+  box-shadow: none;
+  transition: all ease-in-out 0.5s;
+}
+.universal-search.block-instance .panel.panel-block .input-group.searchbox .form-control:active,
+.universal-search.block-instance .panel.panel-block .input-group.searchbox .form-control:focus {
+  font-weight: bold;
+  border-bottom: 2px solid #313e48;
+}
+.universal-search.block-instance .panel.panel-block .input-group.searchbox .input-group-btn {
+  display: block;
+  white-space: initial;
+  text-align: center;
+  width: auto;
+}
+.universal-search.block-instance .panel.panel-block .input-group.searchbox .input-group-btn > a {
+  border-radius: 90px;
+  margin: 30px auto;
+  width: 200px;
 }
 #cms-admin-footer .btn,
 .rock-modal .note-toolbar .btn {

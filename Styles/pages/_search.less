@@ -1,0 +1,56 @@
+.universal-search.block-instance {
+    .panel.panel-block {
+        box-shadow: none;
+        padding: 0;
+        border: 0 none;
+
+        .panel-heading {
+            display: none;
+        }
+
+        .input-group.searchbox {
+            position: relative;
+            display: block;
+
+            .input-group-addon {
+                background-color: transparent;
+                border-radius: 0;
+                border: 0 none;
+                height: 60px;
+                line-height: 60px;
+                padding: 0;
+                position: absolute;
+                left: 15px;
+                z-index: 4;
+            }
+
+            .form-control {
+                height: 60px;
+                padding-left: 45px;
+                border: 0 none;
+                border-bottom: 1px solid #ddd;
+                box-shadow: none;
+                transition: all ease-in-out 0.5s;
+
+                &:active,
+                &:focus {
+                    font-weight: bold;
+                    border-bottom: 2px solid @brand-primary;
+                }
+            }
+
+            .input-group-btn {
+                display: block;
+                white-space: initial;
+                text-align: center;
+                width: auto;
+
+                > a {
+                    border-radius: 90px;
+                    margin: @spacing2x auto;
+                    width: 200px;
+                }
+            }
+        }
+    }
+}
