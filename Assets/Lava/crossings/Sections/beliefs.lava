@@ -1,0 +1,7 @@
+  <div class="about-card-list">
+    <div class="row">
+      {%assign title = 'The Bible'%}
+      {%assign subtitle = 'The Bible is the expressed Word of God and is our final authority in all matters of faith and practice.'%}
+      {[ cardText columnstyle:'col-sm-12 col-lg-6' title:'{{ title }}' subtitle:'{{ subTitle }}' link:'' actiontext:'' ]}
+    </div>
+  </div>
