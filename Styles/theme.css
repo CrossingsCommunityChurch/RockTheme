@@ -14223,6 +14223,103 @@ img {
   margin: 30px auto;
   width: 200px;
 }
+.search-wrapper {
+  display: none;
+  position: absolute;
+  top: -25px;
+  right: 50px;
+  transform-origin: 100% 0;
+  transition-property: min-height, width, top, right, background-color;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+.search-wrapper .form {
+  text-align: right;
+  width: 100%;
+  height: 40px;
+  margin: 0 auto;
+  position: relative;
+  transition-property: width, height, transform;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
+}
+.search-wrapper .search-content,
+.search-wrapper .search-form,
+.search-wrapper .search-close {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+.search-wrapper .search-close {
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  right: 1em;
+  top: 1em;
+  overflow: hidden;
+  text-indent: 100%;
+  cursor: pointer;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale3d(0, 0, 1);
+}
+.search-wrapper .search-close:before,
+.search-wrapper .search-close:after {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  top: 0;
+  left: 50%;
+  border-radius: 3px;
+  opacity: 0.2;
+  background: #000;
+}
+.search-wrapper .search-close:before {
+  transform: rotate(45deg);
+}
+.search-wrapper .search-content {
+  margin-top: 4.5em;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  padding: 0 10.5%;
+  background: #f1f1f1;
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+.search-wrapper.open {
+  width: 100%;
+  min-height: 100%;
+  top: 0px;
+  right: 0px;
+  background-color: #f1f1f1;
+}
+.search-wrapper.open .search-content {
+  opacity: 1;
+  height: auto;
+  overflow: visible;
+  pointer-events: auto;
+  transition: opacity 0.3s 0.5s;
+}
+.search-wrapper.open .search-form {
+  width: 80%;
+  height: 160px;
+  transform: translate3d(0, 3em, 0);
+}
+.search-wrapper.open .search-close {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale3d(1, 1, 1);
+  transition: opacity 0.3s, transform 0.3s;
+  transition-delay: 0.5s;
+}
+@media (min-width: 992px) {
+  .search-wrapper {
+    display: block;
+  }
+}
 #cms-admin-footer .btn,
 .rock-modal .note-toolbar .btn {
   padding: 7.5px 15px;

@@ -1,0 +1,3 @@
+<div class="search-wrapper">
+  <a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>
+</div>
