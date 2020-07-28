@@ -10926,7 +10926,7 @@ fieldset[disabled] .btn-danger-solid.focus {
 .shadowDepth2 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.24);
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .flex-row {
     display: flex;
   }
@@ -13144,6 +13144,7 @@ img {
 .mobile-navbar .btn .fas,
 .mobile-navbar .btn span {
   display: block;
+  width: auto;
 }
 .mobile-navbar .btn .fas {
   font-size: 1rem;
@@ -13777,6 +13778,21 @@ img {
   }
   .simple-section-with-image:hover::after {
     background-color: rgba(0, 0, 0, 0.15);
+  }
+}
+.side-by-side {
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.side-by-side .text-content {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  justify-content: center;
+}
+@media (min-width: 992px) {
+  .side-by-side .text-content {
+    padding: 90px;
   }
 }
 .contact-item {
