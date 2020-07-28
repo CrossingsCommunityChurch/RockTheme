@@ -17,7 +17,7 @@
       <div class="card-content">
         <div class="col">
           <div>
-            <h4>{{ eventname }}</h3>
+            <h4>{{ eventname }}</h4>
               <p style="margin-bottom: 1px;"> <i class="fas fa-tags"></i>
                 {% for audience in audiences%}
                   <span>{{audience.DefinedValue.Value}},</span>
