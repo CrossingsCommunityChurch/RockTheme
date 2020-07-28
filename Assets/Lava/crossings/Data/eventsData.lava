@@ -30,13 +30,13 @@
       1. Capture JSON for events array to 'eventsJson' variable
       2. Deserialize JSON into an array of objects
       3. Sort that array
-      4. Serialize the results back to JSON
-      5. Output that sorted JSON to be captured into the persisted dataset
+      4. Capture a new array to JSON, limiting to the first N results to try and prevent slow page loads
+      5. Output the sorted, limited JSON array to be captured into the persisted dataset
 
       SQL would be an alternative here, but would maybe have compatibility issues in future versions of Rock.
 
     {% endcomment %}
-    {% assign limit = 2 %}
+    {% assign limit = 20 %}
     {% assign eventsJson = "[" %}
     {% eventcalendaritem where:'EventCalendarId != 0' %}
       {% for item in eventcalendaritemItems %}
@@ -53,6 +53,12 @@
             {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
             {% assign occurrence = eventitem.EventItemOccurrences | First %}
             {% assign schedule = occurrence.Schedule%}
+
+            {% comment %} Dataset is only for upcoming events {% endcomment %}
+            {% if schedule.NextStartDateTime == null  %}
+              {% continue %}
+            {% endif %}
+
             {% assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
             {% assign sortableDate = schedule.NextStartDateTime | Date: 'yyyy-MM-dd HH:mm'%}
             {% assign schedule = occurrence.Schedule.FriendlyScheduleText %}
@@ -97,6 +103,13 @@
     {% capture eventsJson %}{{eventsJson}} ] {%endcapture%}
     {% assign events = eventsJson | FromJSON %}
     {% assign sortedEvents = events | Sort:'sortableDate' %}
-    {{ sortedEvents | ToJSON }}
+
+    {% assign limitedEvents = "[" %}
+    {% for event in sortedEvents limit:limit %}
+      {% capture limitedEvents %}{{limitedEvents}}{{event | ToJSON}}{%endcapture%}
+      {% unless forloop.last %}{% capture limitedEvents %}{{limitedEvents}}, {%endcapture%}{% endunless %}
+    {% endfor %}
+    {% capture limitedEvents %}{{limitedEvents}}]{%endcapture%}
+    {{ limitedEvents }}
 
 }
