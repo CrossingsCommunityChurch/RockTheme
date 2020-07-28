@@ -6,7 +6,8 @@
     {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 {% endif %}
 <div class="col-md-6 bgimg split-section-text">
-    <div {% if imageUrl %} style="background-image: url('{{ imageUrl }}')" {% endif %}>
+    <div>
+      {% if imageUrl %}<div class="img" style="background-image: url('{{ imageUrl }}')"></div> {% endif %}
       <div>
         {%- if item.subheading -%}
           <h4 class="reverse subheading">{{ item.subheading }}</h4>

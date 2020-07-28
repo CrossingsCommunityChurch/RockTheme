@@ -7,7 +7,7 @@ actiontext
 {%- endcomment -%}
 
 {% unless columnstyle %}
-  {% assign columnstyle = 'col-md-3 col-lg-4' %}
+  {% assign columnstyle = 'col-md-4 col-lg-4' %}
 {% endunless %}
 
 <div class="{{columnstyle}} card-wrapper">

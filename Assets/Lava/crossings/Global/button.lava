@@ -25,6 +25,15 @@
   {% assign buttonstyle = 'primary' %}
 {% endunless %}
 
+{% assign link =  buttonlink %}
+{% assign text =  buttontext %}
+{% assign target = buttontarget %}
+{% assign style = buttonstyle %}
+{% assign icon = null %}
+{% if buttonicon and buttonicon != empty %}
+  {% assign icon = buttonicon %}
+{% endif %}
+
 {% if type == 'LatestMessage' %}
 
   {% comment %}
@@ -53,15 +62,6 @@
     {% assign style = buttonstyle %}
     {% assign icon = 'play' %}
   {% endcontentchannelitem %}
-
-{% else %}
-  {% assign link =  buttonlink %}
-  {% assign text =  buttontext %}
-  {% assign target = buttontarget %}
-  {% assign style = buttonstyle %}
-  {% if buttonicon != empty %}
-    {% assign icon = buttonicon %}
-  {% endif %}
 {% endif %}
 
 <a href="{{ link }}" {% if target and target != empty %}target="{{ target }}"{% endif %} class="btn btn-{{ style }} {% if buttonoutline and style != empty %}btn-outline-{{ style }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if icon %}<i class="fas fa fa-{{ icon }}"></i> {% endif %}<span>{{ text }}</span></a>
