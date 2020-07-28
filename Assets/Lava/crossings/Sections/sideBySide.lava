@@ -48,7 +48,7 @@
 
     <div class="row flex-row">
 
-        {%- if imageGuid != '' -%}
+        {%- if imageUrlPath != '' -%}
         <div class="cover-half visible-md-block visible-lg-block {% if channelContentAlignment == 'Right' %}{% cycle 'coverside': 'cover-right', '' %}{% else %}{% cycle 'coverside': '', 'cover-right' %}{% endif %}">
           <img alt="{{ item.Title }}" src="{{ imageUrl }}">
         </div>
@@ -58,7 +58,7 @@
             <img alt="{{ item.Title }}" src="{{ imageUrl }}" class="img-responsive hidden-md hidden-lg">
         </div>
         <div class="col-md-6 text-content {% if channelContentAlignment == 'Right' %}{% cycle 'secondcol': 'col-md-pull-6', '' %}{% else %}{% cycle 'secondcol': '', 'col-md-pull-6' %}{% endif %}">
-            <div class='content-item' {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
+            <div class='content-item' data-aos='fade-up' {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
 
               <{{ channelTitleSize }}>{{ item.Title }}</{{ channelTitleSize }}>
 

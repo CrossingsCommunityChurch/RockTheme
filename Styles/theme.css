@@ -13549,7 +13549,23 @@ img {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
+  overflow: hidden;
+}
+.split-section-text.bgimg > div > .img {
+  transition: transform ease-in-out 2s;
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
 }
 .split-section-text.bgimg > div::after {
   transition: background 1s ease-in-out;
@@ -13612,11 +13628,14 @@ img {
     height: 100%;
     display: flex;
     padding: 90px;
-    background-size: 100%;
-    transition: background-size 1s ease-in-out;
+    position: relative;
+    overflow: hidden;
   }
-  .split-section-text.bgimg > div:hover {
-    background-size: 120%;
+  .split-section-text.bgimg > div > .img {
+    transition: transform 2s;
+  }
+  .split-section-text.bgimg > div:hover > .img {
+    transform: scale(1.1);
   }
   .split-section-text.bgimg > div:hover::after {
     background-color: rgba(0, 0, 0, 0.15);
@@ -13629,6 +13648,9 @@ img {
   }
   .split-section-text.bgimg + .split-section-text.bgimg > div {
     border-left: 1px solid #fff;
+  }
+  .split-section-with-images > .row > div > .block-content > div > div {
+    display: flex;
   }
 }
 @media (min-width: 992px) {
@@ -13726,6 +13748,17 @@ img {
   background-repeat: no-repeat;
   margin-bottom: 0;
   position: relative;
+  overflow: hidden;
+}
+.simple-section-with-image > .img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
 }
 .simple-section-with-image:after {
   transition: background 1s ease-in-out;
@@ -13758,9 +13791,9 @@ img {
   .section.simple-section-with-image .content-area {
     padding: 300px 0 60px;
   }
-  .simple-section-with-image {
-    background-size: 100%;
-    transition: background-size 1s ease-in-out;
+  .simple-section-with-image > .img {
+    background-size: cover;
+    transition: transform ease-in-out 2s;
   }
   .simple-section-with-image:after {
     transition: background 1s ease-in-out;
@@ -13773,8 +13806,8 @@ img {
     left: 0;
     right: 0;
   }
-  .simple-section-with-image:hover {
-    background-size: 120%;
+  .simple-section-with-image:hover > .img {
+    transform: scale(1.1);
   }
   .simple-section-with-image:hover::after {
     background-color: rgba(0, 0, 0, 0.15);
