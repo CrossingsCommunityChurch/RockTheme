@@ -13319,9 +13319,9 @@ img {
   }
   .card-list .card-wrapper {
     padding-left: 15px;
+    margin-bottom: 30px;
   }
   .card-list .card {
-    height: auto;
     padding: 45px 22.5px 22.5px;
     transition: all ease-in-out 0.5s;
   }
