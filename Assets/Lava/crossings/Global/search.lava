@@ -1,3 +1,112 @@
+<a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>
 <div class="search-wrapper">
-  <a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>
+  <div class="search-form">
+    <div class="input-with-button">
+      <div class="search-input-group">
+        <input type="text" class="form-control-search search-input" aria-label="Search..." placeholder="Search...">
+        <a href="#" class="addon run-search btn btn-primary"><i class="fa fa-search"></i> Search</a>
+      </div>
+    </div>
+  </div>
+  <div class="search-content">
+    <div class="flex-row flex-wrap">
+      <div class="col-md-12 col-lg-4 search-column">
+        <div>
+          <h2>Recmmended</h2>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Summary</p>
+            </div>
+          </a>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Summary</p>
+            </div>
+          </a>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Summary</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 search-column">
+        <div>
+          <h2>Popular Media</h2>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Summary</p>
+            </div>
+          </a>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Summary</p>
+            </div>
+          </a>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Summary</p>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 search-column">
+        <div>
+          <h2>Upcoming Events</h2>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Date</p>
+            </div>
+          </a>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Date</p>
+            </div>
+          </a>
+          <a class="media-object" href="#">
+            <div class="search-image">
+              <img class="round" src="https://placehold.it/100x100" alt="">
+            </div>
+            <div>
+              <h3>Title</h3>
+              <p>Date</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span class="search-close"></span>
 </div>

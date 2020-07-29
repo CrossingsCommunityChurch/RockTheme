@@ -2,7 +2,7 @@
   {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item toggle-locations' buttonicon:'map-marker-alt' buttontext:'Locations' ]}
   {[ button buttonlink:'/media' buttonstyle:' mobile-nav-bar-item' buttonicon:'video' buttontext:'Media' ]}
   {[ button buttonlink:'/giving' buttonstyle:' mobile-nav-bar-item' buttonicon:'heart' buttontext:'Give' ]}
-  {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item' buttonicon:'search' buttontext:'Search' ]}
+  {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item open-search' buttonicon:'search' buttontext:'Search' ]}
 </div>
 <div class="mobile-slideout locations reverse bg-primary">
   <a class="icon-btn mobile-slideout-close"><i class="fa fa-times"></i></a>
