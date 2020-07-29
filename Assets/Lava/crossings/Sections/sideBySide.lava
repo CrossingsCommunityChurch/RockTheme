@@ -35,7 +35,7 @@
     object-position: 50% 50%;
 }
 {% endstylesheet %}
-<section class="contentComponent contentComponent-split side-by-side">
+<section class="contentComponent contentComponent-split section split-section side-by-side">
 {%- for item in Items -%}
     {%- if channelBackgroundColor != '' -%}
         {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
@@ -59,8 +59,13 @@
         </div>
         <div class="col-md-6 text-content {% if channelContentAlignment == 'Right' %}{% cycle 'secondcol': 'col-md-pull-6', '' %}{% else %}{% cycle 'secondcol': '', 'col-md-pull-6' %}{% endif %}">
             <div class='content-item' data-aos='fade-up' {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
-
-              <{{ channelTitleSize }}>{{ item.Title }}</{{ channelTitleSize }}>
+              {%- if item.subheading -%}
+                <h4 class="subheading">{{ item.subheading }}</h4>
+              {% endif %}
+              {%- if item.Title -%}
+                <h2 class="heading">{{ item.Title }}</h2>
+                <hr class="sep">
+              {% endif %}
 
               {{ item.Content }}
 
