@@ -11,7 +11,7 @@ subtitle
 <div class="{{columnstyle}} card-wrapper">
   <div class="card">
     <div class="title">
-      <h3> <i class="fas {{icon}}"></i></h3>
+      <h3> <i class="fa {{icon}}"></i></h3>
       <h3>{{title}}</h3>
     </div>
     <div class="subtitle">
