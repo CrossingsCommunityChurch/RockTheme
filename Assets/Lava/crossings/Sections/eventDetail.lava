@@ -1,6 +1,8 @@
 {[ eventDetails  ]}
 
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
+{% capture pageTitle %}Event Details - {{eventitemoccurrence.EventItem.Name}}{% endcapture%}
+{{ pageTitle | SetPageTitle }}
 {% assign eventimageUrl =''%}
 {% assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' %}
 {% if eventassetimage and eventassetimage != empty %}
