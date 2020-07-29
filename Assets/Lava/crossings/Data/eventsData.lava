@@ -36,7 +36,7 @@
       SQL would be an alternative here, but would maybe have compatibility issues in future versions of Rock.
 
     {% endcomment %}
-    {% assign limit = 20 %}
+    {% assign limit = 48 %}
     {% assign eventsJson = "[" %}
     {% eventcalendaritem where:'EventCalendarId != 0' %}
       {% for item in eventcalendaritemItems %}
