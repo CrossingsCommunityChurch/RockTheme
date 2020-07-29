@@ -63,6 +63,12 @@
               <{{ channelTitleSize }}>{{ item.Title }}</{{ channelTitleSize }}>
 
               {{ item.Content }}
+
+                {%- if item.lava != empty -%}
+                <div class="buttons" data-aos="fade-up">
+                    {{ item.lava | HtmlDecode }}
+                </div>
+                {%- endif -%}
             </div>
         </div>
 
