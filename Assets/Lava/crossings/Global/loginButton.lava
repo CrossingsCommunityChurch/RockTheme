@@ -1,0 +1,9 @@
+{% if CurrentPerson %}
+  <a href="#" class="account-toggle login-btn btn btn-outline-thin">
+    <i class="fas fa-bars"></i> <span>Account</span>
+  </a>
+{% else %}
+  <a href="/login" class="login-btn btn btn-outline-thin">
+    <i class="fas fa-user"></i> <span>Login</span>
+  </a>
+{% endif %}

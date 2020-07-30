@@ -56,7 +56,7 @@ $(document).ready(function() {
         menuWidth = '75%';
     }
 
-    $('.loginstatus .dropdown-toggle').bigSlide({
+    $('.account-toggle').bigSlide({
         menu: '#account-menu',
         menuWidth: menuWidth,
         easyClose: true,
@@ -66,4 +66,29 @@ $(document).ready(function() {
 
     $('body').addClass('zoom');
 
+
+    $('.open-search').click(function(e){
+        e.preventDefault();
+        $('.search-input').focus();
+        $('.search-wrapper').addClass('open');
+    });
+
+    $('.search-close').click(function(e){
+        e.preventDefault();
+        $('.search-wrapper').removeClass('open');
+    });
+
+    $('.run-search').click(function(e) {
+        e.preventDefault();
+        let input = $('.search-wrapper .search-input').val();
+        window.location.href = '/search/?Q=' + input;
+    });
+
+    $('.search-wrapper .search-input').keydown(function(event){
+        if (event.key === 'Enter') {
+            console.log('enter pressed')
+            event.preventDefault();
+            window.location.href = '/search/?Q=' + $(this).val();
+        }
+    })
 });

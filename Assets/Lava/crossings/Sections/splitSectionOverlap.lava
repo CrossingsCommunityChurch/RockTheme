@@ -18,8 +18,8 @@
               {% endif %}
               {%- if item.Title -%}
               <h2 class="heading">{{ item.Title }}</h2>
-              {% endif %}
               <hr class="sep">
+              {% endif %}
               <p>{{ item.Content }}</p>
               {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
               {%- if item.lava != empty -%}

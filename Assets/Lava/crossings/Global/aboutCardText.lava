@@ -1,0 +1,22 @@
+{%- comment -%}
+columnstyle
+icon
+title
+lavacontent
+{%- endcomment -%}
+
+{% unless columnstyle %}
+  {% assign columnstyle = 'col-md-3 col-lg-4' %}
+{% endunless %}
+
+<div class="{{columnstyle}} card-wrapper">
+  <div class="card">
+    <div class="title">
+      <h3> <i class="{{icon}}"></i></h3>
+      <h3>{{title}}</h3>
+    </div>
+    <div class="subtitle">
+       <p> {{lavacontent}}</p>
+    </div>
+  </div>
+</div>

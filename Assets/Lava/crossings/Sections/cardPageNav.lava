@@ -1,0 +1,19 @@
+{% if Page.DisplayChildPages and Page.Pages != empty %}
+  <div class="container card-list" data-aos="fade-up">
+    <div class="row">
+      {% for childPage in Page.Pages %}
+        {% assign title = childPage.Title %}
+        {% assign subTitle = childPage.SubTitle %}
+        {[ cardText title:'{{ title }}' subtitle:'{{ subTitle }}' link:'{{ childPage.Url }}' actiontext:'Learn More' ]}
+      {%- endfor -%}
+
+      {% for includedPage in IncludePageList %}
+        {% assign subTitle = includedPage.SubTitle %}
+        {% assign path = 'Global' | Page:'Path' %}
+        {% assign attributeParts = includedPage | PropertyToKeyValue %}
+        {[ cardText title:'{{ attributeParts.Key }}' subtitle:'{{ subTitle }}' link:'{{ attributeParts.Value }}' actiontext:'Learn More' ]}
+      {%- endfor -%}
+    </div>
+  </div>
+{% endif %}
+

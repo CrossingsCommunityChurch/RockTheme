@@ -45,7 +45,6 @@
                       <img src="{{ campusLeader.Photo.Url }}">
                     </div>
                     <div class="past-details">
-                      <h4 class="subheading">Campus Pastor</h4>
                       <h2 class="heading">{{ campusLeader.FullName }}</h2>
                       <p class="lead">{{ campusLeader | Attribute: 'Position'}}</p>
                       <p>

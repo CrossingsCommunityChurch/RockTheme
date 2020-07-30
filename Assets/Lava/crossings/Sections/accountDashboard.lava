@@ -1,0 +1,26 @@
+{% if CurrentPerson %}
+
+<div id="account-menu" class="account-dashboard-sidebar">
+    <div class="profile">
+        <div class="profile-image">
+          <img src="{{ CurrentPerson.PhotoUrl }}" alt="My Profile Image" />
+        </div>
+        <div class="profile-info">
+          <h4>{{CurrentPerson.FirstName}} {{CurrentPerson.LastName}}</h4>
+          <p>{{CurrentPerson.Email}}
+        </div>
+    </div>
+    <nav class="account-nav" role="navigation">
+        <ul>
+            <li><a href="/my-profile">My Profile</a></li>
+            <li><a href="/my-giving">My Giving</a></li>
+            <li><a href="/my-groups">My Groups</a></li>
+            <li><a href="/my-assessments">Assessments</a></li>
+        </ul>
+        <div class="logout">
+          <a href="#" class="btn btn-block">Logout</a>
+        </div>
+    </nav>
+</div>
+
+{% endif %}

@@ -1,0 +1,21 @@
+.side-by-side {
+    background-color: #fff;
+
+    .text-content {
+        display: flex;
+        flex-direction: column;
+        padding: @spacing2x;
+        justify-content: center;
+    }
+
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+@media (min-width: @screen-desktop) {
+    .side-by-side {
+        .text-content {
+            padding: @spacing6x;
+        }
+    }
+}

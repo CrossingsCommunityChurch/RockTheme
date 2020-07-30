@@ -5,7 +5,10 @@
     {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
     {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 {% endif %}
-<div class="container-fluid section simple-section {% if item.UseBackgroundImage == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}" {% if item.UseBackgroundImage == 'Yes' & imageUrl %} style="background-image: url('{{ imageUrl }}')" {% endif %}>
+<div class="container-fluid section simple-section {% if item.UseBackgroundImage == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}">
+      {% if item.UseBackgroundImage == 'Yes' & imageUrl %}
+        <div class="img" style="background-image: url('{{ imageUrl }}')"></div>
+      {% endif %}
       <div class="row">
           <div class="container content-area" data-aos="fade-up">
               <div class="row">
