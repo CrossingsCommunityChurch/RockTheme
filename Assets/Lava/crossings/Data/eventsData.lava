@@ -61,7 +61,7 @@
             {% assign audiences = eventitem.EventItemAudiences %}
             {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
 
-            {% assign imageUrlPath = eventitem | Attribute:'Imageasset' | Url:'localpath' %}
+            {% assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' %}
             {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
             {% assign photoId = eventitem.PhotoId %}
