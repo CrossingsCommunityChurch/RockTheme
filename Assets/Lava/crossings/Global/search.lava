@@ -12,7 +12,7 @@
     <div class="flex-row flex-wrap">
       <div class="col-md-12 col-lg-4 search-column">
         <div>
-          <h2>Recmmended</h2>
+          <h2>Recommended</h2>
           <a class="media-object" href="#">
             <div class="search-image">
               <img class="round" src="https://placehold.it/100x100" alt="">
