@@ -72,11 +72,13 @@ $(document).ready(function() {
         e.preventDefault();
         $('.search-input').focus();
         $('.search-wrapper').addClass('open');
+        $('.mobile-navbar').addClass('close');
     });
 
     $('.search-close').click(function(e){
         e.preventDefault();
         $('.search-wrapper').removeClass('open');
+        $('.mobile-navbar').removeClass('close');
     });
 
     $('.run-search').click(function(e) {

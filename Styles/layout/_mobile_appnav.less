@@ -9,6 +9,11 @@
     grid-template-columns: repeat(4,1fr);
     grid-gap: 1px;
     box-shadow: -10px 0 10px rgba(0, 0, 0, 0.2);
+    transition: all ease-in-out 0.5s;
+
+    &.close {
+        bottom: -100px;
+    }
 
     .btn {
         color: @white;
