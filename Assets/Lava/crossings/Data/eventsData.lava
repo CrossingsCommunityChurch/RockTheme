@@ -11,8 +11,7 @@
               {% assign curAudience = audience.DefinedValue.Value | StripNewlines | ToJSON %}
               {% assign match = existing | RegExMatch:curAudience %}
               {% if match == false %}
-                  {{ curAudience }}
-                  {% unless forloop.last %}, {% endunless %}
+                  {{ curAudience }},
                   {% assign existing = existing | Append:curAudience %}
               {% endif %}
             {% endfor %}
