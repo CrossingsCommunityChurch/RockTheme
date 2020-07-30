@@ -47,16 +47,26 @@
         {% assign eventid = item.EventItem.Id%}
         {% eventitem id:'{{ eventid }}' %}
           {% if eventitem.IsActive and eventitem.IsApproved %}
+
+            {% comment %} Dataset is only for upcoming events {% endcomment %}
+            {% assign occurrence = eventitem.EventItemOccurrences | First %}
+            {% assign schedule = occurrence.Schedule%}
+            {% if schedule.NextStartDateTime == null  %}
+              {% continue %}
+            {% endif %}
+
             {% assign name = eventitem.Name %}
             {% assign summary = eventitem.Summary %}
             {% assign audiences = eventitem.EventItemAudiences %}
             {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
-            {% assign occurrence = eventitem.EventItemOccurrences | First %}
-            {% assign schedule = occurrence.Schedule%}
 
-            {% comment %} Dataset is only for upcoming events {% endcomment %}
-            {% if schedule.NextStartDateTime == null  %}
-              {% continue %}
+            {% assign photoId = eventitem.PhotoId %}
+            {% if photoId != null %}
+              {% binaryfile id:'{{photoId}}' %}
+                {% assign url = binaryfile.Url %}
+              {% endbinaryfile %}
+            {% else %}
+              {% assign url = ""%}
             {% endif %}
 
             {% assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
@@ -65,6 +75,8 @@
             {% assign occurrenceId = occurrence.Id%}
             {% assign link = occurrenceId | Prepend:'/events/'%}
             {% capture eventsJson %}{{eventsJson}} { {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"PhotoId": {{photoId | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"PhotoUrl": {{url | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"EventId": {{eventid | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"Name": {{name | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"Summary": {{summary | ToJSON}} , {%endcapture%}
@@ -96,6 +108,7 @@
               {% capture eventsJson %}{{eventsJson}}"link": {{link | ToJSON}}{%endcapture%}
             {% capture eventsJson %}{{eventsJson}} } {%endcapture%}
             {% unless forloop.last %}{% capture eventsJson %}{{eventsJson}}, {%endcapture%}{% endunless %}
+
           {% endif %}
         {% endeventitem %}
       {% endfor %}
