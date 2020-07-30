@@ -12,6 +12,10 @@
               {% assign match = existing | RegExMatch:curAudience %}
               {% if match == false %}
                   {{ curAudience }},
+                  {% comment %}
+                    Trailing comma wasn't getting added correctly in prod. quick fix was just to leave a trailing comman
+                    {% unless forloop.last %}, {% endunless %}
+                  {% endcomment %}
                   {% assign existing = existing | Append:curAudience %}
               {% endif %}
             {% endfor %}
@@ -102,7 +106,7 @@
                   {% endfor %}
                 {% capture eventsJson %}{{eventsJson}} ], {%endcapture%}
                 {% capture eventsJson %}{{eventsJson}}"Note": {{occurrence.Note | StripNewlines | StripHtml | ToJSON}} , {%endcapture%}
-                {% capture eventsJson %}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | ToJSON}}{%endcapture%}
+                {% capture eventsJson %}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | StripNewlines | ToJSON}}{%endcapture%}
               {% capture eventsJson %}{{eventsJson}} }, {% endcapture %}
               {% capture eventsJson %}{{eventsJson}}"date": {{date | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"sortableDate": {{sortableDate | ToJSON}} , {%endcapture%}
