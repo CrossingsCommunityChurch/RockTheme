@@ -66,16 +66,13 @@
       (`audience is ${audience}`);
       curPage = curPage + 1
       renderFilteredItems(events, curPage, audience);
-      $('html, body').animate({
-          scrollTop: $("#eventList").offset().top
-      }, 300);
     });
 
     function renderFilteredItems(events, page, audience) {
 
       $('html, body').animate({
           scrollTop: $("#eventList").offset().top
-      }, 500);
+      }, 300);
 
       let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
