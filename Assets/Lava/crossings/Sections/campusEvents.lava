@@ -5,16 +5,16 @@
 {% assign evts = evtData.Events | ToJSON %}
 {% assign itemsPerPage = 6 %}
 
-<div class="event-list">
+<div id="eventList" class="event-list">
   <div class="container event-list-items" data-aos="fade-up">
     <div class="event-filter row">
       <div class="form form-inline">
         <div class="form-group">
-          <label for="exampleInputEmail1">Event Filter</label>
+          <label for="filterLabel">Filter By Category</label>
           <div class="dropdown">
             <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
-            <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-              <li><a style="cursor: pointer;">Any</a></li>
+            <ul aria-labelledby="eventFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All Events</a></li>
               <li role="separator" class="divider"></li>
               {% for audience in audiences %}
                 <li><a style="cursor: pointer;">{{audience}}</a></li>
@@ -55,25 +55,32 @@
 
     $('#back').click(function() {
       let audience = $('#audiences').text();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'Any';
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All Events';
       curPage = curPage - 1;
       renderFilteredItems(events, curPage, audience);
     });
 
     $('#next').click(function() {
       let audience = $('#audiences').text();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'Any';
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All Events';
       (`audience is ${audience}`);
       curPage = curPage + 1
       renderFilteredItems(events, curPage, audience);
+      $('html, body').animate({
+          scrollTop: $("#eventList").offset().top
+      }, 300);
     });
 
     function renderFilteredItems(events, page, audience) {
 
+      $('html, body').animate({
+          scrollTop: $("#eventList").offset().top
+      }, 500);
+
       let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
 
-      var filteredEvents = events.filter(evt => !audience || audience.trim().toLowerCase() === 'any' || evt.audiences.includes(audience));
+      var filteredEvents = events.filter(evt => !audience || audience.trim().toLowerCase() === 'all events' || evt.audiences.includes(audience));
       if (filteredEvents.length === 0) {
         eventsContainer.append('<p>No events exist for the selected audience.</p>');
         $('#back').hide();
@@ -126,7 +133,7 @@
         );
         div.find('a.card.cardShadow').attr('href', event.link);
         // div.find('img.object-fit').attr('src', `${imageStorageUrl}${imageSize}${event.Imageasset}`);
-        div.find('img.object-fit').attr('src', `${event.PhotoUrl}`);
+        div.find('img.object-fit').attr('src', `${event.AssetImage}`);
         div.find('h4').text(event.Name);
         div.find('p.date').text(event.date);
         div.find('p > i.fas.fa-tags').parent().find('span').text(event.audiences.join(', '));
