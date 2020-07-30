@@ -1,30 +1,154 @@
-{% eventcalendaritem where:'EventCalendarId == {{ calendarid }} || EventCalendarId == {{ allchurchid }}' %}
-  <div class="event-list">
-    <div class="container event-list-items" data-aos="fade-up">
-      <div class="row flex-row flex-wrap">
-        {% for item in eventcalendaritemItems %}
-            {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-            {% assign imageSize = '/fit-in/600x600' %}
-            {% assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' %}
-            {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-            {% assign eventid = item.EventItem.Id%}
-            {% eventitem id:'{{ eventid }}' %}
-              {% if eventitem.IsActive and eventitem.IsApproved %}
-                {% assign name = eventitem.Name %}
-                {% assign summary = eventitem.Summary %}
-                {% assign audiences = eventitem.EventItemAudiences %}
-                {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
-                {% assign occurrence = eventitem.EventItemOccurrences | First %}
-                {% assign schedule = occurrence.Schedule%}
-                {% assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
-                {% assign schedule = occurrence.Schedule.FriendlyScheduleText %}
-                {% assign occurrenceId = occurrence.Id%}
-                {% assign link = occurrenceId | Prepend:'/events/'%}
-                {[ cardEvent link:'{{ link }}' eventname:'{{ name }}' summary:'{{ summary }}' img:'{{ imageUrl }}' audiences:'{{ audienceString }}'  date:'{{ date }}' recurring:'{{ schedule }}' ]}
-              {% endif %}
-            {% endeventitem %}
-        {% endfor %}
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/600x600/' %}
+{% assign evtData = 'events' | PersistedDataset %}
+{% assign audiences = evtData.Audiences %}
+{% assign evts = evtData.Events | ToJSON %}
+{% assign itemsPerPage = 6 %}
+
+<div class="event-list">
+  <div class="container event-list-items" data-aos="fade-up">
+    <div class="event-filter row">
+      <div class="form form-inline">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Event Filter</label>
+          <div class="dropdown">
+            <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
+              <li><a style="cursor: pointer;">Any</a></li>
+              <li role="separator" class="divider"></li>
+              {% for audience in audiences %}
+                <li><a style="cursor: pointer;">{{audience}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="row flex-row flex-wrap">
+    </div>
+    <div class="paginate-buttons text-center">
+      <a class="btn btn-default" id="back" role="button">Back</a>
+      <a class="btn btn-default" id="next" role="button">Next</a>
+    </div>
   </div>
-{% endeventcalendaritem %}
+</div>
+
+<script>
+
+  $(document).ready(() => {
+
+    const eventsJson = `{{evts}}`;
+    const imageStorageUrl = '{{imageStorageUrl}}';
+    const imageSize = '{{imageSize}}';
+    const itemsPerPage = '{{itemsPerPage}}';
+
+    let events = JSON.parse(eventsJson);
+
+    let curPage = 1;
+    renderFilteredItems(events, curPage);
+
+    $('#audiences').parent().find('li').click(function() {
+      let audience = $(this).text();
+      $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(events, 1, audience);
+    });
+
+    $('#back').click(function() {
+      let audience = $('#audiences').text();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'Any';
+      curPage = curPage - 1;
+      renderFilteredItems(events, curPage, audience);
+    });
+
+    $('#next').click(function() {
+      let audience = $('#audiences').text();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'Any';
+      (`audience is ${audience}`);
+      curPage = curPage + 1
+      renderFilteredItems(events, curPage, audience);
+    });
+
+    function renderFilteredItems(events, page, audience) {
+
+      let eventsContainer = $('.row.flex-row.flex-wrap');
+      eventsContainer.empty();
+
+      var filteredEvents = events.filter(evt => !audience || audience.trim().toLowerCase() === 'any' || evt.audiences.includes(audience));
+      if (filteredEvents.length === 0) {
+        eventsContainer.append('<p>No events exist for the selected audience.</p>');
+        $('#back').hide();
+        $('#next').hide();
+        return;
+      }
+
+      let count = 0;
+      let pgIdx = page - 1;
+      let itemIdxMin = pgIdx * itemsPerPage;
+      let itemsCount = filteredEvents.length;
+      let pages = Math.ceil(itemsCount / itemsPerPage);
+      let itemsOnLastPage = itemsCount % itemsPerPage;
+      if (itemsOnLastPage === 0) itemsOnLastPage = itemsPerPage;
+      let itemMax = page * itemsPerPage;
+      if (page === pages) {
+        itemMax = itemMax - (itemsPerPage - itemsOnLastPage);
+      }
+
+      for (let i = itemIdxMin; i < itemMax; i++) {
+
+        let event = filteredEvents[i];
+
+        let div = $(
+          `<div class="col-sm-6 col-md-4">
+            <a href="LINK GOES HERE" class="card cardShadow">
+              <div class="thumb">
+                <img src="IMG GOES HERE" class="object-fit">
+              </div>
+              <div class="row card-content-row">
+                <div class="card-content">
+                  <div class="col">
+                    <div>
+                      <h4>EVENT NAME GOES HERE!</h4>
+                        <p style="margin-bottom: 1px;"> <i class="fas fa-tags"></i>
+                            <span>AUDIENCES GO HERE!</span>
+                        </p>
+                      <p class="date">DATE GOES HERE!</p>
+                      <p class="recurring">RECURRING GOES HERE!</p>
+                    </div>
+                  </div>
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Details</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>`
+        );
+        div.find('a.card.cardShadow').attr('href', event.link);
+        // div.find('img.object-fit').attr('src', `${imageStorageUrl}${imageSize}${event.Imageasset}`);
+        div.find('img.object-fit').attr('src', `${event.PhotoUrl}`);
+        div.find('h4').text(event.Name);
+        div.find('p.date').text(event.date);
+        div.find('p > i.fas.fa-tags').parent().find('span').text(event.audiences.join(', '));
+        div.find('p.recurring').text(event.occurrence.Schedule);
+
+        eventsContainer.append(div);
+
+        if (page <= 1) {
+          $('#back').hide();
+        }
+        else {
+          $('#back').show();
+        }
+        if (page >= pages) {
+          $('#next').hide();
+        } else {
+          $('#next').show();
+        }
+
+      }
+    }
+
+  });
+
+</script>
