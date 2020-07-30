@@ -12619,11 +12619,13 @@ img {
 }
 .primary-nav.fixed {
   position: fixed !important;
-  position: sticky !important;
   top: 0 !important;
   z-index: 99;
   left: 0;
   right: 0;
+}
+.primary-nav.fixed.sticky {
+  position: sticky !important;
 }
 .primary-nav .navigation {
   display: grid !important;
@@ -12650,8 +12652,6 @@ img {
     display: flex;
   }
   .primary-nav.fixed {
-    position: fixed !important;
-    position: sticky !important;
     top: 0;
     background-color: #fff !important;
     text-shadow: none !important;
@@ -13449,10 +13449,18 @@ img {
     transition: all ease-in-out 0.25s;
   }
   .about-card-list .card:hover h3,
+  .about-card-list .card:hover ol,
+  .about-card-list .card:hover ul,
+  .about-card-list .card:hover li,
+  .about-card-list .card:hover em,
   .about-card-list .card:hover p {
     color: #fff;
   }
   .about-card-list .card:hover h3 .fas,
+  .about-card-list .card:hover ol .fas,
+  .about-card-list .card:hover ul .fas,
+  .about-card-list .card:hover li .fas,
+  .about-card-list .card:hover em .fas,
   .about-card-list .card:hover p .fas {
     opacity: 0;
   }

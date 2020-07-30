@@ -38,7 +38,7 @@ $(document).ready(function() {
         if (scroll >= 140) {
             $('.primary-nav').addClass('fixed push');
         } else {
-            $('.primary-nav').removeClass('fixed push');
+            $('.primary-nav').removeClass('fixed push sticky');
         }
     });
     
@@ -62,6 +62,7 @@ $(document).ready(function() {
         easyClose: true,
     }).click(function(e) {
         e.preventDefault();
+        $('.primary-nav').addClass('sticky');
     });
 
     $('body').addClass('zoom');
