@@ -1,4 +1,4 @@
-{%- assign scheduleid = 241 -%}
+{%- assign scheduleid = scheduleid -%}
 <div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
   <a href="https://live.crossings.church/">
     <span class="alert-text">
