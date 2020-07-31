@@ -22,42 +22,6 @@
     </span>
   </a>
 </div>
-{%- comment -%}
-	<div class="container">
-  		<div class="row d-md-flex flex-center">
-  			<div class="col-md-5 col-xs-12 text-sm-right text-center">
-  				<h6 id="churchonline_counter" class="mt-0 mb-0">
-  					<div class="d-inline-block live-btn font-primary-medium mr-2">
-  						<a href="https://live.oneandall.church/">
-  							<div class="no-live color-black">LIVE IN</div>
-  							<div class="live color-black">LIVE NOW</div>
-  							<span>
-  								<i class="fas fa-circle not-live"></i>
-  							</span>
-		   				</a>
-  					</div>
-   				<a class="time" href="https://live.oneandall.church/">
-  						<span class="counter h4 font-w-400 mt-0 mb-0">
-   						<div class="days d-inline-block">
-  								<div class="value"></div>
-  							</div>
-  							<div class="hours d-inline-block">
-  								<div class="value"></div>
-  							</div>
-							<div class="minutes d-inline-block">
-  								<div class="value"></div>
-							</div>
-  							<div class="seconds d-inline-block">
-  								<div class="value"></div>
-							</div>
-						</span>
-  					</a>
-  				</h6>
-			</div>
-  		</div>
-	</div>
-</div>
-{%- endcomment -%}
 
 <script type="text/javascript">
 	jQuery(function() {
@@ -69,6 +33,7 @@
           $("#churchonline_counter").removeClass('alert-primary');
       		$("#churchonline_counter .live").addClass('reveal').show();
       		$("#churchonline_counter").addClass('reveal').show();
+          $('.btn-latest').addClass('btn-live').attr("href", "https://live.crossings.church").find('span').text('Watch Live Now');
 		};
 
         loadCountdown = function(data){
