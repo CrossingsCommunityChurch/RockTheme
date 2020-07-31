@@ -45,6 +45,7 @@
 
     <form id="form1" runat="server">
         <div class="slide-wrap push">
+            <Rock:Zone name="Alerts" runat="server" />
             <nav class="primary-nav flat reverse">
                 <div class="navigation">
                     <Rock:Zone name="Login" runat="server"/>

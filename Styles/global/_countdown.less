@@ -1,0 +1,131 @@
+.counter {
+    display: inline-block;
+    //min-width: 150px;
+    padding: 0;
+    font-weight: 400;
+    border-radius: 8px
+  }
+  .counter div {
+    position: relative;
+    display: inline-block;
+    margin-right: 2px;
+    margin-left: 2px;
+    width: 26px
+  }
+  .counter.days, .counter.hours, .counter.minutes, .counter.seconds {
+    position: relative;
+    display: inline-block;
+    margin-right: 5px;
+    text-align: center
+  }
+  .counter.days .value, .counter.hours .value, .counter.minutes .value, .counter.seconds .value {
+    display: block;
+    width: 100%
+  }
+  .counter.days .span, .counter.hours .span, .counter.minutes .span, .counter.seconds .span {
+    display: block;
+    width: 100%;
+    opacity: 0.8
+  }
+  .counter .hours::before, .counter .minutes::before, .counter .seconds::before {
+    position: absolute;
+    top: -3px;
+    left: -7px;
+    content: ":";
+    opacity: 0.7;
+    animation: blink 1s ease-in-out infinite
+  }
+  #liveBar {
+    position: relative;
+    z-index: 999
+  }
+  .live-btn {
+    padding: 0 7px;
+    font-weight: 400;
+    line-height: 25px;
+    letter-spacing: 3px;
+    vertical-align: 3px;
+    border: 1px solid;
+    border-radius: 5px
+  }
+  .live-btn i {
+    vertical-align: 3px
+  }
+  .live-btn .not-live {
+    color: red
+  }
+  .live-btn .is-live {
+    color: #00d000
+  }
+  .centerIt {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%)
+  }
+  @keyframes blink {
+    0% {
+      opacity: 1
+    }
+    50% {
+      opacity: 0.5
+    }
+    100% {
+      opacity: 1
+    }
+  }
+  #churchonline_counter a {
+    color: #fff;
+  }
+  #churchonline_counter {
+    position: relative;
+    display: none;
+
+    .alert-text {
+        text-decoration: none;
+    }
+
+    &.reveal {
+
+    }
+
+    .watch {
+        border: 1px solid #fff;
+        padding: 7px 30px;
+        display: block;
+        margin-left: 15px;
+        border-radius: 90px;
+    }
+  }
+  #churchonline_counter .time {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0
+  }
+  #churchonline_counter .time li {
+    float: left;
+    padding: 0 10px;
+    text-align: center
+  }
+  #churchonline_counter .time li:first-child {
+    padding-left: 0
+  }
+  #churchonline_counter .time li span {
+    font-size: 1.2em
+  }
+  #churchonline_counter .no-live {
+    display: inline-block;
+    font-weight: 400
+  }
+  #churchonline_counter .live {
+    display: none;
+    font-weight: 400
+  }
+
+@media (min-width: @screen-tablet) {
+    #churchonline_counter {
+        .watch {
+            display: inline-block;
+        }
+    }
+}

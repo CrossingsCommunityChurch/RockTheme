@@ -5,19 +5,32 @@
 }
 
 .alert {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 }
 
 .alert.alert-heading {
     margin: 0;
     border: 0 none;
     border-radius: 0;
-    padding: @spacingSmall @spacing @spacingSmall;
     text-transform: uppercase;
     letter-spacing: 1px;
+    padding: 0;
+
+    > a {
+        display: block;
+        padding: @spacing @spacing @spacing;
+        text-decoration: none;
+        border: 0;
+        outline: none;
+    }
 
     &.alert-info {
         background-color: @alert-color;
+        color: @white;
+    }
+
+    &.alert-primary {
+        background-color: @brand-primary;
         color: @white;
     }
 
@@ -31,7 +44,7 @@
 
 @media (min-width: @screen-desktop) {
     .alert-text {
-        display: inline;
+        display: inline-block;
         margin-right: @spacingSmall;
     }
 
