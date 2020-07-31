@@ -54,6 +54,7 @@
     });
 
     $('#back').click(function() {
+      topOfEvents();
       let audience = $('#audiences').text();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All Events';
       curPage = curPage - 1;
@@ -61,6 +62,7 @@
     });
 
     $('#next').click(function() {
+      topOfEvents();
       let audience = $('#audiences').text();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All Events';
       (`audience is ${audience}`);
@@ -68,12 +70,13 @@
       renderFilteredItems(events, curPage, audience);
     });
 
-    function renderFilteredItems(events, page, audience) {
-
-      $('html, body').animate({
+    function topOfEvents() {
+       $('html, body').animate({
           scrollTop: $("#eventList").offset().top
       }, 300);
+    }
 
+    function renderFilteredItems(events, page, audience) {
       let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
 
