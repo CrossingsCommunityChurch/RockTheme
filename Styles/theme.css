@@ -11022,6 +11022,24 @@ fieldset[disabled] .btn-danger-solid.focus {
 .bg-white {
   background-color: #fff;
 }
+.mb-n1 {
+  margin-bottom: -1rem;
+}
+.mt-n1 {
+  margin-top: -2rem;
+}
+.mb-n2 {
+  margin-bottom: -2rem;
+}
+.mt-n2 {
+  margin-top: -2rem;
+}
+.mb-n3 {
+  margin-bottom: -3rem;
+}
+.mt-n3 {
+  margin-top: -3rem;
+}
 html {
   font-size: 16px;
   scroll-behavior: smooth;
@@ -13833,6 +13851,9 @@ img {
   margin-right: auto;
   border: 0;
   border-top: 3px solid #dbc8a7;
+}
+.section.devo-title hr.sep {
+  margin-left: auto;
 }
 .simple-section {
   background-color: #fff;

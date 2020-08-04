@@ -1,0 +1,23 @@
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/2000x1300' %}
+{% assign imageUrlPath = Item.AssetImage | Url:'localpath' %}
+{% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+
+<div class="section page-title reverse devo-title">
+    <div class="container">
+        <div class="jumbotron text-center" data-aos="fade-in">
+            <h3 class="subheading reverse">{{ Item.ContentChannel.Name }}</h3>
+            <h1 class="heading"> {{ Item.Title }}</h1>
+            <hr class="sep">
+            <h4 class="subheading reverse">{{ Item | Attribute: 'Author' }} | {{ Item.StartDateTime | Date:'MMM d, yyyy' }}</h4>
+        </div>
+    </div>
+</div>
+{% if Item.AssetImage %}
+<div class="devo-image container mt-n3">
+  <img src="{{ imageUrl }}" alt="{{ Item.Title }}" title="{{ Item.Title }}" />
+</div>
+{% endif %}
+<div class="container main">
+  {{ Item.Content }}
+</div>

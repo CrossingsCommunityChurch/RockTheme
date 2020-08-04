@@ -8,11 +8,11 @@
 {% if Pagination.CurrentPage == 1 %}
 <div class="section devo-list current-devo bg-gray">
   <div class="container content-area text-center">
-      <h4 class="subtitle">Current Devotional</h1>
-      <a href="{{ LinkedPages.DetailPage }}?Item={{ currentSeries.Id }}">
+      <h4 class="subtitle">Latest Devotional</h1>
+      <a href="{{ '/devotionals/' | Append: currentSeries.PrimarySlug }}">
         <p class="devo-date">
             <h2 class="text-color">{{ currentSeries.Title }}</h1>
-            {{ currentSeries.StartDateTime | Date:'M/d/yyyy' }}
+            {{ currentSeries.StartDateTime | Date:'MMM d, yyyy' }}
           </p>
       </a>
   </div>
