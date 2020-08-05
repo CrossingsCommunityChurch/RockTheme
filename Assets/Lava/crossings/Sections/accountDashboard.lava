@@ -18,7 +18,7 @@
             <li><a href="/my-assessments">Assessments</a></li>
         </ul>
         <div class="logout">
-          <a href="#" class="btn btn-block">Logout</a>
+          <a href="/?Logout=True" class="btn btn-block">Logout</a>
         </div>
     </nav>
 </div>
