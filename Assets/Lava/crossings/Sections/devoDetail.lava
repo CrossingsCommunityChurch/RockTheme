@@ -3,6 +3,10 @@
 {% assign imageUrlPath = Item.AssetImage | Url:'localpath' %}
 {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
+{% capture pageTitle %}Devotions- {{ Item | Attribute: 'Author' }} - {{ Item.Title }}{% endcapture%}
+{{ pageTitle | SetPageTitle }}
+
+
 <div class="section page-title reverse devo-title">
     <div class="container">
         <div class="jumbotron text-center" data-aos="fade-in">

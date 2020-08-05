@@ -7,6 +7,9 @@
   {% assign video = item | Attribute:'VimeoId' %}
   {% assign parentPath = 'sermons' %}
 
+  {% capture pageTitle %}{{ speaker }} - {{ title }}{% endcapture%}
+  {{ pageTitle | SetPageTitle }}
+
   {% if item.ContentChannel.Name == 'Teaching Message' %}
       {% assign parentPath = 'teachings' %}
   {% endif %}
