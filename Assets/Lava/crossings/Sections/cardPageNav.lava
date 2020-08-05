@@ -3,12 +3,12 @@
     <div class="row">
       {% for childPage in Page.Pages %}
         {% assign title = childPage.Title %}
-        {% assign subTitle = childPage.SubTitle %}
+        {% assign subTitle = childPage | Attribute:'SubTitle' %}
         {[ cardText title:'{{ title }}' subtitle:'{{ subTitle }}' link:'{{ childPage.Url }}' actiontext:'Learn More' ]}
       {%- endfor -%}
 
       {% for includedPage in IncludePageList %}
-        {% assign subTitle = includedPage.SubTitle %}
+        {% assign subTitle = includedPage | Attribute:'SubTitle' %}
         {% assign path = 'Global' | Page:'Path' %}
         {% assign attributeParts = includedPage | PropertyToKeyValue %}
         {[ cardText title:'{{ attributeParts.Key }}' subtitle:'{{ subTitle }}' link:'{{ attributeParts.Value }}' actiontext:'Learn More' ]}

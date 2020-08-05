@@ -13,7 +13,7 @@ text
 {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
 {% assign title = item.Title %}
-{% assign subtitle = item.subheading %}
+{% assign subtitle = item | Attribute:'subheading' %}
 {% assign content = item.Content %}
 
 <div class="card listing">
