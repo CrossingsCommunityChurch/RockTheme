@@ -17,6 +17,9 @@
       {% assign imageUrl = latestMessage | Attribute:'Image', 'RawValue' %}
       {% assign useVimeoImage = True %}
     {% endif %}
+    {%if latestMessage.Image == empty and latestMessage.AssetImage == empty %}
+      {%assign imageUrl = parentSeries.Serieslogo | Url:'localpath' %}
+    {% endif %}
     {% if parentSlug == null %}
       {% assign parentSlug = 'no-series' %}
     {% endif %}

@@ -14453,6 +14453,9 @@ img {
     border-radius: 0;
     width: 100%;
   }
+  .latest-message .message-image {
+    max-height: 415px;
+  }
   .latest-message-details,
   .message-image {
     width: 50%;

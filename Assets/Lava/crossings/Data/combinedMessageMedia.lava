@@ -68,6 +68,11 @@
             {% assign useVimeoImage = True %}
         {% endif %}
 
+        {%if item.Image == empty and item.AssetImage == empty %}
+            {% assign parentSeries = item.ParentItems | First %}
+            {% assign imageUrl = parentSeries.ContentChannelItem.Serieslogo | Url:'localpath' %}
+        {% endif %}
+
         {
             "Id": {{ item.Id }},
             "Title": {{ item.Title | Replace:"'","’" | ToJSON }},
