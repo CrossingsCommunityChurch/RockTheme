@@ -23,9 +23,9 @@
                       <p>{{ item.Content }}</p>
 
                       {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons.{% endcomment %}
-                      {%- if item.lava != empty -%}
+                      {%- if item | Attribute:'lava' != empty -%}
                         <div class="buttons" data-aos="fade-up">
-                            {{ item.lava | HtmlDecode }}
+                            {{ item | Attribute:'lava' | HtmlDecode }}
                         </div>
                       {%- endif -%}
                   </div>
