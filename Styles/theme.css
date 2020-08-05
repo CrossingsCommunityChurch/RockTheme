@@ -11905,7 +11905,7 @@ img {
 .modal .locations .primary-locations h3 a {
   display: block;
 }
-.modal .locations .primary-locations h3 a .fas {
+.modal .locations .primary-locations h3 a .fa {
   float: right;
   margin-right: 30px;
   opacity: 0;
@@ -11914,9 +11914,12 @@ img {
 .modal .locations .primary-locations h3 a:hover {
   text-decoration: none;
 }
-.modal .locations .primary-locations h3 a:hover .fas {
+.modal .locations .primary-locations h3 a:hover .fa {
   margin-right: 0;
   opacity: 1;
+}
+.modal-open .modal {
+  overflow: visible;
 }
 .page-title.section {
   background-color: #313e48;
