@@ -5,7 +5,6 @@
 {%- assign contentItemStyle = '' -%}
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/1100x900' %}
-{% assign mediaData = 'Combinedmedia' | PersistedDataset %}
 
 {% stylesheet id:'contentcomponent-split' %}
 .contentComponent-split .row {
@@ -43,35 +42,39 @@
     {%- if channelForegroundColor != '' -%}
         {%- capture contentItemStyle -%}{{ contentItemStyle }}color:{{ channelForegroundColor }};{%- endcapture -%}
     {%- endif -%}
-    {%- assign imageUrlPath = item.AssetImage | Url:'localpath' -%}
+    {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
     {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+    {% assign title = item.Title %}
+    {% assign subheading = item | Attribute: 'subheading' %}
+    {% assign content = item.Content %}
+    {% assign buttons = item | Attribute: 'lava' | HtmlDecode %}
 
     <div class="row flex-row">
 
         {%- if imageUrlPath != '' -%}
         <div class="cover-half visible-md-block visible-lg-block {% if channelContentAlignment == 'Right' %}{% cycle 'coverside': 'cover-right', '' %}{% else %}{% cycle 'coverside': '', 'cover-right' %}{% endif %}">
-          <img alt="{{ item.Title }}" src="{{ imageUrl }}">
+          <img alt="{{ title }}" src="{{ imageUrl }}">
         </div>
         {%- endif -%}
 
         <div class="col-md-6 {% if channelContentAlignment == 'Right' %}{% cycle 'firstcol': 'col-md-push-6', '' %}{% else %}{% cycle 'firstcol': '', 'col-md-push-6' %}{% endif %}">
-            <img alt="{{ item.Title }}" src="{{ imageUrl }}" class="img-responsive hidden-md hidden-lg">
+            <img alt="{{ title }}" src="{{ imageUrl }}" class="img-responsive hidden-md hidden-lg">
         </div>
         <div class="col-md-6 text-content {% if channelContentAlignment == 'Right' %}{% cycle 'secondcol': 'col-md-pull-6', '' %}{% else %}{% cycle 'secondcol': '', 'col-md-pull-6' %}{% endif %}">
             <div class='content-item' data-aos='fade-up' {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
-              {%- if item.subheading -%}
-                <h4 class="subheading">{{ item.subheading }}</h4>
+              {%- if subheading -%}
+                <h4 class="subheading">{{  subheading }}</h4>
               {% endif %}
-              {%- if item.Title -%}
-                <h2 class="heading">{{ item.Title }}</h2>
+              {%- if title -%}
+                <h2 class="heading">{{ title }}</h2>
                 <hr class="sep">
               {% endif %}
 
-              {{ item.Content }}
+              {{ content }}
 
-                {%- if item.lava != empty -%}
+                {%- if buttons != empty -%}
                 <div class="buttons" data-aos="fade-up">
-                    {{ item.lava | HtmlDecode }}
+                    {{ buttons }}
                 </div>
                 {%- endif -%}
             </div>

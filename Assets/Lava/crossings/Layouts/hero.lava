@@ -1,17 +1,17 @@
 {%- for item in Items -%}
 
 {% assign title = item.Title %}
-{% assign subTitle = item.subheading %}
-{% assign showButtons = item.UseButtons %}
-{% assign buttons = item.Buttons %}
+{% assign subTitle = item | Attribute:'subheading' %}
+{% assign showButtons = item | Attribute:'UseButtons' %}
+{% assign buttons = item | Attribute:'Buttons' %}
 
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/2000x1300' %}
-{% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+{% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
 {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
 {% if height != empty %}
-  {% assign height = item.Height %}
+  {% assign height = item | Attribute:'Height' %}
 {% else %}
   {% assign height = '100vh' %}
 {% endif %}

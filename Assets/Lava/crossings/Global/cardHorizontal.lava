@@ -9,7 +9,7 @@ text
 
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/600x600' %}
-{% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+{% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
 {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
 {% assign title = item.Title %}

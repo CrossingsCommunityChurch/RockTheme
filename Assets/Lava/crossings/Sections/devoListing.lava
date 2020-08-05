@@ -4,19 +4,26 @@
 <div class="section devo-list bg-gray">
   <div class="container content-area">
       {% for item in Items %}
-        {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+        {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
         {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
         {% capture itemLink %}/devotionals/{{item.PrimarySlug}}{%endcapture %}
+        {% assign title = item.Title %}
+        {% assign author = item | Attribute:'Author' %}
+        {% assign content = item.Content | StripHtml | Slice: 0, 225 %}
+        {% assign date = item.StartDateTime | Date:'MMM d, yyyy' %}
+
+
+
         <div class="card listing shadow-bg mb-3 shadowDepth1">
           <div class="row flex-row">
             <div class="col-sm-4">
-              <img src="{{ imageUrl }}" alt="{{ item.Title }}" class="object-cover">
+              <img src="{{ imageUrl }}" alt="{{ title }}" class="object-cover">
             </div>
             <div class="col-sm-8">
               <div class="p-3 pt-2 pl-1">
-                <h3>{{ item.Title }}</h3>
-                <p class="subheading">{{ item.Author }} | {{ item.StartDateTime | Date:'MMM d, yyyy' }}</p>
-                <div class="mb-1">{{ item.Content | StripHtml | Slice: 0, 225 }}...</div>
+                <h3>{{ title }}</h3>
+                <p class="subheading">{{ author }} | {{ date }}</p>
+                <div class="mb-1">{{ content }}...</div>
                 {[ button buttonlink:'{{itemLink}}' buttonstyle:'primary' buttontext:'Read More' ]}
               </div>
             </div>

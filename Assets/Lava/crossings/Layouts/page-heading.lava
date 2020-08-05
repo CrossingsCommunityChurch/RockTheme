@@ -1,12 +1,12 @@
 {% assign title = CurrentPage.PageTitle %}
-{% assign subTitle = CurrentPage.Subheading %}
-{% assign showButtons = CurrentPage.UseButtons %}
-{% assign buttons = CurrentPage.Buttons %}
+{% assign subTitle = CurrentPage | Attribute:'Subheading' %}
+{% assign showButtons = CurrentPage | Attribute:'UseButtons' %}
+{% assign buttons = CurrentPage | Attribute:'Buttons' %}
 {% assign layout = CurrentPage.Layout.Name %}
 
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/2000x1300' %}
-{% assign imageUrlPath = CurrentPage.AssetImage | Url:'localpath' %}
+{% assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' %}
 {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
 {% assign wrapperClass = 'page-item' %}

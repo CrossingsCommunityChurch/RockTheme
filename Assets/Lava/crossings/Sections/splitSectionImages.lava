@@ -1,25 +1,31 @@
 {%- for item in Items -%}  {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
-{% if item.AssetImage %}
+{% if item | Attribute:'AssetImage' %}
     {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
     {% assign imageSize = '/fit-in/900x600' %}
-    {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+    {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
     {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 {% endif %}
+
+{% assign title = item.Title %}
+{% assign subheading = item | Attribute: 'subheading' %}
+{% assign content = item.Content %}
+{% assign buttons = item | Attribute: 'lava' | HtmlDecode %}
+
 <div class="col-md-6 bgimg split-section-text">
     <div>
       {% if imageUrl %}<div class="img" style="background-image: url('{{ imageUrl }}')"></div> {% endif %}
       <div>
-        {%- if item.subheading -%}
-          <h4 class="reverse subheading">{{ item.subheading }}</h4>
+        {%- if subheading -%}
+          <h4 class="reverse subheading">{{ subheading }}</h4>
         {%- endif -%}
-        {%- if item.Title -%}
-        <h2 class="reverse heading">{{ item.Title }}</h2>
+        {%- if title -%}
+        <h2 class="reverse heading">{{ title }}</h2>
         {%- endif -%}
         <p>{{ item.Content }}</p>
         {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
-        {%- if item.lava != empty -%}
+        {%- if buttons != empty -%}
           <div class="buttons">
-            {{ item.lava | HtmlDecode }}
+            {{ buttons }}
           </div>
         {%- endif -%}
     </div>

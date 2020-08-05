@@ -22,13 +22,14 @@
             {% contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false' %}
             {% assign existing = "" %}
                 {% for item in items %}
-                    {% assign match = existing | RegExMatch:item.Speaker %}
+                    {% assign speaker = item | Attribute:'Speaker' %}
+                    {% assign match = existing | RegExMatch:speaker %}
                     {% if match == false %}
                         {
-                            "Name": {{ item.Speaker | ToJSON }}
+                            "Name": {{ item | Attribute:'Speaker' | ToJSON }}
                         }
                         {% unless forloop.last %}, {% endunless %}
-                        {% assign existing = existing | Append:item.Speaker %}
+                        {% assign existing = existing | Append:speaker %}
                     {% endif %}
                 {% endfor %}
             {% endcontentchannelitem %}
@@ -60,17 +61,18 @@
         {% if item.ContentChannel.Name == 'Teaching Message' %}
             {%assign channelPath = 'teachings/' %}
         {% endif %}
-
-        {% assign imageUrl = item.AssetImage | Url:'localpath' %}
+        {% assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' %}
+        {% assign imageUrl = AssetImage %}
         {% assign useVimeoImage = False %}
-        {% if item.Image != empty %}
-            {% assign imageUrl = item | Attribute:'Image', 'RawValue' %}
+        {% assign vimeoImageUrl = item | Attribute:'Image', 'RawValue' %}
+        {% if vimeoImageUrl != empty %}
+            {% assign imageUrl = vimeoImageUrl %}
             {% assign useVimeoImage = True %}
         {% endif %}
 
-        {%if item.Image == empty and item.AssetImage == empty %}
+        {%if vimeoImageUrl == empty and AssetImage == empty %}
             {% assign parentSeries = item.ParentItems | First %}
-            {% assign imageUrl = parentSeries.ContentChannelItem.Serieslogo | Url:'localpath' %}
+            {% assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' %}
         {% endif %}
 
         {

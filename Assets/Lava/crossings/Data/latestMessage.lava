@@ -11,14 +11,17 @@
     {% assign latestMessage = contentChannelItems | First %}
     {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
     {% assign parentSlug = parentSeries.PrimarySlug %}
-    {% assign imageUrl = latestMessage.AssetImage | Url:'localpath' %}
+    {% assign AssetImage = latestMessage | Attribute:'AssetImage' | Url:'localpath' %}
+    {% assign imageUrl = AssetImage %}
     {% assign useVimeoImage = False %}
-    {% if latestMessage.Image != empty %}
-      {% assign imageUrl = latestMessage | Attribute:'Image', 'RawValue' %}
-      {% assign useVimeoImage = True %}
+    {% assign vimeoImageUrl = latestMessage | Attribute:'Image', 'RawValue' %}
+    {% if vimeoImageUrl != empty %}
+        {% assign imageUrl = vimeoImageUrl %}
+        {% assign useVimeoImage = True %}
     {% endif %}
-    {%if latestMessage.Image == empty and latestMessage.AssetImage == empty %}
-      {%assign imageUrl = parentSeries.Serieslogo | Url:'localpath' %}
+    {%if vimeoImageUrl == empty and AssetImage == empty %}
+        {% assign parentSeries = latestMessage.ParentItems | First %}
+        {% assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' %}
     {% endif %}
     {% if parentSlug == null %}
       {% assign parentSlug = 'no-series' %}

@@ -1,32 +1,37 @@
 {%- for item in Items -%} {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
-{% if item.AssetImage %}
+{% if item | Attribute:'AssetImage' %}
     {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
     {% assign imageSize = '/fit-in/900x600' %}
-    {% assign imageUrlPath = item.AssetImage | Url:'localpath' %}
+    {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
     {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 {% endif %}
+{% assign title = item.Title %}
+{% assign subTitle = item | Attribute:'subheading' %}
+{% assign content = item.Content %}
+{% assign buttons = item | Attribute: 'lava' | HtmlDecode %}
+
 <div class="container-fluid section split-section split-section-overlap">
       <div class="row flex-row">
           <div class="col-md-6 nopadding-x image-bg">
             {% if imageUrl %}
-              <img src="{{ imageUrl }}" alt="{{ item.Title }}" />
+              <img src="{{ imageUrl }}" alt="{{ title }}" />
             {% endif %}
           </div>
           <div class="col-md-6 split-section-text" data-aos="fade-left">
-              {%- if item.subheading -%}
-                <h4 class="subheading">{{ item.subheading }}</h4>
+              {%- if subheading -%}
+                <h4 class="subheading">{{ subheading }}</h4>
               {% endif %}
-              {%- if item.Title -%}
-              <h2 class="heading">{{ item.Title }}</h2>
+              {%- if title -%}
+              <h2 class="heading">{{ title }}</h2>
               <hr class="sep">
               {% endif %}
-              <p>{{ item.Content }}</p>
+              <p>{{ content }}</p>
               {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
-              {%- if item.lava != empty -%}
-                <div class="buttons" data-aos="fade-left">
-                  {{ item.lava | HtmlDecode }}
+              {%- if buttons != empty -%}
+                <div class="buttons" data-aos="fade-up">
+                    {{ buttons }}
                 </div>
-              {%- endif -%}
+                {%- endif -%}
           </div>
       </div>
 </div>
