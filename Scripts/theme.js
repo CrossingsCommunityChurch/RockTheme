@@ -94,4 +94,15 @@ $(document).ready(function() {
             window.location.href = '/search/?Q=' + $(this).val();
         }
     })
+
+    $(document).on('click', '[data-toggle="tab-cc"]', function (e) {
+        e.preventDefault();
+        console.log('wes');
+        $(this).closest('.nav-tabs').find('li').removeClass('active');
+        $(this).parent('li').addClass('active');
+        let tab = $(this).attr('href');
+        console.log(tab);
+        $(this).closest('.zone-content').find('.tab-pane').removeClass('active');
+        $(this).closest('.zone-content').find(tab).addClass('active');
+    });
 });
