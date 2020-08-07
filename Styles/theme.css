@@ -13428,6 +13428,12 @@ img {
   .page-wrapper .hero-wrapper.page-hero .parallax-content {
     height: 70vh !important;
   }
+  .page-wrapper .hero-wrapper.short-hero .parallax-content {
+    height: 60vh !important;
+  }
+  .page-wrapper .hero-wrapper.short-hero .parallax-content .jumbotron {
+    bottom: 0;
+  }
   .page-wrapper > .hero-wrapper .hero .Masthead {
     height: 100vh !important;
   }

@@ -1,6 +1,7 @@
 {% assign title = CurrentPage.PageTitle %}
 {% assign subTitle = CurrentPage | Attribute:'Subheading' %}
 {% assign showButtons = CurrentPage | Attribute:'UseButtons' %}
+{% assign heroSmall = CurrentPage | Attribute:'UseSmallHero' %}
 {% assign buttons = CurrentPage | Attribute:'Buttons' %}
 {% assign layout = CurrentPage.Layout.Name %}
 
@@ -9,7 +10,11 @@
 {% assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' %}
 {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 
-{% assign wrapperClass = 'page-item' %}
+{% if heroSmall == 'Yes' %}
+    {% assign wrapperClass = 'page-item short-hero' %}
+{% else %}
+    {% assign wrapperClass = 'page-item' %}
+{% endif %}
 
 {% if imageUrlPath != empty %}
     <div class="container-fluid hero-wrapper {{ wrapperClass }}">
