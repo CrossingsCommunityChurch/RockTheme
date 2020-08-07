@@ -14,7 +14,7 @@
 
 
 
-        <div class="card listing shadow-bg mb-3 shadowDepth1">
+        <div class="card listing shadow-bg mb-3 shadowDepth1" data-aos="fade-up">
           <div class="row flex-row">
             <div class="col-sm-4">
               <img src="{{ imageUrl }}" alt="{{ title }}" class="object-cover">

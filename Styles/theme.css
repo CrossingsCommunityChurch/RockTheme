@@ -11040,8 +11040,20 @@ fieldset[disabled] .btn-danger-solid.focus {
 .mt-n3 {
   margin-top: -3rem;
 }
+.mb-0 {
+  margin-bottom: 0;
+}
 .mb-1 {
   margin-bottom: 1rem;
+}
+.mb-2 {
+  margin-bottom: 2rem;
+}
+.mb-3 {
+  margin-bottom: 3rem;
+}
+.mt-0 {
+  margin-top: 0;
 }
 .mt-1 {
   margin-top: 1rem;
@@ -11058,7 +11070,10 @@ fieldset[disabled] .btn-danger-solid.focus {
 .mt-3 {
   margin-top: 3rem;
 }
-.p1 {
+.p-0 {
+  padding: 0;
+}
+.p-1 {
   padding: 1rem;
 }
 .p-2 {
@@ -11066,6 +11081,9 @@ fieldset[disabled] .btn-danger-solid.focus {
 }
 .p-3 {
   padding: 3rem;
+}
+.pt-0 {
+  padding-top: 0;
 }
 .pt-1 {
   padding-top: 1rem;
@@ -11093,6 +11111,9 @@ fieldset[disabled] .btn-danger-solid.focus {
 }
 .pl-3 {
   padding-left: 3rem;
+}
+.pr-0 {
+  padding-right: 0;
 }
 .pr-1 {
   padding-right: 1rem;
@@ -14155,7 +14176,8 @@ img {
   padding-top: 75px;
   padding-bottom: 75px;
 }
-.special-message .past-details {
+.special-message .past-details,
+.special-message .person-details {
   padding-top: 30px;
 }
 .darkmode .special-message {
@@ -14278,6 +14300,27 @@ img {
 @media (min-width: 992px) {
   .side-by-side .text-content {
     padding: 90px;
+  }
+}
+.person-image img {
+  max-height: 150px;
+}
+@media (min-width: 992px) {
+  .person-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .person-wrapper > h3 {
+    text-align: center;
+    color: #666;
+  }
+  .person-item {
+    display: flex;
+    width: 100%;
+  }
+  .person-item .person-image {
+    padding: 15px 22.5px 0;
+    max-width: 200px;
   }
 }
 .contact-item {

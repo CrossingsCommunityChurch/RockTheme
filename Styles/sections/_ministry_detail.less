@@ -1,0 +1,29 @@
+
+.person-image {
+    img {
+        max-height: 150px;
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .person-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        > h3 {
+            text-align: center;
+            color: #666;
+        }
+    }
+    
+    .person-item {
+        display: flex;
+        width: 100%;
+        
+        
+        .person-image {
+            padding: @spacing @spacingLarger 0;
+            max-width: 200px;
+        }
+    }
+}

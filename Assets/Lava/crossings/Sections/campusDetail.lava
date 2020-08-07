@@ -1,6 +1,7 @@
 {%- for item in Items -%}
-  {% if item.Campus and item.Campus != empty %}
-    {% assign campus = Campuses | Where:'Name', item.Campus | First %}
+  {% assign hasCampus = item | Attribute:'Campus' %}
+  {% if hasCampus and hasCampus != empty %}
+    {% assign campus = Campuses | Where:'Name', hasCampus | First %}
     {% assign address = campus.Location.Street1 %}
     {% assign city = campus.Location.City %}
     {% assign state = campus.Location.State %}
@@ -9,7 +10,7 @@
     {% assign serviceTimes = campus.ServiceTimes | Map:'Time' | Join:', '%}
     {% assign campusLeader = campus.LeaderPersonAliasId | PersonByAliasId %}
     {% assign directionsURL = campus | Attribute: 'DirectionsURL' %}
-    {% assign buttonLava = item.lava %}
+    {% assign buttonLava = item | Attribute:'lava' %}
 
       <div class="section special-message simple-section location-details">
         <div class="container">
