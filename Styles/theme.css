@@ -11616,10 +11616,18 @@ img {
   background-color: #fff;
   border-radius: 10px;
   display: block;
+  width: 100%;
 }
 .media-list .card img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+}
+.media-list .card .thumb {
+  background-position: center center;
+  background-size: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 200px;
 }
 .media-list .card .btn.icon-button {
   display: inline-block;
@@ -11753,9 +11761,15 @@ img {
   margin-top: 0;
 }
 .media-list.list .card .thumb {
+  height: auto;
   width: 30%;
   position: relative;
   overflow: hidden;
+  background-position: center center;
+  background-size: cover;
+  border-radius: 0;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 .media-list.list .card .thumb:after {
   content: '\f04b';
@@ -14586,7 +14600,7 @@ img {
   padding: 15px 0;
 }
 .sermon-series-page .video {
-  margin-top: -255px;
+  margin-top: -75px;
 }
 .sermon-series-page .video .video-player {
   background-color: #fff;

@@ -10,8 +10,8 @@
 
 <div class="col-sm-6 col-md-4">
   <a href="{{ link }}" class="card cardShadow">
-    <div class="thumb">
-      <img src="{{ img }}" class="object-fit">
+    <div class="thumb" style="background-image:url('{{ img }}')">
+      <!--<img src="{{ img }}" class="object-fit">-->
     </div>
     <div class="row card-content-row">
       <div class="card-content">

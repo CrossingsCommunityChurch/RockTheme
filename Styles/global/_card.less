@@ -232,10 +232,19 @@
     //border: 3px solid @white;
     border-radius: 10px;
     display: block;
+    width: 100%;
 
     img {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
+    }
+
+    .thumb {
+        background-position: center center;
+        background-size: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: 200px;
     }
 
     .btn.icon-button {
@@ -408,10 +417,15 @@
             }
 
             .thumb {
-                //height: 100%;
+                height: auto;
                 width: 30%;
                 position: relative;
                 overflow: hidden;
+                background-position: center center;
+                background-size: cover;
+                border-radius: 0;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
 
                 &:after {
                     content: '\f04b';
