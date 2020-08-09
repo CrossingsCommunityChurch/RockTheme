@@ -79,6 +79,7 @@
                           {%if child.ChildContentChannelItem.Id != item.Id %}
                             {% assign title = child.ChildContentChannelItem.Title %}
                             {% assign seriesTitle = parent.Title %}
+                            {% assign seriesLogo = parent | Attribute: 'Serieslogo' | Url: 'localpath' %}
                             {% assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' %}
                             {% assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' %}
                             {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
@@ -88,6 +89,9 @@
                             {% assign vimeoImageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' %}
                             {% if vimeoImageUrl != empty %}
                               {% assign imageUrl = vimeoImageUrl %}
+                            {% endif %}
+                            {%if vimeoImageUrl == empty and imageUrlPath == empty %}
+                                {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:seriesLogo %}
                             {% endif %}
                             {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                             {% assign parentPrimarySlug = parent.PrimarySlug | Trim %}

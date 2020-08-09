@@ -80,6 +80,9 @@
                       {% if vimeoImageUrl != empty %}
                         {% assign imageUrl = vimeoImageUrl %}
                       {% endif %}
+                      {%if vimeoImageUrl == empty and imageUrlPath == empty %}
+                          {% assign imageUrl = seriesLogoUrl %}
+                      {% endif %}
                       {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                       {% assign parentPrimarySlug = item.PrimarySlug | Trim %}
                       {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
