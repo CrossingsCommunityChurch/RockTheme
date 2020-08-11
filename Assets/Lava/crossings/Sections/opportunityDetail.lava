@@ -1,0 +1,43 @@
+{% assign title = Opportunity.Name %}
+{% assign content = Opportunity.Description %}
+{% assign connectiontype = Opportunity.ConnectionType.Name %}
+{% assign icon = Opportunity.IconCssClass %}
+
+  {% assign org = 'Global' | Attribute:'OrganizationName' %}
+{% capture pageTitle %}Opportunity - {{ title }} | {{ org }} {% endcapture%}
+{{ pageTitle | SetPageTitle }}
+
+<div class="section page-title reverse devo-title">
+    <div class="container">
+        <div class="jumbotron text-center" data-aos="fade-in">
+            <h3 class="subheading reverse">{{ connectiontype }}</h3>
+            <h1 class="heading">{% if icon != '' %}<i class='{{ icon }}'></i>{% endif %} {{ title }}</h1>
+        </div>
+    </div>
+</div>
+<div class="container">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="opportunity-description pt-3">
+            {{ content }}
+          </div>
+          <!--<h4>Opportunity Details:</h4>
+
+          {% for attribute in Opportunity.AttributeValues %}
+            <strong>{{ attribute.AttributeName }}:</strong> {{ attribute.ValueFormatted }} <br />
+          {% endfor %}
+
+          <p class="margin-t-lg">
+            {% if LinkedPages.SignupPage != '' %}
+            {% if Opportunity.IsActive %}
+            <a href="{{ LinkedPages.SignupPage }}?OpportunityId={{ Opportunity.Id }}" class="btn btn-primary">Connect</a>
+            {% else %}
+            <a href="#" class="btn btn-primary disabled">Connect</a>
+            <div class="alert alert-info">This opportunity is no longer available.</div>
+            {% endif %}
+            {% endif %}
+          </p>-->
+
+      </div>
+  </div>
+</div>

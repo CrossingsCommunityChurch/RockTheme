@@ -9,6 +9,7 @@
 <div class="container card-list">
   <div class="row">
     {% for opportunity in Opportunities %}
+      {{ opportunity | Debug }}
       {% assign title = opportunity.PublicName%}
       {% assign subtitle = opportunity.Summary | StripHtml %}
       {%- assign itemPrimarySlug = opportunity.PrimarySlug | Trim -%}

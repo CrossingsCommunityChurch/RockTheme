@@ -1,3 +1,5 @@
+{%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+{%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
 {%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
 {%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
 {%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
