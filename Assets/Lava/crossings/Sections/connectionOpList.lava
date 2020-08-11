@@ -10,7 +10,7 @@
   <div class="row">
     {% for opportunity in Opportunities %}
       {% assign title = opportunity.PublicName%}
-      {% assign subtitle = opportunity.Summary %}
+      {% assign subtitle = opportunity.Summary | StripHtml %}
       {%- assign itemPrimarySlug = opportunity.PrimarySlug | Trim -%}
       {%- if DetailPage contains '{OpportunitySlug}' and itemPrimarySlug != '' -%}
         {%- assign itemLink = DetailPage | Replace:'{OpportunitySlug}', opportunity.PrimarySlug | Prepend:'/' -%}

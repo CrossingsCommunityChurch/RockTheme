@@ -15,7 +15,7 @@
         {%- endif -%}
       {%- endif -%}
       {% assign title = item.Title %}
-      {% assign subTitle = item | Attribute:'SubTitle' %}
+      {% assign subTitle = item | Attribute:'SubTitle' | StripHtml %}
       {[ cardText title:'{{ title }}' subtitle:'{{ subTitle }}' link:'{{ itemLink }}' actiontext:'Learn More' ]}
     {%- endfor -%}
   </div>
