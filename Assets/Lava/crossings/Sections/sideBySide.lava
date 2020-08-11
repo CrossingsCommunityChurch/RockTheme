@@ -2,6 +2,7 @@
 {%- assign channelContentAlignment  =  ContentChannel | Attribute:'ContentAlignment' -%}
 {%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
 {%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- assign contentItemStyle = '' -%}
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/1100x900' %}
@@ -34,6 +35,9 @@
     object-position: 50% 50%;
 }
 {% endstylesheet %}
+
+{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
+
 <section class="contentComponent contentComponent-split section split-section side-by-side">
 {%- for item in Items -%}
     {%- if channelBackgroundColor != '' -%}

@@ -10,7 +10,7 @@
     {% assign serviceTimes = campus.ServiceTimes | Map:'Time' | Join:', '%}
     {% assign campusLeader = campus.LeaderPersonAliasId | PersonByAliasId %}
     {% assign directionsURL = campus | Attribute: 'DirectionsURL' %}
-    {% assign buttonLava = item | Attribute:'lava' %}
+    {% assign buttonLava = item | Attribute:'lava' | StripHtml %}
 
       <div class="section special-message simple-section location-details">
         <div class="container">

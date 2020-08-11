@@ -1,3 +1,6 @@
+{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
+{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
+
 {%- for item in Items -%}
 
 {% assign title = item.Title %}

@@ -1,6 +1,8 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/450x325' %}
 {% assign mediaData = 'Combinedmedia' | PersistedDataset %}
+{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
+{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
 <div class="media-list">
   <div class="media-search">

@@ -4,7 +4,8 @@
 {%- assign channelFacebook =  ContentChannel | Attribute:'Facebook', 'RawValue' -%}
 {%- assign channelInstagram =  ContentChannel | Attribute:'Instagram', 'RawValue' -%}
 
-
+{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
+{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
 <div class="section special-message simple-section location-details">
   <div class="container">
