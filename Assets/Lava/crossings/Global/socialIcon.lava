@@ -1,0 +1,1 @@
+<a class="social-icon" href="{{link}}" target="_blank" rel="noopener"><i class="fa fa-fw {{icon}}"></i></a>

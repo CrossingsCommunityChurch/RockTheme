@@ -125,3 +125,23 @@
         color: @white;
     }
 }
+
+.social-icon {
+    background-color: @brand-primary;
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 100%;
+    text-align: center;
+    transition: transform ease-in-out 0.3s;
+
+    &:hover {
+        color: #fff;
+        transform: scale(1.1);
+    }
+}
+
+.social-icon + .social-icon {
+    margin-left: 1rem;
+}

@@ -1,3 +1,11 @@
+{%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
+{%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
+
+{%- assign channelFacebook =  ContentChannel | Attribute:'Facebook', 'RawValue' -%}
+{%- assign channelInstagram =  ContentChannel | Attribute:'Instagram', 'RawValue' -%}
+
+
+
 <div class="section special-message simple-section location-details">
   <div class="container">
     <div class="row">
@@ -14,6 +22,14 @@
                             M23.3,14.6c-0.4,4.3-3.2,7.9-7.1,9.3v-9.5L23.3,14.6z" class="st0"></path></g></g>
             </svg>
           </div>
+          {%- if channelSectionTitle != '' -%}
+              <h2 class="text-center mt-0">{{ channelSectionTitle }}</h2>
+          {%- endif -%}
+          {%- if channelSectionSummary != '' -%}
+              <div class="summary text-center">
+                {{ channelSectionSummary }}
+              </div>
+          {%- endif -%}
           <div class="row flex-row flex-wrap justify-center location-content">
             {%- for item in Items -%}
 
@@ -44,6 +60,16 @@
 
             {% endfor %}
           </div>
+          {% if channelFacebook != '' or channelInstagram != '' %}
+              <div class="row social-section justify-center flex-row flex-wrap">
+                    {% if channelFacebook != '' %}
+                      {[ socialIcon link:'{{channelFacebook}}' icon:'fa-facebook' ]}
+                    {% endif %}
+                    {% if channelInstagram != '' %}
+                      {[ socialIcon link:'{{channelInstagram}}' icon:'fa-instagram' ]}
+                    {% endif %}
+              </div>
+          {% endif %}
         </div>
       </div>
     </div>
