@@ -14599,6 +14599,13 @@ img {
 .paginate-buttons {
   padding: 15px 0;
 }
+.media-embed-list .media-item .subheading {
+  margin-bottom: 0;
+}
+.media-embed-list .media-item h3 {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
 .sermon-series-page .video {
   margin-top: -75px;
 }

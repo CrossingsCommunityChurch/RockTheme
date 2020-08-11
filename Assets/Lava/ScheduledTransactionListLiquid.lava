@@ -12,3 +12,4 @@
   Next gift will be on {{ ScheduledTransaction.NextPaymentDate | Date:"MMMM d, yyyy" }}.
   {% endif %}
 </div>
+
