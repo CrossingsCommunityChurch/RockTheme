@@ -7,6 +7,9 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/1100x900' %}
 
+{%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
+{%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
+
 {% stylesheet id:'contentcomponent-split' %}
 .contentComponent-split .row {
     min-height: 450px;
@@ -38,6 +41,21 @@
 
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
+{%- if channelSectionTitle != '' -%}
+<div class="section">
+    <div class="row">
+        <div class="container content-area" data-aos="fade-up">
+            <h2 class="text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+            <hr class="sep">
+            {%- if channelSectionSummary != '' -%}
+                <div class="summary text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>
+                {{ channelSectionSummary }}
+                </div>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+{%- endif -%}
 <section class="contentComponent contentComponent-split section split-section side-by-side">
 {%- for item in Items -%}
     {%- if channelBackgroundColor != '' -%}
