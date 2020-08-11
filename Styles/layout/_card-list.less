@@ -29,6 +29,7 @@
         height: 100%;
         justify-content: flex-end;
         scroll-snap-align: start;
+        min-width: 150px;
 
         .fas {
             display: none;
@@ -158,6 +159,7 @@
         .card-wrapper {
             padding-left: 15px;
             margin-bottom: @spacing2x;
+            position: relative;
         }
 
         .card {
@@ -166,6 +168,8 @@
             //height: auto;
             padding: @spacing3x @spacingLarger @spacingLarger;
             transition: all ease-in-out 0.5s;
+            height: auto;
+            padding-top: 5rem;
 
             h3 {
                 //font-size: 2rem;
@@ -185,7 +189,12 @@
                 background-color: #888b8c;
                 border-color: #888b8c;
                 text-decoration: none;
-                transform: scale(1.1);
+                transform: scale(1.05);
+                position: absolute;
+                left: 0;
+                right: 0;
+                z-index: 9;
+                padding-top: calc(5rem + 30px);
 
                 .title {
                     top: -30px;
@@ -202,6 +211,11 @@
 
                 .subtitle {
                     display: block;
+                    position: relative;
+                }
+
+                .learn-more {
+                    display: none;
                 }
             }
 

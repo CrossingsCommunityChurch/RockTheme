@@ -13664,6 +13664,7 @@ img {
   height: 100%;
   justify-content: flex-end;
   scroll-snap-align: start;
+  min-width: 150px;
 }
 .card-list .card .fas {
   display: none;
@@ -13769,10 +13770,13 @@ img {
   .card-list .card-wrapper {
     padding-left: 15px;
     margin-bottom: 30px;
+    position: relative;
   }
   .card-list .card {
     padding: 45px 22.5px 22.5px;
     transition: all ease-in-out 0.5s;
+    height: auto;
+    padding-top: 5rem;
   }
   .card-list .card h3 .fas {
     opacity: 0;
@@ -13786,7 +13790,12 @@ img {
     background-color: #888b8c;
     border-color: #888b8c;
     text-decoration: none;
-    transform: scale(1.1);
+    transform: scale(1.05);
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    padding-top: calc(5rem + 30px);
   }
   .card-list .card:hover .title {
     top: -30px;
@@ -13801,6 +13810,10 @@ img {
   }
   .card-list .card:hover .subtitle {
     display: block;
+    position: relative;
+  }
+  .card-list .card:hover .learn-more {
+    display: none;
   }
   .card-list .card .subtitle {
     position: absolute;
