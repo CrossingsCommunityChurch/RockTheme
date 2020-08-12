@@ -1,3 +1,9 @@
+{% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
+{% capture pageTitle %}{{eventitemoccurrence.EventItem.Name}}{% endcapture%}
+{% assign org = 'Global' | Attribute:'OrganizationName' %}
+{% capture pageTitleBrowser %}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{% endcapture%}
+{{ pageTitle | SetPageTitle:'PageTitle' }}
+{{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
 <div class="section page-title reverse devo-title">
     <div class="container">
         <div class="jumbotron text-center" data-aos="fade-in">
@@ -5,17 +11,19 @@
         </div>
     </div>
 </div>
+{% endeventitemoccurrence %}
 
 {[ eventDetails  ]}
 
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
-{% capture pageTitle %}{{eventitemoccurrence.EventItem.Name}}{% endcapture%}
-{% assign org = 'Global' | Attribute:'OrganizationName' %}
-{% capture pageTitleBrowser %}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{% endcapture%}
-{{ pageTitle | SetPageTitle:'PageTitle' }}
-{{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
 {% assign eventimageUrl =''%}
 {% assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' %}
+
+{% eventcalendaritem where:'EventItemId == {{eventitemoccurrence.EventItemId}}' %}
+
+    {% assign eventassetimage = eventcalendaritem | Attribute:'Imageasset' %}
+
+{% endeventcalendaritem %}
 {% if eventassetimage and eventassetimage != empty %}
     {% assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
     {% assign eventimageSize = '/fit-in/900x600' %}
