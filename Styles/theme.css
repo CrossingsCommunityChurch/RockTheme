@@ -12985,7 +12985,7 @@ img {
   transition: transform ease-in-out 0.5s, background ease-in-out 0.3s, font-size ease-in-out 0.5s, padding ease-in-out 0.5s;
   position: fixed;
   /* Fallback */
-  position: sticky;
+  position: absolute;
   left: 0;
   right: 0;
   z-index: 99;
@@ -13291,9 +13291,10 @@ img {
 .hero-wrapper .jumbotron {
   position: absolute;
   z-index: 1;
-  bottom: 10vh;
+  bottom: 0;
   left: 0;
   right: 0;
+  margin-bottom: 0;
 }
 .hero .heading,
 .hero-wrapper .heading,
@@ -13347,6 +13348,7 @@ img {
   .hero-wrapper .jumbotron {
     padding-left: 60px;
     padding-right: 60px;
+    bottom: 10vh;
   }
   .hero .Masthead,
   .hero-wrapper .parallax-content {
