@@ -13777,7 +13777,7 @@ img {
   .card-list .card {
     padding: 45px 22.5px 22.5px;
     transition: all ease-in-out 0.5s;
-    height: auto;
+    height: 100%;
     padding-top: 5rem;
   }
   .card-list .card h3 .fas {
@@ -13797,7 +13797,9 @@ img {
     left: 0;
     right: 0;
     z-index: 9;
-    padding-top: calc(5rem + 30px);
+    padding-top: 5.5rem;
+    height: 100%;
+    min-height: 275px;
   }
   .card-list .card:hover .title {
     top: -30px;
@@ -13820,6 +13822,23 @@ img {
   .card-list .card .subtitle {
     position: absolute;
     display: none;
+  }
+  .page-menu .card-list .card {
+    height: 100%;
+  }
+  .page-menu .card-list .card:hover {
+    transform: none;
+    position: static;
+    padding-top: 5rem;
+  }
+  .page-menu .card-list .card:hover .title {
+    top: -10px;
+  }
+  .page-menu .card-list .card:hover .subtitle {
+    display: none;
+  }
+  .page-menu .card-list .card:hover .learn-more {
+    display: block;
   }
   .about-card-list {
     overflow: inherit;

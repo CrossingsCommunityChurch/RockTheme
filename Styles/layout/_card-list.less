@@ -168,7 +168,7 @@
             //height: auto;
             padding: @spacing3x @spacingLarger @spacingLarger;
             transition: all ease-in-out 0.5s;
-            height: auto;
+            height: 100%;
             padding-top: 5rem;
 
             h3 {
@@ -194,7 +194,9 @@
                 left: 0;
                 right: 0;
                 z-index: 9;
-                padding-top: calc(5rem + 30px);
+                padding-top: 5.5rem;
+                height: 100%;
+                min-height: 275px;
 
                 .title {
                     top: -30px;
@@ -222,6 +224,30 @@
             .subtitle {
                 position: absolute;
                 display: none;
+            }
+        }
+    }
+
+    .page-menu .card-list {
+        .card {
+            height: 100%;
+
+            &:hover {
+                transform: none;
+                position: static;
+                padding-top: 5rem;
+
+                .title {
+                    top: -10px;
+                }
+
+                .subtitle {
+                    display: none;
+                }
+
+                .learn-more {
+                    display: block;
+                }
             }
         }
     }
