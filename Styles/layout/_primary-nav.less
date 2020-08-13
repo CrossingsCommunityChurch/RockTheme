@@ -548,8 +548,9 @@
     flex-direction: column;
 
     .profile {
-        padding: @spacing @spacing @spacing2x;
-        text-align: center;
+        padding: @spacing @spacing2x;
+        text-align: left;
+        //background-color: @white;
 
         h4 {
             margin-bottom: 0;
@@ -558,7 +559,7 @@
         .profile-image {
             width: 125px;
             //padding-right: @spacing2x;
-            margin: auto;
+            //margin: auto;
 
             > img {
                 //border-radius: 50%;
@@ -582,14 +583,15 @@
 
         > ul {
             //padding-right: @spacing;
+            margin-top: @spacing;
 
             > li {
                 //padding: @spacing;
 
                 > a {
                     display: block;
-                    padding: @spacingSmall 7.5px;
-                    text-align: center;
+                    padding: @spacingSmall @spacing @spacingSmall @spacing2x;
+                    text-align: left;
                     text-transform: uppercase;
                     border-bottom: 1px solid #ddd;
                     font-family: @headings-font-family;
@@ -637,10 +639,19 @@
 
                     > a {
                         display: block;
-                        padding: @spacing4x 7.5px;
+                        padding: @spacing3x 7.5px;
                         background-color: #fff;
                         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
                         border: 0 none;
+                        text-align: center;
+
+                        .fa {
+                            display: block;
+                            font-size: 2rem;
+                            text-align: center;
+                            margin: auto;
+                            margin-bottom: 10px
+                        }
 
                         &:hover {
                             background-color: @brand-primary;

@@ -12,10 +12,11 @@
     </div>
     <nav class="account-nav" role="navigation">
         <ul>
-            <li><a href="/my-profile">My Profile</a></li>
-            <li><a href="/my-giving">My Giving</a></li>
-            <li><a href="/my-groups">My Groups</a></li>
-            <li><a href="/my-assessments">Assessments</a></li>
+            <li><a href="/my-profile"><i class="fa fa-fw fa-user"></i> My Profile</a></li>
+            <li><a href="/my-giving"><i class="fa fa-fw fa-heart"></i> My Giving</a></li>
+            <li><a href="/my-groups"><i class="fa fa-fw fa-users"></i> My Groups</a></li>
+            <li><a href="/my-assessments"><i class="fa fa-fw fa-sticky-note"></i> Assessments</a></li>
+            <li><a href="/devotionals"><i class="fa fa-fw fa-bible"></i> Devotionals</a></li>
         </ul>
         <div class="logout">
           <a href="/?Logout=True" class="btn btn-block">Logout</a>
