@@ -6,6 +6,8 @@
   {% assign summary = item.Content %}
   {% assign video = item | Attribute:'VimeoId' %}
   {% assign parentPath = 'sermons' %}
+  {% assign notes = item | Attribute:'Notes', 'Url' %}
+  {% assign questions = item | Attribute:'DiscussionQuestions', 'Url' %}
 
   {% assign org = 'Global' | Attribute:'OrganizationName' %}
   {% capture pageTitle %}{{ speaker }} - {{ title }} | {{ org }} {% endcapture%}
@@ -30,7 +32,18 @@
                 <h1 class="heading">{{ item.Title }}</h1>
                 <h3 class="subheading">{{ speaker }} | {{ date }}</h3>
                 <p>{{ summary }}</p>
+                {% if notes != '' or questions != '' %}
+                  <div class="message-notes">
+                    {% if notes != '' %}
+                        <a href="{{notes}}" class="btn-primary btn" target="_blank" rel="noopener"><i class="fas fa-sticky-note"></i><span>Message Notes</span></a>
+                    {% endif %}
+                    {% if questions != '' %}
+                        <a href="{{questions}}" class="btn-primary btn" target="_blank" rel="noopener"><i class="fas fa-question-circle"></i><span>Discussion Questions</span></a>
+                    {% endif %}
+                  </div>
+                {% endif %}
                 <a href="#" class="btn-outline-primary btn"><i class="fas fa-share"></i><span>Share</span></a>
+
                 <div class="tags">
                   <p class="small"><i class="fas fa-tags"></i>
                     {% if item.ContentChannel.IsTaggingEnabled %}
