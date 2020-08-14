@@ -13838,14 +13838,17 @@ img {
     position: absolute;
     display: none;
   }
+  .page-menu .card-list .card-wrapper {
+    min-height: 220px;
+  }
   .page-menu .card-list .card {
     height: 100%;
   }
   .page-menu .card-list .card:hover {
     transform: none;
     position: static;
-    padding-top: 5rem;
-    min-height: none;
+    padding-top: 0;
+    min-height: 0;
   }
   .page-menu .card-list .card:hover .title {
     top: -10px;
