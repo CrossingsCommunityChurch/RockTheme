@@ -9,6 +9,59 @@
     <div class="container">
       {% comment %} {% assign filterLists = mediaData.FilterLists %}
       {[ mediaFilters lists:filterLists ]} {% endcomment %}
+
+
+      <div class="media-filter row">
+        <div class="col-md-12">
+          <h2>Find a Message or Teaching Series</h2>
+        </div>
+        <div class="col-md-6 col-lg-8">
+          <div class="form form-inline">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Search by Topic</label>
+              <div class="dropdown">
+                <button type="button" id="topics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Topic <i class="fas fa-angle-down pull-right"></i></button>
+                <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
+                  {% comment %} <li><a onclick="setFilter('topic','Any')" style="cursor: pointer;">Any</a></li>
+                  <li role="separator" class="divider"></li> {% endcomment %}
+                  <li v-for="topic in topics"><a style="cursor: pointer;">{%raw%}{{topic.Name}}{%endraw%}</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="form-group hidden-xs hidden-sm">
+              <label for="exampleInputEmail1">Search by Speaker</label>
+              <div class="dropdown">
+                <button type="button" id="speakers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Speaker <i class="fas fa-angle-down pull-right"></i></button>
+                <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
+                  {% comment %} <li><a onclick="setFilter('speaker','Any')" style="cursor: pointer;">Any</a></li>
+                  <li role="separator" class="divider"></li> {% endcomment %}
+                  <li v-for="speaker in speakers"><a style="cursor: pointer;">{%raw%}{{speaker.Name}}{%endraw%}</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="form-group hidden-xs hidden-sm">
+              <label for="exampleInputEmail1">Book of the Bible</label>
+              <div class="dropdown">
+                <button type="button" id="books" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Book <i class="fas fa-angle-down pull-right"></i></button>
+                <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
+                  {% comment %} <li><a onclick="setFilter('book','Any')" style="cursor: pointer;">Any</a></li>
+                  <li role="separator" class="divider"></li> {% endcomment %}
+                  <li v-for="book in books"><a style="cursor: pointer;">{%raw%}{{book.Name}}{%endraw%}</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div role="group" aria-label="..." class="btn-group pull-right card-list-filter">
+            <button type="button" class="btn btn-primary" style="outline: none;"><i class="fas fa-bars"></i></button>
+            <button type="button" class="btn btn-primary active" style="outline: none;"><i class="fas fa-th"></i></button>
+          </div>
+        </div>
+      </div>
+
+
+
       <div class="media-list-items" data-aos="fade-up">
         <div class="row flex-row flex-wrap">
 
@@ -61,7 +114,13 @@ const vueApp = new Vue({
   el: '#vapp',
   data () {
 		return {
-			posts : [''],
+			messages : [''],
+      topics: [''],
+      speakers: [''],
+      books: [''],
+      topicFilter: '',
+      speakerFilter: '',
+      bookFilter: '',
 			page: 1,
 			perPage: 9,
 			pages: [],
@@ -84,43 +143,54 @@ const vueApp = new Vue({
       }
       return imageUrl;
     },
-		getPosts () {
+		getMedia () {
       let data = [];
-      console.log('I am getting posts...')
+      console.log('I am getting messages...')
       axios
         .get('http://localhost:50886/Webhooks/Lava.ashx/crossings/api/combined-media')
         .then(response => {
-          console.log('I got the posts', response.data.Messages);
-          this.posts = response.data.Messages;
-          console.log('posts.length', this.posts.length);
+          this.messages = response.data.Messages;
+          this.topics = response.data.FilterLists.Topics;
+          this.speakers = response.data.FilterLists.Speakers;
+          this.books = response.data.FilterLists.Books;
+          console.log('messages', this.messages);
         });
 		},
 		setPages () {
-			let numberOfPages = Math.ceil(this.posts.length / this.perPage);
+			let numberOfPages = Math.ceil(this.messages.length / this.perPage);
 			for (let index = 1; index <= numberOfPages; index++) {
 				this.pages.push(index);
 			}
 		},
-		paginate (posts) {
+		paginate (messages) {
 			let page = this.page;
 			let perPage = this.perPage;
 			let from = (page * perPage) - perPage;
 			let to = (page * perPage);
-			return  posts.slice(from, to);
+			return  messages.slice(from, to);
 		}
 	},
 	computed: {
+    filteredMessages() {
+      return this.messages.filter(message => {
+        var filterOut = false;
+        filterOut |= (this.topicFilter && this.topicFilter !== 'Any' && !message.Topics.includes(this.topicFilter));
+        filterOut |= (this.speakerFilter && this.speakerFilter !== 'Any' && message.Speaker !== this.speakerFilter);
+        filterOut |= (this.bookFilter && this.bookFilter !== 'Any' && message.Book.indexOf(this.bookFilter) < 0);
+        return !filterOut;
+      });
+    },
 		mediaItems () {
-			return this.paginate(this.posts);
+			return this.paginate(this.filteredMessages);
 		}
 	},
 	watch: {
-		posts () {
+		messages () {
 			this.setPages();
 		}
 	},
 	created(){
-		this.getPosts();
+		this.getMedia();
 	},
 	filters: {
 		trimWords(value){
