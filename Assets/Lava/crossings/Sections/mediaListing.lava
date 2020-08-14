@@ -1,124 +1,132 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/450x325' %}
 {% assign mediaData = 'Combinedmedia' | PersistedDataset %}
 
-<div class="media-list">
+{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js' %}
+{% endjavascript %}
+
+<div id="vapp" class="media-list">
   <div class="media-search">
     <div class="container">
-      {% assign filterLists = mediaData.FilterLists %}
-      {[ mediaFilters lists:filterLists ]}
+      {% comment %} {% assign filterLists = mediaData.FilterLists %}
+      {[ mediaFilters lists:filterLists ]} {% endcomment %}
       <div class="media-list-items" data-aos="fade-up">
         <div class="row flex-row flex-wrap">
 
-            {% assign mediaItems = mediaData.Messages %}
-
-            {% comment %} Filtering {% endcomment %}
-            {% assign topicFilter = PageParameter['topic'] %}
-            {% assign speakerFilter = PageParameter['speaker'] %}
-            {% assign bookFilter = PageParameter['book'] %}
-
-            {% comment %} Paging {% endcomment %}
-            {% assign itemsPerPage = 6 %}
-            {% assign page = 1 %}
-            {%if PageParameter['page'] %}
-              {% assign page = PageParameter['page'] %}
-            {% endif %}
-            {% assign size = mediaItems | Size %}
-            {% assign count = 0 %}
-
-            {%- for item in mediaItems -%}
-
-              {% comment %} Filter out any messages that don't match the currently selected filter {% endcomment %}
-              {% if topicFilter != null and topicFilter != "" %}
-                {% assign containsTopic = item.Topics | Contains:topicFilter %}
-                {% if containsTopic == false %}
-                  {% continue %}
-                {% endif %}
-              {% endif %}
-              {% if bookFilter != null and bookFilter != "" %}
-                {% assign containsBook = item.Books | RegExMatch:bookFilter %}
-                {% if containsBook == false %}
-                  {% continue %}
-                {% endif %}
-              {% endif %}
-              {% if speakerFilter != null and speakerFilter != "" and item.Speaker != speakerFilter %}{% continue %}{% endif %}
-
-              {% comment %} Also filter out items that don't belong in the current page {% endcomment %}
-              {% assign count = count | Plus:1 %}
-              {% assign pgIdx = page | Minus:1 %}
-              {% assign pgMin = pgIdx | Times:itemsPerPage | Plus:1 %}
-              {% assign pgItems = itemsPerPage | Minus:1 %}
-              {% assign pgMax = pgMin | Plus:pgItems %}
-              {% assign prev = pgIdx %}
-              {% assign next = page | Plus:1 %}
-              {% assign lastPage = count | DividedBy:itemsPerPage | Floor %}
-              {% assign itemsOnLastPage = count | Modulo:itemsPerPage  %}
-              {% if itemsOnLastPage != 0 %}
-                {% assign lastPage = lastPage | Plus:1 %}
-              {% endif %}
-
-              {% if count < pgMin or count > pgMax %}{% continue %}{% endif %}
-
-              {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:item.Image %}
-
-              {% if item.useVimeoImage == True %}
-                {% assign imageUrl = item.Image %}
-              {% endif %}
-
-              {% assign date = item.StartDate %}
-              {% assign title = item.Title %}
-              {% assign subTitle = item.SubTitle %}
-              {% assign date = item.PublishDateTime %}
-              {% assign itemLink = item.PrimarySlug | Prepend:'/media/' %}
-              {% assign speaker = item.Speaker %}
-              {% assign channelPath = item.ChannelPath %}
-
-              {% if item.Series %}
-                {% assign seriesTitle = item.Series.Title %}
-                {% assign itemLink = item.PrimarySlug | Prepend: '/' | Prepend:item.Series.Slug | Prepend:item.ChannelPath | Prepend:'/media/'  %}
-              {% endif %}
-
-              {[ cardMedia link:'{{ itemLink }}' title:'{{ title }}' speaker:'{{ speaker }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
-            {% endfor %}
-          {%- comment -%}
-            End Loop over this card
-          {%- endcomment -%}
+          <div v-for="item in mediaItems" class="col-sm-6 col-md-4">
+            <a :href="mediaUrl(item)" class="card cardShadow">
+              <div class="thumb">
+                <img :src="mediaImg(item)" class="object-fit">
+              </div>
+              <div class="row card-content-row">
+                <div class="card-content">
+                  <div class="btn icon-button shadowDepth2">
+                    <i class="fas fa-play"></i>
+                    <span>Watch</span>
+                  </div>
+                  <div class="col">
+                    <div>
+                      <h3>{% raw %}{{ item.Title }}{% endraw %}</h3>
+                      <h5 v-if="item.Series" class="series">{% raw %}{{ item.Series.Title }}{% endraw %}</h5>
+                      <h5>{% raw %}{{ item.Speaker }}{% endraw %}</h5>
+                      <p class="date">{% raw %}{{ item.StartDate }}{% endraw %}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
         </div>
-        <div class="paginate-buttons text-center">
-          <a class="btn btn-default" id="back" onclick="return goToPage({{prev}})" role="button">Back</a>
-          <a class="btn btn-default" id="next" onclick="return goToPage({{next}})" role="button">Next</a>
-        </div>
+        <nav>
+          <ul class="pagination">
+            <li class="page-item">
+              <button type="button" class="page-link" v-if="page != 1" @click="page--"> Back </button>
+            </li>
+            <li class="page-item">
+              <button type="button" class="page-link" v-for="pageNumber in pages.slice(page-1, page+5)" @click="page = pageNumber"> {{pageNumber}} </button>
+            </li>
+            <li class="page-item">
+              <button type="button" @click="page++" v-if="page < pages.length" class="page-link"> Next </button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
 </div>
+
 <script>
 
-  $( document ).ready(function() {
-
-    const urlParams = new URLSearchParams(window.location.search);
-
-    if ({{page}} <= 1) $('#back').hide();
-    if ({{page}} >= {{lastPage}}) $('#next').hide();
-
-  });
-
-  function goToPage(pgNum) {
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlNoParams = window.location.href.split('?')[0];
-
-    if (urlParams.has('page')) {
-      urlParams.set('page', pgNum);
-    }
-    else {
-      urlParams.append('page', pgNum);
-    }
-
-    const newUrl = urlNoParams + '?' + urlParams.toString();
-    window.location.href = newUrl;
-
-    return false;
-  }
+const imageStorageUrl = '{{ imageStorageUrl }}';
+const vueApp = new Vue({
+  el: '#vapp',
+  data () {
+		return {
+			posts : [''],
+			page: 1,
+			perPage: 9,
+			pages: [],
+		}
+	},
+	methods:{
+    mediaUrl(item) {
+      if (item.Series) {
+        return `/media/${item.ChannelPath}${item.Series.Slug}/${item.PrimarySlug}`;
+      }
+      else {
+        return `/media/${item.PrimarySlug}`;
+      }
+    },
+    mediaImg(item) {
+      let imageStorageUrl = '{{imageStorageUrl}}';
+      let imageUrl = `${imageStorageUrl}/fit-in/450x325${item.Image}`;
+      if (item.useVimeoImage) {
+        imageUrl = item.Image;
+      }
+      return imageUrl;
+    },
+		getPosts () {
+      let data = [];
+      console.log('I am getting posts...')
+      axios
+        .get('http://localhost:50886/Webhooks/Lava.ashx/crossings/api/combined-media')
+        .then(response => {
+          console.log('I got the posts', response.data.Messages);
+          this.posts = response.data.Messages;
+          console.log('posts.length', this.posts.length);
+        });
+		},
+		setPages () {
+			let numberOfPages = Math.ceil(this.posts.length / this.perPage);
+			for (let index = 1; index <= numberOfPages; index++) {
+				this.pages.push(index);
+			}
+		},
+		paginate (posts) {
+			let page = this.page;
+			let perPage = this.perPage;
+			let from = (page * perPage) - perPage;
+			let to = (page * perPage);
+			return  posts.slice(from, to);
+		}
+	},
+	computed: {
+		mediaItems () {
+			return this.paginate(this.posts);
+		}
+	},
+	watch: {
+		posts () {
+			this.setPages();
+		}
+	},
+	created(){
+		this.getPosts();
+	},
+	filters: {
+		trimWords(value){
+			return value.split(" ").splice(0,20).join(" ") + '...';
+		}
+	}
+});
 
 </script>
