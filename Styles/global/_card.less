@@ -22,6 +22,7 @@
     background-color: @white;
     //border: 3px solid @white;
     border-radius: 10px;
+    display: block;
 
     img {
         border-top-left-radius: 10px;
@@ -146,6 +147,14 @@
 .event-list {
     padding-top: 30px;
     background-color: #eee;
+
+    .event-filter {
+        > div {
+            padding-left: @spacing;
+            padding-right: @spacing;
+        }
+    }
+
     &.list {
         .card {
             display: flex;

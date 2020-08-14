@@ -11464,6 +11464,7 @@ img {
 .event-list .card {
   background-color: #fff;
   border-radius: 10px;
+  display: block;
 }
 .event-list .card img {
   border-top-left-radius: 10px;
@@ -11564,6 +11565,10 @@ img {
 .event-list {
   padding-top: 30px;
   background-color: #eee;
+}
+.event-list .event-filter > div {
+  padding-left: 15px;
+  padding-right: 15px;
 }
 .event-list.list .card {
   display: flex;
@@ -13650,7 +13655,7 @@ img {
 }
 .card-list {
   overflow-x: scroll;
-  margin-top: -50px;
+  margin-top: -15px;
   position: relative;
   z-index: 9;
   scroll-behavior: smooth;
