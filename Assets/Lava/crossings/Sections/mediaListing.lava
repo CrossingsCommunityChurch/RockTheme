@@ -4,52 +4,32 @@
 {% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js' %}
 {% endjavascript %}
 
+<div id="vue-template-dropdown">
+  <div class="form-group">
+    <label>{%raw%}{{headingLabel}}{%endraw%}</label>
+    <div class="dropdown" :class="{'open': open}">
+      <button @click="open = !open" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle">{%raw%}{{selectedValue}}{%endraw%}<i class="fas fa-angle-down pull-right"></i></button>
+      <ul class="dropdown-menu">
+        <li><a @click="handleClick(-1)">Any</a></li>
+        <li role="separator" class="divider"></li>
+        <li v-for="(option,i) in options"><a @click="handleClick(i)">{%raw%}{{option.Name}}{%endraw%}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <div id="vapp" class="media-list">
   <div class="media-search">
     <div class="container">
-      {% comment %} {% assign filterLists = mediaData.FilterLists %}
-      {[ mediaFilters lists:filterLists ]} {% endcomment %}
-
-
       <div class="media-filter row">
         <div class="col-md-12">
           <h2>Find a Message or Teaching Series</h2>
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
-            <div class="form-group">
-              <label for="exampleInputEmail1">Search by Topic</label>
-              <div class="dropdown">
-                <button type="button" id="topics" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Topic <i class="fas fa-angle-down pull-right"></i></button>
-                <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-                  {% comment %} <li><a onclick="setFilter('topic','Any')" style="cursor: pointer;">Any</a></li>
-                  <li role="separator" class="divider"></li> {% endcomment %}
-                  <li v-for="topic in topics"><a style="cursor: pointer;">{%raw%}{{topic.Name}}{%endraw%}</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="form-group hidden-xs hidden-sm">
-              <label for="exampleInputEmail1">Search by Speaker</label>
-              <div class="dropdown">
-                <button type="button" id="speakers" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Speaker <i class="fas fa-angle-down pull-right"></i></button>
-                <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-                  {% comment %} <li><a onclick="setFilter('speaker','Any')" style="cursor: pointer;">Any</a></li>
-                  <li role="separator" class="divider"></li> {% endcomment %}
-                  <li v-for="speaker in speakers"><a style="cursor: pointer;">{%raw%}{{speaker.Name}}{%endraw%}</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="form-group hidden-xs hidden-sm">
-              <label for="exampleInputEmail1">Book of the Bible</label>
-              <div class="dropdown">
-                <button type="button" id="books" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Book <i class="fas fa-angle-down pull-right"></i></button>
-                <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
-                  {% comment %} <li><a onclick="setFilter('book','Any')" style="cursor: pointer;">Any</a></li>
-                  <li role="separator" class="divider"></li> {% endcomment %}
-                  <li v-for="book in books"><a style="cursor: pointer;">{%raw%}{{book.Name}}{%endraw%}</a></li>
-                </ul>
-              </div>
-            </div>
+            <vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
+            <vue-dropdown :options="speakers" heading-label="Search by Speaker" empty-label="Select a Speaker" @change="setFilter('speaker', $event)"></vue-dropdown>
+            <vue-dropdown :options="books" heading-label="Search by Book" empty-label="Select a Book" @change="setFilter('book', $event)"></vue-dropdown>
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -59,9 +39,6 @@
           </div>
         </div>
       </div>
-
-
-
       <div class="media-list-items" data-aos="fade-up">
         <div class="row flex-row flex-wrap">
 
@@ -92,10 +69,7 @@
         <nav>
           <ul class="pagination">
             <li class="page-item">
-              <button type="button" class="page-link" v-if="page != 1" @click="page--"> Back </button>
-            </li>
-            <li class="page-item">
-              <button type="button" class="page-link" v-for="pageNumber in pages.slice(page-1, page+5)" @click="page = pageNumber"> {{pageNumber}} </button>
+              <button type="button" class="page-link" v-if="page > 1" @click="page--"> Back </button>
             </li>
             <li class="page-item">
               <button type="button" @click="page++" v-if="page < pages.length" class="page-link"> Next </button>
@@ -110,6 +84,49 @@
 <script>
 
 const imageStorageUrl = '{{ imageStorageUrl }}';
+
+Vue.component('vue-dropdown', {
+  template: '#vue-template-dropdown',
+  props: {
+    open: {
+      type: Boolean,
+      default: false
+    },
+    emptyLabel: {
+      type: String,
+      default: 'Select'
+    },
+    options: {
+      type: Array,
+      required: true
+    },
+    headingLabel: {
+      type: String,
+      default: 'Search by Value'
+    }
+  },
+  data: function () {
+    return {
+      selectedOption: {
+        type: Number,
+        default: null
+      }
+    };
+  },
+  computed: {
+    selectedValue: function () {
+      return this.selectedOption >= 0 ? this.options[this.selectedOption].Name : this.emptyLabel;
+    }
+  },
+  methods: {
+    handleClick: function (i) {
+      this.selectedOption = i;
+      this.open = false;
+      this.$emit('change', i >= 0 ? this.options[i] : '');
+    }
+  }
+});
+
 const vueApp = new Vue({
   el: '#vapp',
   data () {
@@ -145,7 +162,6 @@ const vueApp = new Vue({
     },
 		getMedia () {
       let data = [];
-      console.log('I am getting messages...')
       axios
         .get('http://localhost:50886/Webhooks/Lava.ashx/crossings/api/combined-media')
         .then(response => {
@@ -153,11 +169,12 @@ const vueApp = new Vue({
           this.topics = response.data.FilterLists.Topics;
           this.speakers = response.data.FilterLists.Speakers;
           this.books = response.data.FilterLists.Books;
-          console.log('messages', this.messages);
         });
 		},
 		setPages () {
-			let numberOfPages = Math.ceil(this.messages.length / this.perPage);
+      this.pages = [];
+      this.page = 1;
+			let numberOfPages = Math.ceil(this.filteredMessages.length / this.perPage);
 			for (let index = 1; index <= numberOfPages; index++) {
 				this.pages.push(index);
 			}
@@ -168,7 +185,10 @@ const vueApp = new Vue({
 			let from = (page * perPage) - perPage;
 			let to = (page * perPage);
 			return  messages.slice(from, to);
-		}
+		},
+    setFilter(propName, item) {
+      this[`${propName}Filter`] = item.Name;
+    }
 	},
 	computed: {
     filteredMessages() {
@@ -185,7 +205,7 @@ const vueApp = new Vue({
 		}
 	},
 	watch: {
-		messages () {
+		filteredMessages () {
 			this.setPages();
 		}
 	},
