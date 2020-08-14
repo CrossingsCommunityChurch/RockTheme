@@ -1,6 +1,8 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
+<div class="flex-row flex-wrap reverse" style="width: 100%;">
+
 {%- for item in Items -%}  {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
 {% if item | Attribute:'AssetImage' %}
     {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
@@ -35,3 +37,5 @@
   </div>
 </div>
 {%- endfor -%}
+
+</div>
