@@ -87,7 +87,7 @@
               {% capture eventsJson %}{{eventsJson}}"Summary": {{summary | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"audiences": [ {%endcapture%}
                 {% for audience in audiences%}
-                  {% capture eventsJson %}{{eventsJson}}{{ audience.DefinedValue.Value | StripNewlines | ToJSON }}{%endcapture%}
+                  {% capture eventsJson %}{{eventsJson}}{{ audience.DefinedValue.Value | StripNewlines | StripHtml | ToJSON }} , {%endcapture%}
                   {% unless forloop.last %}{% capture eventsJson %}{{eventsJson}} , {%endcapture%}{% endunless %}
                 {% endfor %}
               {% capture eventsJson %}{{eventsJson}} ], {%endcapture%}
@@ -106,7 +106,7 @@
                   {% endfor %}
                 {% capture eventsJson %}{{eventsJson}} ], {%endcapture%}
                 {% capture eventsJson %}{{eventsJson}}"Note": {{occurrence.Note | StripNewlines | StripHtml | ToJSON}} , {%endcapture%}
-                {% capture eventsJson %}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | StripNewlines  | StripHtml | ToJSON}}{%endcapture%}
+                {% capture eventsJson %}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | StripNewlines | StripHtml | ToJSON}}{%endcapture%}
               {% capture eventsJson %}{{eventsJson}} }, {% endcapture %}
               {% capture eventsJson %}{{eventsJson}}"date": {{date | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"sortableDate": {{sortableDate | ToJSON}} , {%endcapture%}
