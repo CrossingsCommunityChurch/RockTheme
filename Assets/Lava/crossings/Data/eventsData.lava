@@ -106,7 +106,7 @@
                   {% endfor %}
                 {% capture eventsJson %}{{eventsJson}} ], {%endcapture%}
                 {% capture eventsJson %}{{eventsJson}}"Note": {{occurrence.Note | StripNewlines | StripHtml | ToJSON}} , {%endcapture%}
-                {% capture eventsJson %}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | StripNewlines | ToJSON}}{%endcapture%}
+                {% capture eventsJson %}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | StripNewlines  | StripHtml | ToJSON}}{%endcapture%}
               {% capture eventsJson %}{{eventsJson}} }, {% endcapture %}
               {% capture eventsJson %}{{eventsJson}}"date": {{date | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"sortableDate": {{sortableDate | ToJSON}} , {%endcapture%}
