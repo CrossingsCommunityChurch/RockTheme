@@ -111,8 +111,7 @@
                     {% for taggedItem in taggedItems %}
                         {% for tag in tags %}
                             {% if taggedItem.TagId == tag.Id %}
-                                {{ tag.Name | ToJSON }}
-                                {% unless forloop.last %}, {% endunless %}
+                                {{ tag.Name | ToJSON }},
                             {% endif %}
                         {% endfor %}
                     {% endfor %}
