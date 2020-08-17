@@ -84,7 +84,7 @@
               {% capture eventsJson %}{{eventsJson}}"PhotoUrl": {{url | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"EventId": {{eventid | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"Name": {{name | ToJSON}} , {%endcapture%}
-              {% capture eventsJson %}{{eventsJson}}"Summary": {{summary | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"Summary": {{summary | StripHtml | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"audiences": [ {%endcapture%}
                 {% for audience in audiences%}
                   {% capture eventsJson %}{{eventsJson}}{{ audience.DefinedValue.Value | StripNewlines | StripHtml | ToJSON }} , {%endcapture%}
