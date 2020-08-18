@@ -8,7 +8,7 @@
 {% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js' %}
 {% endjavascript %}
 
-<div id="vue-template-dropdown">
+<div id="vue-template-dropdown" style="display:none;">
   <div class="form-group">
     <label>{%raw%}{{headingLabel}}{%endraw%}</label>
     <div class="dropdown" :class="{'open': isOpen}">
@@ -48,8 +48,8 @@
 
           <div v-for="item in mediaItems" class="col-sm-6 col-md-4">
             <a :href="mediaUrl(item)" class="card cardShadow">
-              <div class="thumb">
-                <img :src="mediaImg(item)" class="object-fit">
+              <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(item) + '\')' }">
+                <!--<img :src="mediaImg(item)" class="object-fit">-->
               </div>
               <div class="row card-content-row">
                 <div class="card-content">
