@@ -1,0 +1,56 @@
+{%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+{%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
+{%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
+{%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
+
+  {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+  {% assign imageSize = '/fit-in/500x500' %}
+
+{%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
+
+{%- if channelBackgroundColor != '' and useCustomColors == 'Yes' -%}
+    {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
+{%- endif -%}
+
+{%- if channelForegroundColor != '' and useCustomColors == 'Yes' -%}
+      {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
+  {%- endif -%}
+
+<div class="section albumn-embed-list" {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
+  <div class="content-area">
+      <div class="album-list-items">
+        <div class="container">
+          {%- if channelSectionTitle != '' -%}
+              <h2 class="text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+          {%- endif -%}
+          {%- if channelSectionSummary != '' -%}
+              <div class="summary text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>
+              {{ channelSectionSummary }}
+              </div>
+          {%- endif -%}
+        </div>
+        <div class="album-wrapper flex-row flex-wrap">
+            {% for item in Items %}
+                {% assign title = item.Title %}
+                {% assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' %}
+                {% assign image = imageStorageUrl | Append: imageSize | Append:imageAsset %}
+                {% assign spotifyID = item | Attribute: 'SoundcloudID' %}
+                {% assign modalID = item.Title | ToCssClass %}
+                {% capture modalIDWithIndex %}{{modalID}}{{forloop.index}}{%endcapture%}
+                <a href="#" data-toggle="modal" data-target="#{{modalIDWithIndex}}" class="album-item">
+                  <img src="{{ image }}" alt="{{ title }}" />
+                  <div class="album-cover-details reverse">
+                      <div>
+                        <h3>{{ title }}</h3>
+                        <div class="btn btn-primary"><i class="fa fa-play"></i> Play</div>
+                      </div>
+                  </div>
+                  {[ modal modalid:'{{modalIDWithIndex}}' title:'' class:'playlist-modal' ]}
+                      <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://open.spotify.com/embed/album/{{spotifyID}}"></iframe>
+                  {[ endmodal ]}
+                </a>
+            {% endfor %}
+        </div>
+      </div>
+  </div>
+</div>
