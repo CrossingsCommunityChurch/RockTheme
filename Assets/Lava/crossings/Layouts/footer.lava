@@ -84,12 +84,6 @@
             <li>
               <a href="/contact">Contact</a>
             </li>
-            <li class="hidden">
-              <a href="/media/sermons">Sermons</a>
-            </li>
-            <li class="hidden">
-              <a href="/media/teachings">Teachings</a>
-            </li>
           </ul>
           <div class="row reverse social-row">
             <div class="col-xs-6 col-md-3">
