@@ -8,10 +8,16 @@
   {% assign seriesLogo = item | Attribute:'Serieslogo' | Url:'localpath' %}
   {% assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append: seriesLogo %}
   {% assign parentPath = 'sermons' %}
+  {% assign titleCategory = 'Sermon Series' %}
 
-  {% if item.ContentChannel.Name == 'Teaching Message' %}
+  {% if item.ContentChannel.Name == 'Teaching Series' %}
       {% assign parentPath = 'teachings' %}
+      {% assign titleCategory = 'Teaching Series' %}
   {% endif %}
+
+  {% assign org = 'Global' | Attribute:'OrganizationName' %}
+  {% capture pageTitle %}{{ title }} - {{ titleCategory }} | {{ org }}{% endcapture%}
+  {{ pageTitle | SetPageTitle }}
   <div class="sermon-series-page">
     <div class="section page-title reverse">
       <div class="container">
@@ -29,7 +35,27 @@
                 <hr class="sep">
                 <h1 class="heading">{{ item.Title }}</h1>
                 <p>{{ summary }}</p>
-                <a href="#" class="btn-outline-primary btn"><i class="fas fa-share"></i><span>Share</span></a>
+                <div class="share">
+                  <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
+                  <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
+                  <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
+                    <li>
+                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
+                        <i class="fa fa-fw fa-facebook"></i> Facebook
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
+                        <i class="fa fa-fw fa-twitter"></i> Twitter
+                      </a>
+                    </li>
+                    <li>
+                      <a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
+                        <i class="fa fa-fw fa-envelope-o"></i> Email
+                      </a>
+                    </li>
+                  </ul>
+                </div>
                 {% if item.ContentChannel.IsTaggingEnabled %}
                   <div class="tags">
                     <p class="small"><i class="fas fa-tags"></i>
