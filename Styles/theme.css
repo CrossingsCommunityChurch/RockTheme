@@ -11136,6 +11136,7 @@ body {
   overflow-x: hidden;
 }
 .page-wrapper {
+  padding-top: 58px;
   overflow: hidden;
 }
 @media (min-width: 992px) {
@@ -12798,8 +12799,11 @@ img {
   text-align: center;
 }
 .share.open .share-btn-toggle {
-  border-color: #eee;
-  background-color: #eee;
+  border-color: #fff;
+  background-color: #fff;
+  color: #313e48;
+  outline: none;
+  box-shadow: none;
 }
 .login-btn,
 .menu-btn,
@@ -14078,13 +14082,17 @@ img {
 }
 .section hr.sep {
   width: 110px;
-  margin-left: 0;
+  margin-left: auto;
   margin-right: auto;
   border: 0;
   border-top: 3px solid #dbc8a7;
 }
 .section.devo-title hr.sep {
   margin-left: auto;
+}
+.section.split-section hr.sep,
+.section.simple-section hr.sep {
+  margin-left: 0;
 }
 .simple-section {
   background-color: #fff;
