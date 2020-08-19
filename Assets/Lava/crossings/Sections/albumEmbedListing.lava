@@ -34,7 +34,7 @@
                 {% assign title = item.Title %}
                 {% assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' %}
                 {% assign image = imageStorageUrl | Append: imageSize | Append:imageAsset %}
-                {% assign spotifyID = item | Attribute: 'SoundcloudID' %}
+                {% assign spotifyID = item | Attribute: 'SpotifyPlaylistID' %}
                 {% assign modalID = item.Title | ToCssClass %}
                 {% capture modalIDWithIndex %}{{modalID}}{{forloop.index}}{%endcapture%}
                 <a href="#" data-toggle="modal" data-target="#{{modalIDWithIndex}}" class="album-item">
