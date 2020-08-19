@@ -79,10 +79,10 @@
   </div>
 </div>
 <div class="hidden">
-      <p>Sermon Series</p>
-      <a href="/media/sermons">Sermons</a>
-      <p>Teaching Series</p>
-      <a href="/media/teachings">Teachings</a>
+    <p>Sermon Series</p>
+    <a href="/media/sermons">Sermons</a>
+    <p>Teaching Series</p>
+    <a href="/media/teachings">Teachings</a>
 </div>
 
 <script>
