@@ -43,22 +43,22 @@
                   </div>
                 {% endif %}
                 <div class="share">
-                  <a href="#" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
+                  <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
                   <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
-                  <ul class="socialsharing hidden">
+                  <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
                     <li>
                       <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
-                        <i class="fa fa-fw fa-facebook"></i>
+                        <i class="fa fa-fw fa-facebook"></i> Facebook
                       </a>
                     </li>
                     <li>
                       <a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
-                        <i class="fa fa-fw fa-twitter"></i>
+                        <i class="fa fa-fw fa-twitter"></i> Twitter
                       </a>
                     </li>
                     <li>
                       <a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
-                        <i class="fa fa-fw fa-envelope-o"></i>
+                        <i class="fa fa-fw fa-envelope-o"></i> Email
                       </a>
                     </li>
                   </ul>

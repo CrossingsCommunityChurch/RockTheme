@@ -12769,6 +12769,38 @@ img {
 .giving-tabs {
   text-align: center;
 }
+.share {
+  position: relative;
+}
+.share .socialsharing {
+  position: absolute;
+  left: 50%;
+  margin-left: -150px;
+  right: 0;
+  top: -230px;
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  padding: 30px;
+  border: 0 none;
+}
+.share .socialsharing > li {
+  display: block;
+  margin-bottom: 15px;
+}
+.share .socialsharing > li:last-child {
+  margin-bottom: 0;
+}
+.share .socialsharing > li > a {
+  font-family: inherit;
+  display: block;
+  text-align: center;
+}
+.share.open .share-btn-toggle {
+  border-color: #eee;
+  background-color: #eee;
+}
 .login-btn,
 .menu-btn,
 .dropdown-toggle.navbar-link {

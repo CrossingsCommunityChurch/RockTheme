@@ -1,0 +1,40 @@
+.share {
+    position: relative;
+
+    .socialsharing {
+        //display: block;
+        position: absolute;
+        left: 50%;
+        margin-left: -150px;
+        right: 0;
+        top: -230px;
+        width: 300px;
+        background-color: @white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: @spacing;
+        padding: @spacing2x;
+        border: 0 none;
+
+        > li {
+            display: block;
+            margin-bottom: @spacing;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            > a {
+                font-family: inherit;
+                display: block;
+                text-align: center;
+            }
+        }
+    }
+
+    &.open {
+        .share-btn-toggle {
+            border-color: #eee;
+            background-color: #eee;
+        }
+    }
+}
