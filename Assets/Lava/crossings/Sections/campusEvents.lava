@@ -12,7 +12,7 @@
         <div class="form-group">
           <label for="filterLabel">Filter By Category</label>
           <div class="dropdown">
-            <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="ml-1 fas fa-angle-down pull-right"></i></button>
             <ul aria-labelledby="eventFilterMenu" class="dropdown-menu">
               <li><a style="cursor: pointer;">All Events</a></li>
               <li role="separator" class="divider"></li>
@@ -108,7 +108,7 @@
           `<div class="col-sm-6 col-md-4">
             <a href="LINK GOES HERE" class="card cardShadow">
               <div class="thumb">
-                <img src="IMG GOES HERE" class="object-fit">
+                <!--<img src="IMG GOES HERE" class="object-fit">-->
               </div>
               <div class="row card-content-row">
                 <div class="card-content">
@@ -133,7 +133,8 @@
         );
         div.find('a.card.cardShadow').attr('href', event.link);
         // div.find('img.object-fit').attr('src', `${imageStorageUrl}${imageSize}${event.Imageasset}`);
-        div.find('img.object-fit').attr('src', `${event.AssetImage}`);
+        //div.find('img.object-fit').attr('src', `${event.AssetImage}`);
+        div.find('.thumb').css("background-image", "url(" + event.AssetImage + ")");
         div.find('h4').text(event.Name);
         div.find('p.date').text(event.date);
         div.find('p > i.fas.fa-tags').parent().find('span').text(event.audiences.join(', '));

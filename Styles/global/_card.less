@@ -23,6 +23,15 @@
     //border: 3px solid @white;
     border-radius: 10px;
     display: block;
+    width: 100%;
+
+    .thumb {
+        background-position: center center;
+        background-size: cover;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        height: 275px;
+    }
 
     img {
         border-top-left-radius: 10px;
@@ -53,7 +62,7 @@
 
     .card-content {
        display: flex;
-       padding: @spacing2x;
+       padding: 0 @spacing2x @spacing2x;
        flex-direction: column;
        position: relative;
        text-align: center;
@@ -101,12 +110,13 @@
        }
 
        .icon-button {
-            position: absolute;
+            //position: absolute;
             width: 150px;
+            margin: auto;
             padding: @spacingSmall @spacing;
-            left: 50%;
-            margin-left: -75px;
-            top: -20px;
+            //left: 50%;
+            //margin-left: -75px;
+            //top: -20px;
             text-align: center;
             background-color: @white;
             //background-color: @brand-primary;

@@ -11070,6 +11070,18 @@ fieldset[disabled] .btn-danger-solid.focus {
 .mt-3 {
   margin-top: 3rem;
 }
+.ml-0 {
+  margin-left: 0;
+}
+.ml-1 {
+  margin-left: 1rem;
+}
+.ml-2 {
+  margin-left: 2rem;
+}
+.ml-3 {
+  margin-left: 3rem;
+}
 .p-0 {
   padding: 0;
 }
@@ -11466,6 +11478,14 @@ img {
   background-color: #fff;
   border-radius: 10px;
   display: block;
+  width: 100%;
+}
+.event-list .card .thumb {
+  background-position: center center;
+  background-size: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 275px;
 }
 .event-list .card img {
   border-top-left-radius: 10px;
@@ -11491,7 +11511,7 @@ img {
 }
 .event-list .card .card-content {
   display: flex;
-  padding: 30px;
+  padding: 0 30px 30px;
   flex-direction: column;
   position: relative;
   text-align: center;
@@ -11527,12 +11547,9 @@ img {
   display: inline-block;
 }
 .event-list .card .card-content .icon-button {
-  position: absolute;
   width: 150px;
+  margin: auto;
   padding: 10px 15px;
-  left: 50%;
-  margin-left: -75px;
-  top: -20px;
   text-align: center;
   background-color: #fff;
   transition: all 0.3s ease-in-out;
