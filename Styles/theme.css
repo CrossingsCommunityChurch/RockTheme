@@ -11474,6 +11474,9 @@ img {
 .card:not('.listing') img {
   height: 100%;
 }
+.event-list {
+  min-height: 70vh;
+}
 .event-list .card {
   background-color: #fff;
   border-radius: 10px;
