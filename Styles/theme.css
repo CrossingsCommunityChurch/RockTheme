@@ -11480,7 +11480,9 @@ img {
 .card:not('.listing') img {
   height: 100%;
 }
-.event-list {
+.event-list,
+.media-list-items {
+  min-height: 600px;
   min-height: 70vh;
 }
 .event-list .card {
@@ -11660,6 +11662,9 @@ img {
   border-bottom-left-radius: 10px;
   max-width: 175%;
   height: 100%;
+}
+.media-list .dropdown-menu {
+  max-height: 40vh;
 }
 .media-list .card {
   background-color: #fff;
