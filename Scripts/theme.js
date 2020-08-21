@@ -10,7 +10,7 @@ $(document).ready(function() {
     });
 
     $('.has-subnav-parent').hover(function(){
-        $(this).find('.fa').toggleClass('fa-angle-up');
+        $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
     $('a[data-toggle="collapse"').click(function(){
