@@ -13,8 +13,8 @@
             <div class="subnav media-subnav">
                 <ul>
                     <li><a href="/media"><span>Sermons & Messages</span></a></li>
-                    <li><a href="/locations/edmond"><span>Worship</span></a></li>
-                    <li><a href="/locations/online"><span>Kids Media</span></a></li>
+                    <li><a href="/worship"><span>Worship</span></a></li>
+                    <li><a href="/kids/kids-media"><span>Kids Media</span></a></li>
                 </ul>
             </div>
         </li>
