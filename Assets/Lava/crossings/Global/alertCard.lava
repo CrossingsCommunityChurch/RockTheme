@@ -1,0 +1,13 @@
+
+{% if Items %}
+  {% assign item = Items | First %}
+  {% assign active = item | Attribute:'Active' %}
+  {% if active == 'Yes' %}
+    <div class="text-alert alert-warning text-center reverse">
+      <div class="container">
+        {{ item.Content }}
+      </div>
+    </div>
+  {% endif %}
+
+{% endif %}

@@ -378,11 +378,15 @@
             display: flex;
             position: relative;
             transition: all ease-in-out 0.3s;
+            min-width: 100px;
 
             > a {
+                flex: 1;
+                text-align: center;
+
                 &:not(.logo) {
                     border-top: 3px solid transparent;
-                    padding: 42px @spacing2x 43px @spacing2x;
+                    padding: 42px @spacing 43px @spacing;
                     text-transform: uppercase;
                     letter-spacing: 1px;
                     transition: background ease-in-out 0.5s;
@@ -431,6 +435,21 @@
 .subnav {
     display: none;
     background-color: @dark;
+}
+
+@media (min-width: @screen-lg) {
+    .primary-nav-links {
+        > li {
+            min-width: 165px;
+
+            > a {
+                &:not(.logo) {
+                    padding-left: @spacing2x;
+                    padding-right: @spacing2x;
+                }
+            }
+        }
+    }
 }
 
 @media (min-width: @screen-desktop) {

@@ -11464,6 +11464,20 @@ img {
     background-color: #dbc8a7;
   }
 }
+.text-alert.alert-warning {
+  border: 0 none;
+  background-color: #E85664;
+  border-radius: 0 none;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.text-alert.alert-warning p {
+  margin: 0;
+}
+.text-alert.alert-warning a {
+  text-decoration: underline;
+  border: 0 none;
+}
 .card {
   margin-bottom: 30px;
 }
@@ -13159,10 +13173,15 @@ img {
     display: flex;
     position: relative;
     transition: all ease-in-out 0.3s;
+    min-width: 100px;
+  }
+  .primary-nav-links > li > a {
+    flex: 1;
+    text-align: center;
   }
   .primary-nav-links > li > a:not(.logo) {
     border-top: 3px solid transparent;
-    padding: 42px 30px 43px 30px;
+    padding: 42px 15px 43px 15px;
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: background ease-in-out 0.5s;
@@ -13198,6 +13217,15 @@ img {
 .subnav {
   display: none;
   background-color: #000000;
+}
+@media (min-width: 1200px) {
+  .primary-nav-links > li {
+    min-width: 165px;
+  }
+  .primary-nav-links > li > a:not(.logo) {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
 }
 @media (min-width: 992px) {
   .primary-nav-links > li:hover .subnav {
