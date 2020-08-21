@@ -13202,7 +13202,6 @@ img {
 @media (min-width: 992px) {
   .primary-nav-links > li:hover .subnav {
     height: auto;
-    padding-top: 1rem;
     padding-bottom: 1rem;
   }
   .primary-nav-links > li:hover .subnav.media-subnav {
@@ -13264,7 +13263,7 @@ img {
     width: 100%;
   }
   .fixed .primary-nav-links .subnav {
-    background-color: transparent;
+    background-color: #fff;
   }
   .fixed .primary-nav-links .subnav > ul {
     background-color: #fff;
@@ -13272,6 +13271,10 @@ img {
   .fixed .primary-nav-links .subnav > ul a {
     color: #313e48 !important;
     font-size: 0.9rem !important;
+  }
+  .fixed .primary-nav-links .subnav > ul a > span::after {
+    content: '';
+    background-color: #313e48;
   }
   .fixed .primary-nav-links .subnav > ul .view-all a {
     font-size: 0.8rem !important;

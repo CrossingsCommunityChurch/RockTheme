@@ -439,7 +439,7 @@
             &:hover {
                 .subnav {
                     height: auto;
-                    padding-top: 1rem;
+                    //padding-top: 1rem;
                     padding-bottom: 1rem;
                     
                     &.media-subnav {
@@ -525,7 +525,7 @@
     .fixed {
         .primary-nav-links {
             .subnav {
-                background-color: transparent;
+                background-color: @white;
 
                 > ul {
                     background-color: @white;
@@ -533,6 +533,11 @@
                     a {
                         color: @brand-primary !important;
                         font-size: 0.9rem !important;
+
+                        > span::after {
+                            content: '';
+                            background-color: @brand-primary;
+                        }
                     }
 
                     .view-all a {
