@@ -137,20 +137,20 @@ Vue.component('vue-dropdown', {
 const vueApp = new Vue({
   el: '#vapp',
   data () {
-		return {
-			messages : [''],
+    return {
+      messages : [''],
       topics: [''],
       speakers: [''],
       books: [''],
       topicFilter: '',
       speakerFilter: '',
       bookFilter: '',
-			page: 1,
-			perPage: {{mediaItemsPerPage}},
-			pages: [],
-		}
-	},
-	methods:{
+      page: 1,
+      perPage: {{mediaItemsPerPage}},
+      pages: [],
+    }
+  },
+  methods:{
     mediaUrl(item) {
       if (item.Series) {
         return `/media/${item.ChannelPath}${item.Series.Slug}/${item.PrimarySlug}`;
@@ -167,7 +167,7 @@ const vueApp = new Vue({
       }
       return imageUrl;
     },
-		getMedia () {
+    getMedia () {
       let data = [];
       axios
         .get('/Webhooks/Lava.ashx/crossings/api/combined-media')
@@ -177,27 +177,27 @@ const vueApp = new Vue({
           this.speakers = response.data.FilterLists.Speakers;
           this.books = response.data.FilterLists.Books;
         });
-		},
-		setPages () {
+    },
+    setPages () {
       this.pages = [];
       this.page = 1;
-			let numberOfPages = Math.ceil(this.filteredMessages.length / this.perPage);
-			for (let index = 1; index <= numberOfPages; index++) {
-				this.pages.push(index);
-			}
-		},
+      let numberOfPages = Math.ceil(this.filteredMessages.length / this.perPage);
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
     paginate (messages) {
-			let page = this.page;
-			let perPage = this.perPage;
-			let from = 0;
-			let to = (page * perPage);
-			return  messages.slice(from, to);
-		},
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = 0;
+      let to = (page * perPage);
+      return  messages.slice(from, to);
+    },
     setFilter(propName, item) {
       this[`${propName}Filter`] = item.Name;
     }
-	},
-	computed: {
+  },
+  computed: {
     filteredMessages() {
       return this.messages.filter(message => {
         var filterOut = false;
@@ -207,23 +207,23 @@ const vueApp = new Vue({
         return !filterOut;
       });
     },
-		mediaItems () {
-			return this.paginate(this.filteredMessages);
-		}
-	},
-	watch: {
-		filteredMessages () {
-			this.setPages();
-		}
-	},
-	created(){
-		this.getMedia();
-	},
-	filters: {
-		trimWords(value){
-			return value.split(" ").splice(0,20).join(" ") + '...';
-		}
-	}
+    mediaItems () {
+      return this.paginate(this.filteredMessages);
+    }
+  },
+  watch: {
+    filteredMessages () {
+      this.setPages();
+    }
+  },
+  created(){
+    this.getMedia();
+  },
+  filters: {
+    trimWords(value){
+      return value.split(" ").splice(0,20).join(" ") + '...';
+    }
+  }
 });
 
 </script>
