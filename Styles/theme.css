@@ -13202,6 +13202,7 @@ img {
 @media (min-width: 992px) {
   .primary-nav-links > li:hover .subnav {
     height: auto;
+    padding-top: 1rem;
     padding-bottom: 1rem;
   }
   .primary-nav-links > li:hover .subnav.media-subnav {
@@ -13264,6 +13265,8 @@ img {
   }
   .fixed .primary-nav-links .subnav {
     background-color: #fff;
+    padding-top: 0;
+    padding-bottom: 0;
   }
   .fixed .primary-nav-links .subnav > ul {
     background-color: #fff;
