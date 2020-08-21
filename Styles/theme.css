@@ -13084,7 +13084,7 @@ img {
   flex-wrap: wrap;
   grid-gap: 15px;
   grid-template-rows: auto;
-  grid-template-columns: 20% auto 20%;
+  grid-template-columns: 10% auto 10%;
   align-items: center;
   font-family: "nunito-sans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
