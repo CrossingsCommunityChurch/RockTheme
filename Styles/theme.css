@@ -14584,6 +14584,7 @@ img {
   width: 60px;
   line-height: 60px;
   margin-right: 1rem;
+  transition: all ease-in-out 0.3s;
 }
 .albumn-embed-list .album-item .album-cover-details .album-links > a:last-child {
   margin-right: 0;
