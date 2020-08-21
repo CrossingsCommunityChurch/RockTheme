@@ -1,17 +1,4 @@
-{
-    FilterLists: {
-        Topics: [
-            {% category where:'Name == "Topic Tags"' iterator:'topicCategories' securityenabled:'false' %}
-            {% assign topicCategoryId = topicCategories | First | Property:'Id' %}
-            {% tag where:'CategoryId == {{topicCategoryId}}' iterator:'topics' securityenabled:'false' %}
-                {% for topic in topics %}
-                    {
-                        "Name": {{ topic.Name | ToJSON }}
-                    }
-                {% unless forloop.last %}, {% endunless %}{% endfor %}
-            {% endtag %}
-            {% endcategory %}
-        ],
+{%- comment -%}
         Speakers: [
             {% contentchannel where:'Name == "Teaching Message"' iterator:'teachingContentChannels' securityenabled:'false' %}
             {% assign teachingItemId = teachingContentChannels | First | Property:'Id' %}
@@ -33,6 +20,75 @@
                     {% endif %}
                 {% endfor %}
             {% endcontentchannelitem %}
+        ],
+{%- endcomment -%}
+
+{
+    FilterLists: {
+        Topics: [
+            {% category where:'Name == "Topic Tags"' iterator:'topicCategories' securityenabled:'false' %}
+            {% assign topicCategoryId = topicCategories | First | Property:'Id' %}
+            {% tag where:'CategoryId == {{topicCategoryId}}' iterator:'topics' securityenabled:'false' %}
+                {% for topic in topics %}
+                    {
+                        "Name": {{ topic.Name | ToJSON }}
+                    }
+                {% unless forloop.last %}, {% endunless %}{% endfor %}
+            {% endtag %}
+            {% endcategory %}
+        ],
+        Speakers: [
+            {
+                "Name": "Marty Grubbs"
+            },
+            {
+                "Name": "Terry Feix"
+            },
+            {
+                "Name": "Andy Rauschkolb"
+            },
+            {
+                "Name": "Deidre Franklin"
+            },
+            {
+                "Name": "Bill Search"
+            },
+            {
+                "Name": "Mike Fackler"
+            },
+            {
+                "Name": "Marq Youngblood"
+            },
+            {
+                "Name": "Melissa Hiett"
+            },
+            {
+                "Name": "Lance Ward"
+            },
+            {
+                "Name": "Todd Poe"
+            },
+            {
+                "Name": "Blake Bastin"
+            },
+            {
+                "Name": "Scott Bartlow"
+            },
+            {
+                "Name": "Larry Harrison"
+            },
+            {
+                "Name": "Norma Townsdin"
+            },
+            {
+                "Name": "Alex Buchner"
+            },
+            {
+                "Name": "Cliff Sanders"
+            },
+            {
+                "Name": "Cole Feix"
+            }
         ],
         Books: [
             {% category where:'Name == "Bible Books Tags"' iterator:'bookCategories' securityenabled:'false' %}
