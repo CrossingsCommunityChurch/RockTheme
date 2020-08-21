@@ -37,6 +37,32 @@
                 padding-right: 1rem;
                 text-align: center;
             }
+
+            .album-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+
+                > a {
+                    font-size: 2rem;
+                    display: block;
+                    //padding: 0.5rem 1rem;
+                    border-radius: 100%;
+                    height: 60px;
+                    width: 60px;
+                    line-height: 60px;
+                    margin-right: 1rem;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
+                    &:hover {
+                        background-color: @white;
+                        color: @brand-primary;
+                    }
+                }
+            }
         }
 
         &:hover {

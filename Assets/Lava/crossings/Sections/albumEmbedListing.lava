@@ -34,21 +34,33 @@
                 {% assign title = item.Title %}
                 {% assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' %}
                 {% assign image = imageStorageUrl | Append: imageSize | Append:imageAsset %}
-                {% assign spotifyID = item | Attribute: 'SpotifyPlaylistID' %}
-                {% assign modalID = item.Title | ToCssClass %}
-                {% capture modalIDWithIndex %}{{modalID}}{{forloop.index}}{%endcapture%}
-                <a href="#" data-toggle="modal" data-target="#{{modalIDWithIndex}}" class="album-item">
+                {% assign spotifyURL = item | Attribute: 'SpotifyURL' %}
+                {% assign iTunesURL = item | Attribute: 'iTunesURL' %}
+                {% assign soundcloudURL = item | Attribute: 'SoundcloudURL' %}
+                {% assign primeMusicURL = item | Attribute: 'PrimeMusicURL' %}
+                <div class="album-item">
                   <img src="{{ image }}" alt="{{ title }}" />
                   <div class="album-cover-details reverse">
                       <div>
                         <h3>{{ title }}</h3>
-                        <div class="btn btn-primary"><i class="fa fa-play"></i> Play</div>
+                        <p>Listen on</p>
+                        <div class="album-links">
+                            {% if spotifyURL != empty %}
+                              <a href="{{spotifyURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-spotify"></i></a>
+                            {% endif %}
+                            {% if iTunesURL != empty %}
+                              <a href="{{spotifyURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-apple"></i></a>
+                            {% endif %}
+                            {% if soundcloudURL != empty %}
+                              <a href="{{soundcloudURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i></a>
+                            {% endif %}
+                            {% if primeMusicURL != empty %}
+                              <a href="{{primeMusicURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-amazon"></i></a>
+                            {% endif %}
+                        </div>
                       </div>
                   </div>
-                  {[ modal modalid:'{{modalIDWithIndex}}' title:'' class:'playlist-modal' ]}
-                      <iframe allow="autoplay *; encrypted-media *;" frameborder="0" height="450" style="width:100%;max-width:660px;overflow:hidden;background:transparent;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://open.spotify.com/embed/album/{{spotifyID}}"></iframe>
-                  {[ endmodal ]}
-                </a>
+                </div>
             {% endfor %}
         </div>
       </div>

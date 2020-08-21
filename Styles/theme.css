@@ -14568,6 +14568,27 @@ img {
   padding-right: 1rem;
   text-align: center;
 }
+.albumn-embed-list .album-item .album-cover-details .album-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.albumn-embed-list .album-item .album-cover-details .album-links > a {
+  font-size: 2rem;
+  display: block;
+  border-radius: 100%;
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+  margin-right: 1rem;
+}
+.albumn-embed-list .album-item .album-cover-details .album-links > a:last-child {
+  margin-right: 0;
+}
+.albumn-embed-list .album-item .album-cover-details .album-links > a:hover {
+  background-color: #fff;
+  color: #313e48;
+}
 .albumn-embed-list .album-item:hover .album-cover-details {
   top: 0;
   opacity: 1;
