@@ -71,8 +71,7 @@
           </div>
         </div>
         <div class="paginate-buttons text-center">
-          <a class="btn btn-default" id="back" role="button" v-if="page > 1" @click="page--">Back</a>
-          <a class="btn btn-default" id="next" role="button" @click="page++" v-if="page < pages.length">Next</a>
+          <a class="btn btn-default" id="more" role="button" v-if="page < pages.length" @click="page++">More</a>
         </div>
       </div>
     </div>
@@ -187,10 +186,10 @@ const vueApp = new Vue({
 				this.pages.push(index);
 			}
 		},
-		paginate (messages) {
+    paginate (messages) {
 			let page = this.page;
 			let perPage = this.perPage;
-			let from = (page * perPage) - perPage;
+			let from = 0;
 			let to = (page * perPage);
 			return  messages.slice(from, to);
 		},
