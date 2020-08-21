@@ -70,8 +70,9 @@
     {% assign subheading = item | Attribute: 'subheading' %}
     {% assign content = item.Content %}
     {% assign buttons = item | Attribute: 'lava' | HtmlDecode %}
+    {% assign anchor = item | Attribute: 'AnchorID' | HtmlDecode %}
 
-    <div class="row flex-row">
+    <div {% if anchor != '' %} id="{{anchor}}" {% endif %} class="row flex-row">
 
         {%- if imageUrlPath != '' -%}
         <div class="cover-half visible-md-block visible-lg-block {% if channelContentAlignment == 'Right' %}{% cycle 'coverside': 'cover-right', '' %}{% else %}{% cycle 'coverside': '', 'cover-right' %}{% endif %}">
