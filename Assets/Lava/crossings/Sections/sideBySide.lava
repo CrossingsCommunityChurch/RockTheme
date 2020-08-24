@@ -1,3 +1,6 @@
+{%- assign contentItemStyle = '' -%}
+{%- assign contentTextColor = '' -%}
+
 {%- assign channelTitleSize  =  ContentChannel | Attribute:'TitleSize' | Default:'h1' -%}
 {%- assign channelContentAlignment  =  ContentChannel | Attribute:'ContentAlignment' -%}
 {%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
@@ -41,14 +44,14 @@
 
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
-{%- if channelSectionTitle != '' -%}
+{%- if channelSectionTitle != empty -%}
 <div class="section">
     <div class="row">
         <div class="container content-area" data-aos="fade-up">
-            <h2 class="text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+            <h2 class="text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
             <hr class="sep">
             {%- if channelSectionSummary != '' -%}
-                <div class="summary text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>
+                <div class="summary text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>
                 {{ channelSectionSummary }}
                 </div>
             {%- endif -%}
@@ -58,10 +61,10 @@
 {%- endif -%}
 <section class="contentComponent contentComponent-split section split-section side-by-side">
 {%- for item in Items -%}
-    {%- if channelBackgroundColor != '' -%}
+    {%- if channelBackgroundColor != empty -%}
         {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
     {%- endif -%}
-    {%- if channelForegroundColor != '' -%}
+    {%- if channelForegroundColor != empty -%}
         {%- capture contentItemStyle -%}{{ contentItemStyle }}color:{{ channelForegroundColor }};{%- endcapture -%}
     {%- endif -%}
     {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
@@ -72,9 +75,9 @@
     {% assign buttons = item | Attribute: 'lava' | HtmlDecode %}
     {% assign anchor = item | Attribute: 'AnchorID' | HtmlDecode %}
 
-    <div {% if anchor != '' %} id="{{anchor}}" {% endif %} class="row flex-row">
+    <div {% if anchor != empty %} id="{{anchor}}" {% endif %} class="row flex-row">
 
-        {%- if imageUrlPath != '' -%}
+        {%- if imageUrlPath != empty -%}
         <div class="cover-half visible-md-block visible-lg-block {% if channelContentAlignment == 'Right' %}{% cycle 'coverside': 'cover-right', '' %}{% else %}{% cycle 'coverside': '', 'cover-right' %}{% endif %}">
           <img alt="{{ title }}" src="{{ imageUrl }}">
         </div>
@@ -84,7 +87,7 @@
             <img alt="{{ title }}" src="{{ imageUrl }}" class="img-responsive hidden-md hidden-lg">
         </div>
         <div class="col-md-6 text-content {% if channelContentAlignment == 'Right' %}{% cycle 'secondcol': 'col-md-pull-6', '' %}{% else %}{% cycle 'secondcol': '', 'col-md-pull-6' %}{% endif %}">
-            <div class='content-item' data-aos='fade-up' {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
+            <div class='content-item' data-aos='fade-up' {% if contentItemStyle != empty %}style='{{ contentItemStyle }}'{% endif %}>
               {%- if subheading -%}
                 <h4 class="subheading">{{  subheading }}</h4>
               {% endif %}
