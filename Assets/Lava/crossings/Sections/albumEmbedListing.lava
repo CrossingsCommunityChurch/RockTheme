@@ -1,30 +1,31 @@
+{%- assign contentItemStyle = '' -%}
+{%- assign contentTextColor = '' -%}
 {%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
 {%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
 {%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
 {%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
 
-  {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-  {% assign imageSize = '/fit-in/500x500' %}
-
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/500x500' -%}
 {%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
 
-{%- if channelBackgroundColor != '' and useCustomColors == 'Yes' -%}
+{%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}
     {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
 {%- endif -%}
 
-{%- if channelForegroundColor != '' and useCustomColors == 'Yes' -%}
+{%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}
       {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
   {%- endif -%}
 
-<div class="section albumn-embed-list" {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
+<div class="section albumn-embed-list" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
   <div class="content-area">
       <div class="album-list-items">
         <div class="container">
-          {%- if channelSectionTitle != '' -%}
-              <h2 class="text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+          {%- if channelSectionTitle != empty -%}
+              <h2 class="text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
           {%- endif -%}
-          {%- if channelSectionSummary != '' -%}
-              <div class="summary text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>
+          {%- if channelSectionSummary != empty -%}
+              <div class="summary text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>
               {{ channelSectionSummary }}
               </div>
           {%- endif -%}

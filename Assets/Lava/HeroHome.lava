@@ -5,7 +5,7 @@
  <div class="container-fluid hero-wrapper">
     <div class="hero">
       <parallax :sectionHeight="90" :speed-factor="0.1">
-        {%- if imageGuid != ''-%}
+        {%- if imageGuid != empty -%}
         <img src= "/GetImage.ashx?Guid={{imageGuid}}"/>
       </parallax>
       <div class="jumbotron flat home-hero transparent reverse delay2 fadein">

@@ -1,3 +1,6 @@
+
+{%- assign contentItemStyle = '' -%}
+{%- assign contentTextColor = '' -%}
 {%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
 {%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
 {%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
@@ -5,22 +8,22 @@
 
 {%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
 
-{%- if channelBackgroundColor != '' and useCustomColors == 'Yes' -%}
+{%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}
     {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
 {%- endif -%}
 
-{%- if channelForegroundColor != '' and useCustomColors == 'Yes' -%}
+{%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}
       {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
   {%- endif -%}
 
-<div class="section media-embed-list bg-gray" {% if contentItemStyle != '' %}style='{{ contentItemStyle }}'{% endif %}>
+<div class="section media-embed-list bg-gray" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
   <div class="container content-area">
       <div class="media-list-items">
-        {%- if channelSectionTitle != '' -%}
-            <h2 class="text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+        {%- if channelSectionTitle != empty -%}
+            <h2 class="text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
         {%- endif -%}
-        {%- if channelSectionSummary != '' -%}
-            <div class="summary text-center" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>
+        {%- if channelSectionSummary != empty -%}
+            <div class="summary text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>
             {{ channelSectionSummary }}
             </div>
         {%- endif -%}
@@ -34,8 +37,8 @@
                   {[ videoPlayer vimeourl:'{{ video }}' ]}
                   <div class="video-details text-center">
                     <h4 class="subheading" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ subheading }}</h4>
-                    <h3 {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ title }}</h3>
-                    <h5 {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ date }} </h5>
+                    <h3 {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ title }}</h3>
+                    <h5 {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ date }} </h5>
                   </div>
                 </div>
             {% endfor %}
