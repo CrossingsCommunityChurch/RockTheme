@@ -13314,40 +13314,43 @@ img {
     background-color: #fff;
   }
 }
-.account-sidebar {
-  height: 100vh;
+.account-dashboard-sidebar {
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
   background-color: #eee;
   z-index: 99;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
-.account-sidebar .profile {
+.account-dashboard-sidebar .alert {
+  margin-bottom: 0;
+}
+.account-dashboard-sidebar .profile {
   padding: 15px 30px;
   text-align: left;
 }
-.account-sidebar .profile h4 {
+.account-dashboard-sidebar .profile h4 {
   margin-bottom: 0;
 }
-.account-sidebar .profile .profile-image {
+.account-dashboard-sidebar .profile .profile-image {
   width: 125px;
 }
-.account-sidebar .account-nav {
+.account-dashboard-sidebar .account-nav {
   display: flex;
   flex-direction: column;
   height: 100%;
   justify-content: space-between;
 }
-.account-sidebar .account-nav ul,
-.account-sidebar .account-nav li {
+.account-dashboard-sidebar .account-nav ul,
+.account-dashboard-sidebar .account-nav li {
   list-style: none;
   padding: 0;
   margin: 0;
 }
-.account-sidebar .account-nav > ul {
+.account-dashboard-sidebar .account-nav > ul {
   margin-top: 15px;
 }
-.account-sidebar .account-nav > ul > li > a {
+.account-dashboard-sidebar .account-nav > ul > li > a {
   display: block;
   padding: 10px 15px 10px 30px;
   text-align: left;
@@ -13356,7 +13359,7 @@ img {
   font-family: "nunito-sans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: bold;
 }
-.account-sidebar .account-nav > ul > li > a:hover {
+.account-dashboard-sidebar .account-nav > ul > li > a:hover {
   text-decoration: none;
   background-color: #313e48;
   color: #fff;
