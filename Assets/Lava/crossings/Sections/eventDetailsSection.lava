@@ -90,10 +90,11 @@
                         <div class="row">
                          <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
                         {% endfor %}
+                        {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
                       {% endif %}
-
-                      {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
-
+                       {% if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty %}
+                        {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{eventitemoccurrence.EventItem.DetailsUrl}}' buttontarget:'_blank' buttontext:'Register' ]}
+                      {% endif %}
                   </div>
                 </div>
                 <div class="row">
