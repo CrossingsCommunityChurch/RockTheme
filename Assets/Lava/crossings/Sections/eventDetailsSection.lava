@@ -83,17 +83,18 @@
               </div>
               <div class="row">
                   <div class="col">
-                    <div class="buttons location-buttons">
-                    {%- comment -%}
-                      Disabling this for now.
-
-                    {% if eventitemoccurrence.EventItem.directionsURL != empty %}
-                      {[ button icon:'location-arrow' buttonstyle:'primary' buttonlink:'{{ eventitemoccurrence.EventItem.directionsURL }}' buttontarget:'_blank' buttontext:'Directions' ]}
-                    {% endif %}{%- endcomment -%}
-                    {%- comment -%}Make this the register button.{%- endcomment -%}
                       {% assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages %}
-                      {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
-                    </div>
+                      {% assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size %}
+                      {% if eventItemOccurrenceLinkagesCount > 0 %}
+                        {% for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages %}
+                        <div class="row">
+                         <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
+                        {% endfor %}
+                        {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
+                      {% endif %}
+                       {% if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty %}
+                        {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{eventitemoccurrence.EventItem.DetailsUrl}}' buttontarget:'_blank' buttontext:'Register' ]}
+                      {% endif %}
                   </div>
                 </div>
                 <div class="row">
@@ -103,7 +104,7 @@
                   <div class="col">
                     <div class="event-share">
                       <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
-                      <script>function ics_click() { text = `{{ EventItemOccurrence.Schedule.iCalendarContent }}`.replace('END:VEVENT', 'SUMMARY: {{ Event.Name }}\r\nLOCATION: {{ EventItemOccurrence.Location }}\r\nEND:VEVENT'); var element = document.createElement('a'); element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text)); element.setAttribute('download', '{{ Event.Name }}.ics'); element.style.display = 'none'; document.body.appendChild(element); element.click(); document.body.removeChild(element); }</script>
+                      <script>function ics_click() { text = `{{ eventitemoccurrence.Schedule.iCalendarContent }}`.replace('END:VEVENT', 'SUMMARY: {{ eventitemoccurrence.EventItem.Name }}\r\nLOCATION: {{ eventitemoccurrence.Location }}\r\nEND:VEVENT'); var element = document.createElement('a'); element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text)); element.setAttribute('download', '{{ eventitemoccurrence.EventItem.Name }}.ics'); element.style.display = 'none'; document.body.appendChild(element); element.click(); document.body.removeChild(element); }</script>
                       <ul class="socialsharing">
                         <li>
                           <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
