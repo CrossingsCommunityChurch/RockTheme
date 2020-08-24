@@ -30,7 +30,7 @@
 {% assign target = buttontarget %}
 {% assign style = buttonstyle %}
 {% assign icon = null %}
-{% if buttonicon and buttonicon != empty %}
+{% if buttonicon != empty %}
   {% assign icon = buttonicon %}
 {% endif %}
 
