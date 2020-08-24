@@ -14911,6 +14911,28 @@ img {
   font-size: 1.2rem;
   margin-top: 1rem;
 }
+.media-filter .media-filter-input {
+  width: 100%;
+  position: relative;
+}
+.media-filter .media-filter-input .input-group-addon {
+  position: absolute;
+  border: 0 none;
+  background-color: transparent;
+  top: 0;
+  bottom: 0;
+  z-index: 4;
+  line-height: 57px;
+  padding: 0 0 0 1rem;
+}
+.media-filter .media-filter-input .form-control {
+  padding-left: 3rem;
+}
+@media (min-width: 992px) {
+  .media-filter .form-inline {
+    margin-top: 30px;
+  }
+}
 .sermon-series-page .video {
   margin-top: -75px;
 }

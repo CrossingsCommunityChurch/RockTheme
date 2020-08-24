@@ -31,9 +31,13 @@
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
-            <vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
+            <div class="input-group media-filter-input">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by Speaker, Topic, Series or Message">
+            </div>
+            <!--<vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
             <vue-dropdown :options="speakers" heading-label="Search by Speaker" empty-label="Select a Speaker" @change="setFilter('speaker', $event)"></vue-dropdown>
-            <vue-dropdown :options="books" heading-label="Search by Book" empty-label="Select a Book" @change="setFilter('book', $event)"></vue-dropdown>
+            <vue-dropdown :options="books" heading-label="Search by Book" empty-label="Select a Book" @change="setFilter('book', $event)"></vue-dropdown>-->
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -71,8 +75,7 @@
           </div>
         </div>
         <div class="paginate-buttons text-center">
-          <a class="btn btn-default" id="back" role="button" v-if="page > 1" @click="page--">Back</a>
-          <a class="btn btn-default" id="next" role="button" @click="page++" v-if="page < pages.length">Next</a>
+          <a class="btn btn-default" id="more" role="button" v-if="page < pages.length" @click="page++">More</a>
         </div>
       </div>
     </div>
@@ -138,20 +141,21 @@ Vue.component('vue-dropdown', {
 const vueApp = new Vue({
   el: '#vapp',
   data () {
-		return {
-			messages : [''],
+    return {
+      messages : [''],
       topics: [''],
       speakers: [''],
-      books: [''],
+      //books: [''],
       topicFilter: '',
       speakerFilter: '',
       bookFilter: '',
-			page: 1,
-			perPage: {{mediaItemsPerPage}},
-			pages: [],
-		}
-	},
-	methods:{
+      filterInput: '',
+      page: 1,
+      perPage: {{mediaItemsPerPage}},
+      pages: [],
+    }
+  },
+  methods:{
     mediaUrl(item) {
       if (item.Series) {
         return `/media/${item.ChannelPath}${item.Series.Slug}/${item.PrimarySlug}`;
@@ -168,7 +172,7 @@ const vueApp = new Vue({
       }
       return imageUrl;
     },
-		getMedia () {
+    getMedia () {
       let data = [];
       axios
         .get('/Webhooks/Lava.ashx/crossings/api/combined-media')
@@ -176,55 +180,85 @@ const vueApp = new Vue({
           this.messages = response.data.Messages;
           this.topics = response.data.FilterLists.Topics;
           this.speakers = response.data.FilterLists.Speakers;
-          this.books = response.data.FilterLists.Books;
+          //this.books = response.data.FilterLists.Books;
         });
-		},
-		setPages () {
+    },
+    setPages () {
       this.pages = [];
       this.page = 1;
-			let numberOfPages = Math.ceil(this.filteredMessages.length / this.perPage);
-			for (let index = 1; index <= numberOfPages; index++) {
-				this.pages.push(index);
-			}
-		},
-		paginate (messages) {
-			let page = this.page;
-			let perPage = this.perPage;
-			let from = (page * perPage) - perPage;
-			let to = (page * perPage);
-			return  messages.slice(from, to);
-		},
+      let numberOfPages = Math.ceil(this.filteredMessages.length / this.perPage);
+      for (let index = 1; index <= numberOfPages; index++) {
+        this.pages.push(index);
+      }
+    },
+    paginate (messages) {
+      let page = this.page;
+      let perPage = this.perPage;
+      let from = 0;
+      let to = (page * perPage);
+      return  messages.slice(from, to);
+    },
     setFilter(propName, item) {
       this[`${propName}Filter`] = item.Name;
     }
-	},
-	computed: {
-    filteredMessages() {
+  },
+  computed: {
+    /*filteredMessages() {
       return this.messages.filter(message => {
         var filterOut = false;
         filterOut |= (this.topicFilter && this.topicFilter !== 'Any' && !message.Topics.includes(this.topicFilter));
         filterOut |= (this.speakerFilter && this.speakerFilter !== 'Any' && message.Speaker !== this.speakerFilter);
-        filterOut |= (this.bookFilter && this.bookFilter !== 'Any' && message.Books.indexOf(this.bookFilter) < 0);
+        //filterOut |= (this.bookFilter && this.bookFilter !== 'Any' && message.Books.indexOf(this.bookFilter) < 0);
         return !filterOut;
       });
+    },*/
+    filteredMessages() {
+      return this.messages.filter(message => {
+        if(this.filterInput && this.filterInput !== '') {
+
+          var filterText = this.filterInput.toLowerCase();
+
+          if (message.Speaker && message.Speaker.toLowerCase().includes(filterText)) {
+            return message;
+          }
+
+          if (message.Topics.length > 0) {
+            var topics = message.Topics.map(t => t.toLowerCase());
+            if(topics.includes(filterText)) {
+              return message;
+            }
+          }
+
+          if (message.Title.toLowerCase().includes(filterText)) {
+              return message;
+          }
+
+          if (message.Series.Title && message.Series.Title.toLowerCase().includes(filterText)) {
+                return message;
+          }
+
+        } else {
+          return message;
+        }
+      });
     },
-		mediaItems () {
-			return this.paginate(this.filteredMessages);
-		}
-	},
-	watch: {
-		filteredMessages () {
-			this.setPages();
-		}
-	},
-	created(){
-		this.getMedia();
-	},
-	filters: {
-		trimWords(value){
-			return value.split(" ").splice(0,20).join(" ") + '...';
-		}
-	}
+    mediaItems () {
+      return this.paginate(this.filteredMessages);
+    }
+  },
+  watch: {
+    filteredMessages () {
+      this.setPages();
+    },
+  },
+  created(){
+    this.getMedia();
+  },
+  filters: {
+    trimWords(value){
+      return value.split(" ").splice(0,20).join(" ") + '...';
+    }
+  }
 });
 
 </script>
