@@ -31,9 +31,13 @@
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
-            <vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
+            <div class="input-group media-filter-input">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by Speaker, Topic, Series or Message">
+            </div>
+            <!--<vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
             <vue-dropdown :options="speakers" heading-label="Search by Speaker" empty-label="Select a Speaker" @change="setFilter('speaker', $event)"></vue-dropdown>
-            <vue-dropdown :options="books" heading-label="Search by Book" empty-label="Select a Book" @change="setFilter('book', $event)"></vue-dropdown>
+            <vue-dropdown :options="books" heading-label="Search by Book" empty-label="Select a Book" @change="setFilter('book', $event)"></vue-dropdown>-->
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -141,10 +145,11 @@ const vueApp = new Vue({
       messages : [''],
       topics: [''],
       speakers: [''],
-      books: [''],
+      //books: [''],
       topicFilter: '',
       speakerFilter: '',
       bookFilter: '',
+      filterInput: '',
       page: 1,
       perPage: {{mediaItemsPerPage}},
       pages: [],
@@ -175,7 +180,7 @@ const vueApp = new Vue({
           this.messages = response.data.Messages;
           this.topics = response.data.FilterLists.Topics;
           this.speakers = response.data.FilterLists.Speakers;
-          this.books = response.data.FilterLists.Books;
+          //this.books = response.data.FilterLists.Books;
         });
     },
     setPages () {
@@ -198,13 +203,43 @@ const vueApp = new Vue({
     }
   },
   computed: {
-    filteredMessages() {
+    /*filteredMessages() {
       return this.messages.filter(message => {
         var filterOut = false;
         filterOut |= (this.topicFilter && this.topicFilter !== 'Any' && !message.Topics.includes(this.topicFilter));
         filterOut |= (this.speakerFilter && this.speakerFilter !== 'Any' && message.Speaker !== this.speakerFilter);
-        filterOut |= (this.bookFilter && this.bookFilter !== 'Any' && message.Books.indexOf(this.bookFilter) < 0);
+        //filterOut |= (this.bookFilter && this.bookFilter !== 'Any' && message.Books.indexOf(this.bookFilter) < 0);
         return !filterOut;
+      });
+    },*/
+    filteredMessages() {
+      return this.messages.filter(message => {
+        if(this.filterInput && this.filterInput !== '') {
+
+          var filterText = this.filterInput.toLowerCase();
+
+          if (message.Speaker && message.Speaker.toLowerCase().includes(filterText)) {
+            return message;
+          }
+
+          if (message.Topics.length > 0) {
+            var topics = message.Topics.map(t => t.toLowerCase());
+            if(topics.includes(filterText)) {
+              return message;
+            }
+          }
+
+          if (message.Title.toLowerCase().includes(filterText)) {
+              return message;
+          }
+
+          if (message.Series.Title && message.Series.Title.toLowerCase().includes(filterText)) {
+                return message;
+          }
+
+        } else {
+          return message;
+        }
       });
     },
     mediaItems () {
@@ -214,7 +249,7 @@ const vueApp = new Vue({
   watch: {
     filteredMessages () {
       this.setPages();
-    }
+    },
   },
   created(){
     this.getMedia();

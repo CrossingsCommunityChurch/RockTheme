@@ -227,3 +227,33 @@
         }
     }
 }
+
+.media-filter {
+    .media-filter-input {
+        width: 100%;
+        position: relative;
+
+        .input-group-addon {
+            position: absolute;
+            border: 0 none;
+            background-color: transparent;
+            top: 0;
+            bottom: 0;
+            z-index: 4;
+            line-height: 57px;
+            padding: 0 0 0 1rem;
+        }
+
+        .form-control {
+            padding-left: 3rem;
+        }
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .media-filter {
+        .form-inline {
+            margin-top: 30px;    
+        }
+    }
+}
