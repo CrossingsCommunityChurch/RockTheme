@@ -84,17 +84,13 @@
               <div class="row">
                   <div class="col">
                       {% assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages %}
-
+                      {% assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size %}
+                      {% if eventItemOccurrenceLinkagesCount > 0 %}
                         {% for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages %}
                         <div class="row">
                          <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
-                          {% assign daysTillStartDate = 'Now' | DateDiff:eventItemOccurrenceLinkage.RegistrationInstance.StartDateTime,'m' %}
-                          {% assign daysTillEndDate = 'Now' | DateDiff:eventItemOccurrenceLinkage.RegistrationInstance.EndDateTime,'m' %}
-                          {% assign showRegistration = true %}
-                          {% assign registrationMessage = '' %}
-
                         {% endfor %}
-
+                      {% endif %}
 
                       {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
 
