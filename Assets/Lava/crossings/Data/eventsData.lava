@@ -59,6 +59,7 @@
             {% assign name = eventitem.Name %}
             {% assign summary = eventitem.Summary %}
             {% assign audiences = eventitem.EventItemAudiences %}
+            {% assign detailsURL = eventitem.DetailsUrl %}
             {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
 
             {% assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' %}
@@ -80,6 +81,7 @@
             {% assign link = occurrenceId | Prepend:'/events/'%}
             {% capture eventsJson %}{{eventsJson}} { {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"AssetImage": {{imageAsset | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"DetailsUrl": {{detailsURL | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"PhotoId": {{photoId | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"PhotoUrl": {{url | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"EventId": {{eventid | ToJSON}} , {%endcapture%}
