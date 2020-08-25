@@ -15278,6 +15278,13 @@ img {
 .search-results-wrapper {
   padding-top: 60px;
 }
+.universal-search .searchbox {
+  max-width: 1170px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin: auto;
+  margin-top: 30px;
+}
 #cms-admin-footer .btn,
 .rock-modal .note-toolbar .btn {
   padding: 7.5px 15px;
