@@ -16,6 +16,9 @@
       {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
   {%- endif -%}
 
+{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
+{% if channelAnchor != empty %} <div id="{{channelAnchor}}"></div> {% endif %}
+
 <div class="section media-embed-list bg-gray" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
   <div class="container content-area">
       <div class="media-list-items">
@@ -38,7 +41,7 @@
                   <div class="video-details text-center">
                     <h4 class="subheading" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ subheading }}</h4>
                     <h3 {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ title }}</h3>
-                    <h5 {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ date }} </h5>
+                    <!--<h5 {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ date }} </h5>-->
                   </div>
                 </div>
             {% endfor %}

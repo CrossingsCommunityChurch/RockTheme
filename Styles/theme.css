@@ -11494,11 +11494,6 @@ img {
 .card:not('.listing') img {
   height: 100%;
 }
-.event-list,
-.media-list-items {
-  min-height: 600px;
-  min-height: 70vh;
-}
 .event-list .card {
   background-color: #fff;
   border-radius: 10px;
