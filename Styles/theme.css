@@ -13315,7 +13315,6 @@ img {
   }
 }
 .account-dashboard-sidebar {
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
   background-color: #eee;
   z-index: 99;
   display: flex;
@@ -15273,6 +15272,16 @@ img {
   .search-wrapper.open .search-content {
     padding: 0 10.5%;
   }
+}
+.search-card {
+  padding: 1rem 2rem;
+  box-shadow: 0 0 10px rgba(118, 117, 128, 0.25);
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  background-color: #fff;
+}
+.search-results-wrapper {
+  padding-top: 60px;
 }
 #cms-admin-footer .btn,
 .rock-modal .note-toolbar .btn {
