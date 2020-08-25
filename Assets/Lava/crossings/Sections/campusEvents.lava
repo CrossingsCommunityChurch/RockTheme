@@ -76,6 +76,16 @@
       }, 300);
     }
 
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
     function renderFilteredItems(events, page, audience) {
       let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
@@ -154,6 +164,13 @@
         }
 
       }
+    }
+
+    var defaultAudience = getParameterByName('category');
+
+    if(defaultAudience) {
+      $('#audiences').html( defaultAudience + ' <i class="fas fa-angle-down pull-right"></i>');
+      renderFilteredItems(events, 1, defaultAudience);
     }
 
   });
