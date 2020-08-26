@@ -12864,6 +12864,7 @@ img {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  border-bottom: 1px solid #fff;
 }
 .card-modal-items .card-modal-details {
   background-color: rgba(0, 0, 0, 0.15);
