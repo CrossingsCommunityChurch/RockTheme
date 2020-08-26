@@ -9,9 +9,9 @@
   <div class="locations">
     <div class="primary-locations">
       <h5 class="app-nav-heading">Locations</h5>
-      <h3>OKC <span class="times">SUNDAYS // 8:15, 9:15 &amp; 10:45</span></h3>
-      <h3>EDMOND <span class="times">SUNDAYS // 9:00 &amp; 11:00</span></h3>
-      <h3>ONLINE <span class="times">SUNDAYS // 9:15 &amp; 10:45</span></h3>
+      <h3>OKC <span class="times">SUNDAYS // 8:30, 9:30 &amp; 11:00</span></h3>
+      <h3>EDMOND <span class="times">SUNDAYS // 9:30 &amp; 11:00</span></h3>
+      <h3>ONLINE <span class="times">SUNDAYS // 9:30 &amp; 11:00</span></h3>
     </div>
     <div class="sub-headings">
       <div id="collapseLocs" class="collapse">
