@@ -203,43 +203,19 @@ const vueApp = new Vue({
     }
   },
   computed: {
-    /*filteredMessages() {
-      return this.messages.filter(message => {
-        var filterOut = false;
-        filterOut |= (this.topicFilter && this.topicFilter !== 'Any' && !message.Topics.includes(this.topicFilter));
-        filterOut |= (this.speakerFilter && this.speakerFilter !== 'Any' && message.Speaker !== this.speakerFilter);
-        //filterOut |= (this.bookFilter && this.bookFilter !== 'Any' && message.Books.indexOf(this.bookFilter) < 0);
-        return !filterOut;
-      });
-    },*/
     filteredMessages() {
       return this.messages.filter(message => {
-        if(this.filterInput && this.filterInput !== '') {
 
-          var filterText = this.filterInput.toLowerCase();
+        if (!this.filterInput) return true;
 
-          if (message.Speaker && message.Speaker.toLowerCase().includes(filterText)) {
-            return message;
-          }
+        let shouldInclude = false;
+        shouldInclude |= (message.Speaker && message.Speaker.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
+        shouldInclude |= (message.Topics.length && message.Topics.map(t => t.toLowerCase().trim()).includes(this.filterInput.toLowerCase().trim()));
+        shouldInclude |= (message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
+        shouldInclude |= (message.Series.Title && message.Series.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
 
-          if (message.Topics.length > 0) {
-            var topics = message.Topics.map(t => t.toLowerCase());
-            if(topics.includes(filterText)) {
-              return message;
-            }
-          }
+        return shouldInclude;
 
-          if (message.Title.toLowerCase().includes(filterText)) {
-              return message;
-          }
-
-          if (message.Series.Title && message.Series.Title.toLowerCase().includes(filterText)) {
-                return message;
-          }
-
-        } else {
-          return message;
-        }
       });
     },
     mediaItems () {
