@@ -48,9 +48,6 @@
                     <div class="past-details">
                       <h2 class="heading">{{ campusLeader.FullName }}</h2>
                       <p class="lead">{{ campusLeader | Attribute: 'Position'}}</p>
-                      <p>
-                        <a href="#">View All Staff <i class="fas fa-angle-right"></i></a>
-                      </p>
                     </div>
                   </div>
                 </div>
