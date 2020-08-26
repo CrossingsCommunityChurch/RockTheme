@@ -11197,6 +11197,9 @@ body {
     padding-top: 45px;
   }
 }
+.lead-video {
+  margin-top: -60px;
+}
 .btn-shadow {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
