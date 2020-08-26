@@ -1,0 +1,18 @@
+{%- comment -%}
+   Accepts
+   - channelid
+
+{%- endcomment -%}
+
+[
+    {% assign contentChannelId = '67' %}
+    {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}}' iterator:'homeImages' securityenabled:'false' %}
+      {%- for image in homeImages -%}
+        {% assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath' %}
+        {
+            "image" : {{ AssetImage | ToJSON }}
+        }
+        {% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    {% endcontentchannelitem %}
+]

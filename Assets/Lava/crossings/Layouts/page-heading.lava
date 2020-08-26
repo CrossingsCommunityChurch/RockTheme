@@ -16,6 +16,16 @@
     {% assign wrapperClass = 'page-item' %}
 {% endif %}
 
+{% if layout == 'Homepage' %}
+
+{% assign homepageImages = 'homeImages' | PersistedDataset | Shuffle %}
+
+    {% assign firstImage = homepageImages | First %}
+    {% assign imageUrlPath = firstImage.image %}
+    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+
+{% endif %}
+
 {% if imageUrlPath != empty %}
     <div class="container-fluid hero-wrapper {{ wrapperClass }}">
         {[ parallax image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}

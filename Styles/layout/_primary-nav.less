@@ -577,11 +577,15 @@
 }
 
 .account-dashboard-sidebar {
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
     background-color: #eee;
     z-index: 99;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+
+    .alert {
+        margin-bottom: 0;
+    }
 
     .profile {
         padding: @spacing @spacing2x;

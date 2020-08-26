@@ -1,6 +1,4 @@
 {% if CurrentPerson %}
-
-<div id="account-menu" class="account-dashboard-sidebar">
     <div class="profile">
         <div class="profile-image">
           <img src="{{ CurrentPerson.PhotoUrl }}" alt="My Profile Image" />
@@ -22,6 +20,4 @@
           <a href="/?Logout=True" class="btn btn-block">Logout</a>
         </div>
     </nav>
-</div>
-
 {% endif %}
