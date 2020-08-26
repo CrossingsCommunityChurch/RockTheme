@@ -13,7 +13,7 @@
           <label for="filterLabel">Filter By Category</label>
           <div class="dropdown">
             <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
-            <ul aria-labelledby="eventFilterMenu" class="dropdown-menu">
+            <ul aria-labelledby="eventFilterMenu" id="eventFilterMenu" class="dropdown-menu">
               <li><a style="cursor: pointer;">All Events</a></li>
               <li role="separator" class="divider"></li>
               {% for audience in audiences %}
@@ -36,6 +36,20 @@
 <script>
 
   $(document).ready(() => {
+
+    var liText = '', liList = $('#eventFilterMenu li'), listForRemove = [];
+    $(liList).each(function () {
+
+      var text = $(this).text();
+
+      if (liText.indexOf('|'+ text + '|') == -1)
+        liText += '|'+ text + '|';
+      else
+        listForRemove.push($(this));
+
+    })
+
+    $(listForRemove).each(function () { $(this).remove(); });
 
     const eventsJson = `{{evts}}`;
     const imageStorageUrl = '{{imageStorageUrl}}';
