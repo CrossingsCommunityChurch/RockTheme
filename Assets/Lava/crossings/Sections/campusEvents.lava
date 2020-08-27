@@ -1,7 +1,7 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/600x600/' %}
 {% assign evtData = 'events' | PersistedDataset %}
-{% assign audiences = evtData.Audiences %}
+{% assign audiences = evtData.Audiences | Uniq %}
 {% assign evts = evtData.Events | ToJSON %}
 {% assign itemsPerPage = 6 %}
 
@@ -36,20 +36,6 @@
 <script>
 
   $(document).ready(() => {
-
-    var liText = '', liList = $('#eventFilterMenu li'), listForRemove = [];
-    $(liList).each(function () {
-
-      var text = $(this).text();
-
-      if (liText.indexOf('|'+ text + '|') == -1)
-        liText += '|'+ text + '|';
-      else
-        listForRemove.push($(this));
-
-    })
-
-    $(listForRemove).each(function () { $(this).remove(); });
 
     const eventsJson = `{{evts}}`;
     const imageStorageUrl = '{{imageStorageUrl}}';
