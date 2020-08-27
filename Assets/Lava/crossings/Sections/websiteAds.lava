@@ -1,36 +1,44 @@
-<div class="row announcement-list">
+<div id="announcementList" class="announcement-list">
+  <div class="container announcement-list-items" data-aos="fade-up">
+  <div class="row flex-row flex-wrap">
   {% for item in Items %}
-{% assign eventItem = item | Attribute:'Event','Object' %}
-  {{ eventItem.Description }}
-  {%- assign itemContent = item.Content | Trim -%}
-  {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
-  {%- if LinkedPages.DetailPage contains '{Slug}' and itemPrimarySlug != '' -%}
-    {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.PrimarySlug | Prepend:'/' -%}
-  {%- else -%}
-    {%- if LinkedPages.DetailPage contains '{Slug}' -%}
-      {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.Id | Prepend:'/' -%}
+    {%- assign itemContent = item.Content | Trim -%}
+    {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
+    {%- if LinkedPages.DetailPage contains '{Slug}' and itemPrimarySlug != '' -%}
+      {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.PrimarySlug | Prepend:'/' -%}
     {%- else -%}
-      {%- capture itemLink -%}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{%- endcapture -%}
+      {%- if LinkedPages.DetailPage contains '{Slug}' -%}
+        {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.Id | Prepend:'/' -%}
+      {%- else -%}
+        {%- capture itemLink -%}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{%- endcapture -%}
+      {%- endif -%}
     {%- endif -%}
-  {%- endif -%}
-  <div class="col-md-4 col-sm-6 announcement">
-    {%- if itemContent == '' -%}
-      {{ item | Attribute:'Image' }}
-    {% else %}
-      <a href="{{ itemLink }}">{{ item | Attribute:'Image' }}</a>
-    {% endif %}
-    <h2 class="announcement-title">{{ item.Title }}</h2>
-    <p class="announcement-text">{{ item | Attribute:'SummaryText' }}</p>
-    {%- if itemContent != '' -%}
-    <p>
-      <a class="view-details btn btn-default" href="{{ itemLink }}" role="button">View details »</a>
-    </p>
-    {%- endif -%}
-  </div>
-  {% capture breakNow %}{{ forloop.index | Modulo:3 }}{% endcapture %}
-  {% if breakNow == 0 -%}
-</div>
-<div class="row announcement-list">
-  {% endif -%}
+    <div class="col-sm-6 col-md-4">
+      {% if item | Attribute:'DetailsURL' != '' %}
+      <a href="{{ itemLink }}" class="card cardShadow">
+      {% endif %}
+        <div class="thumb">
+                <!--<img src="IMG GOES HERE" class="object-fit">-->
+              </div>
+              <div class="row card-content-row">
+                <div class="card-content">
+                  <div class="col">
+                    <div>
+                      <h4 class="announcement-title">{{ item.Title }}</h4>
+                      <p class="announcement-text">{{ item | Attribute:'SummaryText' }}</p>
+                    </div>
+                  </div>
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Details</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </div>
+              </div>
+      {% if item | Attribute:'DetailsURL' != '' %}
+      </a>
+      {% endif %}
+    </div>
   {% endfor -%}
+  </div>
+  </div>
 </div>
