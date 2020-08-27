@@ -8,16 +8,8 @@
     {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
     {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
     {%- assign itemContent = item.Content | Trim -%}
-    {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
-    {%- if LinkedPages.DetailPage contains '{Slug}' and itemPrimarySlug != '' -%}
-      {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.PrimarySlug | Prepend:'/' -%}
-    {%- else -%}
-      {%- if LinkedPages.DetailPage contains '{Slug}' -%}
-        {%- assign itemLink = LinkedPages.DetailPage | Replace:'{Slug}',item.Id | Prepend:'/' -%}
-      {%- else -%}
-        {%- capture itemLink -%}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{%- endcapture -%}
-      {%- endif -%}
-    {%- endif -%}
+    {% assign subheading = item | Attribute:'Subheading' %}
+    {% assign detail = item | Attribute:'DetailsURL' %}
     <div class="col-sm-6 col-md-4">
       <div class="card cardShadow">
         {% if imageUrlPath !='' %}
@@ -30,10 +22,13 @@
                   <div class="col">
                     <div>
                       <h4>{{ item.Title }}</h4>
+                      {% if subheading != ''%}
+                      <h5 class="text-muted">{{ item | Attribute:'Subheading' }}</h5>
+                      {% endif %}
                       <p class="small">{{ item | Attribute:'SummaryText' }}</p>
                     </div>
                   </div>
-                  {% assign detail = item | Attribute:'DetailsURL' %}
+
                   {% if detail != '' %}
                   <a href="{{ itemLink }}">
                   <div class="btn icon-button shadowDepth2">
