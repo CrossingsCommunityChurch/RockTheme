@@ -34,7 +34,7 @@
             <div class="col-md-12">
                 {% for item in Items %}
                   {% assign title = item.Title %}
-                  {% assign content = item.Content %}
+                  {% assign content = item.Content | Escape %}
                   {% assign icon = item | Attribute:'Icon' %}
                   {% assign subheading = item | Attribute:'subheading' %}
                   {% capture toggleIdentifier %}{{title | Remove:' ' | ToCssClass  }}{{ forloop.index }}{% endcapture %}
