@@ -1,6 +1,7 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign mediaItemsPerPage = 'Global' | Attribute:'MediaItemsPerPage' %}
 {% assign mediaItemImageResize = 'Global' | Attribute:'MediaItemImageResize' %}
+{% assign mediaItemTopicMinCharsToMatch = 'Global' | Attribute:'MediaItemTopicMinCharsToMatch' %}
 {% assign mediaData = 'Combinedmedia' | PersistedDataset %}
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
@@ -209,12 +210,13 @@ const vueApp = new Vue({
         if (!this.filterInput) return true;
 
         let shouldInclude = false;
-        shouldInclude |= (message.Speaker && message.Speaker.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
-        shouldInclude |= (message.Topics.length && message.Topics.map(t => t.toLowerCase().trim()).includes(this.filterInput.toLowerCase().trim()));
-        shouldInclude |= (message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
-        shouldInclude |= (message.Series.Title && message.Series.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
 
-        return shouldInclude;
+        shouldInclude |= (!!message.Speaker && message.Speaker.toLowerCase().includes(this.filterInput.toLowerCase().trim()));
+        shouldInclude |= (this.filterInput.toLowerCase().trim().length >= {{mediaItemTopicMinCharsToMatch}} && !!message.Topics && message.Topics.map(t => t.toLowerCase().trim()).filter(t => t.indexOf(this.filterInput.toLowerCase().trim()) === 0).length > 0);
+        shouldInclude |= (message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
+        shouldInclude |= (!!message.Series && !!message.Series.Title && message.Series.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
+
+        return !!shouldInclude;
 
       });
     },
