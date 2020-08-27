@@ -1,0 +1,83 @@
+.card-modal-items {
+
+    .card-modal-item {
+        position: relative;
+        display: block;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        border-bottom: 1px solid #fff;
+    }
+
+    .card-modal-details {
+        background-color: rgba(0, 0, 0, 0.15);
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        top: 0;
+        right: 0;
+        transition: all ease-in-out 0.5s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.55);
+
+            .icon {
+                &:after {
+                    opacity: 1;
+                    bottom: -1rem;
+                }
+            }
+        }
+
+        > div {
+            text-align: center;
+        }
+
+        .btn {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .icon {
+            position: relative;
+
+            .fa {
+                height: 50px;
+                width: 50px;
+                margin: auto;
+                background-color: rgba(0, 0, 0, 0.45);
+                line-height: 45px;
+                border-radius: 100%;
+                border: 3px solid transparent;
+            }
+
+            &:after {
+                content: 'Preview';
+                display: block;
+                opacity: 0;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -3rem;
+                transition: all ease-in-out 0.3s;
+                text-transform: uppercase;
+                font-size: 0.9rem;
+            }
+        }
+
+        h3 {
+            color: @white;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            text-align: center;
+        }
+
+        h4 {
+            margin-top: 1rem;
+        }
+    }
+}

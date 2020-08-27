@@ -1,0 +1,9 @@
+<div class="section video lead-video">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+              {[ videoPlayer vimeourl:'402724479' ]}
+            </div>
+        </div>
+    </div>
+</div>
