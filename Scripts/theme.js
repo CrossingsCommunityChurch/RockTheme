@@ -32,6 +32,11 @@ $(document).ready(function() {
         $(this).add('.mobile-slideout.locations, .mobile-overlay').toggleClass('active');
     });
 
+    $('.toggle-media, .mobile-slideout-close-media').click(function(e){
+        e.preventDefault();
+        $(this).add('.mobile-slideout.media, .mobile-overlay').toggleClass('active');
+    });
+
     $(window).scroll(function() {    
         var scroll = $(window).scrollTop();
 
