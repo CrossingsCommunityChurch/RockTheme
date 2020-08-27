@@ -27,14 +27,24 @@ $(document).ready(function() {
         $('body').removeClass('modal-open');
     });
 
-    $('.toggle-locations, .mobile-slideout-close').click(function(e){
+    $('.mobile-slideout-close').click(function(e){
         e.preventDefault();
-        $(this).add('.mobile-slideout.locations, .mobile-overlay').toggleClass('active');
+        $('.mobile-nav-bar-item').removeClass('active');
+        $('.mobile-slideout, .mobile-overlay').removeClass('active');
+    })
+
+    $('.toggle-locations').click(function(e){
+        e.preventDefault();
+        $('.mobile-nav-bar-item').removeClass('active');
+        $(this).add('.mobile-slideout, .mobile-overlay').removeClass('active');
+        $(this).add('.mobile-slideout.locations, .mobile-overlay').addClass('active');
     });
 
-    $('.toggle-media, .mobile-slideout-close-media').click(function(e){
+    $('.toggle-media').click(function(e){
         e.preventDefault();
-        $(this).add('.mobile-slideout.media, .mobile-overlay').toggleClass('active');
+        $('.mobile-nav-bar-item').removeClass('active');
+        $(this).add('.mobile-slideout, .mobile-overlay').removeClass('active');
+        $(this).add('.mobile-slideout.media, .mobile-overlay').addClass('active');
     });
 
     $(window).scroll(function() {    
