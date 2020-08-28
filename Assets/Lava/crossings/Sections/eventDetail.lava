@@ -13,8 +13,6 @@
 </div>
 {% endeventitemoccurrence %}
 
-{[ eventDetails  ]}
-
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
 {% assign eventimageUrl =''%}
 {% assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' %}
@@ -31,7 +29,27 @@
     {% assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath %}
 {% endif %}
 
-<div class="container-fluid section simple-section {% if useBackground == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}">
+
+
+<div class="container-fluid section split-section split-section-overlap">
+      <div class="row flex-row">
+          <div class="col-md-6 nopadding-x image-bg">
+            {% if eventimageUrl != empty %}
+              <img src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
+            {% endif %}
+          </div>
+          <div class="col-md-6 split-section-text" data-aos="fade-left">
+            {[ eventDetails  ]}
+          </div>
+        </div>
+</div>
+
+
+
+
+
+
+<div class="container-fluid section simple-section">
       <div class="row">
           <div class="container content-area" data-aos="fade-up">
               <div class="row">
