@@ -9,6 +9,7 @@
             {% assign title = item.Title %}
             {% assign subheading = item | Attribute: 'subheading' %}
             {% assign icon = item | Attribute: 'Icon' %}
+            {% assign subcontent = item | Attribute: 'CardSubcontent' %}
             {% assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' %}
             {% assign image = imageStorageUrl | Append: imageSize | Append:imageAsset %}
             {% assign modalID = item.Title | ToCssClass %}
@@ -22,10 +23,14 @@
                         </div>
                     {% endif %}
                     <h2 class="reverse">{{ title }}</h2>
-                    <h4 class="reverse">{{ subheading }}</h4>
                   </div>
               </div>
             </a>
+            {% if subcontent != empty %}
+              <div class="card-modal-subcontent">
+                {{ subcontent }}
+              </div>
+            {% endif %}
             {[ modal modalid:'{{modalIDWithIndex}}' title:'' class:'playlist-modal' size:'modal-lg' ]}
                 {{item.Content }}
             {[ endmodal ]}

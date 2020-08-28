@@ -12859,6 +12859,12 @@ img {
   outline: none;
   box-shadow: none;
 }
+.card-modal-items .card-modal-subcontent {
+  margin-top: 0.5rem;
+}
+.card-modal-items .card-modal-subcontent a {
+  color: #007acc;
+}
 .card-modal-items .card-modal-item {
   position: relative;
   display: block;
@@ -12917,6 +12923,9 @@ img {
   transition: all ease-in-out 0.3s;
   text-transform: uppercase;
   font-size: 0.9rem;
+}
+.card-modal-items .card-modal-details h2 {
+  font-size: 3rem;
 }
 .card-modal-items .card-modal-details h3 {
   color: #fff;
