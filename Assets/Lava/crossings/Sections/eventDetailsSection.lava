@@ -12,12 +12,15 @@
   {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 {% endif %}
 {% assign contact = eventitemoccurrence.ContactPersonAliasId | PersonByAliasId %}
-<div class="section special-message simple-section location-details">
-        <div class="container-fluid">
+<div class="section special-message simple-section event-details">
+        <div class="container">
           <div class="row">
             <div class="col" data-aos="fade-up">
               <div class="event-content">
                 <div class="row location-content">
+                  <div class="col-md-12">
+                      <h1 class="heading text-center">{{ pageTitle }}</h1>
+                  </div>
                   <div class="col-md-6">
                     {%- comment -%}
                       This shows schedule friendly name only if it exists.
