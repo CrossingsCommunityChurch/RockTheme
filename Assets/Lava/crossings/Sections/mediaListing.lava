@@ -6,8 +6,10 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
-{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js' %}
+{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-select@3.10.8' %}
 {% endjavascript %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-select@3.10.8/dist/vue-select.css">
+<link rel="stylesheet" href="/Themes/RockTheme/Styles/vue-select-overrides.css">
 
 <div id="vue-template-dropdown" style="display:none;">
   <div class="form-group">
@@ -32,9 +34,10 @@
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
-            <div class="input-group media-filter-input">
+            <div class="v-dropdown-input input-group media-filter-input">
+              {% comment %} <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by Speaker, Topic, Series or Message"> {% endcomment %}
               <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by Speaker, Topic, Series or Message">
+              <v-select label="Name" v-model="filterInput" :reduce="n => n.Name" taggable :options="searchOptions" placeholder="Search by Speaker, Topic, Series or Message"></v-select>
             </div>
             <!--<vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
             <vue-dropdown :options="speakers" heading-label="Search by Speaker" empty-label="Select a Speaker" @change="setFilter('speaker', $event)"></vue-dropdown>
@@ -93,6 +96,8 @@
 
 const imageStorageUrl = '{{ imageStorageUrl }}';
 
+Vue.component('v-select', VueSelect.VueSelect);
+
 Vue.component('vue-dropdown', {
   template: '#vue-template-dropdown',
   props: {
@@ -146,6 +151,7 @@ const vueApp = new Vue({
       messages : [''],
       topics: [''],
       speakers: [''],
+      searchOptions: [''],
       //books: [''],
       topicFilter: '',
       speakerFilter: '',
@@ -182,6 +188,7 @@ const vueApp = new Vue({
           this.topics = response.data.FilterLists.Topics;
           this.speakers = response.data.FilterLists.Speakers;
           //this.books = response.data.FilterLists.Books;
+          this.searchOptions = response.data.FilterLists.Topics.concat(response.data.FilterLists.Speakers);
         });
     },
     setPages () {

@@ -1,0 +1,14 @@
+.vs__dropdown-toggle {
+    background-color: white;
+    border: none;
+}
+.v-select {
+    margin-left: 40px;
+}
+.v-dropdown-input {
+    background-color: white;
+    border: 1px solid black;
+}
+.v-dropdown-input .input-group-addon {
+    line-height: 35px !important;
+}
