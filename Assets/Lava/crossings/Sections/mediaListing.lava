@@ -191,6 +191,16 @@ const vueApp = new Vue({
           this.searchOptions = response.data.FilterLists.Topics.concat(response.data.FilterLists.Speakers);
         });
     },
+    applySearchTags() {
+      console.log('Applying search tags...');
+      const params = new URLSearchParams(window.location.search);
+      console.log(`params are '${params}'`);
+      if (params.has('tag')) {
+        var tag = params.get('tag');
+        this.filterInput = tag
+        console.log(`just set search tag to '${tag}'`);
+      }
+    },
     setPages () {
       this.pages = [];
       this.page = 1;
@@ -220,7 +230,7 @@ const vueApp = new Vue({
 
         shouldInclude |= (!!message.Speaker && message.Speaker.toLowerCase().includes(this.filterInput.toLowerCase().trim()));
         shouldInclude |= (this.filterInput.toLowerCase().trim().length >= {{mediaItemTopicMinCharsToMatch}} && !!message.Topics && message.Topics.map(t => t.toLowerCase().trim()).filter(t => t.indexOf(this.filterInput.toLowerCase().trim()) === 0).length > 0);
-        shouldInclude |= (message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
+        shouldInclude |= (!!message.Title && message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
         shouldInclude |= (!!message.Series && !!message.Series.Title && message.Series.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
 
         return !!shouldInclude;
@@ -238,6 +248,7 @@ const vueApp = new Vue({
   },
   created(){
     this.getMedia();
+    this.applySearchTags();
   },
   filters: {
     trimWords(value){
