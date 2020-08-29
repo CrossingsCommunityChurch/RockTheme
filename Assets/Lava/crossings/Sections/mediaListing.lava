@@ -192,13 +192,10 @@ const vueApp = new Vue({
         });
     },
     applySearchTags() {
-      console.log('Applying search tags...');
       const params = new URLSearchParams(window.location.search);
-      console.log(`params are '${params}'`);
       if (params.has('tag')) {
         var tag = params.get('tag');
         this.filterInput = tag
-        console.log(`just set search tag to '${tag}'`);
       }
     },
     setPages () {
