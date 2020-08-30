@@ -11679,6 +11679,9 @@ img {
 .media-list .dropdown-menu {
   max-height: 40vh;
 }
+.media-list .card-list-filter {
+  margin-top: 1rem;
+}
 .media-list .card {
   background-color: #fff;
   border-radius: 10px;
