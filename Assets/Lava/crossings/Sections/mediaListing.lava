@@ -39,9 +39,6 @@
               <span class="input-group-addon"><i class="fa fa-search"></i></span>
               <v-select label="Name" v-model="filterInput" :reduce="n => n.Name" taggable :options="searchOptions" placeholder="Search by Speaker, Topic, Series or Message"></v-select>
             </div>
-            <!--<vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
-            <vue-dropdown :options="speakers" heading-label="Search by Speaker" empty-label="Select a Speaker" @change="setFilter('speaker', $event)"></vue-dropdown>
-            <vue-dropdown :options="books" heading-label="Search by Book" empty-label="Select a Book" @change="setFilter('book', $event)"></vue-dropdown>-->
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -97,52 +94,6 @@
 const imageStorageUrl = '{{ imageStorageUrl }}';
 
 Vue.component('v-select', VueSelect.VueSelect);
-
-Vue.component('vue-dropdown', {
-  template: '#vue-template-dropdown',
-  props: {
-    open: {
-      type: Boolean,
-      default: false
-    },
-    emptyLabel: {
-      type: String,
-      default: 'Select'
-    },
-    options: {
-      type: Array,
-      required: true
-    },
-    headingLabel: {
-      type: String,
-      default: 'Search by Value'
-    }
-  },
-  data: function () {
-    return {
-      selectedOption: {
-        type: Number,
-        default: null
-      },
-      isOpen: Vue.util.extend({}, this.open)
-    };
-  },
-  mounted() {
-    this.isOpen = false;
-  },
-  computed: {
-    selectedValue: function () {
-      return this.selectedOption >= 0 ? this.options[this.selectedOption].Name : this.emptyLabel;
-    }
-  },
-  methods: {
-    handleClick: function (i) {
-      this.selectedOption = i;
-      this.isOpen = false;
-      this.$emit('change', i >= 0 ? this.options[i] : '');
-    }
-  }
-});
 
 const vueApp = new Vue({
   el: '#vapp',
