@@ -78,6 +78,20 @@
         </div>
     </form>
     <script async src="https://merlin.simpledonation.com/js/installScript.js?key=01E4ESB8Z1ANNJZ95F7JHP20Y6"></script>
+    <script>
+	var refTagger = {
+		settings: {
+			bibleVersion: "NIV",			
+			roundCorners: true,
+			socialSharing: ["twitter","facebook"]
+		}
+	};
+	(function(d, t) {
+		var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+		g.src = "//api.reftagger.com/v2/RefTagger.js";
+		s.parentNode.insertBefore(g, s);
+	}(document, "script"));
+</script>
 </body>
 
 </html>

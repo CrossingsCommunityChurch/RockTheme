@@ -1,0 +1,47 @@
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/600x600/' %}
+
+<div id="announcementList" class="announcement-list">
+  <div class="container announcement-list-items" data-aos="fade-up">
+  <div class="row flex-row flex-wrap">
+  {% for item in Items %}
+    {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
+    {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+    {%- assign itemContent = item.Content | Trim -%}
+    {% assign subheading = item | Attribute:'Subheading' %}
+    {% assign detail = item | Attribute:'DetailsURL' %}
+    <div class="col-sm-6 col-md-4">
+      <div class="card cardShadow">
+        {% if imageUrlPath !='' %}
+        <div class="thumb">
+          <img src="{{ imageAsset }}" class="event-img">
+        </div>
+        {% endif %}
+              <div class="row card-content-row">
+                <div class="card-content">
+                  <div class="col">
+                    <div>
+                      <h4>{{ item.Title }}</h4>
+                      {% if subheading != ''%}
+                      <h5 class="text-muted">{{ item | Attribute:'Subheading' }}</h5>
+                      {% endif %}
+                      <p class="small">{{ item | Attribute:'SummaryText' }}</p>
+                    </div>
+                  </div>
+
+                  {% if detail != '' %}
+                  <a href="{{ itemLink }}">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Details</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                  </a>
+                  {% endif %}
+                </div>
+              </div>
+      </div>
+    </div>
+  {% endfor -%}
+  </div>
+  </div>
+</div>

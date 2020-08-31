@@ -12,23 +12,15 @@
   {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 {% endif %}
 {% assign contact = eventitemoccurrence.ContactPersonAliasId | PersonByAliasId %}
-<div class="section special-message simple-section location-details">
+<div class="section special-message simple-section event-details">
         <div class="container">
           <div class="row">
-            <div class="col-md-12" data-aos="fade-up">
+            <div class="col" data-aos="fade-up">
               <div class="event-content">
-                <div class="icon-divider">
-                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24.5px" height="27.1px" viewBox="0 0 24.5 27.1" xml:space="preserve" style="overflow: visible;"><g><g><path d="M12.7,11.4L1.5,10.8c0.2-0.7,0.4-1.4,0.8-2.1l10.3,0.6c0,0,0,0,0.1,0c0.1,0,0.1,0,0.1-0.1
-                                  C12.8,9.1,12.8,9,12.8,9l0-8.8c0-0.1,0-0.2-0.1-0.2c0,0-0.1,0-0.1,0c0,0-0.1,0-0.1,0l-2.3,1.4c0,0,0,0,0,0C4.4,2.4,0,7.5,0,13.5
-                                  c0,6.1,4.4,11.1,10.3,12.1l2.2,1.4c0,0,0.1,0,0.1,0c0,0,0.1,0,0.1,0c0.1,0,0.1-0.1,0.1-0.2l0-15.3C12.8,11.5,12.8,11.4,12.7,11.4z
-                                  M10.1,14.2l0,10.3c-5.1-1-8.9-5.5-9-10.8L10.1,14.2C10.1,14.1,10.1,14.1,10.1,14.2z M2.9,7.6c1.6-2.5,4.2-4.3,7.2-4.9l0,5.3
-                                  L2.9,7.6z" class="st0"></path><path d="M16.2,1.9V1.1c0-0.3-0.3-0.6-0.6-0.6c-0.3,0-0.6,0.3-0.6,0.6l0,7.7c0,0.3,0.2,0.6,0.6,0.6l7.2,0.5
-                                  c0.2,0.7,0.4,1.4,0.5,2.1l-7.9-0.4c0,0,0,0-0.1,0c-0.1,0-0.1,0-0.1,0.1c-0.1,0.1-0.1,0.1-0.1,0.2l0,0.6V26c0,0.3,0.3,0.6,0.6,0.6
-                                  c0.3,0,0.6-0.3,0.6-0.6v-0.8c4.8-1.6,8.3-6.2,8.3-11.6C24.5,8.1,21,3.6,16.2,1.9z M16.2,8.2l0-5.1c2.6,1,4.8,3,6,5.5L16.2,8.2z
-                                  M23.3,14.6c-0.4,4.3-3.2,7.9-7.1,9.3v-9.5L23.3,14.6z" class="st0"></path></g></g>
-                  </svg>
-                </div>
                 <div class="row location-content">
+                  <div class="col-md-12">
+                      <h1 class="heading text-center">{{ pageTitle }}</h1>
+                  </div>
                   <div class="col-md-6">
                     {%- comment -%}
                       This shows schedule friendly name only if it exists.
@@ -53,10 +45,6 @@
 
                   </div>
                   <div class="col-md-6"><div class="pastor-item">
-                    {%- comment -%}
-                      Need to discuss if we want all contacts photos to be here or not.
-                      Also need to add a way to get contact info. idealy around this area.
-                    {%- endcomment -%}
                     {% if contact.Photo.Url and contact.Photo.Url != empty and useContactImage == true %}
                     <div class="pastor-image">
                       <img src="{{ contact.Photo.Url }}">
