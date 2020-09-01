@@ -15633,6 +15633,7 @@ img {
   top: 58px;
   left: 0;
   right: 0;
+  z-index: 99;
 }
 .navbar.affix-navbar .navbar-brand {
   font-weight: bold;
