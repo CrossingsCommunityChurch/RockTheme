@@ -15607,6 +15607,36 @@ img {
     padding-top: 60px;
   }
 }
+.navbar.affix-navbar {
+  border: 0 none;
+  border-top: 1px solid #1c242a;
+  z-index: 9;
+}
+.navbar.affix-navbar.affix {
+  top: 58px;
+  left: 0;
+  right: 0;
+}
+.navbar.affix-navbar .navbar-brand {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.navbar.affix-navbar .nav > li > a {
+  padding: 22.5px 30px;
+}
+@media (min-width: 992px) {
+  .navbar.affix-navbar.affix {
+    top: 75px;
+  }
+  .missions .page-wrapper .hero-wrapper .parallax-content,
+  .lifecare .page-wrapper .hero-wrapper .parallax-content {
+    height: calc(100vh - 70px) !important;
+  }
+  .missions .page-wrapper .hero-wrapper .parallax-content::after,
+  .lifecare .page-wrapper .hero-wrapper .parallax-content::after {
+    display: none;
+  }
+}
 .footer.microsite {
   display: block;
 }

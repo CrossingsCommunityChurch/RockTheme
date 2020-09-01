@@ -1,2 +1,45 @@
 .microsite-nav.navbar {
 }
+
+.navbar.affix-navbar {
+    border: 0 none;
+    border-top: 1px solid darken(@brand-primary, 10%);
+    z-index: 9;
+
+    &.affix {
+        top: 58px;
+        left: 0;
+        right:  0;
+    }
+
+    .navbar-brand {
+        font-weight: bold;
+        text-transform: uppercase;
+    }
+
+    .nav > li {
+        > a {
+            padding: 22.5px @spacing2x;
+        }
+    }
+}
+
+@media (min-width: @screen-desktop) {
+
+    .navbar.affix-navbar {
+        &.affix {
+            top: 75px;
+        }
+    }
+
+    .missions,
+    .lifecare {
+        .page-wrapper .hero-wrapper .parallax-content {
+            height: calc(100vh - 70px) !important;
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+}
