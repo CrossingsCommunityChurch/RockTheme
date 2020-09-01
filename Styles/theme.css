@@ -14668,6 +14668,10 @@ img {
 .special-message .person-details {
   padding-top: 30px;
 }
+.missions .person-details > h4,
+.lifecare .person-details > h4 {
+  display: none;
+}
 .darkmode .special-message {
   border-top: 15px solid;
 }
