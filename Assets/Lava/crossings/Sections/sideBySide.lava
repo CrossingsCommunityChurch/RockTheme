@@ -6,7 +6,6 @@
 {%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
 {%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{%- assign contentItemStyle = '' -%}
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/1100x900' %}
 
@@ -42,7 +41,7 @@
 }
 {% endstylesheet %}
 
-{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
+{% if channelAnchor != empty %} <div id="{{channelAnchor}}"></div> {% endif %}
 
 {%- if channelSectionTitle != empty -%}
 <div class="section">
@@ -50,7 +49,7 @@
         <div class="container content-area" data-aos="fade-up">
             <h2 class="text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
             <hr class="sep">
-            {%- if channelSectionSummary != '' -%}
+            {%- if channelSectionSummary != empty -%}
                 <div class="summary text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>
                 {{ channelSectionSummary }}
                 </div>
@@ -88,10 +87,10 @@
         </div>
         <div class="col-md-6 text-content {% if channelContentAlignment == 'Right' %}{% cycle 'secondcol': 'col-md-pull-6', '' %}{% else %}{% cycle 'secondcol': '', 'col-md-pull-6' %}{% endif %}">
             <div class='content-item' data-aos='fade-up' {% if contentItemStyle != empty %}style='{{ contentItemStyle }}'{% endif %}>
-              {%- if subheading -%}
+              {%- if subheading != empty -%}
                 <h4 class="subheading">{{  subheading }}</h4>
               {% endif %}
-              {%- if title -%}
+              {%- if title != empty -%}
                 <h2 class="heading">{{ title }}</h2>
                 <hr class="sep">
               {% endif %}
