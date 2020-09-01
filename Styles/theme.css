@@ -15654,10 +15654,6 @@ img {
   .lifecare .page-wrapper .hero-wrapper:not(.short-hero) .parallax-content {
     height: calc(100vh - 70px) !important;
   }
-  .missions .page-wrapper .hero-wrapper:not(.short-hero) .parallax-content::after,
-  .lifecare .page-wrapper .hero-wrapper:not(.short-hero) .parallax-content::after {
-    display: none;
-  }
 }
 .footer.microsite {
   display: block;
