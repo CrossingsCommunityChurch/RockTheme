@@ -1,10 +1,16 @@
-.microsite-nav.navbar {
-}
-
 .navbar.affix-navbar {
     border: 0 none;
     border-top: 1px solid darken(@brand-primary, 10%);
     z-index: 9;
+
+    .navbar-toggle {
+        border-color: #fff;
+        background-color: transparent;
+
+        .icon-bar {
+            background-color: #fff;
+        }
+    }
 
     &.affix {
         top: 58px;
@@ -20,6 +26,11 @@
     .nav > li {
         > a {
             padding: 22.5px @spacing2x;
+            transition: all ease-in-out 0.3s;
+
+            &:hover {
+                background-color: darken(@brand-primary, 10%);
+            }
         }
     }
 }
@@ -34,7 +45,7 @@
 
     .missions,
     .lifecare {
-        .page-wrapper .hero-wrapper .parallax-content {
+        .page-wrapper .hero-wrapper:not(.short-hero) .parallax-content {
             height: calc(100vh - 70px) !important;
 
             &::after {

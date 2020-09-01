@@ -15612,6 +15612,13 @@ img {
   border-top: 1px solid #1c242a;
   z-index: 9;
 }
+.navbar.affix-navbar .navbar-toggle {
+  border-color: #fff;
+  background-color: transparent;
+}
+.navbar.affix-navbar .navbar-toggle .icon-bar {
+  background-color: #fff;
+}
 .navbar.affix-navbar.affix {
   top: 58px;
   left: 0;
@@ -15623,17 +15630,21 @@ img {
 }
 .navbar.affix-navbar .nav > li > a {
   padding: 22.5px 30px;
+  transition: all ease-in-out 0.3s;
+}
+.navbar.affix-navbar .nav > li > a:hover {
+  background-color: #1c242a;
 }
 @media (min-width: 992px) {
   .navbar.affix-navbar.affix {
     top: 75px;
   }
-  .missions .page-wrapper .hero-wrapper .parallax-content,
-  .lifecare .page-wrapper .hero-wrapper .parallax-content {
+  .missions .page-wrapper .hero-wrapper:not(.short-hero) .parallax-content,
+  .lifecare .page-wrapper .hero-wrapper:not(.short-hero) .parallax-content {
     height: calc(100vh - 70px) !important;
   }
-  .missions .page-wrapper .hero-wrapper .parallax-content::after,
-  .lifecare .page-wrapper .hero-wrapper .parallax-content::after {
+  .missions .page-wrapper .hero-wrapper:not(.short-hero) .parallax-content::after,
+  .lifecare .page-wrapper .hero-wrapper:not(.short-hero) .parallax-content::after {
     display: none;
   }
 }
