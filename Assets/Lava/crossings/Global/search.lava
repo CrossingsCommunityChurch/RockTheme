@@ -16,7 +16,7 @@
       <div class="col-md-12 col-lg-4 search-column">
         <div>
           <h2>Recommended</h2>
-          {% contentchannelitem where:'ContentChannelId == 1' Sort:'Priority, ' Limit:'3' %}
+          {% contentchannelitem where:'ContentChannelId == 1' Sort:'Priority Desc ' Limit:'3' %}
             {% for content in contentchannelitemItems %}
               {% assign imageUrlPath = content | Attribute:'AssetImage' | Url:'localpath' %}
               {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
