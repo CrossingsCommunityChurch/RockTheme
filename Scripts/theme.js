@@ -120,4 +120,9 @@ $(document).ready(function() {
         $(this).closest('.zone-content').find('.tab-pane').removeClass('active');
         $(this).closest('.zone-content').find(tab).addClass('active');
     });
+
+    //Microsite Stuff
+    var offset = $("#zone-pageheading").outerHeight(true) - 140;
+    console.log(offset);
+    $(".navbar.affix-navbar").affix({offset: {top: offset} });
 });
