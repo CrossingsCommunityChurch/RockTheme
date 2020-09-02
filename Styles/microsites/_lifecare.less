@@ -1,0 +1,59 @@
+@lifecare: lighten(#008080, 5%);
+
+.lifecare {
+    .affix-navbar {
+        background-color: @lifecare;
+        border-top-color: @lifecare;
+
+        .navbar-brand {
+            text-transform: none;
+        }
+    }
+
+    .navbar.affix-navbar .nav > li > a:hover {
+        background-color: darken(@lifecare, 5%);
+    }
+
+    .hero-wrapper,
+    .page-heading {
+        h3.subheading {
+            text-transform: none;
+        }
+    }
+
+    .section .heading:not(.reverse) {
+        color: @lifecare;
+    }
+
+    .icon-divider {
+        svg {
+            fill: @lifecare !important;
+        }
+    }
+
+    .btn-primary,
+    .social-icon,
+    .footer,
+    .footer .footer-logo:after {
+        background-color: @lifecare;
+    }
+
+    .btn-primary {
+        border-color: @lifecare;
+
+        &:hover {
+            background-color: darken(@lifecare, 5%);
+            border-color: darken(@lifecare, 5%);
+        }
+    }
+
+    .footer .social-row a,
+    .footer .footer-logo ul > li a,
+    .footer .copyright {
+        color: @white;
+    }
+
+    .footer .footer-logo ul > li {
+        border-color: darken(@lifecare, 5%);
+    }
+}
