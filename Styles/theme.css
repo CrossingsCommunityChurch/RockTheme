@@ -14673,7 +14673,10 @@ img {
   padding-top: 30px;
 }
 .missions .person-details > h4,
-.lifecare .person-details > h4 {
+.lifecare .person-details > h4,
+.crossings-clinic .person-details > h4,
+.crossings-community-center .person-details > h4,
+.crossings-prison-ministry .person-details > h4 {
   display: none;
 }
 .darkmode .special-message {
