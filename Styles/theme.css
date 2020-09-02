@@ -15673,48 +15673,6 @@ img {
 .footer.microsite {
   display: block;
 }
-.lifecare .affix-navbar {
-  background-color: #00999a;
-  border-top-color: #00999a;
-}
-.lifecare .affix-navbar .navbar-brand {
-  text-transform: none;
-}
-.lifecare .navbar.affix-navbar .nav > li > a:hover,
-.lifecare .navbar.affix-navbar .nav > li > a:focus {
-  background-color: #008080;
-}
-.lifecare .hero-wrapper h3.subheading,
-.lifecare .page-heading h3.subheading {
-  text-transform: none;
-}
-.lifecare .section .heading:not(.reverse) {
-  color: #00999a;
-}
-.lifecare .icon-divider svg {
-  fill: #00999a !important;
-}
-.lifecare .btn-primary,
-.lifecare .social-icon,
-.lifecare .footer,
-.lifecare .footer .footer-logo:after {
-  background-color: #00999a;
-}
-.lifecare .btn-primary {
-  border-color: #00999a;
-}
-.lifecare .btn-primary:hover {
-  background-color: #008080;
-  border-color: #008080;
-}
-.lifecare .footer .social-row a,
-.lifecare .footer .footer-logo ul > li a,
-.lifecare .footer .copyright {
-  color: #fff;
-}
-.lifecare .footer .footer-logo ul > li {
-  border-color: #008080;
-}
 .crossings-clinic .affix-navbar {
   background-color: #AA1F2E;
   border-top-color: #AA1F2E;
