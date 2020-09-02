@@ -15486,10 +15486,17 @@ img {
 .search-wrapper .search-content .media-object:hover {
   box-shadow: 0 0 10px rgba(118, 117, 128, 0.25);
 }
+.search-wrapper .search-content .media-object .thumb {
+  background-position: center center;
+  background-size: cover;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: auto;
+}
 .search-wrapper .search-content .media-object img {
-  border-radius: 100%;
-  margin-right: 15px;
-  max-width: 75px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  min-width: 100%;
 }
 .search-wrapper .search-content .media-object h3 {
   font-size: 1.1rem;

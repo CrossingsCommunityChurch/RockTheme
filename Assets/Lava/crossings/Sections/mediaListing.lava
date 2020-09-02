@@ -27,13 +27,13 @@
     <div class="container">
       <div class="media-filter row">
         <div class="col-md-12">
-          <h2>Find a Message or Teaching Series</h2>
+          <h2>Find a Message or Series</h2>
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
             <div class="input-group media-filter-input">
               <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by Speaker, Topic, Series or Message">
+              <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by speaker, topic, sermon, or teaching series">
             </div>
             <!--<vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
             <vue-dropdown :options="speakers" heading-label="Search by Speaker" empty-label="Select a Speaker" @change="setFilter('speaker', $event)"></vue-dropdown>
