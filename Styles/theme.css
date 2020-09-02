@@ -11498,6 +11498,10 @@ img {
 .card:not('.listing') img {
   height: 100%;
 }
+.event-list,
+.media-list-items {
+  min-height: 600px;
+}
 .event-list .card {
   background-color: #fff;
   border-radius: 10px;
@@ -15676,7 +15680,8 @@ img {
 .lifecare .affix-navbar .navbar-brand {
   text-transform: none;
 }
-.lifecare .navbar.affix-navbar .nav > li > a:hover {
+.lifecare .navbar.affix-navbar .nav > li > a:hover,
+.lifecare .navbar.affix-navbar .nav > li > a:focus {
   background-color: #008080;
 }
 .lifecare .hero-wrapper h3.subheading,
@@ -15711,37 +15716,40 @@ img {
   border-color: #008080;
 }
 .crossings-clinic .affix-navbar {
-  background-color: #E85664;
-  border-top-color: #E85664;
+  background-color: #AA1F2E;
+  border-top-color: #AA1F2E;
 }
 .crossings-clinic .affix-navbar .navbar-brand {
   text-transform: none;
 }
-.crossings-clinic .navbar.affix-navbar .nav > li > a:hover {
-  background-color: #e5404f;
-}
-.crossings-clinic .hero-wrapper h3.subheading,
-.crossings-clinic .page-heading h3.subheading {
-  text-transform: none;
+.crossings-clinic .navbar.affix-navbar .nav > li > a:hover,
+.crossings-clinic .navbar.affix-navbar .nav > li > a:focus {
+  background-color: #941b28;
 }
 .crossings-clinic .section:not(.reverse) .heading {
-  color: #E85664;
+  color: #AA1F2E;
+}
+.crossings-clinic .section:not(.reverse) .subheading {
+  color: #888B8C;
+}
+.crossings-clinic .section hr.sep {
+  border-top-color: #C4BEB6;
 }
 .crossings-clinic .icon-divider svg {
-  fill: #E85664 !important;
+  fill: #AA1F2E !important;
 }
 .crossings-clinic .btn-primary,
 .crossings-clinic .social-icon,
 .crossings-clinic .footer,
 .crossings-clinic .footer .footer-logo:after {
-  background-color: #E85664;
+  background-color: #AA1F2E;
 }
 .crossings-clinic .btn-primary {
-  border-color: #E85664;
+  border-color: #AA1F2E;
 }
 .crossings-clinic .btn-primary:hover {
-  background-color: #e5404f;
-  border-color: #e5404f;
+  background-color: #941b28;
+  border-color: #941b28;
 }
 .crossings-clinic .footer .social-row a,
 .crossings-clinic .footer .footer-logo ul > li a,
@@ -15749,7 +15757,51 @@ img {
   color: #fff;
 }
 .crossings-clinic .footer .footer-logo ul > li {
-  border-color: #e5404f;
+  border-color: #941b28;
+}
+.crossings-community-center .affix-navbar {
+  background-color: #00567A;
+  border-top-color: #00567A;
+}
+.crossings-community-center .affix-navbar .navbar-brand {
+  text-transform: none;
+}
+.crossings-community-center .navbar.affix-navbar .nav > li > a:hover,
+.crossings-community-center .navbar.affix-navbar .nav > li > a:focus {
+  background-color: #004461;
+}
+.crossings-community-center .section:not(.reverse) .heading {
+  color: #00567A;
+}
+.crossings-community-center .section:not(.reverse) .subheading {
+  color: #888B8C;
+}
+.crossings-community-center .section hr.sep {
+  border-top-color: #C4BEB6;
+}
+.crossings-community-center .icon-divider svg {
+  fill: #00567A !important;
+}
+.crossings-community-center .btn-primary,
+.crossings-community-center .social-icon,
+.crossings-community-center .footer,
+.crossings-community-center .footer .footer-logo:after {
+  background-color: #00567A;
+}
+.crossings-community-center .btn-primary {
+  border-color: #00567A;
+}
+.crossings-community-center .btn-primary:hover {
+  background-color: #004461;
+  border-color: #004461;
+}
+.crossings-community-center .footer .social-row a,
+.crossings-community-center .footer .footer-logo ul > li a,
+.crossings-community-center .footer .copyright {
+  color: #fff;
+}
+.crossings-community-center .footer .footer-logo ul > li {
+  border-color: #004461;
 }
 #cms-admin-footer .btn,
 .rock-modal .note-toolbar .btn {

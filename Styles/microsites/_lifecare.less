@@ -10,8 +10,11 @@
         }
     }
 
-    .navbar.affix-navbar .nav > li > a:hover {
-        background-color: darken(@lifecare, 5%);
+    .navbar.affix-navbar .nav > li > a {
+        &:hover,
+        &:focus {
+            background-color: darken(@lifecare, 5%);
+        }
     }
 
     .hero-wrapper,

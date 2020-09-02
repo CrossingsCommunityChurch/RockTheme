@@ -1,4 +1,6 @@
-@clinic:  @alert-color;
+@clinic:  #AA1F2E;
+@clinic-secondary: #C4BEB6;
+@clinic-info: #888B8C;
 
 .crossings-clinic {
     .affix-navbar {
@@ -10,19 +12,23 @@
         }
     }
 
-    .navbar.affix-navbar .nav > li > a:hover {
-        background-color: darken(@clinic, 5%);
-    }
-
-    .hero-wrapper,
-    .page-heading {
-        h3.subheading {
-            text-transform: none;
+    .navbar.affix-navbar .nav > li > a {
+        &:hover,
+        &:focus {
+            background-color: darken(@clinic, 5%);
         }
     }
 
     .section:not(.reverse) .heading {
         color: @clinic;
+    }
+
+    .section:not(.reverse) .subheading {
+        color: @clinic-info;
+    }
+
+    .section hr.sep {
+        border-top-color: @clinic-secondary;
     }
 
     .icon-divider {
