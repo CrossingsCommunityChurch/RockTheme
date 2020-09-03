@@ -26,8 +26,9 @@
     </div>
     <div class="sub-headings">
       <div id="collapseLocs" class="collapse">
-        <h5>Crossings Prison Ministry</h5>
-        <h5>Community Center &amp; Clinic</h5>
+        <h5><a href="https://prisons.crossings.church" target="_blank" rel="noopener">Crossings Prison Ministry</a></h5>
+        <h5><a href="https://clinic.crossings.church" target="_blank" rel="noopener">Crossings Clinic</a></h5>
+        <h5><a href="https://cc.crossings.church" target="_blank" rel="noopener">Crossings Community Center</a></h5>
       </div>
       <a role="button" data-toggle="collapse" href="#collapseLocs" aria-expanded="false" aria-controls="collapseLocs" class="btn btn-link nopadding"> More Locations <i class="fa fa-plus"></i></a>
     </div>

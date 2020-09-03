@@ -5,7 +5,7 @@
                     <li><a href="/locations/okc"><span>OKC</span></a></li>
                     <li><a href="/locations/edmond"><span>Edmond</span></a></li>
                     <li><a href="/locations/online"><span>Online</span></a></li>
-                    <li class="view-all"><a href="/more-locations">View More <i class="fa fa-angle-right"></i></a></li>
+                    <li class="view-all"><a href="/locations">View More <i class="fa fa-angle-right"></i></a></li>
                 </ul>
             </div>
         </li>
