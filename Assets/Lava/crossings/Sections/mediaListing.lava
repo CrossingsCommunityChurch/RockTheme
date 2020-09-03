@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <div class="media-list-items" data-aos="fade-up">
+      <div class="media-list-items">
         <div class="row flex-row flex-wrap">
 
           <div v-for="item in mediaItems" class="col-sm-6 col-md-4">
@@ -183,6 +183,13 @@ const vueApp = new Vue({
           //this.books = response.data.FilterLists.Books;
         });
     },
+    applySearchTags() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('tag')) {
+        var tag = params.get('tag');
+        this.filterInput = tag
+      }
+    },
     setPages () {
       this.pages = [];
       this.page = 1;
@@ -213,33 +220,19 @@ const vueApp = new Vue({
       });
     },*/
     filteredMessages() {
-      return this.messages.filter(message => {
-        if(this.filterInput && this.filterInput !== '') {
+     return this.messages.filter(message => {
 
-          var filterText = this.filterInput.toLowerCase();
+        if (!this.filterInput) return true;
 
-          if (message.Speaker && message.Speaker.toLowerCase().includes(filterText)) {
-            return message;
-          }
+        let shouldInclude = false;
 
-          if (message.Topics.length > 0) {
-            var topics = message.Topics.map(t => t.toLowerCase());
-            if(topics.includes(filterText)) {
-              return message;
-            }
-          }
+        shouldInclude |= (!!message.Speaker && message.Speaker.toLowerCase().includes(this.filterInput.toLowerCase().trim()));
+        shouldInclude |= (this.filterInput.toLowerCase().trim().length >= 1 && !!message.Topics && message.Topics.map(t => t.toLowerCase().trim()).filter(t => t.indexOf(this.filterInput.toLowerCase().trim()) === 0).length > 0);
+        shouldInclude |= (!!message.Title && message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
+        shouldInclude |= (!!message.Series && !!message.Series.Title && message.Series.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
 
-          if (message.Title.toLowerCase().includes(filterText)) {
-              return message;
-          }
+        return !!shouldInclude;
 
-          if (message.Series.Title && message.Series.Title.toLowerCase().includes(filterText)) {
-                return message;
-          }
-
-        } else {
-          return message;
-        }
       });
     },
     mediaItems () {
@@ -253,6 +246,7 @@ const vueApp = new Vue({
   },
   created(){
     this.getMedia();
+    this.applySearchTags();
   },
   filters: {
     trimWords(value){
