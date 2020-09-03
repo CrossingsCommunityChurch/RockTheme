@@ -11446,6 +11446,12 @@ img {
   background-color: #E85664;
   color: #fff;
 }
+.alert.alert-heading.tuesday-live {
+  background-color: #000;
+}
+.alert.alert-heading.wednesday-live {
+  background-color: #236092;
+}
 .alert.alert-heading.alert-primary {
   background-color: #313e48;
   color: #fff;

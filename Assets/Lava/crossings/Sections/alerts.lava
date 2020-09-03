@@ -2,8 +2,8 @@
 <div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
   <a class="live-link" href="#">
     <span class="alert-text">
-      <div class="no-live">LIVE IN</div>
-      <div class="live">Watch Live Now</div>
+      <div class="no-live"><span class='live-text'></span>LIVE IN</div>
+      <div class="live">Watch <span class='live-text'></span>Live Now</div>
     </span>
     <span class="time">
       <span class="counter mt-0 mb-0">
@@ -36,15 +36,23 @@
 		function getLiveLink(day) {
 			if(day === 2) {
 				//Tuesday
-				return '#tuesdaylive';
+				return {
+					link: '#tuesdaylive',
+					text: 'The Gathering ',
+					class: 'tuesday-live'
+				};
 			}
 
 			if (day === 3) {
 				//Wednesday
-				return '#wednesdaylive';
+				return {
+					link: '#wednesdaylive',
+					text: 'Wednesday Night ',
+					class: 'wednesday-live'
+				};
 			}
 
-			if (day === 4) {
+			if (day === 0) {
 				//Sunday
 				return 'multi';
 			}
@@ -53,9 +61,12 @@
 		var liveLink = getLiveLink(dayToday);
 
 		if(liveLink !== 'multi') {
-			$('.live-link').attr("href", liveLink);
+			$('.live-link').attr("href", liveLink.link);
+			$('#churchonline_counter').addClass(liveLink.class);
+			$('#churchonline_counter .live-text').text(liveLink.text);
 		} else {
 			$('.live-link').addClass('watch-multi');
+			$('#churchonline_counter .live-text').text('Church ');
 			$('.watch-multi').click(function(e){
 					e.preventDefault();
 					$('#liveModal').modal();
@@ -72,7 +83,7 @@
 							$("#churchonline_counter .live").addClass('reveal').show();
 							$("#churchonline_counter").addClass('reveal').show();
 							if(liveLink !== 'multi') {
-								$('.btn-latest').addClass('btn-live').attr("href", liveLink).find('span').text('Watch Live Now');
+								//$('.btn-latest').addClass('btn-live').attr("href", liveLink.link).find('span').text('Watch Live Now');
 							} else {
 								$('.btn-latest').addClass('btn-live watch-multi').attr("href", '#').find('span').text('Watch Live Now');
 									$('.watch-multi').click(function(e){
@@ -85,7 +96,7 @@
         loadCountdown = function(data, liveLink){
             var seconds_till;
       		if (data=='islive') {
-      			return goLive();
+      			return goLive(liveLink);
       		} else {
       			dateString = data;
       			seconds_till = Math.abs((new Date(dateString)) - (new Date())) / 1000;
