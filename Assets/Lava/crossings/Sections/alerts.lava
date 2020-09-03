@@ -1,11 +1,11 @@
 {%- assign scheduleid = scheduleid -%}
 <div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
-  <a href="https://live.crossings.church/">
+  <a class="live-link" href="#">
     <span class="alert-text">
-      <div class="no-live">LIVE IN</div>
-      <div class="live">Watch Live Now</div>
+      <div class="no-live"><span class='live-text'></span>LIVE IN</div>
+      <div class="live">Watch <span class='live-text'></span>Live Now</div>
     </span>
-    <span class="time" href="https://live.crossings.church/">
+    <span class="time">
       <span class="counter mt-0 mb-0">
       <div class="days d-inline-block">
           <div class="value"></div>
@@ -26,20 +26,77 @@
 <script type="text/javascript">
 	jQuery(function() {
    	var days, goLive, hours, intervalId, minutes, seconds;
-		goLive = function() {
-      		$("#churchonline_counter .time").hide();
-	      	$("#churchonline_counter .not-live").hide();
-		    	$("#churchonline_counter .no-live").hide();
-          $("#churchonline_counter").removeClass('alert-primary');
-      		$("#churchonline_counter .live").addClass('reveal').show();
-      		$("#churchonline_counter").addClass('reveal').show();
-          $('.btn-latest').addClass('btn-live').attr("href", "https://live.crossings.church").find('span').text('Watch Live Now');
-		};
 
-        loadCountdown = function(data){
+		var d = new Date();
+		var dayToday = d.getDay();
+		var isTuesday = false;
+		var isWednesday = false;
+		var isSunday = false;
+
+		function getLiveLink(day) {
+			if(day === 2) {
+				//Tuesday
+				return {
+					link: '#tuesdaylive',
+					text: 'The Gathering ',
+					class: 'tuesday-live'
+				};
+			}
+
+			if (day === 3) {
+				//Wednesday
+				return {
+					link: '#wednesdaylive',
+					text: 'Wednesday Night ',
+					class: 'wednesday-live'
+				};
+			}
+
+			if (day === 0) {
+				//Sunday
+				return 'multi';
+			}
+		}
+
+		var liveLink = getLiveLink(dayToday);
+
+		if(liveLink !== 'multi') {
+			$('.live-link').attr("href", liveLink.link);
+			$('#churchonline_counter').addClass(liveLink.class);
+			$('#churchonline_counter .live-text').text(liveLink.text);
+		} else {
+			$('.live-link').addClass('watch-multi');
+			$('#churchonline_counter .live-text').text('Church ');
+			$('.watch-multi').click(function(e){
+					e.preventDefault();
+					$('#liveModal').modal();
+			})
+		}
+
+		console.log(liveLink);
+
+				goLive = function(liveLink) {
+							$("#churchonline_counter .time").hide();
+							$("#churchonline_counter .not-live").hide();
+							$("#churchonline_counter .no-live").hide();
+							$("#churchonline_counter").removeClass('alert-primary');
+							$("#churchonline_counter .live").addClass('reveal').show();
+							$("#churchonline_counter").addClass('reveal').show();
+							if(liveLink !== 'multi') {
+								//$('.btn-latest').addClass('btn-live').attr("href", liveLink.link).find('span').text('Watch Live Now');
+							} else {
+								$('.btn-latest').addClass('btn-live watch-multi').attr("href", '#').find('span').text('Watch Live Now');
+									$('.watch-multi').click(function(e){
+										e.preventDefault();
+										$('#liveModal').modal();
+									})
+							}
+				};
+
+        loadCountdown = function(data, liveLink){
             var seconds_till;
       		if (data=='islive') {
-      			return goLive();
+      			return goLive(liveLink);
       		} else {
       			dateString = data;
       			seconds_till = Math.abs((new Date(dateString)) - (new Date())) / 1000;
@@ -65,11 +122,15 @@
 					$("#churchonline_counter .minutes").html((minutes.toString().length < 2 ? "0" + minutes : minutes));
 					$("#churchonline_counter .seconds").html((seconds.toString().length < 2 ? "0" + seconds : seconds));
 					if (seconds === 0 && minutes === 0 && hours === 0 && days === 0) {
-						goLive();
+						goLive(liveLink);
 						return clearInterval(intervalId);
 					}
-					$("#churchonline_counter").addClass('reveal').slideDown();
-      			}, 1000);
+
+					if (hours < 3) {
+						$("#churchonline_counter").addClass('reveal').slideDown();
+					}
+
+					}, 1000);
 			}
 		}
 		days = void 0;
@@ -78,6 +139,6 @@
 		seconds = void 0;
 		intervalId = void 0;
 		data = "{[ scheduledcontent schedulecategoryid:'{{scheduleid}}' showwhen:'notlive'  ]}{{ NextOccurrenceDateTime | Date: 'yyyy/MM/dd HH:mm:ss' }}{[ endscheduledcontent ]}{[ scheduledcontent schedulecategoryid:'{{scheduleid}}' showwhen:'live'  ]}islive{[ endscheduledcontent ]}";
-		loadCountdown(data);
+		loadCountdown(data, liveLink);
 	});
 </script>

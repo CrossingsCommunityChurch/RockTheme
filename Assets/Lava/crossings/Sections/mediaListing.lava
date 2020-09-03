@@ -29,7 +29,7 @@
     <div class="container">
       <div class="media-filter row">
         <div class="col-md-12">
-          <h2>Find a Message or Teaching Series</h2>
+          <h2>Find a Message or Series</h2>
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
@@ -55,7 +55,7 @@
           </div>
         </div>
       </div>
-      <div class="media-list-items" data-aos="fade-up">
+      <div class="media-list-items">
         <div class="row flex-row flex-wrap">
 
           <div v-for="item in mediaItems" class="col-sm-6 col-md-4">
@@ -195,6 +195,7 @@ const vueApp = new Vue({
   },
   computed: {
     filteredMessages() {
+
       return this.messages.filter(message => {
 
         if (!this.filterInput) return true;

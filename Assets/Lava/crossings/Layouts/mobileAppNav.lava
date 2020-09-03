@@ -1,21 +1,34 @@
 <div class="mobile-navbar">
   {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item toggle-locations' buttonicon:'map-marker-alt' buttontext:'Locations' ]}
-  {[ button buttonlink:'/media' buttonstyle:' mobile-nav-bar-item' buttonicon:'video' buttontext:'Media' ]}
+  {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item toggle-media' buttonicon:'video' buttontext:'Media' ]}
   {[ button buttonlink:'/give' buttonstyle:' mobile-nav-bar-item' buttonicon:'heart' buttontext:'Give' ]}
-  {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item open-search' buttonicon:'search' buttontext:'Search' ]}
+  {[ button buttonlink:'/about-us' buttonstyle:' mobile-nav-bar-item' buttonicon:'info-circle' buttontext:'About' ]}
+</div>
+<div class="mobile-slideout media reverse bg-primary">
+  <a class="icon-btn mobile-slideout-close"><i class="fa fa-times"></i></a>
+  <div class="locations">
+    <div class="primary-locations">
+      <h5 class="app-nav-heading">Media</h5>
+      <h3><a href="/media">Messages <span class="times">Sermons & Teaching Series</span></a></h3>
+      <h3><a href="/worship">Worship <span class="times">Chapel, Venue, Sanctuary, Kids</span></a></h3>
+      <h3><a href="/kids/kids-media">Kids <span class="times">Kids Media</span></a></h3>
+    </div>
+  </div>
 </div>
 <div class="mobile-slideout locations reverse bg-primary">
   <a class="icon-btn mobile-slideout-close"><i class="fa fa-times"></i></a>
   <div class="locations">
     <div class="primary-locations">
       <h5 class="app-nav-heading">Locations</h5>
-      <h3>OKC <span class="times">SUNDAYS // 8:15, 9:15 &amp; 10:45</span></h3>
-      <h3>EDMOND <span class="times">SUNDAYS // 9:00 &amp; 11:00</span></h3>
-      <h3>ONLINE <span class="times">SUNDAYS // 9:15 &amp; 10:45</span></h3>
+      <h3><a href="/locations/okc">OKC <span class="times">SUNDAYS // 8:30, 9:30 &amp; 11:00</span></a></h3>
+      <h3><a href="/locations/edmond">EDMOND <span class="times">SUNDAYS // 9:30 &amp; 11:00</span></a></h3>
+      <h3><a href="/locations/online">ONLINE <span class="times">SUNDAYS // 9:30 &amp; 11:00</span></a></h3>
     </div>
     <div class="sub-headings">
       <div id="collapseLocs" class="collapse">
-        <h5>Crossings Joeseph Harp</h5><h5>Community Center &amp; Clinic</h5>
+        <h5><a href="https://prisons.crossings.church" target="_blank" rel="noopener">Crossings Prison Ministry</a></h5>
+        <h5><a href="https://clinic.crossings.church" target="_blank" rel="noopener">Crossings Clinic</a></h5>
+        <h5><a href="https://cc.crossings.church" target="_blank" rel="noopener">Crossings Community Center</a></h5>
       </div>
       <a role="button" data-toggle="collapse" href="#collapseLocs" aria-expanded="false" aria-controls="collapseLocs" class="btn btn-link nopadding"> More Locations <i class="fa fa-plus"></i></a>
     </div>

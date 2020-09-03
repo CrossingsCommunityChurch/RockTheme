@@ -1,3 +1,6 @@
+{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+{% assign imageSize = '/fit-in/300x300/' %}
+
 <a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>
 <div class="search-wrapper">
   <div class="search-form">
@@ -13,60 +16,48 @@
       <div class="col-md-12 col-lg-4 search-column">
         <div>
           <h2>Recommended</h2>
-          <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
-            <div>
-              <h3>Title</h3>
-              <p>Summary</p>
-            </div>
-          </a>
-          <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
-            <div>
-              <h3>Title</h3>
-              <p>Summary</p>
-            </div>
-          </a>
-          <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
-            <div>
-              <h3>Title</h3>
-              <p>Summary</p>
-            </div>
-          </a>
+          {% contentchannelitem where:'ContentChannelId == 1' Sort:'Priority Desc ' Limit:'3' %}
+            {% for content in contentchannelitemItems %}
+              {% assign imageUrlPath = content | Attribute:'AssetImage' | Url:'localpath' %}
+              {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+              {%- assign itemContent = content.Content | Trim -%}
+              {% assign subheading = content | Attribute:'Subheading' %}
+              {% assign detail = content | Attribute:'DetailsURL' %}
+
+              {% if detail !='' %}
+                <a class="media-object" href="{{ detail | StripHtml }}">
+              {% else %}
+                <div class="media-object">
+              {% endif %}
+                <div>
+                  <h3>{{content.Title}}</h3>
+                  <p>{{content | Attribute:'SummaryText'}}</p>
+                </div>
+              {% if detail !='' %}
+                </a>
+              {% else %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          {%  endcontentchannelitem%}
         </div>
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
           <h2>Popular Media</h2>
           <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
             <div>
               <h3>Title</h3>
               <p>Summary</p>
             </div>
           </a>
           <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
             <div>
               <h3>Title</h3>
               <p>Summary</p>
             </div>
           </a>
           <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
             <div>
               <h3>Title</h3>
               <p>Summary</p>
@@ -78,27 +69,18 @@
         <div>
           <h2>Upcoming Events</h2>
           <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
             <div>
               <h3>Title</h3>
               <p>Date</p>
             </div>
           </a>
           <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
             <div>
               <h3>Title</h3>
               <p>Date</p>
             </div>
           </a>
           <a class="media-object" href="#">
-            <div class="search-image">
-              <img class="round" src="https://placehold.it/100x100" alt="">
-            </div>
             <div>
               <h3>Title</h3>
               <p>Date</p>

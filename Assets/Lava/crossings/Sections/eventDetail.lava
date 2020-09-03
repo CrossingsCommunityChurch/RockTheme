@@ -4,16 +4,7 @@
 {% capture pageTitleBrowser %}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{% endcapture%}
 {{ pageTitle | SetPageTitle:'PageTitle' }}
 {{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
-<div class="section page-title reverse devo-title">
-    <div class="container">
-        <div class="jumbotron text-center" data-aos="fade-in">
-            <h1 class="heading"> {{ pageTitle }}</h1>
-        </div>
-    </div>
-</div>
 {% endeventitemoccurrence %}
-
-{[ eventDetails  ]}
 
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
 {% assign eventimageUrl =''%}
@@ -26,24 +17,46 @@
 {% endeventcalendaritem %}
 {% if eventassetimage and eventassetimage != empty %}
     {% assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-    {% assign eventimageSize = '/fit-in/900x600' %}
+    {% assign eventimageSize = '/fit-in/640x640' %}
     {% assign eventimageUrlPath = eventassetimage | Url:'localpath' %}
     {% assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath %}
 {% endif %}
-<div class="container-fluid section split-section split-section-overlap">
-      <div class="row flex-row">
-          <div class="col-md-6 nopadding-x image-bg">
-            {% if eventimageUrl != empty %}
-              <img src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
-            {% endif %}
-          </div>
-          <div class="col-md-6 split-section-text" data-aos="fade-left">
-              <h2 class="heading">{{ eventitemoccurrence.EventItem.Name }}</h2>
-              <h4 class="subheading">Event Description</h4>
-              <hr class="sep">
-              <p>{{ eventitemoccurrence.EventItem.Description }}</p>
-          </div>
+<div class="event-page">
+    <div class="section page-title reverse">
+      <div class="container">
+        <div class="jumbotron text-center"></div>
       </div>
+    </div>
+    <div class="section video">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="event-image">
+              {% if eventimageUrl != empty %}
+                <img src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {[ eventDetails  ]}
+    <div class="container-fluid section event-details">
+          <div class="row">
+              <div class="container content-area" data-aos="fade-up">
+                  <div class="row">
+                      <div class="col-md-12">
+                        <h2 class="heading">{{ eventitemoccurrence.EventItem.Name }}</h2>
+                        <h4 class="subheading">Event Details</h4>
+                        <hr class="sep ml-0">
+                        <div class="event-info">
+                        {{ eventitemoccurrence.EventItem.Description }}
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </div>
 </div>
 {% endeventitemoccurrence %}
 

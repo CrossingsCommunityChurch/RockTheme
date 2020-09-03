@@ -202,10 +202,19 @@
                 box-shadow: 0 0 10px rgba(118,117,128,0.25);
             }
 
+            .thumb {
+                background-position: center center;
+                background-size: cover;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                //height: 275px;
+                height: auto;
+            }
+          
             img {
-                border-radius: 100%;
-                margin-right: @spacing;
-                max-width: 75px;    
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                min-width: 100%;
             }
 
             h3 {
