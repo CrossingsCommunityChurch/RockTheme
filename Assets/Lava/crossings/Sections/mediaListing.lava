@@ -35,8 +35,6 @@
           <div class="form form-inline">
             <div class="v-dropdown-input input-group media-filter-input">
               <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              {% comment %} <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by Speaker, Topic, Series or Message"> {% endcomment %}
-              {% comment %} <v-select label="Name" v-model="filterInput" :reduce="n => n.Name" taggable :options="searchOptions" placeholder="Search by Speaker, Topic, Series or Message"></v-select> {% endcomment %}
               <vue-autosuggest
                   :suggestions="filteredSearchOptions"
                   :input-props="{id:'autosuggest__input', placeholder:'Search by Speaker, Topic, Series or Message'}"
@@ -63,7 +61,6 @@
           <div v-for="item in mediaItems" class="col-sm-6 col-md-4">
             <a :href="mediaUrl(item)" class="card cardShadow">
               <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(item) + '\')' }">
-                <!--<img :src="mediaImg(item)" class="object-fit">-->
               </div>
               <div class="row card-content-row">
                 <div class="card-content">
@@ -113,7 +110,6 @@ const vueApp = new Vue({
       speakers: [''],
       searchOptions: [''],
       filteredSearchOptions: [''],
-      //books: [''],
       topicFilter: '',
       speakerFilter: '',
       bookFilter: '',
@@ -125,7 +121,7 @@ const vueApp = new Vue({
   },
   methods:{
     shouldRenderSuggestions (size, loading) {
-      return size >= 2 && !loading
+      return size >= 0 && !loading
     },
     onInputChange(text) {
 
@@ -162,17 +158,6 @@ const vueApp = new Vue({
         .get('/Webhooks/Lava.ashx/crossings/api/combined-media')
         .then(response => {
           this.messages = response.data.Messages;
-          this.topics = response.data.FilterLists.Topics;
-          this.speakers = response.data.FilterLists.Speakers;
-          //this.books = response.data.FilterLists.Books;
-          //[{data:['Frodo', 'Samwise', 'Gandalf', 'Galadriel', 'Faramir', 'Éowyn']}]
-          // const topics = response.data.FilterLists.Topics.map(t => {
-          //   return { name: 'Topic', item: t.Name };
-          // });
-          // const speakers = response.data.FilterLists.Speakers.map(s => {
-          //   return { name: 'Speaker', item: s.Name };
-          // });
-          //const combined = topics.concat(speakers);
           const topics = response.data.FilterLists.Topics.map(t => t.Name);
           const speakers = response.data.FilterLists.Speakers.map(s => s.Name);
           const combined = topics.concat(speakers);
@@ -237,11 +222,6 @@ const vueApp = new Vue({
   created(){
     this.getMedia();
     this.applySearchTags();
-  },
-  filters: {
-    trimWords(value){
-      return value.split(" ").splice(0,20).join(" ") + '...';
-    }
   }
 });
 
