@@ -39,6 +39,7 @@
                   :suggestions="filteredSearchOptions"
                   :input-props="{id:'autosuggest__input', placeholder:'Search by Speaker, Topic, Series or Message'}"
                   :should-render-suggestions="shouldRenderSuggestions"
+                  v-model="filterInput"
                   @input="onInputChange"
                 >
                 <template slot-scope="{suggestion}">

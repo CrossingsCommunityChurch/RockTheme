@@ -15175,6 +15175,13 @@ img {
   position: relative;
   z-index: 1;
 }
+.media-list #autosuggest__input {
+  font-family: inherit;
+}
+.media-list .autosuggest__results {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
 .media-list-items {
   margin-top: 2rem;
 }
