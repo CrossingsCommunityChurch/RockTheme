@@ -8,7 +8,7 @@
 
 {% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-autosuggest@2.2.0' %}
 {% endjavascript %}
-<link rel="stylesheet" type="text/css" href="/Themes/RockTheme/Styles/vue-autosuggest.css">
+<link rel="stylesheet" type="text/css" href="~~/Styles/vue-autosuggest.css">
 
 <div id="vue-template-dropdown" style="display:none;">
   <div class="form-group">
