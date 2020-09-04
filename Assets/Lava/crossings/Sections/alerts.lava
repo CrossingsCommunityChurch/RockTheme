@@ -37,7 +37,7 @@
 			if(day === 2) {
 				//Tuesday
 				return {
-					link: '#tuesdaylive',
+					link: 'https://venue.crossings.church',
 					text: 'The Gathering ',
 					class: 'tuesday-live'
 				};
@@ -46,7 +46,7 @@
 			if (day === 3) {
 				//Wednesday
 				return {
-					link: '#wednesdaylive',
+					link: 'https://venue.crossings.church',
 					text: 'Wednesday Night ',
 					class: 'wednesday-live'
 				};
