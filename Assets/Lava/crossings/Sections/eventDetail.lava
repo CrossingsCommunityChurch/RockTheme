@@ -41,15 +41,17 @@
       </div>
     </div>
     {[ eventDetails  ]}
-    <div class="container-fluid section simple-section">
+    <div class="container-fluid section event-details">
           <div class="row">
               <div class="container content-area" data-aos="fade-up">
                   <div class="row">
                       <div class="col-md-12">
                         <h2 class="heading">{{ eventitemoccurrence.EventItem.Name }}</h2>
                         <h4 class="subheading">Event Details</h4>
-                        <hr class="sep">
-                        <p>{{ eventitemoccurrence.EventItem.Description }}</p>
+                        <hr class="sep ml-0">
+                        <div class="event-info">
+                        {{ eventitemoccurrence.EventItem.Description }}
+                        </div>
                       </div>
                   </div>
               </div>

@@ -78,7 +78,7 @@
                           {% for taggedItem in taggedItems %}
                             {% for tag in tags %}
                               {% if taggedItem.TagId == tag.Id %}
-                                <a href="#">{{ tag.Name }}</a>
+                                <a href="/media?tag={{tag.Name}}">{{ tag.Name }}</a>
                               {% endif %}
                             {% endfor %}
                           {% endfor %}

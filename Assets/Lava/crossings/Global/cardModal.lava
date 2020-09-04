@@ -23,14 +23,10 @@
                         </div>
                     {% endif %}
                     <h2 class="reverse">{{ title }}</h2>
+                    <h4 class="reverse">{{ subheading }}</h4>
                   </div>
               </div>
             </a>
-            {% if subcontent != empty %}
-              <div class="card-modal-subcontent">
-                {{ subcontent }}
-              </div>
-            {% endif %}
             {[ modal modalid:'{{modalIDWithIndex}}' title:'' class:'playlist-modal' size:'modal-lg' ]}
                 {{item.Content }}
             {[ endmodal ]}

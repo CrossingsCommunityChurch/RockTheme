@@ -1,0 +1,65 @@
+@clinic:  #AA1F2E;
+@clinic-secondary: #C4BEB6;
+@clinic-info: #888B8C;
+
+.crossings-clinic {
+    .affix-navbar {
+        background-color: @clinic;
+        border-top-color: @clinic;
+
+        .navbar-brand {
+            text-transform: none;
+        }
+    }
+
+    .navbar.affix-navbar .nav > li > a {
+        &:hover,
+        &:focus {
+            background-color: darken(@clinic, 5%);
+        }
+    }
+
+    .section:not(.reverse) .heading {
+        color: @clinic;
+    }
+
+    .section:not(.reverse) .subheading {
+        color: @clinic-info;
+    }
+
+    .section hr.sep {
+        border-top-color: @clinic-secondary;
+    }
+
+    .icon-divider {
+        svg {
+            fill: @clinic !important;
+        }
+    }
+
+    .btn-primary,
+    .social-icon,
+    .footer,
+    .footer .footer-logo:after {
+        background-color: @clinic;
+    }
+
+    .btn-primary {
+        border-color: @clinic;
+
+        &:hover {
+            background-color: darken(@clinic, 5%);
+            border-color: darken(@clinic, 5%);
+        }
+    }
+
+    .footer .social-row a,
+    .footer .footer-logo ul > li a,
+    .footer .copyright {
+        color: @white;
+    }
+
+    .footer .footer-logo ul > li {
+        border-color: darken(@clinic, 5%);
+    }
+}

@@ -96,6 +96,23 @@
 
 @media(min-width: @screen-desktop) {
 
+    .split-section.side-by-side {
+        >.row:nth-child(even) {
+            .cover-half {
+                left: auto;
+                right: 0;
+            }
+
+            > .col-md-6.text-content {
+                right: 50%;
+            }
+
+            > .col-md-6:not(.text-content) {
+                left: 50%;
+            }
+        }
+    }
+
     .split-section-text {
         display: flex;
         flex-direction: column;

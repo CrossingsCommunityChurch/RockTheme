@@ -22,7 +22,7 @@
   <div class="container content-area">
       <div class="toggle-list-items">
         {%- if channelSectionTitle != empty -%}
-            <h2 class="text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+            <h2 class="text-center heading" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
             <hr class="sep">
         {%- endif -%}
         {%- if channelSectionSummary != empty -%}

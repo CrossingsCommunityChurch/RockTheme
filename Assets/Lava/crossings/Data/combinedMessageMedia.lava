@@ -113,6 +113,10 @@
         {% contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false' %}
         {% for item in items %}
 
+        {% assign currentDate = 'Now' | Date  %}
+        {% if item.StartDateTime >= currentDate %}
+            {% continue %}
+        {% endif %}
         {% assign channelPath = 'sermons/' %}
         {% if item.ContentChannel.Name == 'Teaching Message' %}
             {%assign channelPath = 'teachings/' %}

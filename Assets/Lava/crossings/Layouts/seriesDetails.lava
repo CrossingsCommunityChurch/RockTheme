@@ -57,7 +57,7 @@
                   </ul>
                 </div>
                 {% if item.ContentChannel.IsTaggingEnabled %}
-                  <div class="tags">
+                  <!--<div class="tags">
                     <p class="small"><i class="fas fa-tags"></i>
                       {% assign itemGuid = item.Guid %}
                       {% assign tagCategory = item.ContentChannel.ItemTagCategoryId %}
@@ -73,7 +73,7 @@
                         {% endtag %}
                       {% endtaggeditem %}
                     </p>
-                  </div>
+                  </div>-->
                 {% endif %}
               </div>
           </div>

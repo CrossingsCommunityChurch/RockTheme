@@ -6,10 +6,9 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
-{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-select@3.10.8' %}
+{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-autosuggest@2.2.0' %}
 {% endjavascript %}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vue-select@3.10.8/dist/vue-select.css">
-<link rel="stylesheet" href="/Themes/RockTheme/Styles/vue-select-overrides.css">
+<link rel="stylesheet" type="text/css" href="/Themes/RockTheme/Styles/vue-autosuggest.css">
 
 <div id="vue-template-dropdown" style="display:none;">
   <div class="form-group">
@@ -30,18 +29,23 @@
     <div class="container">
       <div class="media-filter row">
         <div class="col-md-12">
-          <h2>Find a Message or Teaching Series</h2>
+          <h2>Find a Message or Series</h2>
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
             <div class="v-dropdown-input input-group media-filter-input">
-              {% comment %} <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by Speaker, Topic, Series or Message"> {% endcomment %}
               <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <v-select label="Name" v-model="filterInput" :reduce="n => n.Name" taggable :options="searchOptions" placeholder="Search by Speaker, Topic, Series or Message"></v-select>
+              <vue-autosuggest
+                  :suggestions="filteredSearchOptions"
+                  :input-props="{id:'autosuggest__input', placeholder:'Search by Speaker, Topic, Series or Message'}"
+                  :should-render-suggestions="shouldRenderSuggestions"
+                  @input="onInputChange"
+                >
+                <template slot-scope="{suggestion}">
+                  <span class="my-suggestion-item">{% raw %}{{ suggestion.item }}{% endraw %}</span>
+                </template>
+              </vue-autosuggest>
             </div>
-            <!--<vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
-            <vue-dropdown :options="speakers" heading-label="Search by Speaker" empty-label="Select a Speaker" @change="setFilter('speaker', $event)"></vue-dropdown>
-            <vue-dropdown :options="books" heading-label="Search by Book" empty-label="Select a Book" @change="setFilter('book', $event)"></vue-dropdown>-->
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -51,13 +55,12 @@
           </div>
         </div>
       </div>
-      <div class="media-list-items" data-aos="fade-up">
+      <div class="media-list-items">
         <div class="row flex-row flex-wrap">
 
           <div v-for="item in mediaItems" class="col-sm-6 col-md-4">
             <a :href="mediaUrl(item)" class="card cardShadow">
               <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(item) + '\')' }">
-                <!--<img :src="mediaImg(item)" class="object-fit">-->
               </div>
               <div class="row card-content-row">
                 <div class="card-content">
@@ -96,53 +99,7 @@
 
 const imageStorageUrl = '{{ imageStorageUrl }}';
 
-Vue.component('v-select', VueSelect.VueSelect);
-
-Vue.component('vue-dropdown', {
-  template: '#vue-template-dropdown',
-  props: {
-    open: {
-      type: Boolean,
-      default: false
-    },
-    emptyLabel: {
-      type: String,
-      default: 'Select'
-    },
-    options: {
-      type: Array,
-      required: true
-    },
-    headingLabel: {
-      type: String,
-      default: 'Search by Value'
-    }
-  },
-  data: function () {
-    return {
-      selectedOption: {
-        type: Number,
-        default: null
-      },
-      isOpen: Vue.util.extend({}, this.open)
-    };
-  },
-  mounted() {
-    this.isOpen = false;
-  },
-  computed: {
-    selectedValue: function () {
-      return this.selectedOption >= 0 ? this.options[this.selectedOption].Name : this.emptyLabel;
-    }
-  },
-  methods: {
-    handleClick: function (i) {
-      this.selectedOption = i;
-      this.isOpen = false;
-      this.$emit('change', i >= 0 ? this.options[i] : '');
-    }
-  }
-});
+Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
 
 const vueApp = new Vue({
   el: '#vapp',
@@ -152,17 +109,33 @@ const vueApp = new Vue({
       topics: [''],
       speakers: [''],
       searchOptions: [''],
-      //books: [''],
+      filteredSearchOptions: [''],
       topicFilter: '',
       speakerFilter: '',
       bookFilter: '',
       filterInput: '',
       page: 1,
       perPage: {{mediaItemsPerPage}},
-      pages: [],
+      pages: []
     }
   },
   methods:{
+    shouldRenderSuggestions (size, loading) {
+      return size >= 0 && !loading
+    },
+    onInputChange(text) {
+
+      const filteredData = this.searchOptions[0].data.filter(item => {
+        return item.toLowerCase().indexOf(text.toLowerCase()) > -1;
+      });;
+
+      this.filteredSearchOptions = [{
+        data: filteredData
+      }];
+
+      this.filterInput = text;
+
+    },
     mediaUrl(item) {
       if (item.Series) {
         return `/media/${item.ChannelPath}${item.Series.Slug}/${item.PrimarySlug}`;
@@ -185,10 +158,13 @@ const vueApp = new Vue({
         .get('/Webhooks/Lava.ashx/crossings/api/combined-media')
         .then(response => {
           this.messages = response.data.Messages;
-          this.topics = response.data.FilterLists.Topics;
-          this.speakers = response.data.FilterLists.Speakers;
-          //this.books = response.data.FilterLists.Books;
-          this.searchOptions = response.data.FilterLists.Topics.concat(response.data.FilterLists.Speakers);
+          const topics = response.data.FilterLists.Topics.map(t => t.Name);
+          const speakers = response.data.FilterLists.Speakers.map(s => s.Name);
+          const combined = topics.concat(speakers);
+          this.searchOptions = [
+            { data: combined }
+          ];
+
         });
     },
     applySearchTags() {
@@ -219,6 +195,7 @@ const vueApp = new Vue({
   },
   computed: {
     filteredMessages() {
+
       return this.messages.filter(message => {
 
         if (!this.filterInput) return true;
@@ -246,11 +223,6 @@ const vueApp = new Vue({
   created(){
     this.getMedia();
     this.applySearchTags();
-  },
-  filters: {
-    trimWords(value){
-      return value.split(" ").splice(0,20).join(" ") + '...';
-    }
   }
 });
 
