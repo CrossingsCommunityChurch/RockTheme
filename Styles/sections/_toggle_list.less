@@ -4,13 +4,13 @@
 
         .toggle-title {
             display: block;
-            font-size: 1.5rem;
+            font-size: 1rem;
             text-transform: uppercase;
             font-weight: bold;
             position: relative;
             transition: all ease-in-out 0.5s;
             text-decoration: none;
-            padding: 2rem;
+            padding: 1rem;
 
             &:not(.collapsed) {
                 &:after {
@@ -18,8 +18,12 @@
                 }
             }
 
+            .fa + span {
+                margin-left: 0.5rem;
+            }
+
             span {
-                margin-left: 1rem;
+                //margin-left: 1rem;
                 margin-right: 2rem;
 
                 > .toggle-sub {
@@ -31,9 +35,9 @@
 
             .angle-toggle {
                 position: absolute;
-                right: 2rem;
+                right: 1rem;
                 top: 50%;
-                margin-top: -1rem;
+                margin-top: -0.5rem;
             }
 
             &:hover {
@@ -54,6 +58,22 @@
                 bottom: 0;
                 width: 0;
                 transition: all ease-in-out 0.5s;
+            }
+        }
+    }
+}
+
+@media (min-width: @screen-desktop) {
+    .toggle-content-list {
+        .toggle-item {
+            .toggle-title {
+                font-size: 1.5rem;
+                padding: 2rem;
+
+                .angle-toggle {
+                    right: 2rem;
+                    margin-top: -1rem;
+                }
             }
         }
     }

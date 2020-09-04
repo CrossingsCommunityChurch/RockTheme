@@ -14133,7 +14133,6 @@ img {
   }
 }
 .footer {
-  display: none;
   padding-bottom: 75px;
 }
 .footer .social-row {
@@ -14187,14 +14186,8 @@ img {
 .footer .footer-logo ul {
   margin-top: 30px;
 }
-.footer .footer-logo ul > li {
-  display: inline-block;
-  border-left: 1px solid #465866;
-}
-.footer .footer-logo ul > li:first-child {
-  border-left: 0 none;
-}
 .footer .footer-logo ul > li a {
+  text-align: center;
   color: #fff;
   text-transform: uppercase;
   font-family: "nunito-sans", "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -14220,6 +14213,13 @@ img {
 @media (min-width: 992px) {
   .footer {
     display: block;
+  }
+  .footer .footer-logo ul > li {
+    display: inline-block;
+    border-left: 1px solid #465866;
+  }
+  .footer .footer-logo ul > li:first-child {
+    border-left: 0 none;
   }
 }
 .announcement-list .card {
@@ -14833,19 +14833,21 @@ img {
 }
 .toggle-content-list .toggle-item .toggle-title {
   display: block;
-  font-size: 1.5rem;
+  font-size: 1rem;
   text-transform: uppercase;
   font-weight: bold;
   position: relative;
   transition: all ease-in-out 0.5s;
   text-decoration: none;
-  padding: 2rem;
+  padding: 1rem;
 }
 .toggle-content-list .toggle-item .toggle-title:not(.collapsed):after {
   width: 100%;
 }
+.toggle-content-list .toggle-item .toggle-title .fa + span {
+  margin-left: 0.5rem;
+}
 .toggle-content-list .toggle-item .toggle-title span {
-  margin-left: 1rem;
   margin-right: 2rem;
 }
 .toggle-content-list .toggle-item .toggle-title span > .toggle-sub {
@@ -14855,9 +14857,9 @@ img {
 }
 .toggle-content-list .toggle-item .toggle-title .angle-toggle {
   position: absolute;
-  right: 2rem;
+  right: 1rem;
   top: 50%;
-  margin-top: -1rem;
+  margin-top: -0.5rem;
 }
 .toggle-content-list .toggle-item .toggle-title:hover:after {
   width: 100%;
@@ -14873,6 +14875,16 @@ img {
   bottom: 0;
   width: 0;
   transition: all ease-in-out 0.5s;
+}
+@media (min-width: 992px) {
+  .toggle-content-list .toggle-item .toggle-title {
+    font-size: 1.5rem;
+    padding: 2rem;
+  }
+  .toggle-content-list .toggle-item .toggle-title .angle-toggle {
+    right: 2rem;
+    margin-top: -1rem;
+  }
 }
 .albumn-embed-list .album-item {
   position: relative;

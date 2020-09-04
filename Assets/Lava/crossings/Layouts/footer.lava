@@ -82,14 +82,14 @@
           <div class="row reverse social-row">
             <div class="col-md-4">
               <div class="row">
-                <div class="col-xs-6 col-md-4">
-                  <a href="https://www.facebook.com/CrossingsOKC"><i class="fab fa-facebook"></i></a>
+                <div class="col-xs-4">
+                  <a target="_blank" rel="noopener" href="https://www.facebook.com/CrossingsOKC"><i class="fab fa-facebook"></i></a>
                 </div>
-                <div class="col-xs-6 col-md-4">
-                  <a href="https://www.instagram.com/crossingsokc"><i class="fab fa-instagram"></i></a>
+                <div class="col-xs-4">
+                  <a target="_blank" rel="noopener" href="https://www.instagram.com/crossingsokc"><i class="fab fa-instagram"></i></a>
                 </div>
-                <div class="col-xs-6 col-md-4">
-                  <a href="https://twitter.com/CrossingsOKC"><i class="fab fa-twitter"></i></a>
+                <div class="col-xs-4">
+                  <a target="_blank" rel="noopener" href="https://twitter.com/CrossingsOKC"><i class="fab fa-twitter"></i></a>
                 </div>
               </div>
               <div class="row">
@@ -104,14 +104,14 @@
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-xs-6 col-md-4">
-                  <a href="https://www.facebook.com/CrossingsEdmond"><i class="fab fa-facebook"></i></a>
+                <div class="col-xs-4">
+                  <a target="_blank" rel="noopener" href="https://www.facebook.com/CrossingsEdmond"><i class="fab fa-facebook"></i></a>
                 </div>
-                <div class="col-xs-6 col-md-4">
-                  <a href="https://www.instagram.com/crossingsedmond/"><i class="fab fa-instagram"></i></a>
+                <div class="col-xs-4">
+                  <a target="_blank" rel="noopener" href="https://www.instagram.com/crossingsedmond/"><i class="fab fa-instagram"></i></a>
                 </div>
-                <div class="col-xs-6 col-md-4">
-                  <a href="https://twitter.com/CrossingsEdmond"><i class="fab fa-twitter"></i></a>
+                <div class="col-xs-4">
+                  <a target="_blank" rel="noopener" href="https://twitter.com/CrossingsEdmond"><i class="fab fa-twitter"></i></a>
                 </div>
               </div>
               <div class="row">

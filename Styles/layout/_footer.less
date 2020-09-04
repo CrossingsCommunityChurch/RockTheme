@@ -1,5 +1,5 @@
 .footer {
-    display: none;
+    //display: none;
     padding-bottom: 75px;
 
     .social-row {
@@ -59,15 +59,10 @@
             margin-top: @spacing2x;
         }
 
+        
         ul > li {
-            display: inline-block;
-            border-left: 1px solid lighten(@brand-primary, 10%);
-
-            &:first-child {
-                border-left: 0 none;
-            }
-
             a {
+                text-align: center;
                 color: @white;
                 text-transform: uppercase;
                 font-family: @headings-font-family;
@@ -99,5 +94,17 @@
 @media (min-width: @screen-desktop) {
     .footer {
         display: block;
+
+        .footer-logo {
+            
+            ul > li {
+                display: inline-block;
+                border-left: 1px solid lighten(@brand-primary, 10%);
+
+                &:first-child {
+                    border-left: 0 none;
+                }
+            }
+        }
     }
 }
