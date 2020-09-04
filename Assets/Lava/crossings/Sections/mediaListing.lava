@@ -1,12 +1,14 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign mediaItemsPerPage = 'Global' | Attribute:'MediaItemsPerPage' %}
 {% assign mediaItemImageResize = 'Global' | Attribute:'MediaItemImageResize' %}
+{% assign mediaItemTopicMinCharsToMatch = 'Global' | Attribute:'MediaItemTopicMinCharsToMatch' %}
 {% assign mediaData = 'Combinedmedia' | PersistedDataset %}
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
-{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js' %}
+{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-autosuggest@2.2.0' %}
 {% endjavascript %}
+<link rel="stylesheet" type="text/css" href="/Themes/RockTheme/Styles/vue-autosuggest.css">
 
 <div id="vue-template-dropdown" style="display:none;">
   <div class="form-group">
@@ -31,13 +33,19 @@
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
-            <div class="input-group media-filter-input">
+            <div class="v-dropdown-input input-group media-filter-input">
               <span class="input-group-addon"><i class="fa fa-search"></i></span>
-              <input id="mediaFilterInput" v-model="filterInput" type="text" class="form-control" placeholder="Search by speaker, topic, sermon, or teaching series">
+              <vue-autosuggest
+                  :suggestions="filteredSearchOptions"
+                  :input-props="{id:'autosuggest__input', placeholder:'Search by Speaker, Topic, Series or Message'}"
+                  :should-render-suggestions="shouldRenderSuggestions"
+                  @input="onInputChange"
+                >
+                <template slot-scope="{suggestion}">
+                  <span class="my-suggestion-item">{% raw %}{{ suggestion.item }}{% endraw %}</span>
+                </template>
+              </vue-autosuggest>
             </div>
-            <!--<vue-dropdown :options="topics" heading-label="Search by Topic" empty-label="Select a Topic" @change="setFilter('topic', $event)"></vue-dropdown>
-            <vue-dropdown :options="speakers" heading-label="Search by Speaker" empty-label="Select a Speaker" @change="setFilter('speaker', $event)"></vue-dropdown>
-            <vue-dropdown :options="books" heading-label="Search by Book" empty-label="Select a Book" @change="setFilter('book', $event)"></vue-dropdown>-->
           </div>
         </div>
         <div class="col-md-6 col-lg-4">
@@ -53,7 +61,6 @@
           <div v-for="item in mediaItems" class="col-sm-6 col-md-4">
             <a :href="mediaUrl(item)" class="card cardShadow">
               <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(item) + '\')' }">
-                <!--<img :src="mediaImg(item)" class="object-fit">-->
               </div>
               <div class="row card-content-row">
                 <div class="card-content">
@@ -92,51 +99,7 @@
 
 const imageStorageUrl = '{{ imageStorageUrl }}';
 
-Vue.component('vue-dropdown', {
-  template: '#vue-template-dropdown',
-  props: {
-    open: {
-      type: Boolean,
-      default: false
-    },
-    emptyLabel: {
-      type: String,
-      default: 'Select'
-    },
-    options: {
-      type: Array,
-      required: true
-    },
-    headingLabel: {
-      type: String,
-      default: 'Search by Value'
-    }
-  },
-  data: function () {
-    return {
-      selectedOption: {
-        type: Number,
-        default: null
-      },
-      isOpen: Vue.util.extend({}, this.open)
-    };
-  },
-  mounted() {
-    this.isOpen = false;
-  },
-  computed: {
-    selectedValue: function () {
-      return this.selectedOption >= 0 ? this.options[this.selectedOption].Name : this.emptyLabel;
-    }
-  },
-  methods: {
-    handleClick: function (i) {
-      this.selectedOption = i;
-      this.isOpen = false;
-      this.$emit('change', i >= 0 ? this.options[i] : '');
-    }
-  }
-});
+Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
 
 const vueApp = new Vue({
   el: '#vapp',
@@ -145,17 +108,38 @@ const vueApp = new Vue({
       messages : [''],
       topics: [''],
       speakers: [''],
-      //books: [''],
+      searchOptions: [''],
+      filteredSearchOptions: [''],
       topicFilter: '',
       speakerFilter: '',
       bookFilter: '',
       filterInput: '',
       page: 1,
       perPage: {{mediaItemsPerPage}},
-      pages: [],
+      pages: []
     }
   },
   methods:{
+    shouldRenderSuggestions (size, loading) {
+      return size >= 1 && !loading
+    },
+    onInputChange(text) {
+
+      var filteredData = this.searchOptions[0].data.filter(item => {
+        return item.toLowerCase().indexOf(text.toLowerCase()) > -1;
+      });;
+
+      this.filteredSearchOptions = [{
+        data: filteredData
+      }];
+
+      this.filterInput = text;
+
+      if (text === '') {
+        this.filteredSearchOptions = [];
+      }
+
+    },
     mediaUrl(item) {
       if (item.Series) {
         return `/media/${item.ChannelPath}${item.Series.Slug}/${item.PrimarySlug}`;
@@ -178,9 +162,13 @@ const vueApp = new Vue({
         .get('/Webhooks/Lava.ashx/crossings/api/combined-media')
         .then(response => {
           this.messages = response.data.Messages;
-          this.topics = response.data.FilterLists.Topics;
-          this.speakers = response.data.FilterLists.Speakers;
-          //this.books = response.data.FilterLists.Books;
+          const topics = response.data.FilterLists.Topics.map(t => t.Name);
+          const speakers = response.data.FilterLists.Speakers.map(s => s.Name);
+          const combined = topics.concat(speakers);
+          this.searchOptions = [
+            { data: combined }
+          ];
+
         });
     },
     applySearchTags() {
@@ -210,24 +198,16 @@ const vueApp = new Vue({
     }
   },
   computed: {
-    /*filteredMessages() {
-      return this.messages.filter(message => {
-        var filterOut = false;
-        filterOut |= (this.topicFilter && this.topicFilter !== 'Any' && !message.Topics.includes(this.topicFilter));
-        filterOut |= (this.speakerFilter && this.speakerFilter !== 'Any' && message.Speaker !== this.speakerFilter);
-        //filterOut |= (this.bookFilter && this.bookFilter !== 'Any' && message.Books.indexOf(this.bookFilter) < 0);
-        return !filterOut;
-      });
-    },*/
     filteredMessages() {
-     return this.messages.filter(message => {
+
+      return this.messages.filter(message => {
 
         if (!this.filterInput) return true;
 
         let shouldInclude = false;
 
         shouldInclude |= (!!message.Speaker && message.Speaker.toLowerCase().includes(this.filterInput.toLowerCase().trim()));
-        shouldInclude |= (this.filterInput.toLowerCase().trim().length >= 1 && !!message.Topics && message.Topics.map(t => t.toLowerCase().trim()).filter(t => t.indexOf(this.filterInput.toLowerCase().trim()) === 0).length > 0);
+        shouldInclude |= (this.filterInput.toLowerCase().trim().length >= {{mediaItemTopicMinCharsToMatch}} && !!message.Topics && message.Topics.map(t => t.toLowerCase().trim()).filter(t => t.indexOf(this.filterInput.toLowerCase().trim()) === 0).length > 0);
         shouldInclude |= (!!message.Title && message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
         shouldInclude |= (!!message.Series && !!message.Series.Title && message.Series.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
 
@@ -247,11 +227,6 @@ const vueApp = new Vue({
   created(){
     this.getMedia();
     this.applySearchTags();
-  },
-  filters: {
-    trimWords(value){
-      return value.split(" ").splice(0,20).join(" ") + '...';
-    }
   }
 });
 
