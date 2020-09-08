@@ -46,6 +46,7 @@
     {% eventcalendaritem where:'EventCalendarId != 0' %}
       {% for item in eventcalendaritemItems %}
         {% assign eventid = item.EventItem.Id%}
+        {%  assign calendarId = item.EventCalendarId %}
         {% eventitem id:'{{ eventid }}' %}
           {% if eventitem.IsActive and eventitem.IsApproved %}
 
@@ -82,6 +83,7 @@
             {% capture eventsJson %}{{eventsJson}} { {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"AssetImage": {{imageAsset | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"DetailsUrl": {{detailsURL | ToJSON}} , {%endcapture%}
+              {% capture eventsJson %}{{eventsJson}}"CalendarId": {{calendarId | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"PhotoId": {{photoId | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"PhotoUrl": {{url | ToJSON}} , {%endcapture%}
               {% capture eventsJson %}{{eventsJson}}"EventId": {{eventid | ToJSON}} , {%endcapture%}

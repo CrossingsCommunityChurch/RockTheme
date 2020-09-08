@@ -42,7 +42,9 @@
     const imageSize = '{{imageSize}}';
     const itemsPerPage = '{{itemsPerPage}}';
 
-    let events = JSON.parse(eventsJson);
+    let eventsvar = JSON.parse(eventsJson);
+
+    var events = eventsvar.filter(evt => evt.CalendarId == '{{calendarid}}' || evt.CalendarId == '{{allchurchid}}');
 
     let curPage = 1;
     renderFilteredItems(events, curPage);
