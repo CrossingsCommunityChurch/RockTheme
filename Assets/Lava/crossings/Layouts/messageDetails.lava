@@ -11,7 +11,9 @@
 
   {% assign org = 'Global' | Attribute:'OrganizationName' %}
   {% capture pageTitle %}{{ speaker }} - {{ title }} | {{ org }} {% endcapture%}
+  {% capture metaDesc %}{{ summary | StripHtml }} {{ speaker }}. {{ title }}{% endcapture %}
   {{ pageTitle | SetPageTitle }}
+  {{ metaDesc | AddMetaTagToHead:'name','description' }}
 
   {% if item.ContentChannel.Name == 'Teaching Message' %}
       {% assign parentPath = 'teachings' %}
