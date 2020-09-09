@@ -131,7 +131,7 @@
                             <span>AUDIENCES GO HERE!</span>
                         </p>
                       <p class="date">DATE GOES HERE!</p>
-                      <p class="recurring">RECURRING GOES HERE!</p>
+                      <p class="recurring"></p>
                     </div>
                   </div>
                   <div class="btn icon-button shadowDepth2">
@@ -149,7 +149,7 @@
         div.find('h4').text(event.Name);
         div.find('p.date').text(event.date);
         div.find('p > i.fas.fa-tags').parent().find('span').text(event.audiences.join(', '));
-        div.find('p.recurring').html(event.occurrence.Schedule);
+
 
         eventsContainer.append(div);
 
