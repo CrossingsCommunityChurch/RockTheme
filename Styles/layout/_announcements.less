@@ -6,6 +6,29 @@
   display: block;
   width: 100%;
 
+    .card-content {
+        position: relative;
+    }
+
+  .day-of-week {
+    position: absolute;
+    top: -1rem;
+    left: 0;
+    right: 0;
+
+    > span {
+        display: inline-block;
+        margin: auto;
+        background-color: #888;
+        border-radius: 15px;
+        padding: 0.25rem 1rem;
+        font-size: 0.8rem;
+        border: 3px solid #fff;
+        color: #fff;
+        font-weight: bold;
+    }
+  }
+
   .thumb {
       background-position: center center;
       background-size: cover;

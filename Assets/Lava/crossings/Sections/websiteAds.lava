@@ -125,8 +125,9 @@
               </div>
               <div class="row card-content-row">
                 <div class="card-content">
-                  <div class="col">
+                  <div class="col relative">
                     <div>
+                      <div class="day-of-week hidden"><span></span></div>
                       <h4>Title here</h4>
                     <h5 class="text-muted">Subheadinghere</h5>
                   <p class="small"></p>
@@ -152,6 +153,10 @@
         // div.find('.thumb').css("background-image", `url("${event.AssetImage}")`);
         }
         div.find('h4').text(ad.Title);
+        if(ad.DayofWeek != '') {
+          div.find('.day-of-week').removeClass('hidden');
+          div.find('.day-of-week > span').text(ad.DayofWeek);
+        }
         if(ad.Subheading == ''){
           div.find('h5').hide();
         }
