@@ -10,7 +10,7 @@
         {% endif %}
 
         {% for result in Results %}
-            {% if result.PageTitle != 'Events' %}
+            {% if result.PageTitle == 'Events' %}
                 {% continue %}
             {% endif %}
             <div class="search-card">
