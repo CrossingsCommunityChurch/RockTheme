@@ -12,7 +12,7 @@
   {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
 {% endif %}
 {% assign contact = eventitemoccurrence.ContactPersonAliasId | PersonByAliasId %}
-{% capture metaDesc %}{{ eventitemoccurrence.EventItem.Summary | StripHtml | | TruncateWords:25 }} {{ pageTitle }}{% endcapture %}
+{% capture metaDesc %}{{ eventitemoccurrence.EventItem.Summary | StripHtml | TruncateWords:25 }} {{ pageTitle }}{% endcapture %}
 {{ metaDesc | AddMetaTagToHead:'name','description' }}
 <div class="section special-message simple-section event-details">
         <div class="container">
