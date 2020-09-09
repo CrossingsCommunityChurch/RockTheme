@@ -43,11 +43,18 @@
   {% for item in contentchannel.Items %}
     {% assign summary = item | Attribute:'SummaryText' %}
     {% assign dayOfWeek = item | Attribute:'dayoftheweek' %}
-    {% assign  detailsURL = item | Attribute:'DetailsURL' %}
+    {% assign  detailsURL = item | Attribute:'DetailsURL' | StripHtml %}
     {% assign subheading = item | Attribute:'Subheading' %}
     {% assign campus = item | Attribute:'Campuses' %}
     {% assign primaryAudiance = item | Attribute:'PrimaryAudience' %}
     {% assign secondaryAudiance =  item | Attribute:'SecondaryAudiences' %}
+    {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+    {% assign imageSize = '/fit-in/600x600' %}
+    {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
+    {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+    {% if imageUrlPath == '' %}
+      {% assign imageAsset = '' %}
+    {% endif %}
     {
       "Title": {{ item.Title | ToJSON }},
       "Summary": {{ summary | ToJSON}},
@@ -59,7 +66,8 @@
       "SecondaryAudience": {{ secondaryAudiance | ToJSON }},
       "Priority": {{ item.Priority | ToJSON }},
       "StartDate": {{ item.StartDateTime | ToJSON }},
-      "EndDate": {{ item.ExpireDateTime | ToJSON }}
+      "EndDate": {{ item.ExpireDateTime | ToJSON }},
+      "AssetImage": {{ imageAsset | ToJSON }}
     }{%- unless forloop.last -%},{%- endunless -%}
   {% endfor %}
 {% endcontentchannel %}
