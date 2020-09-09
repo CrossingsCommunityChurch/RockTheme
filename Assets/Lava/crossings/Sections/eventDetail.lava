@@ -4,6 +4,7 @@
 {% capture pageTitleBrowser %}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{% endcapture%}
 {{ pageTitle | SetPageTitle:'PageTitle' }}
 {{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
+
 {% endeventitemoccurrence %}
 
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
