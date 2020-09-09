@@ -1,0 +1,13 @@
+{%- assign isAdministrator = 'Global' | Page:'Id' | HasRightsTo:'Administrate','Rock.Model.Page' -%}
+<script>
+    if ('{% if isAdministrator != true %}1{% endif %}' === '1' ) {
+        window.location = '/'
+    }
+</script>
+
+{% assign events = 'events' | PersistedDataset %}
+{% assign eventList = events.Events %}
+
+{% for event in eventList %}
+  <a href="{{event.link}}" title="{{event.Name}}">{{event.Name}}</a><br />
+{% endfor %}

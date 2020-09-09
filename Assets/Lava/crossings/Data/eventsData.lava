@@ -1,7 +1,7 @@
 {
   "Audiences": [
     {% assign existing = "" %}
-    {% eventcalendaritem where:'EventCalendarId != 0' %}
+    {% eventcalendaritem where:'EventCalendarId != 0 && EventCalendarId != 2' %}
       {% for item in eventcalendaritemItems %}
         {% assign eventid = item.EventItem.Id%}
         {% eventitem id:'{{ eventid }}' %}
@@ -43,7 +43,7 @@
     {% assign imageSize = '/fit-in/600x600' %}
     {% assign limit = 48 %}
     {% assign eventsJson = "[" %}
-    {% eventcalendaritem where:'EventCalendarId != 0' %}
+    {% eventcalendaritem where:'EventCalendarId != 0 && EventCalendarId != 2' %}
       {% for item in eventcalendaritemItems %}
         {% assign eventid = item.EventItem.Id%}
         {%  assign calendarId = item.EventCalendarId %}

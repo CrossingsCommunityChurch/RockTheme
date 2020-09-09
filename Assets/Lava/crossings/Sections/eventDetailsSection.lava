@@ -29,7 +29,7 @@
                       Need to not display if event is only happening once.
                     {%- endcomment -%}
                     <h4 class="subheading">Date</h4>
-                    <h4 class="heading"> {{eventitemoccurrence.Schedule.NextStartDateTime | Date: 'MMM d h:m tt'}}
+                    <h4 class="heading"> {{eventitemoccurrence.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}
                     {% if eventitemoccurrence.Schedule.FriendlyScheduleText and eventitemoccurrence.Schedule.FriendlyScheduleText != empty  %}
                       <h4 class="subheading">Schedule</h4>
                       <h4 class="heading">{{ eventitemoccurrence.Schedule.FriendlyScheduleText }}</h3>
