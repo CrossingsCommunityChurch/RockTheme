@@ -10,6 +10,9 @@
         {% endif %}
 
         {% for result in Results %}
+            {% if result.PageTitle != 'Events' %}
+                {% continue %}
+            {% endif %}
             <div class="search-card">
                 <h4 class="search-title"><a href="{{ result.Url }}">{{ result.PageTitle }}</a></h4>
                 <!--<div class="search-url"><a href="{{ result.Url }}">{{ result.Url }}</a></div>-->
