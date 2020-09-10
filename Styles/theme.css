@@ -15541,6 +15541,7 @@ img {
 }
 .search-wrapper .search-content .media-object p {
   color: #888b8c;
+  margin-bottom: 0;
 }
 .search-wrapper.open {
   width: 100%;

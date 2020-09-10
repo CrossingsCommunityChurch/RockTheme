@@ -24,7 +24,7 @@
               {% endif %}
                 <div>
                   <h3>{{recommend.Title}}</h3>
-                  <p>{{recommend.Content }}</p>
+                  <p>{{recommend.Content | StripHtml | TruncateWords:20 }}</p>
                 </div>
               {% if recommend.Detail != '' %}
                 </a>
@@ -42,8 +42,8 @@
             <a class="media-object" href="{{ link }}">
               <div>
                 <h3>{{ popular.Title }}</h3>
-                <p>{{ popular.Speaker }}<p>
-                <p>{{ popular.PublishDateTime }}</p>
+                <p><strong>{{ popular.Speaker }} | {{ popular.PublishDateTime }}</strong></p>
+                <p>{{ popular.Content | StripHtml | TruncateWords:20 }}</p>
               </div>
             </a>
           {% endfor %}
@@ -57,7 +57,7 @@
               <div>
                 <h3>{{ event.Name }}</h3>
                 <p><strong>{{ event.date }}</strong></p>
-                <p>{{ event.Summary }}</p>
+                <p>{{ event.Summary | StripHtml | TruncateWords:20 }}</p>
               </div>
             </a>
           {% endfor %}
