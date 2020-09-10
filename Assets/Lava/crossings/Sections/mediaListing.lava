@@ -26,6 +26,32 @@
 
 <div id="vapp" class="media-list">
   <div class="media-search">
+
+    <vue-rock-filterable-list v-bind:items="messages" v-slot="{ item: message }">
+      <div class="col-sm-6 col-md-4">
+        <a :href="mediaUrl(message)" class="card cardShadow">
+          <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(message) + '\')' }">
+          </div>
+          <div class="row card-content-row">
+            <div class="card-content">
+              <div class="btn icon-button shadowDepth2">
+                <i class="fas fa-play"></i>
+                <span>Watch</span>
+              </div>
+              <div class="col">
+                <div>
+                  <h3>{% raw %}{{ message.Title }}{% endraw %}</h3>
+                  <h5 v-if="message.Series" class="series">{% raw %}{{ message.Series.Title }}{% endraw %}</h5>
+                  <h5>{% raw %}{{ message.Speaker }}{% endraw %}</h5>
+                  <p class="date">{% raw %}{{ message.StartDate }}{% endraw %}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </vue-rock-filterable-list>
+
     <div class="container">
       <div class="media-filter row">
         <div class="col-md-12">
@@ -101,6 +127,28 @@
 const imageStorageUrl = '{{ imageStorageUrl }}';
 
 Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
+
+Vue.component('vue-rock-filterable-list', {
+  props: ['items'],
+  data: function() {
+    return {
+      things: []
+    };
+  },
+  template: `
+    <div class="container">
+        <div class="media-list-items">
+          <div class="row flex-row flex-wrap">
+            <div v-for="item in items" class="col-sm-6 col-md-4">
+              <slot v-bind:item="item">
+
+              </slot>
+            </div>
+          </div>
+        </div>
+    </div>
+  `
+});
 
 const vueApp = new Vue({
   el: '#vapp',
