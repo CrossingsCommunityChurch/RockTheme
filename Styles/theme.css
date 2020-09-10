@@ -12098,7 +12098,6 @@ img {
 .text-set {
   height: 150px;
   margin-bottom: 100px;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 .text-slider {
   height: 100px;
@@ -12897,7 +12896,6 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
 }
 .card-modal-items .card-modal-details:hover {
   background-color: rgba(0, 0, 0, 0.55);
@@ -13209,7 +13207,6 @@ img {
     top: auto;
     z-index: 99;
     background-color: transparent;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
     box-shadow: none;
   }
   .primary-nav .navigation > div {
@@ -13545,11 +13542,6 @@ img {
   padding-left: 0;
   padding-right: 0;
   background-color: #313e48;
-}
-.hero-wrapper .heading,
-.hero-wrapper .subheading,
-.hero-wrapper p {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.85);
 }
 .hasAlert .hero .Masthead,
 .hasAlert .hero-wrapper .parallax-content {
@@ -14228,6 +14220,26 @@ img {
   display: block;
   width: 100%;
 }
+.announcement-list .card .card-content {
+  position: relative;
+}
+.announcement-list .card .day-of-week {
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  right: 0;
+}
+.announcement-list .card .day-of-week > span {
+  display: inline-block;
+  margin: auto;
+  background-color: #888;
+  border-radius: 15px;
+  padding: 0.25rem 1rem;
+  font-size: 0.8rem;
+  border: 3px solid #fff;
+  color: #fff;
+  font-weight: bold;
+}
 .announcement-list .card .thumb {
   background-position: center center;
   background-size: cover;
@@ -14498,10 +14510,6 @@ img {
   padding: 0;
   background-color: #fff;
 }
-.split-section-text.bgimg h2,
-.split-section-text.bgimg p {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
-}
 .split-section-text.bgimg > div {
   border-top: 1px solid #fff;
   padding: 30px;
@@ -14748,10 +14756,6 @@ img {
   bottom: 0;
   left: 0;
   right: 0;
-}
-.simple-section-with-image h2,
-.simple-section-with-image p {
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
 }
 .simple-section-with-image .content-area {
   position: relative;

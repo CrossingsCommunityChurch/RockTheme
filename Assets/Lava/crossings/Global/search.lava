@@ -1,6 +1,6 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/300x300/' %}
-
+{% assign searchSuggestions = 'searchSuggestions' | PersistedDataset %}
 <a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>
 <div class="search-wrapper">
   <div class="search-form">
@@ -16,76 +16,51 @@
       <div class="col-md-12 col-lg-4 search-column">
         <div>
           <h2>Recommended</h2>
-          {% contentchannelitem where:'ContentChannelId == 1' Sort:'Priority Desc ' Limit:'3' %}
-            {% for content in contentchannelitemItems %}
-              {% assign imageUrlPath = content | Attribute:'AssetImage' | Url:'localpath' %}
-              {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-              {%- assign itemContent = content.Content | Trim -%}
-              {% assign subheading = content | Attribute:'Subheading' %}
-              {% assign detail = content | Attribute:'DetailsURL' %}
-
-              {% if detail !='' %}
-                <a class="media-object" href="{{ detail | StripHtml }}">
+            {% for recommend in searchSuggestions.Recommended %}
+              {% if recommend.Detail != '' %}
+                <a class="media-object" href="{{ recommend.Detail }}">
               {% else %}
                 <div class="media-object">
               {% endif %}
                 <div>
-                  <h3>{{content.Title}}</h3>
-                  <p>{{content | Attribute:'SummaryText'}}</p>
+                  <h3>{{recommend.Title}}</h3>
+                  <p>{{recommend.Content }}</p>
                 </div>
-              {% if detail !='' %}
+              {% if recommend.Detail != '' %}
                 </a>
               {% else %}
                 </div>
               {% endif %}
             {% endfor %}
-          {%  endcontentchannelitem%}
         </div>
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
           <h2>Popular Media</h2>
-          <a class="media-object" href="#">
-            <div>
-              <h3>Title</h3>
-              <p>Summary</p>
-            </div>
-          </a>
-          <a class="media-object" href="#">
-            <div>
-              <h3>Title</h3>
-              <p>Summary</p>
-            </div>
-          </a>
-          <a class="media-object" href="#">
-            <div>
-              <h3>Title</h3>
-              <p>Summary</p>
-            </div>
-          </a>
+          {% for popular in searchSuggestions.Popular %}
+            {% capture link %}/media/{{ popular.ChannelPath }}{{ popular.Series.Slug }}/{{ popular.PrimarySlug }}{%endcapture%}
+            <a class="media-object" href="{{ link }}">
+              <div>
+                <h3>{{ popular.Title }}</h3>
+                <p>{{ popular.Speaker }}<p>
+                <p>{{ popular.PublishDateTime }}</p>
+              </div>
+            </a>
+          {% endfor %}
         </div>
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
           <h2>Upcoming Events</h2>
-          <a class="media-object" href="#">
-            <div>
-              <h3>Title</h3>
-              <p>Date</p>
-            </div>
-          </a>
-          <a class="media-object" href="#">
-            <div>
-              <h3>Title</h3>
-              <p>Date</p>
-            </div>
-          </a>
-          <a class="media-object" href="#">
-            <div>
-              <h3>Title</h3>
-              <p>Date</p>
-            </div>
-          </a>
+          {% for event in searchSuggestions.Events %}
+            <a class="media-object" href="{{event.link}}">
+              <div>
+                <h3>{{ event.Name }}</h3>
+                <p><strong>{{ event.date }}</strong></p>
+                <p>{{ event.Summary }}</p>
+              </div>
+            </a>
+          {% endfor %}
         </div>
       </div>
     </div>

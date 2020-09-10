@@ -67,6 +67,7 @@
                   :should-render-suggestions="shouldRenderSuggestions"
                   v-model="filterInput"
                   @input="onInputChange"
+                  @selected="onSelected"
                 >
                 <template slot-scope="{suggestion}">
                   <span class="my-suggestion-item">{% raw %}{{ suggestion.item }}{% endraw %}</span>
@@ -171,6 +172,11 @@ const vueApp = new Vue({
   methods:{
     shouldRenderSuggestions (size, loading) {
       return size >= 1 && !loading
+    },
+    onSelected(option) {
+        if (option != '') {
+          this.filterInput = option.item;
+        }
     },
     onInputChange(text) {
 

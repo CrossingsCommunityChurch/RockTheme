@@ -1,0 +1,75 @@
+{
+  "Audiences": [
+    {% assign existing = "" %}
+    {% contentchannel id:'1' %}
+      {% for item in contentchannel.Items %}
+        {% assign audiences =  item | Attribute:'SecondaryAudiences','Object' %}
+        {% for audience in audiences %}
+          {% assign curAudience = audience.Value | StripNewlines | ToJSON %}
+            {% assign match = existing | RegExMatch:curAudience %}
+            {% if match == false %}
+              {{ curAudience }},
+              {% comment %}
+                Trailing comma wasn't getting added correctly in prod. quick fix was just to leave a trailing comman
+                {% unless forloop.last %}, {% endunless %}
+              {% endcomment %}
+              {% assign existing = existing | Append:curAudience %}
+            {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endcontentchannel %}
+  ],
+  "DaysofWeek": [
+    {% assign existing = "" %}
+    {% contentchannel id:'1' %}
+      {% for item in contentchannel.Items %}
+        {% assign day =  item | Attribute:'dayoftheweek' %}
+          {% assign curday = day | ToJSON %}
+            {% assign match = existing | RegExMatch:curday %}
+            {% if match == false and day != "" %}
+              {{ curday }},
+              {% comment %}
+                Trailing comma wasn't getting added correctly in prod. quick fix was just to leave a trailing comman
+                {% unless forloop.last %}, {% endunless %}
+              {% endcomment %}
+              {% assign existing = existing | Append:curday %}
+            {% endif %}
+      {% endfor %}
+    {% endcontentchannel %}
+  ],
+  "Ads":
+[
+{% contentchannel id:'1' %}
+  {% for item in contentchannel.Items %}
+    {% assign summary = item | Attribute:'SummaryText' %}
+    {% assign dayOfWeek = item | Attribute:'dayoftheweek' %}
+    {% assign  detailsURL = item | Attribute:'DetailsURL' | StripHtml %}
+    {% assign subheading = item | Attribute:'Subheading' %}
+    {% assign campus = item | Attribute:'Campuses' %}
+    {% assign primaryAudiance = item | Attribute:'PrimaryAudience' %}
+    {% assign secondaryAudiance =  item | Attribute:'SecondaryAudiences' %}
+    {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
+    {% assign imageSize = '/fit-in/600x600' %}
+    {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
+    {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+    {% if imageUrlPath == '' %}
+      {% assign imageAsset = '' %}
+    {% endif %}
+    {
+      "Title": {{ item.Title | ToJSON }},
+      "Summary": {{ summary | ToJSON}},
+      "DayofWeek": {{ dayOfWeek | ToJSON }},
+      "DetailsURL": {{ detailsURL | ToJSON }},
+      "Subheading": {{subheading | ToJSON }},
+      "Campus": {{ campus | ToJSON }},
+      "PrimaryAudience": {{ primaryAudiance | ToJSON }},
+      "SecondaryAudience": {{ secondaryAudiance | ToJSON }},
+      "Priority": {{ item.Priority | ToJSON }},
+      "StartDate": {{ item.StartDateTime | ToJSON }},
+      "EndDate": {{ item.ExpireDateTime | ToJSON }},
+      "AssetImage": {{ imageAsset | ToJSON }}
+    }{%- unless forloop.last -%},{%- endunless -%}
+  {% endfor %}
+{% endcontentchannel %}
+]
+}

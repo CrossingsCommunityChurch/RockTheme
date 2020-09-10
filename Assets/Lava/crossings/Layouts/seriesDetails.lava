@@ -17,7 +17,10 @@
 
   {% assign org = 'Global' | Attribute:'OrganizationName' %}
   {% capture pageTitle %}{{ title }} - {{ titleCategory }} | {{ org }}{% endcapture%}
+  {% capture metaDesc %}{{ summary | StripHtml }} {{ title }}{% endcapture %}
   {{ pageTitle | SetPageTitle }}
+  {{ metaDesc | AddMetaTagToHead:'name','description' }}
+
   <div class="sermon-series-page">
     <div class="section page-title reverse">
       <div class="container">
