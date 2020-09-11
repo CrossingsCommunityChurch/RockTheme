@@ -56,6 +56,12 @@
 				//Sunday
 				return 'multi';
 			}
+
+			return {
+				link: 'https://online.crossings.church',
+				text: 'Church Online ',
+				class: 'not-live'
+			};
 		}
 
 		var liveLink = getLiveLink(dayToday);
@@ -73,7 +79,7 @@
 			})
 		}
 
-		console.log(liveLink);
+		//console.log(liveLink);
 
 				goLive = function(liveLink) {
 							$("#churchonline_counter .time").hide();

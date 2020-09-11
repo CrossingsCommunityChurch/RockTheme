@@ -11151,6 +11151,9 @@ body {
   margin-bottom: 58px;
   overflow-x: hidden;
 }
+.wrapper-style {
+  overflow-x: hidden;
+}
 .page-wrapper {
   padding-top: 58px;
   overflow: hidden;
