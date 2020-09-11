@@ -36,9 +36,16 @@
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
-          <h2>Popular Media</h2>
+          <h2>Lates Media</h2>
           {% for popular in searchSuggestions.Popular %}
-            {% capture link %}/media/{{ popular.ChannelPath }}{{ popular.Series.Slug }}/{{ popular.PrimarySlug }}{%endcapture%}
+
+            {% assign seriesSlug = 'undefined' %}
+
+            {% if popular.Series.Slug %}
+                {% assign seriesSlug = popular.Series.Slug %}
+            {% endif %}
+
+            {% capture link %}/media/{{ popular.ChannelPath }}{{ seriesSlug }}/{{ popular.PrimarySlug }}{%endcapture%}
             <a class="media-object" href="{{ link }}">
               <div>
                 <h3>{{ popular.Title }}</h3>
