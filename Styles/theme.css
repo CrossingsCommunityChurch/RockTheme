@@ -12179,6 +12179,41 @@ img {
 .nav > li > a {
   padding: 7.5px 12px;
 }
+.account-page textarea.form-control {
+  height: auto;
+}
+.account-page .grid-filter {
+  background-color: #fff;
+  color: #313e48;
+}
+.account-page .grid-filter-overview {
+  width: 100%;
+}
+.account-page .grid-filter header {
+  right: 165px;
+}
+.account-page .grid-filter header > .btn {
+  background-color: #efefef;
+}
+.account-page .grid-filter header > .btn .fa {
+  color: #313e48;
+}
+.account-page .grid.grid-panel {
+  position: relative;
+}
+.account-page .grid-filter-overview fieldset {
+  width: 100%;
+}
+.account-page .group-attendance-list .grid-filter {
+  border: 0 none;
+}
+.account-page .group-attendance-list tfoot .grid-actions {
+  display: none;
+}
+.account-page .grid-table .grid-actions {
+  background-color: #fff;
+  border: 0 none;
+}
 .account-page .main .btn {
   padding: 7.5px 12px;
   border-radius: 5px;
