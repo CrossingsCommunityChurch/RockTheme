@@ -1,3 +1,7 @@
+{% comment %}
+  This is included on the /events page to allow internal search to find all event urls
+{%- endcomment -%}
+
 {%- assign isAdministrator = 'Global' | Page:'Id' | HasRightsTo:'Administrate','Rock.Model.Page' -%}
 <script>
     if ('{% if isAdministrator != true %}1{% endif %}' === '1' ) {

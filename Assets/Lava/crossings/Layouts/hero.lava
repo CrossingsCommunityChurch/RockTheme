@@ -1,3 +1,7 @@
+{% comment %}
+  Used as the Hero Content Component. This is not what is used at the top of pages however.
+{%- endcomment -%}
+
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {% if channelAnchor != empty %} <div id="{{channelAnchor}}"></div> {% endif %}
 
@@ -18,10 +22,6 @@
 {% else %}
   {% assign height = '100vh' %}
 {% endif %}
-
-{%- comment -%}
-    I think this will make more sense to add this to the page level and not within a block (may change this to page-heading or something and not call it hero)
-{%- endcomment -%}
 
 {% if imageUrlPath != empty %}
     <div class="container-fluid hero-wrapper page-hero">

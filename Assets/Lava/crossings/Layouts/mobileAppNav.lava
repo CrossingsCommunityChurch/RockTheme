@@ -1,3 +1,8 @@
+{% comment %}
+  Included as a shortcode in the footer
+  This is the nav that shows at the bottom of the screen on mobile
+{%- endcomment -%}
+
 <div class="mobile-navbar">
   {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item toggle-locations' buttonicon:'map-marker-alt' buttontext:'Locations' ]}
   {[ button buttonlink:'#' buttonstyle:' mobile-nav-bar-item toggle-media' buttonicon:'video' buttontext:'Media' ]}

@@ -1,3 +1,7 @@
+{% comment %}
+  Footer for primary site. Runs globally as an include on the site
+{%- endcomment -%}
+
 <div class="footer bg-primary">
   <div class="container">
     <div class="col-md-2 col-lg-2"></div>
