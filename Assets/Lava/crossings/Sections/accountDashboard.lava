@@ -5,7 +5,11 @@
 {% if CurrentPerson %}
     <div class="profile">
         <div class="profile-image">
-          <img src="{{ CurrentPerson.PhotoUrl }}&height=300&width=300&mode=crop&scale=both" alt="My Profile Image" />
+          {% if CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-male.svg?' and CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-female.svg?'  %}
+              <img src="{{ CurrentPerson.PhotoUrl }}&height=300&width=300&mode=crop&scale=both">
+            {% else %}
+              <img src="{{ CurrentPerson.PhotoUrl }}">
+            {% endif %}
         </div>
         <div class="profile-info">
           <h4>{{CurrentPerson.FirstName}} {{CurrentPerson.LastName}}</h4>
