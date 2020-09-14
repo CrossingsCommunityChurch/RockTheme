@@ -1,9 +1,12 @@
-{%- comment -%}
-columnstyle
-link
-title
-subtitle
-actiontext
+{% comment %}
+  Typically looped over to create a list of cards. Currently used in serving opportunities
+
+  Params
+    @columnstyle
+    @link
+    @title
+    @subtitle
+    @actiontext
 {%- endcomment -%}
 
 {% unless columnstyle %}

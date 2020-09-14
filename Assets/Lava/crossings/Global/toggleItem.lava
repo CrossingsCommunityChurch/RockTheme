@@ -1,3 +1,14 @@
+{% comment %}
+  This is looped over inside a Toggle List
+
+  Params
+    @identifier
+    @title
+    @subheading
+    @icon
+    @content - Note on content, we need to encode and decode html when passing content in a shortcode
+{%- endcomment -%}
+
 <div class="toggle-item bg-white shadowDepth2 mt-2">
   <a class="toggle-title collapsed" role="button" data-toggle="collapse" href="#{{identifier}}" aria-expanded="false" aria-controls="{{identifier}}">{% if icon != empty %}<i class="fa {{icon}}"></i>{% endif %}<span>{{title}}{% if subheading != empty %} <span class="toggle-sub hidden-xs hidden-sm">{{ subheading }}</span> {% endif %}</span><i class="fa fa-angle-down angle-toggle"></i></a>
   <div class="toggle-content collapse" id="{{identifier}}">

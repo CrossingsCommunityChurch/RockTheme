@@ -1,3 +1,7 @@
+{% comment %}
+  **Not currently in use. Was swapped for a javascript solution
+{% endcomment %}
+
 {%- comment -%}
   img
   eventName

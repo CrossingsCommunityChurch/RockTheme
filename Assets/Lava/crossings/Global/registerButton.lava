@@ -1,3 +1,11 @@
+{% comment %}
+  Used for Registering for Events. Event Details Page
+
+  Params
+  @eventItemOccurrenceLinkages
+
+{% endcomment %}
+
 {% assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size %}
       {% if eventItemOccurrenceLinkagesCount > 0 %}
         {% for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages %}

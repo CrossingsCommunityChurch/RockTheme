@@ -1,8 +1,5 @@
 {%- comment -%}
-title
-subtitle
-img
-text
+  Used in Card Horizontal Content Components
 {%- endcomment -%}
 
 {%- for item in Items -%}

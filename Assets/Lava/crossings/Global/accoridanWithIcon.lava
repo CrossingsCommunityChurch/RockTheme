@@ -1,3 +1,13 @@
+{% comment %}
+
+  Block Shortcode
+    accepts [[ item ]]
+  Item Params
+    @title
+    @icon - font awesome icon
+
+{% endcomment %}
+
 {%- assign wrapperId = uniqueid -%}
 {%- assign firstopen = firstopen | AsBoolean -%}
 <div class="panel-group" id="accordion-{{ wrapperId }}" role="tablist" aria-multiselectable="true">

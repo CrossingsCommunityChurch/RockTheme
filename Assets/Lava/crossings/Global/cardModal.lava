@@ -1,3 +1,8 @@
+{% comment %}
+  Card Modal Content Component
+    - Uses the modal shortcode internally
+{% endcomment %}
+
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/900x600' %}
 {% assign minHeight = '300px' %}
