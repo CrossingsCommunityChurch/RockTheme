@@ -5,7 +5,7 @@
 {% if CurrentPerson %}
     <div class="profile">
         <div class="profile-image">
-          <img src="{{ CurrentPerson.PhotoUrl }}" alt="My Profile Image" />
+          <img src="{{ CurrentPerson.PhotoUrl }}&height=300&width=300&mode=crop&scale=both" alt="My Profile Image" />
         </div>
         <div class="profile-info">
           <h4>{{CurrentPerson.FirstName}} {{CurrentPerson.LastName}}</h4>

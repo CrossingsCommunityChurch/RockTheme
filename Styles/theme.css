@@ -13484,6 +13484,9 @@ img {
 .account-dashboard-sidebar .profile .profile-image {
   width: 125px;
 }
+.account-dashboard-sidebar .profile .profile-image > img {
+  border-radius: 50%;
+}
 .account-dashboard-sidebar .account-nav {
   display: flex;
   flex-direction: column;
@@ -14867,7 +14870,7 @@ img {
 }
 .person-image img {
   max-height: 150px;
-  border-radius: 100%;
+  border-radius: 50%;
 }
 @media (min-width: 992px) {
   .person-wrapper {
@@ -15044,7 +15047,7 @@ img {
 }
 .pastor-image img {
   max-height: 150px;
-  border-radius: 100%;
+  border-radius: 50%;
 }
 .location-details.special-message {
   background-color: #efefef !important;
