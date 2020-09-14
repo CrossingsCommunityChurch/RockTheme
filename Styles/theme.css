@@ -14883,7 +14883,10 @@ img {
   }
   .person-item .person-image {
     padding: 15px 22.5px 0;
-    max-width: 200px;
+    max-width: 175px;
+  }
+  .person-item .person-details {
+    width: 100%;
   }
 }
 .toggle-content-list .toggle-item {
