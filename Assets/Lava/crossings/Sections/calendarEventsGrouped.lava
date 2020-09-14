@@ -1,3 +1,7 @@
+{%- comment -%}
+  **Not Currently Used
+{%- endcomment -%}
+
   {% assign eventItemCount = EventItems | Size %}
 
   {% if eventItemCount == 0 %}

@@ -1,3 +1,9 @@
+{%- comment -%}
+  Content Component - Campus Detail
+	This runs content specific to a campus and typically used on location pages.
+  Accepts a Campus from the Campus selection on the Content Component
+{%- endcomment -%}
+
 {%- for item in Items -%}
   {% assign hasCampus = item | Attribute:'Campus' %}
   {% if hasCampus and hasCampus != empty %}

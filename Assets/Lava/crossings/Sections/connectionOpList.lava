@@ -1,3 +1,8 @@
+{%- comment -%}
+  Serving Opportunities List
+  Runs a list of cardText items for each opportunity and links to form for each opportunity
+{%- endcomment -%}
+
 {% assign opportunityCount = Opportunities | Size %}
 
 {% if opportunityCount == 0 %}

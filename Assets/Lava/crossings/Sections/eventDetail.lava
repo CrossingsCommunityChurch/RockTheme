@@ -1,3 +1,8 @@
+{%- comment -%}
+  Runs on the Single Event Pages
+  Used as an include on the page and displays the event information
+{%- endcomment -%}
+
 {% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
 {% capture pageTitle %}{{eventitemoccurrence.EventItem.Name}}{% endcapture%}
 {% assign org = 'Global' | Attribute:'OrganizationName' %}

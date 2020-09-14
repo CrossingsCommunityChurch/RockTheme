@@ -1,3 +1,8 @@
+{%- comment -%}
+  Content Component - Album Embed Listing
+  Used for listing worship album artwork with links to spotify, soundcloud, itunes, and prime music
+{%- endcomment -%}
+
 {%- assign contentItemStyle = '' -%}
 {%- assign contentTextColor = '' -%}
 {%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}

@@ -1,8 +1,10 @@
+{%- comment -%}
+  Card Content Component
+  Runs a list of cardText items
+{%- endcomment -%}
+
 <div class="container card-list" data-aos="fade-up">
   <div class="row">
-    {%- comment -%}
-      Probably needs to pull from a content channel for ministries and loop?
-    {%- endcomment -%}
     {%- for item in Items -%}
       {%- assign itemPrimarySlug = item.PrimarySlug | Trim -%}
       {%- if LinkedPages.DetailPage contains '{Slug}' and itemPrimarySlug != empty -%}

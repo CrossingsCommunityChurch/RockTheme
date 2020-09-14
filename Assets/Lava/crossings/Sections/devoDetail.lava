@@ -1,3 +1,9 @@
+{%- comment -%}
+  Devotional Content Channel Item View Template
+
+  Runs the content for a devotional content channel item
+{%- endcomment -%}
+
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/2000x900' %}
 

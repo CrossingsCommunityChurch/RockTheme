@@ -1,3 +1,13 @@
+{%- comment -%}
+  livebar shortcode - runs at the top of the size in the alerts zone
+	This is currently hardcoded to display custom messages for Tuesday, Wednesday and Sunday 2 hours before there is a next set time.
+		Tuesday - The Gathering is Live In... (sends user to venue.crossings.church)
+		Wednesday - Wednesday Night is Live In... (sends user to venue.crossings.church)
+		Sunday - Church is Live In...(opens a modal to allow the user to select which experience to stream)
+	Params
+		@scheduleid
+{%- endcomment -%}
+
 {%- assign scheduleid = scheduleid -%}
 <div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
   <a class="live-link" href="#">

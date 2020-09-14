@@ -1,4 +1,6 @@
-
+{%- comment -%}
+  **Not Currently In Use
+{%- endcomment -%}
 <div class="section special-message simple-section location-details">
   <div class="container">
     <div class="row">

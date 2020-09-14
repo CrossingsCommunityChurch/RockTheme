@@ -1,3 +1,8 @@
+{%- comment -%}
+  Used as a Page Nav template
+  Runs Text Card shortcode for each item in the page nav
+{%- endcomment -%}
+
 {% if Page.DisplayChildPages and Page.Pages != empty %}
   <div class="container card-list" data-aos="fade-up">
     <div class="row">

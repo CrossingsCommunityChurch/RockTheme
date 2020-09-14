@@ -1,3 +1,8 @@
+{%- comment -%}
+  Content Channel View Template
+  Displays Website Ads Content Channel Items
+{%- endcomment -%}
+
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/600x600/' %}
 {% assign adsData = 'ads' | PersistedDataset %}

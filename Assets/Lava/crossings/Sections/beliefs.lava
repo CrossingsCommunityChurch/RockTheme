@@ -1,3 +1,7 @@
+{%- comment -%}
+  **Not Currently Used
+{%- endcomment -%}
+
   <div class="about-card-list">
     <div class="row">
       {%assign title = 'The Bible'%}

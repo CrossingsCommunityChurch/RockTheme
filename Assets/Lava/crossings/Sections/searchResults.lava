@@ -1,3 +1,8 @@
+{%- comment -%}
+  Universal Search Template
+  Loops over the search results
+{%- endcomment -%}
+
 {%- assign isAdministrator = 'Global' | Page:'Id' | HasRightsTo:'Administrate','Rock.Model.Page' -%}
 <section class="search-results-wrapper bg-gray section">
     <div class="container">

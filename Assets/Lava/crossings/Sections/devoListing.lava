@@ -1,3 +1,8 @@
+{%- comment -%}
+  Devotional Content Channel View
+  Lists the latest Devotionals from the Devotional Content Channel Items
+{%- endcomment -%}
+
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/700x700' %}
 

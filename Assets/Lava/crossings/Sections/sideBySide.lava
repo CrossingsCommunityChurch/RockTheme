@@ -1,3 +1,23 @@
+{%- comment -%}
+    Side By Side Content Component
+    A series of side by side (image - text) items
+    Items will alternate left and right aligned image
+    Use Allow Multiple Content Items
+
+    Section Options
+    @Background Color
+    @ForegroundColor
+    @Section Anchor
+
+    Item Options
+    @AssetImage - image to be shown next to text
+    @Title
+    @Subheading
+    @lava - typically used for buttons
+    @Content
+
+{%- endcomment -%}
+
 {% assign contentItemStyle = '' %}
 {% assign contentTextColor = '' %}
 
