@@ -59,7 +59,7 @@
                   {% person id:'{{personID}}' %}
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}">
+                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
                         </div>
                         <div class="person-details">
                           {% if title != empty %}

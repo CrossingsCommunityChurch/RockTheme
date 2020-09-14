@@ -14867,6 +14867,7 @@ img {
 }
 .person-image img {
   max-height: 150px;
+  border-radius: 100%;
 }
 @media (min-width: 992px) {
   .person-wrapper {
@@ -15043,6 +15044,7 @@ img {
 }
 .pastor-image img {
   max-height: 150px;
+  border-radius: 100%;
 }
 .location-details.special-message {
   background-color: #efefef !important;
