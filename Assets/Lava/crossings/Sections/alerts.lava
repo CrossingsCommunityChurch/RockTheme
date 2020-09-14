@@ -142,7 +142,7 @@
 						return clearInterval(intervalId);
 					}
 
-					if (hours < 3) {
+					if (hours < 3 && days === 0) {
 						$("#churchonline_counter").addClass('reveal').slideDown();
 					}
 
