@@ -68,7 +68,7 @@
 			}
 
 			return {
-				link: 'https://online.crossings.church',
+				link: '/locations/online',
 				text: 'Church Online ',
 				class: 'not-live'
 			};
