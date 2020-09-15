@@ -28,32 +28,30 @@
   <div class="media-search">
 
     <vue-rock-filterable-list
-      :list-items="messages" :label="'Find a Message or Series'"
-      :items-per-page="'{{mediaItemsPerPage}}'" :search-items="searchOptions"
+      :items="messages" :label="'Find a Message or Series'"
+      :items-per-page="'{{mediaItemsPerPage}}'" :search-options="searchOptions"
       v-slot="{ item: message }"
       >
-      <div class="col-sm-6 col-md-4">
-        <a :href="mediaUrl(message)" class="card cardShadow">
-          <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(message) + '\')' }">
-          </div>
-          <div class="row card-content-row">
-            <div class="card-content">
-              <div class="btn icon-button shadowDepth2">
-                <i class="fas fa-play"></i>
-                <span>Watch</span>
-              </div>
-              <div class="col">
-                <div>
-                  <h3>{% raw %}{{ message.Title }}{% endraw %}</h3>
-                  <h5 v-if="message.Series" class="series">{% raw %}{{ message.Series.Title }}{% endraw %}</h5>
-                  <h5>{% raw %}{{ message.Speaker }}{% endraw %}</h5>
-                  <p class="date">{% raw %}{{ message.StartDate }}{% endraw %}</p>
-                </div>
+      <a :href="mediaUrl(message)" class="card cardShadow">
+        <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(message) + '\')' }">
+        </div>
+        <div class="row card-content-row">
+          <div class="card-content">
+            <div class="btn icon-button shadowDepth2">
+              <i class="fas fa-play"></i>
+              <span>Watch</span>
+            </div>
+            <div class="col">
+              <div>
+                <h3>{% raw %}{{ message.Title }}{% endraw %}</h3>
+                <h5 v-if="message.Series" class="series">{% raw %}{{ message.Series.Title }}{% endraw %}</h5>
+                <h5>{% raw %}{{ message.Speaker }}{% endraw %}</h5>
+                <p class="date">{% raw %}{{ message.StartDate }}{% endraw %}</p>
               </div>
             </div>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
     </vue-rock-filterable-list>
 
     <div class="container">
@@ -134,11 +132,9 @@ const imageStorageUrl = '{{ imageStorageUrl }}';
 Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
 
 Vue.component('vue-rock-filterable-list', {
-  props: ['listItems', 'label', 'itemsPerPage', 'searchItems'],
+  props: ['items', 'label', 'itemsPerPage', 'searchOptions'],
   data: function() {
     return {
-      items: this.listItems,
-      searchOptions: this.searchItems,
       filteredSearchOptions: [],
       filterInput: '',
       page: 1,
