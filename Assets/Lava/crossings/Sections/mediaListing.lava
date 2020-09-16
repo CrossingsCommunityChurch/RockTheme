@@ -1,28 +1,10 @@
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign mediaItemsPerPage = 'Global' | Attribute:'MediaItemsPerPage' %}
 {% assign mediaItemImageResize = 'Global' | Attribute:'MediaItemImageResize' %}
-{% assign mediaItemTopicMinCharsToMatch = 'Global' | Attribute:'MediaItemTopicMinCharsToMatch' %}
-{% assign mediaData = 'Combinedmedia' | PersistedDataset %}
-{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 
 {% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-autosuggest@2.2.0' %}
 {% endjavascript %}
 <link rel="stylesheet" type="text/css" href="~~/Styles/vue-autosuggest.css">
-
-<div id="vue-template-dropdown" style="display:none;">
-  <div class="form-group">
-    <label>{%raw%}{{headingLabel}}{%endraw%}</label>
-    <div class="dropdown" :class="{'open': isOpen}">
-      <button @click="isOpen = !isOpen" type="button" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle">{%raw%}{{selectedValue}}{%endraw%}<i class="fas fa-angle-down pull-right"></i></button>
-      <ul class="dropdown-menu">
-        <li><a @click="handleClick(-1)">Any</a></li>
-        <li role="separator" class="divider"></li>
-        <li v-for="(option,i) in options"><a @click="handleClick(i)">{%raw%}{{option.Name}}{%endraw%}</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
 
 <div id="vapp" class="media-list">
   <div class="media-search">
@@ -57,20 +39,12 @@
 
   </div>
 </div>
-<div class="hidden">
-    <p>Sermon Series</p>
-    <a href="/media/sermons">Sermons</a>
-    <p>Teaching Series</p>
-    <a href="/media/teachings">Teachings</a>
-</div>
 
 <script src="/Themes/RockTheme/Scripts/vue-rock-filterable-list.js"></script>
 
 <script>
 
 const imageStorageUrl = '{{ imageStorageUrl }}';
-
-Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
 
 const vueApp = new Vue({
   el: '#vapp',
