@@ -78,7 +78,9 @@
                       {% if eventItemOccurrenceLinkagesCount > 0 %}
                         {% for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages %}
                         <div class="row">
+                          {% if eventItemOccurrenceLinkage.RegistrationInstance.Cost != "" %}
                          <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
+                          {% endif %}
                         {% endfor %}
                         {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
                       {% endif %}
