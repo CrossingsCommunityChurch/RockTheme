@@ -57,7 +57,7 @@
     {% endif %}
     {
       "Title": {{ item.Title | ToJSON }},
-      "Summary": {{ summary | ToJSON}},
+      "Summary": {{ summary | StripNewlines | ToJSON}},
       "DayofWeek": {{ dayOfWeek | ToJSON }},
       "DetailsURL": {{ detailsURL | ToJSON }},
       "Subheading": {{subheading | ToJSON }},
