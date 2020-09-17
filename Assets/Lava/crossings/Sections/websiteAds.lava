@@ -28,6 +28,19 @@
             </ul>
           </div>
         </div>
+        <div class="form-group">
+          <label for="filterLabel">Filter By Day</label>
+          <div class="dropdown">
+            <button type="button" id="dayOfWeek" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="evenDaytFilterMenu" id="eventDayFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All</a></li>
+              <li role="separator" class="divider"></li>
+              {% for day in daysofWeek %}
+                <li><a style="cursor: pointer;">{{day}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row flex-row flex-wrap">
@@ -57,25 +70,40 @@
 
     $('#audiences').parent().find('li').click(function() {
       let audience = $(this).text();
+      let day = $('#dayOfWeek').text();
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
       $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
-      renderFilteredItems(events, 1, audience);
+      renderFilteredItems(events, 1, audience, day);
+    });
+
+    $('#dayOfWeek').parent().find('li').click(function() {
+      let day = $(this).text();
+      let audience = $('#audiences').text();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      $('#dayOfWeek').html(`${day} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(events, 1, audience, day);
     });
 
     $('#back').click(function() {
       topOfEvents();
       let audience = $('#audiences').text();
+      let day = $('#dayOfWeek').text();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All';
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'All';
       curPage = curPage - 1;
-      renderFilteredItems(events, curPage, audience);
+      renderFilteredItems(events, curPage, audience, day);
     });
 
     $('#next').click(function() {
       topOfEvents();
       let audience = $('#audiences').text();
+      let day = $('#dayOfWeek').text();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All';
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'All';
       (`audience is ${audience}`);
+      (`day is ${day}`);
       curPage = curPage + 1
-      renderFilteredItems(events, curPage, audience);
+      renderFilteredItems(events, curPage, audience, day);
     });
 
     function topOfEvents() {
@@ -94,12 +122,13 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    function renderFilteredItems(events, page, audience) {
+    function renderFilteredItems(events, page, audience, day) {
       let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
 
-      var filteredEvents = events.filter(evt => !audience || audience.trim().toLowerCase() === 'all' || evt.SecondaryAudience.includes(audience));
-      if (filteredEvents.length === 0) {
+      var filteredEvents = events.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.SecondaryAudience.includes(audience)));
+      var filteredEvents1 = filteredEvents.filter(evt => (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()))
+      if (filteredEvents1.length === 0) {
         eventsContainer.append('<p>No events exist for the selected audience.</p>');
         $('#back').hide();
         $('#next').hide();
@@ -109,7 +138,7 @@
       let count = 0;
       let pgIdx = page - 1;
       let itemIdxMin = pgIdx * itemsPerPage;
-      let itemsCount = filteredEvents.length;
+      let itemsCount = filteredEvents1.length;
       let pages = Math.ceil(itemsCount / itemsPerPage);
       let itemsOnLastPage = itemsCount % itemsPerPage;
       if (itemsOnLastPage === 0) itemsOnLastPage = itemsPerPage;
@@ -120,7 +149,7 @@
 
       for (let i = itemIdxMin; i < itemMax; i++) {
 
-        let ad = filteredEvents[i];
+        let ad = filteredEvents1[i];
 
         let div = $(
           `<div class="col-sm-6 col-md-4">
@@ -194,12 +223,21 @@
     }
 
     var defaultAudience = getParameterByName('category');
-
+    var defaultDay = getParameterByName('day');
     if(defaultAudience) {
       $('#audiences').html( defaultAudience + ' <i class="fas fa-angle-down pull-right"></i>');
-      renderFilteredItems(events, 1, defaultAudience);
+      if(defaultDay){
+        $('#dayOfWeek').html( defaultDay+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, defaultAudience, defaultDay);
+      }
+      else{    renderFilteredItems(events, 1, defaultAudience);}
     }
-
+    else{
+      if(defaultDay){
+        $('#dayOfWeek').html( defaultDay+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, "all", defaultDay);
+      }
+    }
   });
 
 </script>
