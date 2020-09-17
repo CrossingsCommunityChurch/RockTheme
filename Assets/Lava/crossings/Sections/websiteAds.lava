@@ -69,25 +69,27 @@
     renderFilteredItems(events, curPage);
 
     $('#audiences').parent().find('li').click(function() {
-      let audience = $(this).text();
-      let day = $('#dayOfWeek').text();
+      let audience = $(this).text().trim();
+      let day = $('#dayOfWeek').text().trim();
       if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
       $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
+      console.log(events, audience, day);
       renderFilteredItems(events, 1, audience, day);
     });
 
     $('#dayOfWeek').parent().find('li').click(function() {
-      let day = $(this).text();
-      let audience = $('#audiences').text();
+      let day = $(this).text().trim();
+      let audience = $('#audiences').text().trim();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
       $('#dayOfWeek').html(`${day} <i class="fas fa-angle-down pull-right"></i>`);
+      console.log(events, audience, day);
       renderFilteredItems(events, 1, audience, day);
     });
 
     $('#back').click(function() {
       topOfEvents();
-      let audience = $('#audiences').text();
-      let day = $('#dayOfWeek').text();
+      let audience = $('#audiences').text().trim();
+      let day = $('#dayOfWeek').text().trim();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All';
       if (!day || day.trim().toLowerCase() === 'select a filter') day = 'All';
       curPage = curPage - 1;
@@ -97,7 +99,7 @@
     $('#next').click(function() {
       topOfEvents();
       let audience = $('#audiences').text();
-      let day = $('#dayOfWeek').text();
+      let day = $('#dayOfWeek').text().trim();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All';
       if (!day || day.trim().toLowerCase() === 'select a filter') day = 'All';
       (`audience is ${audience}`);
@@ -127,6 +129,9 @@
       eventsContainer.empty();
 
       var filteredEvents = events.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.SecondaryAudience.includes(audience)));
+
+      console.log(filteredEvents);
+
       var filteredEvents1 = filteredEvents.filter(evt => (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()))
       if (filteredEvents1.length === 0) {
         eventsContainer.append('<p>No events exist for the selected audience.</p>');
