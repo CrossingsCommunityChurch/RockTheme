@@ -11164,10 +11164,6 @@ body {
   p {
     line-height: 2;
   }
-  .page-wrapper {
-    padding-top: 0;
-    margin-top: 0;
-  }
 }
 .breadcrumb {
   background-color: #fff;
