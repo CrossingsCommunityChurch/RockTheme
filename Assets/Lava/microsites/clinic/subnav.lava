@@ -11,11 +11,11 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Location & Hours</a></li>
         <li><a href="#">Patients</a></li>
         <li><a href="#">Volunteer</a></li>
-        <li><a href="#">Staff</a></li>
-        <li><a href="#">Support</a></li>
+        <li><a href="#">Clinic Staff</a></li>
+        <li><a href="#">Support & Partners</a></li>
+        <li><a href="#">Donate</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
