@@ -11157,7 +11157,8 @@ body {
 .page-wrapper {
   padding-top: 58px;
 }
-.section.side-by-side {
+.section.side-by-side,
+.section.split-section-overlap {
   overflow: hidden;
 }
 @media (min-width: 992px) {
