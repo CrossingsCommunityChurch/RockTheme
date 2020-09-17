@@ -73,7 +73,6 @@
       let day = $('#dayOfWeek').text().trim();
       if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
       $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
-      console.log(events, audience, day);
       renderFilteredItems(events, 1, audience, day);
     });
 
@@ -82,7 +81,6 @@
       let audience = $('#audiences').text().trim();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
       $('#dayOfWeek').html(`${day} <i class="fas fa-angle-down pull-right"></i>`);
-      console.log(events, audience, day);
       renderFilteredItems(events, 1, audience, day);
     });
 
@@ -129,8 +127,6 @@
       eventsContainer.empty();
 
       var filteredEvents = events.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.SecondaryAudience.includes(audience)));
-
-      console.log(filteredEvents);
 
       var filteredEvents1 = filteredEvents.filter(evt => (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()))
       if (filteredEvents1.length === 0) {
