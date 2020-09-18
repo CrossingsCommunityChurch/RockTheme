@@ -14523,6 +14523,12 @@ img {
   .section .btn + .btn {
     margin-left: 15px;
   }
+  .simple-section ul {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 768px;
+  }
 }
 @media (min-width: 992px) {
   .section .btn {
