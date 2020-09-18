@@ -1,40 +1,49 @@
+Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
+
 Vue.component('vue-rock-filterable-list', {
     props: ['items', 'label', 'itemsPerPage', 'searchOptions', 'initialInput'],
     data: function() {
       return {
         filteredSearchOptions: [],
-        filterInput: this.initialInput,
+        filteredItems: [],
         page: 1,
         perPage: this.itemsPerPage,
         pages: []
       };
     },
     methods: {
-      shouldRenderSuggestions (size, loading) {
-        return size >= 1 && !loading
-      },
-      onSelected(option) {
-        if (option != '') {
-          this.filterInput = option.item;
-        }
-      },
       onInputChange(text) {
-        console.log('onInputChange', this.searchOptions);
-        var filteredData = this.searchOptions[0].data.filter(item => {
-          return item.toLowerCase().indexOf(text.toLowerCase()) > -1;
-        });;
-        this.filteredSearchOptions = [{
-          data: filteredData
-        }];
-        this.filterInput = text;
         if (text === '') {
           this.filteredSearchOptions = [];
         }
+        else {
+          this.filteredSearchOptions = [{
+            data: this.searchOptions[0].data.filter(item => {
+              return item.toLowerCase().indexOf(text.toLowerCase()) > -1;
+            })
+          }];
+        }
+        this.filterItems(text);
       },
+      filterCallback(filtered) {
+        this.filteredItems = filtered;
+        this.setPages();
+      },
+      filterItems(searchText) {
+        this.$emit('filter', this.items, searchText, this.filterCallback);
+      },
+      shouldRenderSuggestions (size, loading) {
+        return size >= 1 && !loading
+      },
+      // onSelected(option) {
+      //   if (option != '') {
+      //     this.filterInput = option.item;
+      //   }
+      // },
       setPages () {
         this.pages = [];
         this.page = 1;
-        let numberOfPages = Math.ceil(this.filteredMessages.length / this.perPage);
+        let numberOfPages = Math.ceil(this.filteredItems.length / this.perPage);
         for (let index = 1; index <= numberOfPages; index++) {
           this.pages.push(index);
         }
@@ -48,26 +57,15 @@ Vue.component('vue-rock-filterable-list', {
       }
     },
     computed: {
-      filteredMessages() {
-        return this.items.filter(message => {
-          if (!this.filterInput) return true;
-          let shouldInclude = false;
-          shouldInclude |= (!!message.Speaker && message.Speaker.toLowerCase().includes(this.filterInput.toLowerCase().trim()));
-          shouldInclude |= (this.filterInput.toLowerCase().trim().length >= 2 && !!message.Topics && message.Topics.map(t => t.toLowerCase().trim()).filter(t => t.indexOf(this.filterInput.toLowerCase().trim()) === 0).length > 0);
-          shouldInclude |= (!!message.Title && message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
-          shouldInclude |= (!!message.Series && !!message.Series.Title && message.Series.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
-          return !!shouldInclude;
-        });
-      },
       displayItems () {
-        return this.paginate(this.filteredMessages);
+        return this.paginate(this.filteredItems);
       }
     },
-    watch: {
-      filteredMessages () {
-        this.setPages();
-      },
-    },
+    // watch: {
+    //   filteredItems () {
+    //     this.setPages();
+    //   },
+    // },
     template: `
       <div class="container">
         <div class="media-filter row">
@@ -82,9 +80,7 @@ Vue.component('vue-rock-filterable-list', {
                     :suggestions="filteredSearchOptions"
                     :input-props="{id:'autosuggest__input', placeholder:'Search by Speaker, Topic, Series or Message'}"
                     :should-render-suggestions="shouldRenderSuggestions"
-                    v-model="filterInput"
                     @input="onInputChange"
-                    @selected="onSelected"
                   >
                   <template slot-scope="{suggestion}">
                     <span class="my-suggestion-item">{{ suggestion.item }}</span>

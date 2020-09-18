@@ -2,179 +2,93 @@
 {% assign imageSize = '/fit-in/600x600/' %}
 {% assign evtData = 'events' | PersistedDataset %}
 {% assign audiences = evtData.Audiences | Uniq %}
-{% assign evts = evtData.Events | ToJSON %}
 {% assign itemsPerPage = 6 %}
 
-<div id="eventList" class="event-list">
-  <div class="container event-list-items" data-aos="fade-up">
-    <div class="event-filter row">
-      <div class="form form-inline">
-        <div class="form-group">
-          <label for="filterLabel">Filter By Category</label>
-          <div class="dropdown">
-            <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
-            <ul aria-labelledby="eventFilterMenu" id="eventFilterMenu" class="dropdown-menu">
-              <li><a style="cursor: pointer;">All Events</a></li>
-              <li role="separator" class="divider"></li>
-              {% for audience in audiences %}
-                <li><a style="cursor: pointer;">{{audience}}</a></li>
-              {% endfor %}
-            </ul>
+{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-autosuggest@2.2.0' %}
+{% endjavascript %}
+<link rel="stylesheet" type="text/css" href="~~/Styles/vue-autosuggest.css">
+
+<div id="vapp" class="media-list">
+  <div class="media-search">
+
+    <vue-rock-filterable-list
+      :items="events"
+      :label="'Find an Event'"
+      :items-per-page="'{{itemsPerPage}}'"
+      :search-options="searchOptions"
+      @filter="filterHandler"
+      v-slot="{ item: event }"
+      >
+      <a :href="event.link" class="card cardShadow">
+        <div class="thumb">
+          <img :src="event.AssetImage" class="event-img">
+        </div>
+        <div class="row card-content-row">
+          <div class="card-content">
+            <div class="col">
+              <div>
+                <h4>{% raw %}{{ event.Name }}{% endraw %}</h4>
+                <p v-if="event.audiences" v-for="audience in event.audiences" style="margin-bottom: 1px;"> <i v-if="audience" class="fas fa-tags"></i>
+                    <span v-if="audience">{% raw %}{{ audience }} {% endraw %}</span>
+                </p>
+                <p class="date">{% raw %}{{ event.date }}{% endraw %}</p>
+                <p class="recurring"></p>
+              </div>
+            </div>
+            <div class="btn icon-button shadowDepth2">
+              <span>Details</span>
+              <i class="fas fa-angle-right"></i>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row flex-row flex-wrap">
-    </div>
-    <div class="paginate-buttons text-center">
-      <a class="btn btn-default" id="back" role="button">Back</a>
-      <a class="btn btn-default" id="next" role="button">Next</a>
-    </div>
+      </a>
+    </vue-rock-filterable-list>
+
   </div>
 </div>
 
+<script src="/Themes/RockTheme/Scripts/vue-rock-filterable-list.js"></script>
+
 <script>
 
-  $(document).ready(() => {
+const imageStorageUrl = '{{ imageStorageUrl }}';
 
-    const eventsJson = `{{evts}}`;
-    const imageStorageUrl = '{{imageStorageUrl}}';
-    const imageSize = '{{imageSize}}';
-    const itemsPerPage = '{{itemsPerPage}}';
-
-    let eventsvar = JSON.parse(eventsJson);
-
-    var events = eventsvar.filter(evt => evt.CalendarId == '{{calendarid}}' || evt.CalendarId == '{{allchurchid}}');
-
-    let curPage = 1;
-    renderFilteredItems(events, curPage);
-
-    $('#audiences').parent().find('li').click(function() {
-      let audience = $(this).text();
-      $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
-      renderFilteredItems(events, 1, audience);
-    });
-
-    $('#back').click(function() {
-      topOfEvents();
-      let audience = $('#audiences').text();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All Events';
-      curPage = curPage - 1;
-      renderFilteredItems(events, curPage, audience);
-    });
-
-    $('#next').click(function() {
-      topOfEvents();
-      let audience = $('#audiences').text();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All Events';
-      (`audience is ${audience}`);
-      curPage = curPage + 1
-      renderFilteredItems(events, curPage, audience);
-    });
-
-    function topOfEvents() {
-       $('html, body').animate({
-          scrollTop: $("#eventList").offset().top
-      }, 300);
+const vueApp = new Vue({
+  el: '#vapp',
+  data () {
+    return {
+      events : [''],
+      searchOptions: ['']
     }
+  },
+  methods:{
+    filterHandler(evts, filterText, cb) {
+      let filteredEvents = evts.filter(evt => {
+        if (!filterText) return true;
+        let shouldInclude = false;
+        shouldInclude |= (!!evt.Name && evt.Name.toLowerCase().trim().includes(filterText.toLowerCase().trim()));
+        return !!shouldInclude;
+      });
+      cb(filteredEvents);
+    },
+    getMedia () {
+      let data = [];
+      axios
+        .get('/Webhooks/Lava.ashx/crossings/api/events')
+        .then(response => {
+          this.events = response.data.Events;
+          const audiences = response.data.Audiences;
+          this.searchOptions = [
+            { data: audiences }
+          ];
 
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        });
     }
-
-    function renderFilteredItems(events, page, audience) {
-      let eventsContainer = $('.row.flex-row.flex-wrap');
-      eventsContainer.empty();
-
-      var filteredEvents = events.filter(evt => !audience || audience.trim().toLowerCase() === 'all events' || evt.audiences.includes(audience));
-      if (filteredEvents.length === 0) {
-        eventsContainer.append('<p>No events exist for the selected audience.</p>');
-        $('#back').hide();
-        $('#next').hide();
-        return;
-      }
-
-      let count = 0;
-      let pgIdx = page - 1;
-      let itemIdxMin = pgIdx * itemsPerPage;
-      let itemsCount = filteredEvents.length;
-      let pages = Math.ceil(itemsCount / itemsPerPage);
-      let itemsOnLastPage = itemsCount % itemsPerPage;
-      if (itemsOnLastPage === 0) itemsOnLastPage = itemsPerPage;
-      let itemMax = page * itemsPerPage;
-      if (page === pages) {
-        itemMax = itemMax - (itemsPerPage - itemsOnLastPage);
-      }
-
-      for (let i = itemIdxMin; i < itemMax; i++) {
-
-        let event = filteredEvents[i];
-
-        let div = $(
-          `<div class="col-sm-6 col-md-4">
-            <a href="LINK GOES HERE" class="card cardShadow">
-              <div class="thumb">
-                <img src="IMG GOES HERE" class="event-img">
-              </div>
-              <div class="row card-content-row">
-                <div class="card-content">
-                  <div class="col">
-                    <div>
-                      <h4>EVENT NAME GOES HERE!</h4>
-                        <p style="margin-bottom: 1px;"> <i class="fas fa-tags"></i>
-                            <span>AUDIENCES GO HERE!</span>
-                        </p>
-                      <p class="date">DATE GOES HERE!</p>
-                      <p class="recurring"></p>
-                    </div>
-                  </div>
-                  <div class="btn icon-button shadowDepth2">
-                    <span>Details</span>
-                    <i class="fas fa-angle-right"></i>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>`
-        );
-        div.find('a.card.cardShadow').attr('href', event.link);
-        div.find('img.event-img').attr('src', event.AssetImage);
-        // div.find('.thumb').css("background-image", `url("${event.AssetImage}")`);
-        div.find('h4').text(event.Name);
-        div.find('p.date').text(event.date);
-        div.find('p > i.fas.fa-tags').parent().find('span').text(event.audiences.join(', '));
-
-
-        eventsContainer.append(div);
-
-        if (page <= 1) {
-          $('#back').hide();
-        }
-        else {
-          $('#back').show();
-        }
-        if (page >= pages) {
-          $('#next').hide();
-        } else {
-          $('#next').show();
-        }
-
-      }
-    }
-
-    var defaultAudience = getParameterByName('category');
-
-    if(defaultAudience) {
-      $('#audiences').html( defaultAudience + ' <i class="fas fa-angle-down pull-right"></i>');
-      renderFilteredItems(events, 1, defaultAudience);
-    }
-
-  });
+  },
+  created(){
+    this.getMedia();
+    //this.applySearchTags();
+  }
+});
 
 </script>

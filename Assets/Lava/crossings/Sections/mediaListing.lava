@@ -10,9 +10,11 @@
   <div class="media-search">
 
     <vue-rock-filterable-list
-      :items="messages" :label="'Find a Message or Series'"
-      :items-per-page="'{{mediaItemsPerPage}}'" :search-options="searchOptions"
-      :initial-input="filterInput"
+      :items="messages"
+      :label="'Find a Message or Series'"
+      :items-per-page="'{{mediaItemsPerPage}}'"
+      :search-options="searchOptions"
+      @filter="filterHandler"
       v-slot="{ item: message }"
       >
       <a :href="mediaUrl(message)" class="card cardShadow">
@@ -56,6 +58,18 @@ const vueApp = new Vue({
     }
   },
   methods:{
+    filterHandler(messages, filterText, cb) {
+      let filteredEvents = messages.filter(message => {
+        if (!filterText) return true;
+        let shouldInclude = false;
+        shouldInclude |= (!!message.Speaker && message.Speaker.toLowerCase().includes(filterText.toLowerCase().trim()));
+        shouldInclude |= (filterText.toLowerCase().trim().length >= 2 && !!message.Topics && message.Topics.map(t => t.toLowerCase().trim()).filter(t => t.indexOf(filterText.toLowerCase().trim()) === 0).length > 0);
+        shouldInclude |= (!!message.Title && message.Title.toLowerCase().trim().includes(filterText.toLowerCase().trim()));
+        shouldInclude |= (!!message.Series && !!message.Series.Title && message.Series.Title.toLowerCase().trim().includes(filterText.toLowerCase().trim()));
+        return !!shouldInclude;
+      });
+      cb(filteredEvents);
+    },
     mediaUrl(item) {
       if (item.Series) {
         return `/media/${item.ChannelPath}${item.Series.Slug}/${item.PrimarySlug}`;
