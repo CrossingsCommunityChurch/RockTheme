@@ -9,7 +9,7 @@
 {% assign audiences = adsData.Audiences | Uniq %}
 {% assign daysofWeek = adsData.DaysofWeek | Uniq %}
 {% assign adsJson = adsData.Ads | ToJSON %}
-{% assign itemsPerPage = 20 %}
+{% assign itemsPerPage = 33 %}
 
 <div id="announcementList" class="announcement-list">
   <div class="container announcement-list-items" data-aos="fade-up">

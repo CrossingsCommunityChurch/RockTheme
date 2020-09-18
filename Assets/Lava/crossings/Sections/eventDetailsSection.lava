@@ -15,80 +15,80 @@
 {% capture metaDesc %}{{ eventitemoccurrence.EventItem.Summary | StripHtml | TruncateWords:25 }} {{ pageTitle }}{% endcapture %}
 {{ metaDesc | AddMetaTagToHead:'name','description' }}
 <div class="section special-message simple-section event-details">
-        <div class="container">
-          <div class="row">
-            <div class="col" data-aos="fade-up">
-              <div class="event-content">
-                <div class="row location-content">
-                  <div class="col-md-12">
-                      <h1 class="heading text-center">{{ pageTitle }}</h1>
-                  </div>
-                  <div class="col-md-6">
-                    {%- comment -%}
-                      This shows schedule friendly name only if it exists.
-                      Need to not display if event is only happening once.
-                    {%- endcomment -%}
-                    <h4 class="subheading">Date</h4>
-                    <h4 class="heading"> {{eventitemoccurrence.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}
-                    {% if eventitemoccurrence.Schedule.FriendlyScheduleText and eventitemoccurrence.Schedule.FriendlyScheduleText != empty  %}
-                      <h4 class="subheading">Schedule</h4>
-                      <h4 class="heading">{{ eventitemoccurrence.Schedule.FriendlyScheduleText }}</h3>
-                    {% endif %}
-                    {% if eventitemoccurrence.location and eventitemoccurrence.location != empty  %}
-                      {%- comment -%}
-                        Need to modify this to list the campus location if non is specified on the event
-                      {%- endcomment -%}
-                      <p class="lead">
-                        <a href="#" class="contact-item">
-                          <i class="fas fa-map-marker-alt"></i><span>{{ address }} <br> {{ city }}, {{ state }} {{ zip }}</span>
-                        </a>
-                      </p>
-                    {% endif %}
-
-                  </div>
-                  <div class="col-md-6"><div class="pastor-item">
-                    {% if contact.Photo.Url and contact.Photo.Url != empty and useContactImage == true %}
-                    <div class="pastor-image">
-                      <img src="{{ contact.Photo.Url }}">
-                    </div>
-                    {% endif %}
-                    {% if useContactImage == false %}
-                    <div class="pastor-image">
-                      <img src="{{ imageUrl }}">
-                    </div>
-                    {% endif %}
-                    <div class="past-details">
-                      <h4 class="subheading">Contact</h4>
-                      <h2 class="heading">{{ contact.FullName }}</h2>
-                      <p class="lead">{{ contact | Attribute: 'Position'}}</p>
-                    </div>
-                  </div>
-                </div>
+  <div class="container">
+    <div class="row">
+      <div class="col" data-aos="fade-up">
+        <div class="event-content">
+          <div class="row location-content">
+            <div class="col-md-12">
+              <h1 class="heading text-center">{{ pageTitle }}</h1>
+            </div>
+            <div class="col-md-6">
+              {%- comment -%}
+                This shows schedule friendly name only if it exists.
+                Need to not display if event is only happening once.
+              {%- endcomment -%}
+              <h4 class="subheading">Date</h4>
+              <h4 class="heading"> {{eventitemoccurrence.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}
+              {% if eventitemoccurrence.Schedule.FriendlyScheduleText and eventitemoccurrence.Schedule.FriendlyScheduleText != empty  %}
+                <h4 class="subheading">Schedule</h4>
+                <h4 class="heading">{{ eventitemoccurrence.Schedule.FriendlyScheduleText }}</h3>
+              {% endif %}
+              {% if eventitemoccurrence.location and eventitemoccurrence.location != empty  %}
+                {%- comment -%}
+                  Need to modify this to list the campus location if non is specified on the event
+                {%- endcomment -%}
+                <p class="lead">
+                  <a href="#" class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i><span>{{ address }} <br> {{ city }}, {{ state }} {{ zip }}</span>
+                  </a>
+                </p>
+              {% endif %}
+            </div>
+            <div class="col-md-6"><div class="pastor-item">
+              {% if contact.Photo.Url and contact.Photo.Url != empty and useContactImage == true %}
+              <div class="pastor-image">
+                <img src="{{ contact.Photo.Url }}">
               </div>
+              {% endif %}
+              {% if useContactImage == false %}
+              <div class="pastor-image">
+                <img src="{{ imageUrl }}">
+              </div>
+              {% endif %}
+              <div class="past-details">
+                <h4 class="subheading">Contact</h4>
+                <h2 class="heading">{{ contact.FullName }}</h2>
+                <p class="lead">{{ contact | Attribute: 'Position'}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3 class="subheading">Summary</h3>
+            <p>{{eventitemoccurrence.EventItem.Summary }}</p>
+          </div>
+        </div>
               <div class="row">
                 <div class="col">
-                  <h3 class="subheading">Summary</h3>
-                  <p>{{eventitemoccurrence.EventItem.Summary }}</p>
+                  {% assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages %}
+                  {% assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size %}
+                  {% if eventItemOccurrenceLinkagesCount > 0 %}
+                    {% for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages %}
+                      <div class="row">
+                        {% if eventItemOccurrenceLinkage.RegistrationInstance.Cost %}
+                          <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                    {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
+                  {% endif %}
+                  {% if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty %}
+                    {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{eventitemoccurrence.EventItem.DetailsUrl}}' buttontarget:'_blank' buttontext:'Register' ]}
+                  {% endif %}
                 </div>
               </div>
-              <div class="row">
-                  <div class="col">
-                      {% assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages %}
-                      {% assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size %}
-                      {% if eventItemOccurrenceLinkagesCount > 0 %}
-                        {% for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages %}
-                        <div class="row">
-                          {% if eventItemOccurrenceLinkage.RegistrationInstance.Cost != "" %}
-                         <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
-                          {% endif %}
-                        {% endfor %}
-                        {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
-                      {% endif %}
-                       {% if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty %}
-                        {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{eventitemoccurrence.EventItem.DetailsUrl}}' buttontarget:'_blank' buttontext:'Register' ]}
-                      {% endif %}
-                  </div>
-                </div>
                 <div class="row">
                   <p class="shareheading">Share this event:</p>
                 </div>

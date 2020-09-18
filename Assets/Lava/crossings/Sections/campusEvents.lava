@@ -23,7 +23,7 @@
           <div class="dropdown">
             <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
             <ul aria-labelledby="eventFilterMenu" id="eventFilterMenu" class="dropdown-menu">
-              <li><a style="cursor: pointer;">All Events</a></li>
+              <li><a style="cursor: pointer;">Church Wide</a></li>
               <li role="separator" class="divider"></li>
               {% for audience in audiences %}
                 <li><a style="cursor: pointer;">{{audience}}</a></li>
@@ -67,7 +67,7 @@
     $('#back').click(function() {
       topOfEvents();
       let audience = $('#audiences').text();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All Events';
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'Church Wide';
       curPage = curPage - 1;
       renderFilteredItems(events, curPage, audience);
     });
@@ -75,7 +75,7 @@
     $('#next').click(function() {
       topOfEvents();
       let audience = $('#audiences').text();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All Events';
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'Church Wide';
       (`audience is ${audience}`);
       curPage = curPage + 1
       renderFilteredItems(events, curPage, audience);
@@ -101,7 +101,7 @@
       let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
 
-      var filteredEvents = events.filter(evt => !audience || audience.trim().toLowerCase() === 'all events' || evt.audiences.includes(audience));
+      var filteredEvents = events.filter(evt => !audience || audience.trim().toLowerCase() === 'church wide' || evt.audiences.includes(audience));
       if (filteredEvents.length === 0) {
         eventsContainer.append('<p>No events exist for the selected audience.</p>');
         $('#back').hide();
