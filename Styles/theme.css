@@ -15790,6 +15790,9 @@ img {
 .crossings-clinic .footer .footer-logo:after {
   background-color: #AA1F2E;
 }
+.crossings-clinic .footer {
+  background-color: #AA1F2E !important;
+}
 .crossings-clinic .btn-primary {
   border-color: #AA1F2E;
 }
@@ -15833,6 +15836,9 @@ img {
 .crossings-community-center .footer,
 .crossings-community-center .footer .footer-logo:after {
   background-color: #00567A;
+}
+.crossings-community-center .footer {
+  background-color: #00567A !important;
 }
 .crossings-community-center .btn-primary {
   border-color: #00567A;
