@@ -14,8 +14,10 @@
     <vue-rock-filterable-list
       :items="events"
       :label="'Find an Event'"
+      :place-holder="'Event name or tag'"
       :items-per-page="'{{itemsPerPage}}'"
       :search-options="searchOptions"
+      :initial-input="tagInput"
       @filter="filterHandler"
       v-slot="{ item: event }"
       >
@@ -58,15 +60,29 @@ const vueApp = new Vue({
   data () {
     return {
       events : [''],
-      searchOptions: ['']
+      searchOptions: [''],
+      tagInput: ''
     }
   },
   methods:{
     filterHandler(evts, filterText, cb) {
       let filteredEvents = evts.filter(evt => {
-        if (!filterText) return true;
+
+        if (!filterText) { return true; }
+        //if (filterText.toLowerCase().trim().length < 2) return false;
         let shouldInclude = false;
+
         shouldInclude |= (!!evt.Name && evt.Name.toLowerCase().trim().includes(filterText.toLowerCase().trim()));
+
+        if (!evt.audiences) return false;
+        shouldInclude |= evt.audiences
+          .map(a => {
+            if (!a) return '';
+            return a.toLowerCase().trim()
+          })
+          .filter(a => a.indexOf(filterText.toLowerCase().trim()) === 0)
+          .length > 0;
+
         return !!shouldInclude;
       });
       cb(filteredEvents);
@@ -78,16 +94,26 @@ const vueApp = new Vue({
         .then(response => {
           this.events = response.data.Events;
           const audiences = response.data.Audiences;
+          const names = response.data.Events.map(e => e.Name);
+          const distinct = [...new Set(audiences.concat(names))];
           this.searchOptions = [
-            { data: audiences }
+            { data: distinct }
           ];
 
         });
+    },
+    applySearchTags() {
+      const params = new URLSearchParams(window.location.search);
+      if (params.has('tag')) {
+        var tag = params.get('tag');
+        console.log(`setting tagInput to ${tag}`);
+        this.tagInput = tag;
+      }
     }
   },
-  created(){
+  created() {
     this.getMedia();
-    //this.applySearchTags();
+    this.applySearchTags();
   }
 });
 

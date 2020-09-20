@@ -1,12 +1,14 @@
 Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
 
 Vue.component('vue-rock-filterable-list', {
-    props: ['items', 'label', 'itemsPerPage', 'searchOptions', 'initialInput'],
-    data: function() {
+    props: ['items', 'label', 'itemsPerPage', 'searchOptions', 'initialInput', 'placeHolder'],
+    data() {
       return {
         filteredSearchOptions: [],
-        filteredItems: [],
+        filteredItems: this.items,
+        initialText: this.initialInput,
         page: 1,
+        placeHolderText: this.placeHolder,
         perPage: this.itemsPerPage,
         pages: []
       };
@@ -35,11 +37,11 @@ Vue.component('vue-rock-filterable-list', {
       shouldRenderSuggestions (size, loading) {
         return size >= 1 && !loading
       },
-      // onSelected(option) {
-      //   if (option != '') {
-      //     this.filterInput = option.item;
-      //   }
-      // },
+      onSelected(option) {
+        if (option != '') {
+          this.filterItems(option.item);
+        }
+      },
       setPages () {
         this.pages = [];
         this.page = 1;
@@ -61,11 +63,12 @@ Vue.component('vue-rock-filterable-list', {
         return this.paginate(this.filteredItems);
       }
     },
-    // watch: {
-    //   filteredItems () {
-    //     this.setPages();
-    //   },
-    // },
+    watch: {
+      items () {
+        console.log(`items changed with initial text ${this.initialText}`);
+        this.filterItems(this.initialText ?? '');
+      }
+    },
     template: `
       <div class="container">
         <div class="media-filter row">
@@ -78,8 +81,10 @@ Vue.component('vue-rock-filterable-list', {
                 <span class="input-group-addon"><i class="fa fa-search"></i></span>
                 <vue-autosuggest
                     :suggestions="filteredSearchOptions"
-                    :input-props="{id:'autosuggest__input', placeholder:'Search by Speaker, Topic, Series or Message'}"
+                    :input-props="{id:'autosuggest__input', placeholder:placeHolderText}"
                     :should-render-suggestions="shouldRenderSuggestions"
+                    v-model="initialText"
+                    @selected="onSelected"
                     @input="onInputChange"
                   >
                   <template slot-scope="{suggestion}">

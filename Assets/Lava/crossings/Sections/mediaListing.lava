@@ -12,8 +12,10 @@
     <vue-rock-filterable-list
       :items="messages"
       :label="'Find a Message or Series'"
+      :place-holder="'Title or speaker name'"
       :items-per-page="'{{mediaItemsPerPage}}'"
       :search-options="searchOptions"
+      :initial-input="tagInput"
       @filter="filterHandler"
       v-slot="{ item: message }"
       >
@@ -54,7 +56,7 @@ const vueApp = new Vue({
     return {
       messages : [''],
       searchOptions: [''],
-      filterInput: ''
+      tagInput: ''
     }
   },
   methods:{
@@ -105,7 +107,7 @@ const vueApp = new Vue({
       const params = new URLSearchParams(window.location.search);
       if (params.has('tag')) {
         var tag = params.get('tag');
-        this.filterInput = tag;
+        this.tagInput = tag;
       }
     }
   },
