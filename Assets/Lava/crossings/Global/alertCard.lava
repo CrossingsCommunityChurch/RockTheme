@@ -1,3 +1,6 @@
+{% comment %}
+  Used in Alert Content Components
+{% endcomment %}
 
 {% if Items %}
   {% assign item = Items | First %}

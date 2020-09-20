@@ -1,3 +1,16 @@
+{%- comment -%}
+  Media Embed Listing Content Component
+
+  Lists a series of vimeo videos - used on the Kids Media Page
+
+  Component Section Options
+  @BackgroundColor - custom background color
+  @UseCustomColor - if checked, custom background and foreground colors can be set
+  @ForegroundColor - custom foreground section
+  @SectionAnchor - anchor tag for the listing
+  @SectionTitle - Runs above listing
+  @Section Summary - Runs above listing
+{%- endcomment -%}
 
 {%- assign contentItemStyle = '' -%}
 {%- assign contentTextColor = '' -%}

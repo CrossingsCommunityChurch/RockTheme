@@ -1,7 +1,15 @@
+{%- comment -%}
+  Runs the account dashboar and is used as an include in the account dashboard zone. Checks to see if someone is logged in and if so, runs their profile info and links
+{%- endcomment -%}
+
 {% if CurrentPerson %}
     <div class="profile">
         <div class="profile-image">
-          <img src="{{ CurrentPerson.PhotoUrl }}" alt="My Profile Image" />
+          {% if CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-male.svg?' and CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-female.svg?'  %}
+              <img src="{{ CurrentPerson.PhotoUrl }}&height=300&width=300&mode=crop&scale=both">
+            {% else %}
+              <img src="{{ CurrentPerson.PhotoUrl }}">
+            {% endif %}
         </div>
         <div class="profile-info">
           <h4>{{CurrentPerson.FirstName}} {{CurrentPerson.LastName}}</h4>
@@ -14,7 +22,7 @@
             <li><a href="/my-giving"><i class="fa fa-fw fa-heart"></i> My Giving</a></li>
             <li><a href="/my-groups"><i class="fa fa-fw fa-users"></i> My Groups</a></li>
             <li><a href="/my-assessments"><i class="fa fa-fw fa-sticky-note"></i> Assessments</a></li>
-            <li><a href="/devotionals"><i class="fa fa-fw fa-bible"></i> Devotionals</a></li>
+            <li><a href="/devotions"><i class="fa fa-fw fa-bible"></i> Devotionals</a></li>
         </ul>
         <div class="logout">
           <a href="/?Logout=True" class="btn btn-block">Logout</a>

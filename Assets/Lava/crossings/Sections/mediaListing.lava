@@ -1,3 +1,8 @@
+{%- comment -%}
+  Used as a shortcode - primarymedialist
+  Lists a mix of sermon and teaching series channel items. Data is fed from the Combinedmedia persisted dataset
+{%- endcomment -%}
+
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign mediaItemsPerPage = 'Global' | Attribute:'MediaItemsPerPage' %}
 {% assign mediaItemImageResize = 'Global' | Attribute:'MediaItemImageResize' %}

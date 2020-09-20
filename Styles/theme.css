@@ -10789,42 +10789,42 @@ fieldset[disabled] .btn-danger-solid.focus {
   font-style: italic;
   font-weight: 300;
   font-display: swap;
-  src: local('Open Sans Light Italic'), local('OpenSans-LightItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWyV-hs.ttf) format('truetype');
+  src: local('Open Sans Light Italic'), local('OpenSans-LightItalic'), url(https://fonts.gstatic.com/s/opensans/v18/memnYaGs126MiZpBA-UFUKWyV-hs.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 400;
   font-display: swap;
-  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v17/mem6YaGs126MiZpBA-UFUJ0e.ttf) format('truetype');
+  src: local('Open Sans Italic'), local('OpenSans-Italic'), url(https://fonts.gstatic.com/s/opensans/v18/mem6YaGs126MiZpBA-UFUJ0e.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: italic;
   font-weight: 700;
   font-display: swap;
-  src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v17/memnYaGs126MiZpBA-UFUKWiUOhs.ttf) format('truetype');
+  src: local('Open Sans Bold Italic'), local('OpenSans-BoldItalic'), url(https://fonts.gstatic.com/s/opensans/v18/memnYaGs126MiZpBA-UFUKWiUOhs.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 300;
   font-display: swap;
-  src: local('Open Sans Light'), local('OpenSans-Light'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN_r8-VQ.ttf) format('truetype');
+  src: local('Open Sans Light'), local('OpenSans-Light'), url(https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UN_r8-VQ.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v17/mem8YaGs126MiZpBA-U1Ug.ttf) format('truetype');
+  src: local('Open Sans Regular'), local('OpenSans-Regular'), url(https://fonts.gstatic.com/s/opensans/v18/mem8YaGs126MiZpBA-U1Ug.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Open Sans';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v17/mem5YaGs126MiZpBA-UN7rg-VQ.ttf) format('truetype');
+  src: local('Open Sans Bold'), local('OpenSans-Bold'), url(https://fonts.gstatic.com/s/opensans/v18/mem5YaGs126MiZpBA-UN7rg-VQ.ttf) format('truetype');
 }
 .overlay-hover {
   background-color: rgba(0, 0, 0, 0.15);
@@ -11151,8 +11151,14 @@ body {
   margin-bottom: 58px;
   overflow-x: hidden;
 }
+.wrapper-style {
+  overflow-x: hidden;
+}
 .page-wrapper {
   padding-top: 58px;
+}
+.section.side-by-side,
+.section.split-section-overlap {
   overflow: hidden;
 }
 @media (min-width: 992px) {
@@ -12012,24 +12018,29 @@ img {
 .modal .locations .sub-headings {
   margin-top: 30px;
 }
-.modal .locations .primary-locations h3 span {
+.modal .locations .primary-locations h3 span,
+.modal .locations .watch-online-locations h3 span {
   display: block;
   color: #5a7285;
   font-size: 1.25rem;
 }
-.modal .locations .primary-locations h3 a {
+.modal .locations .primary-locations h3 a,
+.modal .locations .watch-online-locations h3 a {
   display: block;
 }
-.modal .locations .primary-locations h3 a .fa {
+.modal .locations .primary-locations h3 a .fa,
+.modal .locations .watch-online-locations h3 a .fa {
   float: right;
   margin-right: 30px;
   opacity: 0;
   transition: all ease-in-out 0.3s;
 }
-.modal .locations .primary-locations h3 a:hover {
+.modal .locations .primary-locations h3 a:hover,
+.modal .locations .watch-online-locations h3 a:hover {
   text-decoration: none;
 }
-.modal .locations .primary-locations h3 a:hover .fa {
+.modal .locations .primary-locations h3 a:hover .fa,
+.modal .locations .watch-online-locations h3 a:hover .fa {
   margin-right: 0;
   opacity: 1;
 }
@@ -12175,6 +12186,41 @@ img {
 }
 .nav > li > a {
   padding: 7.5px 12px;
+}
+.account-page textarea.form-control {
+  height: auto;
+}
+.account-page .grid-filter {
+  background-color: #fff;
+  color: #313e48;
+}
+.account-page .grid-filter-overview {
+  width: 100%;
+}
+.account-page .grid-filter header {
+  right: 165px;
+}
+.account-page .grid-filter header > .btn {
+  background-color: #efefef;
+}
+.account-page .grid-filter header > .btn .fa {
+  color: #313e48;
+}
+.account-page .grid.grid-panel {
+  position: relative;
+}
+.account-page .grid-filter-overview fieldset {
+  width: 100%;
+}
+.account-page .group-attendance-list .grid-filter {
+  border: 0 none;
+}
+.account-page .group-attendance-list tfoot .grid-actions {
+  display: none;
+}
+.account-page .grid-table .grid-actions {
+  background-color: #fff;
+  border: 0 none;
 }
 .account-page .main .btn {
   padding: 7.5px 12px;
@@ -13430,6 +13476,9 @@ img {
 .account-dashboard-sidebar .profile .profile-image {
   width: 125px;
 }
+.account-dashboard-sidebar .profile .profile-image > img {
+  border-radius: 50%;
+}
 .account-dashboard-sidebar .account-nav {
   display: flex;
   flex-direction: column;
@@ -14343,6 +14392,7 @@ img {
 .announcement-list {
   padding-top: 30px;
   background-color: #eee;
+  min-height: 500px;
 }
 .announcement-list.list .card {
   display: flex;
@@ -14472,6 +14522,12 @@ img {
 @media (min-width: 768px) {
   .section .btn + .btn {
     margin-left: 15px;
+  }
+  .simple-section ul {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 768px;
   }
 }
 @media (min-width: 992px) {
@@ -14813,6 +14869,7 @@ img {
 }
 .person-image img {
   max-height: 150px;
+  border-radius: 50%;
 }
 @media (min-width: 992px) {
   .person-wrapper {
@@ -14829,11 +14886,17 @@ img {
   }
   .person-item .person-image {
     padding: 15px 22.5px 0;
-    max-width: 200px;
+    max-width: 175px;
+  }
+  .person-item .person-details {
+    width: 100%;
   }
 }
 .toggle-content-list .toggle-item {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.toggle-content-list .toggle-item .p-2 {
+  padding: 2rem !important;
 }
 .toggle-content-list .toggle-item .toggle-title {
   display: block;
@@ -14986,6 +15049,7 @@ img {
 }
 .pastor-image img {
   max-height: 150px;
+  border-radius: 50%;
 }
 .location-details.special-message {
   background-color: #efefef !important;
@@ -15541,6 +15605,7 @@ img {
 }
 .search-wrapper .search-content .media-object p {
   color: #888b8c;
+  margin-bottom: 0;
 }
 .search-wrapper.open {
   width: 100%;
@@ -15591,9 +15656,6 @@ img {
   }
   .search-wrapper .search-form .search-input-group .btn {
     display: inline-block;
-  }
-  .search-wrapper.open {
-    overflow: hidden;
   }
   .search-wrapper.open .search-form {
     width: 80%;
@@ -15734,6 +15796,9 @@ img {
 .crossings-clinic .footer .footer-logo:after {
   background-color: #AA1F2E;
 }
+.crossings-clinic .footer {
+  background-color: #AA1F2E !important;
+}
 .crossings-clinic .btn-primary {
   border-color: #AA1F2E;
 }
@@ -15777,6 +15842,9 @@ img {
 .crossings-community-center .footer,
 .crossings-community-center .footer .footer-logo:after {
   background-color: #00567A;
+}
+.crossings-community-center .footer {
+  background-color: #00567A !important;
 }
 .crossings-community-center .btn-primary {
   border-color: #00567A;

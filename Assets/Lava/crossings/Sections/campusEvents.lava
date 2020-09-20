@@ -1,3 +1,12 @@
+{%- comment -%}
+  Shortcode campusEvents
+  Displays a list of events by calendar ID
+
+  Params
+    @calendarId
+    @allchurchid
+{%- endcomment -%}
+
 {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
 {% assign imageSize = '/fit-in/600x600/' %}
 {% assign evtData = 'events' | PersistedDataset %}

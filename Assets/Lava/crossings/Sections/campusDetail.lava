@@ -1,3 +1,9 @@
+{%- comment -%}
+  Content Component - Campus Detail
+	This runs content specific to a campus and typically used on location pages.
+  Accepts a Campus from the Campus selection on the Content Component
+{%- endcomment -%}
+
 {%- for item in Items -%}
   {% assign hasCampus = item | Attribute:'Campus' %}
   {% if hasCampus and hasCampus != empty %}
@@ -43,7 +49,7 @@
                   </div>
                   <div class="col-md-6"><div class="pastor-item">
                     <div class="pastor-image">
-                      <img src="{{ campusLeader.Photo.Url }}">
+                      <img src="{{ campusLeader.Photo.Url }}&height=250&width=250&mode=crop&scale=both">
                     </div>
                     <div class="past-details">
                       <h2 class="heading">{{ campusLeader.FullName }}</h2>

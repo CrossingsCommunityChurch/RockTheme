@@ -1,5 +1,10 @@
 {%- comment -%}
-  Default to sermon series dataset
+  Lists sermon or teaching series artwork with links to series detail page
+  Used as shortcode seriesList
+  Data is fed by persisted dataset so techincally wouldnt have to be a content channel item view block in the future.
+
+  Params
+  @data - accepts the name of a persisted dataset to use
 {%- endcomment -%}
 {% if data %}
   {% assign dataset = data %}

@@ -1,4 +1,10 @@
+{% comment %}
+  Video Player for Sermons and Teaching Series messages
+
+  Params
+    @vimeourl
+{%- endcomment -%}
+
 <div class="video-player embed-responsive embed-responsive-16by9">
-  <!--<iframe name="my_music" id="frame" frameborder="0" src="https://player.vimeo.com/video/{{vimeourl}}" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="allowfullscreen" class="embed-respsonsive-item"></iframe>-->
   {[ vimeo id:'{{vimeourl}}' ]}
 </div>

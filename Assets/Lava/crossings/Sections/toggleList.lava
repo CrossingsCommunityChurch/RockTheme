@@ -1,3 +1,23 @@
+{%- comment -%}
+    Toggle List Content Component
+    A series of items with titles that can be toggled to show their content
+    Use Allow Multiple Content Items
+
+    Section Options (Optional)
+    @SectionTitle
+    @SectionSummary
+    @Background Color
+    @ForegroundColor
+    @Section Anchor
+
+    Item Options
+    @Title (required)
+    @Icon - Font Awesome Class
+    @Subheading - Runs inline next to title
+    @Content (required) - Toggled Viewable Content
+
+{%- endcomment -%}
+
 {%- assign contentItemStyle = '' -%}
 {%- assign contentTextColor = '' -%}
 

@@ -1,14 +1,7 @@
 {%- comment -%}
-  title
-  subtitle
-  image
-  link
-  summary
-  date
-{%- endcomment -%}
-
-{%- comment -%}
-  Figure out a way to set this globally so that we can pull from a content channel id. rock entities are not available unless configured by the template
+  This displays a section for the Latest Message - Runs at the top of the /media page
+  Used as a shortcode - latestMessage
+  Pulls from the latestmessage persisted dataset
 {%- endcomment -%}
 
 {% assign item = Items | First %}

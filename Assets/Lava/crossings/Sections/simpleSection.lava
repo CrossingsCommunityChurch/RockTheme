@@ -1,3 +1,17 @@
+{%- comment -%}
+    Simple Section Content Component
+    Runs a simple text lead component
+
+    Section Options
+    @Section Anchor
+
+    Item Options
+    @Title (required)
+    @Subheading
+    @lava/buttons - typically used for buttons
+    @Content
+{%- endcomment -%}
+
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 

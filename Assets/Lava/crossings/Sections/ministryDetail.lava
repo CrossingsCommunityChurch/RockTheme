@@ -1,3 +1,16 @@
+{%- comment -%}
+  Media Detail Content Component
+  Used to display staff for a ministry
+  Loops over each staff member and displays their image, name and title
+
+  Section Options
+  @SectionAnchor - anchor tag for section
+  @SectionLava - area available to add a contact button
+
+  Item Options
+  @Person - Staff member for ministry
+{%- endcomment -%}
+
 {%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
 {%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
 
@@ -46,7 +59,7 @@
                   {% person id:'{{personID}}' %}
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}">
+                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
                         </div>
                         <div class="person-details">
                           {% if title != empty %}

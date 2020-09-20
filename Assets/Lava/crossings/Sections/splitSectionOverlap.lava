@@ -1,3 +1,19 @@
+{%- comment -%}
+    Split Section Overlap Content Component
+    Runs an Image to the left with content area the overlaps from the right
+
+    Section Options
+    @Section Anchor
+
+    Item Options
+    @AssetImage (required) - image to be shown next to text
+    @Title (required)
+    @Subheading
+    @lava - typically used for buttons
+    @Content (required)
+
+{%- endcomment -%}
+
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
 

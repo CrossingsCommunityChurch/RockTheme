@@ -1,3 +1,8 @@
+{%- comment -%}
+  Serving Opportunity Details
+  **Not Currently in use because visitors are sent directly to a form now and we skip the detail page
+{%- endcomment -%}
+
 {% assign title = Opportunity.Name %}
 {% assign content = Opportunity.Description %}
 {% assign connectiontype = Opportunity.ConnectionType.Name %}

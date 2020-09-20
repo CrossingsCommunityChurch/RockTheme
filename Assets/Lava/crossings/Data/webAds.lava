@@ -41,6 +41,13 @@
 [
 {% contentchannel id:'1' %}
   {% for item in contentchannel.Items %}
+  {% assign currentDate = 'Now' | Date  %}
+    {% if item.StartDateTime >= currentDate %}
+      {% continue %}
+    {% endif %}
+    {% if item.ExpireDateTime <= currentDate %}
+      {% continue %}
+    {% endif %}
     {% assign summary = item | Attribute:'SummaryText' %}
     {% assign dayOfWeek = item | Attribute:'dayoftheweek' %}
     {% assign  detailsURL = item | Attribute:'DetailsURL' | StripHtml %}
@@ -57,7 +64,7 @@
     {% endif %}
     {
       "Title": {{ item.Title | ToJSON }},
-      "Summary": {{ summary | ToJSON}},
+      "Summary": {{ summary | StripNewlines | ToJSON}},
       "DayofWeek": {{ dayOfWeek | ToJSON }},
       "DetailsURL": {{ detailsURL | ToJSON }},
       "Subheading": {{subheading | ToJSON }},

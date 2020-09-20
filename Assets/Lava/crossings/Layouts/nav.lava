@@ -1,3 +1,7 @@
+{% comment %}
+  This is the primary navigation. Runs as an include globally in the Navigation Zone
+{%- endcomment -%}
+
 <ul class="primary-nav-links">
         <li class="has-subnav-parent"><a href="#">Locations <i class="fa fa-angle-down"></i></a>
             <div class="subnav">
