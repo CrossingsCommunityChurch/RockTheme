@@ -21,24 +21,18 @@
     <div class="flex-row flex-wrap">
       <div class="col-md-12 col-lg-4 search-column">
         <div>
-          <h2>Recommended</h2>
-            {% for recommend in searchSuggestions.Recommended %}
-              {% if recommend.Detail != '' %}
-                <a class="media-object" href="{{ recommend.Detail }}">
-              {% else %}
-                <div class="media-object">
-              {% endif %}
-                <div>
-                  <h3>{{recommend.Title}}</h3>
-                  <p>{{recommend.Content | StripHtml | TruncateWords:20 }}</p>
-                </div>
-              {% if recommend.Detail != '' %}
-                </a>
-              {% else %}
-                </div>
-              {% endif %}
-            {% endfor %}
+          <h2>Upcoming Events</h2>
+          {% for event in searchSuggestions.Events %}
+            <a class="media-object" href="{{event.link}}">
+              <div>
+                <h3>{{ event.Name }}</h3>
+                <p><strong>{{ event.date }}</strong></p>
+                <p>{{ event.Summary | StripHtml | TruncateWords:20 }}</p>
+              </div>
+            </a>
+          {% endfor %}
         </div>
+
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
@@ -64,16 +58,23 @@
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
-          <h2>Upcoming Events</h2>
-          {% for event in searchSuggestions.Events %}
-            <a class="media-object" href="{{event.link}}">
-              <div>
-                <h3>{{ event.Name }}</h3>
-                <p><strong>{{ event.date }}</strong></p>
-                <p>{{ event.Summary | StripHtml | TruncateWords:20 }}</p>
-              </div>
-            </a>
-          {% endfor %}
+        <h2>Suggested</h2>
+            {% for recommend in searchSuggestions.Recommended %}
+              {% if recommend.Detail != '' %}
+                <a class="media-object" href="{{ recommend.Detail }}">
+              {% else %}
+                <div class="media-object">
+              {% endif %}
+                <div>
+                  <h3>{{recommend.Title}}</h3>
+                  <p>{{recommend.Content | StripHtml | TruncateWords:20 }}</p>
+                </div>
+              {% if recommend.Detail != '' %}
+                </a>
+              {% else %}
+                </div>
+              {% endif %}
+            {% endfor %}
         </div>
       </div>
     </div>
