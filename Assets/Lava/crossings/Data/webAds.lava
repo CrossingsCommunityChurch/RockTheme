@@ -20,22 +20,13 @@
     {% endcontentchannel %}
   ],
   "DaysofWeek": [
-    {% assign existing = "" %}
-    {% contentchannel id:'1' %}
-      {% for item in contentchannel.Items %}
-        {% assign day =  item | Attribute:'dayoftheweek' %}
-          {% assign curday = day | ToJSON %}
-            {% assign match = existing | RegExMatch:curday %}
-            {% if match == false and day != "" %}
-              {{ curday }},
-              {% comment %}
-                Trailing comma wasn't getting added correctly in prod. quick fix was just to leave a trailing comman
-                {% unless forloop.last %}, {% endunless %}
-              {% endcomment %}
-              {% assign existing = existing | Append:curday %}
-            {% endif %}
-      {% endfor %}
-    {% endcontentchannel %}
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
   ],
   "Ads":
 [

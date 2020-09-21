@@ -133,7 +133,7 @@
 
       var filteredEvents1 = filteredEvents.filter(evt => (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()))
       if (filteredEvents1.length === 0) {
-        eventsContainer.append('<p>No events exist for the selected audience.</p>');
+        eventsContainer.append('<p>No data exist for the selected filters.</p>');
         $('#back').hide();
         $('#next').hide();
         return;
