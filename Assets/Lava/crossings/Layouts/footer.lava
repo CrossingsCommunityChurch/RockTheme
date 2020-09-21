@@ -71,7 +71,7 @@
           </svg>
           <ul>
             <li>
-              <a href="/PlanYourVisit">Plan a visit</a>
+              <a href="/plan-your-visit">Plan a visit</a>
             </li>
             <li>
               <a href="/contact-us">Contact Us</a>
@@ -80,7 +80,7 @@
               <a href="https://www.paycomonline.net/v4/ats/web.php/jobs?clientkey=BB5BBDC81EFC132E8B6CA382258DEFB3">Employment</a>
             </li>
             <li>
-              <a href="https://www.crossingsschool.org">Crossings School</a>
+              <a href="https://www.crossingsschool.org">Crossings Christian School</a>
             </li>
           </ul>
           <div class="row reverse social-row">
