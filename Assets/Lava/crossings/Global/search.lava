@@ -42,7 +42,7 @@
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
-          <h2>Lates Media</h2>
+          <h2>Latest Media</h2>
           {% for popular in searchSuggestions.Popular %}
 
             {% assign seriesSlug = 'undefined' %}
