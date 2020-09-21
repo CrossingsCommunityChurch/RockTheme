@@ -41,7 +41,8 @@
     {% endif %}
     {% assign summary = item | Attribute:'SummaryText' %}
     {% assign dayOfWeek = item | Attribute:'dayoftheweek' %}
-    {% assign  detailsURL = item | Attribute:'DetailsURL' | StripHtml %}
+    {% assign detailsURL = item | Attribute:'DetailsURL' | StripHtml %}
+    {% assign regURL =  item | Attribute:'RegURL' | StripHtml %}
     {% assign subheading = item | Attribute:'Subheading' %}
     {% assign campus = item | Attribute:'Campuses' %}
     {% assign primaryAudiance = item | Attribute:'PrimaryAudience' %}
@@ -58,6 +59,7 @@
       "Summary": {{ summary | StripNewlines | ToJSON}},
       "DayofWeek": {{ dayOfWeek | ToJSON }},
       "DetailsURL": {{ detailsURL | ToJSON }},
+      "RegURL": {{ regURL | ToJSON }},
       "Subheading": {{subheading | ToJSON }},
       "Campus": {{ campus | ToJSON }},
       "PrimaryAudience": {{ primaryAudiance | ToJSON }},
