@@ -1,4 +1,4 @@
-console.log('loading theme js');
+//console.log('loading theme js');
 
 $(document).ready(function() {
 
@@ -125,4 +125,24 @@ $(document).ready(function() {
     var offset = $("#zone-pageheading").outerHeight(true) - 140;
     console.log(offset);
     $(".navbar.affix-navbar").affix({offset: {top: offset} });
+    
+    function isIE() {
+        // IE 10 and IE 11
+        return /Trident\/|MSIE/.test(window.navigator.userAgent);
+    }
+
+    function showBrowserAlert() {
+        if (document.querySelector('.unsupported-browser')) {
+           var d = document.getElementsByClassName('unsupported-browser');
+    
+           var is_IE = isIE();
+    
+            if (is_IE) {
+                d[0].innerHTML = '<div class="alert alert-info text-center" style="margin-bottom: 0;"><strong>Unsupported Browser</strong> This website will offer limited functionality in this browser. We only support the recent versions of major browsers like Chrome, Firefox, Safari, and Edge.</div>';
+                d[0].style.display = 'block';
+            }
+        }
+    };
+    
+    showBrowserAlert();
 });

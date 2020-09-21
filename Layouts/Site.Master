@@ -59,6 +59,7 @@
              <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{TagManagerID}}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         {% endif %}
     </Rock:Lava>
+    <div class="unsupported-browser"></div>
     <Rock:Lava ID="SiteWrapperClass" runat="server">
         {% assign site = CurrentPage.Site | ToCssClass %}
         <div class="wrapper-style {{ site }}">
