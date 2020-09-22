@@ -11,10 +11,10 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Campuses</a></li>
+        <li><a href="/prison/campuses">Campuses</a></li>
         <li><a href="#">Get Connected</a></li>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="/prison/faq">FAQ</a></li>
+        <li><a href="/prison/connected">Contact</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
