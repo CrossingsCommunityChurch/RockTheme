@@ -11,11 +11,10 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#location">Location</a></li>
-        <li><a href="#mission">Mission</a></li>
-        <li><a href="#events">Programming & Events</a></li>
-        <li><a href="#volunteer">Volunteer</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="/club">The club</a></li>
+        <li><a href="/center/programs">Events</a></li>
+        <li><a href="/center/volunteer">Volunteer</a></li>
+        <li><a href="https://crossings.church/contact-us">Contact</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
