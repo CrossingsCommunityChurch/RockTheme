@@ -11,8 +11,15 @@
   {% assign summary = item.Content %}
   {% assign video = item | Attribute:'VimeoId' %}
   {% assign parentPath = 'sermons' %}
+
+  {% assign docStorageUrl = 'Global' | Attribute:'docsURL' | Prepend:'https://' %}
   {% assign notes = item | Attribute:'Notes', 'Url' %}
   {% assign questions = item | Attribute:'DiscussionQuestions', 'Url' %}
+  {% assign notesUrlPath = notes | Url:'localpath' %}
+  {% assign questionsUrlPath = questions | Url:'localpath' %}
+  {% assign notesUrl = docsStorageUrl | Append:notesUrlPath %}
+  {% assign questionsUrl = docsStorageUrl | Append:questionsUrlPath %}
+
 
   {% assign org = 'Global' | Attribute:'OrganizationName' %}
   {% capture pageTitle %}{{ speaker }} - {{ title }} | {{ org }} {% endcapture%}
@@ -42,10 +49,10 @@
                 {% if notes != '' or questions != '' %}
                   <div class="message-notes">
                     {% if notes != '' %}
-                        <a href="{{notes}}" class="btn-primary btn" target="_blank" rel="noopener"><i class="fas fa-sticky-note"></i><span>Message Notes</span></a>
+                        <a href="{{notesUrl}}" class="btn-primary btn" target="_blank" rel="noopener"><i class="fas fa-sticky-note"></i><span>Message Notes</span></a>
                     {% endif %}
                     {% if questions != '' %}
-                        <a href="{{questions}}" class="btn-primary btn" target="_blank" rel="noopener"><i class="fas fa-question-circle"></i><span>Discussion Questions</span></a>
+                        <a href="{{questionsUrl}}" class="btn-primary btn" target="_blank" rel="noopener"><i class="fas fa-question-circle"></i><span>Discussion Questions</span></a>
                     {% endif %}
                   </div>
                 {% endif %}
