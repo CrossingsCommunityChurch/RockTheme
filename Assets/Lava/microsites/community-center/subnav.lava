@@ -13,7 +13,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/club">The club</a></li>
         <li><a href="/center/programs">Events</a></li>
-        <li><a href="/center/volunteer">Volunteer</a></li>
+        <li><a href="https://crossings.church/locations/okc/volunteer">Volunteer</a></li>
         <li><a href="https://crossings.church/contact-us">Contact</a></li>
       </ul>
     </div><!--/.nav-collapse -->
