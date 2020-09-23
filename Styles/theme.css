@@ -14523,7 +14523,7 @@ img {
   .section .btn + .btn {
     margin-left: 15px;
   }
-  .simple-section ul {
+  .simple-section ul:not(.socialsharing) {
     text-align: left;
     margin-left: auto;
     margin-right: auto;
