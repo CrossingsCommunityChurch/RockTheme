@@ -11,11 +11,12 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">CareSeries</a></li>
-        <li><a href="#">Celebrate Recovery</a></li>
-        <li><a href="#">Kids and Teens</a></li>
-        <li><a href="#">Counseling</a></li>
-        <li><a href="#">Lifecare Staff</a></li>
+        <li><a href="/careseries">CareSeries</a></li>
+        <li><a href="/celebrate-recovery">Celebrate Recovery</a></li>
+        <li><a href="/support-for-kids">Kids and Teens</a></li>
+        <li><a href="/counseling">Counseling</a></li>
+        <li><a href="/lifecare/staff">Lifecare Staff</a></li>
+        <li><a href="/lifecare/resources">Lifecare Resources</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
