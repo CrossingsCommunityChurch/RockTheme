@@ -76,7 +76,7 @@
               <a href="https://crossings.church/contact-us?topic=LifeCare">Contact</a>
             </li>
           </ul>
-          <div class="row reverse social-row">
+         <!-- <div class="row reverse social-row">
             <div class="col-xs-4 col-md-4">
               <a href="#"><i class="fab fa-facebook"></i></a>
             </div>
@@ -85,7 +85,7 @@
             </div>
             <div class="col-xs-4 col-md-4">
               <a href="#"><i class="fab fa-twitter"></i></a></div>
-          </div>
+          </div>-->
           <div class="copyright">&copy; Crossings Community Church 2020</div>
       </div>
     </div>
