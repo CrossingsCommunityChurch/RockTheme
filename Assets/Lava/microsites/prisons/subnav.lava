@@ -12,9 +12,9 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/prison/campuses">Campuses</a></li>
-        <li><a href="#">Get Connected</a></li>
+        <li><a href="/prison/connected">Get Connected</a></li>
         <li><a href="/prison/faq">FAQ</a></li>
-        <li><a href="/prison/connected">Contact</a></li>
+        <li><a href="https://crossings.church/contact-us">Contact</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
