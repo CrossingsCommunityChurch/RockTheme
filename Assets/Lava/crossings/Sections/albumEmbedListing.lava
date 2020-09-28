@@ -55,7 +55,7 @@
                               <a href="{{spotifyURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-spotify"></i></a>
                             {% endif %}
                             {% if iTunesURL != empty %}
-                              <a href="{{spotifyURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-apple"></i></a>
+                              <a href="{{iTunesURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-apple"></i></a>
                             {% endif %}
                             {% if soundcloudURL != empty %}
                               <a href="{{soundcloudURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i></a>
