@@ -7,7 +7,7 @@
 [
     {% assign now = 'Now' | Date %}
     {% assign contentChannelId = channelid %}
-    {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
+    {% contentchannelitem | where:'(Status == 1 || Status == 2) && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
     {% assign latestMessage = contentChannelItems | First %}
     {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
     {% assign parentSlug = parentSeries.PrimarySlug %}
