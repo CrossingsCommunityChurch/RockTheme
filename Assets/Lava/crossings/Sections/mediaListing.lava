@@ -98,7 +98,7 @@
         <div class="media-list-items">
           <div class="row">
             <div class="col-sm-6">
-              <h3>Recent Sermon Series</h3>
+              <h3>Sunday Series</h3>
             </div>
             <div class="col-sm-6" style="text-align: right; margin-top: 1em;">
               <a href="/media/sermons">
@@ -116,7 +116,7 @@
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <h3>Recent Teaching Series</h3>
+              <h3>Teaching Series</h3>
             </div>
             <div class="col-sm-6" style="text-align: right; margin-top: 1em;">
               <a href="/media/teachings">
@@ -240,7 +240,7 @@ const vueApp = new Vue({
           data = response.data;
          this.sermonSeries =  data.filter(e => (new Date(e.PublishDateTime) < new Date() && !e.Title.includes('Stand Alone Messages') ))
           .sort((a,b) => new Date(b.PublishDateTime) - new Date(a.PublishDateTime))
-          .slice(0,3)
+          .slice(0,6)
         });
     },
     getTeachingSeries () {

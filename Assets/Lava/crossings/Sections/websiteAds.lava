@@ -10,6 +10,7 @@
 {% assign daysofWeek = adsData.DaysofWeek | Uniq %}
 {% assign campuses = adsData.Campuses | Uniq %}
 {% assign adsJson = adsData.Ads | ToJSON %}
+
 {% assign personCampus = CurrentPerson | Campus %}
 {% assign itemsPerPage = 33 %}
 
