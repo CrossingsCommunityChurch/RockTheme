@@ -18,8 +18,10 @@
         <div class="media-list-items">
           <div class="row flex-row flex-wrap">
               {% for series in seriesData %}
+                  {% if series.Title != "Stand Alone Messages" %}
                     {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:series.Image %}
                   {[ cardSeries link:'{{series.Slug}}' title:'{{ series.Title }}' img:'{{ imageUrl }}' ]}
+                  {% endif %}
               {% endfor %}
           </div>
         </div>
