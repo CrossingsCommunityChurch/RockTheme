@@ -5,7 +5,8 @@
     {%- endcontentchannel -%}
 
     {%- if teachingSeriesItemId != empty -%}
-    {%- contentchannelitem where:'ContentChannelId == {{teachingSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+    {% assign now = 'Now' | Date %}
+    {%- contentchannelitem where:'ContentChannelId == "{{teachingSeriesItemId}}" && StartDateTime <= "{{now}}"' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
 
     {%assign channelPath = '/media/teachings/' %}
