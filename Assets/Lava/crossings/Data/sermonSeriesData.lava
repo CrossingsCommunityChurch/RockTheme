@@ -5,8 +5,7 @@
     {%- endcontentchannel -%}
 
     {%- if sermonSeriesItemId != empty -%}
-    {% assign now = 'Now' | Date %}
-    {%- contentchannelitem where:'ContentChannelId ==  "{{sermonSeriesItemId}}" && StartDateTime <= "{{now}}"' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+    {%- contentchannelitem where:'ContentChannelId ==  {{sermonSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
 
     {% assign channelPath = '/media/sermons/' %}

@@ -238,8 +238,9 @@ const vueApp = new Vue({
         .get('/Webhooks/Lava.ashx/crossings/api/sermon-series')
         .then(response => {
           data = response.data;
-          let sorted = data.sort((a,b) => {return new Date(b.PublishDateTime) - new Date(a.PublishDateTime)})
-          this.sermonSeries = sorted.slice(0, 3);
+         this.sermonSeries =  data.filter(e => (new Date(e.PublishDateTime) < new Date() && !e.Title.includes('Stand Alone Messages') ))
+          .sort((a,b) => new Date(b.PublishDateTime) - new Date(a.PublishDateTime))
+          .slice(0,3)
         });
     },
     getTeachingSeries () {
@@ -248,8 +249,9 @@ const vueApp = new Vue({
         .get('/Webhooks/Lava.ashx/crossings/api/teaching-series')
         .then(response => {
           data = response.data
-          let sorted = data.sort((a,b) => {return new Date(b.PublishDateTime) - new Date(a.PublishDateTime)})
-          this.teachingSeries = sorted.slice(0, 3)
+          this.teachingSeries = data.filter(e => new Date(e.PublishDateTime) <= new Date())
+          .sort((a,b) => new Date(b.PublishDateTime) - new Date(a.PublishDateTime))
+          .slice(0, 3)
         });
     },
     applySearchTags() {
