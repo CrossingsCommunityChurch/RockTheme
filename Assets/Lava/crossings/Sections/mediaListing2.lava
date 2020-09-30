@@ -248,7 +248,7 @@ const vueApp = new Vue({
         .get('/Webhooks/Lava.ashx/crossings/api/teaching-series')
         .then(response => {
           data = response.data
-          let sorted = data.sort((a,b) => {return new Date(a.PublishDateTime) - new Date(b.PublishDateTime)})
+          let sorted = data.sort((a,b) => {return new Date(b.PublishDateTime) - new Date(a.PublishDateTime)})
           this.teachingSeries = sorted.slice(0, 3)
         });
     },
