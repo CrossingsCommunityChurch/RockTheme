@@ -28,6 +28,11 @@
     "Friday",
     "Saturday"
   ],
+  "Campuses": [
+    "Crossings OKC",
+    "Crossings Edmond",
+    "Crossings Online"
+  ],
   "Ads":
 [
 {% contentchannel id:'1' %}

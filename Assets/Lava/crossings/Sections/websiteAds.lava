@@ -8,7 +8,9 @@
 {% assign adsData = 'ads' | PersistedDataset %}
 {% assign audiences = adsData.Audiences | Uniq %}
 {% assign daysofWeek = adsData.DaysofWeek | Uniq %}
+{% assign campuses = adsData.Campuses | Uniq %}
 {% assign adsJson = adsData.Ads | ToJSON %}
+{% assign personCampus = CurrentPerson | Campus %}
 {% assign itemsPerPage = 33 %}
 
 <div id="announcementList" class="announcement-list">
@@ -41,6 +43,19 @@
             </ul>
           </div>
         </div>
+        <div class="form-group">
+          <label for="filterLabel">Filter By Campus</label>
+          <div class="dropdown">
+            <button type="button" id="campuses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="eventCamptFilterMenu" id="eventCampFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All</a></li>
+              <li role="separator" class="divider"></li>
+              {% for campus in campuses %}
+                <li><a style="cursor: pointer;">{{campus}}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row flex-row flex-wrap">
@@ -61,6 +76,7 @@
     const imageStorageUrl = '{{imageStorageUrl}}';
     const imageSize = '{{imageSize}}';
     const itemsPerPage = '{{itemsPerPage}}';
+    const personCampus = '{{personCampus.Name}}';
 
     let events = JSON.parse(eventsJson);
 
@@ -75,38 +91,57 @@
       let audience = $(this).text().trim();
       let day = $('#dayOfWeek').text().trim();
       if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      let campus = $('#campuses').text().trim();
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
       $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
-      renderFilteredItems(events, 1, audience, day);
+      renderFilteredItems(events, 1, audience, day, campus);
     });
 
     $('#dayOfWeek').parent().find('li').click(function() {
       let day = $(this).text().trim();
       let audience = $('#audiences').text().trim();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      let campus = $('#campuses').text().trim();
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
       $('#dayOfWeek').html(`${day} <i class="fas fa-angle-down pull-right"></i>`);
-      renderFilteredItems(events, 1, audience, day);
+      renderFilteredItems(events, 1, audience, day, campus);
+    });
+
+    $('#campuses').parent().find('li').click(function() {
+      let campus = $(this).text().trim();
+      let day = $('#dayOfWeek').text().trim();
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      let audience = $('#audiences').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      $('#campuses').html(`${campus} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(events, 1, audience, day, campus);
     });
 
     $('#back').click(function() {
       topOfEvents();
       let audience = $('#audiences').text().trim();
       let day = $('#dayOfWeek').text().trim();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All';
-      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'All';
+      let campus = $('#campuses').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
       curPage = curPage - 1;
-      renderFilteredItems(events, curPage, audience, day);
+      renderFilteredItems(events, curPage, audience, day, campus);
     });
 
     $('#next').click(function() {
       topOfEvents();
       let audience = $('#audiences').text();
       let day = $('#dayOfWeek').text().trim();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'All';
-      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'All';
+      let campus = $('#campuses').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
       (`audience is ${audience}`);
       (`day is ${day}`);
+      (`campus is ${campus}`);
       curPage = curPage + 1
-      renderFilteredItems(events, curPage, audience, day);
+      renderFilteredItems(events, curPage, audience, day, campus);
     });
 
     function topOfEvents() {
@@ -125,13 +160,11 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
-    function renderFilteredItems(events, page, audience, day) {
+    function renderFilteredItems(events, page, audience, day, campus) {
       let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
 
-      var filteredEvents = events.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.SecondaryAudience.includes(audience)));
-
-      var filteredEvents1 = filteredEvents.filter(evt => (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()))
+      var filteredEvents1 = events.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.SecondaryAudience.includes(audience)) && (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()) && (!campus || campus.trim().toLowerCase() === 'all' || evt.Campus.includes(campus)));
       if (filteredEvents1.length === 0) {
         eventsContainer.append('<p>No data exist for the selected filters.</p>');
         $('#back').hide();
@@ -240,18 +273,48 @@
 
     var defaultAudience = getParameterByName('category');
     var defaultDay = getParameterByName('day');
+    var defaultCampus = getParameterByName('campus');
+    if(personCampus){
+      defaultCampus = personCampus
+    }
     if(defaultAudience) {
       $('#audiences').html( defaultAudience + ' <i class="fas fa-angle-down pull-right"></i>');
       if(defaultDay){
         $('#dayOfWeek').html( defaultDay+ ' <i class="fas fa-angle-down pull-right"></i>');
-            renderFilteredItems(events, 1, defaultAudience, defaultDay);
+        if(defaultCampus){
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, defaultAudience, defaultDay, defaultCampus);
+        }
+        else{ renderFilteredItems(events, 1, defaultAudience, defaultDay);}
       }
-      else{    renderFilteredItems(events, 1, defaultAudience);}
+      else {
+        if(defaultCampus){
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, defaultAudience, 'all', defaultCampus);
+        }
+        else{ renderFilteredItems(events, 1, defaultAudience, 'all', 'all');}
+      }
     }
-    else{
-      if(defaultDay){
+    else
+    {
+      if(defaultDay)
+      {
         $('#dayOfWeek').html( defaultDay+ ' <i class="fas fa-angle-down pull-right"></i>');
-            renderFilteredItems(events, 1, "all", defaultDay);
+        if(defaultCampus)
+        {
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, 'all', defaultDay, defaultCampus);
+        }
+        else{ renderFilteredItems(events, 1, 'all', defaultDay);}
+      }
+      else
+      {
+        if(defaultCampus)
+        {
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, 'all', 'all', defaultCampus);
+        }
+        else{ renderFilteredItems(events, 1, 'all', 'all', 'all');}
       }
     }
   });
