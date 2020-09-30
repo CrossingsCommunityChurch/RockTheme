@@ -283,7 +283,7 @@
     var defaultAudience = getParameterByName('category');
     var defaultDay = getParameterByName('day');
     var defaultCampus = getParameterByName('campus');
-    if(personCampus){
+    if(!defaultCampus && personCampus){
       defaultCampus = personCampus
     }
     if(defaultAudience) {
