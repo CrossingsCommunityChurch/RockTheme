@@ -11,6 +11,7 @@
 
   {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
   {% assign imageSize = '/fit-in/450x450' %}
+  {% assign now = 'Now' | Date %}
 
   {% assign seriesData = data | PersistedDataset %}
   <div class="section media-list bg-gray">
@@ -18,7 +19,8 @@
         <div class="media-list-items">
           <div class="row flex-row flex-wrap">
               {% for series in seriesData %}
-                  {% if series.Title != "Stand Alone Messages" %}
+                  {% assign seriesDate = series.PublishDateTime | AsDateTime %}
+                  {% if series.Title != "Stand Alone Messages" and seriesDate <= now %}
                     {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:series.Image %}
                   {[ cardSeries link:'{{series.Slug}}' title:'{{ series.Title }}' img:'{{ imageUrl }}' ]}
                   {% endif %}
