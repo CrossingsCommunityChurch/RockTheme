@@ -10,8 +10,12 @@
 {% assign daysofWeek = adsData.DaysofWeek | Uniq %}
 {% assign campuses = adsData.Campuses | Uniq %}
 {% assign adsJson = adsData.Ads | ToJSON %}
-
+{% if CurrentPerson and CurrentPerson != empty%}
 {% assign personCampus = CurrentPerson | Campus %}
+{% else %}
+  {% assign personCampus = 'all' %}
+{% endif %}
+
 {% assign itemsPerPage = 33 %}
 
 <div id="announcementList" class="announcement-list">
@@ -77,7 +81,11 @@
     const imageStorageUrl = '{{imageStorageUrl}}';
     const imageSize = '{{imageSize}}';
     const itemsPerPage = '{{itemsPerPage}}';
-    const personCampus = '{{personCampus.Name}}';
+    let personCampus = 'all';
+    if('{{personCampus}}' != 'all')
+    {
+    personCampus = '{{personCampus.Name}}';
+    }
 
     let events = JSON.parse(eventsJson);
 
