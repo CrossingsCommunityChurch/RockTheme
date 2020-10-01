@@ -69,6 +69,7 @@
             <li>
               <a href="https://crossings.church">Crossings.Church</a>
             </li>
+            {%comment%}
             <li>
               <a href="/about-us">About</a>
             </li>
@@ -78,6 +79,7 @@
             <li>
               <a href="/contact">Contact</a>
             </li>
+            {%endcomment%}
           </ul>
           <div class="row reverse social-row flex-row">
             <div class="col-md-12 justify-center">
