@@ -11820,6 +11820,16 @@ img {
 .media-list .card.series-card:hover {
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.65);
 }
+.media-list .card-series .card {
+  transition: all ease-in-out 0.5s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+.media-list .card-series .card .thumb {
+  border-radius: 10px;
+}
+.media-list .card-series .card:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
+}
 .media-list.list .card {
   display: flex;
 }

@@ -22,7 +22,7 @@
   <div class="container announcement-list-items" data-aos="fade-up">
     <div class="event-filter row">
       <div class="form form-inline">
-        <div class="form-group">
+        <div class="form-group col-sm-4 col-md-3">
           <label for="filterLabel">Filter By Category</label>
           <div class="dropdown">
             <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
@@ -35,7 +35,7 @@
             </ul>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-sm-4 col-md-3">
           <label for="filterLabel">Filter By Day</label>
           <div class="dropdown">
             <button type="button" id="dayOfWeek" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
@@ -48,7 +48,7 @@
             </ul>
           </div>
         </div>
-        <div class="form-group">
+        <div class="form-group col-sm-4 col-md-3">
           <label for="filterLabel">Filter By Campus</label>
           <div class="dropdown">
             <button type="button" id="campuses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
