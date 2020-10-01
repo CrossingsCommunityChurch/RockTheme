@@ -15284,7 +15284,7 @@ img {
 }
 @media (min-width: 992px) {
   .media-hero {
-    height: 60vh;
+    height: 650px;
     padding-top: 225px;
     background-color: #313e48;
     background-position: center;
