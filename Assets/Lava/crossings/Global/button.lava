@@ -49,7 +49,7 @@
   {% comment %}
   Set well-known button properties
   {% endcomment %}
-  {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
+  {% contentchannelitem | where:'(Status == 1 || Status == 2) && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
     {% assign latestMessage = contentChannelItems | First %}
     {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
     {% comment %} {{ parentSeries | Debug }} {% endcomment %}
