@@ -73,22 +73,19 @@
               <a href="https://goo.gl/maps/FKkjYFN7LpsNKUiv7">Location</a>
             </li>
             <li>
-              <a href="#">Clinic Careers</a>
+              <a href="https://www.paycomonline.net/v4/ats/web.php/jobs?clientkey=BB5BBDC81EFC132E8B6CA382258DEFB3">Clinic Careers</a>
             </li>
             <li>
               <a href="mailto:pam@crossingsclinic.org">Contact</a>
             </li>
           </ul>
           <div class="row reverse social-row">
-            <div class="col-xs-4 col-md-4">
-              <a href="#"><i class="fab fa-facebook"></i></a>
+            <div class="col-xs-6 col-md-6">
+              <a href="https://facebook.com/crossingscommunityclinic"><i class="fab fa-facebook"></i></a>
             </div>
-            <div class="col-xs-4 col-md-4">
-              <a href="#"><i class="fab fa-instagram"></i></a>
+            <div class="col-xs-6 col-md-6">
+              <a href="https://instagram.com/crossingsclinic"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="col-xs-4 col-md-4">
-              <a href="#"><i class="fab fa-twitter"></i></a></div>
-          </div>
           <div class="copyright">&copy; Crossings Community Church 2020</div>
       </div>
     </div>
