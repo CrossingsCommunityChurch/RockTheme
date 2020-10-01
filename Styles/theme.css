@@ -12734,6 +12734,9 @@ img {
   color: #fff;
   border-color: #313e48;
 }
+.input-lg.numberincrement {
+  padding: 0;
+}
 .breadcrumb {
   max-width: 1170px;
   margin: auto;
