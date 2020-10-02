@@ -69,10 +69,11 @@
             <li>
               <a href="https://crossings.church">Crossings.Church</a>
             </li>
-            {%comment%}
+
             <li>
-              <a href="/about-us">About</a>
+              <a href="https://crossings.church/about-us">About</a>
             </li>
+            {%comment%}
             <li>
               <a href="/employment">Employment</a>
             </li>
