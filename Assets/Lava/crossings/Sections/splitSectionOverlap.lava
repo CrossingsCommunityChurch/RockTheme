@@ -47,7 +47,7 @@
               <p>{{ content }}</p>
               {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
               {%- if buttons != empty -%}
-                <div class="buttons" data-aos="fade-up">
+                <div class="buttons text-center" data-aos="fade-up">
                     {{ buttons }}
                 </div>
                 {%- endif -%}
