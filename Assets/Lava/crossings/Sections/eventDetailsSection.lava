@@ -57,7 +57,6 @@
               </div>
               {% endif %}
               <div class="past-details">
-                <h4 class="subheading">Contact</h4>
                 <h2 class="heading">{{ contact.FullName }}</h2>
                 <p class="lead">{{ contact | Attribute: 'Position'}}</p>
               </div>
