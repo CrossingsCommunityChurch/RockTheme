@@ -2,6 +2,13 @@
 
 $(document).ready(function() {
 
+    //Init Animate on Scroll
+    // For options on settings - https://github.com/michalsnik/aos
+    AOS.init({
+        easing: 'ease-in-out',
+        duration: '1000'
+    });
+
     $('.card-list-filter .btn').click(function(e){
         e.preventDefault();
         $('.card-list-filter .btn').removeClass('active');
@@ -55,13 +62,6 @@ $(document).ready(function() {
         } else {
             $('.primary-nav').removeClass('fixed push sticky');
         }
-    });
-    
-    //Init Animate on Scroll
-    // For options on settings - https://github.com/michalsnik/aos
-    AOS.init({
-        easing: 'ease-in-out',
-        duration: '1000'
     });
 
     let menuWidth = '30em';
