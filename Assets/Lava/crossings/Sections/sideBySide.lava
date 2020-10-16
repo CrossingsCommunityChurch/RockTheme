@@ -32,7 +32,7 @@
 {%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
 {%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
 
-{%- stylesheet id:'contentcomponent-split' -%}
+{% stylesheet id:'contentcomponent-split' %}
 .contentComponent-split .row {
     min-height: 450px;
     position: relative;
@@ -59,7 +59,7 @@
     object-fit: cover;
     object-position: 50% 50%;
 }
-{%- endstylesheet -%}
+{% endstylesheet %}
 
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
