@@ -27,7 +27,10 @@
         <div class="panel-heading" role="tab" id="heading{{ forloop.index }}-{{ wrapperId }}">
           <h4 class="panel-title">
             <a role="button" data-toggle="collapse" data-parent="#accordion-{{ wrapperId }}" href="#collapse{{ forloop.index }}-{{ wrapperId }}" aria-expanded="{%- if isopen -%}true{%- else -%}false{%- endif -%}" aria-controls="collapse{{ forloop.index }}">
-              <i class="fas fa fa-fw  fa-{{item.icon}}"></i> {{ item.title }} <i class="fas fa fa-angle-down pull-right"></i>
+              {%- if item.icon and item.icon != empty -%}
+                <i class="fas fa fa-fw  fa-{{item.icon}}"></i>
+              {%- endif -%}
+              {{ item.title }} <i class="fas fa fa-angle-down pull-right"></i>
             </a>
           </h4>
         </div>
