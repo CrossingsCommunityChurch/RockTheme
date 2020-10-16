@@ -4,20 +4,20 @@
   Runs the content for a devotional content channel item
 {%- endcomment -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/2000x900' %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/2000x900' -%}
 
-{% assign title = Item.Title %}
-{% assign author = Item | Attribute:'Author' %}
-{% assign channel = Item.ContentChannel.Name %}
-{% assign date = Item.StartDateTime | Date:'MMM d, yyyy' %}
-{% assign content = Item.Content %}
+{%- assign title = Item.Title -%}
+{%- assign author = Item | Attribute:'Author' -%}
+{%- assign channel = Item.ContentChannel.Name -%}
+{%- assign date = Item.StartDateTime | Date:'MMM d, yyyy' -%}
+{%- assign content = Item.Content -%}
 
-{% assign image = Item | Attribute:'AssetImage' | Url:'localpath' %}
-{% assign imageUrlPath = image %}
-{% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign imageUrlPath = image -%}
+{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
-{% capture pageTitle %}Announcements- {{ title }}{% endcapture%}
+{%- capture pageTitle -%}Announcements- {{ title }}{%- endcapture%}
 {{ pageTitle | SetPageTitle }}
 
 
@@ -31,11 +31,11 @@
         </div>
     </div>
 </div>
-{% if image != empty %}
+{%- if image != empty -%}
 <div class="devo-image container mt-n3">
   <img src="{{ imageUrl }}" alt="{{ title }}" title="{{ title }}" />
 </div>
-{% endif %}
+{%- endif -%}
 <div class="container main">
   {{ content }}
 </div>

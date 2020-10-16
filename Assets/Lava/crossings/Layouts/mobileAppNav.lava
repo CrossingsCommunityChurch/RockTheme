@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   Included as a shortcode in the footer
   This is the nav that shows at the bottom of the screen on mobile
 {%- endcomment -%}

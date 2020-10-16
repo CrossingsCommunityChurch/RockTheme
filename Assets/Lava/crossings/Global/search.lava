@@ -1,12 +1,12 @@
-{% comment %}
+{%- comment -%}
   Search shown when someone clicks the search icon in the top right of the page.
 
   Accepts a Persisted Dataset of JSON to make Recommended, Recent Media and Upcoming Events
 {%- endcomment -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/300x300/' %}
-{% assign searchSuggestions = 'searchSuggestions' | PersistedDataset %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/300x300/' -%}
+{%- assign searchSuggestions = 'searchSuggestions' | PersistedDataset -%}
 <a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>
 <div class="search-wrapper">
   <div class="search-form">
@@ -22,7 +22,7 @@
       <div class="col-md-12 col-lg-4 search-column">
         <div>
           <h2>Upcoming Events</h2>
-          {% for event in searchSuggestions.Events %}
+          {%- for event in searchSuggestions.Events -%}
             <a class="media-object" href="{{event.link}}">
               <div>
                 <h3>{{ event.Name }}</h3>
@@ -30,22 +30,22 @@
                 <p>{{ event.Summary | StripHtml | TruncateWords:20 }}</p>
               </div>
             </a>
-          {% endfor %}
+          {%- endfor -%}
         </div>
 
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
           <h2>Latest Media</h2>
-          {% for popular in searchSuggestions.Popular %}
+          {%- for popular in searchSuggestions.Popular -%}
 
-            {% assign seriesSlug = 'undefined' %}
+            {%- assign seriesSlug = 'undefined' -%}
 
-            {% if popular.Series.Slug %}
-                {% assign seriesSlug = popular.Series.Slug %}
-            {% endif %}
+            {%- if popular.Series.Slug -%}
+                {%- assign seriesSlug = popular.Series.Slug -%}
+            {%- endif -%}
 
-            {% capture link %}/media/{{ popular.ChannelPath }}{{ seriesSlug }}/{{ popular.PrimarySlug }}{%endcapture%}
+            {%- capture link -%}/media/{{ popular.ChannelPath }}{{ seriesSlug }}/{{ popular.PrimarySlug }}{%endcapture%}
             <a class="media-object" href="{{ link }}">
               <div>
                 <h3>{{ popular.Title }}</h3>
@@ -53,28 +53,28 @@
                 <p>{{ popular.Content | StripHtml | TruncateWords:20 }}</p>
               </div>
             </a>
-          {% endfor %}
+          {%- endfor -%}
         </div>
       </div>
       <div class="col-md-6 col-lg-4 search-column">
         <div>
         <h2>Suggested</h2>
-            {% for recommend in searchSuggestions.Recommended %}
-              {% if recommend.Detail != '' %}
+            {%- for recommend in searchSuggestions.Recommended -%}
+              {%- if recommend.Detail != '' -%}
                 <a class="media-object" href="{{ recommend.Detail }}">
-              {% else %}
+              {%- else -%}
                 <div class="media-object">
-              {% endif %}
+              {%- endif -%}
                 <div>
                   <h3>{{recommend.Title}}</h3>
                   <p>{{recommend.Content | StripHtml | TruncateWords:20 }}</p>
                 </div>
-              {% if recommend.Detail != '' %}
+              {%- if recommend.Detail != '' -%}
                 </a>
-              {% else %}
+              {%- else -%}
                 </div>
-              {% endif %}
-            {% endfor %}
+              {%- endif -%}
+            {%- endfor -%}
         </div>
       </div>
     </div>

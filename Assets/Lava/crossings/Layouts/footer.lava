@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   Footer for primary site. Runs globally as an include on the site
 {%- endcomment -%}
 

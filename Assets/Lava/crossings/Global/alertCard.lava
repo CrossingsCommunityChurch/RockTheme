@@ -1,10 +1,10 @@
-{% comment %}
+{%- comment -%}
   Used in Alert Content Components
 
   Section Options
   @Background Color
   @ForegroundColor
-{% endcomment %}
+{%- endcomment -%}
 
 {%- assign contentItemStyle = '' -%}
 {%- assign contentTextColor = '' -%}
@@ -21,15 +21,15 @@
     {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
   {%- endif -%}
 
-{% if Items %}
-  {% assign item = Items | First %}
-  {% assign active = item | Attribute:'Active' %}
-  {% if active == 'Yes' %}
-    <div class="text-alert alert-warning text-center reverse"  {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
-      <div class="container" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>
+{%- if Items -%}
+  {%- assign item = Items | First -%}
+  {%- assign active = item | Attribute:'Active' -%}
+  {%- if active == 'Yes' -%}
+    <div class="text-alert alert-warning text-center reverse"  {%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentItemStyle }}'{%- endif -%}>
+      <div class="container" {%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentTextColor }}'{%- endif -%}>
         {{ item.Content }}
       </div>
     </div>
-  {% endif %}
+  {%- endif -%}
 
-{% endif %}
+{%- endif -%}

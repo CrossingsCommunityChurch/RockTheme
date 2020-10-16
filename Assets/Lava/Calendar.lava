@@ -1,27 +1,27 @@
-  {% assign eventItemOccurrenceCount = EventItemOccurrences | Size %}
+  {%- assign eventItemOccurrenceCount = EventItemOccurrences | Size -%}
 
-  {% if eventItemOccurrenceCount == 0 %}
+  {%- if eventItemOccurrenceCount == 0 -%}
   <div class="panel panel-default margin-t-md">
     <div class="margin-all-md"> There are no events in this time frame.</div>
   </div>
-  {% endif %}
+  {%- endif -%}
 
-  {% for eventItemOccurrence in EventItemOccurrences %}
+  {%- for eventItemOccurrence in EventItemOccurrences -%}
   <div class="panel panel-default margin-t-md">
     <div class="panel-heading clearfix">
       <h2 class="panel-title pull-left">
         {{ eventItemOccurrence.Name }}
       </h2>
       <div class="pull-right">
-        {% if eventItemOccurrence.DetailPage != null %}
+        {%- if eventItemOccurrence.DetailPage != null -%}
         <a href="{{ eventItemOccurrence.DetailPage }}">
           View Details <i class="fa fa-chevron-right"></i>
         </a>
-		{% else %}
+		{%- else -%}
 		<a href="{{ DetailsPage }}?EventOccurrenceId={{ eventItemOccurrence.EventItemOccurrence.Id }}">
             View Details <i class="fa fa-chevron-right"></i>
         </a>
-        {% endif %}
+        {%- endif -%}
       </div>
     </div>
     <div class="panel-body">
@@ -30,11 +30,11 @@
           <b>Date</b>
         </div>
         <div class="row">
-          {% if eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate != eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate %}
+          {%- if eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate != eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate -%}
             {{ eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveStartDate  | Date: 'MMM d' }} -  {{ eventItemOccurrence.EventItemOccurrence.Schedule.EffectiveEndDate  | Date: 'MMM d' }}
-          {% else %}
+          {%- else -%}
             {{ eventItemOccurrence.Date | Date: 'MMM d' }}
-          {% endif %}
+          {%- endif -%}
         </div>
       </div>
       <div class="col-md-2">
@@ -63,7 +63,7 @@
       </div>
     </div>
   </div>
-  {% endfor %}
+  {%- endfor -%}
 
 <script type="text/javascript">
 

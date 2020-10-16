@@ -5,14 +5,14 @@
 {%- endcomment -%}
 
 [
-    {% assign contentChannelId = '67' %}
-    {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}}' iterator:'homeImages' securityenabled:'false' %}
+    {%- assign contentChannelId = '67' -%}
+    {%- contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}}' iterator:'homeImages' securityenabled:'false' -%}
       {%- for image in homeImages -%}
-        {% assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath' %}
+        {%- assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath' -%}
         {
             "image" : {{ AssetImage | ToJSON }}
         }
-        {% unless forloop.last %},{% endunless %}
+        {%- unless forloop.last -%},{%- endunless -%}
       {%- endfor -%}
-    {% endcontentchannelitem %}
+    {%- endcontentchannelitem -%}
 ]

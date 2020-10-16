@@ -1,15 +1,15 @@
-﻿{% assign item = Items | First %}
-{% if item %}
+﻿{%- assign item = Items | First -%}
+{%- if item -%}
 
-	{% assign videoLink = item | Attribute:'VideoLink','RawValue' %}
-	{% assign videoEmbed = item | Attribute:'VideoEmbed' %}
-	{% assign audioLink = item | Attribute:'AudioLink','RawValue' %}
+	{%- assign videoLink = item | Attribute:'VideoLink','RawValue' -%}
+	{%- assign videoEmbed = item | Attribute:'VideoEmbed' -%}
+	{%- assign audioLink = item | Attribute:'AudioLink','RawValue' -%}
 
 	<article class="message-detail">
 
-		{% if videoEmbed != '' %}
+		{%- if videoEmbed != '' -%}
 			{{ videoEmbed }}
-		{% endif %}
+		{%- endif -%}
 
 		<h1>{{ item.Title }}</h1>
 
@@ -22,26 +22,26 @@
 				{{ item.Content }}
 			</div>
 			<div class="col-md-4">
-				{% if videoLink != '' or audioLink != '' %}
+				{%- if videoLink != '' or audioLink != '' -%}
 					<div class="panel panel-default">
 						<div class="panel-heading">Downloads &amp; Resources</div>
 						<div class="list-group">
 
-							{% if videoLink != '' %}
+							{%- if videoLink != '' -%}
 								<a href="{{ videoLink }}" class="list-group-item"><i class="fa fa-film"></i> Video Download</a>
-							{% endif %}
+							{%- endif -%}
 
-							{% if audioLink != '' %}
+							{%- if audioLink != '' -%}
 								<a href="{{ audioLink }}" class="list-group-item"><i class="fa fa-volume-up"></i> Audio Download</a>
-							{% endif %}
+							{%- endif -%}
 
 						</div>
 					</div>
-				{% endif %}
+				{%- endif -%}
 			</div>
 		</div>
 	</article>
 
-{% else %}
+{%- else -%}
 	<h1>Could not find message.</h1>
-{% endif %}
+{%- endif -%}

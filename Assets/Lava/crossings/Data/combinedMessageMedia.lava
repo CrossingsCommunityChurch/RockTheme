@@ -1,41 +1,41 @@
 {%- comment -%}
         Speakers: [
-            {% contentchannel where:'Name == "Teaching Message"' iterator:'teachingContentChannels' securityenabled:'false' %}
-            {% assign teachingItemId = teachingContentChannels | First | Property:'Id' %}
-            {% endcontentchannel %}
-            {% contentchannel where:'Name == "Sermon Message"' iterator:'sermonContentChannels' securityenabled:'false' %}
-            {% assign sermonItemId = sermonContentChannels | First | Property:'Id' %}
-            {% endcontentchannel %}
-            {% contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false' %}
-            {% assign existing = "" %}
-                {% for item in items %}
-                    {% assign speaker = item | Attribute:'Speaker' %}
-                    {% assign match = existing | RegExMatch:speaker %}
-                    {% if match == false %}
+            {%-contentchannel where:'Name == "Teaching Message"' iterator:'teachingContentChannels' securityenabled:'false'-%}
+            {%-assign teachingItemId = teachingContentChannels | First | Property:'Id'-%}
+            {%-endcontentchannel-%}
+            {%-contentchannel where:'Name == "Sermon Message"' iterator:'sermonContentChannels' securityenabled:'false'-%}
+            {%-assign sermonItemId = sermonContentChannels | First | Property:'Id'-%}
+            {%-endcontentchannel-%}
+            {%-contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false'-%}
+            {%-assign existing = ""-%}
+                {%-for item in items-%}
+                    {%-assign speaker = item | Attribute:'Speaker'-%}
+                    {%-assign match = existing | RegExMatch:speaker-%}
+                    {%-if match == false-%}
                         {
                             "Name": {{ item | Attribute:'Speaker' | ToJSON }}
                         }
-                        {% unless forloop.last %}, {% endunless %}
-                        {% assign existing = existing | Append:speaker %}
-                    {% endif %}
-                {% endfor %}
-            {% endcontentchannelitem %}
+                        {%-unless forloop.last-%}, {%-endunless-%}
+                        {%-assign existing = existing | Append:speaker-%}
+                    {%-endif-%}
+                {%-endfor-%}
+            {%-endcontentchannelitem-%}
         ],
 {%- endcomment -%}
 
 {
     FilterLists: {
         Topics: [
-            {% category where:'Name == "Topic Tags"' iterator:'topicCategories' securityenabled:'false' %}
-            {% assign topicCategoryId = topicCategories | First | Property:'Id' %}
-            {% tag where:'CategoryId == {{topicCategoryId}}' iterator:'topics' securityenabled:'false' %}
-                {% for topic in topics %}
+            {%-category where:'Name == "Topic Tags"' iterator:'topicCategories' securityenabled:'false'-%}
+            {%-assign topicCategoryId = topicCategories | First | Property:'Id'-%}
+            {%-tag where:'CategoryId == {{topicCategoryId}}' iterator:'topics' securityenabled:'false'-%}
+                {%-for topic in topics-%}
                     {
                         "Name": {{ topic.Name | ToJSON }}
                     }
-                {% unless forloop.last %}, {% endunless %}{% endfor %}
-            {% endtag %}
-            {% endcategory %}
+                {%-unless forloop.last-%}, {%-endunless-%}{%-endfor-%}
+            {%-endtag-%}
+            {%-endcategory-%}
         ],
         Speakers: [
             {
@@ -91,49 +91,49 @@
             }
         ],
         Books: [
-            {% category where:'Name == "Bible Books Tags"' iterator:'bookCategories' securityenabled:'false' %}
-            {% assign bookCategoryId = bookCategories | First | Property:'Id' %}
-            {% tag where:'CategoryId == {{bookCategoryId}}' iterator:'books' securityenabled:'false' %}
-                {% for book in books %}
+            {%-category where:'Name == "Bible Books Tags"' iterator:'bookCategories' securityenabled:'false'-%}
+            {%-assign bookCategoryId = bookCategories | First | Property:'Id'-%}
+            {%-tag where:'CategoryId == {{bookCategoryId}}' iterator:'books' securityenabled:'false'-%}
+                {%-for book in books-%}
                 {
                     "Name": {{ book.Name | ToJSON }}
                 }
-                {% unless forloop.last %}, {% endunless %}{% endfor %}
-            {% endtag %}
-            {% endcategory %}
+                {%-unless forloop.last-%}, {%-endunless-%}{%-endfor-%}
+            {%-endtag-%}
+            {%-endcategory-%}
         ]
     },
     Messages: [
-        {% contentchannel where:'Name == "Teaching Message"' iterator:'teachingItems' securityenabled:'false' %}
-        {% assign teachingItemId = teachingItems | First | Property:'Id' %}
-        {% endcontentchannel %}
-        {% contentchannel where:'Name == "Sermon Message"' iterator:'sermonItems' securityenabled:'false' %}
-        {% assign sermonItemId = sermonItems | First | Property:'Id' %}
-        {% endcontentchannel %}
-        {% contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false' %}
-        {% for item in items %}
+        {%-contentchannel where:'Name == "Teaching Message"' iterator:'teachingItems' securityenabled:'false'-%}
+        {%-assign teachingItemId = teachingItems | First | Property:'Id'-%}
+        {%-endcontentchannel-%}
+        {%-contentchannel where:'Name == "Sermon Message"' iterator:'sermonItems' securityenabled:'false'-%}
+        {%-assign sermonItemId = sermonItems | First | Property:'Id'-%}
+        {%-endcontentchannel-%}
+        {%-contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false'-%}
+        {%-for item in items-%}
 
-        {% assign currentDate = 'Now' | Date  %}
-        {% if item.StartDateTime >= currentDate %}
-            {% continue %}
-        {% endif %}
-        {% assign channelPath = 'sermons/' %}
-        {% if item.ContentChannel.Name == 'Teaching Message' %}
-            {%assign channelPath = 'teachings/' %}
-        {% endif %}
-        {% assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' %}
-        {% assign imageUrl = AssetImage %}
-        {% assign useVimeoImage = False %}
-        {% assign vimeoImageUrl = item | Attribute:'Image', 'RawValue' %}
-        {% if vimeoImageUrl != empty %}
-            {% assign imageUrl = vimeoImageUrl %}
-            {% assign useVimeoImage = True %}
-        {% endif %}
+        {%-assign currentDate = 'Now' | Date -%}
+        {%-if item.StartDateTime >= currentDate-%}
+            {%-continue-%}
+        {%-endif-%}
+        {%-assign channelPath = 'sermons/'-%}
+        {%-if item.ContentChannel.Name == 'Teaching Message'-%}
+            {%assign channelPath = 'teachings/'-%}
+        {%-endif-%}
+        {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath'-%}
+        {%-assign imageUrl = AssetImage-%}
+        {%-assign useVimeoImage = False-%}
+        {%-assign vimeoImageUrl = item | Attribute:'Image', 'RawValue'-%}
+        {%-if vimeoImageUrl != empty-%}
+            {%-assign imageUrl = vimeoImageUrl-%}
+            {%-assign useVimeoImage = True-%}
+        {%-endif-%}
 
-        {%if vimeoImageUrl == empty and AssetImage == empty %}
-            {% assign parentSeries = item.ParentItems | First %}
-            {% assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' %}
-        {% endif %}
+        {%if vimeoImageUrl == empty and AssetImage == empty-%}
+            {%-assign parentSeries = item.ParentItems | First-%}
+            {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath'-%}
+        {%-endif-%}
 
         {
             "Id": {{ item.Id }},
@@ -154,33 +154,33 @@
             "Image": {{ imageUrl | ToJSON }},
             "Speaker": {{ item | Attribute:'Speaker' | ToJSON }},
             "DataViews": {{ item | Attribute:'Dataviews' | ToJSON }},
-            {%if item.ParentItems %}
+            {%if item.ParentItems-%}
             "Series": {
-                {% for series in item.ParentItems | First %}
+                {%-for series in item.ParentItems | First-%}
                     "Title": {{ series.ContentChannelItem.Title | ToJSON }},
                     "Slug" : {{ series.ContentChannelItem.PrimarySlug | ToJSON }},
 
-              {% endfor %}
+              {%-endfor-%}
             },
-            {%endif %}
+            {%endif-%}
             "Topics": [
-                {% assign itemGuid = item.Guid %}
-                {% assign tagCategory = item.ContentChannel.ItemTagCategoryId %}
-                {% taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems' %}
-                {% tag where:'CategoryId == {{ tagCategory }}' iterator:'tags'%}
-                    {% for taggedItem in taggedItems %}
-                        {% for tag in tags %}
-                            {% if taggedItem.TagId == tag.Id %}
+                {%-assign itemGuid = item.Guid-%}
+                {%-assign tagCategory = item.ContentChannel.ItemTagCategoryId-%}
+                {%-taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems'-%}
+                {%-tag where:'CategoryId == {{ tagCategory }}' iterator:'tags'%}
+                    {%-for taggedItem in taggedItems-%}
+                        {%-for tag in tags-%}
+                            {%-if taggedItem.TagId == tag.Id-%}
                                 {{ tag.Name | ToJSON }},
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                {% endtag %}
-                {% endtaggeditem %}
+                            {%-endif-%}
+                        {%-endfor-%}
+                    {%-endfor-%}
+                {%-endtag-%}
+                {%-endtaggeditem-%}
             ],
             "Books": {{ item | Attribute:'Books' | ToJSON }}
         }
-        {% unless forloop.last %}, {% endunless %}{% endfor %}
-        {% endcontentchannelitem %}
+        {%-unless forloop.last-%}, {%-endunless-%}{%-endfor-%}
+        {%-endcontentchannelitem-%}
     ]
 }

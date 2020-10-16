@@ -1,29 +1,29 @@
-{% comment %}
+{%- comment -%}
   Similar to Message Details, this shows the sermon series or teaching series details pages
   Runs on Sermon Series, Teaching Series pages
   It is included as the template used for the Content Channel Item View for Series
 {%- endcomment -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/1140x640' %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/1140x640' -%}
 
-  {% if Item %}
-  {% assign item = Item %}
-  {% assign title = item.Title %}
-  {% assign summary = item.Content %}
-  {% assign seriesLogo = item | Attribute:'Serieslogo' | Url:'localpath' %}
-  {% assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append: seriesLogo %}
-  {% assign parentPath = 'sermons' %}
-  {% assign titleCategory = 'Sermon Series' %}
+  {%- if Item -%}
+  {%- assign item = Item -%}
+  {%- assign title = item.Title -%}
+  {%- assign summary = item.Content -%}
+  {%- assign seriesLogo = item | Attribute:'Serieslogo' | Url:'localpath' -%}
+  {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append: seriesLogo -%}
+  {%- assign parentPath = 'sermons' -%}
+  {%- assign titleCategory = 'Sermon Series' -%}
 
-  {% if item.ContentChannel.Name == 'Teaching Series' %}
-      {% assign parentPath = 'teachings' %}
-      {% assign titleCategory = 'Teaching Series' %}
-  {% endif %}
+  {%- if item.ContentChannel.Name == 'Teaching Series' -%}
+      {%- assign parentPath = 'teachings' -%}
+      {%- assign titleCategory = 'Teaching Series' -%}
+  {%- endif -%}
 
-  {% assign org = 'Global' | Attribute:'OrganizationName' %}
-  {% capture pageTitle %}{{ title }} - {{ titleCategory }} | {{ org }}{% endcapture%}
-  {% capture metaDesc %}{{ summary | StripHtml }} {{ title }}{% endcapture %}
+  {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
+  {%- capture pageTitle -%}{{ title }} - {{ titleCategory }} | {{ org }}{%- endcapture%}
+  {%- capture metaDesc -%}{{ summary | StripHtml }} {{ title }}{%- endcapture -%}
   {{ pageTitle | SetPageTitle }}
   {{ metaDesc | AddMetaTagToHead:'name','description' }}
 
@@ -65,25 +65,25 @@
                     </li>
                   </ul>
                 </div>
-                {% if item.ContentChannel.IsTaggingEnabled %}
+                {%- if item.ContentChannel.IsTaggingEnabled -%}
                   <!--<div class="tags">
                     <p class="small"><i class="fas fa-tags"></i>
-                      {% assign itemGuid = item.Guid %}
-                      {% assign tagCategory = item.ContentChannel.ItemTagCategoryId %}
-                      {% taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems' %}
-                        {% tag where:'CategoryId == {{ tagCategory }}' iterator:'tags'%}
-                          {% for taggedItem in taggedItems %}
-                            {% for tag in tags %}
-                              {% if taggedItem.TagId == tag.Id %}
+                      {%- assign itemGuid = item.Guid -%}
+                      {%- assign tagCategory = item.ContentChannel.ItemTagCategoryId -%}
+                      {%- taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems' -%}
+                        {%- tag where:'CategoryId == {{ tagCategory }}' iterator:'tags'%}
+                          {%- for taggedItem in taggedItems -%}
+                            {%- for tag in tags -%}
+                              {%- if taggedItem.TagId == tag.Id -%}
                                 <a href="#">{{ tag.Name }}</a>
-                              {% endif %}
-                            {% endfor %}
-                          {% endfor %}
-                        {% endtag %}
-                      {% endtaggeditem %}
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endfor -%}
+                        {%- endtag -%}
+                      {%- endtaggeditem -%}
                     </p>
                   </div>-->
-                {% endif %}
+                {%- endif -%}
               </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
       TODO: This cannot be very performant, nested for loops serveral times
     {%- endcomment -%}
 
-    {% if item.ChildItems != 'empty' %}
+    {%- if item.ChildItems != 'empty' -%}
       <div class="section media-list bg-gray">
         <div class="container content-area">
             <div class="media-list-items">
@@ -102,35 +102,35 @@
                   <div class="col-md-12">
                     <h3 class="subheading" style="margin-bottom: 30px;">Messages in This Series</h3>
                   </div>
-                  {% for child in item.ChildItems %}
-                      {% assign title = child.ChildContentChannelItem.Title %}
-                      {% assign seriesTitle = item.Title %}
-                      {% assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' %}
-                      {% assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' %}
-                      {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-                      {% assign imageSize = '/fit-in/450x325' %}
-                      {% assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' %}
-                      {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-                      {% assign vimeoImageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' %}
-                      {% if vimeoImageUrl != empty %}
-                        {% assign imageUrl = vimeoImageUrl %}
-                      {% endif %}
-                      {%if vimeoImageUrl == empty and imageUrlPath == empty %}
-                          {% assign imageUrl = seriesLogoUrl %}
-                      {% endif %}
+                  {%- for child in item.ChildItems -%}
+                      {%- assign title = child.ChildContentChannelItem.Title -%}
+                      {%- assign seriesTitle = item.Title -%}
+                      {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
+                      {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
+                      {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+                      {%- assign imageSize = '/fit-in/450x325' -%}
+                      {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                      {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                      {%- assign vimeoImageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' -%}
+                      {%- if vimeoImageUrl != empty -%}
+                        {%- assign imageUrl = vimeoImageUrl -%}
+                      {%- endif -%}
+                      {%if vimeoImageUrl == empty and imageUrlPath == empty -%}
+                          {%- assign imageUrl = seriesLogoUrl -%}
+                      {%- endif -%}
                       {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
-                      {% assign parentPrimarySlug = item.PrimarySlug | Trim %}
+                      {%- assign parentPrimarySlug = item.PrimarySlug | Trim -%}
                       {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
-                  {% endfor %}
+                  {%- endfor -%}
               </div>
             </div>
         </div>
       </div>
-    {% endif %}
+    {%- endif -%}
 
   </div>
 
-{% else %}
+{%- else -%}
 
   <div class="section page-title reverse">
     <div class="container">
@@ -138,4 +138,4 @@
     </div>
   </div>
 
-{% endif %}
+{%- endif -%}

@@ -2,14 +2,14 @@
   Runs the account dashboar and is used as an include in the account dashboard zone. Checks to see if someone is logged in and if so, runs their profile info and links
 {%- endcomment -%}
 
-{% if CurrentPerson %}
+{%- if CurrentPerson -%}
     <div class="profile">
         <div class="profile-image">
-          {% if CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-male.svg?' and CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-female.svg?'  %}
+          {%- if CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-male.svg?' and CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-female.svg?'  -%}
               <img src="{{ CurrentPerson.PhotoUrl }}&height=300&width=300&mode=crop&scale=both">
-            {% else %}
+            {%- else -%}
               <img src="{{ CurrentPerson.PhotoUrl }}">
-            {% endif %}
+            {%- endif -%}
         </div>
         <div class="profile-info">
           <h4>{{CurrentPerson.FirstName}} {{CurrentPerson.LastName}}</h4>
@@ -28,4 +28,4 @@
           <a href="/?Logout=True" class="btn btn-block">Logout</a>
         </div>
     </nav>
-{% endif %}
+{%- endif -%}

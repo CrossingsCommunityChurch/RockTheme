@@ -13,26 +13,26 @@
 {%- endcomment -%}
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
+{%- if channelAnchor != '' -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
-{%- for item in Items -%} {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
-{% if item | Attribute:'AssetImage' %}
-    {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-    {% assign imageSize = '/fit-in/2000x1300' %}
-    {% assign imageUrlPath =  item | Attribute:'AssetImage' | Url:'localpath' %}
-    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-{% endif %}
+{%- for item in Items -%} {%- comment -%} Do we need to run a loop here? is this always returned as an array? {%- endcomment -%}
+{%- if item | Attribute:'AssetImage' -%}
+    {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+    {%- assign imageSize = '/fit-in/2000x1300' -%}
+    {%- assign imageUrlPath =  item | Attribute:'AssetImage' | Url:'localpath' -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+{%- endif -%}
 
-{% assign useBackground = item | Attribute:'UseBackgroundImage' %}
-{% assign title = item.Title %}
-{% assign subheading = item | Attribute: 'subheading' %}
-{% assign content = item.Content %}
-{% assign buttons = item | Attribute: 'lava' | HtmlDecode %}
+{%- assign useBackground = item | Attribute:'UseBackgroundImage' -%}
+{%- assign title = item.Title -%}
+{%- assign subheading = item | Attribute: 'subheading' -%}
+{%- assign content = item.Content -%}
+{%- assign buttons = item | Attribute: 'lava' | HtmlDecode -%}
 
-<div class="container-fluid section simple-section {% if useBackground == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}">
-      {% if useBackground == 'Yes' and imageUrl %}
+<div class="container-fluid section simple-section {%- if useBackground == 'Yes' -%}bgimg reverse simple-section-with-image{%- endif -%}">
+      {%- if useBackground == 'Yes' and imageUrl -%}
         <div class="img" style="background-image: url('{{ imageUrl }}')"></div>
-      {% endif %}
+      {%- endif -%}
       <div class="row">
           <div class="container content-area" data-aos="fade-up">
               <div class="row">
@@ -46,7 +46,7 @@
                       <hr class="sep">
                       <p>{{ content }}</p>
 
-                      {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons.{% endcomment %}
+                      {%- comment -%} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons.{%- endcomment -%}
                       {%- if buttons != empty -%}
                         <div class="buttons" data-aos="fade-up">
                             {{ buttons }}

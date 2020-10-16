@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   Typically looped over to create a list of cards. Currently used in serving opportunities
 
   Params
@@ -9,17 +9,17 @@
     @actiontext
 {%- endcomment -%}
 
-{% unless columnstyle %}
-  {% assign columnstyle = 'col-md-4 col-lg-4' %}
-{% endunless %}
+{%- unless columnstyle -%}
+  {%- assign columnstyle = 'col-md-4 col-lg-4' -%}
+{%- endunless -%}
 
 <div class="{{columnstyle}} card-wrapper">
   <a href="{{ link }}" class="card">
     <div class="title">
       <h3>{{title}} <i class="fas fa-arrow-right pull-right"></i></h3>
-      {% if subtitle %}
+      {%- if subtitle -%}
         <p class="subtitle">{{subtitle}}</p>
-      {% endif %}
+      {%- endif -%}
     </div>
     <p class="learn-more">{{ actiontext }}</p>
   </a>

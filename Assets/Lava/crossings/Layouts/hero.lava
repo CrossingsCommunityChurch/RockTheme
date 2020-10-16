@@ -1,64 +1,64 @@
-{% comment %}
+{%- comment -%}
   Used as the Hero Content Component. This is not what is used at the top of pages however.
 {%- endcomment -%}
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{% if channelAnchor != empty %} <div id="{{channelAnchor}}"></div> {% endif %}
+{%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
 {%- for item in Items -%}
 
-{% assign title = item.Title %}
-{% assign subTitle = item | Attribute:'subheading' %}
-{% assign showButtons = item | Attribute:'UseButtons' %}
-{% assign buttons = item | Attribute:'Buttons' %}
+{%- assign title = item.Title -%}
+{%- assign subTitle = item | Attribute:'subheading' -%}
+{%- assign showButtons = item | Attribute:'UseButtons' -%}
+{%- assign buttons = item | Attribute:'Buttons' -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/2000x1300' %}
-{% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
-{% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/2000x1300' -%}
+{%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
-{% if height != empty %}
-  {% assign height = item | Attribute:'Height' %}
-{% else %}
-  {% assign height = '100vh' %}
-{% endif %}
+{%- if height != empty -%}
+  {%- assign height = item | Attribute:'Height' -%}
+{%- else -%}
+  {%- assign height = '100vh' -%}
+{%- endif -%}
 
-{% if imageUrlPath != empty %}
+{%- if imageUrlPath != empty -%}
     <div class="container-fluid hero-wrapper page-hero">
         {[ parallax image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
             <div class="jumbotron flat transparent reverse" data-aos="fade-in">
-                {% if layout == 'Homepage' %}
+                {%- if layout == 'Homepage' -%}
                     {{ buttons }}
-                {% else %}
-                    {%if subTitle %}
+                {%- else -%}
+                    {%if subTitle -%}
                         <h3 class="subheading reverse">{{ subTitle }}</h3>
-                    {% endif %}
+                    {%- endif -%}
                     <h1 class="heading">{{ title }}</h1>
-                    {%if showButtons == 'Yes' %}
+                    {%if showButtons == 'Yes' -%}
                         <div class="lead-buttons">
                             {{ buttons }}
                         </div>
-                    {% endif %}
-                {% endif %}
+                    {%- endif -%}
+                {%- endif -%}
             </div>
         {[ endparallax ]}
     </div>
-{% else %}
+{%- else -%}
     <div class="section page-title reverse">
         <div class="container">
             <div class="jumbotron text-center">
-                {%if subTitle %}
+                {%if subTitle -%}
                     <h3 class="subheading reverse">{{ subTitle }}</h3>
-                {% endif %}
+                {%- endif -%}
                 <h2 class="heading">{{ title }}</h1>
-                {%if showButtons == 'Yes' %}
+                {%if showButtons == 'Yes' -%}
                     <div class="lead-buttons">
                         {{ buttons }}
                     </div>
-                {% endif %}
+                {%- endif -%}
             </div>
         </div>
     </div>
-{% endif %}
+{%- endif -%}
 
 {%- endfor -%}
