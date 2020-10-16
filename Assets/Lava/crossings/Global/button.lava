@@ -22,13 +22,13 @@
   If we dont set a button style, set it to be primary by default
 {%- endcomment -%}
 {%- unless buttonstyle -%}
-  {%- assign buttonstyle = 'primary' -%}
+  {% assign buttonstyle = 'primary' %}
 {%- endunless -%}
 
 {%- assign link =  buttonlink -%}
 {%- assign text =  buttontext -%}
 {%- assign target = buttontarget -%}
-{%- assign style = buttonstyle -%}
+{% assign style = buttonstyle %}
 {%- assign icon = null -%}
 {%- if buttonicon != empty -%}
   {%- assign icon = buttonicon -%}
