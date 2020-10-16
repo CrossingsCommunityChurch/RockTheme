@@ -88,7 +88,7 @@
     {%- assign buttons = item | Attribute: 'lava' -%}
     {%- assign anchor = item | Attribute: 'AnchorID' | HtmlDecode -%}
 
-    <div {%- if anchor != empty -%} id="{{anchor}}" {%- endif -%} class="row flex-row">
+    <div {% if anchor != empty %} id="{{anchor}}" {% endif %} class="row flex-row">
 
         {%- if imageUrlPath != empty -%}
         <div class="cover-half visible-md-block visible-lg-block">
