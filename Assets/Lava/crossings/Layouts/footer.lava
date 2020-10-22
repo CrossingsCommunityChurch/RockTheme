@@ -133,6 +133,7 @@
 {%- endcomment -%}
 {[ mobileAppNav ]}
 
+
 <div id="liveModal" tabindex="-1" role="dialog" aria-labelledby="liveModalLabel" class="modal fade in">
     <div role="document" class="modal-dialog">
         <div class="modal-content">
@@ -143,8 +144,9 @@
             <div class="modal-body">
                 <div class="locations">
         <div class="watch-online-locations">
-            <h3><a href="https://sanct.crossings.church" target="_blank" rel="noopener">Sanctuary <i class="fa fa-arrow-right"></i><span class="times">OKC // SUNDAYS // 9:30 &amp; 11</span></a></h3>
-            <h3><a href="https://edmond.crossings.church" target="_blank" rel="noopener">Venue <i class="fa fa-arrow-right"></i><span class="times">EDMOND & OKC // SUNDAYS // 9:30 &amp; 11</span></a></h3>
+            <h3><a href="https://sanct.crossings.church" target="_blank" rel="noopener">Sanctuary <i class="fa fa-arrow-right"></i><span class="times">OKC // SUNDAYS // 9:30 // 11:00 AM &amp; 12:30 PM</span></a></h3>
+            <h3><a href="https://edmond.crossings.church" target="_blank" rel="noopener">Venue <i class="fa fa-arrow-right"></i><span class="times">EDMOND & OKC // SUNDAYS // 9:30 &amp; 11:00 AM</span></a></h3>
         </div>
     </div>
 </div>
+
