@@ -5,10 +5,8 @@
   These are intended to be used with out images and have a details link and possibly a registration link.
 {%- endcomment -%}
 
-{%- assign itemsPerPage = 33 -%}
-
 <div id="announcementList" class="announcement-list">
-  <div class="container announcement-list-items" data-aos="fade-up">
+  <div class="container-fluid announcement-list-items">
   {%- comment -%}
     Need to loop through the passed in elements here.
     This should be a list of classes/groups.
@@ -57,6 +55,3 @@
     </div>
   </div>
 </div>
-
-
-
