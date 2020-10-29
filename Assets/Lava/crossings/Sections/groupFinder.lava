@@ -34,6 +34,7 @@
                 {%- comment -%}
                   this should pull from the detail page attribute? appened the group Identifier? Same with reg.
                 {%- endcomment -%}
+              <div class="btn-group" role="group">
                 <a class="details" href="#">
                   <div class="btn icon-button shadowDepth2">
                     <span>Details</span>
@@ -46,6 +47,7 @@
                     <i class="fas fa-angle-right"></i>
                   </div>
                 </a>
+              </div>
               </div>
             </div>
           </div>
