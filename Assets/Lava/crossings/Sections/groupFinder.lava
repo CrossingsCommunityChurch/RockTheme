@@ -30,7 +30,6 @@
                     {%- endcomment -%}
                     <p class="small"> Short description would go here. </p>
                 </div>
-              </div>
                 {%- comment -%}
                   this should pull from the detail page attribute? appened the group Identifier? Same with reg.
                 {%- endcomment -%}
@@ -47,6 +46,7 @@
                     <i class="fas fa-angle-right"></i>
                   </div>
                 </a>
+              </div>
               </div>
               </div>
             </div>
