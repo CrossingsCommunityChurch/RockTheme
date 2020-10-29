@@ -22,7 +22,7 @@
             <div class="card-content">
               <div class="col relative">
                 <div>
-                  <div class="day-of-week hidden"><span></span></div>
+                  <div class="day-of-week"><span></span></div>
                     <h4>{{group.Name}}</h4>
                     {%- comment -%}
                       Need to see how schedule or next meeting displays.
