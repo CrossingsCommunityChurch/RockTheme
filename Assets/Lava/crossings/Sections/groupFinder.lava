@@ -1,0 +1,62 @@
+{%- comment -%}
+ This is coppied from webAds.lava
+ Modified to be used in the group finder as formatted output.
+
+  These are intended to be used with out images and have a details link and possibly a registration link.
+{%- endcomment -%}
+
+{%- assign itemsPerPage = 33 -%}
+
+<div id="announcementList" class="announcement-list">
+  <div class="container announcement-list-items" data-aos="fade-up">
+  {%- comment -%}
+    Need to loop through the passed in elements here.
+    This should be a list of classes/groups.
+  {%- endcomment -%}
+
+    <div class="row flex-row flex-wrap">
+    {%- for group in Groups -%}
+      <div class="col-sm-6 col-md-4">
+        <div class="card cardShadow">
+          <div class="row card-content-row">
+            <div class="card-content">
+              <div class="col relative">
+                <div>
+                  <div class="day-of-week hidden"><span></span></div>
+                    <h4>{{group.Name}}</h4>
+                    {%- comment -%}
+                      Need to see how schedule or next meeting displays.
+                    {%- endcomment -%}
+                    <h5 class="text-muted">Schedule Here?</h5>
+                    {%- comment -%}
+                      Need an attribute for short description? how to choose if the group needs details page and or registration?
+                    {%- endcomment -%}
+                    <p class="small"> Short description would go here. </p>
+                </div>
+              </div>
+                {%- comment -%}
+                  this should pull from the detail page attribute? appened the group Identifier? Same with reg.
+                {%- endcomment -%}
+                <a class="details" href="#">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Details</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </a>
+                <a class="reg" href="#">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Register</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+    {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+
+
