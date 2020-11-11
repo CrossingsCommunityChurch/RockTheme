@@ -34,13 +34,13 @@
                   this should pull from the detail page attribute? appened the group Identifier? Same with reg.
                 {%- endcomment -%}
               <div class="btn-group" role="group">
-                <a class="btn btn-block" href="#" role="button">
+                <a class="btn btn-block margin-t-md" href="#" role="button">
                   <div class="btn icon-button shadowDepth2">
                     <span>Details</span>
                     <i class="fas fa-angle-right"></i>
                   </div>
                 </a>
-                <a class="btn btn-block" href="#" role="button">
+                <a class="btn btn-block margin-t-md" href="#" role="button">
                   <div class="btn icon-button shadowDepth2">
                     <span>Register</span>
                     <i class="fas fa-angle-right"></i>
