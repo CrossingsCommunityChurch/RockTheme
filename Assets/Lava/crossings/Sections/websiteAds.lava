@@ -283,9 +283,9 @@
     var defaultAudience = getParameterByName('category');
     var defaultDay = getParameterByName('day');
     var defaultCampus = getParameterByName('campus');
-    if(!defaultCampus && personCampus){
-      defaultCampus = personCampus
-    }
+    //if(!defaultCampus && personCampus){
+    //  defaultCampus = personCampus
+    //}
     if(defaultAudience) {
       $('#audiences').html( defaultAudience + ' <i class="fas fa-angle-down pull-right"></i>');
       if(defaultDay){
