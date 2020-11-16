@@ -24,7 +24,7 @@
                     {%- comment -%}
                       Need to see how schedule or next meeting displays.
                     {%- endcomment -%}
-                    <h5 class="text-muted">Schedule Here?</h5>
+                    <h5 class="text-muted">{{group.Schedule.FriendlyScheduleText}}</h5>
                     {%- comment -%}
                       Need an attribute for short description? how to choose if the group needs details page and or registration?
                     {%- endcomment -%}
@@ -40,12 +40,14 @@
                     <i class="fas fa-angle-right"></i>
                   </div>
                 </a>
+                {% comment%}
                 <a class="btn btn-block margin-t-md" href="#" role="button">
                   <div class="btn icon-button shadowDepth2">
                     <span>Register</span>
                     <i class="fas fa-angle-right"></i>
                   </div>
                 </a>
+                {% endcomment %}
               </div>
               </div>
               </div>
