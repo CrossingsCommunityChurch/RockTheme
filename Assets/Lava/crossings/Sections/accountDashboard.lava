@@ -13,7 +13,8 @@
         </div>
         <div class="profile-info">
           <h4>{{CurrentPerson.FirstName}} {{CurrentPerson.LastName}}</h4>
-          <p>{{CurrentPerson.Email}}
+          <p>{{CurrentPerson.Email}}</p>
+          <p><a class="logout-btn btn btn-sm" href="/?Logout=True" class="btn btn-block">Logout</a></p>
         </div>
     </div>
     <nav class="account-nav" role="navigation">
@@ -24,8 +25,8 @@
             <li><a href="/my-assessments"><i class="fa fa-fw fa-sticky-note"></i> Assessments</a></li>
             <li><a href="/devotions"><i class="fa fa-fw fa-bible"></i> Devotionals</a></li>
         </ul>
-        <div class="logout">
+        <!--<div class="logout">
           <a href="/?Logout=True" class="btn btn-block">Logout</a>
-        </div>
+        </div>-->
     </nav>
 {%- endif -%}
