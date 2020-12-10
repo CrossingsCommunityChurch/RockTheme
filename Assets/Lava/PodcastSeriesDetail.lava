@@ -29,19 +29,19 @@
 	}
 </style>
 
-{% assign item = Items | First %}
-{% if item %}
+{%- assign item = Items | First -%}
+{%- if item -%}
 
 	<article class="series-detail">
-		{% assign seriesImageGuid = item | Attribute:'SeriesImage','RawValue' %}
+		{%- assign seriesImageGuid = item | Attribute:'SeriesImage','RawValue' -%}
 		<div class="series-banner" style="background-image: url('/GetImage.ashx?Guid={{ seriesImageGuid }}');" ></div>
 
 		<h1 class="series-title">{{ item.Title }}</h1>
 		<p class="series-dates">
 			<strong>{{ item.StartDateTime | Date:'M/d/yyyy' }}
-				{% if item.StartDateTime != item.ExpireDateTime %}
+				{%- if item.StartDateTime != item.ExpireDateTime -%}
 					- {{ item.ExpireDateTime | Date:'M/d/yyyy' }}
-				{% endif %}
+				{%- endif -%}
 			</strong>
 		</p>
 
@@ -71,17 +71,17 @@
 
 		<h4 class="messages-title margin-t-lg">In This Series</h4>
 		<ol class="messages">
-			{% for message in item.ChildItems %}
+			{%- for message in item.ChildItems -%}
 				<li>
 					<a href="{{ LinkedPages.DetailPage }}?Item={{ message.ChildContentChannelItem.Id }}">
 						{{ message.ChildContentChannelItem.Title }}
 					</a>
         </li>
-			{% endfor %}
+			{%- endfor -%}
 		</ol>
 
 	</article>
 
-{% else %}
+{%- else -%}
 	<h1>Could not find series.</h1>
-{% endif %}
+{%- endif -%}

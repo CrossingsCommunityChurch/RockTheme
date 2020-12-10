@@ -15,9 +15,9 @@
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
             <li><a onclick="setFilter('topic','Any')" style="cursor: pointer;">Any</a></li>
             <li role="separator" class="divider"></li>
-            {% for topic in lists.Topics %}
+            {%- for topic in lists.Topics -%}
               <li><a onclick="setFilter('topic','{{topic.Name}}')" style="cursor: pointer;">{{topic.Name}}</a></li>
-            {% endfor %}
+            {%- endfor -%}
           </ul>
         </div>
       </div>
@@ -28,9 +28,9 @@
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
             <li><a onclick="setFilter('speaker','Any')" style="cursor: pointer;">Any</a></li>
             <li role="separator" class="divider"></li>
-            {% for speaker in lists.Speakers %}
+            {%- for speaker in lists.Speakers -%}
               <li><a onclick="setFilter('speaker','{{speaker.Name}}')" style="cursor: pointer;">{{speaker.Name}}</a></li>
-            {% endfor %}
+            {%- endfor -%}
           </ul>
         </div>
       </div>
@@ -41,9 +41,9 @@
           <ul aria-labelledby="dropdownMenu1" class="dropdown-menu">
             <li><a onclick="setFilter('book','Any')" style="cursor: pointer;">Any</a></li>
             <li role="separator" class="divider"></li>
-            {% for book in lists.Books %}
+            {%- for book in lists.Books -%}
               <li><a onclick="setFilter('book','{{book.Name}}')" style="cursor: pointer;">{{book.Name}}</a></li>
-            {% endfor %}
+            {%- endfor -%}
           </ul>
         </div>
       </div>

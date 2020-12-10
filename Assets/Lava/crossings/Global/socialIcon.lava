@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   Creates a simple, round icon button. Mostly used with social media.
 
   Params

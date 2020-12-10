@@ -1,11 +1,11 @@
-{% comment %}
+{%- comment -%}
   Used to display Sermon and Teaching Series listings/artwork
 
   Params
     @link
     @img
     @title
-{% endcomment %}
+{%- endcomment -%}
 
 <div class="col-sm-6 col-md-4">
   <a href="{{ link }}" class="card series-card cardShadow">

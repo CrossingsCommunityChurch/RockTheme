@@ -7,12 +7,12 @@
     @allchurchid
 {%- endcomment -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/600x600/' %}
-{% assign evtData = 'events' | PersistedDataset %}
-{% assign audiences = evtData.Audiences | Uniq %}
-{% assign evts = evtData.Events | ToJSON %}
-{% assign itemsPerPage = 6 %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/600x600/' -%}
+{%- assign evtData = 'events' | PersistedDataset -%}
+{%- assign audiences = evtData.Audiences | Uniq -%}
+{%- assign evts = evtData.Events | ToJSON -%}
+{%- assign itemsPerPage = 6 -%}
 
 <div id="eventList" class="event-list">
   <div class="container event-list-items" data-aos="fade-up">
@@ -25,9 +25,9 @@
             <ul aria-labelledby="eventFilterMenu" id="eventFilterMenu" class="dropdown-menu">
               <li><a style="cursor: pointer;">Church Wide</a></li>
               <li role="separator" class="divider"></li>
-              {% for audience in audiences %}
+              {%- for audience in audiences -%}
                 <li><a style="cursor: pointer;">{{audience}}</a></li>
-              {% endfor %}
+              {%- endfor -%}
             </ul>
           </div>
         </div>

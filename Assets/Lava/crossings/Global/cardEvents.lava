@@ -1,6 +1,6 @@
-{% comment %}
+{%- comment -%}
   **Not currently in use. Was swapped for a javascript solution
-{% endcomment %}
+{%- endcomment -%}
 
 {%- comment -%}
   img
@@ -23,9 +23,9 @@
           <div>
             <h4>{{ eventname }}</h4>
               <p style="margin-bottom: 1px;"> <i class="fas fa-tags"></i>
-                {% for audience in audiences%}
+                {%- for audience in audiences%}
                   <span>{{audience.DefinedValue.Value}},</span>
-                {% endfor %}
+                {%- endfor -%}
               </p>
             <p class="date">{{ date }}</p>
             <p>{{recurring}}</p>

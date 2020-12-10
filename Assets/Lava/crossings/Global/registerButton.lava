@@ -1,71 +1,71 @@
-{% comment %}
+{%- comment -%}
   Used for Registering for Events. Event Details Page
 
   Params
   @eventItemOccurrenceLinkages
 
-{% endcomment %}
+{%- endcomment -%}
 
-{% assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size %}
-      {% if eventItemOccurrenceLinkagesCount > 0 %}
-        {% for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages %}
-            {% assign daysTillStartDate = 'Now' | DateDiff:eventItemOccurrenceLinkage.RegistrationInstance.StartDateTime,'m' %}
-            {% assign daysTillEndDate = 'Now' | DateDiff:eventItemOccurrenceLinkage.RegistrationInstance.EndDateTime,'m' %}
-            {% assign showRegistration = true %}
-            {% assign registrationMessage = '' %}
+{%- assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size -%}
+      {%- if eventItemOccurrenceLinkagesCount > 0 -%}
+        {%- for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages -%}
+            {%- assign daysTillStartDate = 'Now' | DateDiff:eventItemOccurrenceLinkage.RegistrationInstance.StartDateTime,'m' -%}
+            {%- assign daysTillEndDate = 'Now' | DateDiff:eventItemOccurrenceLinkage.RegistrationInstance.EndDateTime,'m' -%}
+            {%- assign showRegistration = true -%}
+            {%- assign registrationMessage = '' -%}
 
             {%- comment -%}
               The event Registration is not open yet.
             {%- endcomment -%}
-            {% if daysTillStartDate and daysTillStartDate > 0 %}
-                {% assign showRegistration = false %}
-                {% if eventItemOccurrenceLinkagesCount == 1 %}
-                  {% capture registrationMessage %}<h4 class="heading">Registration opens on {{ eventItemOccurrenceLinkage.RegistrationInstance.StartDateTime | Date:'dddd, MMMM d, yyyy' }}</h4>{% endcapture %}
-                {% else %}
-                  {% capture registrationMessage %}<h4 class="heading">Registration for {{ eventItemOccurrenceLinkage.PublicName }} opens on {{ eventItemOccurrenceLinkage.RegistrationInstance.StartDateTime | Date:'dddd, MMMM d, yyyy' }}</h4>{% endcapture %}
-                {% endif %}
-            {% endif %}
+            {%- if daysTillStartDate and daysTillStartDate > 0 -%}
+                {%- assign showRegistration = false -%}
+                {%- if eventItemOccurrenceLinkagesCount == 1 -%}
+                  {%- capture registrationMessage -%}<h4 class="heading">Registration opens on {{ eventItemOccurrenceLinkage.RegistrationInstance.StartDateTime | Date:'dddd, MMMM d, yyyy' }}</h4>{%- endcapture -%}
+                {%- else -%}
+                  {%- capture registrationMessage -%}<h4 class="heading">Registration for {{ eventItemOccurrenceLinkage.PublicName }} opens on {{ eventItemOccurrenceLinkage.RegistrationInstance.StartDateTime | Date:'dddd, MMMM d, yyyy' }}</h4>{%- endcapture -%}
+                {%- endif -%}
+            {%- endif -%}
 
             {%- comment -%}
               The event Registration has ended.
             {%- endcomment -%}
-            {% if daysTillEndDate and daysTillEndDate < 0 %}
-                {% assign showRegistration = false %}
-                {% if eventItemOccurrenceLinkagesCount == 1 %}
-                  {% capture registrationMessage %}<h4 class="heading">Registration closed on {{ eventItemOccurrenceLinkage.RegistrationInstance.EndDateTime | Date:'dddd, MMMM d, yyyy' }}</h4>{% endcapture %}
-                {% else %}
-                  {% capture registrationMessage %}<h4 class="heading">Registration for {{ eventItemOccurrenceLinkage.PublicName }} closed on {{ eventItemOccurrenceLinkage.RegistrationInstance.EndDateTime | Date:'dddd, MMMM d, yyyy' }}</h4>{% endcapture %}
-                {% endif %}
-            {% endif %}
+            {%- if daysTillEndDate and daysTillEndDate < 0 -%}
+                {%- assign showRegistration = false -%}
+                {%- if eventItemOccurrenceLinkagesCount == 1 -%}
+                  {%- capture registrationMessage -%}<h4 class="heading">Registration closed on {{ eventItemOccurrenceLinkage.RegistrationInstance.EndDateTime | Date:'dddd, MMMM d, yyyy' }}</h4>{%- endcapture -%}
+                {%- else -%}
+                  {%- capture registrationMessage -%}<h4 class="heading">Registration for {{ eventItemOccurrenceLinkage.PublicName }} closed on {{ eventItemOccurrenceLinkage.RegistrationInstance.EndDateTime | Date:'dddd, MMMM d, yyyy' }}</h4>{%- endcapture -%}
+                {%- endif -%}
+            {%- endif -%}
 
             {%- comment -%}
               The registration is open.
             {%- endcomment -%}
-            {% if showRegistration == true %}
-                {% assign statusLabel = RegistrationStatusLabels[eventItemOccurrenceLinkage.RegistrationInstanceId] %}
-                {% if eventItemOccurrenceLinkagesCount == 1 %}
-                  {% assign registrationButtonText = statusLabel %}
-                {% else %}
-                  {% assign registrationButtonText = statusLabel | Plus:' for ' | Plus:eventItemOccurrenceLinkage.PublicName %}
-                {% endif %}
+            {%- if showRegistration == true -%}
+                {%- assign statusLabel = RegistrationStatusLabels[eventItemOccurrenceLinkage.RegistrationInstanceId] -%}
+                {%- if eventItemOccurrenceLinkagesCount == 1 -%}
+                  {%- assign registrationButtonText = statusLabel -%}
+                {%- else -%}
+                  {%- assign registrationButtonText = statusLabel | Plus:' for ' | Plus:eventItemOccurrenceLinkage.PublicName -%}
+                {%- endif -%}
 
                 {%- comment -%}Registration is full{%- endcomment -%}
-                {% if statusLabel == 'Full' %}
-                    {% if eventItemOccurrenceLinkagesCount == 1 %}
-                      {% assign registrationButtonText = 'Registration Full' %}
-                    {% else %}
-                      {% assign registrationButtonText = eventItemOccurrenceLinkage.PublicName | Plus: ' (Registration Full) ' %}
-                    {% endif %}
+                {%- if statusLabel == 'Full' -%}
+                    {%- if eventItemOccurrenceLinkagesCount == 1 -%}
+                      {%- assign registrationButtonText = 'Registration Full' -%}
+                    {%- else -%}
+                      {%- assign registrationButtonText = eventItemOccurrenceLinkage.PublicName | Plus: ' (Registration Full) ' -%}
+                    {%- endif -%}
                     <div class='label label-default text-center margin-t-md' style='display: block; padding: 8px;'>{{ registrationButtonText }}</div>
                 {%- comment -%}Registration is able to take registrants.{%- endcomment -%}
-                {% else %}
-                    {% assign buttonlink = eventItemOccurrenceLinkage.RegistrationInstanceId | Prepend:'/Registrations/' %}
-                    {% assign eventoccurrenceid = PageParameter.EventOccurrenceId | Prepend:'/' %}
-                    {% assign link = buttonlink | Append:eventoccurrenceid %}
+                {%- else -%}
+                    {%- assign buttonlink = eventItemOccurrenceLinkage.RegistrationInstanceId | Prepend:'/Registrations/' -%}
+                    {%- assign eventoccurrenceid = PageParameter.EventOccurrenceId | Prepend:'/' -%}
+                    {%- assign link = buttonlink | Append:eventoccurrenceid -%}
                     {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{link}}' buttontarget:'_blank' buttontext:'Register' ]}
-                {% endif %}
-            {% else %}
+                {%- endif -%}
+            {%- else -%}
               <p>{{ registrationMessage }}</p>
-            {% endif %}
-        {% endfor %}
-      {% endif %}
+            {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}

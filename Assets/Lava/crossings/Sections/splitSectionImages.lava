@@ -15,26 +15,26 @@
 {%- endcomment -%}
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
+{%- if channelAnchor != '' -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
 <div class="flex-row flex-wrap reverse" style="width: 100%;">
 
-{%- for item in Items -%}  {% comment %} Do we need to run a loop here? is this always returned as an array? {% endcomment %}
-{% if item | Attribute:'AssetImage' %}
-    {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-    {% assign imageSize = '/fit-in/900x600' %}
-    {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
-    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-{% endif %}
+{%- for item in Items -%}  {%- comment -%} Do we need to run a loop here? is this always returned as an array? {%- endcomment -%}
+{%- if item | Attribute:'AssetImage' -%}
+    {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+    {%- assign imageSize = '/fit-in/900x600' -%}
+    {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+{%- endif -%}
 
-{% assign title = item.Title %}
-{% assign subheading = item | Attribute: 'subheading' %}
-{% assign content = item.Content %}
-{% assign buttons = item | Attribute: 'lava' | HtmlDecode %}
+{%- assign title = item.Title -%}
+{%- assign subheading = item | Attribute: 'subheading' -%}
+{%- assign content = item.Content -%}
+{%- assign buttons = item | Attribute: 'lava' | HtmlDecode -%}
 
 <div class="col-md-6 bgimg split-section-text">
     <div>
-      {% if imageUrl %}<div class="img" style="background-image: url('{{ imageUrl }}')"></div> {% endif %}
+      {%- if imageUrl -%}<div class="img" style="background-image: url('{{ imageUrl }}')"></div> {%- endif -%}
       <div>
         {%- if subheading -%}
           <h4 class="reverse subheading">{{ subheading }}</h4>
@@ -43,7 +43,7 @@
         <h2 class="reverse heading">{{ title }}</h2>
         {%- endif -%}
         <p>{{ item.Content }}</p>
-        {% comment %} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {% endcomment %}
+        {%- comment -%} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons {%- endcomment -%}
         {%- if buttons != empty -%}
           <div class="buttons">
             {{ buttons }}

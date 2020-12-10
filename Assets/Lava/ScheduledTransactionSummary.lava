@@ -5,41 +5,41 @@
     </div>
 
     <div class="col-md-6">
-        {% if ScheduledTransactions.size == 1 %}
+        {%- if ScheduledTransactions.size == 1 -%}
            <div class="row">
                 <p>
                     You currently have <span class='label label-default'>1</span> giving profile active.
                 </p>
                 <p>
-                {% if ScheduledTransactions[0].DaysTillNextPayment > 0 %}
+                {%- if ScheduledTransactions[0].DaysTillNextPayment > 0 -%}
                     Next gift is in {{ ScheduledTransactions[0].DaysTillNextPayment }} days.
-                {% endif %}
-		        {% if ScheduledTransactions[0].DaysTillNextPayment == 0 %}
+                {%- endif -%}
+		        {%- if ScheduledTransactions[0].DaysTillNextPayment == 0 -%}
 			        Next donation is scheduled for today.
-		        {% endif %}
-                {% if ScheduledTransactions[0].LastPaymentDate != null %}
-                    {% if ScheduledTransactions[0].DaysSinceLastPayment > 0 %}
+		        {%- endif -%}
+                {%- if ScheduledTransactions[0].LastPaymentDate != null -%}
+                    {%- if ScheduledTransactions[0].DaysSinceLastPayment > 0 -%}
                         Last gift was {{ ScheduledTransactions[0].DaysSinceLastPayment }} days ago.
-                    {% else %}
+                    {%- else -%}
                         Last gift was today.
-                    {% endif %}
-                {% endif %}
+                    {%- endif -%}
+                {%- endif -%}
                 </p>
             </div>
-        {% elsif ScheduledTransactions.size > 1 %}
+        {%- elsif ScheduledTransactions.size > 1 -%}
         <div class="row">
             <p>
             You currently have <span class='label label-default'>{{ ScheduledTransactions.size }}</span>
             giving profiles active.
             </p>
         </div>
-        {% else %}
+        {%- else -%}
         <div class="row">
         <p>
             You currently have no active profiles.
         </p>
         </div>
-        {% endif %}
+        {%- endif -%}
         <div class="row">
             <a class="btn btn-outline-primary btn-sm btn-block" href="{{ LinkedPages.ManageScheduledTransactionsPage }}">Manage</a>
         </div>

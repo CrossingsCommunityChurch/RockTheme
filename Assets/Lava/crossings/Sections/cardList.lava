@@ -16,8 +16,8 @@
           {%- capture itemLink -%}{{ LinkedPages.DetailPage }}?Item={{ item.Id }}{%- endcapture -%}
         {%- endif -%}
       {%- endif -%}
-      {% assign title = item.Title %}
-      {% assign subTitle = item | Attribute:'SubTitle' | StripHtml %}
+      {%- assign title = item.Title -%}
+      {%- assign subTitle = item | Attribute:'SubTitle' | StripHtml -%}
       {[ cardText title:'{{ title }}' subtitle:'{{ subTitle }}' link:'{{ itemLink }}' actiontext:'Learn More' ]}
     {%- endfor -%}
   </div>

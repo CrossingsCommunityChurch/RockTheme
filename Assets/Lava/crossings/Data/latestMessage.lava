@@ -5,27 +5,27 @@
 {%- endcomment -%}
 
 [
-    {% assign now = 'Now' | Date %}
-    {% assign contentChannelId = channelid %}
-    {% contentchannelitem | where:'(Status == 1 || Status == 2) && ContentChannelId == 21 && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
-    {% assign latestMessage = contentChannelItems | First %}
-    {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
-    {% assign parentSlug = parentSeries.PrimarySlug %}
-    {% assign AssetImage = latestMessage | Attribute:'AssetImage' | Url:'localpath' %}
-    {% assign imageUrl = AssetImage %}
-    {% assign useVimeoImage = False %}
-    {% assign vimeoImageUrl = latestMessage | Attribute:'Image', 'RawValue' %}
-    {% if vimeoImageUrl != empty %}
-        {% assign imageUrl = vimeoImageUrl %}
-        {% assign useVimeoImage = True %}
-    {% endif %}
-    {%if vimeoImageUrl == empty and AssetImage == empty %}
-        {% assign parentSeries = latestMessage.ParentItems | First %}
-        {% assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' %}
-    {% endif %}
-    {% if parentSlug == null %}
-      {% assign parentSlug = 'no-series' %}
-    {% endif %}
+    {%- assign now = 'Now' | Date -%}
+    {%- assign contentChannelId = channelid -%}
+    {%- contentchannelitem | where:'(Status == 1 || Status == 2) && ContentChannelId == 21 && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' -%}
+    {%- assign latestMessage = contentChannelItems | First -%}
+    {%- assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' -%}
+    {%- assign parentSlug = parentSeries.PrimarySlug -%}
+    {%- assign AssetImage = latestMessage | Attribute:'AssetImage' | Url:'localpath' -%}
+    {%- assign imageUrl = AssetImage -%}
+    {%- assign useVimeoImage = False -%}
+    {%- assign vimeoImageUrl = latestMessage | Attribute:'Image', 'RawValue' -%}
+    {%- if vimeoImageUrl != empty -%}
+        {%- assign imageUrl = vimeoImageUrl -%}
+        {%- assign useVimeoImage = True -%}
+    {%- endif -%}
+    {%if vimeoImageUrl == empty and AssetImage == empty -%}
+        {%- assign parentSeries = latestMessage.ParentItems | First -%}
+        {%- assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' -%}
+    {%- endif -%}
+    {%- if parentSlug == null -%}
+      {%- assign parentSlug = 'no-series' -%}
+    {%- endif -%}
     {
         "title" : {{ latestMessage.Title | ToJSON }},
         "image" : {{ imageUrl | ToJSON }},
@@ -37,5 +37,5 @@
         "parentSlug" : {{ parentSlug | ToJSON }},
         "link" : {{ '/media/sermons/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug | ToJSON }}
     }
-    {% endcontentchannelitem %}
+    {%- endcontentchannelitem -%}
 ]

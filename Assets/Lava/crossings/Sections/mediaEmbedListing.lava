@@ -30,34 +30,34 @@
   {%- endif -%}
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{% if channelAnchor != empty %} <div id="{{channelAnchor}}"></div> {% endif %}
+{%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
-<div class="section media-embed-list bg-gray" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+<div class="section media-embed-list bg-gray" {%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentItemStyle }}'{%- endif -%}>
   <div class="container content-area">
       <div class="media-list-items">
         {%- if channelSectionTitle != empty -%}
-            <h2 class="text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+            <h2 class="text-center" {%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentTextColor }}'{%- endif -%}>{{ channelSectionTitle }}</h2>
         {%- endif -%}
         {%- if channelSectionSummary != empty -%}
-            <div class="summary text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>
+            <div class="summary text-center" {%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentTextColor }}'{%- endif -%}>
             {{ channelSectionSummary }}
             </div>
         {%- endif -%}
         <div class="row flex-row flex-wrap">
-            {% for item in Items %}
-                {% assign title = item.Title %}
-                {% assign subheading = item | Attribute: 'subheading' %}
-                {% assign date = item.StartDateTime | Date:'MMM d, yyyy' %}
-                {% assign video = item | Attribute: 'VimeoID' %}
+            {%- for item in Items -%}
+                {%- assign title = item.Title -%}
+                {%- assign subheading = item | Attribute: 'subheading' -%}
+                {%- assign date = item.StartDateTime | Date:'MMM d, yyyy' -%}
+                {%- assign video = item | Attribute: 'VimeoID' -%}
                 <div class="media-item col-md-6 col-lg-4 mb-2">
                   {[ videoPlayer vimeourl:'{{ video }}' ]}
                   <div class="video-details text-center">
-                    <h4 class="subheading" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ subheading }}</h4>
-                    <h3 {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ title }}</h3>
-                    <!--<h5 {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ date }} </h5>-->
+                    <h4 class="subheading" {%- if contentTextColor != '' -%}style='{{ contentTextColor }}'{%- endif -%}>{{ subheading }}</h4>
+                    <h3 {%- if contentTextColor != empty -%}style='{{ contentTextColor }}'{%- endif -%}>{{ title }}</h3>
+                    <!--<h5 {%- if contentTextColor != empty -%}style='{{ contentTextColor }}'{%- endif -%}>{{ date }} </h5>-->
                   </div>
                 </div>
-            {% endfor %}
+            {%- endfor -%}
         </div>
       </div>
   </div>

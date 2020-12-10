@@ -115,7 +115,7 @@
       			return goLive(liveLink);
       		} else {
       			dateString = data;
-      			seconds_till = Math.abs((new Date(dateString)) - (new Date())) / 1000;
+      			seconds_till = Math.abs((new Date(dateString)) - (new Date())) / 1000 - 900;
       			days = Math.floor(seconds_till / 86400);
       			hours = Math.floor((seconds_till % 86400) / 3600);
       			minutes = Math.floor((seconds_till % 3600) / 60);
