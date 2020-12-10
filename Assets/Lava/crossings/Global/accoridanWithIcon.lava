@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
 
   Block Shortcode
     accepts [[ item ]]
@@ -6,7 +6,7 @@
     @title
     @icon - font awesome icon
 
-{% endcomment %}
+{%- endcomment -%}
 
 {%- assign wrapperId = uniqueid -%}
 {%- assign firstopen = firstopen | AsBoolean -%}
@@ -26,12 +26,15 @@
       <div class="panel panel-{{ paneltype }}">
         <div class="panel-heading" role="tab" id="heading{{ forloop.index }}-{{ wrapperId }}">
           <h4 class="panel-title">
-            <a role="button" data-toggle="collapse" data-parent="#accordion-{{ wrapperId }}" href="#collapse{{ forloop.index }}-{{ wrapperId }}" aria-expanded="{% if isopen %}true{% else %}false{% endif %}" aria-controls="collapse{{ forloop.index }}">
-              <i class="fas fa fa-fw  fa-{{item.icon}}"></i> {{ item.title }} <i class="fas fa fa-angle-down pull-right"></i>
+            <a role="button" data-toggle="collapse" data-parent="#accordion-{{ wrapperId }}" href="#collapse{{ forloop.index }}-{{ wrapperId }}" aria-expanded="{%- if isopen -%}true{%- else -%}false{%- endif -%}" aria-controls="collapse{{ forloop.index }}">
+              {%- if item.icon and item.icon != empty -%}
+                <i class="fas fa fa-fw  fa-{{item.icon}}"></i>
+              {%- endif -%}
+              {{ item.title }} <i class="fas fa fa-angle-down pull-right"></i>
             </a>
           </h4>
         </div>
-        <div id="collapse{{ forloop.index }}-{{ wrapperId }}" class="panel-collapse collapse{% if isopen %} in{% endif %}" role="tabpanel" aria-labelledby="heading{{ forloop.index }}-{{ wrapperId }}">
+        <div id="collapse{{ forloop.index }}-{{ wrapperId }}" class="panel-collapse collapse{%- if isopen -%} in{%- endif -%}" role="tabpanel" aria-labelledby="heading{{ forloop.index }}-{{ wrapperId }}">
           <div class="panel-body">
             {{ item.content }}
           </div>

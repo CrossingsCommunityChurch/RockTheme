@@ -14,31 +14,31 @@
     {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
 {%- endif -%}
 
-{% assign item = Items | First %}
+{%- assign item = Items | First -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/1000x600' %}
-{% assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' %}
-{% assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/1000x600' -%}
+{%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
+{%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
 
 
-{% assign latestMessageDataset = 'latestmessage' | PersistedDataset %}
+{%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
-{% for message in latestMessageDataset %}
-  {% assign imageUrlPath = message.image %}
-  {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-  {% if message.useVimeoImage == True %}
-    {% assign imageUrl = message.image %}
-  {% endif %}
+{%- for message in latestMessageDataset -%}
+  {%- assign imageUrlPath = message.image -%}
+  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+  {%- if message.useVimeoImage == True -%}
+    {%- assign imageUrl = message.image -%}
+  {%- endif -%}
 
-  {% assign title = message.title %}
-  {% assign speaker = message.speaker %}
-  {% assign seriesTitle = message.parentSeries %}
-  {% assign date = message.date %}
-  {% assign summary = message.content %}
-  {% assign linkUrl = message.link %}
+  {%- assign title = message.title -%}
+  {%- assign speaker = message.speaker -%}
+  {%- assign seriesTitle = message.parentSeries -%}
+  {%- assign date = message.date -%}
+  {%- assign summary = message.content -%}
+  {%- assign linkUrl = message.link -%}
 
-  <div class="media-hero gradient-bg {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+  <div class="media-hero gradient-bg {%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}inline-component{%- endif -%}" {%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentItemStyle }}'{%- endif -%}>
     <div class="container-fluid section latest-message-wrapper">
       <div class="col-md-10 col-md-offset-1">
         <div class="latest-message">
@@ -57,4 +57,4 @@
       </div>
     </div>
   </div>
-{% endfor %}
+{%- endfor -%}

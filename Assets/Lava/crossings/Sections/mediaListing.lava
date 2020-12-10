@@ -3,17 +3,17 @@
   Lists a mix of sermon and teaching series channel items. Data is fed from the Combinedmedia persisted dataset
 {%- endcomment -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/450x450' %}
-{% assign mediaItemsPerPage = 'Global' | Attribute:'MediaItemsPerPage' %}
-{% assign mediaItemImageResize = 'Global' | Attribute:'MediaItemImageResize' %}
-{% assign mediaItemTopicMinCharsToMatch = 'Global' | Attribute:'MediaItemTopicMinCharsToMatch' %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/450x450' -%}
+{%- assign mediaItemsPerPage = 'Global' | Attribute:'MediaItemsPerPage' -%}
+{%- assign mediaItemImageResize = 'Global' | Attribute:'MediaItemImageResize' -%}
+{%- assign mediaItemTopicMinCharsToMatch = 'Global' | Attribute:'MediaItemTopicMinCharsToMatch' -%}
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
+{%- if channelAnchor != '' -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
-{% javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-autosuggest@2.2.0' %}
-{% endjavascript %}
+{%- javascript id:'vue' url:'https://cdn.jsdelivr.net/combine/npm/vue@2.6.11/dist/vue.js,npm/axios@0.19.2/dist/axios.js,npm/vue-autosuggest@2.2.0' -%}
+{%- endjavascript -%}
 <link rel="stylesheet" type="text/css" href="~~/Styles/vue-autosuggest.css">
 
 <div id="vue-template-dropdown" style="display:none;">
@@ -50,7 +50,7 @@
                   @selected="onSelected"
                 >
                 <template slot-scope="{suggestion}">
-                  <span class="my-suggestion-item">{% raw %}{{ suggestion.item }}{% endraw %}</span>
+                  <span class="my-suggestion-item">{%- raw -%}{{ suggestion.item }}{%- endraw -%}</span>
                 </template>
               </vue-autosuggest>
             </div>
@@ -78,10 +78,10 @@
                   </div>
                   <div class="col">
                     <div>
-                      <h3>{% raw %}{{ item.Title }}{% endraw %}</h3>
-                      <h5 v-if="item.Series" class="series">{% raw %}{{ item.Series.Title }}{% endraw %}</h5>
-                      <h5>{% raw %}{{ item.Speaker }}{% endraw %}</h5>
-                      <p class="date">{% raw %}{{ item.StartDate }}{% endraw %}</p>
+                      <h3>{%- raw -%}{{ item.Title }}{%- endraw -%}</h3>
+                      <h5 v-if="item.Series" class="series">{%- raw -%}{{ item.Series.Title }}{%- endraw -%}</h5>
+                      <h5>{%- raw -%}{{ item.Speaker }}{%- endraw -%}</h5>
+                      <p class="date">{%- raw -%}{{ item.StartDate }}{%- endraw -%}</p>
                     </div>
                   </div>
                 </div>

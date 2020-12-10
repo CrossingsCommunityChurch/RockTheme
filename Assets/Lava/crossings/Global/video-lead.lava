@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   **Not currently in use. Was created to run a video at the top of the page. Opted to just use the standard vimeo shortcode we already had
 {%- endcomment -%}
 

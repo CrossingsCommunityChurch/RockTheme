@@ -75,35 +75,35 @@
 	}
 </style>
 
-{% assign currentSeries = Items | First %}
-{% assign currentSeriesImageGuid = currentSeries | Attribute:'SeriesImage','RawValue' %}
+{%- assign currentSeries = Items | First -%}
+{%- assign currentSeriesImageGuid = currentSeries | Attribute:'SeriesImage','RawValue' -%}
 
-{% if Pagination.CurrentPage == 1 %}
+{%- if Pagination.CurrentPage == 1 -%}
 <a href="{{ LinkedPages.DetailPage }}?Item={{ currentSeries.Id }}">
   <header class="current-series" style="background-image: url('/GetImage.ashx?Guid={{ currentSeriesImageGuid }}')">
 	  <h1>Current Series</h1>
   </header>
 </a>
-{% endif %}
+{%- endif -%}
 
 <div class="row margin-t-lg">
-	{% for item in Items %}
-	{% assign seriesImageGuid = item | Attribute:'SeriesImage','RawValue' %}
+	{%- for item in Items -%}
+	{%- assign seriesImageGuid = item | Attribute:'SeriesImage','RawValue' -%}
 
 	<div class="col-md-4 col-sm-6 margin-b-md">
 		<a class="series-link" href="{{ LinkedPages.DetailPage }}?Item={{ item.Id }}">
 		<article class="series">
-			{% if detailImageGuid != '' %}
+			{%- if detailImageGuid != '' -%}
 				<div class="series-image" style="background-image: url('/GetImage.ashx?Guid={{ seriesImageGuid }}');" ></div>
-			{% endif %}
+			{%- endif -%}
 
 			<div class="series-body">
 				<h1 class="text-color">{{ item.Title }}</h1>
 				<p class="series-dates text-color">
 					{{ item.StartDateTime | Date:'M/d/yyyy' }}
-						{% if item.StartDateTime != item.ExpireDateTime %}
+						{%- if item.StartDateTime != item.ExpireDateTime -%}
 							- {{ item.ExpireDateTime | Date:'M/d/yyyy' }}
-						{% endif %}
+						{%- endif -%}
 				</p>
 
 				<p class="series-summary text-color">
@@ -114,33 +114,33 @@
 		</a>
 	</div>
 
-{% endfor -%}
+{%- endfor -%}
 </div>
 
 
-{% if Pagination.TotalPages > 1 %}
+{%- if Pagination.TotalPages > 1 -%}
 <div class="margin-t-lg">
-  {% assign nextPageString = Pagination.NextPage | ToString %}
-  {% assign prevPageString = Pagination.PreviousPage | ToString %}
+  {%- assign nextPageString = Pagination.NextPage | ToString -%}
+  {%- assign prevPageString = Pagination.PreviousPage | ToString -%}
 
-  {% if Pagination.PreviousPage == -1 %}
+  {%- if Pagination.PreviousPage == -1 -%}
   <div class="btn btn-default pull-left">
     <i class="fa fa-chevron-left"></i> Prev
   </div>
-  {% else %}
+  {%- else -%}
   <a class="btn btn-primary pull-left" href="{{ Pagination.UrlTemplate | Replace:'PageNum', prevPageString }}">
     <i class="fa fa-chevron-left"></i> Prev
   </a>
-  {% endif %}
+  {%- endif -%}
 
-  {% if Pagination.NextPage == -1 %}
+  {%- if Pagination.NextPage == -1 -%}
   <div class="btn btn-default pull-right">
     Next <i class="fa fa-chevron-right"></i>
   </div>
-  {% else %}
+  {%- else -%}
   <a class="btn btn-primary pull-right" href="{{ Pagination.UrlTemplate | Replace:'PageNum', nextPageString }}">
     Next <i class="fa fa-chevron-right"></i>
   </a>
-  {% endif %}
+  {%- endif -%}
 </div>
-{% endif %}
+{%- endif -%}

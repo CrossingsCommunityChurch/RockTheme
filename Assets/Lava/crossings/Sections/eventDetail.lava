@@ -3,30 +3,30 @@
   Used as an include on the page and displays the event information
 {%- endcomment -%}
 
-{% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
-{% capture pageTitle %}{{eventitemoccurrence.EventItem.Name}}{% endcapture%}
-{% assign org = 'Global' | Attribute:'OrganizationName' %}
-{% capture pageTitleBrowser %}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{% endcapture%}
+{%- eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' -%}
+{%- capture pageTitle -%}{{eventitemoccurrence.EventItem.Name}}{%- endcapture%}
+{%- assign org = 'Global' | Attribute:'OrganizationName' -%}
+{%- capture pageTitleBrowser -%}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{%- endcapture%}
 {{ pageTitle | SetPageTitle:'PageTitle' }}
 {{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
 
-{% endeventitemoccurrence %}
+{%- endeventitemoccurrence -%}
 
-{% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
-{% assign eventimageUrl =''%}
-{% assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' %}
+{%- eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' -%}
+{%- assign eventimageUrl =''%}
+{%- assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' -%}
 
-{% eventcalendaritem where:'EventItemId == {{eventitemoccurrence.EventItemId}}' %}
+{%- eventcalendaritem where:'EventItemId == {{eventitemoccurrence.EventItemId}}' -%}
 
-    {% assign eventassetimage = eventcalendaritem | Attribute:'Imageasset' %}
+    {%- assign eventassetimage = eventcalendaritem | Attribute:'Imageasset' -%}
 
-{% endeventcalendaritem %}
-{% if eventassetimage and eventassetimage != empty %}
-    {% assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-    {% assign eventimageSize = '/fit-in/640x640' %}
-    {% assign eventimageUrlPath = eventassetimage | Url:'localpath' %}
-    {% assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath %}
-{% endif %}
+{%- endeventcalendaritem -%}
+{%- if eventassetimage and eventassetimage != empty -%}
+    {%- assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+    {%- assign eventimageSize = '/fit-in/640x640' -%}
+    {%- assign eventimageUrlPath = eventassetimage | Url:'localpath' -%}
+    {%- assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath -%}
+{%- endif -%}
 <div class="event-page">
     <div class="section page-title reverse">
       <div class="container">
@@ -38,9 +38,9 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <div class="event-image">
-              {% if eventimageUrl != empty %}
+              {%- if eventimageUrl != empty -%}
                 <img src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
-              {% endif %}
+              {%- endif -%}
             </div>
           </div>
         </div>
@@ -64,5 +64,5 @@
           </div>
     </div>
 </div>
-{% endeventitemoccurrence %}
+{%- endeventitemoccurrence -%}
 

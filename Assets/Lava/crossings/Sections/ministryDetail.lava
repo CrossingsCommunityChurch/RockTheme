@@ -18,7 +18,7 @@
 {%- assign channelInstagram =  ContentChannel | Attribute:'Instagram', 'RawValue' -%}
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{% if channelAnchor != '' %} <div id="{{channelAnchor}}"></div> {% endif %}
+{%- if channelAnchor != '' -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
 {%- assign sectionLava =  ContentChannel | Attribute:'SectionLava' -%}
 
@@ -49,48 +49,48 @@
           <div class="row flex-row flex-wrap justify-center location-content">
             {%- for item in Items -%}
 
-            {% assign title = item.Title %}
-            {% assign subheading = item | Attribute:'subheading' %}
-            {% assign content = item.Content %}
-            {% assign person = item | Attribute:'Person' %}
-            {% assign personID = item | Attribute:'Person', 'Id' %}
+            {%- assign title = item.Title -%}
+            {%- assign subheading = item | Attribute:'subheading' -%}
+            {%- assign content = item.Content -%}
+            {%- assign person = item | Attribute:'Person' -%}
+            {%- assign personID = item | Attribute:'Person', 'Id' -%}
 
                 <div class="col-md-6 mb-2">
-                  {% person id:'{{personID}}' %}
+                  {%- person id:'{{personID}}' -%}
                       <div class="person-item">
                         <div class="person-image">
                           <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
                         </div>
                         <div class="person-details">
-                          {% if title != empty %}
+                          {%- if title != empty -%}
                             <h4 class="subheading mt-0">{{ title }}</h4>
-                          {% endif %}
+                          {%- endif -%}
                           <h3 class="heading">{{ person.FullName }}</h3>
                           <p class="lead mb-0">{{ person | Attribute: 'Position'}}</p>
                         </div>
                       </div>
-                  {% endperson %}
+                  {%- endperson -%}
                 </div>
 
-            {% endfor %}
+            {%- endfor -%}
           </div>
-          {% if sectionLava != empty %}
+          {%- if sectionLava != empty -%}
             <div class="row">
                 <div class="col-md-12">
                   {{ sectionLava }}
                 </div>
             </div>
-          {% endif %}
-          {% if channelFacebook != empty or channelInstagram != empty %}
+          {%- endif -%}
+          {%- if channelFacebook != empty or channelInstagram != empty -%}
               <div class="row social-section justify-center flex-row flex-wrap">
-                    {% if channelFacebook != '' %}
+                    {%- if channelFacebook != '' -%}
                       {[ socialIcon link:'{{channelFacebook}}' icon:'fa-facebook' ]}
-                    {% endif %}
-                    {% if channelInstagram != '' %}
+                    {%- endif -%}
+                    {%- if channelInstagram != '' -%}
                       {[ socialIcon link:'{{channelInstagram}}' icon:'fa-instagram' ]}
-                    {% endif %}
+                    {%- endif -%}
               </div>
-          {% endif %}
+          {%- endif -%}
         </div>
       </div>
     </div>

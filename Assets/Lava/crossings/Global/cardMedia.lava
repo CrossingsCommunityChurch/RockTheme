@@ -1,6 +1,6 @@
-{% comment %}
+{%- comment -%}
   **Not currently in use. Was swapped for a javascript solution
-{% endcomment %}
+{%- endcomment -%}
 
 {%- comment -%}
   img
@@ -26,9 +26,9 @@
         <div class="col">
           <div>
             <h3>{{ title }}</h3>
-            {% if series %}
+            {%- if series -%}
               <h5 class="series">{{ series }}</h5>
-            {% endif %}
+            {%- endif -%}
             <h5>{{ speaker }}</h5>
             <p class="date">{{ date }}</p>
           </div>

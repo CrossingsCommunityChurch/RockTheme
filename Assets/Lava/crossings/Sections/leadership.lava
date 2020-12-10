@@ -1,4 +1,4 @@
-{% person dataview:'118'  %}
+{%- person dataview:'118'  -%}
 <div class="section special-message simple-section location-details">
   <div class="container">
     <div class="row">
@@ -17,7 +17,7 @@
           </div>
               <h2 class="text-center mt-0">Our Leadership</h2>
           <div class="row flex-row flex-wrap justify-center location-content">
-            {% for person in personItems %}
+            {%- for person in personItems -%}
                 <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
@@ -31,12 +31,12 @@
                       </div>
                 </div>
 
-            {% endfor %}
+            {%- endfor -%}
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-{% endperson %}
+{%- endperson -%}
 

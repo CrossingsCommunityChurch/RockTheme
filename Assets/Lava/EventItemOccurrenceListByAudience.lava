@@ -4,17 +4,17 @@
   </header>
 
   <ul class="list-unstyled">
-    {% for occurrence in EventItemOccurrences %}
+    {%- for occurrence in EventItemOccurrences -%}
     <li>
-      {% if occurrence.EventItem.DetailsUrl != '' %}
+      {%- if occurrence.EventItem.DetailsUrl != '' -%}
       <a href="{{ occurrence.EventItem.DetailsUrl }}">
-        {% else %}
+        {%- else -%}
         <a href="{{ EventDetailPage }}?EventOccurrenceId={{ occurrence.Id }}">
-          {% endif %}
+          {%- endif -%}
           {{ occurrence.EventItem.Name }} <small>({{ occurrence.Schedule.iCalendarContent | DatesFromICal | First | Date: 'M/d ' }})</small>
         </a>
 
       </li>
-    {% endfor %}
+    {%- endfor -%}
   </ul>
 </div>

@@ -3,20 +3,20 @@
   Displays Website Ads Content Channel Items
 {%- endcomment -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/600x600/' %}
-{% assign adsData = 'ads' | PersistedDataset %}
-{% assign audiences = adsData.Audiences | Uniq %}
-{% assign daysofWeek = adsData.DaysofWeek | Uniq %}
-{% assign campuses = adsData.Campuses | Uniq %}
-{% assign adsJson = adsData.Ads | ToJSON %}
-{% if CurrentPerson and CurrentPerson != empty%}
-{% assign personCampus = CurrentPerson | Campus %}
-{% else %}
-  {% assign personCampus = 'all' %}
-{% endif %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/600x600/' -%}
+{%- assign adsData = 'ads' | PersistedDataset -%}
+{%- assign audiences = adsData.Audiences | Uniq -%}
+{%- assign daysofWeek = adsData.DaysofWeek | Uniq -%}
+{%- assign campuses = adsData.Campuses | Uniq -%}
+{%- assign adsJson = adsData.Ads | ToJSON -%}
+{%- if CurrentPerson and CurrentPerson != empty%}
+{%- assign personCampus = CurrentPerson | Campus -%}
+{%- else -%}
+  {%- assign personCampus = 'all' -%}
+{%- endif -%}
 
-{% assign itemsPerPage = 33 %}
+{%- assign itemsPerPage = 33 -%}
 
 <div id="announcementList" class="announcement-list">
   <div class="container announcement-list-items" data-aos="fade-up">
@@ -29,9 +29,9 @@
             <ul aria-labelledby="eventFilterMenu" id="eventFilterMenu" class="dropdown-menu">
               <li><a style="cursor: pointer;">All</a></li>
               <li role="separator" class="divider"></li>
-              {% for audience in audiences %}
+              {%- for audience in audiences -%}
                 <li><a style="cursor: pointer;">{{audience}}</a></li>
-              {% endfor %}
+              {%- endfor -%}
             </ul>
           </div>
         </div>
@@ -42,9 +42,9 @@
             <ul aria-labelledby="evenDaytFilterMenu" id="eventDayFilterMenu" class="dropdown-menu">
               <li><a style="cursor: pointer;">All</a></li>
               <li role="separator" class="divider"></li>
-              {% for day in daysofWeek %}
+              {%- for day in daysofWeek -%}
                 <li><a style="cursor: pointer;">{{day}}</a></li>
-              {% endfor %}
+              {%- endfor -%}
             </ul>
           </div>
         </div>
@@ -55,9 +55,9 @@
             <ul aria-labelledby="eventCamptFilterMenu" id="eventCampFilterMenu" class="dropdown-menu">
               <li><a style="cursor: pointer;">All</a></li>
               <li role="separator" class="divider"></li>
-              {% for campus in campuses %}
+              {%- for campus in campuses -%}
                 <li><a style="cursor: pointer;">{{campus}}</a></li>
-              {% endfor %}
+              {%- endfor -%}
             </ul>
           </div>
         </div>
@@ -283,9 +283,9 @@
     var defaultAudience = getParameterByName('category');
     var defaultDay = getParameterByName('day');
     var defaultCampus = getParameterByName('campus');
-    if(!defaultCampus && personCampus){
-      defaultCampus = personCampus
-    }
+    //if(!defaultCampus && personCampus){
+    //  defaultCampus = personCampus
+    //}
     if(defaultAudience) {
       $('#audiences').html( defaultAudience + ' <i class="fas fa-angle-down pull-right"></i>');
       if(defaultDay){
