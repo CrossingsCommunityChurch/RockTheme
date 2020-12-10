@@ -53,7 +53,7 @@
 				};
 			}
 
-			if (day === 3) {
+			if (day === 4) {
 				//Wednesday
 				return {
 					link: 'https://venue.crossings.church',
