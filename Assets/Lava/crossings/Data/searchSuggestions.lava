@@ -1,7 +1,7 @@
 {
   "Recommended": [
     {%- assign now = 'Now' | Date -%}
-    {%- contentchannelitem where:'ContentChannelId == 1 && StartDateTime < "{{now}}"' Sort:'Priority Desc ' Limit:'3' -%}
+    {%- contentchannelitem where:'ContentChannelId == 1 && StartDateTime <= "{{now}}"' Sort:'Priority Desc ' Limit:'3' -%}
       {%- for item in contentchannelitemItems -%}
         {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
         {%- assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
