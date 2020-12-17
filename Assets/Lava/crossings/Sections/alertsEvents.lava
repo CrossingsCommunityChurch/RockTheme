@@ -10,6 +10,7 @@
         @link
         @multi Boolean
         @livebtn Boolean
+        @eventname
 {%- endcomment -%}
 
 
@@ -45,9 +46,9 @@
 <script type="text/javascript">
 	jQuery(function() {
    	var days, goLive, hours, intervalId, minutes, seconds;
-        const isMulti = '{{ismulti}}';
-        const useLiveBtn = '{{uselivebtn}}';
-        const bannerText = '{{name}}'
+        const isMulti = {{ismulti}};
+        const useLiveBtn = {{uselivebtn}};
+        const bannerText = {{eventname}};
 		function getLiveLink() {
 
 
