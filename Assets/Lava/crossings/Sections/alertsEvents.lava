@@ -59,7 +59,7 @@
 			return {
 				link: "{{link}}",
 				text: "{{eventname}}",
-				class: 'tuesday-live'
+				class: 'wednesday-live'
 			};
 		}
 
