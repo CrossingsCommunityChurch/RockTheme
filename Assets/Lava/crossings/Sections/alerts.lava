@@ -9,7 +9,7 @@
 		@active
 {%- endcomment -%}
 
-{%- if active -%}
+{%- if active == true -%}
 	<div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
   <a class="live-link" href="#">
     <span class="alert-text">
