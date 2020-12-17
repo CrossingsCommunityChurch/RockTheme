@@ -14,7 +14,7 @@
   <a class="live-link" href="#">
     <span class="alert-text">
       <div class="no-live"><span class='live-text'></span>LIVE IN</div>
-      <div class="live">Watch <span class='live-text'></span>Live Now</div>
+      <div class="live">Click to Watch <span class='live-text'></span>Live Now</div>
     </span>
     <span class="time">
       <span class="counter mt-0 mb-0">
@@ -156,7 +156,7 @@
 		seconds = void 0;
 		intervalId = void 0;
 		//data = "{[ scheduledcontent schedulecategoryid:'{{scheduleid}}' showwhen:'notlive'  ]}{{ NextOccurrenceDateTime | Date: 'yyyy/MM/dd HH:mm:ss' }}{[ endscheduledcontent ]}{[ scheduledcontent schedulecategoryid:'{{scheduleid}}' showwhen:'live'  ]}islive{[ endscheduledcontent ]}";
-		data = "{[ scheduledcontent schedulecategoryid:'565' showwhen:'both'  ]}{%- if IsLive -%}islive{%- else -%}{% assign schedmin15 = NextOccurrenceDateTime | Date: 'yyyy/MM/dd HH:mm:ss' | DateAdd:-15,'m' %}{%- assign timedif =  'Now' | DateDiff:schedmin15,'m' -%}{%- if timedif < 0 -%}islive{%- else -%}{{schedmin15}}{%- endif -%}{%- endif -%}{[ endscheduledcontent ]}";
+		data = "{[ scheduledcontent schedulecategoryid:'565' showwhen:'both'  ]}{%- if IsLive -%}islive{%- else -%}{% assign schedmin15 = NextOccurrenceDateTime | Date: 'yyyy/MM/dd HH:mm:ss' | DateAdd:-15,'m' %}{%- assign timedif =  'Now' | DateDiff:schedmin15,'m' -%}{%- if timedif <= 0 -%}islive{%- else -%}{{schedmin15}}{%- endif -%}{%- endif -%}{[ endscheduledcontent ]}";
 		loadCountdown(data, liveLink);
 	});
 </script>
