@@ -6,9 +6,10 @@
 		Sunday - Church is Live In...(opens a modal to allow the user to select which experience to stream)
 	Params
 		@scheduleid
+		@active
 {%- endcomment -%}
 
-{%- assign scheduleid = scheduleid -%}
+
 <div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
   <a class="live-link" href="#">
     <span class="alert-text">
@@ -115,7 +116,7 @@
       			return goLive(liveLink);
       		} else {
       			dateString = data;
-      			seconds_till = Math.abs((new Date(dateString)) - (new Date())) / 1000 - 900;
+      			seconds_till = Math.abs((new Date(dateString)) - (new Date())) / 1000;
       			days = Math.floor(seconds_till / 86400);
       			hours = Math.floor((seconds_till % 86400) / 3600);
       			minutes = Math.floor((seconds_till % 3600) / 60);
@@ -154,7 +155,8 @@
 		minutes = void 0;
 		seconds = void 0;
 		intervalId = void 0;
-		data = "{[ scheduledcontent schedulecategoryid:'{{scheduleid}}' showwhen:'notlive'  ]}{{ NextOccurrenceDateTime | Date: 'yyyy/MM/dd HH:mm:ss' }}{[ endscheduledcontent ]}{[ scheduledcontent schedulecategoryid:'{{scheduleid}}' showwhen:'live'  ]}islive{[ endscheduledcontent ]}";
+		//data = "{[ scheduledcontent schedulecategoryid:'{{scheduleid}}' showwhen:'notlive'  ]}{{ NextOccurrenceDateTime | Date: 'yyyy/MM/dd HH:mm:ss' }}{[ endscheduledcontent ]}{[ scheduledcontent schedulecategoryid:'{{scheduleid}}' showwhen:'live'  ]}islive{[ endscheduledcontent ]}";
+		data = "{[ scheduledcontent schedulecategoryid:'565' showwhen:'both'  ]}{%- if IsLive -%}islive{%- else -%}{% assign schedmin15 = NextOccurrenceDateTime | Date: 'yyyy/MM/dd HH:mm:ss' | DateAdd:-15,'m' %}{%- assign timedif =  'Now' | DateDiff:schedmin15,'m' -%}{%- if timedif < 0 -%}islive{%- else -%}{{schedmin15}}{%- endif -%}{%- endif -%}{[ endscheduledcontent ]}";
 		loadCountdown(data, liveLink);
 	});
 </script>

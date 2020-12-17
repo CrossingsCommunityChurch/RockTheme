@@ -1,0 +1,13 @@
+{%- comment -%}
+  This is used on the group details page. It takes a group ID via URL Parameter.
+
+{%- endcomment -%}
+
+{%- group id:'{{ PageParameter.groupId }}' -%}
+{%- capture pageTitle -%}{{egrou.Name}}{%- endcapture%}
+{%- assign org = 'Global' | Attribute:'OrganizationName' -%}
+{%- capture pageTitleBrowser -%}{{group.Name}} | {{ org }}{%- endcapture%}
+{{ pageTitle | SetPageTitle:'PageTitle' }}
+{{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
+
+{%- endgroup -%}
