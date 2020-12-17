@@ -17,7 +17,6 @@
 {%- assign ismulti = multi | AsBoolean -%}
 {%- assign uselivebtn = livebtn | AsBoolean -%}
 
-{{ 'Lava' | Debug }}
 {%- if isactive == true -%}
 	<div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
   <a class="live-link" href="#">
