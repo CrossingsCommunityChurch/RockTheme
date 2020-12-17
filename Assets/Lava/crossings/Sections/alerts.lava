@@ -8,8 +8,8 @@
 		@scheduleid
 		@active
 {%- endcomment -%}
-
-{%- if active == true -%}
+{%- assign isactive = active | AsBoolean -%}
+{%- if isactive == true -%}
 	<div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
   <a class="live-link" href="#">
     <span class="alert-text">
