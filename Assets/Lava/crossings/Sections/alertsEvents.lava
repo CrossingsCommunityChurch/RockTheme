@@ -8,6 +8,7 @@
 		@scheduleid
 		@active Boolean
         @link
+        @class either wednesday-live watch-multi
         @multi Boolean
         @livebtn Boolean
         @eventname
@@ -49,6 +50,7 @@
         const isMulti = {{ismulti}};
         const useLiveBtn = {{uselivebtn}};
         const bannerText = '{{eventname}}';
+        const bannerClass = '{{class}}';
 		function getLiveLink() {
 
 
@@ -59,7 +61,7 @@
 			return {
 				link: "{{link}}",
 				text: "{{eventname}}",
-				class: 'wednesday-live'
+				class: '{{bannerClass}}'
 			};
 		}
 
