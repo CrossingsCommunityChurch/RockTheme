@@ -48,7 +48,7 @@
    	var days, goLive, hours, intervalId, minutes, seconds;
         const isMulti = {{ismulti}};
         const useLiveBtn = {{uselivebtn}};
-        const bannerText = {{eventname}};
+        const bannerText = '{{eventname}}';
 		function getLiveLink() {
 
 
