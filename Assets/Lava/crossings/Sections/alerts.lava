@@ -63,7 +63,7 @@
 				};
 			}
 
-			if (day === 4) {
+			if (day === 0) {
 				//Sunday
 				return 'multi';
 			}
