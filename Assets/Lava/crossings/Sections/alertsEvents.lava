@@ -6,9 +6,19 @@
 		Sunday - Church is Live In...(opens a modal to allow the user to select which experience to stream)
 	Params
 		@scheduleid
-		@active
+		@active Boolean
+        @link
+        @class either wednesday-live watch-multi
+        @multi Boolean
+        @livebtn Boolean
+        @eventname
 {%- endcomment -%}
+
+
 {%- assign isactive = active | AsBoolean -%}
+{%- assign ismulti = multi | AsBoolean -%}
+{%- assign uselivebtn = livebtn | AsBoolean -%}
+
 {%- if isactive == true -%}
 	<div id="churchonline_counter" class="alert alert-heading alert-info alert-primary text-center">
   <a class="live-link" href="#">
@@ -37,45 +47,25 @@
 <script type="text/javascript">
 	jQuery(function() {
    	var days, goLive, hours, intervalId, minutes, seconds;
+        const isMulti = {{ismulti}};
+        const useLiveBtn = {{uselivebtn}};
+        const bannerText = '{{eventname}}';
+        const bannerClass = '{{class}}';
+		function getLiveLink() {
 
-		var d = new Date();
-		var dayToday = d.getDay();
-		var isTuesday = false;
-		var isWednesday = false;
-		var isSunday = false;
 
-		function getLiveLink(day) {
-			if(day === 2) {
-				//Tuesday
-				return {
-					link: 'https://venue.crossings.church',
-					text: 'The Gathering ',
-					class: 'tuesday-live'
-				};
-			}
-
-			if (day === 3) {
-				//Wednesday
-				return {
-					link: 'https://venue.crossings.church',
-					text: 'Wednesday Night ',
-					class: 'wednesday-live'
-				};
-			}
-
-			if (day === 0) {
-				//Sunday
+			if (isMulti) {
 				return 'multi';
 			}
 
 			return {
-				link: '/locations/online',
-				text: 'Church Online ',
-				class: 'not-live'
+				link: "{{link}}",
+				text: "{{eventname}}",
+				class: '{{bannerClass}}'
 			};
 		}
 
-		var liveLink = getLiveLink(dayToday);
+		var liveLink = getLiveLink();
 
 		if(liveLink !== 'multi') {
 			$('.live-link').attr("href", liveLink.link);
@@ -83,10 +73,10 @@
 			$('#churchonline_counter .live-text').text(liveLink.text);
 		} else {
 			$('.live-link').addClass('watch-multi');
-			$('#churchonline_counter .live-text').text('Church ');
+			$('#churchonline_counter .live-text').text(bannerText);
 			$('.watch-multi').click(function(e){
 					e.preventDefault();
-					$('#liveModal').modal();
+					$('#liveEventModal').modal();
 			})
 		}
 
@@ -100,7 +90,9 @@
 							$("#churchonline_counter .live").addClass('reveal').show();
 							$("#churchonline_counter").addClass('reveal').show();
 							if(liveLink !== 'multi') {
-								//$('.btn-latest').addClass('btn-live').attr("href", liveLink.link).find('span').text('Watch Live Now');
+                                if(useLiveBtn){
+								$('.btn-latest').addClass('btn-live').attr("href", liveLink.link).find('span').text('Watch Live Now');
+                                }
 							} else {
 								$('.btn-latest').addClass('btn-live watch-multi').attr("href", '#').find('span').text('Watch Live Now');
 									$('.watch-multi').click(function(e){
