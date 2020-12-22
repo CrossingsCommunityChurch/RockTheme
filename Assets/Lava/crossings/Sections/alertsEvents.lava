@@ -91,10 +91,10 @@
 							$("#churchonline_counter").addClass('reveal').show();
 							if(liveLink !== 'multi') {
                                 if(useLiveBtn){
-								$('.btn-latest').addClass('btn-live').attr("href", liveLink.link).find('span').text('Watch Live Now');
+								$('.btn-latest').addClass('btn-live').attr("href", liveLink.link).find('span').text('Watch LIVE ' + bannerText);
                                 }
 							} else {
-								$('.btn-latest').addClass('btn-live watch-multi').attr("href", '#').find('span').text('Watch Live Now');
+								$('.btn-latest').addClass('btn-live watch-multi').attr("href", '#').find('span').text('Watch LIVE ' + bannerText);
 									$('.watch-multi').click(function(e){
 										e.preventDefault();
 										$('#liveModal').modal();
