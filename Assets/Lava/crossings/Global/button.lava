@@ -58,7 +58,7 @@
       {%- assign parentSlug = 'no-series' -%}
     {%- endif -%}
     {%- assign link =  '/media/sermons/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug -%}
-    {%- if text != empty -%}
+    {%- if text == empty -%}
       {%- assign text = 'Watch Latest Message' -%}
     {%- endif -%}
     {%- assign style = buttonstyle -%}
