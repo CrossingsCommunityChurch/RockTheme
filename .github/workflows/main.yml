@@ -23,7 +23,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+        
+      - id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@v1
+        with:
+          version: 2.0.30
       # Runs a single command using the runners shell
       - name: StagePush
         run: aws ssm send-command \ --document-name "AWS-RunShellScript" \ --targets "Key=InstanceIds,Values=i-0aaa2f9e4b5ebd565" \ --cli-input-json file://pullStage.json
