@@ -233,7 +233,7 @@
 
 		{%- endif -%}
 
-
+		{%- comment -%}
 
 		{%- if countInactive > -1 -%}
 			{%- assign icountInactive = 0 -%}
@@ -299,6 +299,8 @@
 			{%- endfor -%}
 
 		{%- endif -%}
+
+		{%- endcomment -%}
 
 		<div class="pull-right margin-b-md">
 			{%- if AllowedActions.Edit == true -%}
