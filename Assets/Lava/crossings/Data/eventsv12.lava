@@ -1,0 +1,27 @@
+{
+    "Audiences": [
+
+    ],
+    "Events":[
+        {% calendarevents calendarid:'1'  %}
+            {% for item in EventScheduledInstances %}
+            {%- comment -%}
+                "Details": item.Description
+                "Summary": item.Summary
+                [
+                    "Date": item.Date
+                    "Time": item.Time
+                    "Contact": item.EventItemOccurrence.ContactEmail
+                ]
+            {%- endcomment -%}
+                {{ item.Name }}
+                Details: {{ item.Description }}
+                Summary: {{ item.Summary }}
+                on {{ item.Date }}
+                at {{ item.Time }}
+                for {{ item.AudienceNames | Join:', ' }}
+                Contact: {{ item.EventItemOccurrence.ContactEmail }}
+            {% endfor %}
+        {% endcalendarevents %}
+    ]
+}
