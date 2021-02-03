@@ -12,8 +12,8 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="https://easter.crossings.church/40days">40 Days</a></li>
-        <li><a href="https://easter.church/"></a>Place holder 1</li>
-        <li><a href="https://easter.crossings.church/"></a>Place Holder 2</li>
+        <li><a href="https://easter.church/">Place holder 1</a></li>
+        <li><a href="https://easter.crossings.church/">Place Holder 2</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
