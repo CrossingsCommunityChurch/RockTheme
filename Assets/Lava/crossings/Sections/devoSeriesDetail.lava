@@ -36,10 +36,6 @@
   <img src="{{ imageUrl }}" alt="{{ title }}" title="{{ title }}" />
 </div>
 {%- endif -%}
-<div class="container main">
-  {{ content }}
-</div>
-
 {%- assign cardImageSize = '/fit-in/300x300/' -%}
 
 <div id="announcementList" class="announcement-list">
@@ -84,4 +80,9 @@
     </div>
   </div>
 </div>
+<div class="container main">
+  {{ content }}
+</div>
+
+
 
