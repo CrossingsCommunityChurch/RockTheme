@@ -36,19 +36,20 @@
   <img src="{{ imageUrl }}" alt="{{ title }}" title="{{ title }}" />
 </div>
 {%- endif -%}
-{%- assign cardImageSize = '/fit-in/300x300/' -%}
+{%- assign cardImageSize = '/fit-in/600x600/' -%}
 
 <div id="announcementList" class="announcement-list">
   <div class="container announcement-list-items" data-aos="fade-up">
-    <h4>Daily Devotionals</h4>
+    <h4>Daily Prayers</h4>
     <div class="row flex-row flex-wrap">
-      {%- for card in Item.ChildItems -%}
+      {%- assign cards = Item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc' -%}
+      {%- for card in cards -%}
         {%- assign imageUrlPath = card.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
         {%- assign imageUrl = imageStorageUrl | Append: cardImageSize | Append:imageUrlPath -%}
-        {%- capture itemLink -%}/devotions/{{card.ChildContentChannelItem.PrimarySlug}}{%endcapture -%}
+        {%- capture itemLink -%}/40days/daily/{{card.ChildContentChannelItem.PrimarySlug}}{%endcapture -%}
         {%- assign title = card.ChildContentChannelItem.Title -%}
         {%- assign author = card.ChildContentChannelItem | Attribute:'Author' -%}
-        {%- assign content = card.ChildContentChannelItem.Content | StripHtml | Slice: 0, 225 -%}
+        {%- assign dayContent = card.ChildContentChannelItem.Content | StripHtml | Slice: 0, 225 -%}
         {%- assign date = card.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
         {%-assign summary = card.ChildContentChannelItem | Attribute:'Summary'-%}
         <div class="col-sm-6 col-md-4">
