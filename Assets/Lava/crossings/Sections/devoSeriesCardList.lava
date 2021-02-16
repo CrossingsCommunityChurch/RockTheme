@@ -8,7 +8,7 @@
       {%- for item in Items -%}
         {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
         {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-        {%- capture itemLink -%}/devoseries/{{item.PrimarySlug}}{%endcapture -%}
+        {%- capture itemLink -%}/40days/weekly/{{item.PrimarySlug}}{%endcapture -%}
         {%- assign title = item.Title -%}
         {%- assign author = item | Attribute:'Author' -%}
         {%- assign content = item.Content | StripHtml | Slice: 0, 225 -%}
