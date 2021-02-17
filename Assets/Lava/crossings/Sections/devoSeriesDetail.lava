@@ -43,7 +43,9 @@
     <h4>Daily Prayers</h4>
     <div class="row flex-row flex-wrap">
       {%- assign cards = Item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc' -%}
+      {%- assign curdate = 'Now' | Date -%}
       {%- for card in cards -%}
+      {%- if card.ChildContentChannelItem.StartDateTime <= curdate -%}
         {%- assign imageUrlPath = card.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
         {%- assign imageUrl = imageStorageUrl | Append: cardImageSize | Append:imageUrlPath -%}
         {%- capture itemLink -%}/40days/daily/{{card.ChildContentChannelItem.PrimarySlug}}{%endcapture -%}
@@ -77,6 +79,7 @@
             </div>
           </div>
         </div>
+      {%- endif -%}
       {%- endfor -%}
     </div>
   </div>
