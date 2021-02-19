@@ -1,6 +1,13 @@
-console.log('loading theme js');
+//console.log('loading theme js');
 
 $(document).ready(function() {
+
+    //Init Animate on Scroll
+    // For options on settings - https://github.com/michalsnik/aos
+    AOS.init({
+        easing: 'ease-in-out',
+        duration: '1000'
+    });
 
     $('.card-list-filter .btn').click(function(e){
         e.preventDefault();
@@ -13,7 +20,7 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
-    $('a[data-toggle="collapse"').click(function(){
+    $('a[data-toggle="collapse"]').click(function(){
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
@@ -55,13 +62,6 @@ $(document).ready(function() {
         } else {
             $('.primary-nav').removeClass('fixed push sticky');
         }
-    });
-    
-    //Init Animate on Scroll
-    // For options on settings - https://github.com/michalsnik/aos
-    AOS.init({
-        easing: 'ease-in-out',
-        duration: '1000'
     });
 
     let menuWidth = '30em';
@@ -125,4 +125,24 @@ $(document).ready(function() {
     var offset = $("#zone-pageheading").outerHeight(true) - 140;
     console.log(offset);
     $(".navbar.affix-navbar").affix({offset: {top: offset} });
+    
+    function isIE() {
+        // IE 10 and IE 11
+        return /Trident\/|MSIE/.test(window.navigator.userAgent);
+    }
+
+    function showBrowserAlert() {
+        if (document.querySelector('.unsupported-browser')) {
+           var d = document.getElementsByClassName('unsupported-browser');
+    
+           var is_IE = isIE();
+    
+            if (is_IE) {
+                d[0].innerHTML = '<div class="alert alert-info text-center" style="margin-bottom: 0;"><strong>Unsupported Browser</strong> This website will offer limited functionality in this browser. We only support the recent versions of major browsers like Chrome, Firefox, Safari, and Edge.</div>';
+                d[0].style.display = 'block';
+            }
+        }
+    };
+    
+    showBrowserAlert();
 });

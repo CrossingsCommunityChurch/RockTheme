@@ -1,0 +1,45 @@
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/300x300/' -%}
+
+<div id="announcementList" class="announcement-list">
+  <div class="container announcement-list-items" data-aos="fade-up">
+    <div class="row flex-row flex-wrap">
+      {%- for item in Items -%}
+        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+        {%- capture itemLink -%}/40days/weekly/{{item.PrimarySlug}}{%endcapture -%}
+        {%- assign title = item.Title -%}
+        {%- assign author = item | Attribute:'Author' -%}
+        {%- assign content = item.Content | StripHtml | Slice: 0, 225 -%}
+        {%- assign date = item.StartDateTime | Date:'MMM d, yyyy' -%}
+        {%-assign summary = item | Attribute:'Summary'-%}
+        <div class="col-sm-6 col-md-4">
+          <div class="card cardShadow">
+            <div class="thumb">
+              <img src="{{ imageUrl }}" alt="{{ title }}"class="event-img">
+            </div>
+            <div class="row card-content-row">
+              <div class="card-content">
+                <div class="col relative">
+                  <div>
+                    <h4>{{ title }}</h4>
+                    {%- if summary and summary != empty -%}
+                      <p class="small"> {{ summary }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+                <a class="details" href="{{ itemLink }}">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Read More</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>

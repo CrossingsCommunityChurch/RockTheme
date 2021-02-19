@@ -1,12 +1,13 @@
 {
   "Recommended": [
-    {% contentchannelitem where:'ContentChannelId == 1' Sort:'Priority Desc ' Limit:'3' %}
-      {% for item in contentchannelitemItems %}
-        {% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
-        {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+    {%- assign now = 'Now' | Date -%}
+    {%- contentchannelitem where:'ContentChannelId == 1 && StartDateTime <= "{{now}}"' Sort:'Priority Desc ' Limit:'3' -%}
+      {%- for item in contentchannelitemItems -%}
+        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
         {%- assign itemContent = item | Attribute: 'SummaryText' | StripHtml | Trim -%}
-        {% assign subheading = item | Attribute:'Subheading' %}
-        {% assign detail = item | Attribute:'DetailsURL','RawValue' %}
+        {%- assign subheading = item | Attribute:'Subheading' -%}
+        {%- assign detail = item | Attribute:'DetailsURL','RawValue' -%}
         {
             "Id": {{ item.Id }},
             "Title": {{ item.Title | ToJSON }},
@@ -21,36 +22,36 @@
             "ChannelName": {{ item.ContentChannel.Name | ToJSON }},
             "Detail" : {{ detail | ToJSON }},
         },
-      {% endfor %}
-    {%  endcontentchannelitem%}
+      {%- endfor -%}
+    {%-  endcontentchannelitem%}
   ],
   "Popular": [
-    {% assign now = 'Now' | Date %}
-    {% contentchannel where:'Name == "Teaching Message"' iterator:'teachingItems' securityenabled:'false' %}
-        {% assign teachingItemId = teachingItems | First | Property:'Id' %}
-        {% endcontentchannel %}
-        {% contentchannel where:'Name == "Sermon Message"' iterator:'sermonItems' securityenabled:'false' %}
-        {% assign sermonItemId = sermonItems | First | Property:'Id' %}
-        {% endcontentchannel %}
-        {% contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}} && StartDateTime < "{{now}}"' Limit:'3' sort:'StartDateTime desc' iterator:'items' securityenabled:'false' %}
-        {% for item in items %}
-        {% assign channelPath = 'sermons/' %}
-        {% if item.ContentChannel.Name == 'Teaching Message' %}
-            {%assign channelPath = 'teachings/' %}
-        {% endif %}
-        {% assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' %}
-        {% assign imageUrl = AssetImage %}
-        {% assign useVimeoImage = False %}
-        {% assign vimeoImageUrl = item | Attribute:'Image', 'RawValue' %}
-        {% if vimeoImageUrl != empty %}
-            {% assign imageUrl = vimeoImageUrl %}
-            {% assign useVimeoImage = True %}
-        {% endif %}
+    {%- assign now = 'Now' | Date -%}
+    {%- contentchannel where:'Name == "Teaching Message"' iterator:'teachingItems' securityenabled:'false' -%}
+        {%- assign teachingItemId = teachingItems | First | Property:'Id' -%}
+        {%- endcontentchannel -%}
+        {%- contentchannel where:'Name == "Sermon Message"' iterator:'sermonItems' securityenabled:'false' -%}
+        {%- assign sermonItemId = sermonItems | First | Property:'Id' -%}
+        {%- endcontentchannel -%}
+        {%- contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}} && StartDateTime < "{{now}}"' Limit:'3' sort:'StartDateTime desc' iterator:'items' securityenabled:'false' -%}
+        {%- for item in items -%}
+        {%- assign channelPath = 'sermons/' -%}
+        {%- if item.ContentChannel.Name == 'Teaching Message' -%}
+            {%assign channelPath = 'teachings/' -%}
+        {%- endif -%}
+        {%- assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign imageUrl = AssetImage -%}
+        {%- assign useVimeoImage = False -%}
+        {%- assign vimeoImageUrl = item | Attribute:'Image', 'RawValue' -%}
+        {%- if vimeoImageUrl != empty -%}
+            {%- assign imageUrl = vimeoImageUrl -%}
+            {%- assign useVimeoImage = True -%}
+        {%- endif -%}
 
-        {%if vimeoImageUrl == empty and AssetImage == empty %}
-            {% assign parentSeries = item.ParentItems | First %}
-            {% assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' %}
-        {% endif %}
+        {%if vimeoImageUrl == empty and AssetImage == empty -%}
+            {%- assign parentSeries = item.ParentItems | First -%}
+            {%- assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' -%}
+        {%- endif -%}
 
         {
             "Id": {{ item.Id }},
@@ -71,112 +72,112 @@
             "Image": {{ imageUrl | ToJSON }},
             "Speaker": {{ item | Attribute:'Speaker' | ToJSON }},
             "DataViews": {{ item | Attribute:'Dataviews' | ToJSON }},
-            {%if item.ParentItems %}
+            {%if item.ParentItems -%}
             "Series": {
-                {% for series in item.ParentItems | First %}
+                {%- for series in item.ParentItems | First -%}
                     "Title": {{ series.ContentChannelItem.Title | ToJSON }},
                     "Slug" : {{ series.ContentChannelItem.PrimarySlug | ToJSON }},
 
-              {% endfor %}
+              {%- endfor -%}
             },
-            {%endif %}
+            {%endif -%}
         }
-        {% unless forloop.last %}, {% endunless %}{% endfor %}
-    {% endcontentchannelitem %}
+        {%- unless forloop.last -%}, {%- endunless -%}{%- endfor -%}
+    {%- endcontentchannelitem -%}
   ],
   "Events":
-        {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-        {% assign imageSize = '/fit-in/600x600' %}
-        {% assign limit = 3 %}
-        {% assign eventsJson = "[" %}
-        {% eventcalendaritem where:'EventCalendarId != 0' %}
-          {% for item in eventcalendaritemItems %}
-            {% assign eventid = item.EventItem.Id%}
-            {%  assign calendarId = item.EventCalendarId %}
-            {% eventitem id:'{{ eventid }}' %}
-              {% if eventitem.IsActive and eventitem.IsApproved %}
+        {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+        {%- assign imageSize = '/fit-in/600x600' -%}
+        {%- assign limit = 3 -%}
+        {%- assign eventsJson = "[" -%}
+        {%- eventcalendaritem where:'EventCalendarId != 0' -%}
+          {%- for item in eventcalendaritemItems -%}
+            {%- assign eventid = item.EventItem.Id%}
+            {%-  assign calendarId = item.EventCalendarId -%}
+            {%- eventitem id:'{{ eventid }}' -%}
+              {%- if eventitem.IsActive and eventitem.IsApproved -%}
 
-                {% comment %} Dataset is only for upcoming events {% endcomment %}
-                {% assign occurrence = eventitem.EventItemOccurrences | First %}
-                {% assign schedule = occurrence.Schedule%}
-                {% if schedule.NextStartDateTime == null  %}
-                  {% continue %}
-                {% endif %}
+                {%- comment -%} Dataset is only for upcoming events {%- endcomment -%}
+                {%- assign occurrence = eventitem.EventItemOccurrences | First -%}
+                {%- assign schedule = occurrence.Schedule%}
+                {%- if schedule.NextStartDateTime == null  -%}
+                  {%- continue -%}
+                {%- endif -%}
 
-                {% assign name = eventitem.Name %}
-                {% assign summary = eventitem.Summary %}
-                {% assign audiences = eventitem.EventItemAudiences %}
-                {% assign detailsURL = eventitem.DetailsUrl %}
-                {% assign occurrenceCount = eventitem.EventItemOccurrences | Size %}
+                {%- assign name = eventitem.Name -%}
+                {%- assign summary = eventitem.Summary -%}
+                {%- assign audiences = eventitem.EventItemAudiences -%}
+                {%- assign detailsURL = eventitem.DetailsUrl -%}
+                {%- assign occurrenceCount = eventitem.EventItemOccurrences | Size -%}
 
-                {% assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' %}
-                {% assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+                {%- assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' -%}
+                {%- assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
-                {% assign photoId = eventitem.PhotoId %}
-                {% if photoId != null %}
-                  {% binaryfile id:'{{photoId}}' %}
-                    {% assign url = binaryfile.Url %}
-                  {% endbinaryfile %}
-                {% else %}
-                  {% assign url = ""%}
-                {% endif %}
+                {%- assign photoId = eventitem.PhotoId -%}
+                {%- if photoId != null -%}
+                  {%- binaryfile id:'{{photoId}}' -%}
+                    {%- assign url = binaryfile.Url -%}
+                  {%- endbinaryfile -%}
+                {%- else -%}
+                  {%- assign url = ""%}
+                {%- endif -%}
 
-                {% assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
-                {% assign sortableDate = schedule.NextStartDateTime | Date: 'yyyy-MM-dd HH:mm'%}
-                {% assign schedule = occurrence.Schedule.FriendlyScheduleText %}
-                {% assign occurrenceId = occurrence.Id%}
-                {% assign link = occurrenceId | Prepend:'/events/'%}
-                {% capture eventsJson %}{{eventsJson}} { {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"AssetImage": {{imageAsset | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"DetailsUrl": {{detailsURL | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"CalendarId": {{calendarId | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"PhotoId": {{photoId | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"PhotoUrl": {{url | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"EventId": {{eventid | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"Name": {{name | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"Summary": {{summary | StripNewlines | StripHtml | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"audiences": [ {%endcapture%}
-                    {% for audience in audiences%}
-                      {% capture eventsJson %}{{eventsJson}}{{ audience.DefinedValue.Value | StripNewlines | StripHtml | ToJSON }} , {%endcapture%}
-                      {% unless forloop.last %}{% capture eventsJson %}{{eventsJson}} , {%endcapture%}{% endunless %}
-                    {% endfor %}
-                  {% capture eventsJson %}{{eventsJson}} ], {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"occurrence": { {%endcapture%}
-                    {% capture eventsJson %}{{eventsJson}}"ContactPersonAliasId": {{occurrence.ContactPersonAliasId | ToJSON}},{%endcapture%}
-                    {% capture eventsJson %}{{eventsJson}}"ContactEmail": {{occurrence.ContactEmail | ToJSON}} , {%endcapture%}
-                    {% capture eventsJson %}{{eventsJson}}"Linkages": [ {%endcapture%}
-                      {% for linkage in occurrence.Linkages %}
-                        {% capture eventsJson %}{{eventsJson}} { {%endcapture%}
-                          {% capture eventsJson %}{{eventsJson}}"startDateTime": {{linkage.RegistrationInstance.StartDateTime | ToJSON}} , {%endcapture%}
-                          {% capture eventsJson %}{{eventsJson}}"endDateTime": {{linkage.RegistrationInstance.EndDateTime | ToJSON}} , {%endcapture%}
-                          {% capture eventsJson %}{{eventsJson}}"PublicName": {{linkage.PublicName | ToJSON}} , {%endcapture%}
-                          {% capture eventsJson %}{{eventsJson}}"RegistrationInstanceId": {{linkage.RegistrationInstanceId | ToJSON}}{%endcapture%}
-                        {% capture eventsJson %}{{eventsJson}} } {%endcapture%}
-                        {% unless forloop.last %}{% capture eventsJson %}{{eventsJson}}, {%endcapture%}{% endunless %}
-                      {% endfor %}
-                    {% capture eventsJson %}{{eventsJson}} ], {%endcapture%}
-                    {% capture eventsJson %}{{eventsJson}}"Note": {{occurrence.Note | StripNewlines | StripHtml | ToJSON}} , {%endcapture%}
-                    {% capture eventsJson %}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | StripNewlines | StripHtml | ToJSON}}{%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}} }, {% endcapture %}
-                  {% capture eventsJson %}{{eventsJson}}"date": {{date | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"sortableDate": {{sortableDate | ToJSON}} , {%endcapture%}
-                  {% capture eventsJson %}{{eventsJson}}"link": {{link | ToJSON}}{%endcapture%}
-                {% capture eventsJson %}{{eventsJson}} } {%endcapture%}
-                {% unless forloop.last %}{% capture eventsJson %}{{eventsJson}}, {%endcapture%}{% endunless %}
+                {%- assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
+                {%- assign sortableDate = schedule.NextStartDateTime | Date: 'yyyy-MM-dd HH:mm'%}
+                {%- assign schedule = occurrence.Schedule.FriendlyScheduleText -%}
+                {%- assign occurrenceId = occurrence.Id%}
+                {%- assign link = occurrenceId | Prepend:'/events/'%}
+                {%- capture eventsJson -%}{{eventsJson}} { {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"AssetImage": {{imageAsset | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"DetailsUrl": {{detailsURL | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"CalendarId": {{calendarId | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"PhotoId": {{photoId | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"PhotoUrl": {{url | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"EventId": {{eventid | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"Name": {{name | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"Summary": {{summary | StripNewlines | StripHtml | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"audiences": [ {%endcapture%}
+                    {%- for audience in audiences%}
+                      {%- capture eventsJson -%}{{eventsJson}}{{ audience.DefinedValue.Value | StripNewlines | StripHtml | ToJSON }} , {%endcapture%}
+                      {%- unless forloop.last -%}{%- capture eventsJson -%}{{eventsJson}} , {%endcapture%}{%- endunless -%}
+                    {%- endfor -%}
+                  {%- capture eventsJson -%}{{eventsJson}} ], {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"occurrence": { {%endcapture%}
+                    {%- capture eventsJson -%}{{eventsJson}}"ContactPersonAliasId": {{occurrence.ContactPersonAliasId | ToJSON}},{%endcapture%}
+                    {%- capture eventsJson -%}{{eventsJson}}"ContactEmail": {{occurrence.ContactEmail | ToJSON}} , {%endcapture%}
+                    {%- capture eventsJson -%}{{eventsJson}}"Linkages": [ {%endcapture%}
+                      {%- for linkage in occurrence.Linkages -%}
+                        {%- capture eventsJson -%}{{eventsJson}} { {%endcapture%}
+                          {%- capture eventsJson -%}{{eventsJson}}"startDateTime": {{linkage.RegistrationInstance.StartDateTime | ToJSON}} , {%endcapture%}
+                          {%- capture eventsJson -%}{{eventsJson}}"endDateTime": {{linkage.RegistrationInstance.EndDateTime | ToJSON}} , {%endcapture%}
+                          {%- capture eventsJson -%}{{eventsJson}}"PublicName": {{linkage.PublicName | ToJSON}} , {%endcapture%}
+                          {%- capture eventsJson -%}{{eventsJson}}"RegistrationInstanceId": {{linkage.RegistrationInstanceId | ToJSON}}{%endcapture%}
+                        {%- capture eventsJson -%}{{eventsJson}} } {%endcapture%}
+                        {%- unless forloop.last -%}{%- capture eventsJson -%}{{eventsJson}}, {%endcapture%}{%- endunless -%}
+                      {%- endfor -%}
+                    {%- capture eventsJson -%}{{eventsJson}} ], {%endcapture%}
+                    {%- capture eventsJson -%}{{eventsJson}}"Note": {{occurrence.Note | StripNewlines | StripHtml | ToJSON}} , {%endcapture%}
+                    {%- capture eventsJson -%}{{eventsJson}}"Schedule": {{occurrence.Schedule.FriendlyScheduleText | StripNewlines | StripHtml | ToJSON}}{%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}} }, {%- endcapture -%}
+                  {%- capture eventsJson -%}{{eventsJson}}"date": {{date | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"sortableDate": {{sortableDate | ToJSON}} , {%endcapture%}
+                  {%- capture eventsJson -%}{{eventsJson}}"link": {{link | ToJSON}}{%endcapture%}
+                {%- capture eventsJson -%}{{eventsJson}} } {%endcapture%}
+                {%- unless forloop.last -%}{%- capture eventsJson -%}{{eventsJson}}, {%endcapture%}{%- endunless -%}
 
-              {% endif %}
-            {% endeventitem %}
-          {% endfor %}
-        {% endeventcalendaritem %}
-        {% capture eventsJson %}{{eventsJson}} ] {%endcapture%}
-        {% assign events = eventsJson | FromJSON %}
-        {% assign sortedEvents = events | Sort:'sortableDate' %}
+              {%- endif -%}
+            {%- endeventitem -%}
+          {%- endfor -%}
+        {%- endeventcalendaritem -%}
+        {%- capture eventsJson -%}{{eventsJson}} ] {%endcapture%}
+        {%- assign events = eventsJson | FromJSON -%}
+        {%- assign sortedEvents = events | Sort:'sortableDate' -%}
 
-        {% assign limitedEvents = "[" %}
-        {% for event in sortedEvents limit:limit %}
-          {% capture limitedEvents %}{{limitedEvents}}{{event | ToJSON}}{%endcapture%}
-          {% unless forloop.last %}{% capture limitedEvents %}{{limitedEvents}}, {%endcapture%}{% endunless %}
-        {% endfor %}
-        {% capture limitedEvents %}{{limitedEvents}}]{%endcapture%}
+        {%- assign limitedEvents = "[" -%}
+        {%- for event in sortedEvents limit:limit -%}
+          {%- capture limitedEvents -%}{{limitedEvents}}{{event | ToJSON}}{%endcapture%}
+          {%- unless forloop.last -%}{%- capture limitedEvents -%}{{limitedEvents}}, {%endcapture%}{%- endunless -%}
+        {%- endfor -%}
+        {%- capture limitedEvents -%}{{limitedEvents}}]{%endcapture%}
         {{ limitedEvents }}
 }

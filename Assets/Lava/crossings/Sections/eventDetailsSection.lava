@@ -3,16 +3,16 @@
   This is a section for the events page based on the campus detail section.
 {%- endcomment -%}
 
-{% eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' %}
-{%assign useContactImage = eventitemoccurrence | Attribute:'ShowContactPhoto' | AsBoolean %}
-{% if useContactImage != true %}
-  {% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-  {% assign imageSize = '/fit-in/150x150' %}
-  {% assign imageUrlPath = eventitemoccurrence | Attribute:'DefaultContactImage' | Url:'localpath' %}
-  {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
-{% endif %}
-{% assign contact = eventitemoccurrence.ContactPersonAliasId | PersonByAliasId %}
-{% capture metaDesc %}{{ eventitemoccurrence.EventItem.Summary | StripHtml | TruncateWords:25 }} {{ pageTitle }}{% endcapture %}
+{%- eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' -%}
+{%assign useContactImage = eventitemoccurrence | Attribute:'ShowContactPhoto' | AsBoolean -%}
+{%- if useContactImage != true -%}
+  {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+  {%- assign imageSize = '/fit-in/150x150' -%}
+  {%- assign imageUrlPath = eventitemoccurrence | Attribute:'DefaultContactImage' | Url:'localpath' -%}
+  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+{%- endif -%}
+{%- assign contact = eventitemoccurrence.ContactPersonAliasId | PersonByAliasId -%}
+{%- capture metaDesc -%}{{ eventitemoccurrence.EventItem.Summary | StripHtml | TruncateWords:25 }} {{ pageTitle }}{%- endcapture -%}
 {{ metaDesc | AddMetaTagToHead:'name','description' }}
 <div class="section special-message simple-section event-details">
   <div class="container">
@@ -30,11 +30,11 @@
               {%- endcomment -%}
               <h4 class="subheading">Date</h4>
               <h4 class="heading"> {{eventitemoccurrence.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}
-              {% if eventitemoccurrence.Schedule.FriendlyScheduleText and eventitemoccurrence.Schedule.FriendlyScheduleText != empty  %}
+              {%- if eventitemoccurrence.Schedule.FriendlyScheduleText and eventitemoccurrence.Schedule.FriendlyScheduleText != empty  -%}
                 <h4 class="subheading">Schedule</h4>
                 <h4 class="heading">{{ eventitemoccurrence.Schedule.FriendlyScheduleText }}</h3>
-              {% endif %}
-              {% if eventitemoccurrence.location and eventitemoccurrence.location != empty  %}
+              {%- endif -%}
+              {%- if eventitemoccurrence.location and eventitemoccurrence.location != empty  -%}
                 {%- comment -%}
                   Need to modify this to list the campus location if non is specified on the event
                 {%- endcomment -%}
@@ -43,21 +43,20 @@
                     <i class="fas fa-map-marker-alt"></i><span>{{ address }} <br> {{ city }}, {{ state }} {{ zip }}</span>
                   </a>
                 </p>
-              {% endif %}
+              {%- endif -%}
             </div>
             <div class="col-md-6"><div class="pastor-item">
-              {% if contact.Photo.Url and contact.Photo.Url != empty and useContactImage == true %}
+              {%- if contact.Photo.Url and contact.Photo.Url != empty and useContactImage == true -%}
               <div class="pastor-image">
                 <img src="{{ contact.Photo.Url }}">
               </div>
-              {% endif %}
-              {% if useContactImage == false %}
+              {%- endif -%}
+              {%- if useContactImage == false -%}
               <div class="pastor-image">
                 <img src="{{ imageUrl }}">
               </div>
-              {% endif %}
+              {%- endif -%}
               <div class="past-details">
-                <h4 class="subheading">Contact</h4>
                 <h2 class="heading">{{ contact.FullName }}</h2>
                 <p class="lead">{{ contact | Attribute: 'Position'}}</p>
               </div>
@@ -72,21 +71,21 @@
         </div>
               <div class="row">
                 <div class="col">
-                  {% assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages %}
-                  {% assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size %}
-                  {% if eventItemOccurrenceLinkagesCount > 0 %}
-                    {% for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages %}
+                  {%- assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages -%}
+                  {%- assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size -%}
+                  {%- if eventItemOccurrenceLinkagesCount > 0 -%}
+                    {%- for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages -%}
                       <div class="row">
-                        {% if eventItemOccurrenceLinkage.RegistrationInstance.Cost %}
+                        {%- if eventItemOccurrenceLinkage.RegistrationInstance.Cost -%}
                           <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
-                        {% endif %}
+                        {%- endif -%}
                       </div>
-                    {% endfor %}
+                    {%- endfor -%}
                     {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
-                  {% endif %}
-                  {% if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty %}
+                  {%- endif -%}
+                  {%- if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty -%}
                     {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{eventitemoccurrence.EventItem.DetailsUrl}}' buttontarget:'_blank' buttontext:'Register' ]}
-                  {% endif %}
+                  {%- endif -%}
                 </div>
               </div>
                 <div class="row">
@@ -127,4 +126,4 @@
           </div>
         </div>
       </div>
-{% endeventitemoccurrence %}
+{%- endeventitemoccurrence -%}

@@ -1,9 +1,9 @@
-{%- comment -%}
+{% comment %}
   Universal Search Template
   Loops over the search results
-{%- endcomment -%}
+{% endcomment %}
 
-{%- assign isAdministrator = 'Global' | Page:'Id' | HasRightsTo:'Administrate','Rock.Model.Page' -%}
+{% assign isAdministrator = 'Global' | Page:'Id' | HasRightsTo:'Administrate','Rock.Model.Page' %}
 <section class="search-results-wrapper bg-gray section">
     <div class="container">
         <div class="row">
@@ -23,49 +23,49 @@
                 <!--<div class="search-url"><a href="{{ result.Url }}">{{ result.Url }}</a></div>-->
                 <div class="search-exerpt"><p>
 
-        {%- comment %}Number of words before and after matched word to include{% endcomment -%}
-        {%- assign extraWordCount = 25 -%}
-        {%- assign upcaseSearch = PageParameter.Q | Upcase -%}
-        {%- assign upcasePhrase = result.Content | Upcase -%}
-        {%- assign phraseWords = result.Content | Split:' ' -%}
-        {%- assign upcaseSearchWords = upcaseSearch | Split:' ' -%}
-        {%- assign upcaseSearchWord = upcaseSearchWords | First -%}
-        {%- assign upcasePhraseWords = upcasePhrase | Split:' ' -%}
-        {%- assign foundIndex = -1 -%}
-        {%- assign i = 0 -%}
-        {%- for word in upcasePhraseWords -%}
-            {%- assign word2 = word | Replace:',','' | Replace:'.','' | Replace:'!','' | Replace:'?','' -%}
-            {%- if word2 == upcaseSearchWord %}{% assign foundIndex = i %}{% break %}{% endif -%}
-            {%- assign i = i | Plus:1 -%}
-        {%- endfor -%}
+        {% comment %}Number of words before and after matched word to include{% endcomment %}
+        {% assign extraWordCount = 25 %}
+        {% assign upcaseSearch = PageParameter.Q | Upcase %}
+        {% assign upcasePhrase = result.Content | Upcase %}
+        {% assign phraseWords = result.Content | Split:' ' %}
+        {% assign upcaseSearchWords = upcaseSearch | Split:' ' %}
+        {% assign upcaseSearchWord = upcaseSearchWords | First %}
+        {% assign upcasePhraseWords = upcasePhrase | Split:' ' %}
+        {% assign foundIndex = -1 %}
+        {% assign i = 0 %}
+        {% for word in upcasePhraseWords %}
+            {% assign word2 = word | Replace:',','' | Replace:'.','' | Replace:'!','' | Replace:'?','' %}
+            {% if word2 == upcaseSearchWord %}{% assign foundIndex = i %}{% break %}{% endif %}
+            {% assign i = i | Plus:1 %}
+        {% endfor %}
 
-        {%- if foundIndex != -1 -%}
-            {%- assign startIndex = foundIndex | Minus:extraWordCount -%}
-            {%- if startIndex < 0 %}{% assign startIndex = 0 %}{% endif -%}
-            {%- assign endIndex = foundIndex | Plus:extraWordCount -%}
-            {%- assign lastIndex = phraseWords | Size | AsInteger | Minus:1 -%}
-            {%- if endIndex >= lastIndex %}{% assign endIndex = lastIndex %}{% endif -%}
-            {%- if startIndex > 0 %}... {% endif -%}
-            {%- for i in (startIndex..endIndex) -%}
-                {%- assign wordMatch = false -%}
-                {%- for w in upcaseSearchWords -%}
-                    {%- assign w2 = phraseWords[i] | Upcase -%}
-                    {%- if w2 contains w %}{% assign wordMatch = true %}{% break %}{% endif -%}
-                {%- endfor -%}
-                {%- if wordMatch == true %}<strong>{% endif %}{{ phraseWords[i] }} {% if wordMatch == true %}</strong>{% endif -%}
-            {%- endfor -%}
-            {%- if endIndex < lastIndex %} ...{% endif -%}
-        {%- else -%}
+        {% if foundIndex != -1 %}
+            {% assign startIndex = foundIndex | Minus:extraWordCount %}
+            {% if startIndex < 0 %}{% assign startIndex = 0 %}{% endif %}
+            {% assign endIndex = foundIndex | Plus:extraWordCount %}
+            {% assign lastIndex = phraseWords | Size | AsInteger | Minus:1 %}
+            {% if endIndex >= lastIndex %}{% assign endIndex = lastIndex %}{% endif %}
+            {% if startIndex > 0 %}... {% endif %}
+            {% for i in (startIndex..endIndex) %}
+                {% assign wordMatch = false %}
+                {% for w in upcaseSearchWords %}
+                    {% assign w2 = phraseWords[i] | Upcase %}
+                    {% if w2 contains w %}{% assign wordMatch = true %}{% break %}{% endif %}
+                {% endfor %}
+                {% if wordMatch == true %}<strong>{% endif %}{{ phraseWords[i] }} {% if wordMatch == true %}</strong>{% endif %}
+            {% endfor %}
+            {% if endIndex < lastIndex %} ...{% endif %}
+        {% else %}
             {{- result.Content | TruncateWords:50 -}}
-        {%- endif -%}
+        {% endif %}
 
                 </p></div>
                 <div class="search-button">
                     <a class="btn btn-primary" href="{{ result.Url }}">Learn More</a>
                 </div>
-                {%- if isAdministrator == true -%}
+                {% if isAdministrator == true %}
                 <div class="margin-t-sm"><small>Score: {{ result.Score }}</small></div>
-                {%- endif -%}
+                {% endif %}
                 </div>
         {% endfor %}
             </div>

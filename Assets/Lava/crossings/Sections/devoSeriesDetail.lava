@@ -1,0 +1,92 @@
+{%- comment -%}
+  Devotional Content Channel Item View Template
+
+  Runs the content for a devotional content channel item
+{%- endcomment -%}
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/2000x900' -%}
+
+{%- assign title = Item.Title -%}
+{%- assign author = Item | Attribute:'Author' -%}
+{%- assign channel = Item.ContentChannel.Name -%}
+{%- assign date = Item.StartDateTime | Date:'MMM d, yyyy' -%}
+{%- assign content = Item.Content -%}
+
+{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign imageUrlPath = image -%}
+{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+
+{%- capture pageTitle -%}Devotions- {{ author }} - {{ title }}{%- endcapture%}
+{{ pageTitle | SetPageTitle }}
+
+
+<div class="section page-title reverse devo-title">
+    <div class="container">
+        <div class="jumbotron text-center" data-aos="fade-in">
+            <h3 class="subheading reverse">{{ channel }}</h3>
+            <h1 class="heading"> {{ title }}</h1>
+            <hr class="sep">
+            <h4 class="subheading reverse">{{ author }} | {{ date }}</h4>
+        </div>
+    </div>
+</div>
+{%- if image != empty -%}
+<div class="devo-image container mt-n3">
+  <img src="{{ imageUrl }}" alt="{{ title }}" title="{{ title }}" />
+</div>
+{%- endif -%}
+{%- assign cardImageSize = '/fit-in/600x600/' -%}
+
+<div id="announcementList" class="announcement-list">
+  <div class="container announcement-list-items" data-aos="fade-up">
+    <h4>Daily Prayers</h4>
+    <div class="row flex-row flex-wrap">
+      {%- assign cards = Item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc' -%}
+      {%- assign curdate = 'Now' | Date -%}
+      {%- for card in cards -%}
+      {%- if card.ChildContentChannelItem.StartDateTime <= curdate -%}
+        {%- assign imageUrlPath = card.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign imageUrl = imageStorageUrl | Append: cardImageSize | Append:imageUrlPath -%}
+        {%- capture itemLink -%}/40days/daily/{{card.ChildContentChannelItem.PrimarySlug}}{%endcapture -%}
+        {%- assign title = card.ChildContentChannelItem.Title -%}
+        {%- assign author = card.ChildContentChannelItem | Attribute:'Author' -%}
+        {%- assign dayContent = card.ChildContentChannelItem.Content | StripHtml | Slice: 0, 225 -%}
+        {%- assign date = card.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
+        {%-assign summary = card.ChildContentChannelItem | Attribute:'Summary'-%}
+        <div class="col-sm-6 col-md-4">
+          <div class="card cardShadow">
+            <div class="thumb">
+              <img src="{{ imageUrl }}" alt="{{ title }}"class="event-img">
+            </div>
+            <div class="row card-content-row">
+              <div class="card-content">
+                <div class="col relative">
+                  <div>
+                    <h4>{{ title }}</h4>
+                    {%- if summary and summary != empty -%}
+                      <p class="small"> {{ summary }}</p>
+                    {%- endif -%}
+                  </div>
+                </div>
+                <a class="details" href="{{ itemLink }}">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Read More</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+<div class="container main">
+  {{ content }}
+</div>
+
+
+

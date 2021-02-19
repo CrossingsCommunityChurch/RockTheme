@@ -1,0 +1,11 @@
+{
+    "Parameters": {
+        "commands": [
+            "#!/bin/bash",
+            "cd C:/inetpub/wwwroot/Themes/CCC_Public",
+            "git fetch",
+            "git checkout stage",
+            "git pull"
+        ]
+    }
+}

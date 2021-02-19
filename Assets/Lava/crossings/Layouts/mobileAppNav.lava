@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   Included as a shortcode in the footer
   This is the nav that shows at the bottom of the screen on mobile
 {%- endcomment -%}
@@ -25,15 +25,16 @@
   <div class="locations">
     <div class="primary-locations">
       <h5 class="app-nav-heading">Locations</h5>
-      <h3><a href="/locations/okc">OKC <span class="times">SUNDAYS // 8:30, 9:30 &amp; 11:00</span></a></h3>
+      <h3><a href="/locations/okc">OKC <span class="times">SUNDAYS // 8:30, 9:30, &amp; 11:00</span></a></h3>
       <h3><a href="/locations/edmond">EDMOND <span class="times">SUNDAYS // 9:30 &amp; 11:00</span></a></h3>
-      <h3><a href="/locations/online">ONLINE <span class="times">SUNDAYS // 9:30 &amp; 11:00</span></a></h3>
+      <h3><a href="/locations/online">ONLINE <span class="times">SUNDAYS // 9:30, 11:00, &amp; 12:30</span></a></h3>
     </div>
     <div class="sub-headings">
       <div id="collapseLocs" class="collapse">
         <h5><a href="https://prisons.crossings.church" target="_blank" rel="noopener">Crossings Prison Ministry</a></h5>
         <h5><a href="https://clinic.crossings.church" target="_blank" rel="noopener">Crossings Clinic</a></h5>
-        <h5><a href="https://cc.crossings.church" target="_blank" rel="noopener">Crossings Community Center</a></h5>
+        <h5><a href="https://center.crossings.church" target="_blank" rel="noopener">Crossings Community Center</a></h5>
+        <h5><a href="https://www.crossingsschool.org" target="_blank" rel="noopener">Crossings Christian School</a></h5>
       </div>
       <a role="button" data-toggle="collapse" href="#collapseLocs" aria-expanded="false" aria-controls="collapseLocs" class="btn btn-link nopadding"> More Locations <i class="fa fa-plus"></i></a>
     </div>

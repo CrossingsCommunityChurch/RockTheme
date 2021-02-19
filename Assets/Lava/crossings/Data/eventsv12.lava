@@ -1,0 +1,22 @@
+{
+    "Audiences": [
+
+    ],
+    "Events":[
+        {%- eventcalendaritem where:'EventCalendarId != 0 && EventCalendarId != 2' -%}
+      {%- for item in eventcalendaritemItems -%}
+        {% eventscheduledinstance eventid:'{{item.EventItemId}}' maxoccurrences:'25' daterange:'2m' %}
+            {% for item in EventScheduledInstances %}
+                {{ item.Name }}
+                on {{ item.Date }}
+                at {{ item.Time }}
+                involving {{ item.AudienceNames | Join:', ' }} <br>
+                Contact: {{ item.EventItemOccurrence.ContactPersonAlias.Person.FullName }}
+                at {{ item.EventItemOccurrence.ContactEmail }}
+                <br>
+            {%- endfor -%}
+        {% endeventscheduledinstance %}
+      {%- endfor -%}
+{%- endeventcalendaritem -%}
+    ]
+}

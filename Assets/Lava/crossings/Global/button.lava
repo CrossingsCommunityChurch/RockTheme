@@ -1,8 +1,8 @@
-{% comment %}
+{%- comment -%}
 {[ button type:'LatestMessage' ]}
-{% endcomment %}
+{%- endcomment -%}
 
-{% comment %}
+{%- comment -%}
   Params
 
   @buttonlink - Accepts a url
@@ -13,55 +13,57 @@
   @buttonicon
   @type - Sets (overrides) other properties to well-known values for this button type. Can be one of: 'LatestMessage', ...more to come
 
-{% endcomment %}
+{%- endcomment -%}
 
 
-{% comment %} {% assign type = 'LatestMessage' %} {% endcomment %}
+{%- comment -%} {%- assign type = 'LatestMessage' -%} {%- endcomment -%}
 
-{% comment %}
+{%- comment -%}
   If we dont set a button style, set it to be primary by default
-{% endcomment %}
-{% unless buttonstyle %}
+{%- endcomment -%}
+{%- unless buttonstyle -%}
   {% assign buttonstyle = 'primary' %}
-{% endunless %}
+{%- endunless -%}
 
-{% assign link =  buttonlink %}
-{% assign text =  buttontext %}
-{% assign target = buttontarget %}
+{%- assign link =  buttonlink -%}
+{%- assign text =  buttontext -%}
+{%- assign target = buttontarget -%}
 {% assign style = buttonstyle %}
-{% assign icon = null %}
-{% if buttonicon != empty %}
-  {% assign icon = buttonicon %}
-{% endif %}
+{%- assign icon = null -%}
+{%- if buttonicon != empty -%}
+  {%- assign icon = buttonicon -%}
+{%- endif -%}
 
-{% if type == 'LatestMessage' %}
+{%- if type == 'LatestMessage' -%}
 
-  {% comment %}
+  {%- comment -%}
   Get content channel id by name
-  {% endcomment %}
-  {% contentchannel where:'Name == "Sermon Message"' iterator:'contentChannels' %}
-    {% assign contentChannel = contentChannels | First %}
-    {% assign contentChannelId = contentChannel.Id %}
-  {% endcontentchannel %}
+  {%- endcomment -%}
+  {%- contentchannel where:'Name == "Sermon Message"' iterator:'contentChannels' -%}
+    {%- assign contentChannel = contentChannels | First -%}
+    {%- assign contentChannelId = contentChannel.Id -%}
+  {%- endcontentchannel -%}
 
-  {% assign now = 'Now' | Date %}
+  {%- assign now = 'Now' | Date -%}
 
-  {% comment %}
+  {%- comment -%}
   Set well-known button properties
-  {% endcomment %}
-  {% contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' %}
-    {% assign latestMessage = contentChannelItems | First %}
-    {% assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' %}
-    {% comment %} {{ parentSeries | Debug }} {% endcomment %}
-    {% assign parentSlug = parentSeries.PrimarySlug %}
-    {% if parentSlug == null %}
-      {% assign parentSlug = 'no-series' %}
-    {% endif %}
-    {% assign link =  '/media/sermons/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug %}
-    {% assign text = 'Watch Latest Message' %}
-    {% assign style = buttonstyle %}
-    {% assign icon = 'play' %}
-  {% endcontentchannelitem %}
-{% endif %}
+  {%- endcomment -%}
+  {%- contentchannelitem | where:'(Status == 1 || Status == 2) && ContentChannelId == {{contentChannelId}} && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' -%}
+    {%- assign latestMessage = contentChannelItems | First -%}
+    {%- assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' -%}
+    {%- comment -%} {{ parentSeries | Debug }} {%- endcomment -%}
+    {%- assign parentSlug = parentSeries.PrimarySlug -%}
+    {%- if parentSlug == null -%}
+      {%- assign parentSlug = 'no-series' -%}
+    {%- endif -%}
+    {%- assign link =  '/media/sermons/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug -%}
+    {%- if text == empty -%}
+      {%- assign text = 'Watch Latest Message' -%}
+    {%- endif -%}
+    {%- assign style = buttonstyle -%}
+    {%- assign icon = 'play' -%}
+  {%- endcontentchannelitem -%}
+{%- endif -%}
 
-<a href="{{ link }}" {% if type == 'modal' %} data-toggle="modal" data-target="{{ modaltarget }}" {% endif %} {% if target and target != empty %}target="{{ target }}"{% endif %} class="btn btn-{{ style }} {% if buttonoutline and style != empty %}btn-outline-{{ style }}{% endif %} {% if buttonsize and buttonsize != empty %}btn-{{ buttonsize }}{% endif %}" role="button">{% if icon %}<i class="fas fa fa-{{ icon }}"></i> {% endif %}<span>{{ text }}</span></a>
+<a href="{{ link }}" {% if type == 'modal' %} data-toggle="modal" data-target="{{ modaltarget }}" {% endif %} {% if target and target != empty %}target="{{ target }}"{% endif %} class="btn btn-{{ style }} {% if buttonoutline and style != empty %}btn-outline-{{ style }} {% endif %} {% if buttonsize and buttonsize != empty %} btn-{{ buttonsize }} {% endif %} " role="button">{% if icon %}<i class="fas fa fa-{{ icon }}"></i> {% endif %}<span>{{ text }}</span></a>

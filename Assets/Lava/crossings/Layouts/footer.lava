@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   Footer for primary site. Runs globally as an include on the site
 {%- endcomment -%}
 
@@ -71,29 +71,23 @@
           </svg>
           <ul>
             <li>
-              <a href="/PlanYourVisit">Plan a visit</a>
+              <a href="/plan-your-visit">Plan a visit</a>
             </li>
             <li>
               <a href="/contact-us">Contact Us</a>
             </li>
             <li>
-              <a href="https://www.paycomonline.net/v4/ats/web.php/jobs?clientkey=BB5BBDC81EFC132E8B6CA382258DEFB3">Employment</a>
-            </li>
-            <li>
-              <a href="https://www.crossingsschool.org">Crossings School</a>
+              <a href="https://www.paycomonline.net/v4/ats/web.php/jobs?clientkey=BB5BBDC81EFC132E8B6CA382258DEFB3">Careers</a>
             </li>
           </ul>
           <div class="row reverse social-row">
             <div class="col-md-4">
               <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                   <a target="_blank" rel="noopener" href="https://www.facebook.com/CrossingsOKC"><i class="fab fa-facebook"></i></a>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                   <a target="_blank" rel="noopener" href="https://www.instagram.com/crossingsokc"><i class="fab fa-instagram"></i></a>
-                </div>
-                <div class="col-xs-4">
-                  <a target="_blank" rel="noopener" href="https://twitter.com/CrossingsOKC"><i class="fab fa-twitter"></i></a>
                 </div>
               </div>
               <div class="row">
@@ -108,14 +102,11 @@
             </div>
             <div class="col-md-4">
               <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                   <a target="_blank" rel="noopener" href="https://www.facebook.com/CrossingsEdmond"><i class="fab fa-facebook"></i></a>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                   <a target="_blank" rel="noopener" href="https://www.instagram.com/crossingsedmond/"><i class="fab fa-instagram"></i></a>
-                </div>
-                <div class="col-xs-4">
-                  <a target="_blank" rel="noopener" href="https://twitter.com/CrossingsEdmond"><i class="fab fa-twitter"></i></a>
                 </div>
               </div>
               <div class="row">
@@ -136,18 +127,5 @@
 {%- endcomment -%}
 {[ mobileAppNav ]}
 
-<div id="liveModal" tabindex="-1" role="dialog" aria-labelledby="liveModalLabel" class="modal fade in">
-    <div role="document" class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
-                <h4 id="locationsModalHeadingLabel" class="modal-title">Select a Service to Stream</h4>
-            </div>
-            <div class="modal-body">
-                <div class="locations">
-        <div class="watch-online-locations">
-            <h3><a href="https://sanct.crossings.church" target="_blank" rel="noopener">Sanctuary <i class="fa fa-arrow-right"></i><span class="times">OKC // SUNDAYS // 9:30 &amp; 11</span></a></h3>
-            <h3><a href="https://edmond.crossings.church" target="_blank" rel="noopener">Venue <i class="fa fa-arrow-right"></i><span class="times">EDMOND & OKC // SUNDAYS // 9:30 &amp; 11</span></a></h3>
-        </div>
-    </div>
-</div>
+
+

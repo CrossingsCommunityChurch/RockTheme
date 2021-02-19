@@ -1,14 +1,14 @@
-  {% assign eventItemCount = EventItems | Size %}
+  {%- assign eventItemCount = EventItems | Size -%}
 
-  {% if eventItemCount == 0 %}
+  {%- if eventItemCount == 0 -%}
   <div class="panel panel-default margin-t-md">
     <div class="margin-all-md"> There are no events in this time frame.</div>
   </div>
-  {% endif %}
+  {%- endif -%}
 
-  {% for eventItem in EventItems %}
-  {% assign firstOccurrence = eventItem | First %}
-		{% assign occurrenceCount = firstOccurrence.EventItemOccurrence.Schedule.FriendlyScheduleText %}
+  {%- for eventItem in EventItems -%}
+  {%- assign firstOccurrence = eventItem | First -%}
+		{%- assign occurrenceCount = firstOccurrence.EventItemOccurrence.Schedule.FriendlyScheduleText -%}
   <div class="panel panel-default margin-t-md">
     <div class="panel-heading clearfix">
 		<h2 class="panel-title pull-left">
@@ -32,7 +32,7 @@
 			  <b>Summary</b>
 			</div>
 		</div>
-		{% for eventItemOccurrence in eventItem %}
+		{%- for eventItemOccurrence in eventItem -%}
 		<div class="row">
 			<div class="col-md-2">
 					{{ eventItemOccurrence.Date | Date: 'MMM d' }}
@@ -47,22 +47,22 @@
 			  {{ eventItemOccurrence.OccurrenceNote }}
 			</div>
 			<div class="col-md-2">
-				{% if eventItemOccurrence.DetailPage != null %}
+				{%- if eventItemOccurrence.DetailPage != null -%}
 				<a href="{{ firstOccurrence.DetailPage }}">
 				  <i> View <i class="fa fa-chevron-right"></i> </i>
 				</a>
-				{% else %}
+				{%- else -%}
 				<a href="{{ DetailsPage }}?EventOccurrenceId={{ eventItemOccurrence.EventItemOccurrence.Id }}">
 					View <i class="fa fa-chevron-right"></i>
 				</a>
-				{% endif %}
+				{%- endif -%}
 			</div>
 		</div>
 		<br/>
-		{% endfor %}
+		{%- endfor -%}
     </div>
   </div>
-  {% endfor %}
+  {%- endfor -%}
 
 <script type="text/javascript">
 

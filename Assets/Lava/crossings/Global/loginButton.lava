@@ -1,13 +1,13 @@
-{% comment %}
+{%- comment -%}
   Simple Login Button. Checks if someone is currently logged in or not.
-{% endcomment %}
+{%- endcomment -%}
 
-{% if CurrentPerson %}
+{%- if CurrentPerson -%}
   <a href="#" class="account-toggle login-btn btn btn-outline-thin">
     <i class="fas fa-bars"></i> <span>Account</span>
   </a>
-{% else %}
+{%- else -%}
   <a href="/login" class="login-btn btn btn-outline-thin">
     <i class="fas fa-user"></i> <span>Login</span>
   </a>
-{% endif %}
+{%- endif -%}

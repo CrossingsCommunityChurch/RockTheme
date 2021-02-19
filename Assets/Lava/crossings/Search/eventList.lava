@@ -1,17 +1,17 @@
-{% comment %}
+{%- comment -%}
   This is included on the /events page to allow internal search to find all event urls
 {%- endcomment -%}
 
 {%- assign isAdministrator = 'Global' | Page:'Id' | HasRightsTo:'Administrate','Rock.Model.Page' -%}
 <script>
-    if ('{% if isAdministrator != true %}1{% endif %}' === '1' ) {
+    if ('{%- if isAdministrator != true -%}1{%- endif -%}' === '1' ) {
         window.location = '/'
     }
 </script>
 
-{% assign events = 'events' | PersistedDataset %}
-{% assign eventList = events.Events %}
+{%- assign events = 'events' | PersistedDataset -%}
+{%- assign eventList = events.Events -%}
 
-{% for event in eventList %}
+{%- for event in eventList -%}
   <a href="{{event.link}}" title="{{event.Name}}">{{event.Name}}</a><br />
-{% endfor %}
+{%- endfor -%}

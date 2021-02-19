@@ -3,19 +3,19 @@
   Runs a list of cardText items for each opportunity and links to form for each opportunity
 {%- endcomment -%}
 
-{% assign opportunityCount = Opportunities | Size %}
+{%- assign opportunityCount = Opportunities | Size -%}
 
-{% if opportunityCount == 0 %}
+{%- if opportunityCount == 0 -%}
   <div class="panel panel-default margin-t-md">
     <div class="margin-all-md"> There are no opportunities that match the criteria</div>
   </div>
-{% endif %}
+{%- endif -%}
 
 <div class="container card-list">
   <div class="row">
-    {% for opportunity in Opportunities %}
-      {% assign title = opportunity.PublicName%}
-      {% assign subtitle = opportunity.Summary | StripHtml %}
+    {%- for opportunity in Opportunities -%}
+      {%- assign title = opportunity.PublicName%}
+      {%- assign subtitle = opportunity.Summary | StripHtml -%}
       {%- assign itemPrimarySlug = opportunity.PrimarySlug | Trim -%}
       {%- if DetailPage contains '{OpportunitySlug}' and itemPrimarySlug != '' -%}
         {%- assign itemLink = DetailPage | Replace:'{OpportunitySlug}', opportunity.PrimarySlug | Prepend:'/' -%}
@@ -27,6 +27,6 @@
         {%- endif -%}
       {%- endif -%}
       {[ cardText title:'{{ title }}' subtitle:'{{ subTitle }}' link:'{{ itemLink }}' actiontext:'Learn More' ]}
-    {% endfor %}
+    {%- endfor -%}
   </div>
 </div>

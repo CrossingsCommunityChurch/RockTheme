@@ -1,32 +1,32 @@
-{% comment %}
+{%- comment -%}
   Card Modal Content Component
     - Uses the modal shortcode internally
-{% endcomment %}
+{%- endcomment -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/900x600' %}
-{% assign minHeight = '300px' %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/900x600' -%}
+{%- assign minHeight = '300px' -%}
 
 <div class="section card-modal-list">
   <div class="card-modal-items">
     <div class="card-modal-wrapper">
-        {% for item in Items %}
-            {% assign title = item.Title %}
-            {% assign subheading = item | Attribute: 'subheading' %}
-            {% assign icon = item | Attribute: 'Icon' %}
-            {% assign subcontent = item | Attribute: 'CardSubcontent' %}
-            {% assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' %}
-            {% assign image = imageStorageUrl | Append: imageSize | Append:imageAsset %}
-            {% assign modalID = item.Title | ToCssClass %}
-            {% capture modalIDWithIndex %}{{modalID}}{{forloop.index}}{%endcapture%}
+        {%- for item in Items -%}
+            {%- assign title = item.Title -%}
+            {%- assign subheading = item | Attribute: 'subheading' -%}
+            {%- assign icon = item | Attribute: 'Icon' -%}
+            {%- assign subcontent = item | Attribute: 'CardSubcontent' -%}
+            {%- assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' -%}
+            {%- assign image = imageStorageUrl | Append: imageSize | Append:imageAsset -%}
+            {%- assign modalID = item.Title | ToCssClass -%}
+            {%- capture modalIDWithIndex -%}{{modalID}}{{forloop.index}}{%endcapture%}
             <a href="#" data-toggle="modal" data-target="#{{modalIDWithIndex}}" class="card-modal-item" style="background-image:url('{{ image }}'); min-height: {{minHeight}};">
               <div class="card-modal-details reverse">
                   <div>
-                    {% if icon != empty %}
+                    {%- if icon != empty -%}
                         <div class="icon circle-icon">
                           <i class="fa fa-{{icon}}"></i>
                         </div>
-                    {% endif %}
+                    {%- endif -%}
                     <h2 class="reverse">{{ title }}</h2>
                     <h4 class="reverse">{{ subheading }}</h4>
                   </div>
@@ -35,7 +35,7 @@
             {[ modal modalid:'{{modalIDWithIndex}}' title:'' class:'playlist-modal' size:'modal-lg' ]}
                 {{item.Content }}
             {[ endmodal ]}
-        {% endfor %}
+        {%- endfor -%}
     </div>
   </div>
 </div>

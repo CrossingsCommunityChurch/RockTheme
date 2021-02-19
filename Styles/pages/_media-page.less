@@ -194,16 +194,35 @@
 .media-hero {
     padding-top: @spacing6x;
     position: relative;
+
+    &.inline-component {
+        padding-top: 3rem;
+        height: auto;
+
+        &:after {
+            display: none !important;
+        }
+
+        .latest-message {
+            margin-bottom: -60px;
+        }
+    }
 }
 
 @media (min-width: @screen-desktop) {
     .media-hero {
-        height: 60vh;
+        height: 650px;
         padding-top: 225px;
         background-color: @brand-primary;
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
+    }
+
+    &.inline-component {
+        .latest-message {
+            margin-bottom: -60px;
+        }
     }
 }
 

@@ -40,27 +40,28 @@
 
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
     <Rock:Lava ID="GoogleTagManagerHead" runat="server">
-        {% assign TagManagerID = 'Global' | Attribute:'GoogleTagManagerID' %}
+        {%- assign TagManagerID = 'Global' | Attribute:'GoogleTagManagerID' -%}
 
-        {% if TagManagerID != empty %}
+        {%- if TagManagerID != empty -%}
             <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
               new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','{{TagManagerID}}');</script>
-        {% endif %}
+        {%- endif -%}
     </Rock:Lava>
 </head>
 <body runat="server" id="body">
     <Rock:Lava ID="GoogleTagManagerNoJs" runat="server">
-        {% assign TagManagerID = 'Global' | Attribute:'GoogleTagManagerID' %}
+        {%- assign TagManagerID = 'Global' | Attribute:'GoogleTagManagerID' -%}
 
-        {% if TagManagerID != empty %}
+        {%- if TagManagerID != empty -%}
              <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{TagManagerID}}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        {% endif %}
+        {%- endif -%}
     </Rock:Lava>
+    <div class="unsupported-browser"></div>
     <Rock:Lava ID="SiteWrapperClass" runat="server">
-        {% assign site = CurrentPage.Site | ToCssClass %}
+        {%- assign site = CurrentPage.Site | ToCssClass -%}
         <div class="wrapper-style {{ site }}">
     </Rock:Lava>
     <form id="form1" runat="server">

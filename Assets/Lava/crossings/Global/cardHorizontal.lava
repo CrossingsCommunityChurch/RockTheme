@@ -4,14 +4,14 @@
 
 {%- for item in Items -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/600x600' %}
-{% assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' %}
-{% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/600x600' -%}
+{%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
-{% assign title = item.Title %}
-{% assign subtitle = item | Attribute:'subheading' %}
-{% assign content = item.Content %}
+{%- assign title = item.Title -%}
+{%- assign subtitle = item | Attribute:'subheading' -%}
+{%- assign content = item.Content -%}
 
 <div class="card listing">
   <div class="row flex-row">
@@ -21,9 +21,9 @@
     <div class="col-sm-8">
       <div>
         <h3>{{ title }}</h3>
-        {% if subtitle %}
+        {%- if subtitle -%}
           <h4>{{ subtitle }}</h4>
-        {% endif %}
+        {%- endif -%}
         {{ content }}
       </div>
     </div>

@@ -5,18 +5,18 @@
 {%- endcomment -%}
 
 {%- for item in Items -%}
-  {% assign hasCampus = item | Attribute:'Campus' %}
-  {% if hasCampus and hasCampus != empty %}
-    {% assign campus = Campuses | Where:'Name', hasCampus | First %}
-    {% assign address = campus.Location.Street1 %}
-    {% assign city = campus.Location.City %}
-    {% assign state = campus.Location.State %}
-    {% assign zip = campus.Location.PostalCode %}
-    {% assign phone = campus.PhoneNumber %}
-    {% assign serviceTimes = campus.ServiceTimes | Map:'Time' | Join:', '%}
-    {% assign campusLeader = campus.LeaderPersonAliasId | PersonByAliasId %}
-    {% assign directionsURL = campus | Attribute: 'DirectionsURL' %}
-    {% assign buttonLava = item | Attribute:'lava' | HtmlDecode %}
+  {%- assign hasCampus = item | Attribute:'Campus' -%}
+  {%- if hasCampus and hasCampus != empty -%}
+    {%- assign campus = Campuses | Where:'Name', hasCampus | First -%}
+    {%- assign address = campus.Location.Street1 -%}
+    {%- assign city = campus.Location.City -%}
+    {%- assign state = campus.Location.State -%}
+    {%- assign zip = campus.Location.PostalCode -%}
+    {%- assign phone = campus.PhoneNumber -%}
+    {%- assign serviceTimes = campus.ServiceTimes | Map:'Time' | Join:', '%}
+    {%- assign campusLeader = campus.LeaderPersonAliasId | PersonByAliasId -%}
+    {%- assign directionsURL = campus | Attribute: 'DirectionsURL' -%}
+    {%- assign buttonLava = item | Attribute:'lava' | HtmlDecode -%}
 
       <div class="section special-message simple-section location-details">
         <div class="container">
@@ -39,10 +39,10 @@
                     <h4 class="subheading">Sunday Services</h4>
                     <h2 class="heading">{{ serviceTimes }}</h2>
                     <p class="lead">
-                      <a href="#" class="contact-item">
+                      <a href="https://maps.google.com/?q={{address}},{{city}},{{state}}{{zip}}" class="contact-item">
                         <i class="fas fa-map-marker-alt"></i><span>{{ address }} <br> {{ city }}, {{ state }} {{ zip }}</span>
                       </a>
-                      <a href="#" class="contact-item">
+                      <a href="tel:{{phone}}" class="contact-item">
                         <i class="fas fa-phone"></i> <span>{{ phone }}</span>
                       </a>
                     </p>
@@ -61,12 +61,12 @@
                 <div class="row">
                   <div class="col">
                     <div class="buttons location-buttons">
-                    {% if directionsURL != empty %}
+                    {%- if directionsURL != empty -%}
                       {[ button icon:'location-arrow' buttonstyle:'primary' buttonlink:'{{ directionsURL }}' buttontarget:'_blank' buttontext:'Directions' ]}
-                    {% endif %}
-                    {%if buttonLava != empty %}
+                    {%- endif -%}
+                    {%if buttonLava != empty -%}
                         {{ buttonLava }}
-                    {% endif %}
+                    {%- endif -%}
                     </div>
                   </div>
                 </div>
@@ -75,5 +75,5 @@
           </div>
         </div>
       </div>
-  {% endif %}
-{% endfor %}
+  {%- endif -%}
+{%- endfor -%}

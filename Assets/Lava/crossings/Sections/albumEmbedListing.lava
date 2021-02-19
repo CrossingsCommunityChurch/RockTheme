@@ -22,28 +22,28 @@
       {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
   {%- endif -%}
 
-<div class="section albumn-embed-list" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+<div class="section albumn-embed-list" {%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentItemStyle }}'{%- endif -%}>
   <div class="content-area">
       <div class="album-list-items">
         <div class="container">
           {%- if channelSectionTitle != empty -%}
-              <h2 class="text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+              <h2 class="text-center" {%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentTextColor }}'{%- endif -%}>{{ channelSectionTitle }}</h2>
           {%- endif -%}
           {%- if channelSectionSummary != empty -%}
-              <div class="summary text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>
+              <div class="summary text-center" {%- if contentTextColor != empty -%}style='{{ contentTextColor }}'{%- endif -%}>
               {{ channelSectionSummary }}
               </div>
           {%- endif -%}
         </div>
         <div class="album-wrapper flex-row flex-wrap">
-            {% for item in Items %}
-                {% assign title = item.Title %}
-                {% assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' %}
-                {% assign image = imageStorageUrl | Append: imageSize | Append:imageAsset %}
-                {% assign spotifyURL = item | Attribute: 'SpotifyURL' %}
-                {% assign iTunesURL = item | Attribute: 'iTunesURL' %}
-                {% assign soundcloudURL = item | Attribute: 'SoundcloudURL' %}
-                {% assign primeMusicURL = item | Attribute: 'PrimeMusicURL' %}
+            {%- for item in Items -%}
+                {%- assign title = item.Title -%}
+                {%- assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' -%}
+                {%- assign image = imageStorageUrl | Append: imageSize | Append:imageAsset -%}
+                {%- assign spotifyURL = item | Attribute: 'SpotifyURL' -%}
+                {%- assign iTunesURL = item | Attribute: 'iTunesURL' -%}
+                {%- assign soundcloudURL = item | Attribute: 'SoundcloudURL' -%}
+                {%- assign primeMusicURL = item | Attribute: 'PrimeMusicURL' -%}
                 <div class="album-item">
                   <img src="{{ image }}" alt="{{ title }}" />
                   <div class="album-cover-details reverse">
@@ -51,23 +51,23 @@
                         <h3>{{ title }}</h3>
                         <p>Listen on</p>
                         <div class="album-links">
-                            {% if spotifyURL != empty %}
+                            {%- if spotifyURL != empty -%}
                               <a href="{{spotifyURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-spotify"></i></a>
-                            {% endif %}
-                            {% if iTunesURL != empty %}
-                              <a href="{{spotifyURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-apple"></i></a>
-                            {% endif %}
-                            {% if soundcloudURL != empty %}
+                            {%- endif -%}
+                            {%- if iTunesURL != empty -%}
+                              <a href="{{iTunesURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-apple"></i></a>
+                            {%- endif -%}
+                            {%- if soundcloudURL != empty -%}
                               <a href="{{soundcloudURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-soundcloud"></i></a>
-                            {% endif %}
-                            {% if primeMusicURL != empty %}
+                            {%- endif -%}
+                            {%- if primeMusicURL != empty -%}
                               <a href="{{primeMusicURL}}" rel="noopener" target="_blank"><i class="fa fa-fw fa-amazon"></i></a>
-                            {% endif %}
+                            {%- endif -%}
                         </div>
                       </div>
                   </div>
                 </div>
-            {% endfor %}
+            {%- endfor -%}
         </div>
       </div>
   </div>

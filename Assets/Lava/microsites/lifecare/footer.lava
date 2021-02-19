@@ -70,16 +70,13 @@
               <a href="https://crossings.church">Crossings.Church</a>
             </li>
             <li>
-              <a href="/about-us">About</a>
+              <a href="https://www.paycomonline.net/v4/ats/web.php/jobs?clientkey=BB5BBDC81EFC132E8B6CA382258DEFB3">Careers</a>
             </li>
             <li>
-              <a href="/employment">Employment</a>
-            </li>
-            <li>
-              <a href="/contact">Contact</a>
+              <a href="https://crossings.church/contact-us?topic=LifeCare">Contact</a>
             </li>
           </ul>
-          <div class="row reverse social-row">
+         <!-- <div class="row reverse social-row">
             <div class="col-xs-4 col-md-4">
               <a href="#"><i class="fab fa-facebook"></i></a>
             </div>
@@ -88,7 +85,7 @@
             </div>
             <div class="col-xs-4 col-md-4">
               <a href="#"><i class="fab fa-twitter"></i></a></div>
-          </div>
+          </div>-->
           <div class="copyright">&copy; Crossings Community Church 2020</div>
       </div>
     </div>

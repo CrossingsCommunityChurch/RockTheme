@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   This is the primary navigation. Runs as an include globally in the Navigation Zone
 {%- endcomment -%}
 

@@ -1,72 +1,72 @@
-{% comment %}
+{%- comment -%}
   Runs in Layouts that include the PageHeading Zone
   This will add a hero image to the top of the page if one is set, otherwise it will run the page title with a solid background
 
   Options are controlled by Page Attributes when you edit a page.
 {%- endcomment -%}
 
-{% assign title = CurrentPage.PageTitle %}
-{% assign subTitle = CurrentPage | Attribute:'Subheading' %}
-{% assign showButtons = CurrentPage | Attribute:'UseButtons' %}
-{% assign heroSmall = CurrentPage | Attribute:'UseSmallHero' %}
-{% assign buttons = CurrentPage | Attribute:'Buttons' %}
-{% assign layout = CurrentPage.Layout.Name %}
+{%- assign title = CurrentPage.PageTitle -%}
+{%- assign subTitle = CurrentPage | Attribute:'Subheading' -%}
+{%- assign showButtons = CurrentPage | Attribute:'UseButtons' -%}
+{%- assign heroSmall = CurrentPage | Attribute:'UseSmallHero' -%}
+{%- assign buttons = CurrentPage | Attribute:'Buttons' -%}
+{%- assign layout = CurrentPage.Layout.Name -%}
 
-{% assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' %}
-{% assign imageSize = '/fit-in/2000x1300' %}
-{% assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' %}
-{% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/2000x1300' -%}
+{%- assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
-{% if heroSmall == 'Yes' %}
-    {% assign wrapperClass = 'page-item short-hero' %}
-{% else %}
-    {% assign wrapperClass = 'page-item' %}
-{% endif %}
+{%- if heroSmall == 'Yes' -%}
+    {%- assign wrapperClass = 'page-item short-hero' -%}
+{%- else -%}
+    {%- assign wrapperClass = 'page-item' -%}
+{%- endif -%}
 
-{% if layout == 'Homepage' %}
+{%- if layout == 'Homepage' -%}
 
-{% assign homepageImages = 'homeImages' | PersistedDataset | Shuffle %}
+{%- assign homepageImages = 'homeImages' | PersistedDataset | Shuffle -%}
 
-    {% assign firstImage = homepageImages | First %}
-    {% assign imageUrlPath = firstImage.image %}
-    {% assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath %}
+    {%- assign firstImage = homepageImages | First -%}
+    {%- assign imageUrlPath = firstImage.image -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
-{% endif %}
+{%- endif -%}
 
-{% if imageUrlPath != empty %}
+{%- if imageUrlPath != empty -%}
     <div class="container-fluid hero-wrapper {{ wrapperClass }}">
         {[ parallax image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
             <div class="jumbotron flat transparent reverse" data-aos="fade-in">
-                {% if layout == 'Homepage' %}
+                {%- if layout == 'Homepage' -%}
                     {{ buttons }}
-                {% else %}
-                    {%if subTitle %}
+                {%- else -%}
+                    {%if subTitle -%}
                         <h3 class="subheading reverse">{{ subTitle }}</h3>
-                    {% endif %}
+                    {%- endif -%}
                     <h1 class="heading">{{ title }}</h1>
-                    {%if showButtons == 'Yes' %}
+                    {%if showButtons == 'Yes' -%}
                         <div class="lead-buttons">
                             {{ buttons }}
                         </div>
-                    {% endif %}
-                {% endif %}
+                    {%- endif -%}
+                {%- endif -%}
             </div>
         {[ endparallax ]}
     </div>
-{% else %}
+{%- else -%}
     <div class="section page-title reverse">
         <div class="container">
             <div class="jumbotron text-center" data-aos="fade-in">
-                {%if subTitle %}
+                {%if subTitle -%}
                     <h3 class="subheading reverse">{{ subTitle }}</h3>
-                {% endif %}
+                {%- endif -%}
                 <h1 class="heading">{{ title }}</h1>
-                {%if showButtons == 'Yes' %}
+                {%if showButtons == 'Yes' -%}
                     <div class="lead-buttons">
                         {{ buttons }}
                     </div>
-                {% endif %}
+                {%- endif -%}
             </div>
         </div>
     </div>
-{% endif %}
+{%- endif -%}

@@ -1,4 +1,4 @@
-{% comment %}
+{%- comment -%}
   Video Player for Sermons and Teaching Series messages
 
   Params

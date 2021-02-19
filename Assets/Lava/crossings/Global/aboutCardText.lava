@@ -11,9 +11,9 @@ title
 lavacontent
 {%- endcomment -%}
 
-{% unless columnstyle %}
-  {% assign columnstyle = 'col-md-3 col-lg-4' %}
-{% endunless %}
+{%- unless columnstyle -%}
+  {%- assign columnstyle = 'col-md-3 col-lg-4' -%}
+{%- endunless -%}
 
 <div class="{{columnstyle}} card-wrapper">
   <div class="card">
