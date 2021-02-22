@@ -58,7 +58,7 @@
   </div>
 </div>
 
-<script src="/Themes/RockTheme/Scripts/vue-rock-filterable-list.js"></script>
+<script src="/Themes/CCC_Public/Scripts/vue-rock-filterable-list.js"></script>
 
 <script>
 
