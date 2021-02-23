@@ -1,0 +1,85 @@
+/* Tab Navigation */
+
+
+.leadership-details.special-message {
+    background-color: #efefef !important;
+    border: 0 none;
+    //box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 9;
+    text-align: center;
+    padding-left: @spacing;
+    padding-right: @spacing;
+
+    .icon-divider {
+        position: absolute;
+        left: 50%;
+        margin-left: -100px;
+        margin-top: -95px;
+
+        svg {
+            fill: lighten(@brand-primary, 20%);
+        }
+
+        &:after,
+        &:before {
+            display: none;
+        }
+
+        &:before {
+            content: '';
+            display: block;
+            background-color: #efefef; //#1d242b
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            position: absolute;
+            top: -5px;
+            left: 50%;
+            margin-left: -30px;
+        }
+    }
+
+    .contact-item {
+        .fas {
+            display: none;
+        }
+    }
+
+    .nav-tabs {
+        margin: 0;
+        padding: 0;
+        border: 0;    
+    }
+    .nav-tabs > li > a {
+        background: #DADADA;
+        border-radius: 0;
+        box-shadow: inset 0 -8px 7px -9px rgba(0,0,0,.4),-2px -2px 5px -2px rgba(0,0,0,.4);
+    }
+    .nav-tabs > li.active > a,
+    .nav-tabs > li.active > a:hover {
+        background: #F5F5F5;
+        box-shadow: inset 0 0 0 0 rgba(0,0,0,.4),-2px -3px 5px -2px rgba(0,0,0,.4);
+    }
+    
+    /* Tab Content */
+    .tab-pane {
+        background: #F5F5F5;
+        box-shadow: 0 0 4px rgba(0,0,0,.4);
+        border-radius: 0;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    .tab-pane:not(.active) {
+        display: none;
+    }
+
+    .person-image {
+        img {
+            max-height: 150px;
+            border-radius: 80%;
+        }
+    }
+}
+
