@@ -16,26 +16,21 @@
 {%- endjavascript -%}
 <link rel="stylesheet" type="text/css" href="~~/Styles/vue-autosuggest.css">
 
-<div id="vue-template-dropdown" style="display:none;">
-  <div class="form-group">
-    <label>{%raw%}{{headingLabel}}{%endraw%}</label>
-    <div class="dropdown" :class="{'open': isOpen}">
-      <button @click="isOpen = !isOpen" type="button" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle">{%raw%}{{selectedValue}}{%endraw%}<i class="fas fa-angle-down pull-right"></i></button>
-      <ul class="dropdown-menu">
-        <li><a @click="handleClick(-1)">Any</a></li>
-        <li role="separator" class="divider"></li>
-        <li v-for="(option,i) in options"><a @click="handleClick(i)">{%raw%}{{option.Name}}{%endraw%}</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
 <div id="vapp" class="media-list">
   <div class="media-search">
-    <div class="container">
-      <div class="media-filter row">
-        <div class="col-md-12">
-          <h2>Find a Message or Series</h2>
+
+    <vue-rock-filterable-list
+      :items="messages"
+      :label="'Find a Message or Series'"
+      :place-holder="'Title or speaker name'"
+      :items-per-page="'{{mediaItemsPerPage}}'"
+      :search-options="searchOptions"
+      :initial-input="tagInput"
+      @filter="filterHandler"
+      v-slot="{ item: message }"
+      >
+      <a :href="mediaUrl(message)" class="card cardShadow">
+        <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(message) + '\')' }">
         </div>
         <div class="col-md-6 col-lg-8">
           <div class="form form-inline">
@@ -137,18 +132,12 @@
     </div>
   </div>
 </div>
-<div class="hidden">
-    <p>Sermon Series</p>
-    <a href="/media/sermons">Sermons</a>
-    <p>Teaching Series</p>
-    <a href="/media/teachings">Teachings</a>
-</div>
+
+<script src="/Themes/RockTheme/Scripts/vue-rock-filterable-list.js"></script>
 
 <script>
 
 const imageStorageUrl = '{{ imageStorageUrl }}';
-
-Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
 
 const vueApp = new Vue({
   el: '#vapp',
@@ -196,7 +185,6 @@ const vueApp = new Vue({
         this.showResults = false;
         this.filteredSearchOptions = [];
       }
-
     },
     mediaUrl(item) {
       if (item.Series) {
@@ -259,55 +247,10 @@ const vueApp = new Vue({
       if (params.has('tag')) {
         this.showResults = true;
         var tag = params.get('tag');
-        this.filterInput = tag
+        this.tagInput = tag;
       }
-    },
-    setPages () {
-      this.pages = [];
-      this.page = 1;
-      let numberOfPages = Math.ceil(this.filteredMessages.length / this.perPage);
-      for (let index = 1; index <= numberOfPages; index++) {
-        this.pages.push(index);
-      }
-    },
-    paginate (messages) {
-      let page = this.page;
-      let perPage = this.perPage;
-      let from = 0;
-      let to = (page * perPage);
-      return  messages.slice(from, to);
-    },
-    setFilter(propName, item) {
-      this[`${propName}Filter`] = item.Name;
-    }
-  },
-  computed: {
-    filteredMessages() {
-
-      return this.messages.filter(message => {
-
-        if (!this.filterInput) return true;
-
-        let shouldInclude = false;
-
-        shouldInclude |= (!!message.Speaker && message.Speaker.toLowerCase().includes(this.filterInput.toLowerCase().trim()));
-        shouldInclude |= (this.filterInput.toLowerCase().trim().length >= {{mediaItemTopicMinCharsToMatch}} && !!message.Topics && message.Topics.map(t => t.toLowerCase().trim()).filter(t => t.indexOf(this.filterInput.toLowerCase().trim()) === 0).length > 0);
-        shouldInclude |= (!!message.Title && message.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
-        shouldInclude |= (!!message.Series && !!message.Series.Title && message.Series.Title.toLowerCase().trim().includes(this.filterInput.toLowerCase().trim()));
-
-        return !!shouldInclude;
-
-      });
-    },
-    mediaItems () {
-      return this.paginate(this.filteredMessages);
     }
 
-  },
-  watch: {
-    filteredMessages () {
-      this.setPages();
-    },
   },
   created(){
     this.getMedia();
