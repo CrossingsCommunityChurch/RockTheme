@@ -25,9 +25,9 @@
   <div class="locations">
     <div class="primary-locations">
       <h5 class="app-nav-heading">Locations</h5>
-      <h3><a href="/locations/okc">OKC <span class="times">SUNDAYS // 8:30, 9:30, &amp; 11:00</span></a></h3>
+      <h3><a href="/locations/okc">OKC <span class="times">SUNDAYS // 8:30, 9:30 &amp; 11:00</span></a></h3>
       <h3><a href="/locations/edmond">EDMOND <span class="times">SUNDAYS // 9:30 &amp; 11:00</span></a></h3>
-      <h3><a href="/locations/online">ONLINE <span class="times">SUNDAYS // 9:30, 11:00, &amp; 12:30</span></a></h3>
+      <h3><a href="/locations/online">ONLINE <span class="times">SUNDAYS // 9:30 &amp; 11:00</span></a></h3>
     </div>
     <div class="sub-headings">
       <div id="collapseLocs" class="collapse">
