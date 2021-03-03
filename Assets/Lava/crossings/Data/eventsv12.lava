@@ -3,20 +3,25 @@
 
     ],
     "Events":[
-        {%- eventcalendaritem where:'EventCalendarId != 0 && EventCalendarId != 2' -%}
-      {%- for item in eventcalendaritemItems -%}
-        {% eventscheduledinstance eventid:'{{item.EventItemId}}' maxoccurrences:'25' daterange:'2m' %}
+        {% calendarevents calendarid:'1'  %}
             {% for item in EventScheduledInstances %}
+            {%- comment -%}
+                "Details": item.Description
+                "Summary": item.Summary
+                [
+                    "Date": item.Date
+                    "Time": item.Time
+                    "Contact": item.EventItemOccurrence.ContactEmail
+                ]
+            {%- endcomment -%}
                 {{ item.Name }}
+                Details: {{ item.Description }}
+                Summary: {{ item.Summary }}
                 on {{ item.Date }}
                 at {{ item.Time }}
-                involving {{ item.AudienceNames | Join:', ' }} <br>
-                Contact: {{ item.EventItemOccurrence.ContactPersonAlias.Person.FullName }}
-                at {{ item.EventItemOccurrence.ContactEmail }}
-                <br>
-            {%- endfor -%}
-        {% endeventscheduledinstance %}
-      {%- endfor -%}
-{%- endeventcalendaritem -%}
+                for {{ item.AudienceNames | Join:', ' }}
+                Contact: {{ item.EventItemOccurrence.ContactEmail }}
+            {% endfor %}
+        {% endcalendarevents %}
     ]
 }
