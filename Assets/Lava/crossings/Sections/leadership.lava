@@ -1,6 +1,5 @@
-{%- assign eltguid = "62E64CEB-E5F3-4C82-B4ED-EA660DB13F7E" -%}
-{%- assign mltguid = "C32465E4-3208-4B25-A7F8-679E2DDD0196" -%}
-<div class="section special-message simple-section leadership-details">
+{%- person dataview:'118'  -%}
+<div class="section special-message simple-section location-details">
   <div class="container">
     <div class="row">
       <div class="col-md-12" data-aos="fade-up">
@@ -16,36 +15,21 @@
                             M23.3,14.6c-0.4,4.3-3.2,7.9-7.1,9.3v-9.5L23.3,14.6z" class="st0"></path></g></g>
             </svg>
           </div>
-          <h2 class="text-center mt-0">Our Leadership</h2>
-          <!-- Navigation Tabs -->
-          <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
-              <a href="#elt" role="tab" data-toggle="tab">
-                <p>Executive Leadership</p>
-              </a>
-            </li>
-            <li>
-              <a href="#mlt" role="tab" data-toggle="tab">
-                <p>Ministry Leadership</p>
-              </a>
-            </li>
-          </ul>
-          <!-- Tab panes -->
-          <div calss="tab-content">
-            <div class="tab-pane fade active in" id="elt">
-              <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffRole == "{{eltguid}}"' Sort:'Position desc' -%}
-                  {%- for person in personItems -%}
-                    <div class="col-md-6 mb-2">
+              <h2 class="text-center mt-0">Our Leadership</h2>
+          <div class="row flex-row flex-wrap justify-center location-content">
+            {%- for person in personItems -%}
+                <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
                           <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
                         </div>
                         <div class="person-details">
+                            <h4 class="subheading mt-0">{{  person | Attribute: 'StaffRole' }}</h4>
                           <h3 class="heading">{{ person.FullName }}</h3>
                           <p class="lead mb-0">{{ person | Attribute: 'Position'}}</p>
                         </div>
                       </div>
+
                  </div>
                   {%- endfor -%}
                 {%- endperson -%}
@@ -70,10 +54,10 @@
                 {%- endperson -%}
               </div>
             </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
