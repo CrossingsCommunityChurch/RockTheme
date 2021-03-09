@@ -46,7 +46,7 @@
                           <p class="lead mb-0">{{ person | Attribute: 'Position'}}</p>
                         </div>
                       </div>
-                    </div>
+                 </div>
                   {%- endfor -%}
                 {%- endperson -%}
               </div>
@@ -76,5 +76,4 @@
     </div>
   </div>
 </div>
-
 
