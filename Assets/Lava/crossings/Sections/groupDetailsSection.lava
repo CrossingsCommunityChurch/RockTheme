@@ -4,8 +4,29 @@
 {%- endcomment -%}
 
 {%- group id:'{{ PageParameter.groupId }}' -%}
-{%- assign contact = eventitemoccurrence.ContactPersonAliasId | PersonByAliasId -%}
-{%- capture metaDesc -%}{{ eventitemoccurrence.EventItem.Summary | StripHtml | TruncateWords:25 }} {{ pageTitle }}{%- endcapture -%}
+  {%- assign countActive = -1 -%}
+	{%- assign countInactive = -1 -%}
+	{%- assign countPending = -1 -%}
+	{%- for member in group.Members -%}
+		{%- case member.GroupMemberStatus -%}
+			{%- when 'Active' -%}
+				{%- assign countActive = countActive | Plus: 1 -%}
+			{%- when 'Inactive' -%}
+				{%- assign countInactive = countInactive | Plus: 1 -%}
+			{%- when 'Pending' -%}
+				{%- assign countPending = countPending | Plus: 1 -%}
+			{%- else -%}
+		{%- endcase -%}
+	{%- endfor -%}
+
+  {%- for member in group.Members -%}
+    {%- if member.GroupRole.IsLeader -%}
+			{%- assign contact = member.Person -%}
+			{%- endif -%}
+			{%- endfor -%}
+
+
+{%- capture metaDesc -%}{{ group.Description | StripHtml | TruncateWords:25 }} {{ pageTitle }}{%- endcapture -%}
 {{ metaDesc | AddMetaTagToHead:'name','description' }}
 <div class="section special-message simple-section event-details">
   <div class="container">
@@ -22,12 +43,12 @@
                 Need to not display if event is only happening once.
               {%- endcomment -%}
               <h4 class="subheading">Date</h4>
-              <h4 class="heading"> {{eventitemoccurrence.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}
-              {%- if eventitemoccurrence.Schedule.FriendlyScheduleText and eventitemoccurrence.Schedule.FriendlyScheduleText != empty  -%}
+              <h4 class="heading"> {{group.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}
+              {%- if group.Schedule.FriendlyScheduleText and group.Schedule.FriendlyScheduleText != empty  -%}
                 <h4 class="subheading">Schedule</h4>
-                <h4 class="heading">{{ eventitemoccurrence.Schedule.FriendlyScheduleText }}</h3>
+                <h4 class="heading">{{ group.Schedule.FriendlyScheduleText }}</h3>
               {%- endif -%}
-              {%- if eventitemoccurrence.location and eventitemoccurrence.location != empty  -%}
+              {%- if group.location and group.location != empty  -%}
                 {%- comment -%}
                   Need to modify this to list the campus location if non is specified on the event
                 {%- endcomment -%}
@@ -39,7 +60,7 @@
               {%- endif -%}
             </div>
             <div class="col-md-6"><div class="pastor-item">
-              {%- if contact.Photo.Url and contact.Photo.Url != empty and useContactImage == true -%}
+              {%- if contact.Photo.Url and contact.Photo.Url != empty -%}
               <div class="pastor-image">
                 <img src="{{ contact.Photo.Url }}">
               </div>
@@ -85,4 +106,4 @@
           </div>
         </div>
       </div>
-{%- endeventitemoccurrence -%}
+{%- endgroup-%}
