@@ -1,0 +1,61 @@
+{
+    "Tags":[
+        {%- definedvalue where:'DefinedTypeId == 101' iterator:'values' -%}
+            {%- for value in values -%}
+            {{value.Value | ToJSON }}{%-unless forloop.last-%},{%-endunless-%}
+            {%- endfor -%}
+        {%- enddefinedvalue -%}
+    ],
+    "DaysOfWeek":[
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ],
+    "Campuses":[
+        "Crossings OKC",
+        "Crossings Edmond",
+        "Crossings Online"
+    ],
+    "Groups":[
+        {% group where:'GroupTypeId == 131 || GroupTypeId == 91' %}
+            {%- for group in groupItems -%}
+                {%- if group.IsPublic -%}
+                    {%-assign name = group.Name-%}
+                    {%-assign campus = group.Campus.Name -%}
+                    {%-assign schedule = group.ScheduleId-%}
+                    {%-assign details =  group.Description-%}
+                    {%- for member in group.Members -%}
+                        {%- if member.GroupRole.IsLeader -%}
+	                        {%- assign leader = member.PersonId -%}
+	                    {%- endif -%}
+	                {%- endfor -%}
+                    {%-assign summary = group | Attribute:'WebSummary'-%}
+                    {%-assign tagsArray = group | Attribute:'GroupTags'-%}
+                    {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
+                    {%-assign imageSize = '/fit-in/600x600'-%}
+                    {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath'-%}
+                    {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+                    {%-if imageUrlPath == ''-%}
+                      {%-assign imageAsset = ''-%}
+                    {%-endif-%}
+        {
+            "Name": {{name | ToJSON}},
+            "Campus": {{campus | ToJSON}},
+            "Tags": {{tagsArray | ToJSON}},
+            "ScheduleId": {{schedule | ToJSON}},
+            "Deatils": {{details | ToJSON }},
+            "Summary": {{summary | ToJSON}},
+            "ImageAsset": {{imageAsset | ToJSON}},
+            "LeaderID": {{leader | ToJSON}},
+            "MemberCount": 0,
+            "AvgAge": 0
+        } {%-unless forloop.last-%},{%-endunless-%}
+                {%- endif -%}
+            {%- endfor -%}
+        {% endgroup %}
+    ]
+}
