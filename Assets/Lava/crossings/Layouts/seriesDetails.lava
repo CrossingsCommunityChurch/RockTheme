@@ -95,6 +95,7 @@
     {%- endcomment -%}
 
     {%- if item.ChildItems != 'empty' -%}
+      {%- assign sortedItems = item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc'-%}
       <div class="section media-list bg-gray">
         <div class="container content-area">
             <div class="media-list-items">
@@ -102,7 +103,7 @@
                   <div class="col-md-12">
                     <h3 class="subheading" style="margin-bottom: 30px;">Messages in This Series</h3>
                   </div>
-                  {%- for child in item.ChildItems -%}
+                  {%- for child in sortedItems -%}
                       {%- assign title = child.ChildContentChannelItem.Title -%}
                       {%- assign seriesTitle = item.Title -%}
                       {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
