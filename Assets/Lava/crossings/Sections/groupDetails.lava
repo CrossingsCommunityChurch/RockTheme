@@ -4,10 +4,57 @@
 {%- endcomment -%}
 
 {%- group id:'{{ PageParameter.groupId }}' -%}
-{%- capture pageTitle -%}{{egrou.Name}}{%- endcapture%}
+{%- capture pageTitle -%}{{group.Name}}{%- endcapture%}
 {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
 {%- capture pageTitleBrowser -%}{{group.Name}} | {{ org }}{%- endcapture%}
 {{ pageTitle | SetPageTitle:'PageTitle' }}
 {{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/600x600/' -%}
+{%- assign imageAtt = group | Attribute:'Assetimage' | Url:'localpath' -%}
+{%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageAtt-%}
+
+
+<div class="event-page">
+    <div class="section page-title reverse">
+      <div class="container">
+        <div class="jumbotron text-center"></div>
+      </div>
+    </div>
+    <div class="section video">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="event-image">
+              {%- if imageAsset != empty -%}
+                <img src="{{ imageAsset }}" alt="{{ group.Name }}" />
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     {[ groupdetailsection  ]}
+
+    <div class="container-fluid section event-details">
+          <div class="row">
+              <div class="container content-area" data-aos="fade-up">
+                  <div class="row">
+                      <div class="col-md-12">
+                        <h2 class="heading">{{ group.Name }}</h2>
+                        <h4 class="subheading">Group Details</h4>
+                        <hr class="sep ml-0">
+                        <div class="event-info">
+                        {{ group.Description }}
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+</div>
+
+
 
 {%- endgroup -%}
