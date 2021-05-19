@@ -17,6 +17,8 @@
   {%- assign personCampus = 'all' -%}
 {%- endif -%}
 
+{%- assign itemsPerPage = 27 -%}
+
 <div id="announcementList" class="announcement-list">
   <div class="container announcement-list-items" data-aos="fade-up">
     <div class="event-filter row">
@@ -86,6 +88,8 @@
 
     let groups = JSON.parse(groupsJson);
 
+    //Should we sort the groups somehow here?
+
     let curPage = 1;
     renderFilteredItems(groups, curPage);
 
@@ -117,6 +121,33 @@
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
       $('#campuses').html(`${campus} <i class="fas fa-angle-down pull-right"></i>`);
       renderFilteredItems(groups, 1, audience, day, campus);
+    });
+
+    $('#back').click(function() {
+      topOfEvents();
+      let audience = $('#audiences').text().trim();
+      let day = $('#dayOfWeek').text().trim();
+      let campus = $('#campuses').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
+      curPage = curPage - 1;
+      renderFilteredItems(events, curPage, audience, day, campus);
+    });
+
+    $('#next').click(function() {
+      topOfEvents();
+      let audience = $('#audiences').text();
+      let day = $('#dayOfWeek').text().trim();
+      let campus = $('#campuses').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
+      (`audience is ${audience}`);
+      (`day is ${day}`);
+      (`campus is ${campus}`);
+      curPage = curPage + 1
+      renderFilteredItems(events, curPage, audience, day, campus);
     });
 
     function topOfEvents() {

@@ -3,9 +3,9 @@
         "commands": [
             "#!/bin/bash",
             "cd C:/inetpub/wwwroot/Themes/CCC_Public",
-            "git fetch",
+            "git fetch --all",
             "git checkout stage",
-            "git pull"
+            "git reset --hard origin/stage"
         ]
     }
 }
