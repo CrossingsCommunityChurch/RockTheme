@@ -132,7 +132,7 @@
       if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
       if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
       curPage = curPage - 1;
-      renderFilteredItems(events, curPage, audience, day, campus);
+      renderFilteredItems(groups, curPage, audience, day, campus);
     });
 
     $('#next').click(function() {
@@ -147,7 +147,7 @@
       (`day is ${day}`);
       (`campus is ${campus}`);
       curPage = curPage + 1
-      renderFilteredItems(events, curPage, audience, day, campus);
+      renderFilteredItems(groups, curPage, audience, day, campus);
     });
 
     function topOfEvents() {
