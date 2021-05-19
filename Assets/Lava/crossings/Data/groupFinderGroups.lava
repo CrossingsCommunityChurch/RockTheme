@@ -24,10 +24,33 @@
         {% group where:'GroupTypeId == 131 || GroupTypeId == 91' %}
             {%- for group in groupItems -%}
                 {%- if group.IsPublic -%}
+                    {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
                     {%-assign name = group.Name-%}
                     {%-assign campus = group.Campus.Name -%}
-                    {%-assign schedule = group.ScheduleId-%}
+                    {% comment %}
+                        Schedle check for schedules attached to the group. If no group Schedule check
+                        group location schedules. Get next occurance day and full date.
+                    {% endcomment %}
+                    {%- if group.Schedule and group.Schedule != empty -%}
+                        {%-assign scheduleId = group.ScheduleId-%}
+                        {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
+                        {%-assign sched = group.Schedule -%}
+                        {%- assign nextOc = sched.NextStartDateTime -%}
+                        {%-assign friendlyName = sched.FriendlyScheduleText -%}
+                        {%-assign location = group.GroupLocations | First -%}
+                    {%- else -%}
+                        {% for loc in group.GroupLocations %}
+                            {%- for sched in loc.Schedules -%}
+                                {%- assign dayofweek = sched.NextStartDateTime | Date:'dddd' -%}
+                                {%- assign scheduleId = sched.Id -%}
+                                {%- assign nextOc = sched.NextStartDateTime -%}
+                                {%-assign friendlyName = sched.FriendlyScheduleText -%}
+                                {%assign location = loc %}
+                            {%- endfor -%}
+                        {%- endfor -%}
+                    {%- endif -%}
                     {%-assign details =  group.Description-%}
+                    {%-assign memberCount = group.Members | Size -%}
                     {%- for member in group.Members -%}
                         {%- if member.GroupRole.IsLeader -%}
 	                        {%- assign leader = member.PersonId -%}
@@ -44,15 +67,20 @@
                     {%-endif-%}
         {
             "Name": {{name | ToJSON}},
+            "NextOC": {{nextOc | ToJSON}},
             "Campus": {{campus | ToJSON}},
             "Tags": {{tagsArray | ToJSON}},
-            "ScheduleId": {{schedule | ToJSON}},
+            "ScheduleId": {{scheduleId | ToJSON}},
+            "FriendlyScheduleText": {{friendlyName | ToJSON }},
             "Deatils": {{details | ToJSON }},
             "Summary": {{summary | ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
             "LeaderID": {{leader | ToJSON}},
-            "MemberCount": 0,
-            "AvgAge": 0
+            "DayofWeek": {{dayofweek | ToJSON}},
+            "MemberCount": {{memberCount | ToJSON}},
+            "DetailsURL": {{detailURL | ToJSON}},
+            "AvgAge": 0,
+            "LocationName": {{location.Location.Name | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
                 {%- endif -%}
             {%- endfor -%}
