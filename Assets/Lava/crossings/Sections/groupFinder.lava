@@ -1,65 +1,293 @@
 {%- comment -%}
  This is coppied from webAds.lava
  Modified to be used in the group finder as formatted output.
-
-  These are intended to be used with out images and have a details link and possibly a registration link.
+ These are intended to be used with out images and have a details link and possibly a registration link.
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
 {%- assign imageSize = '/fit-in/640x640/' -%}
+{%- assign groupsData = 'groupFinder' | PersistedDataset -%}
+{%- assign Tags =  groupsData.Tags | Uniq-%}
+{%- assign DaysOfWeek = groupsData.DaysOfWeek | Uniq -%}
+{%- assign CampusList = groupsData.Campuses | Uniq -%}
+{%- assign groupsJson = groupsData.Groups | ToJSON -%}
+{%- if CurrentPerson and CurrentPerson != empty%}
+{%- assign personCampus = CurrentPerson | Campus -%}
+{%- else -%}
+  {%- assign personCampus = 'all' -%}
+{%- endif -%}
 
 <div id="announcementList" class="announcement-list">
-  <div class="container-fluid announcement-list-items">
-  {%- comment -%}
-    Need to loop through the passed in elements here.
-    This should be a list of classes/groups.
-  {%- endcomment -%}
-
-    <div class="row flex-row flex-wrap">
-    {%- for group in Groups -%}
-      {%- assign imageAtt = group | Attribute:'Assetimage' | Url:'localpath' -%}
-      {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageAtt-%}
-      <div class="col-sm-6 col-md-4">
-        <div class="card cardShadow">
-          <div class="thumb">
-              <img src="{{imageAsset}}" class="event-img">
+  <div class="container announcement-list-items" data-aos="fade-up">
+    <div class="event-filter row">
+      <div class="form form-inline">
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="filterLabel">Filter By Category</label>
+          <div class="dropdown">
+            <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="eventFilterMenu" id="eventFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All</a></li>
+              <li role="separator" class="divider"></li>
+              {%- for tag in Tags -%}
+                <li><a style="cursor: pointer;">{{tag}}</a></li>
+              {%- endfor -%}
+            </ul>
           </div>
-          <div class="row card-content-row">
-            <div class="card-content">
-              <h4>{{group.Name}}</h4>
-              {%- comment -%}
-                Need to see how schedule or next meeting displays.
-              {%- endcomment -%}
-              {%- if group.Schedule.FriendlyScheduleText and  group.Schedule.FriendlyScheduleText != empty-%}
-                <h5 class="text-muted">{{group.Schedule.FriendlyScheduleText}}</h5>
-              {%- endif -%}
-              {%- comment -%}
-                Need an attribute for short description? how to choose if the group needs details page and or registration?
-              {%- endcomment -%}
-              <p class="small"> {{group.Description}} </p>
-              {%- comment -%}
-                this should pull from the detail page attribute? appened the group Identifier? Same with reg.
-              {%- endcomment -%}
-              {%- assign regLink =  LinkedPages.GroupDetailPage | Append:'?groupId=' -%}
-                <a class="btn btn-block margin-t-md" href="{{ regLink | Append:group.Id}}" role="button">
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="filterLabel">Filter By Day</label>
+          <div class="dropdown">
+            <button type="button" id="dayOfWeek" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="evenDaytFilterMenu" id="eventDayFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All</a></li>
+              <li role="separator" class="divider"></li>
+              {%- for day in DaysOfWeek -%}
+                <li><a style="cursor: pointer;">{{day}}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="filterLabel">Filter By Campus</label>
+          <div class="dropdown">
+            <button type="button" id="campuses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="eventCamptFilterMenu" id="eventCampFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All</a></li>
+              <li role="separator" class="divider"></li>
+              {%- for campus in CampusList -%}
+                <li><a style="cursor: pointer;">{{campus}}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row flex-row flex-wrap">
+    </div>
+    <div class="paginate-buttons text-center">
+      <a class="btn btn-default" id="back" role="button">Back</a>
+      <a class="btn btn-default" id="next" role="button">Next</a>
+    </div>
+  </div>
+</div>
+
+<script>
+
+  $(document).ready(() => {
+
+    const groupsJson = `{{groupsJson}}`;
+    const imageStorageUrl = '{{imageStorageUrl}}';
+    const imageSize = '{{imageSize}}';
+    let personCampus = 'all';
+    if('{{personCampus}}' != 'all')
+    {
+    personCampus = '{{personCampus.Name}}';
+    }
+
+    let groups = JSON.parse(groupsJson);
+
+    let curPage = 1;
+    renderFilteredItems(groups, curPage);
+
+    $('#audiences').parent().find('li').click(function() {
+      let audience = $(this).text().trim();
+      let day = $('#dayOfWeek').text().trim();
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      let campus = $('#campuses').text().trim();
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
+      $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(groups, 1, audience, day, campus);
+    });
+
+    $('#dayOfWeek').parent().find('li').click(function() {
+      let day = $(this).text().trim();
+      let audience = $('#audiences').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      let campus = $('#campuses').text().trim();
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
+      $('#dayOfWeek').html(`${day} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(groups, 1, audience, day, campus);
+    });
+
+    $('#campuses').parent().find('li').click(function() {
+      let campus = $(this).text().trim();
+      let day = $('#dayOfWeek').text().trim();
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      let audience = $('#audiences').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      $('#campuses').html(`${campus} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(groups, 1, audience, day, campus);
+    });
+
+    function topOfEvents() {
+       $('html, body').animate({
+          scrollTop: $("#announcementList").offset().top
+      }, 300);
+    }
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function renderFilteredItems(groups, page, audience, day, campus) {
+      let eventsContainer = $('.row.flex-row.flex-wrap');
+      eventsContainer.empty();
+
+      var filteredEvents1 = groups.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.Tags.includes(audience)) && (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()) && (!campus || campus.trim().toLowerCase() === 'all' || evt.Campus.includes(campus)));
+      if (filteredEvents1.length === 0) {
+        eventsContainer.append('<p>No data exist for the selected filters.</p>');
+        $('#back').hide();
+        $('#next').hide();
+        return;
+      }
+
+      let count = 0;
+      let pgIdx = page - 1;
+      let itemsPerPage = 25
+      let itemIdxMin = pgIdx * itemsPerPage;
+      let itemsCount = filteredEvents1.length;
+      let pages = Math.ceil(itemsCount / itemsPerPage);
+      let itemsOnLastPage = itemsCount % itemsPerPage;
+      if (itemsOnLastPage === 0) itemsOnLastPage = itemsPerPage;
+      let itemMax = page * itemsPerPage;
+      if (page === pages) {
+        itemMax = itemMax - (itemsPerPage - itemsOnLastPage);
+      }
+
+      for (let i = itemIdxMin; i < itemMax; i++) {
+
+        let ad = filteredEvents1[i];
+
+        let div = $(
+          `<div class="col-sm-6 col-md-4">
+            <div class="card cardShadow">
+              <div class="thumb">
+                <img src="I" class="event-img">
+              </div>
+              <div class="row card-content-row">
+                <div class="card-content">
+                  <div class="col relative">
+                    <div>
+                      <div class="day-of-week hidden"><span></span></div>
+                      <h4>Title here</h4>
+                    <h5 class="text-muted">Subheadinghere</h5>
+                  <p class="small"></p>
+                </div>
+              </div>
+                <a class="details" href="{{ detail | StripHtml }}">
                   <div class="btn icon-button shadowDepth2">
                     <span>Details</span>
                     <i class="fas fa-angle-right"></i>
                   </div>
                 </a>
-                {% comment%}
-                <a class="btn btn-block margin-t-md" href="#" role="button">
+                <a class="reg" href="">
                   <div class="btn icon-button shadowDepth2">
                     <span>Register</span>
                     <i class="fas fa-angle-right"></i>
                   </div>
                 </a>
-                {% endcomment %}
-            </div>
+              </div>
             </div>
           </div>
         </div>
-    {%- endfor -%}
-    </div>
-  </div>
-</div>
+`
+        );
+        if(ad.ImageAsset == ''){
+        div.find('.thumb').hide();
+        }
+        else{
+        div.find('img.event-img').attr('src', ad.ImageAsset);
+        // div.find('.thumb').css("background-image", `url("${event.AssetImage}")`);
+        }
+        div.find('h4').text(ad.Name);
+        if(ad.DayofWeek != '') {
+          div.find('.day-of-week').removeClass('hidden');
+          div.find('.day-of-week > span').text(ad.DayofWeek);
+        }
+        if(ad.FriendlyScheduleText == ''){
+          div.find('h5').hide();
+        }
+        else{
+          div.find('h5').text(ad.FriendlyScheduleText);
+        }
+        div.find('p').text(ad.Summary);
+        if(ad.DetailsURL == ''){
+          div.find('.details').hide();
+        }
+        else {
+          div.find('.details').attr('href', ad.DetailsURL)
+        }
+        div.find('.reg').hide();
+
+        eventsContainer.append(div);
+
+        if (page <= 1) {
+          $('#back').hide();
+        }
+        else {
+          $('#back').show();
+        }
+        if (page >= pages) {
+          $('#next').hide();
+        } else {
+          $('#next').show();
+        }
+
+      }
+    }
+
+    var defaultAudience = getParameterByName('category');
+    var defaultDay = getParameterByName('day');
+    var defaultCampus = getParameterByName('campus');
+    //if(!defaultCampus && personCampus){
+    //  defaultCampus = personCampus
+    //}
+    if(defaultAudience) {
+      $('#audiences').html( defaultAudience + ' <i class="fas fa-angle-down pull-right"></i>');
+      if(defaultDay){
+        $('#dayOfWeek').html( defaultDay+ ' <i class="fas fa-angle-down pull-right"></i>');
+        if(defaultCampus){
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(groups, 1, defaultAudience, defaultDay, defaultCampus);
+        }
+        else{ renderFilteredItems(groups, 1, defaultAudience, defaultDay);}
+      }
+      else {
+        if(defaultCampus){
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(groups, 1, defaultAudience, 'all', defaultCampus);
+        }
+        else{ renderFilteredItems(groups, 1, defaultAudience, 'all', 'all');}
+      }
+    }
+    else
+    {
+      if(defaultDay)
+      {
+        $('#dayOfWeek').html( defaultDay+ ' <i class="fas fa-angle-down pull-right"></i>');
+        if(defaultCampus)
+        {
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(groups, 1, 'all', defaultDay, defaultCampus);
+        }
+        else{ renderFilteredItems(groups, 1, 'all', defaultDay);}
+      }
+      else
+      {
+        if(defaultCampus)
+        {
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(groups, 1, 'all', 'all', defaultCampus);
+        }
+        else{ renderFilteredItems(groups, 1, 'all', 'all', 'all');}
+      }
+    }
+  });
+
+</script>

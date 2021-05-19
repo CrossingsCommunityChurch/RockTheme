@@ -22,8 +22,8 @@
   {%- for member in group.Members -%}
     {%- if member.GroupRole.IsLeader -%}
 			{%- assign contact = member.Person -%}
-			{%- endif -%}
-			{%- endfor -%}
+		{%- endif -%}
+	{%- endfor -%}
 
 
 {%- capture metaDesc -%}{{ group.Description | StripHtml | TruncateWords:25 }} {{ pageTitle }}{%- endcapture -%}
@@ -43,20 +43,22 @@
                 Need to not display if event is only happening once.
               {%- endcomment -%}
               <h4 class="subheading">Date</h4>
-              <h4 class="heading"> {{group.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}
+              <h4 class="heading"> {{group.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}</h4>
               {%- if group.Schedule.FriendlyScheduleText and group.Schedule.FriendlyScheduleText != empty  -%}
                 <h4 class="subheading">Schedule</h4>
-                <h4 class="heading">{{ group.Schedule.FriendlyScheduleText }}</h3>
+                <h3 class="heading">{{ group.Schedule.FriendlyScheduleText }}</h3>
               {%- endif -%}
-              {%- if group.location and group.location != empty  -%}
+              {%- if group.GroupLocations and group.GroupLocations != empty  -%}
                 {%- comment -%}
-                  Need to modify this to list the campus location if non is specified on the event
+                  Need to modify this to list the campus location if non is specified on the group
                 {%- endcomment -%}
+                {%- for location in group.GroupLocations -%}
                 <p class="lead">
                   <a href="#" class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i><span>{{ address }} <br> {{ city }}, {{ state }} {{ zip }}</span>
+                    <i class="fas fa-map-marker-alt"></i><span>{{location.Location.Name}}</span>
                   </a>
                 </p>
+                {%- endfor -%}
               {%- endif -%}
             </div>
             <div class="col-md-6"><div class="pastor-item">
@@ -83,27 +85,27 @@
             <p>{{eventitemoccurrence.EventItem.Summary }}</p>
           </div>
         </div>
-              <div class="row">
-                <div class="col">
-                  {%- assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages -%}
-                  {%- assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size -%}
-                  {%- if eventItemOccurrenceLinkagesCount > 0 -%}
-                    {%- for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages -%}
-                      <div class="row">
-                        {%- if eventItemOccurrenceLinkage.RegistrationInstance.Cost -%}
-                          <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
-                        {%- endif -%}
-                      </div>
-                    {%- endfor -%}
-                    {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
-                  {%- endif -%}
-                  {%- if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty -%}
-                    {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{eventitemoccurrence.EventItem.DetailsUrl}}' buttontarget:'_blank' buttontext:'Register' ]}
+        <div class="row">
+          <div class="col">
+            {%- assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages -%}
+            {%- assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size -%}
+            {%- if eventItemOccurrenceLinkagesCount > 0 -%}
+              {%- for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages -%}
+                <div class="row">
+                  {%- if eventItemOccurrenceLinkage.RegistrationInstance.Cost -%}
+                    <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
                   {%- endif -%}
                 </div>
-              </div>
-            </div>
+              {%- endfor -%}
+              {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
+            {%- endif -%}
+            {%- if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty -%}
+              {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{eventitemoccurrence.EventItem.DetailsUrl}}' buttontarget:'_blank' buttontext:'Register' ]}
+            {%- endif -%}
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 {%- endgroup-%}
