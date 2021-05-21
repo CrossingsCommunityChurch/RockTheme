@@ -25,6 +25,7 @@
             {%- for group in groupItems -%}
                 {%- if group.IsPublic -%}
                     {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
+                    {%-assign id = group.Id-%}
                     {%-assign name = group.Name-%}
                     {%-assign campus = group.Campus.Name -%}
                     {% comment %}
@@ -66,13 +67,14 @@
                       {%-assign imageAsset = ''-%}
                     {%-endif-%}
         {
+            "Id": {{id | ToJSON}},
             "Name": {{name | ToJSON}},
             "NextOC": {{nextOc | ToJSON}},
             "Campus": {{campus | ToJSON}},
             "Tags": {{tagsArray | ToJSON}},
             "ScheduleId": {{scheduleId | ToJSON}},
             "FriendlyScheduleText": {{friendlyName | ToJSON }},
-            "Deatils": {{details | ToJSON }},
+            "Details": {{details | ToJSON }},
             "Summary": {{summary | ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
             "LeaderID": {{leader | ToJSON}},

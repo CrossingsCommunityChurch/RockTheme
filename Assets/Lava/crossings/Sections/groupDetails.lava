@@ -3,18 +3,22 @@
 
 {%- endcomment -%}
 
-{%- group id:'{{ PageParameter.groupId }}' -%}
+{% assign data = 'groupFinder' | PersistedDataset%}
+{% assign id = PageParameter.groupId | AsInteger %}
+{% assign manData = data.Groups | Where:'Id', id %}
+{% comment %} {{ manData | Debug }} {% endcomment %}
+
+{% for group in manData %}
+
 {%- capture pageTitle -%}{{group.Name}}{%- endcapture%}
 {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
 {%- capture pageTitleBrowser -%}{{group.Name}} | {{ org }}{%- endcapture%}
 {{ pageTitle | SetPageTitle:'PageTitle' }}
 {{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
 
-{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/600x600/' -%}
-{%- assign imageAtt = group | Attribute:'Assetimage' | Url:'localpath' -%}
-{%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageAtt-%}
+{%- assign imageAsset = group.ImageAsset -%}
 
+{% comment %} {{group | Debug}} {% endcomment %}
 
 <div class="event-page">
     <div class="section page-title reverse">
@@ -39,14 +43,14 @@
      {[ groupdetailsection  ]}
     <div class="container-fluid section event-details">
           <div class="row">
-              <div class="container content-area" data-aos="fade-up">
+              <div class="container content-area" data-aos="fade-up" style="padding: 0px 10px 0px 10px">
                   <div class="row">
-                      <div class="col-md-12">
+                      <div class="col-md-12 flexCenter">
                         <h2 class="heading">{{ group.Name }}</h2>
                         <h4 class="subheading">Group Details</h4>
-                        <hr class="sep ml-0">
+                        <hr class="sep">
                         <div class="event-info">
-                        {{ group.Description }}
+                        {{ group.Details }}
                         </div>
                       </div>
                   </div>
@@ -54,7 +58,4 @@
           </div>
     </div>
 </div>
-
-
-
-{%- endgroup -%}
+{% endfor %}
