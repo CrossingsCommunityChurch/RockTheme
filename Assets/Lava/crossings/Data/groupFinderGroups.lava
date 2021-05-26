@@ -1,0 +1,91 @@
+{
+    "Tags":[
+        {%- definedvalue where:'DefinedTypeId == 101' iterator:'values' -%}
+            {%- for value in values -%}
+            {{value.Value | ToJSON }}{%-unless forloop.last-%},{%-endunless-%}
+            {%- endfor -%}
+        {%- enddefinedvalue -%}
+    ],
+    "DaysOfWeek":[
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ],
+    "Campuses":[
+        "Crossings OKC",
+        "Crossings Edmond",
+        "Crossings Online"
+    ],
+    "Groups":[
+        {% group where:'GroupTypeId == 131 || GroupTypeId == 91' %}
+            {%- for group in groupItems -%}
+                {%- if group.IsPublic -%}
+                    {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
+                    {%-assign id = group.Id-%}
+                    {%-assign name = group.Name-%}
+                    {%-assign campus = group.Campus.Name -%}
+                    {% comment %}
+                        Schedle check for schedules attached to the group. If no group Schedule check
+                        group location schedules. Get next occurance day and full date.
+                    {% endcomment %}
+                    {%- if group.Schedule and group.Schedule != empty -%}
+                        {%-assign scheduleId = group.ScheduleId-%}
+                        {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
+                        {%-assign sched = group.Schedule -%}
+                        {%- assign nextOc = sched.NextStartDateTime -%}
+                        {%-assign friendlyName = sched.FriendlyScheduleText -%}
+                        {%-assign location = group.GroupLocations | First -%}
+                    {%- else -%}
+                        {% for loc in group.GroupLocations %}
+                            {%- for sched in loc.Schedules -%}
+                                {%- assign dayofweek = sched.NextStartDateTime | Date:'dddd' -%}
+                                {%- assign scheduleId = sched.Id -%}
+                                {%- assign nextOc = sched.NextStartDateTime -%}
+                                {%-assign friendlyName = sched.FriendlyScheduleText -%}
+                                {%assign location = loc %}
+                            {%- endfor -%}
+                        {%- endfor -%}
+                    {%- endif -%}
+                    {%-assign details =  group.Description-%}
+                    {%-assign memberCount = group.Members | Size -%}
+                    {%- for member in group.Members -%}
+                        {%- if member.GroupRole.IsLeader -%}
+	                        {%- assign leader = member.PersonId -%}
+	                    {%- endif -%}
+	                {%- endfor -%}
+                    {%-assign summary = group | Attribute:'WebSummary'-%}
+                    {%-assign tagsArray = group | Attribute:'GroupTags'-%}
+                    {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
+                    {%-assign imageSize = '/fit-in/600x600'-%}
+                    {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath'-%}
+                    {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+                    {%-if imageUrlPath == ''-%}
+                      {%-assign imageAsset = ''-%}
+                    {%-endif-%}
+        {
+            "Id": {{id | ToJSON}},
+            "Name": {{name | ToJSON}},
+            "NextOC": {{nextOc | ToJSON}},
+            "Campus": {{campus | ToJSON}},
+            "Tags": {{tagsArray | ToJSON}},
+            "ScheduleId": {{scheduleId | ToJSON}},
+            "FriendlyScheduleText": {{friendlyName | ToJSON }},
+            "Details": {{details | ToJSON }},
+            "Summary": {{summary | ToJSON}},
+            "ImageAsset": {{imageAsset | ToJSON}},
+            "LeaderID": {{leader | ToJSON}},
+            "DayofWeek": {{dayofweek | ToJSON}},
+            "MemberCount": {{memberCount | ToJSON}},
+            "DetailsURL": {{detailURL | ToJSON}},
+            "AvgAge": 0,
+            "LocationName": {{location.Location.Name | ToJSON}}
+        } {%-unless forloop.last-%},{%-endunless-%}
+                {%- endif -%}
+            {%- endfor -%}
+        {% endgroup %}
+    ]
+}
