@@ -1,0 +1,163 @@
+{%- comment -%}
+  Search shown when someone clicks the search icon in the top right of the page.
+
+  Accepts a Persisted Dataset of JSON to make Recommended, Recent Media and Upcoming Events
+{%- endcomment -%}
+
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossorigin="anonymous">
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.find%2CArray.prototype.includes%2CPromise%2CObject.assign%2CObject.entries"></script>
+
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = '/fit-in/300x300/' -%}
+{%- assign searchSuggestions = 'searchSuggestions' | PersistedDataset -%}
+<a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>
+<div class="search-wrapper">
+
+{% comment %} Begin Algolia Search {% endcomment %}
+<div class="ais-InstantSearch">
+  {% comment %} <div class="right-panel"> {% endcomment %}
+    <div class="searchContainer">
+    <button onclick="myFunction()">Toggle</button>
+      <div id="searchbox"></div>
+    </div>
+  {% comment %} </div> {% endcomment %}
+    <div id="hideShow" style="display: none">
+      <div id="hits"></div>
+      <div id="pagination"></div>
+    </div>
+</div>
+
+{% comment %} Begin suggestions container {% endcomment %}
+  <div id="hideShow2" class="search-content">
+    <div class="flex-row flex-wrap">
+      <div class="col-md-12 col-lg-4 search-column">
+        <div>
+          <h2>Upcoming Events</h2>
+          {%- for event in searchSuggestions.Events -%}
+            <a class="media-object" href="{{event.link}}">
+              <div>
+                <h3>{{ event.Name }}</h3>
+                <p><strong>{{ event.date }}</strong></p>
+                <p>{{ event.Summary | StripHtml | TruncateWords:20 }}</p>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+
+      </div>
+      <div class="col-md-6 col-lg-4 search-column">
+        <div>
+          <h2>Latest Media</h2>
+          {%- for popular in searchSuggestions.Popular -%}
+
+            {%- assign seriesSlug = 'undefined' -%}
+
+            {%- if popular.Series.Slug -%}
+                {%- assign seriesSlug = popular.Series.Slug -%}
+            {%- endif -%}
+
+            {%- capture link -%}/media/{{ popular.ChannelPath }}{{ seriesSlug }}/{{ popular.PrimarySlug }}{%endcapture%}
+            <a class="media-object" href="{{ link }}">
+              <div>
+                <h3>{{ popular.Title }}</h3>
+                <p><strong>{{ popular.Speaker }} | {{ popular.PublishDateTime }}</strong></p>
+                <p>{{ popular.Content | StripHtml | TruncateWords:20 }}</p>
+              </div>
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 search-column">
+        <div>
+        <h2>Suggested</h2>
+            {%- for recommend in searchSuggestions.Recommended -%}
+              {%- if recommend.Detail != '' -%}
+                <a class="media-object" href="{{ recommend.Detail }}">
+              {%- else -%}
+                <div class="media-object">
+              {%- endif -%}
+                <div>
+                  <h3>{{recommend.Title}}</h3>
+                  <p>{{recommend.Content | StripHtml | TruncateWords:20 }}</p>
+                </div>
+              {%- if recommend.Detail != '' -%}
+                </a>
+              {%- else -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{% comment %} End suggestions container {% endcomment %}
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("hideShow");
+  var y = document.getElementById("hideShow2");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+    y.style.display = "none";
+  } else {
+    x.style.display = "none";
+    y.style.display = "block";
+  }
+}
+
+const searchClient = algoliasearch(
+  "I8DCGNGPPY",
+  "4f5e9f90d86e4b94520f83d0cff2f1cf"
+);
+
+// Search Box
+const search = instantsearch({
+  indexName: "sitepageindex",
+  searchClient,
+});
+
+search.addWidgets([
+  // Search Widget
+  instantsearch.widgets.searchBox({
+    placeholder: "Search...",
+    cssClasses: {
+      input: "inputStyle",
+    },
+    container: "#searchbox",
+  }),
+
+  // Hits|Items Widget
+  instantsearch.widgets.hits({
+    container: "#hits",
+    cssClasses: {
+      item: ["itemStyle"],
+    },
+    templates: {
+      item(hit) {
+        return `
+          <div class="itemContainer">
+            <div style="width:100%">
+              <h4>${hit.PageTitle}</h4>
+              <p>${hit.PageSummary}</p>
+            <div>
+            <div class="search-button">
+              <a class="btn btn-primary" href=${hit.Url}>Learn More</a>
+            </div>
+          </div>
+        `;
+      },
+    },
+  }),
+
+]);
+
+search.start();
+</script>
+{% comment %} <script src="./js/algoliaSearch.js"></script> {% endcomment %}
+
+  <span class="search-close"></span>
+</div>

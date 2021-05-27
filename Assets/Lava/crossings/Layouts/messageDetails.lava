@@ -55,7 +55,7 @@
                     {%- endif -%}
                   </div>
                 {%- endif -%}
-                <div class="share">
+                <div class="share no-index">
                   <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
                   <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
                   <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
@@ -91,7 +91,7 @@
                           {%- for taggedItem in taggedItems -%}
                             {%- for tag in tags -%}
                               {%- if taggedItem.TagId == tag.Id -%}
-                                <a href="/media?tag={{tag.Name}}#vapp">{{ tag.Name }}</a>
+                                <a class="tagItem" href="/media?tag={{tag.Name}}#vapp">{{ tag.Name }}</a>
                               {%- endif -%}
                             {%- endfor -%}
                           {%- endfor -%}

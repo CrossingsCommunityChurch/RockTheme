@@ -88,12 +88,14 @@ $(document).ready(function() {
         $('.search-input').focus();
         $('.search-wrapper').addClass('open');
         $('.mobile-navbar').addClass('close');
+        $('html').addClass('hide-overflow');
     });
 
     $('.search-close').click(function(e){
         e.preventDefault();
         $('.search-wrapper').removeClass('open');
         $('.mobile-navbar').removeClass('close');
+        $('html').removeClass('hide-overflow');
     });
 
     $('.run-search').click(function(e) {
