@@ -21,7 +21,7 @@
 {% comment %} {{group | Debug}} {% endcomment %}
 
 <div class="event-page">
-    <div class="section page-title reverse">
+    <div class="section page-title reverse" style="padding-top: 0px!important">
       <div class="container">
         <div class="jumbotron text-center"></div>
       </div>
@@ -48,7 +48,7 @@
                       <div class="col-md-12 flexCenter">
                         <h2 class="heading">{{ group.Name }}</h2>
                         <h4 class="subheading">Group Details</h4>
-                        <hr class="sep">
+                        <hr class="sep" style="margin-left: auto!important;">
                         <div class="event-info">
                         {{ group.Details }}
                         </div>

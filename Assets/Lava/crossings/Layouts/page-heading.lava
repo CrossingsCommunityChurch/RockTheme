@@ -54,7 +54,7 @@
         {[ endparallax ]}
     </div>
 {%- else -%}
-    <div class="section page-title reverse">
+    <div class="section page-title reverse group-content">
         <div class="container">
             <div class="jumbotron text-center" data-aos="fade-in">
                 {%if subTitle -%}
