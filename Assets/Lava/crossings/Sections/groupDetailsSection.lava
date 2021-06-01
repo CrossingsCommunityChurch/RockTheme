@@ -16,7 +16,7 @@
         <div class="event-content">
           <div class="row location-content">
             <div class="groupAlign">
-            <div class="col-md-6" style="width: 50vw>
+            <div class=" groupInfo col-md-6" style="width: 50vw>
               {%- comment -%}
                 This shows schedule friendly name only if it exists.
                 Need to not display if event is only happening once.
