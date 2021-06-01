@@ -28,6 +28,7 @@
                     {%-assign id = group.Id-%}
                     {%-assign name = group.Name-%}
                     {%-assign campus = group.Campus.Name -%}
+                    {%-assign campusShortcode = group.Campus.ShortCode -%}
                     {% comment %}
                         Schedle check for schedules attached to the group. If no group Schedule check
                         group location schedules. Get next occurance day and full date.
@@ -36,8 +37,9 @@
                         {%-assign scheduleId = group.ScheduleId-%}
                         {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
                         {%-assign sched = group.Schedule -%}
-                        {%- assign nextOc = sched.NextStartDateTime -%}
+                        {%-assign nextOc = sched.NextStartDateTime -%}
                         {%-assign friendlyName = sched.FriendlyScheduleText -%}
+                        {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
                         {%-assign location = group.GroupLocations | First -%}
                     {%- else -%}
                         {% for loc in group.GroupLocations %}
@@ -46,17 +48,18 @@
                                 {%- assign scheduleId = sched.Id -%}
                                 {%- assign nextOc = sched.NextStartDateTime -%}
                                 {%-assign friendlyName = sched.FriendlyScheduleText -%}
+                                {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
                                 {%assign location = loc %}
                             {%- endfor -%}
                         {%- endfor -%}
                     {%- endif -%}
                     {%-assign details =  group.Description-%}
                     {%-assign memberCount = group.Members | Size -%}
-                    {%- for member in group.Members -%}
-                        {%- if member.GroupRole.IsLeader -%}
-	                        {%- assign leader = member.PersonId -%}
-	                    {%- endif -%}
-	                {%- endfor -%}
+                    {%-assign members = group.Members-%}
+                    {%comment%}
+                        The groupRoleId in production for Leader is 700 staging is 624
+                    {%endcomment%}
+                    {%-assign leaderArray = members | Where:'GroupRoleId',624 -%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
@@ -77,7 +80,7 @@
             "Details": {{details | ToJSON }},
             "Summary": {{summary | ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
-            "LeaderID": {{leader | ToJSON}},
+            "Leaders": {{leaderArray | ToJSON}},
             "DayofWeek": {{dayofweek | ToJSON}},
             "MemberCount": {{memberCount | ToJSON}},
             "DetailsURL": {{detailURL | ToJSON}},
