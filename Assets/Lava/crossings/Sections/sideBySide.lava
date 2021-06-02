@@ -67,10 +67,10 @@
 <div class="section">
     <div class="row">
         <div class="container content-area" data-aos="fade-up">
-            <h2 class="text-center" {%- if contentTextColor != empty -%}style='{{ contentTextColor }}'{%- endif -%}>{{ channelSectionTitle }}</h2>
+            <h2 class="text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
             <hr class="sep">
             {%- if channelSectionSummary != empty -%}
-                <div class="summary text-center" {%- if contentTextColor != empty -%}style='{{ contentTextColor }}'{%- endif -%}>
+                <div class="summary text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>
                 {{ channelSectionSummary }}
                 </div>
             {%- endif -%}
