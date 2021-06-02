@@ -4,23 +4,19 @@
 {%- endcomment -%}
 
 
-{%- assign contact = group.LeaderID | PersonById -%}
+{%- assign leaders = group.Leaders -%}
 
 
 {%- capture metaDesc -%}{{ group.Details | StripHtml | TruncateWords:25 }} {{ pageTitle }}{%- endcapture -%}
 {{ metaDesc | AddMetaTagToHead:'name','description' }}
 <div class="section special-message simple-section event-details" style="padding-bottom: 60px">
-  <div class="container">
+  <div class="container" style="padding: 0px 5vw 0px 5vw">
     <div class="row">
       <div class="col" data-aos="fade-up">
         <div class="event-content">
           <div class="row location-content">
             <div class="groupAlign">
-            <div class=" groupInfo col-md-6" style="width: 50vw>
-              {%- comment -%}
-                This shows schedule friendly name only if it exists.
-                Need to not display if event is only happening once.
-              {%- endcomment -%}
+            <div class=" groupInfo col-md-6" style="width: 50vw">
               <h4 class="subheading">Date</h4>
               <h4 class="heading"> {{group.NextOC | Date: 'MMM d h:mm tt'}}</h4>
               {%- if group.FriendlyScheduleText and group.FriendlyScheduleText != empty  -%}
@@ -39,19 +35,17 @@
               {%- endif -%}
             </div>
             <div class="col-md-6"><div class="pastor-item">
-              {%- if contact.Photo.Url and contact.Photo.Url != empty -%}
-              <div class="pastor-image">
-                <img src="{{ contact.Photo.Url }}">
-              </div>
-              {%- endif -%}
-              {%- if useContactImage == false -%}
-              <div class="pastor-image">
-                <img src="{{ imageUrl }}">
-              </div>
-              {%- endif -%}
               <div class="past-details">
-                <h2 class="heading">{{ contact.FullName }}</h2>
-                <p class="lead">{{ contact | Attribute: 'Position'}}</p>
+                <h4 class="subheading">Leader's:</h4>
+
+                {%-if leaders != empty-%}
+                {%-for leader in leaders-%}
+                  {% assign contact = leader.Person.Id | PersonById %}
+                  <h4 class="heading" style="margin-bottom: 0px">{{ contact.FullName }}</h2>
+                  <p class="leaderDescription">{{ contact | Attribute: 'Position'}}</p>
+                {%-endfor-%}
+                {%-endif-%}
+
               </div>
             </div>
             </div>

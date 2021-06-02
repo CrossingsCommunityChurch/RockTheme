@@ -22,15 +22,15 @@
       {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
   {%- endif -%}
 
-<div class="section albumn-embed-list" {%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentItemStyle }}'{%- endif -%}>
+<div class="section albumn-embed-list" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
   <div class="content-area">
       <div class="album-list-items">
         <div class="container">
           {%- if channelSectionTitle != empty -%}
-              <h2 class="text-center" {%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentTextColor }}'{%- endif -%}>{{ channelSectionTitle }}</h2>
+              <h2 class="text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
           {%- endif -%}
           {%- if channelSectionSummary != empty -%}
-              <div class="summary text-center" {%- if contentTextColor != empty -%}style='{{ contentTextColor }}'{%- endif -%}>
+              <div class="summary text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>
               {{ channelSectionSummary }}
               </div>
           {%- endif -%}
