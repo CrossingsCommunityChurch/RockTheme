@@ -40,9 +40,7 @@
 
                 {%-if leaders != empty-%}
                 {%-for leader in leaders-%}
-                  {% assign contact = leader.Person.Id | PersonById %}
-                  <h4 class="heading" style="margin-bottom: 0px">{{ contact.FullName }}</h2>
-                  <p class="leaderDescription">{{ contact | Attribute: 'Position'}}</p>
+                  <h4 class="heading" style="margin-bottom: 0px">{{ leader}}</h2>
                 {%-endfor-%}
                 {%-endif-%}
 

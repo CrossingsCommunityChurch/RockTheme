@@ -59,7 +59,8 @@
                     {%comment%}
                         The groupRoleId in production for Leader is 700 staging is 624
                     {%endcomment%}
-                    {%-assign leaderArray = members | Where:'GroupRoleId', groupRoleId -%}
+                    {%-assign leaderArray = members | Where:'GroupRoleId', groupRoleId | Select:'Person' -%}
+                    {%- assign leaders = leaderArray | Select:'FullName' -%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
@@ -80,7 +81,7 @@
             "Details": {{details | ToJSON }},
             "Summary": {{summary | ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
-            "Leaders": {{leaderArray | ToJSON}},
+            "Leaders": {{leaders | ToJSON}},
             "DayofWeek": {{dayofweek | ToJSON}},
             "MemberCount": {{memberCount | ToJSON}},
             "DetailsURL": {{detailURL | ToJSON}},
