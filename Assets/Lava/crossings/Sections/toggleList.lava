@@ -38,15 +38,15 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
-<div class="section toggle-content-list bg-gray" {%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentItemStyle }}'{%- endif -%}>
+<div class="section toggle-content-list bg-gray" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
   <div class="container content-area">
       <div class="toggle-list-items">
         {%- if channelSectionTitle != empty -%}
-            <h2 class="text-center heading" {%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentTextColor }}'{%- endif -%}>{{ channelSectionTitle }}</h2>
+            <h2 class="text-center heading" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
             <hr class="sep">
         {%- endif -%}
         {%- if channelSectionSummary != empty -%}
-            <div class="summary text-center" {%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}style='{{ contentTextColor }}'{%- endif -%}>
+            <div class="summary text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>
             {{ channelSectionSummary }}
             </div>
         {%- endif -%}
