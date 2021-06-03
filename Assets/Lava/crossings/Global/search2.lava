@@ -18,12 +18,9 @@
 
 {% comment %} Begin Algolia Search {% endcomment %}
 <div class="ais-InstantSearch">
-  {% comment %} <div class="right-panel"> {% endcomment %}
     <div class="searchContainer">
-    <button onclick="myFunction()">Toggle</button>
-      <div id="searchbox"></div>
+      <div oninput="myFunction()"id="searchbox"></div>
     </div>
-  {% comment %} </div> {% endcomment %}
     <div id="hideShow" style="display: none">
       <div id="hits"></div>
       <div id="pagination"></div>
@@ -98,12 +95,19 @@
 
 <script>
 function myFunction() {
+  // Seach results
   var x = document.getElementById("hideShow");
+  // Suggested view
   var y = document.getElementById("hideShow2");
-  if (x.style.display === "none") {
+  // Search Input
+  var z = document.getElementsByClassName("inputStyle")[0].value.length;
+  console.log('z', z)
+
+  if (x.style.display === "none" && z >= 3) {
     x.style.display = "block";
     y.style.display = "none";
-  } else {
+  }
+  if (x.style.display !== "none" && z === 0) {
     x.style.display = "none";
     y.style.display = "block";
   }
@@ -117,6 +121,14 @@ const searchClient = algoliasearch(
 // Search Box
 const search = instantsearch({
   indexName: "sitepageindex",
+  // Delete this
+  searchFunction(helper) {
+    const page = helper.getPage(); // Retrieve the current page
+
+    helper.setQuery('') // this call resets the page
+          .setPage(page) // we re-apply the previous page
+          .search();
+  },
   searchClient,
 });
 
@@ -125,7 +137,10 @@ search.addWidgets([
   instantsearch.widgets.searchBox({
     placeholder: "Search...",
     cssClasses: {
+      form: "searchForm",
       input: "inputStyle",
+      submitIcon: "submitBtn",
+      resetIcon: "resetBtn"
     },
     container: "#searchbox",
   }),
