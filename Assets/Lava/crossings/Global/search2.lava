@@ -121,6 +121,12 @@ const searchClient = algoliasearch(
 const search = instantsearch({
   indexName: "sitepageindex",
   searchClient,
+  searchFunction: function(helper) {
+    if (helper.state.query.length < 2) {
+      return;
+    }
+    helper.search( );
+}
 });
 
 search.addWidgets([
