@@ -130,7 +130,7 @@
     $(window).on("scroll", function () {
       const scrollHeight = $(document).height();
       const scrollPos = Math.floor($(window).height() + $(window).scrollTop());
-      const isBottom = scrollHeight - 100 < scrollPos;
+      const isBottom = scrollHeight - 800 < scrollPos;
       const eventsContainer = $(".row.flex-row.flex-wrap");
 
       // filter values
