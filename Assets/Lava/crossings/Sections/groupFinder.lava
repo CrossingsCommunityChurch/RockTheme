@@ -66,10 +66,6 @@
     </div>
     <div class="row flex-row flex-wrap">
     </div>
-    <div class="paginate-buttons text-center">
-      <a class="btn btn-default" id="back" role="button">Back</a>
-      <a class="btn btn-default" id="next" role="button">Next</a>
-    </div>
   </div>
 </div>
 
@@ -123,35 +119,111 @@
       renderFilteredItems(groups, 1, audience, day, campus);
     });
 
-    $('#back').click(function() {
-      topOfEvents();
+//****************** Top - Scroll to Render *******************//
+
+    var currentscrollHeight = 0;
+    var count = 0;
+    // needs to match "itemsPerPage" in initial render..
+    let curIndex = 6;
+
+    // Infinite Scroll
+    $(window).on("scroll", function () {
+      const scrollHeight = $(document).height();
+      const scrollPos = Math.floor($(window).height() + $(window).scrollTop());
+      const isBottom = scrollHeight - 100 < scrollPos;
+      const eventsContainer = $(".row.flex-row.flex-wrap");
+
+      // filter values
       let audience = $('#audiences').text().trim();
-      let day = $('#dayOfWeek').text().trim();
-      let campus = $('#campuses').text().trim();
       if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      let day = $('#dayOfWeek').text().trim();
       if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      let campus = $('#campuses').text().trim();
       if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
-      curPage = curPage - 1;
-      renderFilteredItems(groups, curPage, audience, day, campus);
+
+      var filteredEvents1 = groups.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.Tags.includes(audience)) && (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()) && (!campus || campus.trim().toLowerCase() === 'all' || evt.Campus.includes(campus)));;
+      let loadMax = curIndex >= filteredEvents1.length ? curIndex : curIndex + 6;
+
+      if (isBottom && currentscrollHeight < scrollHeight) {
+
+        for(var i = curIndex; i < loadMax; i++) {
+          let ad = filteredEvents1[i];
+          curIndex = curIndex + 1;
+          // add groups to the view
+          let div = $(`
+            <div class="col-sm-6 col-md-4">
+              <div class="card cardShadow">
+                <div class="thumb">
+                  <img src="I" class="event-img">
+                </div>
+              <div class="row card-content-row">
+                <div class="card-content">
+                  <div class="col relative">
+                    <div>
+                      <div class="day-of-week hidden"><span></span></div>
+                      <h4>Title here</h4>
+                    <h5 class="text-muted">Subheadinghere</h5>
+                  <p class="small"></p>
+                </div>
+              </div>
+              <a class="details" href="{{ detail | StripHtml }}">
+                <div class="btn icon-button shadowDepth2">
+                  <span>Details</span>
+                  <i class="fas fa-angle-right"></i>
+                </div>
+                </a>
+                <a class="reg" href="">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Register</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>`
+      );
+
+        if(ad.ImageAsset == ''){
+        div.find('.thumb').hide();
+        }
+        else{
+        div.find('img.event-img').attr('src', ad.ImageAsset);
+        // div.find('.thumb').css("background-image", `url("${event.AssetImage}")`);
+        }
+        div.find('h4').text(ad.Name);
+        if(ad.DayofWeek != '') {
+          div.find('.day-of-week').removeClass('hidden');
+          div.find('.day-of-week > span').text(ad.DayofWeek);
+        }
+        if(ad.FriendlyScheduleText == ''){
+          div.find('h5').hide();
+        }
+        else{
+          div.find('h5').text(ad.FriendlyScheduleText);
+        }
+        div.find('p').text(ad.Summary);
+        if(ad.DetailsURL == ''){
+          div.find('.details').hide();
+        }
+        else {
+          div.find('.details').attr('href', ad.DetailsURL)
+        }
+        div.find('.reg').hide();
+
+        eventsContainer.append(div);
+
+          count++;
+        }
+        currentscrollHeight = scrollHeight;
+      }
     });
 
-    $('#next').click(function() {
-      topOfEvents();
-      let audience = $('#audiences').text();
-      let day = $('#dayOfWeek').text().trim();
-      let campus = $('#campuses').text().trim();
-      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
-      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
-      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
-      (`audience is ${audience}`);
-      (`day is ${day}`);
-      (`campus is ${campus}`);
-      curPage = curPage + 1
-      renderFilteredItems(groups, curPage, audience, day, campus);
-    });
+
+//****************** Bottom - Scroll to Render *******************//
 
     function topOfEvents() {
-       $('html, body').animate({
+      $('html, body').animate({
           scrollTop: $("#announcementList").offset().top
       }, 300);
     }
@@ -166,21 +238,18 @@
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
+    //****************** Initial Render *******************//
+
     function renderFilteredItems(groups, page, audience, day, campus) {
       let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
 
       var filteredEvents1 = groups.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.Tags.includes(audience)) && (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()) && (!campus || campus.trim().toLowerCase() === 'all' || evt.Campus.includes(campus)));
-      if (filteredEvents1.length === 0) {
-        eventsContainer.append('<p>No data exist for the selected filters.</p>');
-        $('#back').hide();
-        $('#next').hide();
-        return;
-      }
 
       let count = 0;
       let pgIdx = page - 1;
-      let itemsPerPage = 25
+      // needs to match "curIndex" in scroll to render..
+      let itemsPerPage = 6;
       let itemIdxMin = pgIdx * itemsPerPage;
       let itemsCount = filteredEvents1.length;
       let pages = Math.ceil(itemsCount / itemsPerPage);
@@ -258,20 +327,10 @@
 
         eventsContainer.append(div);
 
-        if (page <= 1) {
-          $('#back').hide();
-        }
-        else {
-          $('#back').show();
-        }
-        if (page >= pages) {
-          $('#next').hide();
-        } else {
-          $('#next').show();
-        }
-
       }
     }
+
+    //****************** End Initial Render *******************//
 
     var defaultAudience = getParameterByName('category');
     var defaultDay = getParameterByName('day');
