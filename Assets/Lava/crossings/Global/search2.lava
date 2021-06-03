@@ -101,7 +101,6 @@ function myFunction() {
   var y = document.getElementById("hideShow2");
   // Search Input
   var z = document.getElementsByClassName("inputStyle")[0].value.length;
-  console.log('z', z)
 
   if (x.style.display === "none" && z >= 3) {
     x.style.display = "block";
@@ -121,14 +120,6 @@ const searchClient = algoliasearch(
 // Search Box
 const search = instantsearch({
   indexName: "sitepageindex",
-  // Delete this
-  searchFunction(helper) {
-    const page = helper.getPage(); // Retrieve the current page
-
-    helper.setQuery('') // this call resets the page
-          .setPage(page) // we re-apply the previous page
-          .search();
-  },
   searchClient,
 });
 
