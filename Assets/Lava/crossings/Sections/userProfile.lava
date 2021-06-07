@@ -48,7 +48,7 @@
                     {{ CurrentPerson.FullName }}
                     {% if familyCount > 1 %}
                         <div class="pull-right">
-                            <select name="selectFamily" onchange="{{ Family.Id | Postback:'SelectFamily' }}" class="form-control" style="padding: none">
+                            <select name="selectFamily" onchange="{{ Family.Id | Postback:'SelectFamily' }}" class="form-control" style="padding: 0px">
                                 <option value="{{ Family.Id }}" selected="selected">{{ Family.Name }}</option>
                                 {% for family in Families %}
                                     {% if family.Id != Family.Id %}
