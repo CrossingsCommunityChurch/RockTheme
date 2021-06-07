@@ -48,7 +48,7 @@
                     {{ CurrentPerson.FullName }}
                     {% if familyCount > 1 %}
                         <div class="pull-right">
-                            <select name="selectFamily" onchange="{{ Family.Id | Postback:'SelectFamily' }}" class="form-control" style="padding: 0px!important">
+                            <select name="selectFamily" onchange="{{ Family.Id | Postback:'SelectFamily' }}" class="form-control">
                                 <option value="{{ Family.Id }}" selected="selected">{{ Family.Name }}</option>
                                 {% for family in Families %}
                                     {% if family.Id != Family.Id %}
@@ -341,17 +341,3 @@
         </div>
 
     {% endif %}
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
- Octotree
- Login with GitHub
