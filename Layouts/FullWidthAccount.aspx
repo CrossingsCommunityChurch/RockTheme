@@ -3,7 +3,7 @@
 <asp:Content ID="ctMain" ContentPlaceHolderID="main" runat="server">
         <Rock:Zone Name="PageHeading" runat="server" />
         <!-- Start Content Area -->
-        <div class="Main">
+        <div class="Main account-page">
         <!-- Breadcrumbs -->
         <Rock:PageBreadCrumbs ID="PageBreadCrumbs" runat="server" />
 
