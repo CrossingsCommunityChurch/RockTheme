@@ -1,37 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
-
-@MatthewKyle22
-SparkDevNetwork
-/
-Rock
-81
-418
-274
-Code
-Issues
-260
-Pull requests
-6
-Actions
-Projects
-Wiki
-Security
-Insights
-Rock/RockWeb/Assets/Lava/PublicProfile.lava
-@nairdo
-nairdo - (Lava) Remove use of {%- in comment/endcomment tags.
-Latest commit e59e772 on Apr 27
- History
- 3 contributors
-@MikeDPeterson@shauncummings@nairdo
-343 lines (312 sloc)  17.9 KB
-
 {% comment %}
     This is the default lava template for the PublicProfileEdit block
     Available Lava Fields:
