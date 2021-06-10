@@ -21,7 +21,7 @@
         "Crossings Online"
     ],
     "Groups":[
-        {% group where:'GroupTypeId == 131 || GroupTypeId == 91' %}
+        {% group where:'GroupTypeId == 206 || GroupTypeId == 131' %}
             {%- for group in groupItems -%}
                 {%- if group.IsPublic -%}
                     {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
