@@ -116,7 +116,7 @@
               </div>
             </div>
           </div>
-        <div class="copyright">&copy; Crossings Community Church {{'NOW' | Date:'yyyy'}}</div>
+        <div class="copyright">&copy; Crossings Community Church {{'Now' | Date:'yyyy'}}</div>
       </div>
     </div>
     <div class="col-md-2 col-lg-2"></div>
