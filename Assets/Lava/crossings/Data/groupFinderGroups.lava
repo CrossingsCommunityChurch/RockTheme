@@ -21,7 +21,7 @@
         "Crossings Online"
     ],
     "Groups":[
-        {% group where:'GroupTypeId == 206 || GroupTypeId == 131' %}
+        {% group where:'GroupTypeId == 206 || GroupTypeId == 131' securityenabled:'false' %}
             {%- for group in groupItems -%}
                 {%- if group.IsPublic -%}
                     {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
@@ -59,7 +59,7 @@
                     {%comment%}
                         The groupRoleId in production for Leader is 700 staging is 624
                     {%endcomment%}
-                    {%-assign leaderArray = members | Where:'GroupRoleId', 624 | Select:'Person' -%}
+                    {%-assign leaderArray = members | Where:'GroupRoleId', groupRoleId | Select:'Person' -%}
                     {%- assign leaders = leaderArray | Select:'FullName' -%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
