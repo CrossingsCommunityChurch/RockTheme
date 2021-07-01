@@ -76,7 +76,7 @@
               <a href="https://crossings.church/contact-us?topic=Missions">Contact</a>
             </li>
           </ul>
-          <div class="copyright">&copy; Crossings Community Church 2020</div>
+          <div class="copyright">&copy; Crossings Community Church {{'Now' | Date:'yyyy'}}</div>
       </div>
     </div>
     <div class="col-md-2 col-lg-2"></div>
