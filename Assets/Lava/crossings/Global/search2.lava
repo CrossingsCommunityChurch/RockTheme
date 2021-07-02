@@ -22,7 +22,13 @@
       <div oninput="myFunction()"id="searchbox"></div>
     </div>
     <div id="hideShow" style="display: none">
+    <div class="resultsIndex">
+      <h4>Results from Crossings Main</h4>
+      <button>See More</button>
+    </div>
       <div id="hits"></div>
+      <h4>Missions Hits<h4>
+      <div id="missionsHits"></div>
       <div id="pagination"></div>
     </div>
 </div>
@@ -92,7 +98,6 @@
   </div>
 {% comment %} End suggestions container {% endcomment %}
 
-
 <script>
 function myFunction() {
   // Seach results
@@ -111,15 +116,19 @@ function myFunction() {
     y.style.display = "block";
   }
 }
+const searchName = '{{indexArray}}';
+const applicationId = '{{applicationId}}';
+const searchApiKey = '{{searchApiKey}}';
+const indexArray = searchName.split(',');
+console.log(indexArray);
 
-const searchClient = algoliasearch(
-  "I8DCGNGPPY",
-  "4f5e9f90d86e4b94520f83d0cff2f1cf"
-);
+const searchClient = algoliasearch( applicationId, searchApiKey);
 
+
+{}
 // Search Box
 const search = instantsearch({
-  indexName: "sitepageindex",
+  indexName: 'crossings staging',
   searchClient,
   searchFunction: function(helper) {
     if (helper.state.query.length < 2) {
@@ -129,8 +138,16 @@ const search = instantsearch({
 }
 });
 
+
+
+//////////////////////////////////////////
 search.addWidgets([
   // Search Widget
+  instantsearch.widgets.configure({
+    hitsPerPage: 3,
+    attributesToSnippet: ['Content:20', 'PageSummary'],
+    snippetEllipsisText: '...',
+  }),
   instantsearch.widgets.searchBox({
     placeholder: "Search...",
     cssClasses: {
@@ -150,11 +167,13 @@ search.addWidgets([
     },
     templates: {
       item(hit) {
+        console.log('hit', hit)
         return `
           <div class="itemContainer">
             <div style="width:100%">
-              <h4>${hit.PageTitle}</h4>
-              <p>${hit.PageSummary}</p>
+              <h4>${hit._highlightResult.PageTitle.value}</h4>
+              ${hit._snippetResult.PageSummary.matchLevel === 'none' ? '' : `<p>Page Summary: ${hit._snippetResult.PageSummary.value}</p>`}
+                <p>Content: ${hit._snippetResult.Content.value}</p>
             <div>
             <div class="search-button">
               <a class="btn btn-primary" href=${hit.Url}>Learn More</a>
@@ -165,8 +184,41 @@ search.addWidgets([
     },
   }),
 
+  // missions widget
+    instantsearch.widgets
+    .index({ indexName: 'missions' })
+    .addWidgets([
+      instantsearch.widgets.configure({
+        hitsPerPage: 3,
+        attributesToSnippet: ['Content:20', 'PageSummary'],
+        snippetEllipsisText: '...',
+      }),
+      instantsearch.widgets.hits({
+        container: "#missionsHits",
+        cssClasses: {
+          item: ["itemStyle"],
+        },
+        templates: {
+          item(hit) {
+            console.log("missions", hit)
+            return `
+              <div class="itemContainer">
+                <div style="width:100%">
+                  <h4>${hit._highlightResult.PageTitle.value}</h4>
+                  ${hit._snippetResult.PageSummary?.matchLevel === 'none' || hit._snippetResult.PageSummary === undefined ? '' : `<p>Page Summary: ${hit._snippetResult.PageSummary?.value}</p>`}
+                  <p>${hit._snippetResult.Content.value}</p>
+                <div>
+                <div class="search-button">
+                  <a class="btn btn-primary" href=${hit.Url}>Learn More</a>
+                </div>
+              </div>
+            `;
+          },
+        },
+      }),
+    ]),
 ]);
-
+//////////////////////////////////////////
 search.start();
 </script>
 {% comment %} <script src="./js/algoliaSearch.js"></script> {% endcomment %}
