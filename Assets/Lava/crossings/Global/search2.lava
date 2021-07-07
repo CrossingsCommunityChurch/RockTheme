@@ -169,7 +169,7 @@ search.addWidgets([
     },
     templates: {
       empty(results) {
-        return `<p class="noResults"> No results for <q>${results.query}</q> </p>`;
+        return `<p class="noResults"> No results for <q>${results.query}</q> on the Crossings site.</p>`;
       },
       item(hit) {
         return `
@@ -206,7 +206,7 @@ search.addWidgets([
         },
         templates: {
           empty(results) {
-            return `<p class="noResults"> No results for <q>${results.query}</q> </p>`;
+            return `<p class="noResults"> No results for <q>${results.query}</q> on the missions site.</p>`;
           },
           item(hit) {
             return `
