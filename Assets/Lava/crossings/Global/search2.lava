@@ -22,12 +22,15 @@
       <div oninput="myFunction()"id="searchbox"></div>
     </div>
     <div id="hideShow" style="display: none">
-    <div class="resultsIndex">
-      <h4>Results from Crossings Main</h4>
-      <button>See More</button>
-    </div>
-      <div id="hits"></div>
-      <h4>Missions Hits<h4>
+      <div class="resultsIndex">
+        <h4 class="searchTitles">Crossings Site Results</h4>
+        {% comment %} <button class="actionText" onClick="searchIndex('crossings')">See More</button> {% endcomment %}
+      </div>
+      <div id="mainHits"></div>
+        <div class="resultsIndex">
+          <h4 class="searchTitles">Missions Results<h4>
+          {% comment %} <button class="actionText" onClick="searchIndex('missions')">See More</button> {% endcomment %}
+          </div>
       <div id="missionsHits"></div>
       <div id="pagination"></div>
     </div>
@@ -116,11 +119,11 @@ function myFunction() {
     y.style.display = "block";
   }
 }
+
 const searchName = '{{indexArray}}';
 const applicationId = '{{applicationId}}';
 const searchApiKey = '{{searchApiKey}}';
 const indexArray = searchName.split(',');
-console.log(indexArray);
 
 const searchClient = algoliasearch( applicationId, searchApiKey);
 
@@ -138,9 +141,6 @@ const search = instantsearch({
 }
 });
 
-
-
-//////////////////////////////////////////
 search.addWidgets([
   // Search Widget
   instantsearch.widgets.configure({
@@ -159,20 +159,24 @@ search.addWidgets([
     container: "#searchbox",
   }),
 
-  // Hits|Items Widget
-  instantsearch.widgets.hits({
-    container: "#hits",
+  // Main Site Results
+  instantsearch.widgets.infiniteHits({
+    container: "#mainHits",
     cssClasses: {
       item: ["itemStyle"],
+      loadMore: "loadMoreBtn",
+      disabledLoadMore: "disabledLoadBtn",
     },
     templates: {
+      empty(results) {
+        return `<p class="noResults"> No results for <q>${results.query}</q> </p>`;
+      },
       item(hit) {
-        console.log('hit', hit)
         return `
           <div class="itemContainer">
             <div style="width:100%">
               <h4>${hit._highlightResult.PageTitle.value}</h4>
-              ${hit._snippetResult.PageSummary.matchLevel === 'none' ? '' : `<p>Page Summary: ${hit._snippetResult.PageSummary.value}</p>`}
+              ${hit._snippetResult.PageSummary?.matchLevel === 'none' || hit._snippetResult.PageSummary === undefined ? '' : `<p>Page Summary: ${hit._snippetResult.PageSummary.value}</p>`}
                 <p>Content: ${hit._snippetResult.Content.value}</p>
             <div>
             <div class="search-button">
@@ -184,23 +188,27 @@ search.addWidgets([
     },
   }),
 
-  // missions widget
+  // Missions Results
     instantsearch.widgets
     .index({ indexName: 'missions' })
     .addWidgets([
       instantsearch.widgets.configure({
-        hitsPerPage: 3,
+        hitsPerPage: 2,
         attributesToSnippet: ['Content:20', 'PageSummary'],
         snippetEllipsisText: '...',
       }),
-      instantsearch.widgets.hits({
+      instantsearch.widgets.infiniteHits({
         container: "#missionsHits",
         cssClasses: {
           item: ["itemStyle"],
+          loadMore: "loadMoreBtn",
+          disabledLoadMore: "disabledLoadBtn",
         },
         templates: {
+          empty(results) {
+            return `<p class="noResults"> No results for <q>${results.query}</q> </p>`;
+          },
           item(hit) {
-            console.log("missions", hit)
             return `
               <div class="itemContainer">
                 <div style="width:100%">
@@ -218,7 +226,7 @@ search.addWidgets([
       }),
     ]),
 ]);
-//////////////////////////////////////////
+
 search.start();
 </script>
 {% comment %} <script src="./js/algoliaSearch.js"></script> {% endcomment %}
