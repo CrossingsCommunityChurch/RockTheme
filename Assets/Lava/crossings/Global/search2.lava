@@ -193,7 +193,7 @@ search.addWidgets([
     .index({ indexName: 'missions' })
     .addWidgets([
       instantsearch.widgets.configure({
-        hitsPerPage: 2,
+        hitsPerPage: 3,
         attributesToSnippet: ['Content:20', 'PageSummary'],
         snippetEllipsisText: '...',
       }),
