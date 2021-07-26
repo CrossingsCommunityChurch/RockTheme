@@ -33,6 +33,17 @@
                         Schedle check for schedules attached to the group. If no group Schedule check
                         group location schedules. Get next occurance day and full date.
                     {% endcomment %}
+                    {%-assign scheduleId = null-%}
+                    {%- assign dayofweek = null-%}
+                    {%-assign sched = null -%}
+                    {%-assign nextOc = null-%}
+                    {%-assign friendlyName = null -%}
+                    {%-assign friendlyName = null-%}
+                    {%-assign location = null -%}
+                    {%-assign leaderArray = null -%}
+                    {%- assign leaders = null -%}
+                    {%-assign summary = null-%}
+                    {%-assign tagsArray = null-%}
                     {%- if group.Schedule and group.Schedule != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
                         {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
