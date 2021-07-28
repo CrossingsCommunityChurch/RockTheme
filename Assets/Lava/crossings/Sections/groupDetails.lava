@@ -50,7 +50,11 @@
                         <h4 class="subheading">Group Details</h4>
                         <hr class="sep" style="margin-left: auto!important;">
                         <div class="event-info">
-                        {{ group.Details }}
+                        {%-assign detailsString = group.Details | Split:'\n' -%}
+                        {%- for detail in detailsString-%}
+                        <p>{{detail}}</p>
+                          {%-unless forloop.last-%}<br />{%-endunless-%}
+                        {%-endfor-%}
                         </div>
                       </div>
                   </div>
