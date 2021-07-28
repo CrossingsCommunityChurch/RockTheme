@@ -50,7 +50,7 @@
                         <h4 class="subheading">Group Details</h4>
                         <hr class="sep" style="margin-left: auto!important;">
                         <div class="event-info">
-                        {{ group.Details }}
+                        {{ group.Details | UnescapeDataString }}
                         </div>
                       </div>
                   </div>
