@@ -82,14 +82,14 @@
                     {%-endif-%}
         {
             "Id": {{id | ToJSON}},
-            "Name": {{name | ToJSON}},
+            "Name": {{name | Replace:"'","’" | ToJSON}},
             "NextOC": {{nextOc | ToJSON}},
             "Campus": {{campus | ToJSON}},
             "Tags": {{tagsArray | ToJSON}},
             "ScheduleId": {{scheduleId | ToJSON}},
             "FriendlyScheduleText": {{friendlyName | ToJSON }},
-            "Details": {{details | StripNewlines | ToJSON }},
-            "Summary": {{summary | ToJSON}},
+            "Details": {{details | Replace:"'","’" }},
+            "Summary": {{summary | Replace:"'","’" | ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
             "Leaders": {{leaders | ToJSON}},
             "DayofWeek": {{dayofweek | ToJSON}},
