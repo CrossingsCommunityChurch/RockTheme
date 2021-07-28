@@ -11,7 +11,7 @@
 {%- assign DaysOfWeek = groupsData.DaysOfWeek | Uniq -%}
 {%- assign CampusList = groupsData.Campuses | Uniq -%}
 {%- assign groupsJson = groupsData.Groups | ToJSON -%}
-{%- if CurrentPerson and CurrentPerson != empty%}
+{%- if CurrentPerson and CurrentPerson != empty -%}
 {%- assign personCampus = CurrentPerson | Campus -%}
 {%- else -%}
   {%- assign personCampus = 'all' -%}
@@ -81,9 +81,7 @@
     {
     personCampus = '{{personCampus.Name}}';
     }
-
     let groups = JSON.parse(groupsJson);
-
     //Should we sort the groups somehow here?
 
     let curPage = 1;
