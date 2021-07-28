@@ -88,7 +88,7 @@
             "Tags": {{tagsArray | ToJSON}},
             "ScheduleId": {{scheduleId | ToJSON}},
             "FriendlyScheduleText": {{friendlyName | ToJSON }},
-            "Details": {{details | Replace:"'","’" | Escape | ToJSON }},
+            "Details": {{details | Replace:"'","’" | ToJSON | Escape }},
             "Summary": {{summary | Replace:"'","’" | ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
             "Leaders": {{leaders | ToJSON}},
