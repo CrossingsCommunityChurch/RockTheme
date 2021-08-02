@@ -69,7 +69,7 @@
                     {%comment%}
                         The groupRoleId in production for Leader is 700 staging is 624
                     {%endcomment%}
-                    {%-assign leaderArray = members | Where:'GroupRoleId', groupRoleId | Select:'Person' -%}
+                    {%-assign leaderArray = members | Where:'GroupRoleId', 700 | Select:'Person' -%}
                     {%- assign leaders = leaderArray | Select:'FullName' -%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
