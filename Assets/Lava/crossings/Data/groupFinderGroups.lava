@@ -67,9 +67,9 @@
                     {%-assign memberCount = group.Members | Size -%}
                     {%-assign members = group.Members-%}
                     {%comment%}
-                        The groupRoleId in production for Leader is 700 staging is 624
+                        The groupRoleId in production for Leader is 624 staging is 624
                     {%endcomment%}
-                    {%-assign leaderArray = members | Where:'GroupRoleId', 700 | Select:'Person' -%}
+                    {%-assign leaderArray = members | Where:'GroupRoleId', 624 | Select:'Person' -%}
                     {%- assign leaders = leaderArray | Select:'FullName' -%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
