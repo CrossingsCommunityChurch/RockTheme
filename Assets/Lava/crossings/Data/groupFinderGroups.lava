@@ -32,17 +32,17 @@
                         Schedle check for schedules attached to the group. If no group Schedule check
                         group location schedules. Get next occurance day and full date.
                     {% endcomment %}
-                    {%-assign scheduleId = null-%}
-                    {%- assign dayofweek = null-%}
-                    {%-assign sched = null -%}
-                    {%-assign nextOc = null-%}
-                    {%-assign friendlyName = null -%}
-                    {%-assign friendlyName = null-%}
-                    {%-assign location = null -%}
-                    {%-assign leaderArray = null -%}
-                    {%- assign leaders = null -%}
-                    {%-assign summary = null-%}
-                    {%-assign tagsArray = null-%}
+                    {%-assign scheduleId = ""-%}
+                    {%- assign dayofweek = ""-%}
+                    {%-assign sched = "" -%}
+                    {%-assign nextOc = ""-%}
+                    {%-assign friendlyName = "" -%}
+                    {%-assign friendlyName = ""-%}
+                    {%-assign location = "" -%}
+                    {%-assign leaderArray = "" -%}
+                    {%- assign leaders = "" -%}
+                    {%-assign summary = ""-%}
+                    {%-assign tagsArray = ""-%}
                     {%- if group.Schedule and group.Schedule != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
                         {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
@@ -88,7 +88,7 @@
             "Tags": {{tagsArray | ToJSON}},
             "ScheduleId": {{scheduleId | ToJSON}},
             "FriendlyScheduleText": {{friendlyName | ToJSON }},
-            "Details": {{details | Replace:"'","’" | ToJSON  }},
+            "Details": {{details | Replace:"'","’" | ToJSON | Replace:"\n","\\n" }},
             "Summary": {{summary | Replace:"'","’" | ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
             "Leaders": {{leaders | ToJSON}},
