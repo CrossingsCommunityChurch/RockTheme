@@ -43,6 +43,8 @@
                     {%- assign leaders = "" -%}
                     {%-assign summary = ""-%}
                     {%-assign tagsArray = ""-%}
+                    {%-assign childCare = ""-%}
+                    {%-assign registrationLink = ""-%}
                     {%- if group.Schedule and group.Schedule != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
                         {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
@@ -66,6 +68,20 @@
                     {%-assign details =  group.Description-%}
                     {%-assign memberCount = group.Members | Size -%}
                     {%-assign members = group.Members-%}
+                    {%-assign childCare =  group | Attribute: 'HasChildcare'-%}
+                    {%-assign regattribute = group | Attribute: 'RegistrationType'-%}
+                    {%-case redgattribute-%}
+                        {%- when 'none'-%}
+                            {%-assign registrationLink = null-%}
+                        {%- when 'Simple'-%}
+                            {%-assign registrationLink = "/groups/simplereg?groupId=" | Append:group.Id-%}
+                        {%- when 'Full' -%}
+                            {%-assign registrationLink = "/groups/fullreg?groupId=" | Append:group.Id-%}
+                        {%- when 'Full With Spouse'-%}
+                            {%-assign registrationLink = "/groups/couplereg?groupId=" | Append:group.Id-%}
+                        {%- else -%}
+                            {%-assign registrationLink = null-%}
+                    {%-endcase-%}
                     {%comment%}
                         The groupRoleId in production for Leader is 624 staging is 624
                     {%endcomment%}
