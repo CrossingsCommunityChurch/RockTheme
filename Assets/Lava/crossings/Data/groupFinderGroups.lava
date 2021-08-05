@@ -28,10 +28,10 @@
                     {%-assign name = group.Name-%}
                     {%-assign campus = group.Campus.Name -%}
                     {%-assign campusShortcode = group.Campus.ShortCode -%}
-                    {% comment %}
+                    {%- comment -%}
                         Schedle check for schedules attached to the group. If no group Schedule check
                         group location schedules. Get next occurance day and full date.
-                    {% endcomment %}
+                    {%-endcomment -%}
                     {%-assign scheduleId = ""-%}
                     {%- assign dayofweek = ""-%}
                     {%-assign sched = "" -%}
@@ -72,7 +72,12 @@
                     {%-assign regattribute = group | Attribute: 'RegistrationType'-%}
                     {%-case redgattribute-%}
                         {%- when 'none'-%}
-                            {%-assign registrationLink = null-%}
+                            {%-assign link = group | Attribute: 'RegistrationInstance'-%}
+                            {%-if link and link != empty-%}
+                                {%-assign registrationLink = link-%}
+                            {%-else-%}
+                                {%-assign registrationLink = null-%}
+                            {%-endif-%}
                         {%- when 'Simple'-%}
                             {%-assign registrationLink = "/groups/simplereg?groupId=" | Append:group.Id-%}
                         {%- when 'Full' -%}
@@ -80,11 +85,16 @@
                         {%- when 'Full With Spouse'-%}
                             {%-assign registrationLink = "/groups/couplereg?groupId=" | Append:group.Id-%}
                         {%- else -%}
+                        {%-assign link = group | Attribute: 'RegistrationInstance'-%}
+                        {%-if link and link != empty-%}
+                            {%-assign registrationLink = link-%}
+                        {%-else-%}
                             {%-assign registrationLink = null-%}
+                        {%-endif-%}
                     {%-endcase-%}
-                    {%comment%}
+                    {%-comment-%}
                         The groupRoleId in production for Leader is 624 staging is 624
-                    {%endcomment%}
+                    {%-endcomment-%}
                     {%-assign leaderArray = members | Where:'GroupRoleId', 624 | Select:'Person' -%}
                     {%- assign leaders = leaderArray | Select:'FullName' -%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
@@ -111,6 +121,8 @@
             "DayofWeek": {{dayofweek | ToJSON}},
             "MemberCount": {{memberCount | ToJSON}},
             "DetailsURL": {{detailURL | ToJSON}},
+            "RegistrationURL": {{registrationLink | ToJSON }},
+            "ChildCare": {{childCare | ToJSON}},
             "AvgAge": 0,
             "LocationName": {{location.Location.Name | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
