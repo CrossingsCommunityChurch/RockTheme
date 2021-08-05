@@ -21,7 +21,7 @@
         "Crossings Online"
     ],
     "Groups":[
-        {% group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' %}
+        {%- group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' -%}
             {%- for group in groupItems -%}
                     {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
                     {%-assign id = group.Id-%}
@@ -127,6 +127,6 @@
             "LocationName": {{location.Location.Name | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
             {%- endfor -%}
-        {% endgroup %}
+        {%- endgroup -%}
     ]
 }
