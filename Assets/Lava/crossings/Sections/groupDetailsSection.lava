@@ -17,10 +17,10 @@
           <div class="row location-content">
             <div class="groupAlign">
             <div class=" groupInfo col-md-6" style="width: 50vw">
-              <h4 class="subheading">Date</h4>
+              <h4 class="subheading">Next Date:</h4>
               <h4 class="heading"> {{group.NextOC | Date: 'MMM d h:mm tt'}}</h4>
               {%- if group.FriendlyScheduleText and group.FriendlyScheduleText != empty  -%}
-                <h4 class="subheading" style="padding-top: 20px">Schedule</h4>
+                <h4 class="subheading" style="padding-top: 20px">Schedule:</h4>
                 <h4 class="heading">{{ group.FriendlyScheduleText }}</h4>
               {%- endif -%}
               {%- if group.LocationName and group.LocationName != empty  -%}
@@ -36,14 +36,12 @@
             </div>
             <div class="col-md-6"><div class="pastor-item">
               <div class="past-details">
-                <h4 class="subheading">Leader's:</h4>
-
+                <h4 class="subheading">Leader(s):</h4>
                 {%-if leaders != empty-%}
-                {%-for leader in leaders-%}
-                  <h4 class="heading" style="margin-bottom: 0px">{{ leader}}</h2>
-                {%-endfor-%}
+                  {%-for leader in leaders-%}
+                    <h4 class="heading" style="margin-bottom: 0px">{{ leader}}</h2>
+                  {%-endfor-%}
                 {%-endif-%}
-
               </div>
             </div>
             </div>
@@ -51,21 +49,6 @@
         </div>
         <div class="row">
           <div class="col">
-            {%- assign eventItemOccurrenceLinkages = eventitemoccurrence.Linkages -%}
-            {%- assign eventItemOccurrenceLinkagesCount = eventItemOccurrenceLinkages | Size -%}
-            {%- if eventItemOccurrenceLinkagesCount > 0 -%}
-              {%- for eventItemOccurrenceLinkage in eventItemOccurrenceLinkages -%}
-                <div class="row">
-                  {%- if eventItemOccurrenceLinkage.RegistrationInstance.Cost -%}
-                    <h3 class="subheading">Registration Cost:</h3><p> {{ eventItemOccurrenceLinkage.RegistrationInstance.Cost | Prepend:'$' }}</p></div>
-                  {%- endif -%}
-                </div>
-              {%- endfor -%}
-              {[ regButton eventItemOccurrenceLinkages:'{{eventItemOccurrenceLinkages}}' ]}
-            {%- endif -%}
-            {%- if eventitemoccurrence.EventItem.DetailsUrl  and eventitemoccurrence.EventItem.DetailsUrl != empty -%}
-              {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{eventitemoccurrence.EventItem.DetailsUrl}}' buttontarget:'_blank' buttontext:'Register' ]}
-            {%- endif -%}
           </div>
         </div>
       </div>
