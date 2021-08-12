@@ -201,14 +201,6 @@
         else{
           div.find('.day-time').text(ad.FriendlyScheduleText);
         }
-        if(ad.Ongoing == 'yes'){
-          div.find('.start-stop').text('Ongoing is true');
-        }
-        else{
-          if(ad.Ongoing == 'no'){
-            div.find('.start-stop').text("Start - Stop");
-          }
-        }
         div.find('p').text(ad.Summary);
         if(ad.DetailsURL == ''){
           div.find('.details').hide();
