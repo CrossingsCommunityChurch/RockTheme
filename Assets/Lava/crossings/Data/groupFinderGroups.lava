@@ -51,8 +51,14 @@
                         {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
                         {%-assign sched = group.Schedule -%}
                         {%-assign nextOc = sched.NextStartDateTime -%}
+                        {%-assign start = sched.EffectiveStartDate | Date: 'MMM dd'-%}
+                        {%-assign endDate = sched.EffectiveEndDate | Date: 'MMM dd' -%}
                         {%-assign friendlyName = sched.FriendlyScheduleText -%}
-                        {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
+                        {%-if campusShortcode == "OKC"-%}
+                            {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
+                        {%-elseif campusShortcode == "EDM"-%}
+                            {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Edmond' -%}
+                        {%-endif-%}
                         {%-assign location = group.GroupLocations | First -%}
                     {%- else -%}
                         {% for loc in group.GroupLocations %}
@@ -60,8 +66,14 @@
                                 {%- assign dayofweek = sched.NextStartDateTime | Date:'dddd' -%}
                                 {%- assign scheduleId = sched.Id -%}
                                 {%- assign nextOc = sched.NextStartDateTime -%}
+                                {%-assign start = sched.EffectiveStartDate | Date: 'MMM dd'-%}
+                                {%-assign endDate = sched.EffectiveEndDate | Date: 'MMM dd'-%}
                                 {%-assign friendlyName = sched.FriendlyScheduleText -%}
-                                {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
+                                {%-if campusShortcode == "OKC"-%}
+                                    {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
+                                {%-elseif campusShortcode == "EDM"-%}
+                                    {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Edmond' -%}
+                                {%-endif-%}
                                 {%assign location = loc %}
                             {%- endfor -%}
                         {%- endfor -%}
@@ -126,6 +138,8 @@
             "RegistrationURL": {{registrationLink | ToJSON }},
             "ChildCare": {{childCare | ToJSON}},
             "Ongoing": {{ongoing | ToJSON}},
+            "StartDate": {{start | ToJSON}},
+            "EndDate": {{endDate | ToJSON}}
             "AvgAge": 0,
             "LocationName": {{location.Location.Name | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
