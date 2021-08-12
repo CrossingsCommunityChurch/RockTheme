@@ -91,6 +91,18 @@
     }
 }
 
+.footerSpacing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: @screen-desktop) {
+    .footerSpacing { 
+        all: revert;
+    }
+}
+
 @media (min-width: @screen-desktop) {
     .footer {
         display: block;
