@@ -201,15 +201,12 @@
         else{
           div.find('.day-time').text(ad.FriendlyScheduleText);
         }
-        if(!ad.Ongoing || ad.Ongoing == ''){
-          div.find('.start-stop').hide();
+        if(ad.Ongoing == 'yes'){
+          div.find('.start-stop').text('Ongoing is true');
         }
         else{
-          if(ad.Ongoing){
-            div.find('.start-stop').text("Ongoing");
-          }
-          else{
-            div.find('.start-stop').text("Start - Stop here")
+          if(ad.Ongoing == 'no'){
+            div.find('.start-stop').text("Start - Stop");
           }
         }
         div.find('p').text(ad.Summary);
