@@ -5,10 +5,9 @@
 
 {% assign data = 'groupFinder' | PersistedDataset%}
 {% assign id = PageParameter.groupId | AsInteger %}
-{% assign manData = data.Groups | Where:'Id', id %}
-{% comment %} {{ manData | Debug }} {% endcomment %}
+{% assign gpData = data.Groups | Where:'Id', id %}
 
-{% for group in manData %}
+{% for group in gpData %}
 
 {%- capture pageTitle -%}{{group.Name}}{%- endcapture%}
 {%- assign org = 'Global' | Attribute:'OrganizationName' -%}

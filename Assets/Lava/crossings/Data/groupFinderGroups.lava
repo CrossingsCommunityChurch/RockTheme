@@ -40,6 +40,7 @@
                     {%-assign friendlyName = ""-%}
                     {%-assign location = "" -%}
                     {%-assign leaderArray = "" -%}
+                    {%-assign ongoing = ""-%}
                     {%- assign leaders = "" -%}
                     {%-assign summary = ""-%}
                     {%-assign tagsArray = ""-%}
@@ -98,6 +99,7 @@
                     {%-assign leaderArray = members | Where:'GroupRoleId', 624 | Select:'Person' -%}
                     {%- assign leaders = leaderArray | Select:'FullName' -%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
+                    {%-assign ongoing = group | Attribute: 'OngoingSchedule'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
                     {%-assign imageSize = '/fit-in/600x600'-%}
@@ -123,6 +125,7 @@
             "DetailsURL": {{detailURL | ToJSON}},
             "RegistrationURL": {{registrationLink | ToJSON }},
             "ChildCare": {{childCare | ToJSON}},
+            "Ongoing": {{ongoing | ToJSON}},
             "AvgAge": 0,
             "LocationName": {{location.Location.Name | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
