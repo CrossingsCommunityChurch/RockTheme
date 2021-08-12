@@ -206,7 +206,7 @@
         }
         else{
           if(ad.Ongoing == 'no'){
-            div.find('.start-stop').text("Start - Stop");
+            div.find('.start-stop').text('Start - Stop');
           }
         }
         div.find('p').text(ad.Summary);
@@ -324,11 +324,11 @@
         else{
           div.find('.day-time').text(ad.FriendlyScheduleText);
         }
-        if(ad.Ongoing){
+        if(ad.Ongoing == 'yes'){
           div.find('.start-stop').text('Ongoing is true');
         }
         else{
-          if(!ad.Ongoing){
+          if(ad.Ongoing == 'no'){
             div.find('.start-stop').text("Start - Stop");
           }
         }
