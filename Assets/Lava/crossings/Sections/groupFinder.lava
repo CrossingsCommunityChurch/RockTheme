@@ -11,7 +11,7 @@
 {%- assign DaysOfWeek = groupsData.DaysOfWeek | Uniq -%}
 {%- assign CampusList = groupsData.Campuses | Uniq -%}
 {%- assign groupsJson = groupsData.Groups | ToJSON -%}
-{%- if CurrentPerson and CurrentPerson != empty%}
+{%- if CurrentPerson and CurrentPerson != empty -%}
 {%- assign personCampus = CurrentPerson | Campus -%}
 {%- else -%}
   {%- assign personCampus = 'all' -%}
@@ -81,9 +81,7 @@
     {
     personCampus = '{{personCampus.Name}}';
     }
-
     let groups = JSON.parse(groupsJson);
-
     //Should we sort the groups somehow here?
 
     let curPage = 1;
@@ -162,7 +160,8 @@
                     <div>
                       <div class="day-of-week hidden"><span></span></div>
                       <h4>Title here</h4>
-                    <h5 class="text-muted">Subheadinghere</h5>
+                    <h5 class="text-muted day-time">Subheadinghere</h5>
+                    <h5 class="text-muted start-stop">Subheadinghere</h5>
                   <p class="small"></p>
                 </div>
               </div>
@@ -197,10 +196,21 @@
           div.find('.day-of-week > span').text(ad.DayofWeek);
         }
         if(ad.FriendlyScheduleText == ''){
-          div.find('h5').hide();
+          div.find('.day-time').hide();
         }
         else{
-          div.find('h5').text(ad.FriendlyScheduleText);
+          div.find('.day-time').text(ad.FriendlyScheduleText);
+        }
+        if(!ad.Ongoing || ad.Ongoing == ''){
+          div.find('.start-stop').hide();
+        }
+        else{
+          if(ad.Ongoing){
+            div.find('.start-stop').text("Ongoing");
+          }
+          else{
+            div.find('.start-stop').text("Start - Stop here")
+          }
         }
         div.find('p').text(ad.Summary);
         if(ad.DetailsURL == ''){

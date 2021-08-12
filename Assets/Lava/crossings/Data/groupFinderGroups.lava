@@ -21,18 +21,31 @@
         "Crossings Online"
     ],
     "Groups":[
-        {% group where:'GroupTypeId == 206 || GroupTypeId == 131' securityenabled:'false' %}
+        {%- group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' -%}
             {%- for group in groupItems -%}
-                {%- if group.IsPublic -%}
                     {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
                     {%-assign id = group.Id-%}
                     {%-assign name = group.Name-%}
                     {%-assign campus = group.Campus.Name -%}
                     {%-assign campusShortcode = group.Campus.ShortCode -%}
-                    {% comment %}
+                    {%- comment -%}
                         Schedle check for schedules attached to the group. If no group Schedule check
                         group location schedules. Get next occurance day and full date.
-                    {% endcomment %}
+                    {%-endcomment -%}
+                    {%-assign scheduleId = ""-%}
+                    {%- assign dayofweek = ""-%}
+                    {%-assign sched = "" -%}
+                    {%-assign nextOc = ""-%}
+                    {%-assign friendlyName = "" -%}
+                    {%-assign friendlyName = ""-%}
+                    {%-assign location = "" -%}
+                    {%-assign leaderArray = "" -%}
+                    {%-assign ongoing = ""-%}
+                    {%- assign leaders = "" -%}
+                    {%-assign summary = ""-%}
+                    {%-assign tagsArray = ""-%}
+                    {%-assign childCare = ""-%}
+                    {%-assign registrationLink = ""-%}
                     {%- if group.Schedule and group.Schedule != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
                         {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
@@ -56,12 +69,37 @@
                     {%-assign details =  group.Description-%}
                     {%-assign memberCount = group.Members | Size -%}
                     {%-assign members = group.Members-%}
-                    {%comment%}
-                        The groupRoleId in production for Leader is 700 staging is 624
-                    {%endcomment%}
-                    {%-assign leaderArray = members | Where:'GroupRoleId', groupRoleId | Select:'Person' -%}
+                    {%-assign childCare =  group | Attribute: 'HasChildcare'-%}
+                    {%-assign regattribute = group | Attribute: 'RegistrationType'-%}
+                    {%-case redgattribute-%}
+                        {%- when 'none'-%}
+                            {%-assign link = group | Attribute: 'RegistrationInstance'-%}
+                            {%-if link and link != empty-%}
+                                {%-assign registrationLink = link-%}
+                            {%-else-%}
+                                {%-assign registrationLink = null-%}
+                            {%-endif-%}
+                        {%- when 'Simple'-%}
+                            {%-assign registrationLink = "/groups/simplereg?groupId=" | Append:group.Id-%}
+                        {%- when 'Full' -%}
+                            {%-assign registrationLink = "/groups/fullreg?groupId=" | Append:group.Id-%}
+                        {%- when 'Full With Spouse'-%}
+                            {%-assign registrationLink = "/groups/couplereg?groupId=" | Append:group.Id-%}
+                        {%- else -%}
+                        {%-assign link = group | Attribute: 'RegistrationInstance'-%}
+                        {%-if link and link != empty-%}
+                            {%-assign registrationLink = link-%}
+                        {%-else-%}
+                            {%-assign registrationLink = null-%}
+                        {%-endif-%}
+                    {%-endcase-%}
+                    {%-comment-%}
+                        The groupRoleId in production for Leader is 624 staging is 624
+                    {%-endcomment-%}
+                    {%-assign leaderArray = members | Where:'GroupRoleId', 624 | Select:'Person' -%}
                     {%- assign leaders = leaderArray | Select:'FullName' -%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
+                    {%-assign ongoing = group | Attribute: 'OngoingSchedule'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
                     {%-assign imageSize = '/fit-in/600x600'-%}
@@ -72,24 +110,26 @@
                     {%-endif-%}
         {
             "Id": {{id | ToJSON}},
-            "Name": {{name | ToJSON}},
+            "Name": {{name | Replace:"'","’" | ToJSON}},
             "NextOC": {{nextOc | ToJSON}},
             "Campus": {{campus | ToJSON}},
             "Tags": {{tagsArray | ToJSON}},
             "ScheduleId": {{scheduleId | ToJSON}},
             "FriendlyScheduleText": {{friendlyName | ToJSON }},
-            "Details": {{details | ToJSON }},
-            "Summary": {{summary | ToJSON}},
+            "Details": {{details | Replace:"'","’" | ToJSON | Replace:"\n","\\n" }},
+            "Summary": {{summary | Replace:"'","’" | ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
             "Leaders": {{leaders | ToJSON}},
             "DayofWeek": {{dayofweek | ToJSON}},
             "MemberCount": {{memberCount | ToJSON}},
             "DetailsURL": {{detailURL | ToJSON}},
+            "RegistrationURL": {{registrationLink | ToJSON }},
+            "ChildCare": {{childCare | ToJSON}},
+            "Ongoing": {{ongoing | ToJSON}},
             "AvgAge": 0,
             "LocationName": {{location.Location.Name | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
-                {%- endif -%}
             {%- endfor -%}
-        {% endgroup %}
+        {%- endgroup -%}
     ]
 }
