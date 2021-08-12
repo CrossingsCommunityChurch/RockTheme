@@ -283,7 +283,7 @@
                     <div>
                       <div class="day-of-week hidden"><span></span></div>
                       <h4>Title here</h4>
-                    <h5 class="text-muted">Subheadinghere</h5>
+                    <h5 class="text-muted day-time">Subheadinghere</h5>
                     <h5 class="text-muted start-stop">Subheadinghere</h5>
                   <p class="small"></p>
                 </div>
