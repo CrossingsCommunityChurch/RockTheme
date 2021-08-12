@@ -139,7 +139,7 @@
             "ChildCare": {{childCare | ToJSON}},
             "Ongoing": {{ongoing | ToJSON}},
             "StartDate": {{start | ToJSON}},
-            "EndDate": {{endDate | ToJSON}}
+            "EndDate": {{endDate | ToJSON}},
             "AvgAge": 0,
             "LocationName": {{location.Location.Name | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
