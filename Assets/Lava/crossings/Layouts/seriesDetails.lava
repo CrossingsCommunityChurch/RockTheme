@@ -105,7 +105,7 @@
                   </div>
                   {%- for child in sortedItems -%}
                       {%- assign title = child.ChildContentChannelItem.Title -%}
-                      {%- assign seriesTitle = item.Title -%}
+                      {% assign seriesTitle = item.Title %}
                       {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
                       {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
                       {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
