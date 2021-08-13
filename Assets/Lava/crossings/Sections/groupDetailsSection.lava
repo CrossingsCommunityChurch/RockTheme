@@ -45,11 +45,14 @@
             </div>
           </div>
         </div>
+        <br/>
+        {%-if group.RegistrationURL and group.RegistrationURL != null -%}
         <div class="row">
           <div class="col">
           {[ button icon:'check-circle' buttonstyle:'primary' buttonlink:'{{group.RegistrationURL}}' buttontarget:'_blank' buttontext:'Register' ]}
           </div>
         </div>
+        {%-endif-%}
       </div>
     </div>
   </div>
