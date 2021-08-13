@@ -55,8 +55,10 @@
                         {%-assign endDate = sched.EffectiveEndDate | Date: 'MMM dd' -%}
                         {%-assign friendlyName = sched.FriendlyScheduleText -%}
                         {%-if campusShortcode == "OKC"-%}
+                            {%-assign childLink = "https://crossings.church/okckands"-%}
                             {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
                         {%-elseif campusShortcode == "EDM"-%}
+                            {%-assign childLink = "https://crossings.church/edmkands"-%}
                             {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Edmond' -%}
                         {%-endif-%}
                         {%-assign location = group.GroupLocations | First -%}
@@ -70,8 +72,10 @@
                                 {%-assign endDate = sched.EffectiveEndDate | Date: 'MMM dd'-%}
                                 {%-assign friendlyName = sched.FriendlyScheduleText -%}
                                 {%-if campusShortcode == "OKC"-%}
+                                    {%-assign childLink = "https://crossings.church/okckands"-%}
                                     {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
                                 {%-elseif campusShortcode == "EDM"-%}
+                                    {%-assign childLink = "https://crossings.church/edmkands"-%}
                                     {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Edmond' -%}
                                 {%-endif-%}
                                 {%assign location = loc %}
@@ -81,7 +85,7 @@
                     {%-assign details =  group.Description-%}
                     {%-assign memberCount = group.Members | Size -%}
                     {%-assign members = group.Members-%}
-                    {%-assign childCare =  group | Attribute: 'HasChildcare'-%}
+                    {%-assign childCare =  group | Attribute: 'HasChildcare' | AsBoolean -%}
                     {%-assign regattribute = group | Attribute: 'RegistrationType'-%}
                     {%-case redgattribute-%}
                         {%- when 'none'-%}
@@ -137,6 +141,7 @@
             "DetailsURL": {{detailURL | ToJSON}},
             "RegistrationURL": {{registrationLink | ToJSON }},
             "ChildCare": {{childCare | ToJSON}},
+            "ChildLink": {{childLink | ToJSON}},
             "Ongoing": {{ongoing | ToJSON}},
             "StartDate": {{start | ToJSON}},
             "EndDate": {{endDate | ToJSON}},
