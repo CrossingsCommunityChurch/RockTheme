@@ -55,9 +55,9 @@
                           {%-unless forloop.last-%}<br />{%-endunless-%}
                         {%-endfor-%}
                         {%-assign childcare = group.ChildCare | AsBoolean-%}
-                        {%- if childcare == true -%}
+                        {%- if childcre == true -%}
                           <br/>
-                          {[ button buttonlink:'{{group.ChildLink}}' buttontarget:'_blank' buttontext:'Kids & Students Programming' ]}
+                          {[ button buttonstyle:'primary' buttonlink:'{{group.ChildLink}}' buttontarget:'_blank' buttontext:'Kids & students' ]}
                         {%- elseif childcare == false -%}
                         <br/>
                         {%-endif-%}
