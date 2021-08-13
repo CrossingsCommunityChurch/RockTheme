@@ -57,7 +57,7 @@
                         {%-assign childcare = group.ChildCare | AsBoolean-%}
                         {%- if childcare == true -%}
                           <br/>
-                          {[ button buttonstyle:'primary' buttonlink:'{{group.ChildLink}}' buttontarget:'_blank' buttontext:'Kids & students' ]}
+                          {[ button buttonstyle:'primary' buttonlink:'{{group.ChildLink}}' buttontarget:'_blank' buttontext:'Kids & students Programming' ]}
                         {%- elseif childcare == false -%}
                         <br/>
                         {%-endif-%}
