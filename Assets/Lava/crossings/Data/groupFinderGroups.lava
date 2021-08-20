@@ -119,8 +119,9 @@
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign ongoing = group | Attribute: 'OngoingSchedule'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
-                    {%-assign isLifeCare = tagsArray | Contains:'Support'-%}
-                    {%-if isLifecare and dayofweek != 'Sunday' -%}
+                    {% capture expression %}(Support/)\w+{% endcapture %}
+                    {%- assign substring = tagsArray | RegExMatchValue: expression -%}
+                    {%-if substring and substring != empty -%}
                         {%-assign childLink = "https://lifecare.crossings.church/support-for-kids"-%}
                     {%-endif-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
