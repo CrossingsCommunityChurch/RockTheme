@@ -13,25 +13,23 @@
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
 {%- assign imageSize = '/fit-in/300x300/' -%}
 {%- assign searchSuggestions = 'searchSuggestions' | PersistedDataset -%}
+{%- assign htmlIndex = indexArray-%}
 <a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>
 <div class="search-wrapper">
 
-{% comment %} Begin Algolia Search {% endcomment %}
 <div class="ais-InstantSearch">
     <div class="searchContainer">
       <div oninput="myFunction()"id="searchbox"></div>
     </div>
     <div id="hideShow" style="display: none">
-      <div class="resultsIndex">
-        <h4 class="searchTitles">Crossings Site Results</h4>
-        {% comment %} <button class="actionText" onClick="searchIndex('crossings')">See More</button> {% endcomment %}
-      </div>
-      <div id="mainHits"></div>
-        <div class="resultsIndex">
-          <h4 class="searchTitles">Missions Results<h4>
-          {% comment %} <button class="actionText" onClick="searchIndex('missions')">See More</button> {% endcomment %}
-          </div>
-      <div id="missionsHits"></div>
+    {%- assign testArray = htmlIndex | Split:','-%}
+    {%- for i in testArray -%}
+    {%- assign cssClass = i | Remove: ' '-%}
+    <div class="resultsIndex">
+      <h4 class="searchTitles">{{i}} Results</h4>
+    </div>
+    <div id={{cssClass}}></div>
+  {%- endfor -%}
       <div id="pagination"></div>
     </div>
 </div>
@@ -99,7 +97,6 @@
       </div>
     </div>
   </div>
-{% comment %} End suggestions container {% endcomment %}
 
 <script>
 function myFunction() {
@@ -124,30 +121,27 @@ const searchName = '{{indexArray}}';
 const applicationId = '{{applicationId}}';
 const searchApiKey = '{{searchApiKey}}';
 const indexArray = searchName.split(',');
-
 const searchClient = algoliasearch( applicationId, searchApiKey);
 
-
-{}
 // Search Box
 const search = instantsearch({
-  indexName: 'crossings staging',
+  indexName: indexArray[0],
   searchClient,
   searchFunction: function(helper) {
     if (helper.state.query.length < 2) {
       return;
-    }
-    helper.search( );
-}
-});
+      }
+      helper.search( );
+      }
+      });
+
+  // Looping Index Results
+for (let i = 0; i < indexArray.length; i++) {
+  let index = indexArray[i];
+  let nameIndex = ("#" + index.replace(/\s/g, ''));
 
 search.addWidgets([
   // Search Widget
-  instantsearch.widgets.configure({
-    hitsPerPage: 3,
-    attributesToSnippet: ['Content:20', 'PageSummary'],
-    snippetEllipsisText: '...',
-  }),
   instantsearch.widgets.searchBox({
     placeholder: "Search...",
     cssClasses: {
@@ -159,9 +153,16 @@ search.addWidgets([
     container: "#searchbox",
   }),
 
-  // Main Site Results
+  instantsearch.widgets
+  .index({ indexName: index})
+  .addWidgets([
+    instantsearch.widgets.configure({
+      hitsPerPage: 3,
+      attributesToSnippet: ['Content:20', 'PageSummary'],
+      snippetEllipsisText: '...',
+    }),
   instantsearch.widgets.infiniteHits({
-    container: "#mainHits",
+    container: nameIndex,
     cssClasses: {
       item: ["itemStyle"],
       loadMore: "loadMoreBtn",
@@ -169,7 +170,7 @@ search.addWidgets([
     },
     templates: {
       empty(results) {
-        return `<p class="noResults"> No results for <q>${results.query}</q> on the Crossings site.</p>`;
+        return `<p class="noResults"> No results for <q>${results.query}</q> on the ${index} site.</p>`;
       },
       item(hit) {
         return `
@@ -187,45 +188,9 @@ search.addWidgets([
       },
     },
   }),
-
-  // Missions Results
-    instantsearch.widgets
-    .index({ indexName: 'missions' })
-    .addWidgets([
-      instantsearch.widgets.configure({
-        hitsPerPage: 3,
-        attributesToSnippet: ['Content:20', 'PageSummary'],
-        snippetEllipsisText: '...',
-      }),
-      instantsearch.widgets.infiniteHits({
-        container: "#missionsHits",
-        cssClasses: {
-          item: ["itemStyle"],
-          loadMore: "loadMoreBtn",
-          disabledLoadMore: "disabledLoadBtn",
-        },
-        templates: {
-          empty(results) {
-            return `<p class="noResults"> No results for <q>${results.query}</q> on the missions site.</p>`;
-          },
-          item(hit) {
-            return `
-              <div class="itemContainer">
-                <div style="width:100%">
-                  <h4>${hit._highlightResult.PageTitle.value}</h4>
-                  ${hit._snippetResult.PageSummary?.matchLevel === 'none' || hit._snippetResult.PageSummary === undefined ? '' : `<p>Page Summary: ${hit._snippetResult.PageSummary?.value}</p>`}
-                  <p>${hit._snippetResult.Content.value}</p>
-                <div>
-                <div class="search-button">
-                  <a class="btn btn-primary" href=${hit.Url}>Learn More</a>
-                </div>
-              </div>
-            `;
-          },
-        },
-      }),
-    ]),
-]);
+  ])
+  ]);
+}
 
 search.start();
 </script>
