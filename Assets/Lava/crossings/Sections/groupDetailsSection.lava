@@ -28,7 +28,7 @@
                     <i class="fas fa-map-marker-alt"></i><span>{{group.LocationName}}</span>
                 </p>
               {%-else-%}
-              {%-assign link = "https://www.google.com/maps/dir/?api=1"-%}
+              {%-assign link = "https://www.google.com/maps/search/?api=1&query="-%}
               {%-assign encodedadd = group.LocationAddress | EscapeDataString-%}
               {%-assign mapLink = link | Append:encodedadd-%}
               <p class="lead">
