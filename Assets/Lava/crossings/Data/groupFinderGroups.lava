@@ -51,8 +51,16 @@
                         {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
                         {%-assign sched = group.Schedule -%}
                         {%-assign nextOc = sched.NextStartDateTime -%}
+                        {%-assign start = sched.EffectiveStartDate | Date: 'MMM dd'-%}
+                        {%-assign endDate = sched.EffectiveEndDate | Date: 'MMM dd' -%}
                         {%-assign friendlyName = sched.FriendlyScheduleText -%}
-                        {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
+                        {%-if campusShortcode == "OKC"-%}
+                            {%-assign childLink = "https://crossings.church/okckands"-%}
+                            {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
+                        {%-elseif campusShortcode == "EDM"-%}
+                            {%-assign childLink = "https://crossings.church/edmkands"-%}
+                            {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Edmond' -%}
+                        {%-endif-%}
                         {%-assign location = group.GroupLocations | First -%}
                     {%- else -%}
                         {% for loc in group.GroupLocations %}
@@ -60,8 +68,16 @@
                                 {%- assign dayofweek = sched.NextStartDateTime | Date:'dddd' -%}
                                 {%- assign scheduleId = sched.Id -%}
                                 {%- assign nextOc = sched.NextStartDateTime -%}
+                                {%-assign start = sched.EffectiveStartDate | Date: 'MMM dd'-%}
+                                {%-assign endDate = sched.EffectiveEndDate | Date: 'MMM dd'-%}
                                 {%-assign friendlyName = sched.FriendlyScheduleText -%}
-                                {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
+                                {%-if campusShortcode == "OKC"-%}
+                                    {%-assign childLink = "https://crossings.church/okckands"-%}
+                                    {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
+                                {%-elseif campusShortcode == "EDM"-%}
+                                    {%-assign childLink = "https://crossings.church/edmkands"-%}
+                                    {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Edmond' -%}
+                                {%-endif-%}
                                 {%assign location = loc %}
                             {%- endfor -%}
                         {%- endfor -%}
@@ -69,7 +85,7 @@
                     {%-assign details =  group.Description-%}
                     {%-assign memberCount = group.Members | Size -%}
                     {%-assign members = group.Members-%}
-                    {%-assign childCare =  group | Attribute: 'HasChildcare'-%}
+                    {%-assign childCare =  group | Attribute: 'HasChildcare' | AsBoolean -%}
                     {%-assign regattribute = group | Attribute: 'RegistrationType'-%}
                     {%-case redgattribute-%}
                         {%- when 'none'-%}
@@ -93,14 +109,20 @@
                             {%-assign registrationLink = null-%}
                         {%-endif-%}
                     {%-endcase-%}
-                    {%-comment-%}
-                        The groupRoleId in production for Leader is 624 staging is 624
-                    {%-endcomment-%}
                     {%-assign leaderArray = members | Where:'GroupRoleId', 624 | Select:'Person' -%}
-                    {%- assign leaders = leaderArray | Select:'FullName' -%}
+                    {%-if leaderArray != empty -%}
+                        {%- assign leaders = leaderArray | Select:'FullName' -%}
+                    {% else %}
+                        {%-assign leaderArray = members | Where:'GroupRoleId', 700 | Select:'Person' -%}
+                        {%- assign leaders = leaderArray | Select:'FullName' -%}
+                    {%endif%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign ongoing = group | Attribute: 'OngoingSchedule'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
+                    {%-assign isLifeCare = tagsArray | Contains:'Support'-%}
+                    {%-if isLifecare and dayofweek != 'Sunday' -%}
+                        {%-assign childLink = "https://lifecare.crossings.church/support-for-kids"-%}
+                    {%-endif-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
                     {%-assign imageSize = '/fit-in/600x600'-%}
                     {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath'-%}
@@ -125,7 +147,10 @@
             "DetailsURL": {{detailURL | ToJSON}},
             "RegistrationURL": {{registrationLink | ToJSON }},
             "ChildCare": {{childCare | ToJSON}},
+            "ChildLink": {{childLink | ToJSON}},
             "Ongoing": {{ongoing | ToJSON}},
+            "StartDate": {{start | ToJSON}},
+            "EndDate": {{endDate | ToJSON}},
             "AvgAge": 0,
             "LocationName": {{location.Location.Name | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
