@@ -119,6 +119,10 @@
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign ongoing = group | Attribute: 'OngoingSchedule'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}
+                    {%-assign isLifeCare = tagsArray | Contains:'Support'-%}
+                    {%-if isLifecare and dayofweek != 'Sunday' -%}
+                        {%-assign childLink = "https://lifecare.crossings.church/support-for-kids"-%}
+                    {%-endif-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
                     {%-assign imageSize = '/fit-in/600x600'-%}
                     {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath'-%}
