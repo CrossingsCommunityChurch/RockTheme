@@ -130,6 +130,11 @@
                     {%-if imageUrlPath == ''-%}
                       {%-assign imageAsset = ''-%}
                     {%-endif-%}
+                    {%-if location.Location.Name and location.Location.Name != empty-%}
+                        {%-assign locName = location.Location.Name %}
+                    {%-else-%}
+                        {%- assign locName = location.Location.FormattedAddress -%}
+                    {%-endif-%} FormattedAddress
         {
             "Id": {{id | ToJSON}},
             "Name": {{name | Replace:"'","’" | ToJSON}},
@@ -152,7 +157,7 @@
             "StartDate": {{start | ToJSON}},
             "EndDate": {{endDate | ToJSON}},
             "AvgAge": 0,
-            "LocationName": {{location.Location.Name | ToJSON}}
+            "LocationName": {{locName | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
             {%- endfor -%}
         {%- endgroup -%}
