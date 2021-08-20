@@ -189,12 +189,12 @@
         else{
           div.find('.day-time').text(ad.FriendlyScheduleText);
         }
-        if(ad.Ongoing == 'yes'){
-          div.find('.start-stop').text('Ongoing is true');
+        if(ad.Ongoing == 'Yes'){
+          div.find('.start-stop').text('Ongoing');
         }
         else{
-          if(ad.Ongoing == 'no'){
-            div.find('.start-stop').text("Start - Stop");
+          if(ad.Ongoing == 'No'){
+            div.find('.start-stop').text(ad.StartDate + ' - '+ ad.EndDate);
           }
         }
         div.find('p').text(ad.Summary);
@@ -236,7 +236,6 @@
       for (let i = itemIdxMin; i < itemMax; i++) {
 
         let ad = filteredEvents1[i];
-
         storeEventsContainer(ad);
       }
     }
