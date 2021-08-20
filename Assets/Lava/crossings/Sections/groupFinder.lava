@@ -69,8 +69,10 @@
 
 <script>
 
-  $(document).ready(() => {
+let eventsContainer = $('.row.flex-row.flex-wrap');
+let curIndex = 0;
 
+  $(document).ready(() => {
     const groupsJson = `{{groupsJson}}`;
     const imageStorageUrl = '{{imageStorageUrl}}';
     const imageSize = '{{imageSize}}';
@@ -133,7 +135,6 @@
     }
 
     function storeEventsContainer(ad) {
-      let eventsContainer = $('.row.flex-row.flex-wrap');
 
       let div = $(
         `<div class="col-sm-6 col-md-4">
@@ -209,13 +210,10 @@
         eventsContainer.append(div);
     }
 
-
     //****************** Initial Render *******************//
 
     function renderFilteredItems(groups, page, audience, day, campus) {
-      let eventsContainer = $('.row.flex-row.flex-wrap');
       eventsContainer.empty();
-      console.log('eventsContainer', eventsContainer[0].children.length )
 
       var filteredEvents1 = groups.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.Tags.includes(audience)) && (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()) && (!campus || campus.trim().toLowerCase() === 'all' || evt.Campus.includes(campus)));
 
@@ -232,25 +230,27 @@
       if (page === pages) {
         itemMax = itemMax - (itemsPerPage - itemsOnLastPage);
       }
+      let filteredIndex = 0;
 
       for (let i = itemIdxMin; i < itemMax; i++) {
 
         let ad = filteredEvents1[i];
+        filteredIndex = filteredIndex + 1;
+
         storeEventsContainer(ad);
       }
+        curIndex = filteredIndex;
     }
 
     //****************** End Initial Render *******************//
 
     //****************** Start Scroll to Render *******************//
-
-    var currentscrollHeight = 0;
-    var count = 0;
+    let currentscrollHeight = 0;
+    let count = 0;
     // needs to match "itemsPerPage" in initial render..
-    let curIndex = 6;
 
-    // Infinite Scroll
-    $(window).on("scroll", function () {
+// Infinite Scroll
+$(window).on("scroll", function () {
       const scrollHeight = $(document).height();
       const scrollPos = Math.floor($(window).height() + $(window).scrollTop());
       const isBottom = scrollHeight - 800 < scrollPos;
