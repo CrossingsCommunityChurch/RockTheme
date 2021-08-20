@@ -71,6 +71,7 @@
 
 let eventsContainer = $('.row.flex-row.flex-wrap');
 let curIndex = 0;
+let currentscrollHeight = 0;
 
   $(document).ready(() => {
     const groupsJson = `{{groupsJson}}`;
@@ -266,6 +267,10 @@ $(window).on("scroll", function () {
       var filteredEvents1 = groups.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.Tags.includes(audience)) && (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()) && (!campus || campus.trim().toLowerCase() === 'all' || evt.Campus.includes(campus)));;
       let loadMax = curIndex >= filteredEvents1.length ? curIndex : curIndex + 6;
 
+      console.log('scrolling CH', currentscrollHeight, 'SH', scrollHeight)
+      if (currentscrollHeight >= scrollHeight) {
+        currentscrollHeight = scrollPos;
+      }
       if (isBottom && currentscrollHeight < scrollHeight) {
 
         for(var i = curIndex; i < loadMax; i++) {
@@ -276,7 +281,7 @@ $(window).on("scroll", function () {
 
           count++;
         }
-        currentscrollHeight = scrollHeight;
+        currentscrollHeight = scrollPos;
       }
     });
 
