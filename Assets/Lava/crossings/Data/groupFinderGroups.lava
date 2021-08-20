@@ -109,11 +109,13 @@
                             {%-assign registrationLink = null-%}
                         {%-endif-%}
                     {%-endcase-%}
-                    {%-comment-%}
-                        The groupRoleId in production for Leader is 624 staging is 624
-                    {%-endcomment-%}
                     {%-assign leaderArray = members | Where:'GroupRoleId', 624 | Select:'Person' -%}
-                    {%- assign leaders = leaderArray | Select:'FullName' -%}
+                    {%-if leaderArray != empty -%}
+                        {%- assign leaders = leaderArray | Select:'FullName' -%}
+                    {% else %}
+                        {%-assign leaderArray = members | Where:'GroupRoleId', 700 | Select:'Person' -%}
+                        {%- assign leaders = leaderArray | Select:'FullName' -%}
+                    {%endif%}
                     {%-assign summary = group | Attribute:'WebSummary'-%}
                     {%-assign ongoing = group | Attribute: 'OngoingSchedule'-%}
                     {%-assign tagsArray = group | Attribute:'GroupTags'-%}

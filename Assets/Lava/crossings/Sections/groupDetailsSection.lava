@@ -35,9 +35,11 @@
             <div class="col-md-6"><div class="pastor-item">
               <div class="past-details">
                 <h4 class="subheading">Leader(s):</h4>
+                {%-if leaders != empty-%}
                   {%-for leader in leaders-%}
                     <h4 class="heading" style="margin-bottom: 0px">{{ leader}}</h2>
                   {%-endfor-%}
+                {%-endif-%}
               </div>
             </div>
             </div>
