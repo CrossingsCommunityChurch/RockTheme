@@ -52,7 +52,7 @@
 
             {%- comment -%} Dataset is only for upcoming events {%- endcomment -%}
             {%-assign occurrences = eventitem.EventItemOccurrences -%}
-              {%for occurrentce in occurrences%}
+              {%for occurrence in occurrences%}
                     {%- assign schedule = occurrence.Schedule%}
                     {%- if schedule.NextStartDateTime == null  -%}
                         {%- continue -%}
