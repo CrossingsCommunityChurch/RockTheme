@@ -51,11 +51,12 @@
           {%- if eventitem.IsActive and eventitem.IsApproved -%}
 
             {%- comment -%} Dataset is only for upcoming events {%- endcomment -%}
-            {%- assign occurrence = eventitem.EventItemOccurrences | First -%}
-            {%- assign schedule = occurrence.Schedule%}
-            {%- if schedule.NextStartDateTime == null  -%}
-              {%- continue -%}
-            {%- endif -%}
+            {%-assign occurrences = eventitem.EventItemOccurrences -%}
+              {%for occurrence in occurrences%}
+                    {%- assign schedule = occurrence.Schedule%}
+                    {%- if schedule.NextStartDateTime == null  -%}
+                        {%- continue -%}
+                    {%- endif -%}
 
             {%- assign name = eventitem.Name -%}
             {%- assign summary = eventitem.Summary -%}
@@ -117,7 +118,7 @@
               {%- capture eventsJson -%}{{eventsJson}}"link": {{link | ToJSON}}{%endcapture%}
             {%- capture eventsJson -%}{{eventsJson}} } {%endcapture%}
             {%- unless forloop.last -%}{%- capture eventsJson -%}{{eventsJson}}, {%endcapture%}{%- endunless -%}
-
+          {%-endfor-%}
           {%- endif -%}
         {%- endeventitem -%}
       {%- endfor -%}
