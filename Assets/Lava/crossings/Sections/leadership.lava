@@ -26,11 +26,13 @@
                 <p>Elders</p>
               </a>
             </li>
+            <li>
               <a href="#leadership" role="tab" data-toggle="tab">
                 <p>Church Leadership</p>
               </a>
+            </li>
             <li>
-              <a href="pastoral" role="tab" data-toggle="tab">
+              <a href="#pastoral" role="tab" data-toggle="tab">
                 <p>Pastoral Staff</p>
               </a>
             </li>
