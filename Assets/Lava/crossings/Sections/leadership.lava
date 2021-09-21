@@ -19,6 +19,9 @@
             </svg>
           </div>
           <h2 class="text-center mt-0">Our Leadership</h2>
+          <div class="row">
+            <p>Crossings is elder-governed and staff-led. Explore our staff directory which includes our elders, church leadership, and pastoral staff from Crossings OKC, Crossings Edmond, Crossings Community Center and Clinic, and Crossings Prison Campus locations.</p>
+          </div>
           <!-- Navigation Tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li class="active">
