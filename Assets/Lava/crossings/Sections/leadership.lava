@@ -1,5 +1,7 @@
 {%- assign eltguid = "62E64CEB-E5F3-4C82-B4ED-EA660DB13F7E" -%}
 {%- assign mltguid = "C32465E4-3208-4B25-A7F8-679E2DDD0196" -%}
+{%- assign pastoralguid = "496567a2-3a42-4691-9f25-1d362bcb7f93"-%}
+{%- assign elderguid = 'e8611d6f-050c-4876-ae92-39261b3f3632'-%}
 <div class="section special-message simple-section leadership-details">
   <div class="container">
     <div class="row">
@@ -20,21 +22,26 @@
           <!-- Navigation Tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li class="active">
-              <a href="#elt" role="tab" data-toggle="tab">
-                <p>Executive Leadership</p>
+              <a href="#elders" role="tab" data-toggle="tab">
+                <p>Elders</p>
               </a>
             </li>
             <li>
-              <a href="#mlt" role="tab" data-toggle="tab">
-                <p>Ministry Leadership</p>
+              <a href="#leadership" role="tab" data-toggle="tab">
+                <p>Church Leadership</p>
+              </a>
+            </li>
+            <li>
+              <a href="#pastoral" role="tab" data-toggle="tab">
+                <p>Pastoral Staff</p>
               </a>
             </li>
           </ul>
           <!-- Tab panes -->
           <div calss="tab-content">
-            <div class="tab-pane fade active in" id="elt">
+            <div class="tab-pane fade active in" id="elders">
               <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffRole == "{{eltguid}}"' Sort:'Position desc' -%}
+                {%- person dataview:'118' where:'StaffRole == "{{elderguid}}"' Sort:'Position desc' -%}
                   {%- for person in personItems -%}
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
@@ -51,9 +58,28 @@
                 {%- endperson -%}
               </div>
             </div>
-             <div class="tab-pane fade" id="mlt">
+             <div class="tab-pane fade" id="leadership">
               <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffRole == "{{mltguid}}"' Sort:'Position desc' -%}
+                {%- person dataview:'118' where:'StaffRole == "{{eltguid}}"' Sort:'Position desc' -%}
+                  {%- for person in personItems -%}
+                    <div class="col-md-6 mb-2">
+                      <div class="person-item">
+                        <div class="person-image">
+                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
+                        </div>
+                        <div class="person-details">
+                          <h3 class="heading">{{ person.FullName }}</h3>
+                          <p class="lead mb-0">{{ person | Attribute: 'Position'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                  {%- endfor -%}
+                {%- endperson -%}
+              </div>
+            </div>
+            <div class="tab-pane fade" id="pastoral">
+              <div class="row flex-row flex-wrap justify-center location-content">
+                {%- person dataview:'118' where:'StaffRole == "{{pastoralguid}}"' Sort:'Position desc' -%}
                   {%- for person in personItems -%}
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
