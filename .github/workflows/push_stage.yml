@@ -6,18 +6,16 @@ on:
 name: Push to Stage
 
 jobs:
-build-and-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-
-    - name: Log in with Azure
+      - name: Log in with Azure
         uses: azure/login@v1
         with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Azure CLI script
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+      - name: Azure CLI script
         uses: azure/CLI@v1
         with:
-        azcliversion: 2.0.72
-        inlineScript: |
+          azcliversion: 2.0.72
+          inlineScript: |
              az vm run-command invoke --command-id RunPowershellScript --name ROCKSTAGE -g rg-rock-stage-cus --scripts 'cd C:\\inetpub\\wwwroot\\Themes\\CCC_Public; git fetch; git checkout -f stage;  git pull -f'
