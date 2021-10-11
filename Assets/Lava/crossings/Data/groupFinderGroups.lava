@@ -48,7 +48,7 @@
                     {%-assign registrationLink = ""-%}
                     {%- if group.Schedule and group.Schedule != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
-                        {%- assign dayofweek = group.Schedule.NextStartDateTime | Date:'dddd' -%}
+                        {%- assign dayofweek = group.Schedule.EffectiveStartDate | Date:'dddd' -%}
                         {%-assign sched = group.Schedule -%}
                         {%-assign nextOc = sched.NextStartDateTime -%}
                         {%-assign start = sched.EffectiveStartDate | Date: 'MMM dd'-%}
@@ -65,7 +65,7 @@
                     {%- else -%}
                         {% for loc in group.GroupLocations %}
                             {%- for sched in loc.Schedules -%}
-                                {%- assign dayofweek = sched.NextStartDateTime | Date:'dddd' -%}
+                                {%- assign dayofweek = sched.EffectiveStartDate | Date:'dddd' -%}
                                 {%- assign scheduleId = sched.Id -%}
                                 {%- assign nextOc = sched.NextStartDateTime -%}
                                 {%-assign start = sched.EffectiveStartDate | Date: 'MMM dd'-%}

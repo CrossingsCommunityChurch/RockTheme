@@ -33,7 +33,7 @@
               {%-assign mapLink = link | Append:encodedadd-%}
               <p class="lead">
               <a href="{{mapLink}}" class="contact-item">
-                <i class="fas fa-map-marker-alt"></i><span>{{group.LocationAddress}}</span>
+                <i class="fas fa-map-marker-alt"></i><span style="margin-left: 7px;">{{group.LocationAddress}}</span>
               </a>
             </p>
               {%- endif -%}
