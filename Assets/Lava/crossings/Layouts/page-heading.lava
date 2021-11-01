@@ -28,7 +28,7 @@
 {%- assign homepageImages = 'homeImages' | PersistedDataset | Shuffle -%}
 
     {%- assign firstImage = homepageImages | First -%}
-    {%- assign imageUrlPath = firstImage.image |  Prepend:'/Web' -%}
+    {%- assign imageUrlPath = firstImage.image  | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'  -%}
     {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
 {%- endif -%}
