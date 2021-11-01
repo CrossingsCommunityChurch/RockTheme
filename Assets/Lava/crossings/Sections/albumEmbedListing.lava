@@ -11,7 +11,7 @@
 {%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/500x500' -%}
+{%- assign imageSize = ',c_scale,h_500' -%}
 {%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
 
 {%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}

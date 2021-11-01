@@ -13,8 +13,8 @@
 {%- assign layout = CurrentPage.Layout.Name -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/2000x1300' -%}
-{%- assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign imageSize = ',c_scale,h_1300' -%}
+{%- assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
 {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
 {%- if heroSmall == 'Yes' -%}
@@ -28,14 +28,14 @@
 {%- assign homepageImages = 'homeImages' | PersistedDataset | Shuffle -%}
 
     {%- assign firstImage = homepageImages | First -%}
-    {%- assign imageUrlPath = firstImage.image -%}
+    {%- assign imageUrlPath = firstImage.image  | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'  -%}
     {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
 {%- endif -%}
 
 {%- if imageUrlPath != empty -%}
     <div class="container-fluid hero-wrapper {{ wrapperClass }}">
-        {[ parallax image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
+        {[ cloudpara image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
             <div class="jumbotron flat transparent reverse" data-aos="fade-in">
                 {%- if layout == 'Homepage' -%}
                     {{ buttons }}
@@ -51,7 +51,7 @@
                     {%- endif -%}
                 {%- endif -%}
             </div>
-        {[ endparallax ]}
+        {[ endcloudpara ]}
     </div>
 {%- else -%}
     <div class="section page-title reverse group-content">

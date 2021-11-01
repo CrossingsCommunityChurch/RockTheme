@@ -10,7 +10,7 @@
   {%- assign dataset = data -%}
 
   {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-  {%- assign imageSize = '/fit-in/450x450' -%}
+  {%- assign imageSize = ',c_scale,h_450' -%}
   {%- assign now = 'Now' | Date -%}
 
   {%- assign seriesData = data | PersistedDataset -%}

@@ -8,7 +8,7 @@
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/600x600/' -%}
+{%- assign imageSize = ',c_scale,h_600' -%}
 {%- assign evtData = 'events' | PersistedDataset -%}
 {%- assign audiences = evtData.Audiences | Uniq -%}
 {%- assign evts = evtData.Events | ToJSON -%}

@@ -125,7 +125,7 @@
                     {%-endif-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
                     {%-assign imageSize = '/fit-in/600x600'-%}
-                    {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath'-%}
+                    {%-assign imageUrlPath = group | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
                     {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
                     {%-if imageUrlPath == ''-%}
                       {%-assign imageAsset = ''-%}
