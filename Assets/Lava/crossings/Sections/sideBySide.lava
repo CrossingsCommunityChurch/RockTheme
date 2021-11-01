@@ -27,7 +27,7 @@
 {%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/1100x900' -%}
+{%- assign imageSize = ',c_scale,h_900' -%}
 
 {%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
 {%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}

@@ -5,7 +5,7 @@
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/640x640/' -%}
+{%- assign imageSize = ',c_scale,h_640' -%}
 {%- assign groupsData = 'groupFinder' | PersistedDataset -%}
 {%- assign Tags =  groupsData.Tags | Uniq-%}
 {%- assign DaysOfWeek = groupsData.DaysOfWeek | Uniq -%}

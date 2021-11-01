@@ -11,7 +11,7 @@
 
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/300x300/' -%}
+{%- assign imageSize = ',c_scale,h_300' -%}
 {%- assign searchSuggestions = 'searchSuggestions' | PersistedDataset -%}
 {%- assign htmlIndex = indexArray-%}
 <a href="#" class="menu-btn btn search btn-outline-thin open-search"><i class="fas fa-search"></i><span>Search</span></a>

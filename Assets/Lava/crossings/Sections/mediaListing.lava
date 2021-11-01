@@ -4,7 +4,7 @@
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/450x450' -%}
+{%- assign imageSize = ',c_scale,h_450' -%}
 {%- assign mediaItemsPerPage = 'Global' | Attribute:'MediaItemsPerPage' -%}
 {%- assign mediaItemImageResize = 'Global' | Attribute:'MediaItemImageResize' -%}
 {%- assign mediaItemTopicMinCharsToMatch = 'Global' | Attribute:'MediaItemTopicMinCharsToMatch' -%}

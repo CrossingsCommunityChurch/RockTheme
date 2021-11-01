@@ -5,7 +5,7 @@
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/2000x900' -%}
+{%- assign imageSize = ',c_scale,h_900' -%}
 
 {%- assign title = Item.Title -%}
 {%- assign author = Item | Attribute:'Author' -%}
