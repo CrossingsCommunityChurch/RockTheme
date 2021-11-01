@@ -13,7 +13,7 @@
 {%- assign date = Item.StartDateTime | Date:'MMM d, yyyy' -%}
 {%- assign content = Item.Content -%}
 
-{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
 {%- assign imageUrlPath = image -%}
 {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 

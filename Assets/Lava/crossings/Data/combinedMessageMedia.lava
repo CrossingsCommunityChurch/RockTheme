@@ -121,7 +121,7 @@
         {%-if item.ContentChannel.Name == 'Teaching Message'-%}
             {%assign channelPath = 'teachings/'-%}
         {%-endif-%}
-        {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath'-%}
+        {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
         {%-assign imageUrl = AssetImage-%}
         {%-assign useVimeoImage = False-%}
         {%-assign vimeoImageUrl = item | Attribute:'Image', 'RawValue'-%}

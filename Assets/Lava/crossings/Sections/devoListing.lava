@@ -9,7 +9,7 @@
 <div class="section devo-list bg-gray">
   <div class="container content-area">
       {%- for item in Items -%}
-        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
         {%- capture itemLink -%}/devotions/{{item.PrimarySlug}}{%endcapture -%}
         {%- assign title = item.Title -%}

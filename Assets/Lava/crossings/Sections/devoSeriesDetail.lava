@@ -13,7 +13,7 @@
 {%- assign date = Item.StartDateTime | Date:'MMM d, yyyy' -%}
 {%- assign content = Item.Content -%}
 
-{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
 {%- assign imageUrlPath = image -%}
 {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
@@ -46,7 +46,7 @@
       {%- assign curdate = 'Now' | Date -%}
       {%- for card in cards -%}
       {%- if card.ChildContentChannelItem.StartDateTime <= curdate -%}
-        {%- assign imageUrlPath = card.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign imageUrlPath = card.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {%- assign imageUrl = imageStorageUrl | Append: cardImageSize | Append:imageUrlPath -%}
         {%- capture itemLink -%}/40days/daily/{{card.ChildContentChannelItem.PrimarySlug}}{%endcapture -%}
         {%- assign title = card.ChildContentChannelItem.Title -%}

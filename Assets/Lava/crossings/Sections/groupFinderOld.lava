@@ -8,7 +8,7 @@
 
     <div class="row flex-row flex-wrap">
     {%- for group in Groups -%}
-      {%- assign imageAtt = group | Attribute:'Assetimage' | Url:'localpath' -%}
+      {%- assign imageAtt = group | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
       {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageAtt-%}
       <div class="col-sm-6 col-md-4">
         <div class="card cardShadow">

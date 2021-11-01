@@ -131,7 +131,7 @@
                             {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
                             {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
                             {%- assign imageSize = ',c_scale,h_325' -%}
-                            {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                            {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
                             {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
                             {%- assign vimeoImageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' -%}
                             {%- if vimeoImageUrl != empty -%}

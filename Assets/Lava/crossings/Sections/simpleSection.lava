@@ -19,7 +19,7 @@
 {%- if item | Attribute:'AssetImage' -%}
     {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
     {%- assign imageSize = ',c_scale,h_1300' -%}
-    {%- assign imageUrlPath =  item | Attribute:'AssetImage' | Url:'localpath' -%}
+    {%- assign imageUrlPath =  item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
     {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 {%- endif -%}
 

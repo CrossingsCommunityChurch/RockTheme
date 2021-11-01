@@ -80,7 +80,7 @@
 {%- endif -%}
 <section class="contentComponent contentComponent-split section split-section side-by-side">
 {%- for item in Items -%}
-    {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+    {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
     {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
     {%- assign title = item.Title -%}
     {%- assign subheading = item | Attribute: 'subheading' -%}
