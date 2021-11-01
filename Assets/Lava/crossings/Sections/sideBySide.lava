@@ -92,11 +92,11 @@
 
         {%- if imageUrlPath != empty -%}
         <div class="cover-half visible-md-block visible-lg-block">
-          <img alt="{{ title }}" src="{{ imageUrl }}">
+          <img class="cld-hidpi" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
         </div>
         {%- endif -%}
         <div class="col-md-6">
-            <img alt="{{ title }}" src="{{ imageUrl }}" class="img-responsive hidden-md hidden-lg">
+            <img alt="{{ title }}" src="" data-src="{{ imageUrl }}" class="cld-hidpi img-responsive hidden-md hidden-lg">
         </div>
         <div class="col-md-6 text-content">
             <div class='content-item' data-aos='fade-up'>

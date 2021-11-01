@@ -33,7 +33,7 @@
 </div>
 {%- if image != empty -%}
 <div class="devo-image container mt-n3">
-  <img src="{{ imageUrl }}" alt="{{ title }}" title="{{ title }}" />
+  <img class="cld-hidpi" src="" data-src="{{ imageUrl }}" alt="{{ title }}" title="{{ title }}" />
 </div>
 {%- endif -%}
 {%- assign cardImageSize = '/fit-in/600x600/' -%}
@@ -57,7 +57,7 @@
         <div class="col-sm-6 col-md-4">
           <div class="card cardShadow">
             <div class="thumb">
-              <img src="{{ imageUrl }}" alt="{{ title }}"class="event-img">
+              <img src="" data-src="{{ imageUrl }}" alt="{{ title }}"class="cld-hidpi event-img">
             </div>
             <div class="row card-content-row">
               <div class="card-content">
