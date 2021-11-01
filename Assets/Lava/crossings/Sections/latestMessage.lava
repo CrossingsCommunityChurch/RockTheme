@@ -17,7 +17,7 @@
 {%- assign item = Items | First -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/1000x600' -%}
+{%- assign imageSize = ',c_scale,h_600' -%}
 {%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
 {%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
 
@@ -43,7 +43,7 @@
       <div class="col-md-10 col-md-offset-1">
         <div class="latest-message">
           <div class="message-image" data-aos="fade-in">
-            <img src="{{ imageUrl }}">
+            <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
           </div>
           <div class="latest-message-details" data-aos="fade-up">
             <h4 class="subheading">Latest Message</h4>

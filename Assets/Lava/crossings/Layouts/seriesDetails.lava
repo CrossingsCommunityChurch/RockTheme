@@ -5,7 +5,7 @@
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/1140x640' -%}
+{%- assign imageSize = ',c_scale,h_640' -%}
 
   {%- if Item -%}
   {%- assign item = Item -%}
@@ -109,8 +109,8 @@
                       {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
                       {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
                       {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-                      {%- assign imageSize = '/fit-in/450x325' -%}
-                      {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                      {%- assign imageSize = ',c_scale,h_325' -%}
+                      {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
                       {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
                       {%- assign vimeoImageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' -%}
                       {%- if vimeoImageUrl != empty -%}

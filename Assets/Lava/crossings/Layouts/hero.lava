@@ -13,8 +13,8 @@
 {%- assign buttons = item | Attribute:'Buttons' -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/2000x1300' -%}
-{%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+{%- assign imageSize = ',c_scale,h_1300' -%}
+{%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
 {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 
 {%- if height != empty -%}

@@ -4,12 +4,12 @@
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/700x700' -%}
+{%- assign imageSize = ',c_scale,h_700' -%}
 
 <div class="section devo-list bg-gray">
   <div class="container content-area">
       {%- for item in Items -%}
-        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
         {%- capture itemLink -%}/devotions/{{item.PrimarySlug}}{%endcapture -%}
         {%- assign title = item.Title -%}
@@ -22,7 +22,7 @@
         <div class="card listing shadow-bg mb-3 shadowDepth1" data-aos="fade-up">
           <div class="row flex-row">
             <div class="col-sm-4">
-              <img src="{{ imageUrl }}" alt="{{ title }}" class="object-cover">
+              <img src="" data-src="{{ imageUrl }}" alt="{{ title }}" class=" cld-hidpi object-cover">
             </div>
             <div class="col-sm-8">
               <div class="p-3 pt-2 pl-1">

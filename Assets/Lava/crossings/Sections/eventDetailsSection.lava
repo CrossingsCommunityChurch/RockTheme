@@ -7,7 +7,7 @@
 {%assign useContactImage = eventitemoccurrence | Attribute:'ShowContactPhoto' | AsBoolean -%}
 {%- if useContactImage != true -%}
   {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-  {%- assign imageSize = '/fit-in/150x150' -%}
+  {%- assign imageSize = ',c_scale,h_150' -%}
   {%- assign imageUrlPath = eventitemoccurrence | Attribute:'DefaultContactImage' | Url:'localpath' -%}
   {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 {%- endif -%}
@@ -53,7 +53,7 @@
               {%- endif -%}
               {%- if useContactImage == false -%}
               <div class="pastor-image">
-                <img src="{{ imageUrl }}">
+                <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
               </div>
               {%- endif -%}
               <div class="past-details">
