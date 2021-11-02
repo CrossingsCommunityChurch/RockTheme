@@ -132,7 +132,7 @@
 
         {%if vimeoImageUrl == empty and AssetImage == empty-%}
             {%-assign parentSeries = item.ParentItems | First-%}
-            {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath'-%}
+            {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
         {%-endif-%}
 
         {
