@@ -4,7 +4,7 @@
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = ',c_scale,h_600 ' -%}
+{%- assign imageSize = ',c_scale,h_600' -%}
 {%- assign minHeight = '300px' -%}
 
 <div class="section card-modal-list">
