@@ -26,7 +26,7 @@
 
 {%- for message in latestMessageDataset -%}
   {%- assign imageUrlPath = message.image -%}
-  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
   {%- if message.useVimeoImage == True -%}
     {%- assign imageUrl = message.image -%}
   {%- endif -%}
