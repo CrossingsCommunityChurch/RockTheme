@@ -126,10 +126,12 @@
                     {%-endif-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
                     {%-assign imageSize = ',c_scale,w_600'-%}
-                    {%-assign imageUrlPath = group | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+                    {%-assign imageUrlPath = group | Attribute:'AssetImage' | Url:'localpath' | Prepend:'/oldweb'-%}
                     {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
-                    {%-if imageUrlPath == ''-%}
+                    {%-if imageUrlPath == '/oldweb'-%}
                       {%-assign imageAsset = ''-%}
+                    {%-else -%}
+                        {%- assign imageAsset = imageAsset  | RemoveFirst:'/Images' | RemoveFirst:'/Web' -%}
                     {%-endif-%}
                     {%-if location.Location.Name and location.Location.Name != empty-%}
                         {%-assign locaddress = location.Location.FormattedAddress %}
