@@ -15,7 +15,7 @@
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
 {%- assign imageSize = ',c_scale,h_1300' -%}
 {%- assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' -%}
-{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+
 
 {%- if heroSmall == 'Yes' -%}
     {%- assign wrapperClass = 'page-item short-hero' -%}
@@ -35,6 +35,7 @@
 
 {%- if imageUrlPath != empty -%}
     {%- assign imageUrlPath = imageUrlPath  | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
     <div class="container-fluid hero-wrapper {{ wrapperClass }}">
         {[ cloudpara image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
             <div class="jumbotron flat transparent reverse" data-aos="fade-in">
