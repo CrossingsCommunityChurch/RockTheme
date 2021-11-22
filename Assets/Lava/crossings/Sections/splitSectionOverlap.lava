@@ -20,8 +20,8 @@
 {%- for item in Items -%} {%- comment -%} Do we need to run a loop here? is this always returned as an array? {%- endcomment -%}
 {%- if item | Attribute:'AssetImage' -%}
     {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-    {%- assign imageSize = '/fit-in/900x600' -%}
-    {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+    {%- assign imageSize = ',c_scale,h_600' -%}
+    {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
     {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
 {%- endif -%}
 {%- assign title = item.Title -%}
@@ -33,7 +33,7 @@
       <div class="row flex-row">
           <div class="col-md-6 nopadding-x image-bg">
             {%- if imageUrl -%}
-              <img src="{{ imageUrl }}" alt="{{ title }}" />
+              <img class="cld-hidpi" src="" data-src="{{ imageUrl }}" alt="{{ title }}" />
             {%- endif -%}
           </div>
           <div class="col-md-6 split-section-text" data-aos="fade-left">

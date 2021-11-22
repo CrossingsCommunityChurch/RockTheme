@@ -1,12 +1,12 @@
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/300x300/' -%}
+{%- assign imageSize = ',c_scale,h_300' -%}
 
 <div id="announcementList" class="announcement-list">
   <div class="container announcement-list-items" data-aos="fade-up">
     <div class="row flex-row flex-wrap">
       {%- for item in Items -%}
-        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
         {%- capture itemLink -%}/40days/weekly/{{item.PrimarySlug}}{%endcapture -%}
         {%- assign title = item.Title -%}
@@ -17,7 +17,7 @@
         <div class="col-sm-6 col-md-4">
           <div class="card cardShadow">
             <div class="thumb">
-              <img src="{{ imageUrl }}" alt="{{ title }}"class="event-img">
+              <img src="" data-src="{{ imageUrl }}" alt="{{ title }}"class="cld-hidpi event-img">
             </div>
             <div class="row card-content-row">
               <div class="card-content">

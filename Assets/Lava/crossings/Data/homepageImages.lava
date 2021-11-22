@@ -8,7 +8,7 @@
     {%- assign contentChannelId = '67' -%}
     {%- contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}}' iterator:'homeImages' securityenabled:'false' -%}
       {%- for image in homeImages -%}
-        {%- assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%- assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {
             "image" : {{ AssetImage | ToJSON }}
         }

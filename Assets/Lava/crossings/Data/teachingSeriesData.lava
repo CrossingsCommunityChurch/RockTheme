@@ -19,7 +19,7 @@
         "Guid": {{ item.Guid | ToJSON }},
         "Status": {{ item.Status | ToJSON }},
         "PublishDateTime": {{ item.StartDateTime | Date:'MMM d, yyyy' | ToJSON }},
-        "Image": {{item | Attribute:'Serieslogo'  | Url:'localpath' | ToJSON}},
+        "Image": {{item | Attribute:'Serieslogo'  | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' | ToJSON}},
         "ExpireDateTime": {{ item.ExpireDateTime | ToJSON }},
         "ModifiedDateTime": {{ item.ModifiedDateTime | ToJSON }},
         "ChannelId": {{ item.ContentChannel.Id | ToJSON }},

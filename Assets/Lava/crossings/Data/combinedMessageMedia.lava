@@ -121,7 +121,7 @@
         {%-if item.ContentChannel.Name == 'Teaching Message'-%}
             {%assign channelPath = 'teachings/'-%}
         {%-endif-%}
-        {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath'-%}
+        {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
         {%-assign imageUrl = AssetImage-%}
         {%-assign useVimeoImage = False-%}
         {%-assign vimeoImageUrl = item | Attribute:'Image', 'RawValue'-%}
@@ -132,7 +132,7 @@
 
         {%if vimeoImageUrl == empty and AssetImage == empty-%}
             {%-assign parentSeries = item.ParentItems | First-%}
-            {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath'-%}
+            {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
         {%-endif-%}
 
         {

@@ -4,7 +4,7 @@
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = '/fit-in/900x600' -%}
+{%- assign imageSize = ',c_scale,h_600' -%}
 {%- assign minHeight = '300px' -%}
 
 <div class="section card-modal-list">
@@ -15,7 +15,7 @@
             {%- assign subheading = item | Attribute: 'subheading' -%}
             {%- assign icon = item | Attribute: 'Icon' -%}
             {%- assign subcontent = item | Attribute: 'CardSubcontent' -%}
-            {%- assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' -%}
+            {%- assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
             {%- assign image = imageStorageUrl | Append: imageSize | Append:imageAsset -%}
             {%- assign modalID = item.Title | ToCssClass -%}
             {%- capture modalIDWithIndex -%}{{modalID}}{{forloop.index}}{%endcapture%}
