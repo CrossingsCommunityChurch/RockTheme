@@ -54,10 +54,12 @@
     {%-assign secondaryAudiance =  item | Attribute:'SecondaryAudiences'-%}
     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
     {%-assign imageSize = ',c_scale,w_600'-%}
-    {%-assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+    {%-assign imageUrlPath = item | Attribute:'Image' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
     {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
     {%-if imageUrlPath == ''-%}
       {%-assign imageAsset = ''-%}
+    {%- else -%}
+      {%- assign imageUrlPath = item | Attribute:'Image' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
     {%-endif-%}
     {
       "Title": {{ item.Title | ToJSON }},
