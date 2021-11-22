@@ -46,6 +46,7 @@
                     {%-assign tagsArray = ""-%}
                     {%-assign childCare = ""-%}
                     {%-assign registrationLink = ""-%}
+                     {%-assign imageUrlPath = ""-%}
                     {%- if group.Schedule and group.Schedule != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
                         {%- assign dayofweek = group.Schedule.EffectiveStartDate | Date:'dddd' -%}
@@ -130,7 +131,7 @@
                     {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
                     {%-if imageUrlPath == ''-%}
                       {%-assign imageAsset = ''-%}
-                    {%else %}
+                    {%- else -%}
                        {%-assign imageUrlPath = group | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
                        {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
                     {%-endif-%}
