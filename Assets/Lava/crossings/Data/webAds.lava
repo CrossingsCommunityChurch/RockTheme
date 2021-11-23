@@ -53,7 +53,7 @@
     {%-assign primaryAudiance = item | Attribute:'PrimaryAudience'-%}
     {%-assign secondaryAudiance =  item | Attribute:'SecondaryAudiences'-%}
     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
-    {%-assign imageSize = ',c_scale,w_450'-%}
+    {%-assign imageSize = ',c_scale,w_400'-%}
     {%-assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
     {%-if imageUrlPath == ''-%}
       {%-assign imageAsset = ''-%}
