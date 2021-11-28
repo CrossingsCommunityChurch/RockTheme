@@ -65,7 +65,7 @@
             {%- assign occurrenceCount = eventitem.EventItemOccurrences | Size -%}
 
             {%- assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' -%}
-            {%- assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+            {%- assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
 
             {%- assign photoId = eventitem.PhotoId -%}
             {%- if photoId != null -%}
