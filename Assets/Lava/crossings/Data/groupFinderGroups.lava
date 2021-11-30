@@ -46,6 +46,7 @@
                     {%-assign tagsArray = ""-%}
                     {%-assign childCare = ""-%}
                     {%-assign registrationLink = ""-%}
+                     {%-assign imageUrlPath = ""-%}
                     {%- if group.Schedule and group.Schedule != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
                         {%- assign dayofweek = group.Schedule.EffectiveStartDate | Date:'dddd' -%}
@@ -125,11 +126,14 @@
                         {%-assign childLink = "https://lifecare.crossings.church/support-for-kids"-%}
                     {%-endif-%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
-                    {%-assign imageSize = '/fit-in/600x600'-%}
-                    {%-assign imageUrlPath = group | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+                    {%-assign imageSize = ',c_scale,w_450'-%}
+                    {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' -%}
                     {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
                     {%-if imageUrlPath == ''-%}
                       {%-assign imageAsset = ''-%}
+                    {%- else -%}
+                       {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                       {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
                     {%-endif-%}
                     {%-if location.Location.Name and location.Location.Name != empty-%}
                         {%-assign locaddress = location.Location.FormattedAddress %}
