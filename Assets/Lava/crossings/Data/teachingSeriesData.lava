@@ -3,9 +3,12 @@
     {%- contentchannel where:'Name == "Teaching Series"' iterator:'teachingSeriesItems' -%}
     {%- assign teachingSeriesItemId = teachingSeriesItems | First | Property:'Id' -%}
     {%- endcontentchannel -%}
+    {%- contentchannel where:'Name == "The Gathering Series"' iterator:'gatheringSeriesItems' -%}
+    {%- assign gatheringSeriesItemId = gatheringSeriesItems | First | Property:'Id' -%}
+    {%- endcontentchannel -%}
 
     {%- if teachingSeriesItemId != empty -%}
-    {%- contentchannelitem where:'ContentChannelId == {{teachingSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+    {%- contentchannelitem where:'ContentChannelId == {{teachingSeriesItemId}} || ContentChannelId == {{gatheringSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
 
     {%assign channelPath = '/media/teachings/' -%}
