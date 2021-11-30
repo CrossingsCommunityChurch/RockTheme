@@ -57,7 +57,7 @@
 			if (day === 3) {
 				//Wednesday
 				return {
-					link: 'https://venue.crossings.church',
+					link: 'https://crossings.church/livebar-wed',
 					text: 'Wednesday Night ',
 					class: 'wednesday-live'
 				};

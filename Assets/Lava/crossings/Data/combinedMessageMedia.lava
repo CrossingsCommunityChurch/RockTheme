@@ -110,7 +110,10 @@
         {%-contentchannel where:'Name == "Sermon Message"' iterator:'sermonItems' securityenabled:'false'-%}
         {%-assign sermonItemId = sermonItems | First | Property:'Id'-%}
         {%-endcontentchannel-%}
-        {%-contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false'-%}
+        {%-contentchannel where:'Name == "The Gathering Messages"' iterator:'GatheringItems' securityenabled:'false'-%}
+        {%-assign gatheringItemId = sermonItems | First | Property:'Id'-%}
+        {%-endcontentchannel-%}
+        {%-contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}} || ContentChannelId == {{gatheringItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false'-%}
         {%-for item in items-%}
 
         {%-assign currentDate = 'Now' | Date -%}
@@ -118,8 +121,9 @@
             {%-continue-%}
         {%-endif-%}
         {%-assign channelPath = 'sermons/'-%}
-        {%-if item.ContentChannel.Name == 'Teaching Message'-%}
+        {%-if item.ContentChannel.Name == 'Teaching Message' or item.ContentChannel.Name == 'The Gathering'-%}
             {%assign channelPath = 'teachings/'-%}
+        {%-elseif -%}
         {%-endif-%}
         {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
         {%-assign imageUrl = AssetImage-%}
@@ -132,7 +136,7 @@
 
         {%if vimeoImageUrl == empty and AssetImage == empty-%}
             {%-assign parentSeries = item.ParentItems | First-%}
-            {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath'-%}
+            {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
         {%-endif-%}
 
         {

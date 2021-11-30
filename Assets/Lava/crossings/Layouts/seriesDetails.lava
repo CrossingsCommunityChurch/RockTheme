@@ -11,7 +11,7 @@
   {%- assign item = Item -%}
   {%- assign title = item.Title -%}
   {%- assign summary = item.Content -%}
-  {%- assign seriesLogo = item | Attribute:'Serieslogo' | Url:'localpath' -%}
+  {%- assign seriesLogo = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
   {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append: seriesLogo -%}
   {%- assign parentPath = 'sermons' -%}
   {%- assign titleCategory = 'Sermon Series' -%}

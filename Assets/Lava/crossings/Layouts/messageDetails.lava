@@ -91,7 +91,7 @@
                           {%- for taggedItem in taggedItems -%}
                             {%- for tag in tags -%}
                               {%- if taggedItem.TagId == tag.Id -%}
-                                <a class="tagItem" href="/media?tag={{tag.Name}}#vapp">{{ tag.Name }}</a>
+                                <a class="tagItem" href="/media?tag={{tag.Name}}#vapp">{{ tag.Name | Upcase }}</a>
                               {%- endif -%}
                             {%- endfor -%}
                           {%- endfor -%}

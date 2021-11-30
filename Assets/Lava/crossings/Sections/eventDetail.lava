@@ -23,8 +23,8 @@
 {%- endeventcalendaritem -%}
 {%- if eventassetimage and eventassetimage != empty -%}
     {%- assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-    {%- assign eventimageSize = '/fit-in/640x640' -%}
-    {%- assign eventimageUrlPath = eventassetimage | Url:'localpath' -%}
+    {%- assign eventimageSize = ',c_scale,w_600' -%}
+    {%- assign eventimageUrlPath = eventassetimage | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
     {%- assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath -%}
 {%- endif -%}
 <div class="event-page">

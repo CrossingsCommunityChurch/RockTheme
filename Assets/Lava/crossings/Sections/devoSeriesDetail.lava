@@ -36,7 +36,7 @@
   <img class="cld-hidpi" src="" data-src="{{ imageUrl }}" alt="{{ title }}" title="{{ title }}" />
 </div>
 {%- endif -%}
-{%- assign cardImageSize = '/fit-in/600x600/' -%}
+{%- assign cardImageSize = ',c_scale,w_600' -%}
 
 <div id="announcementList" class="announcement-list">
   <div class="container announcement-list-items" data-aos="fade-up">
