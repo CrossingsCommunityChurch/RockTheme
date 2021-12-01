@@ -123,7 +123,6 @@
         {%-assign channelPath = 'sermons/'-%}
         {%-if item.ContentChannel.Name == 'Teaching Message' or item.ContentChannel.Name == 'The Gathering'-%}
             {%assign channelPath = 'teachings/'-%}
-        {%-elseif -%}
         {%-endif-%}
         {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
         {%-assign imageUrl = AssetImage-%}
