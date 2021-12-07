@@ -241,7 +241,7 @@ let currentscrollHeight = 0;
         storeEventsContainer(ad);
       }
         curIndex = filteredIndex;
-      cloudinary.responsive();
+      $.cloudinary.responsive();
 
     }
 
