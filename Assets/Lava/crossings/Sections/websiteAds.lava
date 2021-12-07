@@ -201,7 +201,7 @@
           `<div class="col-sm-6 col-md-4">
             <div class="card cardShadow">
               <div class="thumb">
-                <img src="I" class="event-img">
+                <img src="" class="event-img cld-hidpi" data-src="">
               </div>
               <div class="row card-content-row">
                 <div class="card-content">
@@ -235,7 +235,7 @@
         div.find('.thumb').hide();
         }
         else{
-        div.find('img.event-img').attr('src', ad.AssetImage);
+        div.find('img.event-img').attr('data-src', ad.AssetImage);
         // div.find('.thumb').css("background-image", `url("${event.AssetImage}")`);
         }
         div.find('h4').text(ad.Title);
@@ -326,6 +326,7 @@
         else{ renderFilteredItems(events, 1, 'all', 'all', 'all');}
       }
     }
+    $.cloudinary.responsive();
   });
 
 </script>
