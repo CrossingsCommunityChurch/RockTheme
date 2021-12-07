@@ -241,7 +241,6 @@ let currentscrollHeight = 0;
         storeEventsContainer(ad);
       }
         curIndex = filteredIndex;
-      $.cloudinary.responsive();
 
     }
 
@@ -284,7 +283,6 @@ $(window).on("scroll", function () {
         }
         currentscrollHeight = scrollPos;
       }
-          $.cloudinary.responsive();
     });
 
 //****************** End Scroll to Render *******************//
