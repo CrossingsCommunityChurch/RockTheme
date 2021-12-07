@@ -141,7 +141,7 @@ let currentscrollHeight = 0;
         `<div class="col-sm-6 col-md-4">
           <div class="card cardShadow">
             <div class="thumb">
-              <img src="" class="event-img cld-hipdi" data-src="">
+              <img src="" class="event-img cld-hidpi" data-src="">
             </div>
             <div class="row card-content-row">
               <div class="card-content">
@@ -241,6 +241,7 @@ let currentscrollHeight = 0;
         storeEventsContainer(ad);
       }
         curIndex = filteredIndex;
+
     }
 
     //****************** End Initial Render *******************//
@@ -281,7 +282,8 @@ $(window).on("scroll", function () {
           count++;
         }
         currentscrollHeight = scrollPos;
-      }
+      $.cloudinary.responsive();}
+
     });
 
 //****************** End Scroll to Render *******************//
