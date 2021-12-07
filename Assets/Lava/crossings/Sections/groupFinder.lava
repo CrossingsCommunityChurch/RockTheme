@@ -282,7 +282,8 @@ $(window).on("scroll", function () {
           count++;
         }
         currentscrollHeight = scrollPos;
-      }
+      $.cloudinary.responsive();}
+
     });
 
 //****************** End Scroll to Render *******************//
