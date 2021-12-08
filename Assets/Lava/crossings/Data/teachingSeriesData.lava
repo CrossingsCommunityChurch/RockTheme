@@ -11,7 +11,12 @@
     {%- contentchannelitem where:'ContentChannelId == {{teachingSeriesItemId}} || ContentChannelId == {{gatheringSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
 
-    {%assign channelPath = '/media/teachings/' -%}
+    {%- if item.ContentChannel.Name == 'The Gathering Series' -%}
+      {%- assign channelPath = '/media/gathering/' -%}
+    {%- endif -%}
+    {%- if item.ContentChannel.Name == 'Teaching Series' -%}
+      {%- assign channelPath = '/media/teachings/' -%}
+    {%- endif -%}
 
 
     {
