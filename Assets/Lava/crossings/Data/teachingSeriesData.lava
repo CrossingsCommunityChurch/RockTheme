@@ -12,10 +12,10 @@
     {%- for item in items -%}
 
     {%- if item.ContentChannel.Name == 'The Gathering Series' -%}
-      {%- assign channelPath = '/media/gathering' -%}
+      {%- assign channelPath = '/media/gathering/' -%}
     {%- endif -%}
     {%- if item.ContentChannel.Name == 'Teaching Series' -%}
-      {%- assign channelPath = '/media/teachings' -%}
+      {%- assign channelPath = '/media/teachings/' -%}
     {%- endif -%}
 
 
