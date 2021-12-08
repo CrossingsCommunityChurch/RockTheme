@@ -20,6 +20,10 @@
       {%- assign parentPath = 'teachings' -%}
       {%- assign titleCategory = 'Teaching Series' -%}
   {%- endif -%}
+   {%- if item.ContentChannel.Name == 'The Gathering Series' -%}
+      {%- assign parentPath = 'gathering' -%}
+      {%- assign titleCategory = 'Gathering Series' -%}
+  {%- endif -%}
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
   {%- capture pageTitle -%}{{ title }} - {{ titleCategory }} | {{ org }}{%- endcapture%}
