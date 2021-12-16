@@ -1,0 +1,61 @@
+{%- comment -%}
+  Blog Content Channel View
+  Lists the latest Blogs from the Blog Content Channel Items
+{%- endcomment -%}
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = ',c_scale,h_700' -%}
+
+<div class="section devo-list bg-gray">
+  <div class="container content-area">
+      {%- for item in Items -%}
+        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+        {%- capture itemLink -%}/blog/{{item.PrimarySlug}}{%endcapture -%}
+        {%- assign title = item.Title -%}
+        {%- assign author = item | Attribute:'Author' -%}
+        {%- assign content = item.Content | StripHtml | Slice: 0, 225 -%}
+        {%- assign date = item.StartDateTime | Date:'MMM d, yyyy' -%}
+
+
+
+        <div class="card listing shadow-bg mb-3 shadowDepth1" data-aos="fade-up">
+          <div class="row flex-row">
+            <div class="col-sm-4">
+              <img src="" data-src="{{ imageUrl }}" alt="{{ title }}" class=" cld-hidpi object-cover">
+            </div>
+            <div class="col-sm-8">
+              <div class="p-3 pt-2 pl-1">
+                <h3>{{ title }}</h3>
+                <p class="subheading">{{ date }}</p>
+                <div class="mb-1">{{ content }}...</div>
+                {[ button buttonlink:'{{itemLink}}' buttonstyle:'primary' buttontext:'Read More' ]}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+  </div>
+  <div class="container mt-3">
+    {%- if Pagination.TotalPages > 1 -%}
+      <div class="margin-t-lg flex-row justify-center">
+        {%- assign nextPageString = Pagination.NextPage | ToString -%}
+        {%- assign prevPageString = Pagination.PreviousPage | ToString -%}
+
+        {%- if Pagination.PreviousPage == -1 -%}
+        {%- else -%}
+          <a class="btn btn-default pull-left" href="{{ Pagination.UrlTemplate | Replace:'PageNum', prevPageString }}">
+            <i class="fa fa-chevron-left"></i> Prev
+          </a>
+        {%- endif -%}
+
+        {%- if Pagination.NextPage == -1 -%}
+        {%- else -%}
+        <a class="btn btn-default pull-right" href="{{ Pagination.UrlTemplate | Replace:'PageNum', nextPageString }}">
+          Next <i class="fa fa-chevron-right"></i>
+        </a>
+        {%- endif -%}
+      </div>
+      {%- endif -%}
+  </div>
+</div>
