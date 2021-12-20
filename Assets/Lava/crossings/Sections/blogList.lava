@@ -11,7 +11,7 @@
       {%- for item in Items -%}
         {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-        {%- capture itemLink -%}/blog/{{item.PrimarySlug}}{%endcapture -%}
+        {%- capture itemLink -%}/blogs/{{item.PrimarySlug}}{%endcapture -%}
         {%- assign title = item.Title -%}
         {%- assign author = item | Attribute:'Author' -%}
         {%- assign content = item.Content | StripHtml | Slice: 0, 225 -%}
