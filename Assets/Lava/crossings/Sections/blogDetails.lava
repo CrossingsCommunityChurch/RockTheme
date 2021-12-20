@@ -1,0 +1,41 @@
+{%- comment -%}
+  Blog Content Channel Item View Template
+
+  Runs the content for a Blog content channel item
+{%- endcomment -%}
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = ',c_scale,h_900' -%}
+
+{%- assign title = Item.Title -%}
+{%- assign author = Item | Attribute:'Author' -%}
+{%- assign channel = Item.ContentChannel.Name -%}
+{%- assign date = Item.StartDateTime | Date:'MMM d, yyyy' -%}
+{%- assign content = Item.Content -%}
+
+{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+{%- assign imageUrlPath = image -%}
+{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+
+{%- capture pageTitle -%}Blogs- {{ author }} - {{ title }}{%- endcapture%}
+{{ pageTitle | SetPageTitle }}
+
+
+<div class="section page-title reverse devo-title">
+    <div class="container">
+        <div class="jumbotron text-center" data-aos="fade-in">
+            <h3 class="subheading reverse">{{ channel }}</h3>
+            <h1 class="heading"> {{ title }}</h1>
+            <hr class="sep">
+            <h4 class="subheading reverse">{{ author }} | {{ date }}</h4>
+        </div>
+    </div>
+</div>
+{%- if image != empty -%}
+<div class="devo-image container mt-n3">
+  <img class="cld-hidpi" src="" data-src="{{ imageUrl }}" alt="{{ title }}" title="{{ title }}" />
+</div>
+{%- endif -%}
+<div class="container main">
+  {{ content }}
+</div>
