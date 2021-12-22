@@ -97,7 +97,7 @@
 								$('.btn-latest').addClass('btn-live watch-multi').attr("href", '#').find('span').text('Watch LIVE ' + bannerText);
 									$('.watch-multi').click(function(e){
 										e.preventDefault();
-										$('#liveModal').modal();
+										$('#liveEventModal').modal();
 									})
 							}
 				};
