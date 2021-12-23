@@ -47,14 +47,15 @@
                     {%-assign childCare = ""-%}
                     {%-assign registrationLink = ""-%}
                      {%-assign imageUrlPath = ""-%}
-                    {%- if group.Schedule and group.Schedule != empty -%}
+                    {{%- if group.ScheduleId and group.ScheduleId != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
-                        {%- assign dayofweek = group.Schedule.EffectiveStartDate | Date:'dddd' -%}
-                        {%-assign sched = group.Schedule -%}
-                        {%-assign nextOc = sched.NextStartDateTime -%}
-                        {%-assign start = sched.EffectiveStartDate | Date: 'MMM dd'-%}
-                        {%-assign endDate = sched.EffectiveEndDate | Date: 'MMM dd' -%}
-                        {%-assign friendlyName = sched.FriendlyScheduleText -%}
+                        {%- schedule id:'{{scheduleId}}' -%}
+                           {%- assign dayofweek = schedule.NextStartDateTime | Date:'dddd' -%}
+                           {%-assign nextOc = schedule.NextStartDateTime -%}
+                           {%-assign start = schedule.EffectiveStartDate | Date: 'MMM dd'-%}
+                           {%-assign endDate = schedule.EffectiveEndDate | Date: 'MMM dd' -%}
+                           {%-assign friendlyName = schedule.FriendlyScheduleText -%}
+                        {%- endschedule -%}
                         {%-if campusShortcode == "OKC"-%}
                             {%-assign childLink = "https://crossings.church/okckands"-%}
                             {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
