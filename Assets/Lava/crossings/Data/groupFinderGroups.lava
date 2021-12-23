@@ -47,7 +47,7 @@
                     {%-assign childCare = ""-%}
                     {%-assign registrationLink = ""-%}
                      {%-assign imageUrlPath = ""-%}
-                    {{%- if group.ScheduleId and group.ScheduleId != empty -%}
+                    {%- if group.ScheduleId and group.ScheduleId != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
                         {%- schedule id:'{{scheduleId}}' -%}
                            {%- assign dayofweek = schedule.NextStartDateTime | Date:'dddd' -%}
