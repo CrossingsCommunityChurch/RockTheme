@@ -56,11 +56,7 @@
 
 			if (day === 3) {
 				//Wednesday
-				return {
-					link: 'https://crossings.church/livebar-wed',
-					text: 'Wednesday Night ',
-					class: 'wednesday-live'
-				};
+				return return 'multi';
 			}
 
 			if (day === 0) {
