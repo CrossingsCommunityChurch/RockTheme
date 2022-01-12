@@ -56,7 +56,7 @@
 
 			if (day === 3) {
 				//Wednesday
-				return return 'multi';
+				return 'multi';
 			}
 
 			if (day === 0) {
