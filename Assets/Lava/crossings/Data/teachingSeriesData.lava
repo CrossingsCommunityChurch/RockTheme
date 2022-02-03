@@ -6,9 +6,12 @@
     {%- contentchannel where:'Name == "The Gathering Series"' iterator:'gatheringSeriesItems' -%}
     {%- assign gatheringSeriesItemId = gatheringSeriesItems | First | Property:'Id' -%}
     {%- endcontentchannel -%}
+    {%- contentchannel where:'Name == "On Demand Series"' iterator:'onDemandSeriesItems' -%}
+    {%- assign onDemandId = onDemandSeriesItems | First | Property:'Id' -%}
+    {%- endcontentchannel -%}
 
     {%- if teachingSeriesItemId != empty -%}
-    {%- contentchannelitem where:'ContentChannelId == {{teachingSeriesItemId}} || ContentChannelId == {{gatheringSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+    {%- contentchannelitem where:'ContentChannelId == {{teachingSeriesItemId}} || ContentChannelId == {{gatheringSeriesItemId}} || ContentChannelId == {{onDemandId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
 
     {%- if item.ContentChannel.Name == 'The Gathering Series' -%}
