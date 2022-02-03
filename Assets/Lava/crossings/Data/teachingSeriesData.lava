@@ -20,6 +20,9 @@
     {%- if item.ContentChannel.Name == 'Teaching Series' -%}
       {%- assign channelPath = '/media/teachings/' -%}
     {%- endif -%}
+    {%- if item.ContentChannel.Name == 'On Demand Series' -%}
+      {%- assign channelPath = '/media/ondemand/' -%}
+    {%- endif -%}
 
 
     {
