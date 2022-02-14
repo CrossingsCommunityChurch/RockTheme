@@ -111,9 +111,13 @@
         {%-assign sermonItemId = sermonItems | First | Property:'Id'-%}
         {%-endcontentchannel-%}
         {%-contentchannel where:'Name == "The Gathering Messages"' iterator:'GatheringItems' securityenabled:'false'-%}
-        {%-assign gatheringItemId = sermonItems | First | Property:'Id'-%}
+        {%-assign gatheringItemId = GatheringItems | First | Property:'Id'-%}
         {%-endcontentchannel-%}
-        {%-contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}} || ContentChannelId == {{gatheringItemId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false'-%}
+        {%- contentchannel where:'Name == "On Demand Message"' iterator:'onDemandItems' -%}
+        {%- assign onDemandId = onDemandItems | First | Property:'Id' -%}
+        {%- endcontentchannel -%}
+
+        {%-contentchannelitem where:'ContentChannelId ==  {{teachingItemId}} || ContentChannelId == {{sermonItemId}} || ContentChannelId == {{gatheringItemId}} || ContentChannelId == {{onDemandId}}' sort:'StartDateTime desc' iterator:'items' securityenabled:'false'-%}
         {%-for item in items-%}
 
         {%-assign currentDate = 'Now' | Date -%}
@@ -121,7 +125,7 @@
             {%-continue-%}
         {%-endif-%}
         {%-assign channelPath = 'sermons/'-%}
-        {%-if item.ContentChannel.Name == 'Teaching Message' or item.ContentChannel.Name == 'The Gathering'-%}
+        {%-if item.ContentChannel.Name == 'Teaching Message' or item.ContentChannel.Name == 'The Gathering' or item.ContentChannel.Name == 'On Demand Message'-%}
             {%assign channelPath = 'teachings/'-%}
         {%-endif-%}
         {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
@@ -170,7 +174,7 @@
                 {%-assign itemGuid = item.Guid-%}
                 {%-assign tagCategory = item.ContentChannel.ItemTagCategoryId-%}
                 {%-taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems'-%}
-                {%-tag where:'CategoryId == {{ tagCategory }}' iterator:'tags'%}
+                {%-tag where:'CategoryId == "{{tagCategory}}"' iterator:'tags'%}
                     {%-for taggedItem in taggedItems-%}
                         {%-for tag in tags-%}
                             {%-if taggedItem.TagId == tag.Id-%}

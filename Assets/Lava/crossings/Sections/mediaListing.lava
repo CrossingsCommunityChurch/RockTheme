@@ -251,7 +251,7 @@ const vueApp = new Vue({
           data = response.data
           this.teachingSeries = data.filter(e => new Date(e.PublishDateTime) <= new Date())
           .sort((a,b) => new Date(b.PublishDateTime) - new Date(a.PublishDateTime))
-          .slice(0, 3)
+          .slice(0, 6)
         });
     },
     applySearchTags() {
