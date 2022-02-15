@@ -23,6 +23,16 @@
     {%- if item.ContentChannel.Name == 'On Demand Series' -%}
       {%- assign channelPath = '/media/ondemand/' -%}
     {%- endif -%}
+    {%- assign usecl = false -%}
+     {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+    {%- if clPhoto and clPhoto != empty -%}
+        {%- assign photo = clPhoto -%}
+        {%- assign usecl = true -%}
+    {%- else -%}
+        {%- assign photo = item | Attribute:'Serieslogo'  | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%},
+        {%- assign usecl = false -%}
+
+    {%- endif -%}
 
 
     {
@@ -33,13 +43,14 @@
         "Guid": {{ item.Guid | ToJSON }},
         "Status": {{ item.Status | ToJSON }},
         "PublishDateTime": {{ item.StartDateTime | Date:'MMM d, yyyy' | ToJSON }},
-        "Image": {{item | Attribute:'Serieslogo'  | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' | ToJSON}},
+        "Image": {{ photo | ToJSON}},
         "ExpireDateTime": {{ item.ExpireDateTime | ToJSON }},
         "ModifiedDateTime": {{ item.ModifiedDateTime | ToJSON }},
         "ChannelId": {{ item.ContentChannel.Id | ToJSON }},
         "ChannelName": {{ item.ContentChannel.Name | ToJSON }},
         "ParentChannelId": {{ parentchannelid | ToJSON }},
-        "ChildChannelId": {{ childchannelid | ToJSON }}
+        "ChildChannelId": {{ childchannelid | ToJSON }},
+        "UseCloudinary": {{ usecl | ToJSON }}
     }
     {%- unless forloop.last -%}, {%- endunless -%}{%- endfor -%}
     {%- endcontentchannelitem -%}
