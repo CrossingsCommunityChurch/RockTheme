@@ -33,7 +33,7 @@
       <div class="row flex-row">
           <div class="col-md-6 nopadding-x image-bg">
             {%- if imageUrl -%}
-              <img class="cld-responsive" src="" data-src="{{ imageUrl }}" alt="{{ title }}" />
+              <img class="cld-hidpi" src="" data-src="{{ imageUrl }}" alt="{{ title }}" />
             {%- endif -%}
           </div>
           <div class="col-md-6 split-section-text" data-aos="fade-left">

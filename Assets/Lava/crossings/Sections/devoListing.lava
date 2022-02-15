@@ -22,7 +22,7 @@
         <div class="card listing shadow-bg mb-3 shadowDepth1" data-aos="fade-up">
           <div class="row flex-row">
             <div class="col-sm-4">
-              <img src="" data-src="{{ imageUrl }}" alt="{{ title }}" class=" cld-responsive object-cover">
+              <img src="" data-src="{{ imageUrl }}" alt="{{ title }}" class=" cld-hidpi object-cover">
             </div>
             <div class="col-sm-8">
               <div class="p-3 pt-2 pl-1">

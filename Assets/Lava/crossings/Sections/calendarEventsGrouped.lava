@@ -26,7 +26,7 @@
       <div class="card listing">
   <div class="row flex-row">
     <div class="col-sm-4">
-      <img src="" data-src="{{ imageUrl }}" class="cld-responsive object-cover">
+      <img src="" data-src="{{ imageUrl }}" class="cld-hidpi object-cover">
     </div>
     <div class="col-sm-8">
       <div>
