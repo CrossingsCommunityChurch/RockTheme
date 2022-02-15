@@ -318,9 +318,6 @@ const vueApp = new Vue({
     this.getSermonSeries();
     this.getTeachingSeries();
   }
-  mounted(){
-    cl.responsive();
-  }
 });
 
 </script>
