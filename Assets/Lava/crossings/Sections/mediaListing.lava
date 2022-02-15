@@ -282,6 +282,7 @@ const vueApp = new Vue({
     setFilter(propName, item) {
       this[`${propName}Filter`] = item.Name;
     }
+
   },
   computed: {
     filteredMessages() {
@@ -316,6 +317,9 @@ const vueApp = new Vue({
     this.applySearchTags();
     this.getSermonSeries();
     this.getTeachingSeries();
+  }
+  mounted(){
+    cl.responsive();
   }
 });
 
