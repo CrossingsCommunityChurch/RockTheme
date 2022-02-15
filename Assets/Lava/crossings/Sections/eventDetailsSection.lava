@@ -53,7 +53,7 @@
               {%- endif -%}
               {%- if useContactImage == false -%}
               <div class="pastor-image">
-                <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
+                <img class="cld-responsive" src="" data-src="{{ imageUrl }}">
               </div>
               {%- endif -%}
               <div class="past-details">

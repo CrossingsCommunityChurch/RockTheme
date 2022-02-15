@@ -22,7 +22,7 @@
     <div id="{{ id }}" class="jarallax" data-jarallax-video="{{ videourl }}" data-type="{{ type }}" data-speed="{{ speed }}" data-img-position="{{ position }}" data-object-position="{{ position }}" data-background-position="{{ position }}" data-zindex="{{ bodyZindex }}" data-no-android="{{ noandroid }}" data-no-ios="{{ noios }}">
 {% else -%}
     <div id="{{ id }}" data-jarallax class="jarallax" data-type="{{ type }}" data-speed="{{ speed }}" data-img-position="{{ position }}" data-object-position="{{ position }}" data-background-position="{{ position }}" data-zindex="{{ bodyZindex }}" data-no-android="{{ noandroid }}" data-no-ios="{{ noios }}">
-        <img class="jarallax-img cld-hidpi" src="/images/blank.gif" data-src="{{image}}" alt="">
+        <img class="jarallax-img cld-responsive" src="/images/blank.gif" data-src="{{image}}" alt="">
 {% endif -%}
 
         {% if blockContent != '' -%}

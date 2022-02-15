@@ -43,7 +43,7 @@
       <div class="col-md-10 col-md-offset-1">
         <div class="latest-message">
           <div class="message-image" data-aos="fade-in">
-            <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
+            <img class="cld-responsive" src="" data-src="{{ imageUrl }}">
           </div>
           <div class="latest-message-details" data-aos="fade-up">
             <h4 class="subheading">Latest Message</h4>
