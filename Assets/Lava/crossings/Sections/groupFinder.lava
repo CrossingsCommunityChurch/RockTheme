@@ -241,7 +241,7 @@ let currentscrollHeight = 0;
         storeEventsContainer(ad);
       }
         curIndex = filteredIndex;
-        $.cloudinary.responsive();
+        cl.responsive();
     }
 
     //****************** End Initial Render *******************//
@@ -282,7 +282,7 @@ $(window).on("scroll", function () {
           count++;
         }
         currentscrollHeight = scrollPos;
-      $.cloudinary.responsive();}
+      cl.responsive();}
 
     });
 
@@ -334,7 +334,7 @@ $(window).on("scroll", function () {
         else{ renderFilteredItems(groups, 1, 'all', 'all', 'all');}
       }
     }
-    $.cloudinary.responsive();
+    cl.responsive();
   });
 
 </script>
