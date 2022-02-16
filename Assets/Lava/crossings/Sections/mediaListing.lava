@@ -148,6 +148,7 @@
 <script>
 
 const imageStorageUrl = '{{ imageStorageUrl }}';
+var cl = cloudinary.Cloudinary.new({ cloud_name: 'crossings-community-church'});
 
 Vue.component('vue-autosuggest', VueAutosuggest.VueAutosuggest);
 
@@ -158,6 +159,7 @@ const vueApp = new Vue({
       messages : [''],
       sermonSeries: [''],
       teachingSeries: [''],
+      vueCl: cl,
       topics: [''],
       speakers: [''],
       searchOptions: [''],
@@ -169,8 +171,7 @@ const vueApp = new Vue({
       page: 1,
       showResults: false,
       perPage: {{mediaItemsPerPage}},
-      pages: [],
-      vueCl: cl
+      pages: []
     }
   },
   methods:{
