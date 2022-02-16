@@ -214,13 +214,14 @@ const vueApp = new Vue({
     },
   // TODO: Change this to account for both possible assets. this is also not calling responsive after update.
     mediaImg(item) {
-      if(item.Image != "udefined")
+      if(item.Image != "udefined"){
       let imageStorageUrl = '{{imageStorageUrl}}';
       let imageUrl = `${imageStorageUrl}{{mediaItemImageResize}}${item.Image}`;
       if (item.useVimeoImage) {
         imageUrl = item.Image;
       }
       return imageUrl;
+      }
     },
     getMedia () {
       let data = [];
