@@ -128,7 +128,8 @@
           <div class="row flex-row flex-wrap">
             <div v-for="item in teachingSeries" class="col-sm-6 card-series col-md-4">
               <a :href="seriesMediaUrl(item)" class="card  cardShadow">
-                <div class="thumb" :style="{ backgroundImage: 'url(\'' + mediaImg(item) + '\')' }">
+                <div class="thumb" >
+                   <img src="" class="event-img cld-hidpi" :data-src="mediaImg(item)">
                 </div>
               </a>
             </div>
@@ -325,7 +326,6 @@ const vueApp = new Vue({
   updated(){
     cl.responsive()
 }
-
 });
 
 </script>
