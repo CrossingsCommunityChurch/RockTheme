@@ -318,9 +318,9 @@ const vueApp = new Vue({
     this.getSermonSeries();
     this.getTeachingSeries();
   },
-  onMounted(() => {
+  onMounted() => {
     cl.responsive()
-})
+}
 
 });
 
