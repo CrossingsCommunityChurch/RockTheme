@@ -107,10 +107,10 @@
             </div>
           </div>
           <div class="row flex-row flex-wrap">
-            <div v-for="(item, index) in sermonSeries" class="col-sm-6 card-series col-md-4">
+            <div v-for="item in sermonSeries" class="col-sm-6 card-series col-md-4">
               <a :href="seriesMediaUrl(item)" class="card  cardShadow">
                 <div class="thumb" >
-                   <img src="" class="event-img cld-hidpi" :data-src="mediaImg(item)">
+                   <img src="" class="event-img cld-hidpi" :data-src="item.Image">
                 </div>
               </a>
             </div>
@@ -214,6 +214,7 @@ const vueApp = new Vue({
     },
   // TODO: Change this to account for both possible assets. this is also not calling responsive after update.
     mediaImg(item) {
+      if(item.Image != "udefined")
       let imageStorageUrl = '{{imageStorageUrl}}';
       let imageUrl = `${imageStorageUrl}{{mediaItemImageResize}}${item.Image}`;
       if (item.useVimeoImage) {
