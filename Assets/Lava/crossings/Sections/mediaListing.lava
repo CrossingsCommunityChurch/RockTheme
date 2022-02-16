@@ -169,7 +169,8 @@ const vueApp = new Vue({
       page: 1,
       showResults: false,
       perPage: {{mediaItemsPerPage}},
-      pages: []
+      pages: [],
+      vueCl: cl
     }
   },
   methods:{
