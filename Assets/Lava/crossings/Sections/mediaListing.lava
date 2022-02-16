@@ -107,7 +107,7 @@
             </div>
           </div>
           <div class="row flex-row flex-wrap">
-            <div v-for="item in sermonSeries" class="col-sm-6 card-series col-md-4">
+            <div v-for="(item, index) in sermonSeries" class="col-sm-6 card-series col-md-4">
               <a :href="seriesMediaUrl(item)" class="card  cardShadow">
                 <div class="thumb" >
                    <img src="" class="event-img cld-hidpi" :data-src="mediaImg(item)">
@@ -210,7 +210,7 @@ const vueApp = new Vue({
      seriesMediaUrl(item) {
         return item.Slug;
     },
-  // TODO: Change this to account for both possible assets.
+  // TODO: Change this to account for both possible assets. this is also not calling responsive after update.
     mediaImg(item) {
       let imageStorageUrl = '{{imageStorageUrl}}';
       let imageUrl = `${imageStorageUrl}{{mediaItemImageResize}}${item.Image}`;
@@ -317,7 +317,11 @@ const vueApp = new Vue({
     this.applySearchTags();
     this.getSermonSeries();
     this.getTeachingSeries();
-  }
+  },
+  onMounted(() => {
+    cl.responsive()
+})
+
 });
 
 </script>
