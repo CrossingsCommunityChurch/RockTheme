@@ -322,7 +322,7 @@ const vueApp = new Vue({
     this.getSermonSeries();
     this.getTeachingSeries();
   },
-  mounted(){
+  updated(){
     cl.responsive()
 }
 
