@@ -37,15 +37,20 @@
             {%- assign audiences = eventitem.EventItemAudiences -%}
             {%- assign detailsURL = eventitem.DetailsUrl -%}
             {%- assign occurrenceCount = eventitem.EventItemOccurrences | Size -%}
-            {%- assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-            {%- assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath  -%}
-            {%- assign photoId = eventitem.PhotoId -%}
-            {%- if photoId != null -%}
-              {%- binaryfile id:'{{photoId}}' -%}
-                {%- assign url = binaryfile.Url -%}
-              {%- endbinaryfile -%}
+            {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+            {%- if clPhoto and clPhoto != empty -%}
+                {%- assign url = clPhoto -%}
             {%- else -%}
-              {%- assign url = ""%}
+              {%- assign imageUrlPath = item | Attribute:'Imageasset' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+              {%- assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath  -%}
+              {%- assign photoId = eventitem.PhotoId -%}
+              {%- if photoId != null -%}
+                {%- binaryfile id:'{{photoId}}' -%}
+                  {%- assign url = binaryfile.Url -%}
+                {%- endbinaryfile -%}
+              {%- else -%}
+                {%- assign url = ""%}
+              {%- endif -%}
             {%- endif -%}
             {%- assign date = schedule.NextStartDateTime | Date: 'MMM d, h:mm tt'%}
             {%- assign sortableDate = schedule.NextStartDateTime | Date: 'yyyy-MM-dd HH:mm'%}

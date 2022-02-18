@@ -22,7 +22,7 @@
     ],
     "Groups":[
         {%- group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' -%}
-            {%- for group in groupItems -%}
+            {%- for group in groupgroups -%}
                     {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
                     {%-assign id = group.Id-%}
                     {%-assign name = group.Name-%}
@@ -126,13 +126,30 @@
                     {%-if substring and substring != empty -%}
                         {%-assign childLink = "https://lifecare.crossings.church/support-for-kids"-%}
                     {%-endif-%}
+                    {% assign clPhoto = group | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                        {%- if clPhoto and clPhoto != empty -%}
+                            {%- assign imageAsset = clPhoto -%}
+                        {%- else -%}
+                          	{%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
+                    		{%-assign imageSize = ',c_scale,w_450'-%}
+                    		{%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' -%}
+                    		{%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+                    		{%-if imageUrlPath == ''-%}
+                    		  {%-assign imageAsset = ''-%}
+                    		{%- else -%}
+                    		   {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                    		   {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+                    		{%-endif-%}
+                        {%- endif -%}
                     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
                     {%-assign imageSize = ',c_scale,w_450'-%}
+                    {% comment %} TODO: account for cloudinary {% endcomment %}
                     {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' -%}
                     {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
                     {%-if imageUrlPath == ''-%}
                       {%-assign imageAsset = ''-%}
                     {%- else -%}
+                    {% comment %} TODO: account for cloudinary {% endcomment %}
                        {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
                        {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
                     {%-endif-%}

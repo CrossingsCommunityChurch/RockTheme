@@ -21,14 +21,11 @@
     {%- if item.ContentChannel.Name == 'On Demand Series' -%}
       {%- assign channelPath = '/media/ondemand/' -%}
     {%- endif -%}
-    {%- assign usecl = false -%}
      {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
     {%- if clPhoto and clPhoto != empty -%}
         {%- assign photo = clPhoto -%}
-        {%- assign usecl = true -%}
     {%- else -%}
         {%- assign photo = item | Attribute:'Serieslogo'  | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-        {%- assign usecl = false -%}
     {%- endif -%}
     {
         "Id": {{ item.Id | ToJSON }},
