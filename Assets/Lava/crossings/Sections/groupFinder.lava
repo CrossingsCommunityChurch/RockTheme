@@ -1,7 +1,7 @@
 {%- comment -%}
- This is coppied from webAds.lava
- Modified to be used in the group finder as formatted output.
- These are intended to be used with out images and have a details link and possibly a registration link.
+ This is used in the group finder section.
+ It pulls from the groupFinderGroups dataset.
+ Displays all the groups as cards with details and links.
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
