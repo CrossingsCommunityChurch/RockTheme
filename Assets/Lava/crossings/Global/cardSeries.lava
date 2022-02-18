@@ -10,7 +10,7 @@
 <div class="col-sm-6 col-md-4">
   <a href="{{ link }}" class="card series-card cardShadow">
     <div class="thumb">
-      <img src="{{ img }}" alt="{{ title}}" class="object-fit">
+      <img src="" data-src="{{ img }}" alt="{{ title}}" class="object-fit cld-hidpi">
     </div>
   </a>
 </div>
