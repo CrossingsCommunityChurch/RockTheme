@@ -15,14 +15,18 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != '' -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
-{%- for item in Items -%} {%- comment -%} Do we need to run a loop here? is this always returned as an array? {%- endcomment -%}
-{%- if item | Attribute:'AssetImage' -%}
-    {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-    {%- assign imageSize = ',c_scale,w_auto' -%}
-    {%- assign imageUrlPath =  item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-{%- endif -%}
-
+{%- for item in Items -%}
+{% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {%- if clPhoto and clPhoto != empty -%}
+      {%- assign imageUrl = clPhoto -%}
+    {%- else -%}
+    {%- if item | Attribute:'AssetImage' -%}
+      {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+      {%- assign imageSize = ',c_scale,w_auto' -%}
+      {%- assign imageUrlPath =  item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+      {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+    {%- endif -%}
+  {%- endif -%}
 {%- assign useBackground = item | Attribute:'UseBackgroundImage' -%}
 {%- assign title = item.Title -%}
 {%- assign subheading = item | Attribute: 'subheading' -%}
