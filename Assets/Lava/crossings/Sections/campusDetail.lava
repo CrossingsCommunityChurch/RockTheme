@@ -2,6 +2,7 @@
   Content Component - Campus Detail
 	This runs content specific to a campus and typically used on location pages.
   Accepts a Campus from the Campus selection on the Content Component
+  TODO: set up person images to pull from cloudinary
 {%- endcomment -%}
 
 {%- for item in Items -%}

@@ -1,5 +1,5 @@
 {%- comment -%}
-  Devotional Content Channel Item View Template
+  This is currently used onthe Easter microsite for 40days conetnt Items.
 
   Runs the content for a devotional content channel item
 {%- endcomment -%}
@@ -13,9 +13,14 @@
 {%- assign date = Item.StartDateTime | Date:'MMM d, yyyy' -%}
 {%- assign content = Item.Content -%}
 
-{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-{%- assign imageUrlPath = image -%}
-{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+{% assign clPhoto = Item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+{%- if clPhoto and clPhoto != empty -%}
+  {%- assign imageUrl = clPhoto -%}
+{%- else -%}
+  {%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+  {%- assign imageUrlPath = image -%}
+  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+{%- endif -%}
 
 {%- capture pageTitle -%}Devotions- {{ author }} - {{ title }}{%- endcapture%}
 {{ pageTitle | SetPageTitle }}
@@ -46,8 +51,13 @@
       {%- assign curdate = 'Now' | Date -%}
       {%- for card in cards -%}
       {%- if card.ChildContentChannelItem.StartDateTime <= curdate -%}
-        {%- assign imageUrlPath = card.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+        {% assign clPhoto = card | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+        {%- if clPhoto and clPhoto != empty -%}
+          {%- assign imageUrl = clPhoto -%}
+        {%- else -%}
+          {%- assign imageUrlPath = card.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {%- assign imageUrl = imageStorageUrl | Append: cardImageSize | Append:imageUrlPath -%}
+        {%- endif -%}
         {%- capture itemLink -%}/40days/daily/{{card.ChildContentChannelItem.PrimarySlug}}{%endcapture -%}
         {%- assign title = card.ChildContentChannelItem.Title -%}
         {%- assign author = card.ChildContentChannelItem | Attribute:'Author' -%}
