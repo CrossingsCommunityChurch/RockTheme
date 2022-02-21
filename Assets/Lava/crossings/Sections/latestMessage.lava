@@ -31,7 +31,7 @@
   {%- if isCloudinary -%}
     {%- assign imageUrl = message.image -%}
   {%- else -%}
-    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append:imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: heroUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
     {%- if message.useVimeoImage == True -%}
       {%- assign imageUrl = message.image -%}
     {%- endif -%}

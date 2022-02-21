@@ -213,7 +213,6 @@ const vueApp = new Vue({
      seriesMediaUrl(item) {
         return item.Slug;
     },
-  // TODO: Change this to account for both possible assets. this is also not calling responsive after update.
     mediaImg(item) {
       if(item.Image.startsWith("https://")){
         return item.Image;
