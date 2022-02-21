@@ -38,14 +38,19 @@
         <div class="album-wrapper flex-row flex-wrap">
             {%- for item in Items -%}
                 {%- assign title = item.Title -%}
-                {%- assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' -%}
-                {%- assign image = imageStorageUrl | Append: imageSize | Append:imageAsset -%}
+                {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                {%- if clPhoto and clPhoto != empty -%}
+                  {%- assign image = clPhoto -%}
+                {%- else -%}
+                  {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                  {%- assign image = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                {%- endif -%}
                 {%- assign spotifyURL = item | Attribute: 'SpotifyURL' -%}
                 {%- assign iTunesURL = item | Attribute: 'iTunesURL' -%}
                 {%- assign soundcloudURL = item | Attribute: 'SoundcloudURL' -%}
                 {%- assign primeMusicURL = item | Attribute: 'PrimeMusicURL' -%}
                 <div class="album-item">
-                  <img src="{{ image }}" alt="{{ title }}" />
+                  <img class="cld-hidpi" src="" data-src="{{ image }}" alt="{{ title }}" />
                   <div class="album-cover-details reverse">
                       <div>
                         <h3>{{ title }}</h3>
