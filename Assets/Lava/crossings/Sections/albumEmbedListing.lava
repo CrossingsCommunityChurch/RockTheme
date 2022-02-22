@@ -50,7 +50,7 @@
                 {%- assign soundcloudURL = item | Attribute: 'SoundcloudURL' -%}
                 {%- assign primeMusicURL = item | Attribute: 'PrimeMusicURL' -%}
                 <div class="album-item">
-                  <img class="cld-hidpi" src="" data-src="{{ image }}" alt="{{ title }}" />
+                  <img class=" " src="" data-src="{{ image }}" alt="{{ title }}" />
                   <div class="album-cover-details reverse">
                       <div>
                         <h3>{{ title }}</h3>
