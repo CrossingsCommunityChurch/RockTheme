@@ -6,7 +6,7 @@
     <div class="profile">
         <div class="profile-image">
           {%- if CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-male.svg?' and CurrentPerson.PhotoUrl != '/Assets/Images/person-no-photo-female.svg?'  -%}
-              <img src="{{ CurrentPerson.PhotoUrl }}&height=300&width=300&mode=crop&scale=both">
+              <img src="{{ CurrentPerson.PhotoUrl }}">
             {%- else -%}
               <img src="{{ CurrentPerson.PhotoUrl }}">
             {%- endif -%}
