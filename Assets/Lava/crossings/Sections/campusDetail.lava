@@ -49,7 +49,7 @@
                   </div>
                   <div class="col-md-6"><div class="pastor-item">
                     <div class="pastor-image">
-                      <img src="{{ campusLeader.Photo.Url }}&height=250&width=250&mode=crop&scale=both">
+                      <img src="{{ campusLeader.Photo.Url }}">
                     </div>
                     <div class="past-details">
                       <h2 class="heading">{{ campusLeader.FullName }}</h2>
