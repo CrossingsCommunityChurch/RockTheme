@@ -49,7 +49,7 @@
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
+                          <img src="{{ person.Photo.Url }}">
                         </div>
                         <div class="person-details">
                           <h3 class="heading">{{ person.FullName }}</h3>
@@ -68,7 +68,7 @@
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
+                          <img src="{{ person.Photo.Url }}">
                         </div>
                         <div class="person-details">
                           <h3 class="heading">{{ person.FullName }}</h3>
@@ -87,7 +87,7 @@
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
+                          <img src="{{ person.Photo.Url }}">
                         </div>
                         <div class="person-details">
                           <h3 class="heading">{{ person.FullName }}</h3>
