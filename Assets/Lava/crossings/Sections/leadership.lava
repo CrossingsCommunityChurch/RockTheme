@@ -24,17 +24,17 @@
           </div>
           <!-- Navigation Tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
+            <li class="active Elders-tab">
               <a href="#elders" role="tab" data-toggle="tab">
                 <p>Elders</p>
               </a>
             </li>
-            <li>
+            <li class="Leadership-tab">
               <a href="#leadership" role="tab" data-toggle="tab">
                 <p>Church Leadership</p>
               </a>
             </li>
-            <li>
+            <li class="pastoral-tab">
               <a href="#pastoral" role="tab" data-toggle="tab">
                 <p>Pastoral Staff</p>
               </a>
@@ -82,7 +82,7 @@
             </div>
             <div class="tab-pane fade" id="pastoral">
               <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffRole == "{{pastoralguid}}"' Sort:'Position desc' -%}
+                {%- person dataview:'118' where:'StaffRole == "{{pastoralguid}}" || StaffRole == "{{mltguid}}"' Sort:'LastName asc' -%}
                   {%- for person in personItems -%}
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
