@@ -24,17 +24,17 @@
           </div>
           <!-- Navigation Tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li class="active">
+            <li class="active Elders-tab">
               <a href="#elders" role="tab" data-toggle="tab">
                 <p>Elders</p>
               </a>
             </li>
-            <li>
+            <li class="Leadership-tab">
               <a href="#leadership" role="tab" data-toggle="tab">
                 <p>Church Leadership</p>
               </a>
             </li>
-            <li>
+            <li class="pastoral-tab">
               <a href="#pastoral" role="tab" data-toggle="tab">
                 <p>Pastoral Staff</p>
               </a>
@@ -44,12 +44,12 @@
           <div calss="tab-content">
             <div class="tab-pane fade active in" id="elders">
               <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffRole == "{{elderguid}}"' Sort:'Position desc' -%}
+                {%- person dataview:'118' where:'StaffRole == "{{elderguid}}" || Position == "Senior Pastor"' Sort:'Position desc' -%}
                   {%- for person in personItems -%}
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
+                          <img src="{{ person.Photo.Url }}">
                         </div>
                         <div class="person-details">
                           <h3 class="heading">{{ person.FullName }}</h3>
@@ -68,7 +68,7 @@
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
+                          <img src="{{ person.Photo.Url }}">
                         </div>
                         <div class="person-details">
                           <h3 class="heading">{{ person.FullName }}</h3>
@@ -82,12 +82,12 @@
             </div>
             <div class="tab-pane fade" id="pastoral">
               <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffRole == "{{pastoralguid}}"' Sort:'Position desc' -%}
+                {%- person dataview:'118' where:'StaffRole == "{{pastoralguid}}" || StaffRole == "{{mltguid}}"' Sort:'LastName' -%}
                   {%- for person in personItems -%}
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}&height=300&width=300&mode=crop&scale=both">
+                          <img src="{{ person.Photo.Url }}">
                         </div>
                         <div class="person-details">
                           <h3 class="heading">{{ person.FullName }}</h3>

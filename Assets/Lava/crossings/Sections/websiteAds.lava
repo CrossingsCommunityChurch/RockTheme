@@ -213,13 +213,13 @@
                   <p class="small"></p>
                 </div>
               </div>
-                <a class="details" href="{{ detail | StripHtml }}">
+                <a class="details info-details" href="{{ detail | StripHtml }}">
                   <div class="btn icon-button shadowDepth2">
                     <span>Details</span>
                     <i class="fas fa-angle-right"></i>
                   </div>
                 </a>
-                <a class="reg" href="">
+                <a class="reg info-reg" href="">
                   <div class="btn icon-button shadowDepth2">
                     <span>Register</span>
                     <i class="fas fa-angle-right"></i>
