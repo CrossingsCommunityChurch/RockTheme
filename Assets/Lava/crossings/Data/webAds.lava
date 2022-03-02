@@ -75,7 +75,7 @@
       "Priority": {{ item.Priority | ToJSON }},
       "StartDate": {{ item.StartDateTime | ToJSON }},
       "EndDate": {{ item.ExpireDateTime | ToJSON }},
-      "AssetImage": {{ imageAsset | ToJSON }},
+      "AssetImage": {{ imageAsset | ToJSON }}
     }{%- unless forloop.last -%},{%- endunless -%}
   {%-endfor-%}
 {%-endcontentchannel-%}
