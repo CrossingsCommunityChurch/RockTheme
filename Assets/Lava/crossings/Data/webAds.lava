@@ -28,6 +28,7 @@
     "Friday",
     "Saturday"
   ],
+  {% comment %} TODO: make this pull dynamically on Rock campuses.  {% endcomment %}
   "Campuses": [
     "Crossings OKC",
     "Crossings Edmond",
@@ -63,6 +64,7 @@
       {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
     {%-endif-%}
     {
+      "Id": {{ item.Id | ToJSON }},
       "Title": {{ item.Title | ToJSON }},
       "Summary": {{ summary | StripNewlines | ToJSON}},
       "DayofWeek": {{ dayOfWeek | ToJSON }},
