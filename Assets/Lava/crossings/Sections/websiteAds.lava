@@ -270,10 +270,10 @@
         }
         // TODO: Need to account for the new details link and allow hide show here.
         if(ad.DetailsHTML == ''){
-          div.find('.details').hide();
+          div.find('.content').hide();
         }
         else {
-          div.find('.details').attr('href', "/details/"+ad.Id)
+          div.find('.content').attr('href', "/details/"+ad.Id)
         }
         eventsContainer.append(div);
 
