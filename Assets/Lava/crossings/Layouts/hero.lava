@@ -12,10 +12,17 @@
 {%- assign showButtons = item | Attribute:'UseButtons' -%}
 {%- assign buttons = item | Attribute:'Buttons' -%}
 
-{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = ',c_scale,h_1300' -%}
-{%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+{% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {%- if clPhoto and clPhoto != empty -%}
+    {%- assign imageUrl = clPhoto -%}
+  {%- else -%}
+   {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+    {%- assign imageSize = ',c_scale,h_1300' -%}
+    {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+  {%- endif -%}
+
+
 
 {%- if height != empty -%}
   {%- assign height = item | Attribute:'Height' -%}
@@ -25,7 +32,7 @@
 
 {%- if imageUrlPath != empty -%}
     <div class="container-fluid hero-wrapper page-hero">
-        {[ parallax image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
+        {[ cloudpara image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
             <div class="jumbotron flat transparent reverse" data-aos="fade-in">
                 {%- if layout == 'Homepage' -%}
                     {{ buttons }}

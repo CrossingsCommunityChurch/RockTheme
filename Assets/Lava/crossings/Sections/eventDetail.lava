@@ -1,68 +1,72 @@
 {%- comment -%}
   Runs on the Single Event Pages
   Used as an include on the page and displays the event information
+  Looks at the event occurance photo first then the event item photo.
 {%- endcomment -%}
 
 {%- eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' -%}
-{%- capture pageTitle -%}{{eventitemoccurrence.EventItem.Name}}{%- endcapture%}
-{%- assign org = 'Global' | Attribute:'OrganizationName' -%}
-{%- capture pageTitleBrowser -%}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{%- endcapture%}
-{{ pageTitle | SetPageTitle:'PageTitle' }}
-{{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
-
-{%- endeventitemoccurrence -%}
-
-{%- eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' -%}
-{%- assign eventimageUrl =''%}
-{%- assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' -%}
-
-{%- eventcalendaritem where:'EventItemId == {{eventitemoccurrence.EventItemId}}' -%}
-
-    {%- assign eventassetimage = eventcalendaritem | Attribute:'Imageasset' -%}
-
-{%- endeventcalendaritem -%}
-{%- if eventassetimage and eventassetimage != empty -%}
+  {%- capture pageTitle -%}{{eventitemoccurrence.EventItem.Name}}{%- endcapture%}
+  {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
+  {%- capture pageTitleBrowser -%}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{%- endcapture%}
+  {{ pageTitle | SetPageTitle:'PageTitle' }}
+  {{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
+  {% assign clPhoto = eventitemoccurrence | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {%- if clPhoto and clPhoto != empty -%}
+      {%- assign eventimageUrl = clPhoto -%}
+  {%- else -%}
+    {%- assign eventimageUrl =''%}
+    {%- assign eventassetimage = eventitemoccurrence | Attribute:'Imageasset' -%}
     {%- assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
     {%- assign eventimageSize = ',c_scale,w_600' -%}
     {%- assign eventimageUrlPath = eventassetimage | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
     {%- assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath -%}
-{%- endif -%}
-<div class="event-page">
-    <div class="section page-title reverse">
-      <div class="container">
-        <div class="jumbotron text-center"></div>
+  {%- endif -%}
+  {%- if eventimageUrl and eventimageUrl != empty -%}
+    {%- eventcalendaritem where:'EventItemId == {{eventitemoccurrence.EventItemId}}' -%}
+      {%- assign eventassetimage = eventcalendaritem | Attribute:'Imageasset' -%}
+      {%- assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+      {%- assign eventimageSize = ',c_scale,w_600' -%}
+      {%- assign eventimageUrlPath = eventassetimage | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+      {%- assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath -%}
+    {%- endeventcalendaritem -%}
+  {%- endif -%}
+
+  <div class="event-page">
+      <div class="section page-title reverse">
+        <div class="container">
+          <div class="jumbotron text-center"></div>
+        </div>
       </div>
-    </div>
-    <div class="section video">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <div class="event-image">
-              {%- if eventimageUrl != empty -%}
-                <img src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
-              {%- endif -%}
+      <div class="section video">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <div class="event-image">
+                {%- if eventimageUrl and eventimageUrl != empty -%}
+                  <img class=" cld-hidpi"  src="" data-src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
+                {%- endif -%}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    {[ eventDetails  ]}
-    <div class="container-fluid section event-details">
-          <div class="row">
-              <div class="container content-area" data-aos="fade-up">
-                  <div class="row">
-                      <div class="col-md-12">
-                        <h2 class="heading">{{ eventitemoccurrence.EventItem.Name }}</h2>
-                        <h4 class="subheading">Event Details</h4>
-                        <hr class="sep ml-0">
-                        <div class="event-info">
-                        {{ eventitemoccurrence.EventItem.Description }}
+      {[ eventDetails  ]}
+      <div class="container-fluid section event-details">
+            <div class="row">
+                <div class="container content-area" data-aos="fade-up">
+                    <div class="row">
+                        <div class="col-md-12">
+                          <h2 class="heading">{{ eventitemoccurrence.EventItem.Name }}</h2>
+                          <h4 class="subheading">Event Details</h4>
+                          <hr class="sep ml-0">
+                          <div class="event-info">
+                          {{ eventitemoccurrence.EventItem.Description }}
+                          </div>
                         </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-    </div>
-</div>
+                    </div>
+                </div>
+            </div>
+      </div>
+  </div>
 {%- endeventitemoccurrence -%}
 

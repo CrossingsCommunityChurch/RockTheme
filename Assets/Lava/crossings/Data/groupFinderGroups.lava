@@ -22,7 +22,7 @@
     ],
     "Groups":[
         {%- group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' -%}
-            {%- for group in groupItems -%}
+            {%- for group in groupgroups -%}
                     {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
                     {%-assign id = group.Id-%}
                     {%-assign name = group.Name-%}
@@ -47,14 +47,15 @@
                     {%-assign childCare = ""-%}
                     {%-assign registrationLink = ""-%}
                      {%-assign imageUrlPath = ""-%}
-                    {%- if group.Schedule and group.Schedule != empty -%}
+                    {%- if group.ScheduleId and group.ScheduleId != empty -%}
                         {%-assign scheduleId = group.ScheduleId-%}
-                        {%- assign dayofweek = group.Schedule.EffectiveStartDate | Date:'dddd' -%}
-                        {%-assign sched = group.Schedule -%}
-                        {%-assign nextOc = sched.NextStartDateTime -%}
-                        {%-assign start = sched.EffectiveStartDate | Date: 'MMM dd'-%}
-                        {%-assign endDate = sched.EffectiveEndDate | Date: 'MMM dd' -%}
-                        {%-assign friendlyName = sched.FriendlyScheduleText -%}
+                        {%- schedule id:'{{scheduleId}}' -%}
+                           {%- assign dayofweek = schedule.NextStartDateTime | Date:'dddd' -%}
+                           {%-assign nextOc = schedule.NextStartDateTime -%}
+                           {%-assign start = schedule.EffectiveStartDate | Date: 'MMM dd'-%}
+                           {%-assign endDate = schedule.EffectiveEndDate | Date: 'MMM dd' -%}
+                           {%-assign friendlyName = schedule.FriendlyScheduleText -%}
+                        {%- endschedule -%}
                         {%-if campusShortcode == "OKC"-%}
                             {%-assign childLink = "https://crossings.church/okckands"-%}
                             {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:',campusShortcode -%}
@@ -125,16 +126,21 @@
                     {%-if substring and substring != empty -%}
                         {%-assign childLink = "https://lifecare.crossings.church/support-for-kids"-%}
                     {%-endif-%}
-                    {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
-                    {%-assign imageSize = ',c_scale,w_450'-%}
-                    {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' -%}
-                    {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
-                    {%-if imageUrlPath == ''-%}
-                      {%-assign imageAsset = ''-%}
-                    {%- else -%}
-                       {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-                       {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
-                    {%-endif-%}
+                    {% assign clPhoto = group | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                        {%- if clPhoto and clPhoto != empty -%}
+                            {%- assign imageAsset = clPhoto -%}
+                        {%- else -%}
+                          	{%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
+                    		{%-assign imageSize = ',c_scale,w_450'-%}
+                    		{%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' -%}
+                    		{%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+                    		{%-if imageUrlPath == ''-%}
+                    		  {%-assign imageAsset = ''-%}
+                    		{%- else -%}
+                    		   {%-assign imageUrlPath = group | Attribute:'Assetimage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                    		   {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+                    		{%-endif-%}
+                        {%- endif -%}
                     {%-if location.Location.Name and location.Location.Name != empty-%}
                         {%-assign locaddress = location.Location.FormattedAddress %}
                     {%-else-%}

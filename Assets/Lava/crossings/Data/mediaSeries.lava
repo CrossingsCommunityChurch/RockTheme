@@ -15,7 +15,12 @@
     {%- if item.ContentChannel.Name == 'Teaching Message' -%}
         {%assign channelPath = '/media/teachings/' -%}
     {%- endif -%}
-
+    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+        {%- if clPhoto and clPhoto != empty -%}
+            {%- assign photo = clPhoto -%}
+        {%- else -%}
+            {%- assign photo = item | Attribute:'Serieslogo'  | Url:'localpath' -%}
+        {%- endif -%}
 
     {
         "Id": {{ item.Id | ToJSON }},
@@ -25,7 +30,7 @@
         "Guid": {{ item.Guid | ToJSON }},
         "Status": {{ item.Status | ToJSON }},
         "PublishDateTime": {{ item.StartDateTime | Date:'MMM d, yyyy' | ToJSON }},
-        "Image": {{item | Attribute:'Serieslogo'  | Url:'localpath' | ToJSON}},
+        "Image": {{ photo | ToJSON}},
         "ExpireDateTime": {{ item.ExpireDateTime | ToJSON }},
         "ModifiedDateTime": {{ item.ModifiedDateTime | ToJSON }},
         "ChannelId": {{ item.ContentChannel.Id | ToJSON }},

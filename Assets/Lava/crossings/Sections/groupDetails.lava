@@ -31,7 +31,7 @@
           <div class="col-md-12 text-center">
             <div class="event-image">
               {%- if imageAsset != empty -%}
-                <img src="{{ imageAsset }}" alt="{{ group.Name }}" />
+                <img class="cld-hidpi"  src="" data-src="{{ imageAsset }}" alt="{{ group.Name }}" />
               {%- endif -%}
             </div>
           </div>

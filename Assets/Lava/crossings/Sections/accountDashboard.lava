@@ -1,5 +1,6 @@
 {%- comment -%}
   Runs the account dashboar and is used as an include in the account dashboard zone. Checks to see if someone is logged in and if so, runs their profile info and links
+  TODO: make person image pull from cloudinary
 {%- endcomment -%}
 
 {%- if CurrentPerson -%}

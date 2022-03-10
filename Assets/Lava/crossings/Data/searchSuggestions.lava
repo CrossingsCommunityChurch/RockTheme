@@ -3,6 +3,7 @@
     {%- assign now = 'Now' | Date -%}
     {%- contentchannelitem where:'ContentChannelId == 1 && StartDateTime <= "{{now}}"' Sort:'Priority Desc ' Limit:'3' -%}
       {%- for item in contentchannelitemItems -%}
+      {% comment %} TODO:account for cloudinary  {% endcomment %}
         {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {%- assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
         {%- assign itemContent = item | Attribute: 'SummaryText' | StripHtml | Trim -%}
@@ -39,6 +40,26 @@
         {%- if item.ContentChannel.Name == 'Teaching Message' -%}
             {%assign channelPath = 'teachings/' -%}
         {%- endif -%}
+        {% comment %} TODO:account for cloudinary {% endcomment %}
+
+        {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+        {%- if clPhoto and clPhoto != empty -%}
+          {%- assign photo = clPhoto -%}
+        {%- else -%}
+          {%- assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+          {%- assign imageUrl = AssetImage -%}
+          {%- assign useVimeoImage = False -%}
+          {%- assign vimeoImageUrl = item | Attribute:'Image', 'RawValue' -%}
+          {%- if vimeoImageUrl != empty -%}
+            {%- assign imageUrl = vimeoImageUrl -%}
+            {%- assign useVimeoImage = True -%}
+          {%- endif -%}
+          {%if vimeoImageUrl == empty and AssetImage == empty -%}
+            {%- assign parentSeries = item.ParentItems | First -%}
+            {%- assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' -%}
+          {%- endif -%}
+        {%- endif -%}
+
         {%- assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
         {%- assign imageUrl = AssetImage -%}
         {%- assign useVimeoImage = False -%}

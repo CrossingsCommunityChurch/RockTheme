@@ -1,7 +1,7 @@
 {%- comment -%}
- This is coppied from webAds.lava
- Modified to be used in the group finder as formatted output.
- These are intended to be used with out images and have a details link and possibly a registration link.
+ This is used in the group finder section.
+ It pulls from the groupFinderGroups dataset.
+ Displays all the groups as cards with details and links.
 {%- endcomment -%}
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
@@ -141,7 +141,7 @@ let currentscrollHeight = 0;
         `<div class="col-sm-6 col-md-4">
           <div class="card cardShadow">
             <div class="thumb">
-              <img src="" class="event-img cld-hipdi" data-src="">
+              <img src="" class="event-img cld-hidpi" data-src="">
             </div>
             <div class="row card-content-row">
               <div class="card-content">
@@ -241,6 +241,7 @@ let currentscrollHeight = 0;
         storeEventsContainer(ad);
       }
         curIndex = filteredIndex;
+        cl.responsive();
     }
 
     //****************** End Initial Render *******************//
@@ -281,7 +282,8 @@ $(window).on("scroll", function () {
           count++;
         }
         currentscrollHeight = scrollPos;
-      }
+      cl.responsive();}
+
     });
 
 //****************** End Scroll to Render *******************//
@@ -332,7 +334,7 @@ $(window).on("scroll", function () {
         else{ renderFilteredItems(groups, 1, 'all', 'all', 'all');}
       }
     }
-    $.cloudinary.responsive();
+    cl.responsive();
   });
 
 </script>
