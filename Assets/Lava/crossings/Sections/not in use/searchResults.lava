@@ -1,7 +1,7 @@
 {% comment %}
   Universal Search Template
-  Loops over the search results
-{% endcomment %}
+  This is no longer used.
+
 
 {% assign isAdministrator = 'Global' | Page:'Id' | HasRightsTo:'Administrate','Rock.Model.Page' %}
 <section class="search-results-wrapper bg-gray section">
@@ -23,7 +23,7 @@
                 <!--<div class="search-url"><a href="{{ result.Url }}">{{ result.Url }}</a></div>-->
                 <div class="search-exerpt"><p>
 
-        {% comment %}Number of words before and after matched word to include{% endcomment %}
+        {% comment %}Number of words before and after matched word to include
         {% assign extraWordCount = 25 %}
         {% assign upcaseSearch = PageParameter.Q | Upcase %}
         {% assign upcasePhrase = result.Content | Upcase %}
@@ -72,3 +72,4 @@
         </div>
     </div>
 </section>
+{% endcomment %}

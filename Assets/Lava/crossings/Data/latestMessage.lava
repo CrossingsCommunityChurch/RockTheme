@@ -11,17 +11,22 @@
     {%- assign latestMessage = contentChannelItems | First -%}
     {%- assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' -%}
     {%- assign parentSlug = parentSeries.PrimarySlug -%}
-    {%- assign AssetImage = latestMessage | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-    {%- assign imageUrl = AssetImage -%}
-    {%- assign useVimeoImage = False -%}
-    {%- assign vimeoImageUrl = latestMessage | Attribute:'Image', 'RawValue' -%}
-    {%- if vimeoImageUrl != empty -%}
+    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+    {%- if clPhoto and clPhoto != empty -%}
+        {%- assign imageUrl = clPhoto -%}
+    {%- else -%}
+      {%- assign AssetImage = latestMessage | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+      {%- assign imageUrl = AssetImage -%}
+      {%- assign useVimeoImage = False -%}
+      {%- assign vimeoImageUrl = latestMessage | Attribute:'Image', 'RawValue' -%}
+      {%- if vimeoImageUrl != empty -%}
         {%- assign imageUrl = vimeoImageUrl -%}
         {%- assign useVimeoImage = True -%}
-    {%- endif -%}
-    {%if vimeoImageUrl == empty and AssetImage == empty -%}
+      {%- endif -%}
+    {%- if vimeoImageUrl == empty and AssetImage == empty -%}
         {%- assign parentSeries = latestMessage.ParentItems | First -%}
         {%- assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' -%}
+    {%- endif -%}
     {%- endif -%}
     {%- if parentSlug == null -%}
       {%- assign parentSlug = 'no-series' -%}

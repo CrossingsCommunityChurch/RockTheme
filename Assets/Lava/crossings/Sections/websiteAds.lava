@@ -290,7 +290,7 @@
         }
 
       }
-      $.cloudinary.responsive();
+      cl.responsive();
     }
 
     var defaultAudience = getParameterByName('category');
@@ -339,7 +339,7 @@
         else{ renderFilteredItems(events, 1, 'all', 'all', 'all');}
       }
     }
-    $.cloudinary.responsive();
+    cl.responsive();
   });
 
 </script>

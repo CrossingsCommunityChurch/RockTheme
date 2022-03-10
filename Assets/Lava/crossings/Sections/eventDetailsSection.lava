@@ -1,6 +1,7 @@
 
 {%- comment -%}
   This is a section for the events page based on the campus detail section.
+  TODO: may need to update to pull from cloudinary
 {%- endcomment -%}
 
 {%- eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' -%}
