@@ -1,0 +1,29 @@
+{%- comment -%}
+  Runs on the Dynamic Info Card Detail page.
+  Used as an include on the page and displays the card Content
+{%- endcomment -%}
+
+{%- assign adsData = 'ads' | PersistedDataset -%}
+{%-assign ads = adsData.Ads -%}
+{%-assign adId =  PageParameter.infoId | AsDecimal -%}
+{%-assign ad = ads | Where:'Id', adId -%}
+{%- for ad in ad -%}
+<div class="event-page">
+    <div class="container-fluid section event-details">
+          <div class="row">
+              <div class="container content-area" data-aos="fade-up">
+                  <div class="row">
+                      <div class="col-md-12">
+                        <h2 class="heading">{{ad.Title }}</h2>
+                        <h4 class="subheading">Details</h4>
+                        <hr class="sep ml-0">
+                        <div class="event-info">
+                        {{ ad.DetailsHTML | HtmlDecode }}
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+</div>
+{%- endfor -%}

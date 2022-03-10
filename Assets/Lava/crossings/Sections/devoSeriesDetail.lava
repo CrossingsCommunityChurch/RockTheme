@@ -26,7 +26,7 @@
 {{ pageTitle | SetPageTitle }}
 
 
-<div class="section page-title reverse devo-title">
+<div class="section page-title reverse devo-title" style="padding-top:0px">
     <div class="container">
         <div class="jumbotron text-center" data-aos="fade-in">
             <h3 class="subheading reverse">{{ channel }}</h3>
@@ -45,7 +45,7 @@
 
 <div id="announcementList" class="announcement-list">
   <div class="container announcement-list-items" data-aos="fade-up">
-    <h4>Daily Prayers</h4>
+    <h4>Prayers and Devotions</h4>
     <div class="row flex-row flex-wrap">
       {%- assign cards = Item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc' -%}
       {%- assign curdate = 'Now' | Date -%}

@@ -24,7 +24,19 @@
             <div class="col-md-12">
               <h1 class="heading text-center">{{ pageTitle }}</h1>
             </div>
-            <div class="col-md-6">
+            {%- assign event = eventitemoccurrence.EventItem -%}
+            {%- assign allOccurances = event.EventItemOccurrences -%}
+            {%- assign occurances = allOccurances | OrderBy:'Schedule.NextStartDateTime asc' -%}
+            {%- assign size = allOccurances | Size -%}
+            {%- if size > 1 -%}
+                <div class="col-md-6">
+                <h4 class="subheading">Dates</h4>
+            {%- for occ in occurances -%}
+                <h4 class="heading"> {{occ.Schedule.NextStartDateTime | Date: 'MMM d h:mm tt'}}
+            {%- endfor -%}
+            </div>
+            {% else %}
+              <div class="col-md-6">
               {%- comment -%}
                 This shows schedule friendly name only if it exists.
                 Need to not display if event is only happening once.
@@ -45,7 +57,8 @@
                   </a>
                 </p>
               {%- endif -%}
-            </div>
+              </div>
+            {%endif%}
             <div class="col-md-6"><div class="pastor-item">
               {%- if contact.Photo.Url and contact.Photo.Url != empty and useContactImage == true -%}
               <div class="pastor-image">

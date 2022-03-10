@@ -53,21 +53,18 @@
     {%-assign campus = item | Attribute:'Campuses'-%}
     {%-assign primaryAudiance = item | Attribute:'PrimaryAudience'-%}
     {%-assign secondaryAudiance =  item | Attribute:'SecondaryAudiences'-%}
-    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-    {%- if clPhoto and clPhoto != empty -%}
-        {%- assign imageAsset = clPhoto -%}
+    {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
+    {%-assign imageSize = ',c_scale,w_400'-%}
+    {%-assign detailsHTML = item.Content | Escape -%}
+    {%-assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+    {%-if imageUrlPath == ''-%}
+      {%-assign imageAsset = ''-%}
     {%- else -%}
-      {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
-      {%-assign imageSize = ',c_scale,w_400'-%}
-      {%-assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
-      {%-if imageUrlPath == ''-%}
-        {%-assign imageAsset = ''-%}
-      {%- else -%}
-        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
-        {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
-      {%-endif-%}
-    {%- endif -%}
+      {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+      {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+    {%-endif-%}
     {
+      "Id": {{ item.Id | ToJSON }},
       "Title": {{ item.Title | ToJSON }},
       "Summary": {{ summary | StripNewlines | ToJSON}},
       "DayofWeek": {{ dayOfWeek | ToJSON }},
@@ -80,7 +77,8 @@
       "Priority": {{ item.Priority | ToJSON }},
       "StartDate": {{ item.StartDateTime | ToJSON }},
       "EndDate": {{ item.ExpireDateTime | ToJSON }},
-      "AssetImage": {{ imageAsset | ToJSON }}
+      "AssetImage": {{ imageAsset | ToJSON }},
+      "DetailsHTML": {{ detailsHTML | ToJSON }}
     }{%- unless forloop.last -%},{%- endunless -%}
   {%-endfor-%}
 {%-endcontentchannel-%}

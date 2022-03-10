@@ -94,6 +94,7 @@
             {%- capture eventsJson -%}{{eventsJson}}"sortableDate": {{sortableDate | ToJSON}} , {%endcapture%}
             {%- capture eventsJson -%}{{eventsJson}}"link": {{link | ToJSON}}{%endcapture%}
             {%- capture eventsJson -%}{{eventsJson}} } {%endcapture%}
+            {%- unless forloop.last -%}{%- capture eventsJson -%}{{eventsJson}}, {%endcapture%}{%- endunless -%}
         {%-endfor-%}
         {%- if toSkip == false-%}
             {%- unless forloop.last -%}{%- capture eventsJson -%}{{eventsJson}}, {%endcapture%}{%- endunless -%}
