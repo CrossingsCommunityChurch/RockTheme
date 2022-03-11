@@ -6,8 +6,14 @@
   <div class="container announcement-list-items" data-aos="fade-up">
     <div class="row flex-row flex-wrap">
       {%- for item in Items -%}
-        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+        {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+        {%- if clPhoto and clPhoto != empty -%}
+          {%- assign imageUrl = clPhoto -%}
+        {%- else -%}
+          {%- assign image = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+          {%- assign imageUrlPath = image -%}
+          {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+        {%- endif -%}
         {%- capture itemLink -%}/40days/weekly/{{item.PrimarySlug}}{%endcapture -%}
         {%- assign title = item.Title -%}
         {%- assign author = item | Attribute:'Author' -%}

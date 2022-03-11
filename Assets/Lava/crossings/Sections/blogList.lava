@@ -9,8 +9,13 @@
 <div class="section devo-list bg-gray">
   <div class="container content-area">
       {%- for item in Items -%}
-        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+        {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+        {%- if clPhoto and clPhoto != empty -%}
+          {%- assign imageUrl = clPhoto -%}
+        {%- else -%}
+          {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+          {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+        {%- endif -%}
         {%- capture itemLink -%}/blogs/{{item.PrimarySlug}}{%endcapture -%}
         {%- assign title = item.Title -%}
         {%- assign author = item | Attribute:'Author' -%}

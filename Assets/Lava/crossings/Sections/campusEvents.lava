@@ -1,7 +1,7 @@
 {%- comment -%}
   Shortcode campusEvents
   Displays a list of events by calendar ID
-
+  TODO: need to verify if this is used any whwere. Build it into the /info page?
   Params
     @calendarId
     @allchurchid

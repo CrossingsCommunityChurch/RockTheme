@@ -80,8 +80,13 @@
 {%- endif -%}
 <section class="contentComponent contentComponent-split section split-section side-by-side">
 {%- for item in Items -%}
-    {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+    {%- if clPhoto and clPhoto != empty -%}
+        {%- assign imageUrl = clPhoto -%}
+    {%- else -%}
+      {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+    {%- endif -%}
     {%- assign title = item.Title -%}
     {%- assign subheading = item | Attribute: 'subheading' -%}
     {%- assign content = item.Content | HtmlDecode -%}

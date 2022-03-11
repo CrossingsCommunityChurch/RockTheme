@@ -128,20 +128,23 @@
         {%-if item.ContentChannel.Name == 'Teaching Message' or item.ContentChannel.Name == 'The Gathering' or item.ContentChannel.Name == 'On Demand Message'-%}
             {%assign channelPath = 'teachings/'-%}
         {%-endif-%}
-        {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
-        {%-assign imageUrl = AssetImage-%}
-        {%-assign useVimeoImage = False-%}
-        {%-assign vimeoImageUrl = item | Attribute:'Image', 'RawValue'-%}
-        {%-if vimeoImageUrl != empty-%}
-            {%-assign imageUrl = vimeoImageUrl-%}
-            {%-assign useVimeoImage = True-%}
-        {%-endif-%}
-
-        {%if vimeoImageUrl == empty and AssetImage == empty-%}
-            {%-assign parentSeries = item.ParentItems | First-%}
-            {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
-        {%-endif-%}
-
+        {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+        {%- if clPhoto and clPhoto != empty -%}
+            {%- assign imageAsset = clPhoto -%}
+        {%- else -%}
+            {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+            {%-assign imageUrl = AssetImage-%}
+            {%-assign useVimeoImage = False-%}
+            {%-assign vimeoImageUrl = item | Attribute:'Image', 'RawValue'-%}
+            {%-if vimeoImageUrl != empty-%}
+                {%-assign imageUrl = vimeoImageUrl-%}
+                {%-assign useVimeoImage = True-%}
+            {%-endif-%}
+            {%if vimeoImageUrl == empty and AssetImage == empty-%}
+                {%-assign parentSeries = item.ParentItems | First-%}
+                {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+            {%-endif-%}
+        {%- endif -%}
         {
             "Id": {{ item.Id }},
             "Title": {{ item.Title | Replace:"'","’" | ToJSON }},

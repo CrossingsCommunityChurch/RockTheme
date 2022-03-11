@@ -9,16 +9,18 @@
 <div class="section devo-list bg-gray">
   <div class="container content-area">
       {%- for item in Items -%}
-        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+        {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+        {%- if clPhoto and clPhoto != empty -%}
+          {%- assign imageUrl = clPhoto -%}
+        {%- else -%}
+          {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+          {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+        {%- endif -%}
         {%- capture itemLink -%}/devotions/{{item.PrimarySlug}}{%endcapture -%}
         {%- assign title = item.Title -%}
         {%- assign author = item | Attribute:'Author' -%}
         {%- assign content = item.Content | StripHtml | Slice: 0, 225 -%}
         {%- assign date = item.StartDateTime | Date:'MMM d, yyyy' -%}
-
-
-
         <div class="card listing shadow-bg mb-3 shadowDepth1" data-aos="fade-up">
           <div class="row flex-row">
             <div class="col-sm-4">

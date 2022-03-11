@@ -56,13 +56,20 @@
     {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
     {%-assign imageSize = ',c_scale,w_400'-%}
     {%-assign detailsHTML = item.Content | Escape -%}
-    {%-assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
-    {%-if imageUrlPath == ''-%}
-      {%-assign imageAsset = ''-%}
+    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+    {%- if clPhoto and clPhoto != empty -%}
+        {%- assign imageAsset = clPhoto -%}
     {%- else -%}
-      {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
-      {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
-    {%-endif-%}
+      {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
+      {%-assign imageSize = ',c_scale,w_400'-%}
+      {%-assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+      {%-if imageUrlPath == ''-%}
+        {%-assign imageAsset = ''-%}
+      {%- else -%}
+        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+        {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+      {%-endif-%}
+    {%- endif -%}
     {
       "Id": {{ item.Id | ToJSON }},
       "Title": {{ item.Title | ToJSON }},

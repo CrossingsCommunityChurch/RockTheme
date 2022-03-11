@@ -12,11 +12,13 @@
 {%- assign channel = Item.ContentChannel.Name -%}
 {%- assign date = Item.StartDateTime | Date:'MMM d, yyyy' -%}
 {%- assign content = Item.Content -%}
-
-{%- assign image = Item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-{%- assign imageUrlPath = image -%}
-{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-
+{% assign clPhoto = Item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {%- if clPhoto and clPhoto != empty -%}
+    {%- assign imageUrl = clPhoto -%}
+  {%- else -%}
+    {%- assign imageUrlPath = Item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+  {%- endif -%}
 {%- capture pageTitle -%}Blogs- {{ author }} - {{ title }}{%- endcapture%}
 {{ pageTitle | SetPageTitle }}
 
