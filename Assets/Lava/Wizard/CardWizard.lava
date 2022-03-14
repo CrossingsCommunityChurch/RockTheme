@@ -1,7 +1,6 @@
 <div id="signup-parent" style="height: 1362px;">
     <div id="signup-container" style="display: none;">
-	<h3>Hello</h3>
-		{% comment %} {% include './CardWizard/Partition.lava' %} {% endcomment %}
+		{% include '~~/Assets/Lava/Wizard/CardWizard/Partition.lava' %}
     </div>
 </div>
 <script type="text/javascript">
