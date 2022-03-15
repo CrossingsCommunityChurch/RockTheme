@@ -7,17 +7,6 @@
   @data - accepts the name of a persisted dataset to use
 {%- endcomment -%}
 {%- if data -%}
-  {%- assign dataset = data -%}
-
-  {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-    {%- if clPhoto and clPhoto != empty -%}
-        {%- assign imageUrl = clPhoto -%}
-    {%- else -%}
-      {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-      {%- assign imageSize = ',c_scale,h_450' -%}
-      {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:series.Image -%}
-    {%- endif -%}
-
   {%- assign now = 'Now' | Date -%}
 
   {%- assign seriesData = data | PersistedDataset -%}
@@ -26,6 +15,14 @@
         <div class="media-list-items">
           <div class="row flex-row flex-wrap">
               {%- for series in seriesData -%}
+                {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                {%- if clPhoto and clPhoto != empty -%}
+                  {%- assign imageUrl = clPhoto -%}
+                {%- else -%}
+                  {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+                  {%- assign imageSize = ',c_scale,h_450' -%}
+                  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:series.Image -%}
+                {%- endif -%}
                   {%- assign seriesDate = series.PublishDateTime | AsDateTime -%}
                   {%- if series.Title != "Stand Alone Messages" and seriesDate <= now -%}
                   {[ cardSeries link:'{{series.Slug}}' title:'{{ series.Title }}' img:'{{ imageUrl }}' ]}
