@@ -45,7 +45,7 @@
 							{% include '~/Plugins/org_secc/Connection/CardWizard/CardCampus.lava' %}
 						{% elseif partition.PartitionType == 'Role' %}
 							{% if forloop.first %}<h3 class="section-header">@Please select your serving role:</h3>{% endif %}
-							{% include '~/Plugins/org_secc/Connection/CardWizard/CardRole.lava' %}
+							{% include '~~/Assets/Lava/Wizard/CardWizard/CardRole.lava' %}
 						{% endif %}
 					{% else %}
 						{% assign parameterName = partition.ParameterName %}
