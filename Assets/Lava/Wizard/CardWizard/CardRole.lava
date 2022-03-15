@@ -17,8 +17,6 @@
 							{% if icon != '' and icon != empty %}
 								<i class="{{icon}} fa-5x"></i>
 							{% endif %}
-							{% comment %} TODO: remove this debug {% endcomment %}
-							{{ role | Debug }}
                             <h3>{{ role.Entity.Name }}</h3>
 							<p>{{ role.Entity.Description }}</p>
                         </div>
