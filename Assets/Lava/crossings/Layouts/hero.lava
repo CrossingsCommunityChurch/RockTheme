@@ -48,7 +48,7 @@
                     {%- endif -%}
                 {%- endif -%}
             </div>
-        {[ endparallax ]}
+        {[ cloudpara ]}
     </div>
 {%- else -%}
     <div class="section page-title reverse">
