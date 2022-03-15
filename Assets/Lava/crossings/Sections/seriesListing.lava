@@ -18,6 +18,8 @@
                 {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
                 {%- if clPhoto and clPhoto != empty -%}
                   {%- assign imageUrl = clPhoto -%}
+                  {{ imageUrl }}
+
                 {%- else -%}
                   {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
                   {%- assign imageSize = ',c_scale,h_450' -%}
