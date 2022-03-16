@@ -21,7 +21,6 @@
 {%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
 {%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
 
-
 {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
 {%- for message in latestMessageDataset -%}
@@ -31,7 +30,7 @@
   {%- if isCloudinary -%}
     {%- assign imageUrl = message.image -%}
   {%- else -%}
-    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: heroUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
     {%- if message.useVimeoImage == True -%}
       {%- assign imageUrl = message.image -%}
     {%- endif -%}
@@ -49,6 +48,8 @@
     <div class="container-fluid section latest-message-wrapper">
       <div class="col-md-10 col-md-offset-1">
         <div class="latest-message">
+        {% comment %} <h1>HERO:{{heroUrl}}</h1> {% endcomment %}
+
           <div class="message-image" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
           </div>
