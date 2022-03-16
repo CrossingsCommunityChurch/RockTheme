@@ -22,7 +22,7 @@
     ],
     "Groups":[
         {%- group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' -%}
-            {%- for group in groupgroups -%}
+            {%- for group in groupItems -%}
                     {%-assign detailURL = "/groups?groupId=" | Append:group.Id-%}
                     {%-assign id = group.Id-%}
                     {%-assign name = group.Name-%}
