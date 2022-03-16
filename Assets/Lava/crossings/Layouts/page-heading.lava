@@ -14,6 +14,7 @@
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
 {%- assign imageSize = ',c_scale,h_1300' -%}
+{%- assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' -%}
 {% assign clPhoto = CurrentPage | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
   {%- if clPhoto and clPhoto != empty -%}
     {%- assign imageUrl = clPhoto -%}
@@ -42,7 +43,7 @@
     {%- endif -%}
 {%- endif -%}
 
-{%- if imageUrlPath != empty -%}
+{%- if imageUrlPath != empty or clPhoto != empty -%}
     <div class="container-fluid hero-wrapper {{ wrapperClass }}">
         {[ cloudpara image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
             <div class="jumbotron flat transparent reverse" data-aos="fade-in">
