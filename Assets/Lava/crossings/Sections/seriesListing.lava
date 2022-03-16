@@ -15,11 +15,11 @@
         <div class="media-list-items">
           <div class="row flex-row flex-wrap">
               {%- for series in seriesData -%}
-                {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-                {%- if clPhoto and clPhoto != empty -%}
+                {% assign clPhoto = series.Image %}
+                {% capture expression %}^https://{% endcapture %}
+                {% assign isCloudinary = clPhoto | RegExMatch: expression %}
+                {%- if isCloudinary and clPhoto != empty -%}
                   {%- assign imageUrl = clPhoto -%}
-                  {{ imageUrl }}
-
                 {%- else -%}
                   {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
                   {%- assign imageSize = ',c_scale,h_450' -%}
