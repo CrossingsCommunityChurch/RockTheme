@@ -48,8 +48,6 @@
     <div class="container-fluid section latest-message-wrapper">
       <div class="col-md-10 col-md-offset-1">
         <div class="latest-message">
-        {% comment %} <h1>HERO:{{heroUrl}}</h1> {% endcomment %}
-
           <div class="message-image" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
           </div>
