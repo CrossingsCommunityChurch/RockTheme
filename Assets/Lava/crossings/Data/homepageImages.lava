@@ -3,7 +3,7 @@
    - channelid
 {%- endcomment -%}
 [
-    {%- assign contentChannelId = '67' -%}
+    {%- assign contentChannelId = '214' -%}
     {%- contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}}' iterator:'homeImages' securityenabled:'false' -%}
       {%- for image in homeImages -%}
       {% comment %} TODO: account for cloudinary images {% endcomment %}
