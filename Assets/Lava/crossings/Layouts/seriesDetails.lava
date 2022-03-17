@@ -134,7 +134,7 @@
                             {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
                           {%- endif -%}
                       {%- endif -%}
-                      {%if !imageUrl or imageUrl == empty -%}
+                      {%if imageUrl == empty -%}
                           {%- assign imageUrl = seriesLogoUrl -%}
                       {%- endif -%}
                       {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
