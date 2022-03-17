@@ -14,11 +14,12 @@
                             M23.3,14.6c-0.4,4.3-3.2,7.9-7.1,9.3v-9.5L23.3,14.6z" class="st0"></path></g></g>
             </svg>
           </div>
-          <h2 class="text-center mt-0">Our Leadership</h2>
+          <h2 class="text-center mt-0">Pastoral Staff</h2>
           <div class="row">
-            <p>Crossings is elder-governed and staff-led. Explore our staff directory which includes our elders, church leadership, and pastoral staff.</p>
+            {% comment %} buttons here to go to other locatins and leadership.  {% endcomment %}
           </div>
           <!-- Navigation Tabs -->
+          {% comment %} TODO: maybe clean this up does not look too good with just one tab.  {% endcomment %}
           <ul class="nav nav-tabs" role="tablist">
             <li class="active Pastors-tab">
               <a href="#pastors" role="tab" data-toggle="tab">
@@ -30,9 +31,8 @@
           <div calss="tab-content">
             <div class="tab-pane fade active in" id="pastors">
               <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffLocation *= "EDM"' Sort:'LastName' -%}
+                {%- person dataview:'118' where:'StaffLocation *= {{location}}' Sort:'LastName' -%}
                   {%- for person in personItems -%}
-                  {{person | Debug}}
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
@@ -44,25 +44,6 @@
                         </div>
                       </div>
                  </div>
-                  {%- endfor -%}
-                {%- endperson -%}
-              </div>
-            </div>
-             <div class="tab-pane fade" id="leadership">
-              <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffRole *= "ELT"' Sort:'LastName' -%}
-                  {%- for person in personItems -%}
-                    <div class="col-md-6 mb-2">
-                      <div class="person-item">
-                        <div class="person-image">
-                          <img src="{{ person.Photo.Url }}">
-                        </div>
-                        <div class="person-details">
-                          <h3 class="heading">{{ person.FullName }}</h3>
-                          <p class="lead mb-0">{{ person | Attribute: 'Position'}}</p>
-                        </div>
-                      </div>
-                    </div>
                   {%- endfor -%}
                 {%- endperson -%}
               </div>
