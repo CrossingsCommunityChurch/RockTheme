@@ -11,7 +11,7 @@
       {%- if clPhoto and clPhoto != empty -%}
         {%- assign AssetImage = clPhoto -%}
       {%- else -%}
-        {%- assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+        {%- assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath'  -%}
       {%- endif -%}
         {
             "image" : {{ AssetImage | ToJSON }}
