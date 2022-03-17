@@ -124,11 +124,15 @@
                       {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
                       {%- assign imageSize = ',c_scale,h_325' -%}
                       {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                      {% assign imageUrl = "" %}
                       {%- if cclPhoto and cclPhoto != empty -%}
                         {%- assign imageUrl = clPhoto -%}
                       {%- else -%}
-                        {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-                        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                         {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                         {%- if image and image != empty -%}
+                            {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                            {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                          {%- endif -%}
                       {%- endif -%}
                       {%if imageUrl == empty -%}
                           {%- assign imageUrl = seriesLogoUrl -%}

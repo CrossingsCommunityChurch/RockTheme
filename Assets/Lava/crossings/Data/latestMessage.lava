@@ -11,11 +11,11 @@
     {%- assign latestMessage = contentChannelItems | First -%}
     {%- assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' -%}
     {%- assign parentSlug = parentSeries.PrimarySlug -%}
-    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+    {% assign clPhoto = latestMessage | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
     {%- if clPhoto and clPhoto != empty -%}
         {%- assign imageUrl = clPhoto -%}
     {%- else -%}
-      {%- assign AssetImage = latestMessage | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+      {%- assign AssetImage = latestMessage | Attribute:'AssetImage' | Url:'localpath' -%}
       {%- assign imageUrl = AssetImage -%}
       {%- assign useVimeoImage = False -%}
       {%- assign vimeoImageUrl = latestMessage | Attribute:'Image', 'RawValue' -%}
@@ -44,3 +44,4 @@
     }
     {%- endcontentchannelitem -%}
 ]
+
