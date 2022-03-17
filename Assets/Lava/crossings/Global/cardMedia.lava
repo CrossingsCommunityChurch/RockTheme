@@ -14,8 +14,8 @@
 
 <div class="col-sm-6 col-md-4">
   <a href="{{ link }}" class="card cardShadow">
-    <div class="thumb" style="background-image:url('{{ img }}')">
-      <!--<img src="{{ img }}" class="object-fit">-->
+    <div class="thumb">
+      <img src="" class="event-img cld-hidpi" data-src="{{ img }}">
     </div>
     <div class="row card-content-row">
       <div class="card-content">
