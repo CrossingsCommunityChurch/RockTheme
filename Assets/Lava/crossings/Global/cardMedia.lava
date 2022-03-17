@@ -1,5 +1,5 @@
 {%- comment -%}
-  **Not currently in use. Was swapped for a javascript solution
+  Used on the series details page.
 {%- endcomment -%}
 
 {%- comment -%}
