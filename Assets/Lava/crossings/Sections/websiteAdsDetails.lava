@@ -5,65 +5,20 @@
 
 {%- assign adsData = 'ads' | PersistedDataset -%}
 {%-assign ads = adsData.Ads -%}
-{%-assign adId =  PageParameter.infoId -%}
+{%-assign adId =  PageParameter.infoId | AsDecimal -%}
 {%-assign ad = ads | Where:'Id', adId -%}
-{{ ad | Debug }}
-{% comment %} {%- eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' -%}
-{%- capture pageTitle -%}{{eventitemoccurrence.EventItem.Name}}{%- endcapture%}
-{%- assign org = 'Global' | Attribute:'OrganizationName' -%}
-{%- capture pageTitleBrowser -%}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{%- endcapture%}
-{{ pageTitle | SetPageTitle:'PageTitle' }}
-{{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
-
-{%- endeventitemoccurrence -%}
-
-{%- eventitemoccurrence id:'{{ PageParameter.EventOccurrenceId }}' -%}
-{%- assign eventimageUrl =''%}
-{%- assign eventassetimage = eventitemoccurrence.EventItem | Attribute:'Imageasset' -%}
-
-{%- eventcalendaritem where:'EventItemId == {{eventitemoccurrence.EventItemId}}' -%}
-
-    {%- assign eventassetimage = eventcalendaritem | Attribute:'Imageasset' -%}
-
-{%- endeventcalendaritem -%}
-{%- if eventassetimage and eventassetimage != empty -%}
-    {%- assign eventimageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-    {%- assign eventimageSize = ',c_scale,w_600' -%}
-    {%- assign eventimageUrlPath = eventassetimage | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-    {%- assign eventimageUrl = eventimageStorageUrl | Append: eventimageSize | Append:eventimageUrlPath -%}
-{%- endif -%} {% endcomment %}
+{%- for ad in ad -%}
 <div class="event-page">
-    <div class="section page-title reverse">
-      <div class="container">
-        <div class="jumbotron text-center"></div>
-      </div>
-    </div>
-    <div class="section video">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <div class="event-image">
-            {% comment %} Pull this image from the webadcontent channel.  {% endcomment %}
-              {%- if eventimageUrl != empty -%}
-                <img src="{{ eventimageUrl }}" alt="{{ Event.Name }}" />
-              {%- endif -%}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {% comment %} {[ eventDetails  ]} Need to swap this shortcode out for one that is not event specific. {% endcomment %}
     <div class="container-fluid section event-details">
           <div class="row">
               <div class="container content-area" data-aos="fade-up">
                   <div class="row">
                       <div class="col-md-12">
-                      {% comment %} what attribute should come through here fo? {% endcomment %}
-                        <h2 class="heading">{{ eventitemoccurrence.EventItem.Name }}</h2>
-                        <h4 class="subheading">Event Details</h4>
+                        <h2 class="heading">{{ad.Title }}</h2>
+                        <h4 class="subheading">Details</h4>
                         <hr class="sep ml-0">
                         <div class="event-info">
-                        {{ eventitemoccurrence.EventItem.Description }}
+                        {{ ad.DetailsHTML | HtmlDecode }}
                         </div>
                       </div>
                   </div>
@@ -71,5 +26,4 @@
           </div>
     </div>
 </div>
-{%- endeventitemoccurrence -%}
-
+{%- endfor -%}

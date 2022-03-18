@@ -14,9 +14,14 @@
 
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
 {%- assign imageSize = ',c_scale,h_1300' -%}
-{%- assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath'  -%}
-{%- assign imageUrlPathUse = CurrentPage | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPathUse -%}
+{%- assign imageUrlPath = CurrentPage | Attribute:'AssetImage' | Url:'localpath' -%}
+{% assign clPhoto = CurrentPage | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {%- if clPhoto and clPhoto != empty -%}
+    {%- assign imageUrl = clPhoto -%}
+  {%- else -%}
+  	{%- assign imageUrlPathUse = CurrentPage | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+		{%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPathUse -%}
+  {%- endif -%}
 
 {%- if heroSmall == 'Yes' -%}
     {%- assign wrapperClass = 'page-item short-hero' -%}
@@ -25,16 +30,20 @@
 {%- endif -%}
 
 {%- if layout == 'Homepage' -%}
-
-{%- assign homepageImages = 'homeImages' | PersistedDataset | Shuffle -%}
-
+    {%- assign homepageImages = 'homeImages' | PersistedDataset | Shuffle -%}
     {%- assign firstImage = homepageImages | First -%}
-    {%- assign imageUrlPath = firstImage.image  | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'  -%}
-    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-
+    {% assign clPhoto = firstImage.image %}
+    {% capture expression %}^(http|https):\/\/{% endcapture %}
+    {%- assign isCloudinary = clPhoto | RegExMatch: expression  -%}
+    {%- if isCloudinary -%}
+      {%- assign imageUrl = firstImage.image -%}
+    {%- else -%}
+        {%- assign imageUrlPath = firstImage.image  | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'  -%}
+        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+    {%- endif -%}
 {%- endif -%}
 
-{%- if imageUrlPath != empty -%}
+{%- if imageUrlPath != empty or clPhoto != empty -%}
     <div class="container-fluid hero-wrapper {{ wrapperClass }}">
         {[ cloudpara image:'{{ imageUrl }}' speed:'15' contentpadding:'0' contentalign:'left' ]}
             <div class="jumbotron flat transparent reverse" data-aos="fade-in">

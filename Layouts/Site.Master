@@ -50,8 +50,7 @@
             })(window,document,'script','dataLayer','{{TagManagerID}}');</script>
         {%- endif -%}
     </Rock:Lava>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-jquery/2.12.0/cloudinary-jquery.min.js" integrity="sha512-2KncSMZ6g38vnuCcRf6O/FdxwCYsqVJ4TTmd8IahFQmD9V2VxBihc8cRi+0W/cPPkOttYoc8fV7ZuKjnTm95Yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>$.cloudinary.config({ cloud_name: 'crossings-community-church'});</script>
+    <script src="https://unpkg.com/cloudinary-core@2.12.3/cloudinary-core-shrinkwrap.js"></script>
 </head>
 <body runat="server" id="body">
     <Rock:Lava ID="GoogleTagManagerNoJs" runat="server">
@@ -116,7 +115,7 @@
 		s.parentNode.insertBefore(g, s);
 	}(document, "script"));
 </script>
-
 </body>
-<script>$.cloudinary.responsive();</script>
+<script type="text/javascript"> var cl = cloudinary.Cloudinary.new({ cloud_name: 'crossings-community-church'}); cl.responsive()</script>
+
 </html>

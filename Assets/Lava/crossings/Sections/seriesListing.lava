@@ -7,10 +7,6 @@
   @data - accepts the name of a persisted dataset to use
 {%- endcomment -%}
 {%- if data -%}
-  {%- assign dataset = data -%}
-
-  {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-  {%- assign imageSize = ',c_scale,h_450' -%}
   {%- assign now = 'Now' | Date -%}
 
   {%- assign seriesData = data | PersistedDataset -%}
@@ -19,9 +15,18 @@
         <div class="media-list-items">
           <div class="row flex-row flex-wrap">
               {%- for series in seriesData -%}
+                {% assign clPhoto = series.Image %}
+                {% capture expression %}^https://{% endcapture %}
+                {% assign isCloudinary = clPhoto | RegExMatch: expression %}
+                {%- if isCloudinary and clPhoto != empty -%}
+                  {%- assign imageUrl = clPhoto -%}
+                {%- else -%}
+                  {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+                  {%- assign imageSize = ',c_scale,h_450' -%}
+                  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:series.Image -%}
+                {%- endif -%}
                   {%- assign seriesDate = series.PublishDateTime | AsDateTime -%}
                   {%- if series.Title != "Stand Alone Messages" and seriesDate <= now -%}
-                    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:series.Image -%}
                   {[ cardSeries link:'{{series.Slug}}' title:'{{ series.Title }}' img:'{{ imageUrl }}' ]}
                   {%- endif -%}
               {%- endfor -%}

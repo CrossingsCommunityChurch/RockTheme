@@ -1,14 +1,18 @@
 {%- comment -%}
    Accepts
    - channelid
-
 {%- endcomment -%}
-
 [
-    {%- assign contentChannelId = '67' -%}
+    {%- assign contentChannelId = '214' -%}
     {%- contentchannelitem | where:'Status == 1 && ContentChannelId == {{contentChannelId}}' iterator:'homeImages' securityenabled:'false' -%}
       {%- for image in homeImages -%}
-        {%- assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+      {% comment %} TODO: account for cloudinary images {% endcomment %}
+      {% assign clPhoto = image | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+      {%- if clPhoto and clPhoto != empty -%}
+        {%- assign AssetImage = clPhoto -%}
+      {%- else -%}
+        {%- assign AssetImage = image | Attribute:'AssetImage' | Url:'localpath'  -%}
+      {%- endif -%}
         {
             "image" : {{ AssetImage | ToJSON }}
         }

@@ -21,15 +21,21 @@
 {%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
 {%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
 
-
 {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
 {%- for message in latestMessageDataset -%}
   {%- assign imageUrlPath = message.image -%}
-  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append:imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
-  {%- if message.useVimeoImage == True -%}
+  {% capture expression %}^(http|https):\/\/{% endcapture %}
+  {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
+  {%- if isCloudinary -%}
     {%- assign imageUrl = message.image -%}
+  {%- else -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
+    {%- if message.useVimeoImage == True -%}
+      {%- assign imageUrl = message.image -%}
+    {%- endif -%}
   {%- endif -%}
+
 
   {%- assign title = message.title -%}
   {%- assign speaker = message.speaker -%}

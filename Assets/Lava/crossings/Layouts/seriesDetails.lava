@@ -11,8 +11,13 @@
   {%- assign item = Item -%}
   {%- assign title = item.Title -%}
   {%- assign summary = item.Content -%}
-  {%- assign seriesLogo = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-  {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append: seriesLogo -%}
+  {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {%- if clPhoto and clPhoto != empty -%}
+    {%- assign seriesLogoUrl = clPhoto -%}
+  {%- else -%}
+    {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+    {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+  {%- endif -%}
   {%- assign parentPath = 'sermons' -%}
   {%- assign titleCategory = 'Sermon Series' -%}
 
@@ -46,7 +51,7 @@
         <div class="row">
           <div class="col-md-12 text-center">
             <div class="series-logo">
-              <img src="{{ seriesLogoUrl}}" alt="{{ item.Title }}" />
+              <img class="cld-hidpi" src="" data-src="{{ seriesLogoUrl}}" alt="{{ item.Title }}" />
             </div>
               <div class="series-details section text-center">
                 <hr class="sep">
@@ -118,16 +123,18 @@
                       {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
                       {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
                       {%- assign imageSize = ',c_scale,h_325' -%}
-                      {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath'  -%}
-                      {%- if imageUrlPath != empty-%}
-                         {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath'  | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                      {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                      {% assign imageUrl = "" %}
+                      {%- if cclPhoto and cclPhoto != empty -%}
+                        {%- assign imageUrl = clPhoto -%}
+                      {%- else -%}
+                         {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                         {%- if image and image != empty -%}
+                            {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                            {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                          {%- endif -%}
                       {%- endif -%}
-                      {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-                      {%- assign vimeoImageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' -%}
-                      {%- if vimeoImageUrl != empty -%}
-                        {%- assign imageUrl = vimeoImageUrl -%}
-                      {%- endif -%}
-                      {%if vimeoImageUrl == empty and imageUrlPath == empty -%}
+                      {%if imageUrl == empty -%}
                           {%- assign imageUrl = seriesLogoUrl -%}
                       {%- endif -%}
                       {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
