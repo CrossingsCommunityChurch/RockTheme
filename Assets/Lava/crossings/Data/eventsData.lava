@@ -104,6 +104,6 @@
  {%- endfor -%}
 {%- endeventcalendaritem -%}
     {%- capture eventsJson -%}{{eventsJson}} ] {%endcapture%}
-    {% comment %} {%- assign events = eventsJson | ReplaceLast:',', ' '-%} {% endcomment %}
+    {%- assign events = eventsJson -%}
     {{events}}
 }
