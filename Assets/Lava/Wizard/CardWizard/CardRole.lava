@@ -11,14 +11,16 @@
 					<div class="serve-card" style="height: 180px;">
                         <div class="box text-center">
 							<div class="clearfix">
-								<span class="label label-default pull-right" style="margin: 10px">{% if role.Limit == null %}Unlimited{% else %}{% if spotsLeft <= 0 %}Full{% else %}{{spotsLeft}} {{ 'Spot' | PluralizeForQuantity:spotsLeft }} Remaining{% endif %}{% endif %}</span>
+								<span class="label label-default pull-right" style="margin: 10px; overflow:scroll; ">{% if role.Limit == null %}Unlimited{% else %}{% if spotsLeft <= 0 %}Full{% else %}{{spotsLeft}} {{ 'Spot' | PluralizeForQuantity:spotsLeft }} Remaining{% endif %}{% endif %}</span>
 							</div>
 							{% assign icon = role.Entity | Attribute:"Icon" %}
 							{% if icon != '' and icon != empty %}
 								<i class="{{icon}} fa-5x"></i>
 							{% endif %}
                             <h3>{{ role.Entity.Name }}</h3>
-							<p>{{ role.Entity.Description }}</p>
+							{% if partitionDescriptionShow == "True" %}
+								<p>{{ role.Entity.Description }}</p>
+							{% endif %}
                         </div>
 					</div>
 					{% if spotsLeft > 0 and role.Limit > 0 %}
