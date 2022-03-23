@@ -1,6 +1,6 @@
                 {%- assign role = partition -%}
 				{%- assign spotsLeft = role.Limit | Minus: role.Filled -%}
-				<div class="col-sm-6 col-md-4">
+				<div class="col-sm-6">
 					{% if spotsLeft > 0 and role.Limit > 0 %}
 						{% if partitionSize > 0 %}
 							<a href="#" onclick="doSlide('#{{divId}}_{{role.Value}}'); return false;">
@@ -11,7 +11,7 @@
 					<div class="serve-card" style="height: 180px;">
                         <div class="box text-center">
 							<div class="clearfix">
-								<span class="label label-default pull-right" style="margin: 10px; overflow:scroll; ">{% if role.Limit == null %}Unlimited{% else %}{% if spotsLeft <= 0 %}Full{% else %}{{spotsLeft}} {{ 'Spot' | PluralizeForQuantity:spotsLeft }} Remaining{% endif %}{% endif %}</span>
+								<span class="label label-default pull-right" style="margin: 10px ;">{% if role.Limit == null %}Unlimited{% else %}{% if spotsLeft <= 0 %}Full{% else %}{{spotsLeft}} {{ 'Spot' | PluralizeForQuantity:spotsLeft }} Remaining{% endif %}{% endif %}</span>
 							</div>
 							{% assign icon = role.Entity | Attribute:"Icon" %}
 							{% if icon != '' and icon != empty %}
