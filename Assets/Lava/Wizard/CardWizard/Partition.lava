@@ -61,7 +61,9 @@
 						{% elseif partition.PartitionType == 'Role' and forloop.first %}
 							<h3 class="section-header">#Please select your serving role(s):</h3>
 						{% endif %}
-						{% include '~/Plugins/org_secc/Connection/CardWizard/PartitionList.lava' %}
+						<div>
+							{% include '~/Plugins/org_secc/Connection/CardWizard/PartitionList.lava' %}
+						</div>
 					{% endif %}
 	            {% endfor %}
 	            </div>
