@@ -35,35 +35,31 @@
 					{% assign partitionSize = partition.Partitions | Size %}
 					{% if partitionSize > 0 or CardWizardMode == "Single" %}
 						{% if partition.PartitionType == 'DefinedType' %}
-							{% if forloop.first %}<h3 class="section-header">@Please select from the following:</h3>{% endif %}
+							{% if forloop.first %}<h3 class="section-header">Please select from the following:</h3>{% endif %}
 							{% include '~/Plugins/org_secc/Connection/CardWizard/CardDefinedType.lava' %}
 						{% elseif partition.PartitionType == 'Schedule' %}
-							{% if forloop.first %}<h3 class="section-header">@Please select your schedule:</h3>{% endif %}
+							{% if forloop.first %}<h3 class="section-header">Please select your schedule:</h3>{% endif %}
 							{% include '~/Plugins/org_secc/Connection/CardWizard/CardSchedule.lava' %}
 						{% elseif partition.PartitionType == 'Campus' %}
-							{% if forloop.first %}<h3 class="section-header">@Please select your campus:</h3>{% endif %}
+							{% if forloop.first %}<h3 class="section-header">Please select your campus:</h3>{% endif %}
 							{% include '~/Plugins/org_secc/Connection/CardWizard/CardCampus.lava' %}
 						{% elseif partition.PartitionType == 'Role' %}
-							{% if forloop.first %}<h3 class="section-header">@Please select your serving role:</h3>{% endif %}
-							<div>
+							{% if forloop.first %}<h3 class="section-header">Please select your serving role:</h3>{% endif %}
 								{% include '~~/Assets/Lava/Wizard/CardWizard/CardRole.lava' %}
-							</div>
 						{% endif %}
 					{% else %}
 						{% assign parameterName = partition.ParameterName %}
 						{% assign type = partition.PartitionType %}
 						{% if partition.PartitionType == 'DefinedType' and forloop.first %}
-							<h3 class="section-header">#Please select from the following:</h3>
+							<h3 class="section-header">Please select from the following:</h3>
 						{% elseif partition.PartitionType == 'Schedule' and forloop.first %}
-							<h3 class="section-header">#Please select your schedule(s):</h3>
+							<h3 class="section-header">Please select your schedule(s):</h3>
 						{% elseif partition.PartitionType == 'Campus' and forloop.first %}
-							<h3 class="section-header">#Please select from the following:</h3>
+							<h3 class="section-header">Please select from the following:</h3>
 						{% elseif partition.PartitionType == 'Role' and forloop.first %}
-							<h3 class="section-header">#Please select your serving role(s):</h3>
+							<h3 class="section-header">Please select your serving role(s):</h3>
 						{% endif %}
-						<div>
 							{% include '~/Plugins/org_secc/Connection/CardWizard/PartitionList.lava' %}
-						</div>
 					{% endif %}
 	            {% endfor %}
 	            </div>
