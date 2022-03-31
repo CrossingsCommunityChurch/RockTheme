@@ -1,0 +1,143 @@
+  {%- comment -%}
+    This is the similar to the media details section but used for a single special content channel (e.g. dollar Club videos).
+  {%- endcomment -%}
+
+  {%- if Item -%}
+  {%- assign item = Item -%}
+  {%- assign title = item.Title -%}
+  {%- assign speaker = item | Attribute:'Speaker' -%}
+  {%- assign date = item.StartDateTime | Date:'MMM d, yyyy' -%}
+  {%- assign summary = item.Content -%}
+  {%- assign video = item | Attribute:'VimeoId' -%}
+  {%- assign parentPath = 'sermons' -%}
+{% comment %} TODO: Change this to use cloudinary for documents as well.  {% endcomment %}
+  {%- assign docStorageUrl = 'Global' | Attribute:'docsURL' | Prepend:'https://' -%}
+  {%- assign notes = item | Attribute:'Notes', 'Url' -%}
+  {%- assign questions = item | Attribute:'DiscussionQuestions', 'Url' -%}
+  {%- assign notesUrlPath = notes | Url:'localpath' -%}
+  {%- assign questionsUrlPath = questions | Url:'localpath' -%}
+  {%- assign notesUrl = docStorageUrl | Append:notesUrlPath -%}
+  {%- assign questionsUrl = docStorageUrl | Append:questionsUrlPath -%}
+
+  {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
+  {%- capture pageTitle -%}{{ speaker }} - {{ title }} | {{ org }} {%- endcapture%}
+  {%- capture metaDesc -%}{{ summary | StripHtml }} {{ speaker }}. {{ title }}{%- endcapture -%}
+  {{ pageTitle | SetPageTitle }}
+  {{ metaDesc | AddMetaTagToHead:'name','description' }}
+
+  {%- if item.ContentChannel.Name == 'Teaching Message' -%}
+      {%- assign parentPath = 'teachings' -%}
+  {%- endif -%}
+  <div class="sermon-series-page">
+    <div class="section page-title reverse">
+      <div class="container">
+        <div class="jumbotron text-center"></div>
+      </div>
+    </div>
+    <div class="section video">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            {[ videoPlayer vimeourl:'{{ video }}' ]}
+              <div class="series-details section text-center">
+                <hr class="sep">
+                <h1 class="heading">{{ item.Title }}</h1>
+                <h3 class="subheading">{{ speaker }} | {{ date }}</h3>
+                <p>{{ summary }}</p>
+                <div class="share no-index">
+                  <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
+                  <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
+                  <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
+                    <li>
+                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
+                        <i class="fa fa-fw fa-facebook"></i> Facebook
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
+                        <i class="fa fa-fw fa-twitter"></i> Twitter
+                      </a>
+                    </li>
+                    <li>
+                      <a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
+                        <i class="fa fa-fw fa-envelope-o"></i> Email
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%- comment -%}
+      TODO: This needs to get reworked to use some common shortcodes (card)
+      TODO: This cannot be very performant, nested for loops serveral times
+    {%- endcomment -%}
+    {%- if item.ParentItems != 'empty' -%}
+      {%- assign ParentItem = item.ParentItems | First -%}
+      {%- assign ParentItemId = ParentItem.ContentChannelItemId -%}
+      <div class="section media-list bg-gray">
+        <div class="container content-area">
+            <div class="media-list-items">
+              <div class="row flex-row flex-wrap">
+                  <div class="col-md-12">
+                    <h3 class="subheading" style="margin-bottom: 30px;">Other Messages in This Series</h3>
+                  </div>
+                  {%- contentchannelitem where:'Id == {{ ParentItemId }}' -%}
+                    {%- for parent in contentchannelitemItems -%}
+                        {%- for child in parent.ChildItems -%}
+                          {%if child.ChildContentChannelItem.Id != item.Id -%}
+                            {%- assign title = child.ChildContentChannelItem.Title -%}
+                            {%- assign seriesTitle = parent.Title -%}
+                            {% assign clParentPhoto = parent | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                            {%- if clParentPhoto and clParentPhoto != empty -%}
+                              {%- assign seriesLogo = clPhoto -%}
+                            {%- else -%}
+                              {%- assign seriesLogo = parent | Attribute: 'Serieslogo' | Url: 'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                            {%- endif -%}
+                            {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
+                            {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
+                            {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+                            {%- assign imageSize = ',c_scale,h_325' -%}
+                            {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                            {%- if cclPhoto and cclPhoto != empty -%}
+                              {%- assign imageUrl = clPhoto -%}
+                            {%- else -%}
+                              {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                              {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                              {%- assign vimeoImageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' -%}
+                              {%- if imageUrl == empty and vimeoImageUrl != empty -%}
+                                {%- assign imageUrl = vimeoImageUrl -%}
+                              {%- endif -%}
+                              {%if vimeoImageUrl == empty and imageUrlPath == empty -%}
+                                  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:seriesLogo -%}
+                              {%- endif -%}
+                            {%- endif -%}
+                            {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
+                            {%- assign parentPrimarySlug = parent.PrimarySlug | Trim -%}
+                            {%- comment -%}
+                              - Need better way to get links
+                              - We are duplicating efforts to set images, may be a better way
+                            {%- endcomment -%}
+                            {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                          {%- endif -%}
+                        {%- endfor -%}
+                    {%- endfor -%}
+                  {%- endcontentchannelitem -%}
+              </div>
+            </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+{%- else -%}
+
+  <div class="section page-title reverse">
+    <div class="container">
+      <div class="jumbotron text-center"><h1>Could not find message.</h1></div>
+    </div>
+  </div>
+
+{%- endif -%}
