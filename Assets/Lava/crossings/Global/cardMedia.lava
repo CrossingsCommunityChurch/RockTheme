@@ -26,8 +26,6 @@
         <div class="col">
           <div>
             <h3>{{ title }}</h3>
-            <h3>{{ test }}</h3>
-            <p>{{img}}</p>
             {%- if series -%}
               <h5 class="series">{{ series }}</h5>
             {%- endif -%}

@@ -165,7 +165,7 @@
                         - Need better way to get links
                         - We are duplicating efforts to set images, may be a better way
                       {%- endcomment -%}
-                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' test:'test:{{test}}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
                     {%- endif -%}
                   {%- endfor -%}
                 {%- endfor -%}
