@@ -136,6 +136,7 @@
                       {% assign clParentPhoto = parent | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
                       {%- if clParentPhoto and clParentPhoto != empty -%}
                         {%- assign seriesLogo = clParentPhoto -%}
+                        {%- assign imageUrl = clParentPhoto -%}
                         {%- assign test = clParentPhoto -%}
                       {%- else -%}
                         {%- assign seriesLogo = parent | Attribute: 'Serieslogo' | Url: 'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
@@ -154,9 +155,9 @@
                           {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
                           {%- assign test = imageUrl -%}
                         {%- endif -%}
-                        {%if imageUrl == empty-%}
-                          {%- assign imageUrl = seriesLogo -%}
-                        {%- endif -%}
+                      {%- endif -%}
+                      {%if imageUrl == empty-%}
+                        {%- assign imageUrl = seriesLogo -%}
                       {%- endif -%}
                       {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                       {%- assign parentPrimarySlug = parent.PrimarySlug | Trim -%}
