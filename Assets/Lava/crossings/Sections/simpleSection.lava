@@ -13,7 +13,7 @@
 {%- endcomment -%}
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
-{%- if channelAnchor != '' -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
+{%- if channelAnchor != '' -%} <div class="anchor" id="{{channelAnchor}}"></div> {%- endif -%}
 
 {%- for item in Items -%}
 {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}

@@ -27,6 +27,7 @@
                 {%- endif -%}
                   {%- assign seriesDate = series.PublishDateTime | AsDateTime -%}
                   {%- if series.Title != "Stand Alone Messages" and seriesDate <= now -%}
+                  <h3>TEST</h3>
                   {[ cardSeries link:'{{series.Slug}}' title:'{{ series.Title }}' img:'{{ imageUrl }}' ]}
                   {%- endif -%}
               {%- endfor -%}

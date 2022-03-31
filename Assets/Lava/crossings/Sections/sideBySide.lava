@@ -61,7 +61,7 @@
 }
 {% endstylesheet %}
 
-{%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
+{%- if channelAnchor != empty -%} <div class="anchor" id="{{channelAnchor}}"></div> {%- endif -%}
 
 {%- if channelSectionTitle != empty -%}
 <div class="section">
