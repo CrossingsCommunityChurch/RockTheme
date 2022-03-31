@@ -1,4 +1,4 @@
-  {%- comment -%}
+{%- comment -%}
     Used on the Sermon and Teaching Message Details (Media Detail) pages
     It is used as the Content Channel Item View template
   {%- endcomment -%}
@@ -9,6 +9,15 @@
   {%- assign speaker = item | Attribute:'Speaker' -%}
   {%- assign date = item.StartDateTime | Date:'MMM d, yyyy' -%}
   {%- assign summary = item.Content -%}
+  {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {%- if clPhoto and clPhoto != empty -%}
+    {%- assign seriesLogoUrl = clPhoto -%}
+    {% comment %} {%- assign seriesLogoUrl = 'One' -%} {% endcomment %}
+  {%- else -%}
+    {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+    {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+    {% comment %} {%- assign seriesLogoUrl = 'Two' -%} {% endcomment %}
+  {%- endif -%}
   {%- assign video = item | Attribute:'VimeoId' -%}
   {%- assign parentPath = 'sermons' -%}
 {% comment %} TODO: Change this to use cloudinary for documents as well.  {% endcomment %}
@@ -126,29 +135,38 @@
                           {%if child.ChildContentChannelItem.Id != item.Id -%}
                             {%- assign title = child.ChildContentChannelItem.Title -%}
                             {%- assign seriesTitle = parent.Title -%}
+                            {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
+                            {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
+
+                            {% comment %} checks parent for series cloudinary logo {% endcomment %}
                             {% assign clParentPhoto = parent | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
                             {%- if clParentPhoto and clParentPhoto != empty -%}
-                              {%- assign seriesLogo = clPhoto -%}
+                              {%- assign seriesLogo = clParentPhoto -%}
+                              {%- assign test = clParentPhoto -%}
                             {%- else -%}
                               {%- assign seriesLogo = parent | Attribute: 'Serieslogo' | Url: 'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
                             {%- endif -%}
-                            {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
-                            {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
+
                             {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
                             {%- assign imageSize = ',c_scale,h_325' -%}
+
+                            {% comment %} checking child for Cloudinary image {% endcomment %}
                             {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
                             {%- if cclPhoto and cclPhoto != empty -%}
-                              {%- assign imageUrl = clPhoto -%}
+                              {%- assign imageUrl = cclPhoto -%}
+                              {%- assign test = cclPhoto -%}
                             {%- else -%}
+
+                          {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                          {%- if image and image != empty -%}
                               {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
                               {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-                              {%- assign vimeoImageUrl = child.ChildContentChannelItem | Attribute: 'Image', 'RawValue' -%}
-                              {%- if imageUrl == empty and vimeoImageUrl != empty -%}
-                                {%- assign imageUrl = vimeoImageUrl -%}
-                              {%- endif -%}
-                              {%if vimeoImageUrl == empty and imageUrlPath == empty -%}
-                                  {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:seriesLogo -%}
-                              {%- endif -%}
+                              {%- assign test = imageUrl -%}
+                          {%- endif -%}
+
+                      {%if imageUrl == empty-%}
+                          {%- assign imageUrl = seriesLogoUrl -%}
+                      {%- endif -%}
                             {%- endif -%}
                             {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                             {%- assign parentPrimarySlug = parent.PrimarySlug | Trim -%}
@@ -156,7 +174,7 @@
                               - Need better way to get links
                               - We are duplicating efforts to set images, may be a better way
                             {%- endcomment -%}
-                            {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                            {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' test:'test:{{test}}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
                           {%- endif -%}
                         {%- endfor -%}
                     {%- endfor -%}
