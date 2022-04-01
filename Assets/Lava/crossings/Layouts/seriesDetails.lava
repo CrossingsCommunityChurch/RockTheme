@@ -94,24 +94,24 @@
                   <div class="col-md-12">
                     <h3 class="subheading" style="margin-bottom: 30px;">Messages in This Series</h3>
                   </div>
+                  {%- assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' -%}
+                  {%- if clPhoto and clPhoto != empty -%}
+                    {%- assign seriesLogo = clPhoto -%}
+                    {%- assign imageUrl = clPhoto -%}
+                  {%- else -%}
+                    {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                    {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                  {%- endif -%}
                   {%- for child in sortedItems -%}
-                    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-                    {%- if clPhoto and clPhoto != empty -%}
-                      {%- assign seriesLogoUrl = clPhoto -%}
-                    {%- else -%}
-                      {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-                      {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-                    {%- endif -%}
                     {%- assign title = child.ChildContentChannelItem.Title -%}
-                    {% assign seriesTitle = item.Title %}
+                    {%- assign seriesTitle = item.Title -%}
                     {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
                     {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
                     {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
                     {%- assign imageSize = ',c_scale,h_325' -%}
                     {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-                    {% assign imageUrl = "" %}
                     {%- if cclPhoto and cclPhoto != empty -%}
-                      {%- assign imageUrl = clPhoto -%}
+                      {%- assign imageUrl = cclPhoto -%}
                     {%- else -%}
                       {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
                       {%- if image and image != empty -%}
@@ -120,7 +120,7 @@
                       {%- endif -%}
                     {%- endif -%}
                     {%if imageUrl == empty -%}
-                      {%- assign imageUrl = seriesLogoUrl -%}
+                      {%- assign imageUrl = seriesLogo -%}
                     {%- endif -%}
                     {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                     {%- assign parentPrimarySlug = item.PrimarySlug | Trim -%}

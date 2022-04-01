@@ -137,7 +137,6 @@
                       {%- if clParentPhoto and clParentPhoto != empty -%}
                         {%- assign seriesLogo = clParentPhoto -%}
                         {%- assign imageUrl = clParentPhoto -%}
-                        {%- assign test = clParentPhoto -%}
                       {%- else -%}
                         {%- assign seriesLogo = parent | Attribute: 'Serieslogo' | Url: 'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
                       {%- endif -%}
