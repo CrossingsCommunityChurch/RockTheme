@@ -7,7 +7,7 @@
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
 {%- assign imageSize = ',c_scale,h_640' -%}
 
-  {%- if Item -%}
+{%- if Item -%}
   {%- assign item = Item -%}
   {%- assign title = item.Title -%}
   {%- assign summary = item.Content -%}
@@ -22,24 +22,22 @@
   {%- assign titleCategory = 'Sermon Series' -%}
 
   {%- if item.ContentChannel.Name == 'Teaching Series' -%}
-      {%- assign parentPath = 'teachings' -%}
-      {%- assign titleCategory = 'Teaching Series' -%}
+    {%- assign parentPath = 'teachings' -%}
+    {%- assign titleCategory = 'Teaching Series' -%}
   {%- endif -%}
-   {%- if item.ContentChannel.Name == 'The Gathering Series' -%}
-      {%- assign parentPath = 'gathering' -%}
-      {%- assign titleCategory = 'Gathering Series' -%}
+  {%- if item.ContentChannel.Name == 'The Gathering Series' -%}
+    {%- assign parentPath = 'gathering' -%}
+    {%- assign titleCategory = 'Gathering Series' -%}
   {%- endif -%}
   {%- if item.ContentChannel.Name == 'On Demand Series' -%}
-      {%- assign parentPath = 'ondemand' -%}
-      {%- assign titleCategory = 'On Demand Series' -%}
+    {%- assign parentPath = 'ondemand' -%}
+    {%- assign titleCategory = 'On Demand Series' -%}
   {%- endif -%}
-
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
   {%- capture pageTitle -%}{{ title }} - {{ titleCategory }} | {{ org }}{%- endcapture%}
   {%- capture metaDesc -%}{{ summary | StripHtml }} {{ title }}{%- endcapture -%}
   {{ pageTitle | SetPageTitle }}
   {{ metaDesc | AddMetaTagToHead:'name','description' }}
-
   <div class="sermon-series-page">
     <div class="section page-title reverse">
       <div class="container">
@@ -53,51 +51,32 @@
             <div class="series-logo">
               <img class="cld-hidpi" src="" data-src="{{ seriesLogoUrl}}" alt="{{ item.Title }}" />
             </div>
-              <div class="series-details section text-center">
-                <hr class="sep">
-                <h1 class="heading">{{ item.Title }}</h1>
-                <p>{{ summary }}</p>
-                <div class="share">
-                  <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
-                  <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
-                  <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
-                    <li>
-                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
-                        <i class="fa fa-fw fa-facebook"></i> Facebook
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
-                        <i class="fa fa-fw fa-twitter"></i> Twitter
-                      </a>
-                    </li>
-                    <li>
-                      <a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
-                        <i class="fa fa-fw fa-envelope-o"></i> Email
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-                {%- if item.ContentChannel.IsTaggingEnabled -%}
-                  <!--<div class="tags">
-                    <p class="small"><i class="fas fa-tags"></i>
-                      {%- assign itemGuid = item.Guid -%}
-                      {%- assign tagCategory = item.ContentChannel.ItemTagCategoryId -%}
-                      {%- taggeditem where:'EntityGuid == "{{itemGuid}}"' iterator:'taggedItems' -%}
-                        {%- tag where:'CategoryId == {{ tagCategory }}' iterator:'tags'%}
-                          {%- for taggedItem in taggedItems -%}
-                            {%- for tag in tags -%}
-                              {%- if taggedItem.TagId == tag.Id -%}
-                                <a href="#">{{ tag.Name }}</a>
-                              {%- endif -%}
-                            {%- endfor -%}
-                          {%- endfor -%}
-                        {%- endtag -%}
-                      {%- endtaggeditem -%}
-                    </p>
-                  </div>-->
-                {%- endif -%}
+            <div class="series-details section text-center">
+              <hr class="sep">
+              <h1 class="heading">{{ item.Title }}</h1>
+              <p>{{ summary }}</p>
+              <div class="share">
+                <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
+                <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
+                <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
+                  <li>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
+                      <i class="fa fa-fw fa-facebook"></i> Facebook
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
+                      <i class="fa fa-fw fa-twitter"></i> Twitter
+                    </a>
+                  </li>
+                  <li>
+                    <a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
+                      <i class="fa fa-fw fa-envelope-o"></i> Email
+                    </a>
+                  </li>
+                </ul>
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -106,7 +85,6 @@
       TODO: This needs to get reworked to use some common shortcodes (card)
       TODO: This cannot be very performant, nested for loops serveral times
     {%- endcomment -%}
-
     {%- if item.ChildItems != 'empty' -%}
       {%- assign sortedItems = item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc'-%}
       <div class="section media-list bg-gray">
@@ -116,45 +94,48 @@
                   <div class="col-md-12">
                     <h3 class="subheading" style="margin-bottom: 30px;">Messages in This Series</h3>
                   </div>
+                  {%- assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' -%}
+                  {%- if clPhoto and clPhoto != empty -%}
+                    {%- assign seriesLogo = clPhoto -%}
+                    {%- assign imageUrl = clPhoto -%}
+                  {%- else -%}
+                    {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                    {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                  {%- endif -%}
                   {%- for child in sortedItems -%}
-                      {%- assign title = child.ChildContentChannelItem.Title -%}
-                      {% assign seriesTitle = item.Title %}
-                      {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
-                      {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
-                      {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-                      {%- assign imageSize = ',c_scale,h_325' -%}
-                      {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-                      {% assign imageUrl = "" %}
-                      {%- if cclPhoto and cclPhoto != empty -%}
-                        {%- assign imageUrl = clPhoto -%}
-                      {%- else -%}
-                         {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
-                         {%- if image and image != empty -%}
-                            {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-                            {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-                          {%- endif -%}
+                    {%- assign title = child.ChildContentChannelItem.Title -%}
+                    {%- assign seriesTitle = item.Title -%}
+                    {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
+                    {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
+                    {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+                    {%- assign imageSize = ',c_scale,h_325' -%}
+                    {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                    {%- if cclPhoto and cclPhoto != empty -%}
+                      {%- assign imageUrl = cclPhoto -%}
+                    {%- else -%}
+                      {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                      {%- if image and image != empty -%}
+                        {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
                       {%- endif -%}
-                      {%if imageUrl == empty -%}
-                          {%- assign imageUrl = seriesLogoUrl -%}
-                      {%- endif -%}
-                      {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
-                      {%- assign parentPrimarySlug = item.PrimarySlug | Trim -%}
-                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                    {%- endif -%}
+                    {%if imageUrl == empty -%}
+                      {%- assign imageUrl = seriesLogo -%}
+                    {%- endif -%}
+                    {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
+                    {%- assign parentPrimarySlug = item.PrimarySlug | Trim -%}
+                    {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{imageUrl}}' actiontext:'Watch' date:'{{ date }}' ]}
                   {%- endfor -%}
               </div>
             </div>
         </div>
       </div>
     {%- endif -%}
-
   </div>
-
 {%- else -%}
-
   <div class="section page-title reverse">
     <div class="container">
       <div class="jumbotron text-center"><h1>Could not find message.</h1></div>
     </div>
   </div>
-
 {%- endif -%}
