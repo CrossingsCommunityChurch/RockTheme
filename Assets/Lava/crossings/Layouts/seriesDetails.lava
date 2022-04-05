@@ -51,32 +51,32 @@
             <div class="series-logo">
               <img class="cld-hidpi" src="" data-src="{{ seriesLogoUrl}}" alt="{{ item.Title }}" />
             </div>
-            <div class="series-details section text-center">
-              <hr class="sep">
-              <h1 class="heading">{{ item.Title }}</h1>
-              <p>{{ summary }}</p>
-              <div class="share">
-                <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
-                <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
-                <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
-                  <li>
-                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
-                      <i class="fa fa-fw fa-facebook"></i> Facebook
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
-                      <i class="fa fa-fw fa-twitter"></i> Twitter
-                    </a>
-                  </li>
-                  <li>
-                    <a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
-                      <i class="fa fa-fw fa-envelope-o"></i> Email
-                    </a>
-                  </li>
-                </ul>
+              <div class="series-details section text-center">
+                <hr class="sep">
+                <h1 class="heading">{{ item.Title }}</h1>
+                <p>{{ summary }}</p>
+                <div class="share">
+                  <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
+                  <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
+                  <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
+                    <li>
+                      <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
+                        <i class="fa fa-fw fa-facebook"></i> Facebook
+                      </a>
+                    </li>
+                    <li>
+                      <a href="https://twitter.com/intent/tweet?text={{ 'Global' | Page:'Url' | EscapeDataString }}" class="socialicon socialicon-twitter" title="" data-original-title="Share via Twitter">
+                        <i class="fa fa-fw fa-twitter"></i> Twitter
+                      </a>
+                    </li>
+                    <li>
+                      <a href="mailto:?Subject={{ Event.Name | EscapeDataString }}&Body={{ 'Global' | Page:'Url' }}"  class="socialicon socialicon-email" title="" data-original-title="Share via Email">
+                        <i class="fa fa-fw fa-envelope-o"></i> Email
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
@@ -103,28 +103,29 @@
                     {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
                   {%- endif -%}
                   {%- for child in sortedItems -%}
-                    {%- assign title = child.ChildContentChannelItem.Title -%}
-                    {%- assign seriesTitle = item.Title -%}
-                    {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
-                    {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
-                    {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-                    {%- assign imageSize = ',c_scale,h_325' -%}
-                    {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-                    {%- if cclPhoto and cclPhoto != empty -%}
-                      {%- assign imageUrl = cclPhoto -%}
-                    {%- else -%}
-                      {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
-                      {%- if image and image != empty -%}
-                        {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-                        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                      {%- assign title = child.ChildContentChannelItem.Title -%}
+                      {%- assign seriesTitle = item.Title -%}
+                      {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
+                      {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
+                      {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+                      {%- assign imageSize = ',c_scale,h_325' -%}
+                      {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                      {% assign imageUrl = "" %}
+                      {%- if cclPhoto and cclPhoto != empty -%}
+                        {%- assign imageUrl = cclPhoto -%}
+                      {%- else -%}
+                        {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                        {%- if image and image != empty -%}
+                            {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                            {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                          {%- endif -%}
                       {%- endif -%}
-                    {%- endif -%}
-                    {%if imageUrl == empty -%}
-                      {%- assign imageUrl = seriesLogo -%}
-                    {%- endif -%}
-                    {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
-                    {%- assign parentPrimarySlug = item.PrimarySlug | Trim -%}
-                    {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{imageUrl}}' actiontext:'Watch' date:'{{ date }}' ]}
+                      {%if imageUrl == empty -%}
+                          {%- assign imageUrl = seriesLogoUrl -%}
+                      {%- endif -%}
+                      {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
+                      {%- assign parentPrimarySlug = item.PrimarySlug | Trim -%}
+                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
                   {%- endfor -%}
               </div>
             </div>
