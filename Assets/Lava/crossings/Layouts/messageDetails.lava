@@ -12,11 +12,9 @@
   {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
   {%- if clPhoto and clPhoto != empty -%}
     {%- assign seriesLogoUrl = clPhoto -%}
-    {% comment %} {%- assign seriesLogoUrl = 'One' -%} {% endcomment %}
   {%- else -%}
     {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
     {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-    {% comment %} {%- assign seriesLogoUrl = 'Two' -%} {% endcomment %}
   {%- endif -%}
   {%- assign video = item | Attribute:'VimeoId' -%}
   {%- assign parentPath = 'sermons' -%}
@@ -35,6 +33,12 @@
   {{ metaDesc | AddMetaTagToHead:'name','description' }}
   {%- if item.ContentChannel.Name == 'Teaching Message' -%}
       {%- assign parentPath = 'teachings' -%}
+  {%- endif -%}
+  {%- if item.ContentChannel.Name == 'The Gathering Messages' -%}
+    {%- assign parentPath = 'gathering' -%}
+  {%- endif -%}
+  {%- if item.ContentChannel.Name == 'On Demand message' -%}
+    {%- assign parentPath = 'ondemand' -%}
   {%- endif -%}
   <div class="sermon-series-page">
     <div class="section page-title reverse">
@@ -158,13 +162,14 @@
                       {%if imageUrl == empty-%}
                         {%- assign imageUrl = seriesLogo -%}
                       {%- endif -%}
+                      {%- assign imageUrl = seriesLogo -%}
                       {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                       {%- assign parentPrimarySlug = parent.PrimarySlug | Trim -%}
                       {%- comment -%}
                         - Need better way to get links
                         - We are duplicating efforts to set images, may be a better way
                       {%- endcomment -%}
-                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'https://res.cloudinary.com/crossings-community-church/image/upload/q_auto,f_auto,dpr_1.0,c_scale,h_640{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
                     {%- endif -%}
                   {%- endfor -%}
                 {%- endfor -%}
