@@ -28,12 +28,12 @@
           <ul class="nav nav-tabs" style="padding-top:20px" role="tablist">
             <li class="active Elders-tab">
               <a href="#elders" role="tab" data-toggle="tab">
-                <p>Elders</p>
+                <p style="margin: 0px">Elders</p>
               </a>
             </li>
             <li class="Leadership-tab">
               <a href="#leadership" role="tab" data-toggle="tab">
-                <p>Church Leadership</p>
+                <p style="margin: 0px">Church Leadership</p>
               </a>
             </li>
           </ul>
