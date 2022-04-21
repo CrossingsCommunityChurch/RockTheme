@@ -51,6 +51,13 @@
             </div>
           </div>
         </div>
+          <div class="row" style="padding-top: 15px">
+            {% comment %} buttons here to go to other locatins and leadership.  {% endcomment %}
+            {%- if location == "Prisons"  -%}
+            {[ button buttontext:'Connect on Facebook' buttonstyle:'primary' buttonlink:'https://www.facebook.com/groups/2629291197293643/' ]}
+            {[ button buttontext:'Connect on Instagram' buttonstyle:'primary' buttonlink:'https://www.instagram.com/crossingsprison/' ]}
+            {%- endif -%}
+           </div>
       </div>
     </div>
   </div>
