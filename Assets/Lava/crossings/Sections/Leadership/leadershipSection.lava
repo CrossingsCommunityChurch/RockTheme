@@ -18,9 +18,9 @@
           <div class="row">
             <p>Crossings is elder-governed and staff-led. Explore our staff directory which includes our elders, church leadership, and pastoral staff.</p>
           </div>
-          {[ button buttonlink:'https://crossings.church/locations/okc' buttonstyle:'primary' buttontext:'OKC Campus' ]}
-          {[ button buttonlink:'https://crossings.church/locations/edmond' buttonstyle:'primary' buttontext:'Edmond Campus' ]}
-          {[ button buttonlink:'https://crossings.church/locations/online' buttonstyle:'primary' buttontext:'Online Campus' ]}
+          {[ button buttonlink:'https://crossings.church/locations/okc/#staffSection' buttonstyle:'primary' buttontext:'OKC Campus' ]}
+          {[ button buttonlink:'https://crossings.church/locations/edmond/#staffSection' buttonstyle:'primary' buttontext:'Edmond Campus' ]}
+          {[ button buttonlink:'https://crossings.church/locations/online/#staffSection' buttonstyle:'primary' buttontext:'Online Campus' ]}
           {[ button buttonlink:'https://missions.crossings.church/#staffSection' buttonstyle:'primary' buttontext:'Missions' ]}
 
           <!-- Navigation Tabs -->
