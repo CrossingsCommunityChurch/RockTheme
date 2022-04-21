@@ -18,6 +18,11 @@
           <div class="row">
             <p>Crossings is elder-governed and staff-led. Explore our staff directory which includes our elders, church leadership, and pastoral staff.</p>
           </div>
+          {[ button buttonlink:'https://crossings.church/locations/okc' buttonstyle:'primary' buttontext:'OKC Campus' ]}
+          {[ button buttonlink:'https://crossings.church/locations/edmond' buttonstyle:'primary' buttontext:'Edmond Campus' ]}
+          {[ button buttonlink:'https://crossings.church/locations/online' buttonstyle:'primary' buttontext:'Online Campus' ]}
+          {[ button buttonlink:'https://missions.crossings.church/#staffSection' buttonstyle:'primary' buttontext:'Missions' ]}
+
           <!-- Navigation Tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li class="active Elders-tab">
@@ -36,26 +41,21 @@
             <div class="tab-pane fade active in" id="elders">
               <div class="row flex-row flex-wrap justify-center location-content">
                 {%- person dataview:'118' where:'StaffRole *= "Elder"' Sort:'LastName' -%}
-                  {%- for person in personItems -%}
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
-                          <img src="{{ person.Photo.Url }}">
+                          <img src="https://res.cloudinary.com/crossings-community-church/image/upload/v1645545447/rock-person-photo/vvmhwqq49vl1icums1u8.jpg">
                         </div>
                         <div class="person-details">
-                          <h3 class="heading">{{ person.FullName }}</h3>
-                          <p class="lead mb-0">{{ person | Attribute: 'Position'}}</p>
+                          <h3 class="heading">Marty Grubbs</h3>
+                          <p class="lead mb-0">Senior Pastor</p>
                         </div>
                       </div>
-                 </div>
-                  {%- endfor -%}
-                {%- endperson -%}
-              </div>
-            </div>
-             <div class="tab-pane fade" id="leadership">
-              <div class="row flex-row flex-wrap justify-center location-content">
-                {%- person dataview:'118' where:'StaffRole *= "ELT"' Sort:'LastName' -%}
+                    </div>
                   {%- for person in personItems -%}
+                    {%- if person.FullName == "Marty Grubbs" -%}
+                      {%- continue -%}
+                    {%- else -%}
                     <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
@@ -67,6 +67,41 @@
                         </div>
                       </div>
                     </div>
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- endperson -%}
+              </div>
+            </div>
+             <div class="tab-pane fade" id="leadership">
+              <div class="row flex-row flex-wrap justify-center location-content">
+                {%- person dataview:'118' where:'StaffRole *= "ELT"' Sort:'LastName' -%}
+                    <div class="col-md-6 mb-2">
+                      <div class="person-item">
+                        <div class="person-image">
+                          <img src="https://res.cloudinary.com/crossings-community-church/image/upload/v1645545447/rock-person-photo/vvmhwqq49vl1icums1u8.jpg">
+                        </div>
+                        <div class="person-details">
+                          <h3 class="heading">Marty Grubbs</h3>
+                          <p class="lead mb-0">Senior Pastor</p>
+                        </div>
+                      </div>
+                    </div>
+                  {%- for person in personItems -%}
+                    {%- if person.FullName == "Marty Grubbs" -%}
+                      {%- continue -%}
+                    {%- else -%}
+                    <div class="col-md-6 mb-2">
+                      <div class="person-item">
+                        <div class="person-image">
+                          <img src="{{ person.Photo.Url }}">
+                        </div>
+                        <div class="person-details">
+                          <h3 class="heading">{{ person.FullName }}</h3>
+                          <p class="lead mb-0">{{ person | Attribute: 'Position'}}</p>
+                        </div>
+                      </div>
+                    </div>
+                    {%- endif -%}
                   {%- endfor -%}
                 {%- endperson -%}
               </div>
