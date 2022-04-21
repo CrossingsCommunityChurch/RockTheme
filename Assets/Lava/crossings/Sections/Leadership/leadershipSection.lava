@@ -24,7 +24,7 @@
           {[ button buttonlink:'https://missions.crossings.church/#staffSection' buttonstyle:'primary' buttontext:'Missions' ]}
 
           <!-- Navigation Tabs -->
-          <ul class="nav nav-tabs" role="tablist">
+          <ul class="nav nav-tabs" style="padding-top:20px" role="tablist">
             <li class="active Elders-tab">
               <a href="#elders" role="tab" data-toggle="tab">
                 <p>Elders</p>
