@@ -41,7 +41,6 @@
           <div class="container content-area" data-aos="fade-up">
               <div class="row">
                   <div class="col-md-12">
-                    <div style="display: flex; justify-content: center; align-items: center;">
                       {%- if subheading -%}
                         <h4 class="subheading">{{ subheading }}</h4>
                       {%- endif -%}
@@ -56,7 +55,6 @@
                             {{ buttons }}
                         </div>
                       {%- endif -%}
-                    </div>
                   </div>
               </div>
           </div>
