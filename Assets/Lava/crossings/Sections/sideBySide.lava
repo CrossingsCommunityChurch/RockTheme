@@ -104,7 +104,8 @@
             <img alt="{{ title }}" src="" data-src="{{ imageUrl }}" class="cld-hidpi img-responsive hidden-md hidden-lg">
         </div>
         <div class="col-md-6 text-content">
-            <div class='content-item' data-aos='fade-up' style="display: flex; justify-content: center; align-items: center;">
+            <div class='content-item' data-aos='fade-up'>
+            <div style="display: flex; justify-content: center; align-items: center;">
               {%- if subheading != empty -%}
                 <h4 class="subheading">{{  subheading }}</h4>
               {%- endif -%}
@@ -113,7 +114,6 @@
                 <hr class="sep">
               {%- endif -%}
             </div>
-
               {{ content }}
 
                 {%- if buttons != empty -%}
@@ -121,6 +121,7 @@
                     {{ buttons }}
                 {%- endif -%}
                 </div>
+            </div>
         </div>
 
     </div>
