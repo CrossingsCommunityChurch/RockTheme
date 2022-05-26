@@ -105,7 +105,6 @@
         </div>
         <div class="col-md-6 text-content">
             <div class='content-item' data-aos='fade-up'>
-            <div style="display: flex; justify-content: center; align-items: center;">
               {%- if subheading != empty -%}
                 <h4 class="subheading">{{  subheading }}</h4>
               {%- endif -%}
@@ -113,14 +112,14 @@
                 <h2 class="heading">{{ title }}</h2>
                 <hr class="sep">
               {%- endif -%}
-            </div>
+
               {{ content }}
 
                 {%- if buttons != empty -%}
                 <div class="buttons" data-aos="fade-up">
                     {{ buttons }}
-                {%- endif -%}
                 </div>
+                {%- endif -%}
             </div>
         </div>
 
