@@ -41,7 +41,7 @@
     {%- assign parentPath = 'ondemand' -%}
   {%- endif -%}
   <div class="sermon-series-page">
-    <div class="section page-title reverse" style="padding-top: 0px" >
+    <div class="section page-title reverse">
       <div class="container">
         <div class="jumbotron text-center"></div>
       </div>
@@ -51,12 +51,14 @@
         <div class="row">
           <div class="col-md-12">
             {%- if video != empty -%}
-            {[ videoPlayer vimeourl:'{{ video }}' ]}
+              {[ videoPlayer vimeourl:'{{ video }}' ]}
+            {%- else -%}
+            <div class="series-logo">
+              <img class="cld-hidpi" src="" data-src="{{ seriesLogoUrl }}" alt="{{ item.Title }}" />
+            </div>
             {%- endif -%}
-            <div class="series-details section text-center" style="padding-top: 150px">
-            {%- if video != empty -%}
+            <div class="series-details section text-center">
               <hr class="sep">
-            {%- endif -%}
               <h1 class="heading">{{ item.Title }}</h1>
               <h3 class="subheading">{{ speaker }} | {{ date }}</h3>
               <p class="text-left">{{ summary }}</p>
