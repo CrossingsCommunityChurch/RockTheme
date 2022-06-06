@@ -54,7 +54,7 @@
               {[ videoPlayer vimeourl:'{{ video }}' ]}
             {%- else -%}
             <div class="series-logo">
-              <img class="cld-hidpi" src="" data-src="{{ seriesLogoUrl }}" alt="{{ item.Title }}" />
+              <img class="cld-hidpi" src="" data-src="{{ clPhoto }}" alt="{{ item.Title }}" />
             </div>
             {%- endif -%}
             <div class="series-details section text-center">
