@@ -128,7 +128,7 @@
           <div class="media-list-items">
             <div class="row flex-row flex-wrap">
               <div class="col-md-12">
-                <h3 class="subheading" style="margin-bottom: 30px;">Other Messages in This Series</h3>
+                <h3 class="subheading" style="margin-bottom: 30px;">Other Stories</h3>
               </div>
               {%- contentchannelitem where:'Id == {{ ParentItemId }}' -%}
                 {%- for parent in contentchannelitemItems -%}
@@ -171,7 +171,7 @@
                         - Need better way to get links
                         - We are duplicating efforts to set images, may be a better way
                       {%- endcomment -%}
-                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                      {[ cardMedia link:'/dollar-club/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Learn More' date:'{{ date }}' ]}
                     {%- endif -%}
                   {%- endfor -%}
                 {%- endfor -%}
