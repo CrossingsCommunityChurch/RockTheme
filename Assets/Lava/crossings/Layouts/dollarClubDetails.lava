@@ -59,7 +59,7 @@
             {%- endif -%}
               <h1 class="heading">{{ item.Title }}</h1>
               <h3 class="subheading">{{ speaker }} | {{ date }}</h3>
-              <p>{{ summary }}</p>
+              <p class="text-left">{{ summary }}</p>
               {%- if notes != '' or questions != '' -%}
                 <div class="message-notes">
                   {%- if notes != '' -%}
