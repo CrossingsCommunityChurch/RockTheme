@@ -33,7 +33,7 @@
       TODO: This cannot be very performant, nested for loops serveral times
     {%- endcomment -%}
     {%- if item.ChildItems != 'empty' -%}
-      {%- assign sortedItems = item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc'-%}
+      {%- assign sortedItems = item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime asc'-%}
       <div class="section media-list bg-gray">
         <div class="container content-area">
             <div class="media-list-items">
