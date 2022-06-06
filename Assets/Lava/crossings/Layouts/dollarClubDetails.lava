@@ -136,7 +136,8 @@
               </div>
               {%- contentchannelitem where:'Id == {{ ParentItemId }}' -%}
                 {%- for parent in contentchannelitemItems -%}
-                  {%- for child in parent.ChildItems -%}
+                  {%- assign sortedItems = parent.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc'-%}
+                  {%- for child in sortedItems -%}
                     {%if child.ChildContentChannelItem.Id != item.Id -%}
                       {%- assign title = child.ChildContentChannelItem.Title -%}
                       {%- assign seriesTitle = parent.Title -%}
