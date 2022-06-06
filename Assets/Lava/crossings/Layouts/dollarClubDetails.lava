@@ -3,6 +3,9 @@
     It is used as the Content Channel Item View template
   {%- endcomment -%}
 
+  {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+  {%- assign imageSize = ',c_scale,h_640' -%}
+
 {%- if Item -%}
   {%- assign item = Item -%}
   {%- assign title = item.Title -%}
