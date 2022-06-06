@@ -20,7 +20,6 @@
     {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
   {%- endif -%}
   {%- assign video = item | Attribute:'VimeoId' -%}
-  {%- assign parentPath = 'sermons' -%}
   {% comment %} TODO: Change this to use cloudinary for documents as well.  {% endcomment %}
   {%- assign docStorageUrl = 'Global' | Attribute:'docsURL' | Prepend:'https://' -%}
   {%- assign notes = item | Attribute:'Notes', 'Url' -%}
@@ -34,15 +33,6 @@
   {%- capture metaDesc -%}{{ summary | StripHtml }} {{ speaker }}. {{ title }}{%- endcapture -%}
   {{ pageTitle | SetPageTitle }}
   {{ metaDesc | AddMetaTagToHead:'name','description' }}
-  {%- if item.ContentChannel.Name == 'Teaching Message' -%}
-      {%- assign parentPath = 'teachings' -%}
-  {%- endif -%}
-  {%- if item.ContentChannel.Name == 'The Gathering Messages' -%}
-    {%- assign parentPath = 'gathering' -%}
-  {%- endif -%}
-  {%- if item.ContentChannel.Name == 'On Demand message' -%}
-    {%- assign parentPath = 'ondemand' -%}
-  {%- endif -%}
   <div class="sermon-series-page">
     <div class="section page-title reverse">
       <div class="container">
