@@ -68,7 +68,9 @@
               {%- endif -%}
               <div class="share no-index">
                 <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
-                <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
+                <script>
+                  function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }
+                </script>
                 <ul class="socialsharing dropdown-menu" aria-labelledby="shareLabel">
                   <li>
                     <a href="https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}" onclick="return fbs_click()" target="_blank" class="socialicon socialicon-facebook" title="" data-original-title="Share via Facebook">
@@ -169,7 +171,7 @@
                         - Need better way to get links
                         - We are duplicating efforts to set images, may be a better way
                       {%- endcomment -%}
-                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'https://res.cloudinary.com/crossings-community-church/image/upload/q_auto,f_auto,dpr_1.0,c_scale,h_640{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
+                      {[ cardMedia link:'/media/{{ parentPath }}/{{ parentPrimarySlug }}/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Watch' date:'{{ date }}' ]}
                     {%- endif -%}
                   {%- endfor -%}
                 {%- endfor -%}
