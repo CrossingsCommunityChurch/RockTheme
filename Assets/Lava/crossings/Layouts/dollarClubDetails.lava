@@ -57,10 +57,10 @@
               <img class="cld-hidpi" src="" data-src="{{ clPhoto }}" alt="{{ item.Title }}" />
             </div>
             {%- endif -%}
-            <div class="series-details section text-center">
-              <hr class="sep">
-              <h1 class="heading">{{ item.Title }}</h1>
-              <h3 class="subheading">{{ speaker }} | {{ date }}</h3>
+            <div class="series-details section text-left">
+              <hr class="sep text-center">
+              <h1 class="heading text-center">{{ item.Title }}</h1>
+              <h3 class="subheading text-center">{{ speaker }} | {{ date }}</h3>
               <p class="text-left">{{ summary }}</p>
               {%- if notes != '' or questions != '' -%}
                 <div class="message-notes">
@@ -72,7 +72,7 @@
                   {%- endif -%}
                 </div>
               {%- endif -%}
-              <div class="share no-index">
+              <div class="share no-index text-center">
                 <a id="shareLabel" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="btn-outline-primary btn share-btn-toggle"><i class="fas fa-share"></i><span>Share</span></a>
                 <script>
                   function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }
@@ -96,7 +96,7 @@
                 </ul>
               </div>
               <div class="tags">
-                <p class="small"><i class="fas fa-tags"></i>
+                <p class="small text-center"><i class="fas fa-tags"></i>
                   {%- if item.ContentChannel.IsTaggingEnabled -%}
                     {%- comment -%}
                     Show the tags for this sermon message
