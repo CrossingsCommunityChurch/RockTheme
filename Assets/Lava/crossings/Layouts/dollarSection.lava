@@ -33,7 +33,7 @@
       TODO: This cannot be very performant, nested for loops serveral times
     {%- endcomment -%}
     {%- if item.ChildItems != 'empty' -%}
-      {%- assign sortedItems = item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime asc'-%}
+      {%- assign sortedItems = item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc'-%}
       <div class="section media-list bg-gray">
         <div class="container content-area">
             <div class="media-list-items">
@@ -49,7 +49,7 @@
                     {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
                     {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
                   {%- endif -%}
-                  {%- for child in item.ChildItems -%}
+                  {%- for child in sortedItems -%}
                       {%- assign title = child.ChildContentChannelItem.Title -%}
                       {%- assign seriesTitle = item.Title -%}
                       {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
