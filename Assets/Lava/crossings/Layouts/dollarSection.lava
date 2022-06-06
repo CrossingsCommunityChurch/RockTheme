@@ -1,0 +1,91 @@
+{%- comment -%}
+  Similar to Message Details, this shows the sermon series or teaching series details pages
+  Runs on Sermon Series, Teaching Series pages
+  It is included as the template used for the Content Channel Item View for Series
+{%- endcomment -%}
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = ',c_scale,h_640' -%}
+
+{%- contentchannelitem where:'ContentChannelId == 483' iterator:'items' sort:'Priority desc' -%}
+{%- for item in items -%}
+{%- if item -%}
+  {%- assign item = Item -%}
+  {%- assign title = item.Title -%}
+  {%- assign summary = item.Content -%}
+  {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {%- if clPhoto and clPhoto != empty -%}
+    {%- assign seriesLogoUrl = clPhoto -%}
+  {%- else -%}
+    {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+    {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+  {%- endif -%}
+  {%- assign parentPath = 'dollar-club' -%}
+  {%- assign titleCategory = 'Dollar Club' -%}
+
+  {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
+  {%- capture pageTitle -%}{{ title }} - {{ titleCategory }} | {{ org }}{%- endcapture%}
+  {%- capture metaDesc -%}{{ summary | StripHtml }} {{ title }}{%- endcapture -%}
+  {{ pageTitle | SetPageTitle }}
+  {{ metaDesc | AddMetaTagToHead:'name','description' }}
+    {%- comment -%}
+      TODO: This needs to get reworked to use some common shortcodes (card)
+      TODO: This cannot be very performant, nested for loops serveral times
+    {%- endcomment -%}
+    {%- if item.ChildItems != 'empty' -%}
+      {%- assign sortedItems = item.ChildItems | OrderBy:'ChildContentChannelItem.StartDateTime desc'-%}
+      <div class="section media-list bg-gray">
+        <div class="container content-area">
+            <div class="media-list-items">
+              <div class="row flex-row flex-wrap">
+                  <div class="col-md-12">
+                    <h3 class="subheading" style="margin-bottom: 30px;">Dollar Club Stories</h3>
+                  </div>
+                  {%- assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' -%}
+                  {%- if clPhoto and clPhoto != empty -%}
+                    {%- assign seriesLogo = clPhoto -%}
+                    {%- assign imageUrl = clPhoto -%}
+                  {%- else -%}
+                    {%- assign imageUrlPath = item | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                    {%- assign seriesLogoUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                  {%- endif -%}
+                  {%- for child in sortedItems -%}
+                      {%- assign title = child.ChildContentChannelItem.Title -%}
+                      {%- assign seriesTitle = item.Title -%}
+                      {%- assign speaker = child.ChildContentChannelItem | Attribute:'Speaker' -%}
+                      {%- assign date = child.ChildContentChannelItem.StartDateTime | Date:'MMM d, yyyy' -%}
+                      {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+                      {%- assign imageSize = ',c_scale,h_325' -%}
+                      {% assign cclPhoto = child.ChildContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+                      {% assign imageUrl = "" %}
+                      {%- if cclPhoto and cclPhoto != empty -%}
+                        {%- assign imageUrl = cclPhoto -%}
+                      {%- else -%}
+                        {%- assign image = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' -%}
+                        {%- if image and image != empty -%}
+                            {%- assign imageUrlPath = child.ChildContentChannelItem | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                            {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+                          {%- endif -%}
+                      {%- endif -%}
+                      {%if imageUrl == empty -%}
+                          {%- assign imageUrl = seriesLogoUrl -%}
+                      {%- endif -%}
+                      {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
+                      {%- assign parentPrimarySlug = item.PrimarySlug | Trim -%}
+                      {[ cardMedia link:'dollar-club/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Learn More' date:'{{ date }}' ]}
+                  {%- endfor -%}
+              </div>
+            </div>
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+{%- else -%}
+  <div class="section page-title reverse">
+    <div class="container">
+      <div class="jumbotron text-center"><h1>Could not find message.</h1></div>
+    </div>
+  </div>
+{%- endif -%}
+{%- endfor -%}
+{%- endcontentchannelitem -%}

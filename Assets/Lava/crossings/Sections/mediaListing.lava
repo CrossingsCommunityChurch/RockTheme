@@ -111,7 +111,7 @@
             <div v-for="item in sermonSeries" class="col-sm-6 card-series col-md-4">
               <a :href="seriesMediaUrl(item)" class="card  cardShadow">
                 <div class="thumb" >
-                   <img src="" class="event-img cld-hidpi" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :data-src="mediaImg(item)">
+                  <img src="" class="event-img cld-hidpi" style="border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;" :data-src="mediaImg(item)">
                 </div>
               </a>
             </div>
@@ -130,7 +130,7 @@
             <div v-for="item in teachingSeries" class="col-sm-6 card-series col-md-4">
               <a :href="seriesMediaUrl(item)" class="card  cardShadow">
                 <div class="thumb" >
-                   <img src="" class="event-img cld-hidpi" :data-src="mediaImg(item)">
+                  <img src="" class="event-img cld-hidpi" :data-src="mediaImg(item)">
                 </div>
               </a>
             </div>
