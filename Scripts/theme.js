@@ -80,8 +80,12 @@ $(document).ready(function() {
         e.preventDefault();
         // $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
-        if ($('.primary-nav').hasClass('fixed')) {
+        var fixed = $('.primary-nav').hasClass('fixed');
+        var style = $('.primary-nav').hasAttr('style');
+        if (fixed && !style) {
             $('.primary-nav').css('left', '30em');
+        } else {
+            $('.primary-nav').removeAttr('style');
         }
     });
 
