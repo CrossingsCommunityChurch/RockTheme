@@ -84,7 +84,7 @@ $(document).ready(function() {
             $('.primary-nav').css('left', '30em');
         }
         if ($('.primary-nav').hasAttr('style')) {
-            $('.primary-nav').css('left', '');
+            $('.primary-nav').removeAttr('style');
         }
     });
 
