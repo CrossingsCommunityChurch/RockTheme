@@ -76,7 +76,7 @@ $(document).ready(function() {
         menuWidth: menuWidth,
         easyClose: true,
     }).click(function(e) {
-        e.preventDefault();
+        // e.preventDefault();
         $('.primary-nav').addClass('sticky');
     });
 
