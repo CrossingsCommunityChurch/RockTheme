@@ -78,6 +78,7 @@ $(document).ready(function() {
     }).click(function(e) {
         e.preventDefault();
         // $('.primary-nav').addClass('sticky');
+        $('.primary-nav').addClass('left');
     });
 
     $('body').addClass('zoom');
