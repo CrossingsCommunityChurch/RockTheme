@@ -78,21 +78,10 @@ $(document).ready(function() {
         easyClose: true,
     }).click(function(e) {
         e.preventDefault();
-        // $('.primary-nav').addClass('sticky');
+        $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
-        var fixed = $('.primary-nav').hasClass('fixed');
-        var style = $('.primary-nav').hasAttr('style');
-        if (fixed && !style) {
-            $('.primary-nav').css('left', '30em');
-        } else {
-            $('.primary-nav').removeAttr('style');
-        }
-    });
 
-    // if ($('.primary-nav').hasClass('fixed')) {
-    //     $('.primary-nav').css('left', '30em');
-    // }
-    /*$('.account-menu').is(':visible') && */
+    });
 
     $('body').addClass('zoom');
 
