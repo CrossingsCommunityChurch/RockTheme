@@ -85,6 +85,8 @@ $(document).ready(function() {
             $('.primary-nav').removeAttr('style');
         } else if ($('.primary-nav').hasClass('fixed')) {
             $('.primary-nav').css('left', '30em');
+        } else {
+            $('.primary-nav').css('left', '30em');
         }
     });
 
