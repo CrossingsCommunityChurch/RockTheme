@@ -80,14 +80,14 @@ $(document).ready(function() {
         e.preventDefault();
         // $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
-        // if ($('.primary-nav').hasClass('fixed')) {
-        //     $('.primary-nav').css('left', '30em');
-        // }
+        if ($('.primary-nav').hasClass('fixed')) {
+            $('.primary-nav').css('left', '30em');
+        }
     });
 
-    if ($('.primary-nav').hasClass('fixed')) {
-        $('.primary-nav').css('left', '30em');
-    }
+    // if ($('.primary-nav').hasClass('fixed')) {
+    //     $('.primary-nav').css('left', '30em');
+    // }
     /*$('.account-menu').is(':visible') && */
 
     $('body').addClass('zoom');
