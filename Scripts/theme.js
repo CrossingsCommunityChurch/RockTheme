@@ -80,7 +80,7 @@ $(document).ready(function() {
         e.preventDefault();
         // $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
-        if (scroll > 140) {
+        if ($('.primary-nav').hasClass('fixed')) {
             $('.primary-nav').css('left', '30em');
         }
     });
