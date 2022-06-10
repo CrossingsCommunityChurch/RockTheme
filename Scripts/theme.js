@@ -61,7 +61,7 @@ $(document).ready(function() {
             $('.primary-nav').addClass('fixed push');
         } else {
             $('.primary-nav').removeClass('fixed push sticky');
-            $('.primary-nav').removeAttr('style');
+            // $('.primary-nav').removeAttr('style');
         }
     });
 
@@ -79,7 +79,7 @@ $(document).ready(function() {
     }).click(function(e) {
         e.preventDefault();
         // $('.primary-nav').addClass('sticky');
-        $('.primary-nav').css('left', '30em');
+        // $('.primary-nav').css('left', '30em');
     });
 
     $('body').addClass('zoom');
