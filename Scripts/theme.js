@@ -80,11 +80,11 @@ $(document).ready(function() {
         e.preventDefault();
         // $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
-        if ($('.primary-nav').hasClass('fixed') && $('.primary-nav:not(style)')) {
-            $('.primary-nav').css('left', '30em');
-        }
+        
         if ($('.primary-nav').hasAttr('style')) {
             $('.primary-nav').removeAttr('style');
+        } else if ($('.primary-nav').hasClass('fixed')) {
+            $('.primary-nav').css('left', '30em');
         }
     });
 
