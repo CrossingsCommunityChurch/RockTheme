@@ -85,9 +85,10 @@ $(document).ready(function() {
         // }
     });
 
-    if (/*$('.account-menu').is(':visible') && */$('.primary-nav').hasClass('fixed')) {
+    if ($('.primary-nav').hasClass('fixed')) {
         $('.primary-nav').css('left', '30em');
     }
+    /*$('.account-menu').is(':visible') && */
 
     $('body').addClass('zoom');
 
