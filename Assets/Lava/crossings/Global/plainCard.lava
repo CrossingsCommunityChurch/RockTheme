@@ -1,0 +1,38 @@
+{%- comment -%}
+  Used on the series details page.
+{%- endcomment -%}
+
+{%- comment -%}
+  img
+  title
+  series
+  speaker
+  date
+  link
+  actiontext
+{%- endcomment -%}
+
+<div class="col-sm-6 col-md-4">
+  <a href="{{ link }}" class="card cardShadow">
+    <div class="thumb">
+      <img src="" class="event-img cld-hidpi" data-src="{{ img }}">
+    </div>
+    <div class="row card-content-row">
+      <div class="card-content">
+        <div class="btn icon-button shadowDepth2">
+          <span>{{ actiontext }}</span>
+        </div>
+        <div class="col">
+          <div>
+            <h3>{{ title }}</h3>
+            {%- if series -%}
+              <h5 class="series">{{ series }}</h5>
+            {%- endif -%}
+            <h5>{{ speaker }}</h5>
+            <p class="date">{{ date }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
