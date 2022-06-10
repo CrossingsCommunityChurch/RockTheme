@@ -61,6 +61,7 @@ $(document).ready(function() {
             $('.primary-nav').addClass('fixed push');
         } else {
             $('.primary-nav').removeClass('fixed push sticky');
+            $('.primary-nav').removeAttr('style');
         }
     });
 
