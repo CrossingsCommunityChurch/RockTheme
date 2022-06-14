@@ -257,8 +257,8 @@
     ;
     position: fixed; /* Fallback */
     // position: absolute;
-    // left: 0;
-    // right: 0;
+    left: 0;
+    right: 0;
     z-index: 99;
     width: 100%;
     width: -webkit-fill-available;
@@ -271,14 +271,14 @@
     }
 
     &.fixed {
-        // position: fixed !important;
+        position: fixed !important;
         top: 0 !important;
         z-index: 99;
-        // left: 0;
-        // right: 0;
+        left: 0;
+        right: 0;
 
         &.sticky {
-            // position: sticky !important;
+            position: sticky !important;
         }
     }
 
@@ -296,9 +296,9 @@
 
 @media (min-width: @screen-desktop) {
     .primary-nav {
-        // position: absolute;
-        // right: 0;
-        // left: 0;
+        position: absolute;
+        right: 0;
+        left: 0;
         top: auto;
         z-index: 99;
         background-color: transparent;
