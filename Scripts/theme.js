@@ -60,7 +60,7 @@ $(document).ready(function() {
         if (scroll >= 140) {
             $('.primary-nav').addClass('fixed');
         } else {
-            $('.primary-nav').removeClass('fixed sticky');
+            $('.primary-nav').removeClass('fixed');
             // $('.primary-nav').removeAttr('style');
         }
     });
@@ -78,7 +78,7 @@ $(document).ready(function() {
         easyClose: true,
     }).click(function(e) {
         e.preventDefault();
-        $('.primary-nav').addClass('sticky');
+        // $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
 
     });
