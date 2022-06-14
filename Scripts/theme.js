@@ -82,6 +82,10 @@ $(document).ready(function() {
         // $('.primary-nav').css('left', '30em');
     });
 
+    $('#close-left-arrow').click(function() {
+        $('#close-left-arrow').removeClass('active');
+    });
+
     $('body').addClass('zoom');
 
 
