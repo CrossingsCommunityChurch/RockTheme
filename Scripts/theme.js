@@ -63,11 +63,6 @@ $(document).ready(function() {
             $('.primary-nav').removeClass('fixed sticky');
             // $('.primary-nav').removeAttr('style');
         }
-
-        let windowSize = $(window).width();
-        if (windowSize < 992) {
-            $('.primary-nav').addClass('push');
-        }
     });
 
     let menuWidth = '30em';
