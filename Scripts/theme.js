@@ -80,7 +80,6 @@ $(document).ready(function() {
         e.preventDefault();
         // $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
-
     });
 
     $('body').addClass('zoom');
