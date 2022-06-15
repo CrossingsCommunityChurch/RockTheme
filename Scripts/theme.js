@@ -78,6 +78,7 @@ $(document).ready(function() {
         easyClose: true,
     }).click(function(e) {
         e.preventDefault();
+        $('#login').addClass('active');
         // $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
     });
