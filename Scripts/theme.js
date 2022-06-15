@@ -87,6 +87,7 @@ $(document).ready(function() {
         menu: '#account-menu',
         menuWidth: menuWidth,
         easyClose: true,
+        state: closed,
     }).click(function(e) {
         e.preventDefault();
         $('#account-menu').css('left', '-30em');
