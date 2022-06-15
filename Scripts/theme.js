@@ -82,7 +82,8 @@ $(document).ready(function() {
         // $('.primary-nav').css('left', '30em');
     });
 
-    $('#close-left-arrow').click(function() {
+    $('#close-left-arrow').click(function(e) {
+        e.preventDefault();
         $('#account-menu').css('left', '-30em');
         $('#login').removeClass('active');
     });
