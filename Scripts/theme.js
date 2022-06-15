@@ -77,14 +77,18 @@ $(document).ready(function() {
         menuWidth: menuWidth,
         easyClose: true,
     }).click(function(e) {
-        // e.preventDefault();
+        e.preventDefault();
         $('#login').addClass('active');
         // $('.primary-nav').addClass('sticky');
         // $('.primary-nav').css('left', '30em');
     });
 
-    $('#close-left-arrow').click(function(e) {
-        // e.preventDefault();
+    $('#close-left-arrow').bigSlide({
+        menu: '#account-menu',
+        menuWidth: menuWidth,
+        easyClose: true,
+    }).click(function(e) {
+        e.preventDefault();
         $('#account-menu').css('left', '-30em');
         $('#login').removeClass('active');
     });
