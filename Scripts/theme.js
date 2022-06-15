@@ -76,7 +76,6 @@ $(document).ready(function() {
         menu: '#account-menu',
         menuWidth: menuWidth,
         easyClose: true,
-        state: closed,
     }).click(function(e) {
         e.preventDefault();
         $('#login').addClass('active');
@@ -88,11 +87,13 @@ $(document).ready(function() {
         menu: '#account-menu',
         menuWidth: menuWidth,
         easyClose: false,
-    }).click(function(e) {
-        e.preventDefault();
-        $('#account-menu').css('left', '-30em');
-        $('#login').removeClass('active');
-    });
+    }).click(
+        controller.setState(closed),
+        function(e) {
+            e.preventDefault();
+            $('#account-menu').css('left', '-30em');
+            $('#login').removeClass('active');
+        });
 
     $('body').addClass('zoom');
 
