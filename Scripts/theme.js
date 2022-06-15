@@ -83,7 +83,7 @@ $(document).ready(function() {
     });
 
     $('#close-left-arrow').click(function() {
-        $('#login').css('left', '-30em');
+        $('#account-menu').css('left', '-30em');
     });
 
     $('body').addClass('zoom');
