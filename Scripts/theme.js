@@ -83,12 +83,10 @@ $(document).ready(function() {
         // $('.primary-nav').css('left', '30em');
     });
 
-    $('#close-left-arrow').bigSlide({
-        menu: '#account-menu',
-        menuWidth: menuWidth,
-        easyClose: false,
-    }).click(
-        controller.setState(closed),
+    $('#close-left-arrow').bigSlide.click(
+        toggleClose()
+    ).click(
+        toggleClose(),
         function(e) {
             e.preventDefault();
             $('#account-menu').css('left', '-30em');
