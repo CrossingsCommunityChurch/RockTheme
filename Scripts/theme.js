@@ -84,6 +84,7 @@ $(document).ready(function() {
 
     $('#close-left-arrow').click(function() {
         $('#account-menu').css('left', '-30em');
+        $('#login').removeClass('active');
     });
 
     $('body').addClass('zoom');
