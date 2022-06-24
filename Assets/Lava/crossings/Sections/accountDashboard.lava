@@ -16,6 +16,7 @@
           <h4>{{CurrentPerson.FirstName}} {{CurrentPerson.LastName}}</h4>
           <p>{{CurrentPerson.Email}}</p>
           <p><a class="logout-btn btn btn-sm" href="/?Logout=True" class="btn btn-block">Logout</a></p>
+          <a><i id="close-left-arrow" class="account-toggle fa fa-arrow-alt-circle-left fa-2x" style="position: absolute; top: 15px; right: 15px; cursor: pointer;"></i></a>
         </div>
     </div>
     <nav class="account-nav" role="navigation">

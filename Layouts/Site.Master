@@ -66,7 +66,7 @@
         <div class="wrapper-style {{ site }}">
     </Rock:Lava>
     <form id="form1" runat="server">
-        <div class="slide-wrap push">
+        <div class="slide-wrap">
             <Rock:Zone name="Alerts" runat="server" />
             <nav class="primary-nav flat reverse">
                 <div class="navigation">

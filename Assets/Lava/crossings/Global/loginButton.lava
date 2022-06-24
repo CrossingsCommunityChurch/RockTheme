@@ -3,7 +3,7 @@
 {%- endcomment -%}
 
 {%- if CurrentPerson -%}
-  <a href="#" class="account-toggle login-btn btn btn-outline-thin">
+  <a id="login" href="#" class="account-toggle login-btn btn btn-outline-thin">
     <i class="fas fa-bars"></i> <span>Account</span>
   </a>
 {%- else -%}

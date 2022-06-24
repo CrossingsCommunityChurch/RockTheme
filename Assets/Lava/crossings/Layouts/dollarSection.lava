@@ -72,7 +72,7 @@
                       {%- endif -%}
                       {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                       {%- assign parentPrimarySlug = item.PrimarySlug | Trim -%}
-                      {[ cardMedia link:'dollar-club/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Learn More' date:'{{ date }}' ]}
+                      {[ plainCard link:'dollar-club/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Learn More' date:'{{ date }}' ]}
                   {%- endfor -%}
               </div>
             </div>
