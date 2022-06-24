@@ -12,7 +12,7 @@
               <img src="{{ CurrentPerson.PhotoUrl }}">
             {%- endif -%}
         </div>
-        <div class="profile-info">
+        <div class="profile-info" style="word-break: break-all;">
           <h4>{{CurrentPerson.FirstName}} {{CurrentPerson.LastName}}</h4>
           <p>{{CurrentPerson.Email}}</p>
           <p><a class="logout-btn btn btn-sm" href="/?Logout=True" class="btn btn-block">Logout</a></p>
