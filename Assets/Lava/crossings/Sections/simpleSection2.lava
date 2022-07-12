@@ -16,7 +16,7 @@
 {%- if channelAnchor != '' -%} <div class="anchor" id="{{channelAnchor}}"></div> {%- endif -%}
 
 {%- assign backgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
-{%- if backgroundColor != '' -%} <style>.bgcolor{background-color: BackgroundColor;}</style> {%- endif -%}
+{%- if backgroundColor != '' -%} <style>.bgcolor{background-color: backgroundColor;}</style> {%- endif -%}
 
 {%- for item in Items -%}
 {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
