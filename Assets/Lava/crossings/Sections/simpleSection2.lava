@@ -16,7 +16,7 @@
 {%- if channelAnchor != '' -%} <div class="anchor" id="{{channelAnchor}}"></div> {%- endif -%}
 
 {%- assign backgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
-{%- if backgroundColor != '' -%} <style>.html{background-color: BackgroundColor;}</style> {%- endif -%}
+{%- if backgroundColor != '' -%} <style>.bgcolor{background-color: BackgroundColor;}</style> {%- endif -%}
 
 {%- for item in Items -%}
 {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
@@ -36,7 +36,7 @@
 {%- assign content = item.Content -%}
 {%- assign buttons = item | Attribute: 'lava' | HtmlDecode -%}
 
-<div class="container-fluid section simple-section {% if useBackground == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}">
+<div class="bgcolor container-fluid section simple-section {% if useBackground == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}">
       {%- if useBackground == 'Yes' and imageUrl -%}
         <div class="img" style="background-image: url('{{ imageUrl }}')"></div>
       {%- endif -%}
