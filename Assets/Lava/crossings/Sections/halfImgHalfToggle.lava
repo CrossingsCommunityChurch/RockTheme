@@ -79,6 +79,54 @@
 </div>
 {%- endif -%}
 <section class="contentComponent contentComponent-split section split-section side-by-side">
+{%- for item in Items -%}
+    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+    {%- if clPhoto and clPhoto != empty -%}
+        {%- assign imageUrl = clPhoto -%}
+    {%- else -%}
+      {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+    {%- endif -%}
+    {%- assign title = item.Title -%}
+    {%- assign subheading = item | Attribute: 'subheading' -%}
+    {%- assign content = item.Content | HtmlDecode -%}
+    {%- assign buttons = item | Attribute: 'lava' -%}
+    {%- assign anchor = item | Attribute: 'AnchorID' | HtmlDecode -%}
+
+    <div {% if anchor != empty %} id="{{anchor}}" {% endif %} class="row flex-row">
+
+        {%- if imageUrlPath != empty -%}
+        <div class="cover-half visible-md-block visible-lg-block">
+          <img class="cld-hidpi" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
+        </div>
+        {%- endif -%}
+        <div class="col-md-6">
+            <img alt="{{ title }}" src="" data-src="{{ imageUrl }}" class="cld-hidpi img-responsive hidden-md hidden-lg">
+        </div>
+        <div class="col-md-6 text-content">
+            <div class='content-item' data-aos='fade-up'>
+              {%- if subheading != empty -%}
+                <h4 class="subheading">{{  subheading }}</h4>
+              {%- endif -%}
+              {%- if title != empty -%}
+                <h2 class="heading">{{ title }}</h2>
+                <hr class="sep">
+              {%- endif -%}
+
+              {{ content }}
+
+                {%- if buttons != empty -%}
+                <div class="buttons" data-aos="fade-up">
+                    {{ buttons }}
+                </div>
+                {%- endif -%}
+            </div>
+        </div>
+
+    </div>
+{%- endfor -%}
+</section>
+<section>
 {%- comment -%}
     Toggle List Content Component
     A series of items with titles that can be toggled to show their content
