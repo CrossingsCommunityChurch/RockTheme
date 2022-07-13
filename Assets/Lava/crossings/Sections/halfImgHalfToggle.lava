@@ -61,23 +61,6 @@
 }
 {% endstylesheet %}
 
-{%- if channelAnchor != empty -%} <div class="anchor" id="{{channelAnchor}}"></div> {%- endif -%}
-
-{%- if channelSectionTitle != empty -%}
-<div class="section">
-    <div class="row">
-        <div class="container content-area" data-aos="fade-up">
-            <h2 class="text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
-            <hr class="sep">
-            {%- if channelSectionSummary != empty -%}
-                <div class="summary text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>
-                {{ channelSectionSummary }}
-                </div>
-            {%- endif -%}
-        </div>
-    </div>
-</div>
-{%- endif -%}
 <section class="contentComponent contentComponent-split-toggle section split-section side-by-side">
 {%- for item in Items -%}
     {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
