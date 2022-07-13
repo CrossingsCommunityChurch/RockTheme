@@ -34,7 +34,7 @@
 
 {% stylesheet id:'contentcomponent-split' %}
 .contentComponent-split .row {
-    min-height: 500px;
+    min-height: 575px;
     position: relative;
 }
 
