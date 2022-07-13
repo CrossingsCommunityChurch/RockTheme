@@ -18,6 +18,35 @@
 
 {%- endcomment -%}
 
+{% stylesheet id:'contentcomponent-split-toggle' %}
+    .contentComponent-split .row {
+        min-height: 575px;
+        position: relative;
+    }
+    
+    .contentComponent-split-toggle .cover-half {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .contentComponent-split-toggle .cover-half.cover-right {
+        left: auto;
+        right: 0;
+    }
+    
+    .contentComponent-split-toggle .cover-half img {
+        min-width: 100%;
+        width: auto;
+        height: 100%;
+        object-fit: cover;
+        object-position: 50% 50%;
+    }
+{% endstylesheet %}
+
 {%- assign contentItemStyle = '' -%}
 {%- assign contentTextColor = '' -%}
 
@@ -38,7 +67,7 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
-<div class="section toggle-content-list bg-gray" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+<div class="section toggle-content-list bg-gray contentComponent-split row" style="display: flex;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
   <div style="width: 50%;">
     <div class="container content-area">
         <div class="toggle-list-items">
@@ -66,7 +95,7 @@
         </div>
     </div>
   </div>
-  <div style="width: 50%;">
+  <div class="contentComponent-split cover-half cover-right">
     {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
     {%- assign imageSize = ',c_scale,w_auto' -%}
     {%- for item in Items -%}
@@ -79,7 +108,7 @@
         {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
     {%- endif -%}
     {%- if imageUrl != empty -%}
-        <img class="" alt="{{ title }}" src="{{ imageUrl }}" data-src="{{ imageUrl }}">
+        <img class="img" alt="{{ title }}" src="{{ imageUrl }}" data-src="{{ imageUrl }}">
         {%- break -%}
     {%- endif -%}
     {%- endfor -%}
