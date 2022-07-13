@@ -79,6 +79,7 @@
         {%- endif -%}
         {%- if imageUrl != empty -%}
             <img class="" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
+            {%- break -%}
         {%- endif -%}
     {%- endfor -%}
         <img class="" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
