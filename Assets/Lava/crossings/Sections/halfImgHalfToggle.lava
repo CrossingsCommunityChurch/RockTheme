@@ -19,7 +19,7 @@
 {%- endcomment -%}
 
 {% stylesheet id:'contentcomponent-split-toggle' %}
-    .contentComponent-split-toggle.row {
+    .contentComponent-split-toggle .row {
         position: relative;
     }
     
@@ -65,51 +65,52 @@
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
-
-<div class="section toggle-content-list bg-gray contentComponent-split-toggle row" style="display: flex;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
-  <div style="width: 50%;">
-    <div class="container content-area">
-        <div class="toggle-list-items">
-          {%- if channelSectionTitle != empty -%}
-              <h2 class="text-center heading" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
-              <hr class="sep">
-          {%- endif -%}
-          {%- if channelSectionSummary != empty -%}
-              <div class="summary text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>
-              {{ channelSectionSummary }}
-              </div>
-          {%- endif -%}
-          <div class="row">
-              <div class="col-md-12">
-                {%- for item in Items -%}
-                    {%- assign title = item.Title -%}
-                    {%- assign content = item.Content | Escape -%}
-                    {%- assign icon = item | Attribute:'Icon' -%}
-                    {%- assign subheading = item | Attribute:'subheading' -%}
-                    {%- capture toggleIdentifier -%}{{title | Remove:' ' | ToCssClass  }}{{ forloop.index }}{%- endcapture -%}
-                    {[ toggleItem title:'{{title}}' content:'{{content}}' subheading:'{{subheading}}' icon:'{{icon}}' identifier:'{{toggleIdentifier}}' ]}
-                {%- endfor -%}
-              </div>
-          </div>
+<div class="contentComponent-split-toggle">
+    <div class="section toggle-content-list bg-gray row" style="display: flex;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+        <div style ="width: 50%;">
+            <div class="container content-area">
+                <div class="toggle-list-items">
+                    {%- if channelSectionTitle != empty -%}
+                        <h2 class="text-center heading" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+                        <hr class="sep">
+                    {%- endif -%}
+                    {%- if channelSectionSummary != empty -%}
+                        <div class="summary text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>
+                        {{ channelSectionSummary }}
+                        </div>
+                    {%- endif -%}
+                    <div class="row">
+                        <div class="col-md-12">
+                            {%- for item in Items -%}
+                                {%- assign title = item.Title -%}
+                                {%- assign content = item.Content | Escape -%}
+                                {%- assign icon = item | Attribute:'Icon' -%}
+                                {%- assign subheading = item | Attribute:'subheading' -%}
+                                {%- capture toggleIdentifier -%}{{title | Remove:' ' | ToCssClass  }}{{ forloop.index }}{%- endcapture -%}
+                                {[ toggleItem title:'{{title}}' content:'{{content}}' subheading:'{{subheading}}' icon:'{{icon}}' identifier:'{{toggleIdentifier}}' ]}
+                            {%- endfor -%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cover-half cover-right">
+            {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+            {%- assign imageSize = ',c_scale,w_auto' -%}
+            {%- for item in Items -%}
+            {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+            {%- assign title = item.Title -%}
+            {%- if clPhoto and clPhoto != empty -%}
+                {%- assign imageUrl = clPhoto -%}
+            {%- else -%}
+                {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+            {%- endif -%}
+            {%- if imageUrl != empty -%}
+                <img class="img" alt="{{ title }}" src="{{ imageUrl }}" data-src="{{ imageUrl }}">
+                {%- break -%}
+            {%- endif -%}
+            {%- endfor -%}
         </div>
     </div>
-  </div>
-  <div class="cover-half cover-right">
-    {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-    {%- assign imageSize = ',c_scale,w_auto' -%}
-    {%- for item in Items -%}
-    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-    {%- assign title = item.Title -%}
-    {%- if clPhoto and clPhoto != empty -%}
-        {%- assign imageUrl = clPhoto -%}
-    {%- else -%}
-        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-    {%- endif -%}
-    {%- if imageUrl != empty -%}
-        <img class="img" alt="{{ title }}" src="{{ imageUrl }}" data-src="{{ imageUrl }}">
-        {%- break -%}
-    {%- endif -%}
-    {%- endfor -%}
-  </div>
 </div>
