@@ -96,7 +96,7 @@
     <div {% if anchor != empty %} id="{{anchor}}" {% endif %} class="row flex-row">
 
         {%- if imageUrlPath != empty -%}
-        <div class="cover-half visible-md-block visible-lg-block">
+        <div class="cover-half img visible-md-block visible-lg-block">
           <img class="cld-hidpi" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
         </div>
         {%- endif -%}
