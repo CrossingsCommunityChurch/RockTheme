@@ -19,7 +19,7 @@
 {%- endcomment -%}
 
 {% stylesheet id:'contentcomponent-split-toggle' %}
-    .contentComponent-split-toggle .row {
+    .contentComponent-split-toggle.row {
         position: relative;
     }
     
