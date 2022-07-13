@@ -79,5 +79,6 @@
         {%- if imageUrl != empty -%}
             <img class="" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
         {%- endif -%}
+        <img class="" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
     </div>
 </div>
