@@ -96,8 +96,8 @@
     <div {% if anchor != empty %} id="{{anchor}}" {% endif %} class="row flex-row">
 
         {%- if imageUrlPath != empty -%}
-        <div class="cover-half img visible-md-block visible-lg-block">
-          <img class="cld-hidpi" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
+        <div class="cover-half visible-md-block visible-lg-block">
+          <img class="cld-hidpi img" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
         </div>
         {%- endif -%}
         {%- comment -%}
@@ -140,7 +140,7 @@
         {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
         {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
         
-        <div class="section toggle-content-list bg-gray contentComponent-split cover-half cover-right" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+        <div class="section toggle-content-list bg-gray cover-half cover-right" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
             <div class="container content-area">
                 <div class="toggle-list-items">
                 {%- if channelSectionTitle != empty -%}
