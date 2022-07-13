@@ -62,26 +62,26 @@
                     {[ toggleItem title:'{{title}}' content:'{{content}}' subheading:'{{subheading}}' icon:'{{icon}}' identifier:'{{toggleIdentifier}}' ]}
                 {%- endfor -%}
               </div>
-            </div>
+          </div>
         </div>
     </div>
-    <div style="width: 50%;">
-        {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-        {%- assign imageSize = ',c_scale,w_auto' -%}
-        {%- for item in Items -%}
-        {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-        {%- assign title = item.Title -%}
-        {%- if clPhoto and clPhoto != empty -%}
-            {%- assign imageUrl = clPhoto -%}
-        {%- else -%}
-            {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-            {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
-        {%- endif -%}
-        {%- if imageUrl != empty -%}
-            <img class="" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
-            {%- break -%}
-        {%- endif -%}
+  </div>
+  <div style="width: 50%;">
+    {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+    {%- assign imageSize = ',c_scale,w_auto' -%}
+    {%- for item in Items -%}
+    {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+    {%- assign title = item.Title -%}
+    {%- if clPhoto and clPhoto != empty -%}
+        {%- assign imageUrl = clPhoto -%}
+    {%- else -%}
+        {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+        {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+    {%- endif -%}
+    {%- if imageUrl != empty -%}
+        <img class="" alt="{{ title }}" src="{{ imageUrl }}" data-src="{{ imageUrl }}">
+        {%- break -%}
+    {%- endif -%}
     {%- endfor -%}
-        <img class="" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
-    </div>
+  </div>
 </div>
