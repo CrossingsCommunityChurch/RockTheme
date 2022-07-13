@@ -1,0 +1,148 @@
+{%- comment -%}
+    Side By Side Content Component
+    A series of side by side (image - text) items
+    Items will alternate left and right aligned image
+    Use Allow Multiple Content Items
+
+    Section Options
+    @Background Color
+    @ForegroundColor
+    @Section Anchor
+
+    Item Options
+    @AssetImage - image to be shown next to text
+    @Title
+    @Subheading
+    @lava - typically used for buttons
+    @Content
+
+{%- endcomment -%}
+
+{%- assign contentItemStyle = '' -%}
+{%- assign contentTextColor = '' -%}
+
+{%- assign channelTitleSize  =  ContentChannel | Attribute:'TitleSize' | Default:'h1' -%}
+{%- assign channelContentAlignment  =  ContentChannel | Attribute:'ContentAlignment' -%}
+{%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
+{%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = ',c_scale,w_auto' -%}
+
+{%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
+{%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
+
+{% stylesheet id:'contentcomponent-split' %}
+.contentComponent-split .row {
+    min-height: 450px;
+    position: relative;
+}
+
+.contentComponent-split .cover-half {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.contentComponent-split .cover-half.cover-right {
+    left: auto;
+    right: 0;
+}
+
+.contentComponent-split .cover-half img {
+    min-width: 100%;
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 50%;
+}
+{% endstylesheet %}
+
+{%- if channelAnchor != empty -%} <div class="anchor" id="{{channelAnchor}}"></div> {%- endif -%}
+
+{%- if channelSectionTitle != empty -%}
+<div class="section">
+    <div class="row">
+        <div class="container content-area" data-aos="fade-up">
+            <h2 class="text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+            <hr class="sep">
+            {%- if channelSectionSummary != empty -%}
+                <div class="summary text-center" {% if contentTextColor != empty %}style='{{ contentTextColor }}'{% endif %}>
+                {{ channelSectionSummary }}
+                </div>
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+{%- endif -%}
+<section class="contentComponent contentComponent-split section split-section side-by-side">
+{%- comment -%}
+    Toggle List Content Component
+    A series of items with titles that can be toggled to show their content
+    Use Allow Multiple Content Items
+
+    Section Options (Optional)
+    @SectionTitle
+    @SectionSummary
+    @Background Color
+    @ForegroundColor
+    @Section Anchor
+
+    Item Options
+    @Title (required)
+    @Icon - Font Awesome Class
+    @Subheading - Runs inline next to title
+    @Content (required) - Toggled Viewable Content
+
+{%- endcomment -%}
+
+{%- assign contentItemStyle = '' -%}
+{%- assign contentTextColor = '' -%}
+
+{%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+{%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
+{%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
+{%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
+{%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
+
+{%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}
+    {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
+{%- endif -%}
+
+{%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}
+      {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
+  {%- endif -%}
+
+{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
+{%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
+
+<div class="section toggle-content-list bg-gray" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+  <div class="container content-area">
+      <div class="toggle-list-items">
+        {%- if channelSectionTitle != empty -%}
+            <h2 class="text-center heading" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+            <hr class="sep">
+        {%- endif -%}
+        {%- if channelSectionSummary != empty -%}
+            <div class="summary text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>
+            {{ channelSectionSummary }}
+            </div>
+        {%- endif -%}
+        <div class="row">
+            <div class="col-md-12">
+                {%- for item in Items -%}
+                  {%- assign title = item.Title -%}
+                  {%- assign content = item.Content | Escape -%}
+                  {%- assign icon = item | Attribute:'Icon' -%}
+                  {%- assign subheading = item | Attribute:'subheading' -%}
+                  {%- capture toggleIdentifier -%}{{title | Remove:' ' | ToCssClass  }}{{ forloop.index }}{%- endcapture -%}
+                  {[ toggleItem title:'{{title}}' content:'{{content}}' subheading:'{{subheading}}' icon:'{{icon}}' identifier:'{{toggleIdentifier}}' ]}
+                {%- endfor -%}
+            </div>
+        </div>
+  </div>
+</div>
+</section>
