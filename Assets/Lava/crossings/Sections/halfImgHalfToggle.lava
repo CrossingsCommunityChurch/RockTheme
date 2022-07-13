@@ -100,9 +100,6 @@
           <img class="cld-hidpi" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
         </div>
         {%- endif -%}
-        <div class="col-md-6">
-            <img alt="{{ title }}" src="" data-src="{{ imageUrl }}" class="cld-hidpi img-responsive hidden-md hidden-lg">
-        </div>
         {%- comment -%}
             Toggle List Content Component
             A series of items with titles that can be toggled to show their content
@@ -143,7 +140,7 @@
         {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
         {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
         
-        <div class="section toggle-content-list bg-gray" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+        <div class="section toggle-content-list bg-gray contentComponent-split cover-half cover-right" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
             <div class="container content-area">
                 <div class="toggle-list-items">
                 {%- if channelSectionTitle != empty -%}
