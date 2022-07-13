@@ -68,6 +68,7 @@
     <div style="width: 50%;">
         {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
         {%- assign imageSize = ',c_scale,w_auto' -%}
+        {%- for item in Items -%}
         {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
         {%- assign title = item.Title -%}
         {%- if clPhoto and clPhoto != empty -%}
@@ -79,6 +80,7 @@
         {%- if imageUrl != empty -%}
             <img class="" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
         {%- endif -%}
+    {%- endfor -%}
         <img class="" alt="{{ title }}" src="" data-src="{{ imageUrl }}">
     </div>
 </div>
