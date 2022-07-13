@@ -19,8 +19,7 @@
 {%- endcomment -%}
 
 {% stylesheet id:'contentcomponent-split-toggle' %}
-    .contentComponent-split .row {
-        min-height: 575px;
+    .contentComponent-split-toggle .row {
         position: relative;
     }
     
@@ -67,7 +66,7 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 
-<div class="section toggle-content-list bg-gray contentComponent-split row" style="display: flex;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+<div class="section toggle-content-list bg-gray contentComponent-split-toggle row" style="display: flex;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
   <div style="width: 50%;">
     <div class="container content-area">
         <div class="toggle-list-items">
@@ -95,7 +94,7 @@
         </div>
     </div>
   </div>
-  <div class="contentComponent-split cover-half cover-right">
+  <div class="cover-half cover-right">
     {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
     {%- assign imageSize = ',c_scale,w_auto' -%}
     {%- for item in Items -%}
