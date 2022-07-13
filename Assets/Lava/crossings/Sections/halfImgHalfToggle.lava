@@ -21,6 +21,7 @@
 {% stylesheet id:'contentcomponent-split-toggle' %}
     .contentComponent-split-toggle .row {
         position: relative;
+        min-height: 450px;
     }
     
     .contentComponent-split-toggle .cover-half {
