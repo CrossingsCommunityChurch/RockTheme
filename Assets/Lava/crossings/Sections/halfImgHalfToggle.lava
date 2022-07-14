@@ -47,6 +47,9 @@
             height: 100%;
             object-fit: cover;
             object-position: 50% 50%;
+            }
+        .w-50 {
+            width: 50%;
         }
     }
     @media only screen and (max-width: 992px) {
@@ -102,7 +105,7 @@
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 <div class="contentComponent-split-toggle">
     <div class="section toggle-content-list bg-gray row" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
-        <div style ="width: 50%; display: flex;">
+        <div class="w-50" style ="display: flex;">
             <div class="container content-area">
                 <div class="toggle-list-items">
                     {%- if channelSectionTitle != empty -%}
@@ -114,7 +117,7 @@
                         {{ channelSectionSummary }}
                         </div>
                     {%- endif -%}
-                    <div class="row">
+                    <div>
                         <div class="col-md-12">
                             {%- for item in Items -%}
                                 {%- assign title = item.Title -%}
