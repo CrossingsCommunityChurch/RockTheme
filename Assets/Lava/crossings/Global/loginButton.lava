@@ -3,8 +3,8 @@
 {%- endcomment -%}
 
 {% stylesheet id:'nav-acct-login' %}
-  @media (min-width: 992px), (max-width: 1250px) {
-    .nav-acct-login .hide {
+  @media (min-width: 992px), (max-width: 1050px) {
+    .nav-acct-login .leave {
       display: none;
     }
   }
@@ -12,10 +12,10 @@
 
 {%- if CurrentPerson -%}
   <a id="login" href="#" class="account-toggle login-btn btn btn-outline-thin nav-acct-login">
-    <i class="fas fa-bars"></i> <span class="hide">Account</span>
+    <i class="fas fa-bars"></i> <span class="leave">Account</span>
   </a>
 {%- else -%}
   <a href="/login" class="login-btn btn btn-outline-thin nav-acct-login">
-    <i class="fas fa-user"></i> <span class="hide">Login</span>
+    <i class="fas fa-user"></i> <span class="leave">Login</span>
   </a>
 {%- endif -%}
