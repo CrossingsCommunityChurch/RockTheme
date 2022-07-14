@@ -7,15 +7,21 @@
     .nav-acct-login .leave {
       display: none;
     }
+    .nav-acct-login.squish {
+      border-radius: 50% !important;
+      width: 43px !important;
+      padding: 0 !important;
+      line-height: 41px !important;
+    }
   }
 {% endstylesheet %}
 
 {%- if CurrentPerson -%}
-  <a id="login" href="#" class="account-toggle login-btn btn btn-outline-thin nav-acct-login">
+  <a id="login" href="#" class="account-toggle login-btn btn btn-outline-thin nav-acct-login squish">
     <i class="fas fa-bars"></i> <span class="leave">Account</span>
   </a>
 {%- else -%}
-  <a href="/login" class="login-btn btn btn-outline-thin nav-acct-login">
+  <a href="/login" class="login-btn btn btn-outline-thin nav-acct-login squish">
     <i class="fas fa-user"></i> <span class="leave">Login</span>
   </a>
 {%- endif -%}
