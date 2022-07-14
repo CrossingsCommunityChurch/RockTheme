@@ -23,6 +23,8 @@
         .contentComponent-split-toggle .row {
             position: relative;
             min-height: 450px;
+            display: flex;
+            flex-direction: row;
         }
         
         .contentComponent-split-toggle .cover-half {
@@ -51,6 +53,8 @@
         .contentComponent-split-toggle .row {
             position: relative;
             min-height: 450px;
+            display: flex;
+            flex-direction: column;
         }
         
         .contentComponent-split-toggle .cover-half {
@@ -97,8 +101,8 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 <div class="contentComponent-split-toggle">
-    <div class="section toggle-content-list bg-gray row" style="display: flex;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
-        <div style ="width: 50%;">
+    <div class="section toggle-content-list bg-gray row" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+        <div style ="width: 50%; display: flex;">
             <div class="container content-area">
                 <div class="toggle-list-items">
                     {%- if channelSectionTitle != empty -%}
