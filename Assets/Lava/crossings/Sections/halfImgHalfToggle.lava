@@ -19,31 +19,61 @@
 {%- endcomment -%}
 
 {% stylesheet id:'contentcomponent-split-toggle' %}
-    .contentComponent-split-toggle .row {
-        position: relative;
-        min-height: 450px;
+    @media (min-width: @screen-desktop) {
+        .contentComponent-split-toggle .row {
+            position: relative;
+            min-height: 450px;
+        }
+        
+        .contentComponent-split-toggle .cover-half {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .contentComponent-split-toggle .cover-half.cover-right {
+            left: auto;
+            right: 0;
+        }
+        
+        .contentComponent-split-toggle .cover-half img {
+            min-width: 100%;
+            width: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 50%;
+        }
     }
-    
-    .contentComponent-split-toggle .cover-half {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 50%;
-        height: 100%;
-        overflow: hidden;
-    }
-    
-    .contentComponent-split-toggle .cover-half.cover-right {
-        left: auto;
-        right: 0;
-    }
-    
-    .contentComponent-split-toggle .cover-half img {
-        min-width: 100%;
-        width: auto;
-        height: 100%;
-        object-fit: cover;
-        object-position: 50% 50%;
+    @media (max-width: @screen-desktop) {
+        .contentComponent-split-toggle .row {
+            position: relative;
+            min-height: 450px;
+        }
+        
+        .contentComponent-split-toggle .cover-half {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .contentComponent-split-toggle .cover-half.cover-right {
+            left: auto;
+            right: 0;
+        }
+        
+        .contentComponent-split-toggle .cover-half img {
+            min-width: 100%;
+            width: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 50%;
+        }
     }
 {% endstylesheet %}
 
