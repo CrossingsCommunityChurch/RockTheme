@@ -7,8 +7,7 @@
     .nav-acct-login .leave {
       display: none;
     }
-    .nav-acct-login {
-      border-radius: 50% !important;
+    a #login {
       width: 43px !important;
       padding: 0 !important;
       line-height: 41px !important;
