@@ -24,7 +24,7 @@
             position: relative;
             min-height: 450px;
             display: flex;
-            flex-direction: row;
+            flex-direction: row-reverse;
         }
         
         .contentComponent-split-toggle-left .cover-half {
@@ -34,11 +34,6 @@
             width: 50%;
             height: 100%;
             overflow: hidden;
-        }
-        
-        .contentComponent-split-toggle-left .cover-half.cover-right {
-            left: auto;
-            right: 0;
         }
         
         .contentComponent-split-toggle-left .cover-half img {
