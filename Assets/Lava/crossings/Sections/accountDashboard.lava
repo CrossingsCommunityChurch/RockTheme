@@ -26,7 +26,7 @@
             <li><a href="/my-groups"><i class="fa fa-fw fa-users"></i> My Groups</a></li>
             <li><a href="/my-assessments"><i class="fa fa-fw fa-sticky-note"></i> Assessments</a></li>
             <li><a href="/devotions"><i class="fa fa-fw fa-bible"></i> Devotionals</a></li>
-            <li><a href="/email-subscriptions"><i class="fa fa-fw fa-bible"></i> Subscriptions</a></li>
+            <li><a href="/email-subscriptions"><i class="fa fa-fw fa-envelope"></i> Subscriptions</a></li>
         </ul>
         <!--<div class="logout">
           <a href="/?Logout=True" class="btn btn-block">Logout</a>
