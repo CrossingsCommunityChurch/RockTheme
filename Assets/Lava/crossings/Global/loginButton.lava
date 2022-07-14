@@ -3,7 +3,7 @@
 {%- endcomment -%}
 
 {% stylesheet id:'nav-acct-login' %}
-  @media (min-width: 992px), (max-width: 1050px) {
+  @media (min-width: 992px) and (max-width: 1050px) {
     .nav-acct-login .leave {
       display: none;
     }
