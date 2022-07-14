@@ -20,14 +20,14 @@
 
 {% stylesheet id:'contentcomponent-split-toggle' %}
     @media only screen and (min-width: 992px) {
-        .contentComponent-split-toggle .row {
+        .contentComponent-split-toggle-left .row {
             position: relative;
             min-height: 450px;
             display: flex;
             flex-direction: row;
         }
         
-        .contentComponent-split-toggle .cover-half {
+        .contentComponent-split-toggle-left .cover-half {
             position: absolute;
             top: 0;
             left: 0;
@@ -36,12 +36,12 @@
             overflow: hidden;
         }
         
-        .contentComponent-split-toggle .cover-half.cover-right {
+        .contentComponent-split-toggle-left .cover-half.cover-right {
             left: auto;
             right: 0;
         }
         
-        .contentComponent-split-toggle .cover-half img {
+        .contentComponent-split-toggle-left .cover-half img {
             min-width: 100%;
             width: auto;
             height: 100%;
@@ -53,14 +53,14 @@
         }
     }
     @media only screen and (max-width: 992px) {
-        .contentComponent-split-toggle .row {
+        .contentComponent-split-toggle-left .row {
             position: relative;
             min-height: 450px;
             display: flex;
             flex-direction: column-reverse;
         }
         
-        .contentComponent-split-toggle .cover-half img {
+        .contentComponent-split-toggle-left .cover-half img {
             min-width: 100%;
             width: auto;
             height: 100%;
@@ -89,7 +89,7 @@
 
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
-<div class="contentComponent-split-toggle">
+<div class="contentComponent-split-toggle-left">
     <div class="toggle-content-list bg-gray row" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
         <div class="cover-half cover-right">
             {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
