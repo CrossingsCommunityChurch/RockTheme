@@ -7,11 +7,6 @@
     .nav-acct-login .leave {
       display: none;
     }
-    a #login {
-      width: 43px !important;
-      padding: 0 !important;
-      line-height: 41px !important;
-    }
   }
 {% endstylesheet %}
 
