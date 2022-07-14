@@ -18,7 +18,7 @@
 
 {%- endcomment -%}
 
-{% stylesheet id:'contentcomponent-split-toggle' %}
+{% stylesheet id:'contentcomponent-split-toggle-left' %}
     @media only screen and (min-width: 992px) {
         .contentComponent-split-toggle-left .row {
             position: relative;
