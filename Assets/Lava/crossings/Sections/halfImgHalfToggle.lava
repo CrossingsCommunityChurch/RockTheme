@@ -19,7 +19,7 @@
 {%- endcomment -%}
 
 {% stylesheet id:'contentcomponent-split-toggle' %}
-    @media (min-width: @screen-desktop) {
+    @media only screen and (min-width: 992px) {
         .contentComponent-split-toggle .row {
             position: relative;
             min-height: 450px;
@@ -47,7 +47,7 @@
             object-position: 50% 50%;
         }
     }
-    @media (max-width: @screen-desktop) {
+    @media only screen and (max-width: 992px) {
         .contentComponent-split-toggle .row {
             position: relative;
             min-height: 450px;
