@@ -57,7 +57,7 @@
             position: relative;
             min-height: 450px;
             display: flex;
-            flex-direction: column;
+            flex-direction: column-reverse;
         }
         
         .contentComponent-split-toggle .cover-half img {
