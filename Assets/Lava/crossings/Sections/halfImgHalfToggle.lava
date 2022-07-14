@@ -48,7 +48,7 @@
             object-fit: cover;
             object-position: 50% 50%;
             }
-        .w-50 {
+        .width-50 {
             width: 50%;
         }
     }
@@ -58,20 +58,6 @@
             min-height: 450px;
             display: flex;
             flex-direction: column;
-        }
-        
-        .contentComponent-split-toggle .cover-half {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50%;
-            height: 100%;
-            overflow: hidden;
-        }
-        
-        .contentComponent-split-toggle .cover-half.cover-right {
-            left: auto;
-            right: 0;
         }
         
         .contentComponent-split-toggle .cover-half img {
@@ -104,8 +90,8 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
 <div class="contentComponent-split-toggle">
-    <div class="section toggle-content-list bg-gray row" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
-        <div class="w-50" style ="display: flex;">
+    <div class="toggle-content-list bg-gray row" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+        <div class="width-50 section" style ="display: flex;">
             <div class="container content-area">
                 <div class="toggle-list-items">
                     {%- if channelSectionTitle != empty -%}
