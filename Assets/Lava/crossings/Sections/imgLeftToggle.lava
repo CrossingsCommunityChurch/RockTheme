@@ -26,7 +26,7 @@
             display: flex;
             flex-direction: row-reverse;
         }
-        
+
         .contentComponent-split-toggle-left .cover-half {
             position: absolute;
             top: 0;
@@ -35,7 +35,7 @@
             height: 100%;
             overflow: hidden;
         }
-        
+
         .contentComponent-split-toggle-left .cover-half img {
             min-width: 100%;
             width: auto;
@@ -54,7 +54,7 @@
             display: flex;
             flex-direction: column;
         }
-        
+
         .contentComponent-split-toggle-left .cover-half img {
             min-width: 100%;
             width: auto;
@@ -117,7 +117,7 @@
                         </div>
                     {%- endif -%}
                     <div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 panel-group" id="accordian">
                             {%- for item in Items -%}
                                 {%- assign title = item.Title -%}
                                 {%- assign content = item.Content | Escape -%}
