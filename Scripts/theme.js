@@ -20,7 +20,8 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
-    $('a[data-parent="#accordian"]').click(function() {
+    $('a[data-parent="#accordian"]').click(function(e) {
+        e.preventDefault();
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
