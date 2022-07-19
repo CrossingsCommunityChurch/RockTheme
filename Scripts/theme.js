@@ -20,10 +20,9 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
-    if ($('a[data-parent="#accordion"]') && $('a[aria-expanded="false"]')) {
-        $('.angle-toggle').removeClass('fa-angle-up');
-    }
-    else $('.angle-toggle').addClass('fa-angle-up');
+    $('a[data-parent="#accordion"]').click(function() {
+        $('a[data-parent="#accordion"]').find('.fa-angle-down').toggleClass('fa-angle-up');
+    });
 
     $('.dropdown-toggle').click(function() {
         $(this).find('.fa-caret-down').toggleClass('fa-caret-up');
