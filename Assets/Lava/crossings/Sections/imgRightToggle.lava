@@ -45,7 +45,7 @@
             min-width: 100%;
             width: auto;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             object-position: 50% 50%;
             }
         .width-50 {
@@ -104,7 +104,7 @@
                         </div>
                     {%- endif -%}
                     <div>
-                        <div class="col-md-12" id="accordion">
+                        <div class="col-md-12 panel-group" id="accordian">
                             {%- for item in Items -%}
                                 {%- assign title = item.Title -%}
                                 {%- assign content = item.Content | Escape -%}
