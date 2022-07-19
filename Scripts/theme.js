@@ -21,7 +21,7 @@ $(document).ready(function() {
     });
 
     $('.angle-toggle').click(function() {
-        if ($(this).contains('fa-angle-down')) {
+        if ($(this).hasClass('fa-angle-down')) {
             $(this).remove('fa-angle-down');
             $(this).addClass('fa-angle-up');
         }
