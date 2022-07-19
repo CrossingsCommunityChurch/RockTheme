@@ -22,7 +22,7 @@ $(document).ready(function() {
 
     $('a[data-parent="#accordian"]').click(function(e) {
         e.preventDefault();
-        $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
+        $('.fa-angle-down').addClass('fa-angle-up');
     });
 
     $('.dropdown-toggle').click(function() {
