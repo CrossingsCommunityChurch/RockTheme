@@ -21,7 +21,7 @@ $(document).ready(function() {
     });
 
     if ($('a[data-parent="#accordion"]').hasClass('collapsed')) {
-        $('angle-toggle').removeClass('fa-angle-up');
+        $('.angle-toggle').removeClass('fa-angle-up');
     }
     else $('.angle-toggle').addClass('fa-angle-up');
 
