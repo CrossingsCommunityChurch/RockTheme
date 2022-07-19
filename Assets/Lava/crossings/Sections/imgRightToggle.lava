@@ -26,7 +26,7 @@
             display: flex;
             flex-direction: row;
         }
-        
+
         .contentComponent-split-toggle .cover-half {
             position: absolute;
             top: 0;
@@ -35,17 +35,17 @@
             height: 100%;
             overflow: hidden;
         }
-        
+
         .contentComponent-split-toggle .cover-half.cover-right {
             left: auto;
             right: 0;
         }
-        
+
         .contentComponent-split-toggle .cover-half img {
             min-width: 100%;
             width: auto;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
             object-position: 50% 50%;
             }
         .width-50 {
@@ -59,7 +59,7 @@
             display: flex;
             flex-direction: column-reverse;
         }
-        
+
         .contentComponent-split-toggle .cover-half img {
             min-width: 100%;
             width: auto;
