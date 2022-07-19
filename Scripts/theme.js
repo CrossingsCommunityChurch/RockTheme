@@ -21,7 +21,9 @@ $(document).ready(function() {
     });
 
     $('a[data-parent="#accordion"]').click(function() {
-        $('a[data-parent="#accordion"]').find('.fa-angle-down').toggleClass('fa-angle-up');
+        if ($('.toggle-content').hasClass('in')) {
+            $('a[data-parent="#accordion"]').find('.fa-angle-down').toggleClass('fa-angle-up');
+        }
     });
 
     $('.dropdown-toggle').click(function() {
