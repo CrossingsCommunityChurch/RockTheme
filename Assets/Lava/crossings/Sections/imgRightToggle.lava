@@ -104,7 +104,7 @@
                         </div>
                     {%- endif -%}
                     <div>
-                        <div class="col-md-12">
+                        <div class="col-md-12" id="accordion">
                             {%- for item in Items -%}
                                 {%- assign title = item.Title -%}
                                 {%- assign content = item.Content | Escape -%}
