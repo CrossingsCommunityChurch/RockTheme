@@ -21,9 +21,9 @@ $(document).ready(function() {
     });
 
     $('.angle-toggle').click(function() {
-        if ($(this).hasClass('fa-angle-down')) {
-            $(this).remove('fa-angle-down');
-            $(this).addClass('fa-angle-up');
+        if ($('.angle-toggle').hasClass('fa-angle-down')) {
+            $('.angle-toggle').remove('fa-angle-down');
+            $('.angle-toggle').addClass('fa-angle-up');
         }
     });
 
