@@ -20,11 +20,8 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
-    $('.angle-toggle').click(function() {
-        if ($('.angle-toggle').hasClass('fa-angle-down')) {
-            $('.angle-toggle').remove('fa-angle-down');
-            $('.angle-toggle').addClass('fa-angle-up');
-        }
+    $('a[data-parent="#accordian"]').click(function() {
+        $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
     $('.dropdown-toggle').click(function() {
