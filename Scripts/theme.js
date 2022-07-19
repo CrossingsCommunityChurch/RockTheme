@@ -20,9 +20,8 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
-    $('a[data-parent="#accordion"]').click(function(e) {
-        e.preventDefault();
-        $('.fa-angle-down').addClass('fa-angle-up');
+    $('a[data-parent="#accordion"]').click(function() {
+        $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
     $('.dropdown-toggle').click(function() {
