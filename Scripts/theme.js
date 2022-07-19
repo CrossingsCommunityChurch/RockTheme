@@ -20,7 +20,7 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
-    if ($('a[data-parent="#accordion"]').hasClass('collapsed')) {
+    if ($('a[data-parent="#accordion"]') && $('a[aria-expanded="false"]')) {
         $('.angle-toggle').removeClass('fa-angle-up');
     }
     else $('.angle-toggle').addClass('fa-angle-up');
