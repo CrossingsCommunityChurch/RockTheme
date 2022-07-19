@@ -21,8 +21,11 @@ $(document).ready(function() {
     });
 
     $('a[data-parent="#accordion"]').click(function() {
-        if ($('.toggle-content').hasClass('in')) {
-            $('a[data-parent="#accordion"]').find('.fa-angle-down').toggleClass('fa-angle-up');
+        if ($('a[data-parent="#accordion"]').find('.fa-angle-down').hasClass('fa-angle-up')) {
+            $('a[data-parent="#accordion"]').find('.fa-angle-down').removeClass('fa-angle-up');
+        }
+        if (!$('a[data-parent="#accordion"]').find('.fa-angle-down').hasClass('fa-angle-up')) {
+            $('a[data-parent="#accordion"]').find('.fa-angle-down').addClass('fa-angle-up');
         }
     });
 
