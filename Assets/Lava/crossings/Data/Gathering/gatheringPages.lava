@@ -51,6 +51,8 @@
                     "ButtonText": {{ section.ChildContentChannelItem | Attribute: 'ButtonText' | ToJSON }},
                     "HideTitle": {{ section.ChildContentChannelItem | Attribute: 'HideTitle', 'RawValue' | ToJSON }},
                     "Type": {{ section.ChildContentChannelItem | Attribute:'SectionLayout' | ToJSON }},
+                    "VimeoId": {{ section.ChildContentChannelItem | Attribute:'VimeoId' | ToJSON }},
+                    "iFrameUrl": {{ section.ChildContentChannelItem | Attribute:'IFrameUrl', 'RawValue' | ToJSON }},
                     "Order": {{ section.ChildContentChannelItem.Order | ToJSON }}
                 }
             {%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
