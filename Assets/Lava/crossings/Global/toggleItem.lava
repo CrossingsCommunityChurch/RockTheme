@@ -7,6 +7,7 @@
     @subheading
     @icon
     @content - Note on content, we need to encode and decode html when passing content in a shortcode
+    @id
 {%- endcomment -%}
 
 <div class="toggle-item bg-white shadowDepth2 mt-2 panel">
