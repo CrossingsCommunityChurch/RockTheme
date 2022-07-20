@@ -111,7 +111,7 @@
                                 {%- assign icon = item | Attribute:'Icon' -%}
                                 {%- assign subheading = item | Attribute:'subheading' -%}
                                 {%- capture toggleIdentifier -%}{{title | Remove:' ' | ToCssClass  }}{{ forloop.index }}{%- endcapture -%}
-                                {[ toggleItem title:'{{title}}' content:'{{content}}' subheading:'{{subheading}}' icon:'{{icon}}' identifier:'{{toggleIdentifier}}' id: 'accordionR' ]}
+                                {[ toggleItem title:'{{title}}' content:'{{content}}' subheading:'{{subheading}}' icon:'{{icon}}' identifier:'{{toggleIdentifier}}' name: 'accordionR' ]}
                             {%- endfor -%}
                         </div>
                     </div>
