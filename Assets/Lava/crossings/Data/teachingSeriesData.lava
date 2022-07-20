@@ -12,6 +12,7 @@
     {%- if teachingSeriesItemId != empty -%}
     {%- contentchannelitem where:'ContentChannelId == {{teachingSeriesItemId}} || ContentChannelId == {{gatheringSeriesItemId}} || ContentChannelId == {{onDemandId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
+    {% if item.Title == 'So What? Podcast' %}{% continue %}{% endif %}
     {%- if item.ContentChannel.Name == 'The Gathering Series' -%}
       {%- assign channelPath = '/media/gathering/' -%}
     {%- endif -%}
