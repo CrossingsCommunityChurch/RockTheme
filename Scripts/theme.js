@@ -20,7 +20,13 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
-    $('a[data-toggle="collapse"]').click(function() {
+    $('a[data-parent="#accordionR"]').click(function() {
+        $('a[data-parent="#accordionR"]').not(this).find('.fa-angle-up').removeClass('fa-angle-up');
+        $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
+    });
+
+    $('a[data-parent="#accordionL"]').click(function() {
+        $('a[data-parent="#accordionL"]').not(this).find('.fa-angle-up').removeClass('fa-angle-up');
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
