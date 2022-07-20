@@ -21,7 +21,7 @@ $(document).ready(function() {
     });
 
     $('a[data-parent="#accordion"]').click(function() {
-        $('a[data-parent="#accordion"]').find('.fa-angle-up').removeClass('fa-angle-up');
+        $('a[data-parent="#accordion"]').not(this).find('.fa-angle-up').removeClass('fa-angle-up');
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
