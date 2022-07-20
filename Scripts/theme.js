@@ -24,7 +24,7 @@ $(document).ready(function() {
         if ($(this).find('.fa-angle-down').hasClass('fa-angle-up')) {
             $(this).find('.fa-angle-down').removeClass('fa-angle-up');
         }
-        if (!$(this).find('.fa-angle-down').hasClass('fa-angle-up')) {
+        if (!($(this).find('.fa-angle-down').hasClass('fa-angle-up'))) {
             $(this).find('.fa-angle-down').addClass('fa-angle-up');
         }
     });
