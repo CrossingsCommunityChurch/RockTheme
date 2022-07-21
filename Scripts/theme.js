@@ -20,6 +20,11 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
+    $('a[data-parent="#accordion"]').click(function() {
+        $('a[data-parent="#accordion"]').not(this).find('.fa-angle-up').removeClass('fa-angle-up');
+        $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
+    });
+
     $('a[data-parent="#accordionR"]').click(function() {
         $('a[data-parent="#accordionR"]').not(this).find('.fa-angle-up').removeClass('fa-angle-up');
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
@@ -27,10 +32,6 @@ $(document).ready(function() {
 
     $('a[data-parent="#accordionL"]').click(function() {
         $('a[data-parent="#accordionL"]').not(this).find('.fa-angle-up').removeClass('fa-angle-up');
-        $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
-    });
-
-    $('a[data-toggle="collapse"]').click(function(){
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
