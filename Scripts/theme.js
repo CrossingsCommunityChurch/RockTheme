@@ -30,6 +30,10 @@ $(document).ready(function() {
         $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
     });
 
+    $('a[data-toggle="collapse"]').click(function(){
+        $(this).find('.fa-angle-down').toggleClass('fa-angle-up');
+    });
+
     $('.dropdown-toggle').click(function() {
         $(this).find('.fa-caret-down').toggleClass('fa-caret-up');
     });
