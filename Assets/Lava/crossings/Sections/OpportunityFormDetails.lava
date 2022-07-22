@@ -11,7 +11,9 @@
 
         <h4>Opportunity Details:</h4>
         {%- for attribute in Opportunity.AttributeValues -%}
+            {% if attribute.ValueFormatted != "" %}
 	        <strong>{{ attribute.AttributeName }}:</strong> {{ attribute.ValueFormatted }} <br />
+            {% endif %}
         {%- endfor -%}
 
         {% comment %} <p class="margin-t-lg">
