@@ -37,7 +37,6 @@
             <p class="date">{{ date }}</p>
             <p>{{ summary }}</p>
             <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
-            <p>{{latestMessageDataset |  ToJSON }}</p>
           </div>
         </div>
       </div>
