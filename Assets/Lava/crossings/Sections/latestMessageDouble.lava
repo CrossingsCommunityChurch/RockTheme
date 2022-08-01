@@ -46,6 +46,7 @@
             <p class="date">{{ date }}</p>
             <p>{{ summary }}</p>
             <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+            <p>{{latestMessageDataset[0] |  ToJSON }}</p>
           </div>
         </div>
       </div>
@@ -57,6 +58,7 @@
             <p class="date">{{ 2date }}</p>
             <p>{{ 2summary }}</p>
             <a href="{{2linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+            <p>{{latestMessageDataset[1] |  ToJSON }}</p>
           </div>
         </div>
       </div>
