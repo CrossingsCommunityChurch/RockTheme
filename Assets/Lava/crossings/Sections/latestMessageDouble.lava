@@ -23,7 +23,7 @@
 
 {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
-{%- for message in latestMessageDataset[0] -%}
+{% comment %} {%- for message in latestMessageDataset[0] -%} {% endcomment %}
   {%- assign parentSeries = message.ParentItems | First | Property:'ContentChannelItem' -%}
   {% comment %} {%- assign imageUrlPath = message.image -%}
   {% capture expression %}^(http|https):\/\/{% endcapture %}
@@ -38,13 +38,13 @@
   {%- endif -%} {% endcomment %}
 
 
-  {%- assign title = message.title -%}
-  {%- assign speaker = message.speaker -%}
-  {%- assign seriesTitle = message.parentSeries -%}
-  {%- assign date = message.date -%}
-  {%- assign summary = message.content -%}
-  {%- assign linkUrl = message.link -%}
-{%- endfor -%}
+  {%- assign title = latestMessageDataset[0].title -%}
+  {%- assign speaker = latestMessageDataset[0].speaker -%}
+  {%- assign seriesTitle = latestMessageDataset[0].parentSeries -%}
+  {%- assign date = latestMessageDataset[0].date -%}
+  {%- assign summary = latestMessageDataset[0].content -%}
+  {%- assign linkUrl = latestMessageDataset[0].link -%}
+{% comment %} {%- endfor -%} {% endcomment %}
 
   
   <div class="media-hero gradient-bg {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
