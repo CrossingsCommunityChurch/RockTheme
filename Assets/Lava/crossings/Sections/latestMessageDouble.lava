@@ -68,8 +68,8 @@
   
   <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" style = "height: auto;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
     <h1 class="heading reverse" style="display: flex; justify-content: center; font-size: 72px;">Latest Messages</h1>
-    <div class="container-fluid section latest-message-wrapper" style="display: flex;">
-      <div class="col-md-offset-2" style="width: 33.3%">
+    <div class="container-fluid section latest-message-wrapper" style="display: flex; padding-top: 20px">
+      <div style="width: 50%; margin-left: 150px">
         <div class="latest-message">
           <div class="message-image" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
@@ -83,7 +83,7 @@
           </div>
         </div>
       </div>
-      <div style="width: 33.3%">
+      <div style="width: 50%; margin-right: 150px">
         <div class="latest-message">
           <div class="message-image" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ 2imageUrl }}">
