@@ -26,7 +26,7 @@
   {%- assign linkUrl = latestMessageDataset[0].link -%}
 
   
-  <div class="media-hero gradient-bg {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+  <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
     <div class="container-fluid section latest-message-wrapper">
       <h1 class="heading">Latest Messages</h1>
       <div class="col-md-10 col-md-offset-1">
