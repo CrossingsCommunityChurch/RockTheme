@@ -25,7 +25,7 @@
 
 {%- for message in latestMessageDataset -%}
   {%- assign parentSeries = message.ParentItems | First | Property:'ContentChannelItem' -%}
-  {%- assign imageUrlPath = message.image -%}
+  {% comment %} {%- assign imageUrlPath = message.image -%}
   {% capture expression %}^(http|https):\/\/{% endcapture %}
   {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
   {%- if isCloudinary -%}
@@ -35,7 +35,7 @@
     {%- if message.useVimeoImage == True -%}
       {%- assign imageUrl = message.image -%}
     {%- endif -%}
-  {%- endif -%}
+  {%- endif -%} {% endcomment %}
 
 
   {%- assign title = message.title -%}
@@ -51,9 +51,9 @@
     <div class="container-fluid section latest-message-wrapper">
       <div class="col-md-10 col-md-offset-1">
         <div class="latest-message">
-          <div class="message-image" data-aos="fade-in">
+          {% comment %} <div class="message-image" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
-          </div>
+          </div> {% endcomment %}
           <div class="latest-message-details" data-aos="fade-up">
             <h4 class="subheading">Latest Messages</h4>
             <h2 class="heading">{{ title }}</h2>
@@ -61,7 +61,7 @@
             <p class="date">{{ date }}</p>
             <p>{{ summary }}</p>
             <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
-            <p>{{parentSeries |  ToJSON }}</p>
+            <p>{{latestMessageDataset |  ToJSON }}</p>
           </div>
         </div>
       </div>
