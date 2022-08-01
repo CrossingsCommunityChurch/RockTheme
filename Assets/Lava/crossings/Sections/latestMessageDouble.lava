@@ -43,7 +43,9 @@
   {%- assign date = message.date -%}
   {%- assign summary = message.content -%}
   {%- assign linkUrl = message.link -%}
+{%- endfor -%}
 
+  
   <div class="media-hero gradient-bg {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
     <div class="container-fluid section latest-message-wrapper">
       <div class="col-md-10 col-md-offset-1">
@@ -52,7 +54,7 @@
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
           </div>
           <div class="latest-message-details" data-aos="fade-up">
-            <h4 class="subheading">Latest Message</h4>
+            <h4 class="subheading">Latest Messages</h4>
             <h2 class="heading">{{ title }}</h2>
             <h5>{{ speaker }}</h5>
             <p class="date">{{ date }}</p>
@@ -63,4 +65,3 @@
       </div>
     </div>
   </div>
-{%- endfor -%}
