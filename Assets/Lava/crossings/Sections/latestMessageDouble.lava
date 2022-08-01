@@ -19,6 +19,37 @@
 
   {%- assign parentSeries = message.ParentItems | First | Property:'ContentChannelItem' -%}
 
+  {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+  {%- assign imageSize = ',c_scale,h_600' -%}
+  {%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
+  {%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
+
+  {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
+
+  {%- assign imageUrlPath = latestMessageDataset[0].image -%}
+  {%- assign 2imageUrlPath = latestMessageDataset[1].image -%}
+
+  {% capture expression %}^(http|https):\/\/{% endcapture %}
+
+  {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
+  {%- if isCloudinary -%}
+    {%- assign imageUrl = latestMessageDataset[0].image -%}
+  {%- else -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
+    {%- if latestMessageDataset[0].useVimeoImage == True -%}
+      {%- assign imageUrl = latestMessageDataset[0].image -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign isCloudinary = 2imageUrlPath | RegExMatch: expression  -%}
+  {%- if isCloudinary -%}
+    {%- assign 2imageUrl = latestMessageDataset[1].image -%}
+  {%- else -%}
+    {%- assign 2imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: 2imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
+    {%- if latestMessageDataset[1].useVimeoImage == True -%}
+      {%- assign 2imageUrl = latestMessageDataset[1].image -%}
+    {%- endif -%}
+  {%- endif -%}
+
   {%- assign title = latestMessageDataset[0].title -%}
   {%- assign speaker = latestMessageDataset[0].speaker -%}
   {%- assign seriesTitle = latestMessageDataset[0].parentSeries -%}
@@ -40,6 +71,9 @@
     <div class="container-fluid section latest-message-wrapper" style="display: flex;">
       <div class="col-md-offset-2" style="width: 33.3%">
         <div class="latest-message">
+          <div class="message-image" data-aos="fade-in">
+            <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
+          </div>
           <div class="latest-message-details" data-aos="fade-up">
             <h2 class="subheading">{{ title }}</h2>
             <h5>{{ speaker }}</h5>
@@ -52,6 +86,9 @@
       </div>
       <div style="width: 33.3%">
         <div class="latest-message">
+          <div class="message-image" data-aos="fade-in">
+            <img class="cld-hidpi" src="" data-src="{{ 2imageUrl }}">
+          </div>
           <div class="latest-message-details" data-aos="fade-up">
             <h2 class="subheading">{{ 2title }}</h2>
             <h5>{{ 2speaker }}</h5>
