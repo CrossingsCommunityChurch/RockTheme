@@ -10,7 +10,7 @@
     {%- contentchannelitem | where:'(Status == 1 || Status == 2) && ContentChannelId == 21 && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' -%}
     
     {%- assign latestMessage = contentChannelItems | First -%}
-    {%- assign 2latestMessage = contentChannelItems | First+1 -%}
+    {%- assign 2latestMessage = contentChannelItems | Index:2 -%}
 
     {%- assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' -%}
     {%- assign parentSlug = parentSeries.PrimarySlug -%}
