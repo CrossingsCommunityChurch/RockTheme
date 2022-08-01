@@ -75,7 +75,7 @@
       "date" : {{ 2latestMessage.StartDateTime | Date:'MMM d, yyyy' | ToJSON }},
       "content" : {{ 2latestMessage.Content | ToJSON }},
       "speaker" : {{ 2latestMessage.Speaker | ToJSON }},
-      "parentSeries" : {{ 2parentSeries.Title | ToJSON }},
+      "parentSeries" : {{ parentSeries.Title | ToJSON }},
       "parentSlug" : {{ parentSlug | ToJSON }},
       "link" : {{ '/media/sermons/' | Append: parentSlug | Append: '/' | Append: 2latestMessage.PrimarySlug | ToJSON }}
   }
