@@ -18,6 +18,7 @@
 {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
   {%- assign parentSeries = message.ParentItems | First | Property:'ContentChannelItem' -%}
+
   {%- assign title = latestMessageDataset[0].title -%}
   {%- assign speaker = latestMessageDataset[0].speaker -%}
   {%- assign seriesTitle = latestMessageDataset[0].parentSeries -%}
@@ -25,11 +26,19 @@
   {%- assign summary = latestMessageDataset[0].content -%}
   {%- assign linkUrl = latestMessageDataset[0].link -%}
 
+  {%- assign 2title = latestMessageDataset[1].title -%}
+  {%- assign 2speaker = latestMessageDataset[1].speaker -%}
+  {%- assign 2seriesTitle = latestMessageDataset[1].parentSeries -%}
+  {%- assign 2date = latestMessageDataset[1].date -%}
+  {%- assign 2summary = latestMessageDataset[1].content -%}
+  {%- assign 2linkUrl = latestMessageDataset[1].link -%}
+
+
   
   <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
     <div class="container-fluid section latest-message-wrapper">
       <h1 class="heading reverse" style="display: flex; justify-content: center; font-size: 72px;">Latest Messages</h1>
-      <div class="col-md-10 col-md-offset-2">
+      <div class="col-md-offset-2" style="width: 33.3%">
         <div class="latest-message">
           <div class="latest-message-details" data-aos="fade-up">
             <h2 class="subheading">{{ title }}</h2>
@@ -37,6 +46,17 @@
             <p class="date">{{ date }}</p>
             <p>{{ summary }}</p>
             <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+          </div>
+        </div>
+      </div>
+      <div style="width: 33.3%">
+        <div class="latest-message">
+          <div class="latest-message-details" data-aos="fade-up">
+            <h2 class="subheading">{{ 2title }}</h2>
+            <h5>{{ 2speaker }}</h5>
+            <p class="date">{{ 2date }}</p>
+            <p>{{ 2summary }}</p>
+            <a href="{{2linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
           </div>
         </div>
       </div>
