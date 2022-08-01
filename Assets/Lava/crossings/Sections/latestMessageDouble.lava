@@ -1,0 +1,66 @@
+{%- comment -%}
+  This displays a section for the Latest Message - Runs at the top of the /media page
+  Used as a shortcode - latestMessage
+  Pulls from the latestmessage persisted dataset
+{%- endcomment -%}
+
+{%- assign contentItemStyle = '' -%}
+{%- assign contentTextColor = '' -%}
+{%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+
+{%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
+
+{%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}
+    {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
+{%- endif -%}
+
+{%- assign item = Items | First -%}
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = ',c_scale,h_600' -%}
+{%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
+{%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
+
+{%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
+
+{%- for message in latestMessageDataset -%}
+  {%- assign imageUrlPath = message.image -%}
+  {% capture expression %}^(http|https):\/\/{% endcapture %}
+  {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
+  {%- if isCloudinary -%}
+    {%- assign imageUrl = message.image -%}
+  {%- else -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
+    {%- if message.useVimeoImage == True -%}
+      {%- assign imageUrl = message.image -%}
+    {%- endif -%}
+  {%- endif -%}
+
+
+  {%- assign title = message.title -%}
+  {%- assign speaker = message.speaker -%}
+  {%- assign seriesTitle = message.parentSeries -%}
+  {%- assign date = message.date -%}
+  {%- assign summary = message.content -%}
+  {%- assign linkUrl = message.link -%}
+
+  <div class="media-hero gradient-bg {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+    <div class="container-fluid section latest-message-wrapper">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="latest-message">
+          <div class="message-image" data-aos="fade-in">
+            <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
+          </div>
+          <div class="latest-message-details" data-aos="fade-up">
+            <h4 class="subheading">Latest Message</h4>
+            <h2 class="heading">{{ title }}</h2>
+            <h5>{{ speaker }}</h5>
+            <p class="date">{{ date }}</p>
+            <p>{{ summary }}</p>
+            <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endfor -%}
