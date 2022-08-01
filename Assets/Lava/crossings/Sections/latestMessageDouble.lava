@@ -15,45 +15,21 @@
 {%- endif -%}
 
 {%- assign item = Items | First -%}
-
-{% comment %} {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
-{%- assign imageSize = ',c_scale,h_600' -%}
-{%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
-{%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%} {% endcomment %}
-
 {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
-{% comment %} {%- for message in latestMessageDataset[0] -%} {% endcomment %}
   {%- assign parentSeries = message.ParentItems | First | Property:'ContentChannelItem' -%}
-  {% comment %} {%- assign imageUrlPath = message.image -%}
-  {% capture expression %}^(http|https):\/\/{% endcapture %}
-  {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
-  {%- if isCloudinary -%}
-    {%- assign imageUrl = message.image -%}
-  {%- else -%}
-    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
-    {%- if message.useVimeoImage == True -%}
-      {%- assign imageUrl = message.image -%}
-    {%- endif -%}
-  {%- endif -%} {% endcomment %}
-
-
   {%- assign title = latestMessageDataset[0].title -%}
   {%- assign speaker = latestMessageDataset[0].speaker -%}
   {%- assign seriesTitle = latestMessageDataset[0].parentSeries -%}
   {%- assign date = latestMessageDataset[0].date -%}
   {%- assign summary = latestMessageDataset[0].content -%}
   {%- assign linkUrl = latestMessageDataset[0].link -%}
-{% comment %} {%- endfor -%} {% endcomment %}
 
   
   <div class="media-hero gradient-bg {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
     <div class="container-fluid section latest-message-wrapper">
       <div class="col-md-10 col-md-offset-1">
         <div class="latest-message">
-          {% comment %} <div class="message-image" data-aos="fade-in">
-            <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
-          </div> {% endcomment %}
           <div class="latest-message-details" data-aos="fade-up">
             <h1 class="heading">Latest Messages</h4>
             <h2 class="subheading">{{ title }}</h2>
