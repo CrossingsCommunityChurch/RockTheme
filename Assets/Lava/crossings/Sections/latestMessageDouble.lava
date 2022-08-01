@@ -16,14 +16,14 @@
 
 {%- assign item = Items | First -%}
 
-{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{% comment %} {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
 {%- assign imageSize = ',c_scale,h_600' -%}
 {%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
-{%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
+{%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%} {% endcomment %}
 
 {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
-{%- for message in latestMessageDataset -%}
+{%- for message in latestMessageDataset[0] -%}
   {%- assign parentSeries = message.ParentItems | First | Property:'ContentChannelItem' -%}
   {% comment %} {%- assign imageUrlPath = message.image -%}
   {% capture expression %}^(http|https):\/\/{% endcapture %}
@@ -55,8 +55,8 @@
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
           </div> {% endcomment %}
           <div class="latest-message-details" data-aos="fade-up">
-            <h4 class="subheading">Latest Messages</h4>
-            <h2 class="heading">{{ title }}</h2>
+            <h1 class="heading">Latest Messages</h4>
+            <h2 class="subheading">{{ title }}</h2>
             <h5>{{ speaker }}</h5>
             <p class="date">{{ date }}</p>
             <p>{{ summary }}</p>
