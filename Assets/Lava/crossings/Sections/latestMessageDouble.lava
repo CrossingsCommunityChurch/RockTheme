@@ -24,6 +24,7 @@
 {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
 {%- for message in latestMessageDataset -%}
+  {%- assign parentSeries = message.ParentItems | First | Property:'ContentChannelItem' -%}
   {%- assign imageUrlPath = message.image -%}
   {% capture expression %}^(http|https):\/\/{% endcapture %}
   {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
@@ -60,7 +61,7 @@
             <p class="date">{{ date }}</p>
             <p>{{ summary }}</p>
             <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
-            <p>{{latestMessageDataset |  ToJSON }}</p>
+            <p>{{parentSeries |  ToJSON }}</p>
           </div>
         </div>
       </div>
