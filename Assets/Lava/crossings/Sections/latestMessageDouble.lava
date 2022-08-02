@@ -75,10 +75,10 @@
       width: 50%
     }
     .message-double .side .img {
-      width: 75%
+      width: 65%
     }
     .message-double .side .info {
-      width: 25%
+      width: 35%
     }
   {% endstylesheet %}
 
@@ -102,10 +102,10 @@
       </div>
       <div class="side">
         <div class="latest-message">
-          <div class="" data-aos="fade-in">
+          <div class="img" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ 2imageUrl }}">
           </div>
-          <div class="latest-message-details" data-aos="fade-up">
+          <div class="latest-message-details info" data-aos="fade-up">
             <h2 class="subheading">{{ 2title }}</h2>
             <h5>{{ 2speaker }}</h5>
             <p class="date">{{ 2date }}</p>
