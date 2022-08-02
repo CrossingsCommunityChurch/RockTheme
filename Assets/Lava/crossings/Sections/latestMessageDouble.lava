@@ -97,7 +97,7 @@
       text-transform: none;
     }
     h5 {
-      color: #313e48;
+      color: #313e48 !important;
     }
   {% endstylesheet %}
 
