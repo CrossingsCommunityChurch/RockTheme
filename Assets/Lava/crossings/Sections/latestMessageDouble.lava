@@ -152,10 +152,12 @@
       }
       .message-double .side {
         width: auto;
+        margin-bottom: 25px;
       }
       .message-double .latest-message {
         {% comment %} padding-left: 50px; {% endcomment %}
         {% comment %} padding-right: 50px; {% endcomment %}
+        box-shadow: 0 5px 15px rgb(0 0 0 / 25%);
       }
       .message-double .side .img {
         width: auto;
@@ -178,7 +180,7 @@
         font-weight: 300 !important;
         font-family: Georgia,"Times New Roman",Times,serif;
         text-transform: none;
-        color: #313e48;
+        color: #5a7285;
       }
     }
   {% endstylesheet %}
