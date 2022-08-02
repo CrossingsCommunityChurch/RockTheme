@@ -78,6 +78,7 @@
     .message-double .latest-message {
       padding-left: 50px;
       padding-right: 50px;
+      justify-content: center;
     }
     .message-double .side .img {
       width: 80%;
