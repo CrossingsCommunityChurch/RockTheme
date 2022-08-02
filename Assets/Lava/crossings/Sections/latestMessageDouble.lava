@@ -70,6 +70,7 @@
       padding-top: 20px;
       padding-left: 50px;
       padding-right: 50px;
+      justify-content: center;
     }
     .message-double .side {
       width: 50%
@@ -79,6 +80,7 @@
       padding-right: 50px;
     }
     .message-double .side .img {
+      width: 80%;
     }
     .message-double .side .info {
       position: absolute;
@@ -88,20 +90,20 @@
   {% endstylesheet %}
 
   
-  <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" style = "height: auto;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+  <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" style = "height: 100vh !important;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
     <h1 class="heading reverse" style="display: flex; justify-content: center; font-size: 72px;">Latest Messages</h1>
     <div class="container-fluid section latest-message-wrapper message-double">
       <div class="side">
         <div class="latest-message">
           <div class="img" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
-          </div>
-          <div class="latest-message-details info" data-aos="fade-up">
-            <h2 class="subheading">{{ title }}</h2>
-            <h5>{{ speaker }}</h5>
-            <p class="date">{{ date }}</p>
-            <p>{{ summary }}</p>
-            <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+            <div class="latest-message-details info" data-aos="fade-up">
+              <h2 class="subheading">{{ title }}</h2>
+              <h5>{{ speaker }}</h5>
+              <p class="date">{{ date }}</p>
+              <p>{{ summary }}</p>
+              <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+            </div>
           </div>
         </div>
       </div>
