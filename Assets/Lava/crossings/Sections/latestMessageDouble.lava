@@ -75,10 +75,11 @@
       width: 50%
     }
     .message-double .side .img {
-      width: 65%
     }
     .message-double .side .info {
-      width: 35%
+      position: absolute;
+      background-color: #fff;
+      color: #313e48;
     }
   {% endstylesheet %}
 
