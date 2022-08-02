@@ -166,7 +166,7 @@
         padding-bottom: 0;
       }
       h1 {
-        color: #313e48 ; 
+        color: #313e48 !important; 
       }
       h2 {
         font-size: 1.25rem;
