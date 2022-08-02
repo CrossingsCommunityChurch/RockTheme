@@ -133,9 +133,6 @@
         padding-top: 0;
         padding-bottom: 0;
       }
-      h1 {
-        color: #313e48 ; 
-      }
       h2 {
         font-size: 1.25rem;
         letter-spacing: 2px;
@@ -165,6 +162,9 @@
         width: auto;
         padding-top: 0;
         padding-bottom: 0;
+      }
+      h1 {
+        color: #313e48 ; 
       }
       h2 {
         font-size: 1.25rem;
