@@ -163,9 +163,13 @@
       .message-double .side .info {
         width: auto;
         padding-top: 0;
-        padding-bottom: 0;
+        padding-bottom: 25px;
       }
       h1 {
+        display: flex;
+        justify-content: center;
+        font-size: 72px;
+        text-align: center;
         color: #313e48 !important; 
       }
       h2 {
@@ -174,15 +178,14 @@
         font-weight: 300 !important;
         font-family: Georgia,"Times New Roman",Times,serif;
         text-transform: none;
-      }
-      h5 {
+        color: #313e48;
       }
     }
   {% endstylesheet %}
 
   
   <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" style = "height: auto;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
-    <h1 class="heading reverse" style="display: flex; justify-content: center; font-size: 72px;">Latest Messages</h1>
+    <h1 class="heading reverse" style="">Latest Messages</h1>
     <div class="container-fluid section latest-message-wrapper message-double">
       <div class="side">
         <div class="latest-message">
