@@ -148,8 +148,6 @@
     }
     @media only screen and (max-width: 992px) {
       .message-double {
-        display: flex; 
-        padding-top: 50px;
         flex-direction: column;
       }
       .message-double .side {
@@ -163,19 +161,12 @@
         width: auto;
       }
       .message-double .side .info {
-        width: auto;
-        padding-top: 0;
         padding-bottom: 25px;
       }
       h1 {
         color: #313e48 !important; 
       }
       h2 {
-        font-size: 1.25rem;
-        letter-spacing: 2px;
-        font-weight: 300 !important;
-        font-family: Georgia,"Times New Roman",Times,serif;
-        text-transform: none;
         color: #5a7285;
       }
     }
