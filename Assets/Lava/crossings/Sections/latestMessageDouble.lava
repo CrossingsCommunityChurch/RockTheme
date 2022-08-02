@@ -88,6 +88,10 @@
       background-color: #fff;
       color: #313e48;
       width: auto;
+      right: -4rem;
+      bottom: -4rem;
+      padding-top: 0;
+      padding-bottom: 0;
     }
     h2 {
       font-size: 1.25rem;
@@ -127,13 +131,13 @@
         <div class="latest-message">
           <div class="img" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ 2imageUrl }}">
-          </div>
-          <div class="latest-message-details info" data-aos="fade-up">
-            <h2 class="subheading">{{ 2title }}</h2>
-            <h5>{{ 2speaker }}</h5>
-            <p class="date">{{ 2date }}</p>
-            <p>{{ 2summary }}</p>
-            <a href="{{2linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+            <div class="latest-message-details info" data-aos="fade-up">
+              <h2 class="">{{ 2title }}</h2>
+              <h5>{{ 2speaker }}</h5>
+              <p class="date">{{ 2date }}</p>
+              <p>{{ 2summary }}</p>
+              <a href="{{2linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+            </div>
           </div>
         </div>
       </div>
