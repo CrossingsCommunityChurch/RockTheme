@@ -21,8 +21,8 @@
 {%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
 {%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
 
-{%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
-{%- assign latestMessageDataset = latestMessageDataset | First -%}
+{%- assign latestMessages = 'latestmessage' | PersistedDataset -%}
+{%- assign latestMessageDataset = latestMessages | First -%}
 
 {%- for message in latestMessageDataset -%}
   {%- assign imageUrlPath = message.image -%}
