@@ -94,6 +94,13 @@
         padding-top: 0;
         padding-bottom: 0;
       }
+      h1 {
+        display: flex;
+        justify-content: center;
+        font-size: 72px;
+        text-align: center;
+        color: #313e48 !important; 
+      }
       h2 {
         font-size: 1.25rem;
         color: #5a7285;
@@ -168,10 +175,6 @@
         padding-bottom: 25px;
       }
       h1 {
-        display: flex;
-        justify-content: center;
-        font-size: 72px;
-        text-align: center;
         color: #313e48 !important; 
       }
       h2 {
