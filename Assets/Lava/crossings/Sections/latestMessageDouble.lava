@@ -159,7 +159,6 @@
         {% comment %} padding-right: 50px; {% endcomment %}
       }
       .message-double .side .img {
-        width: 80%;
       }
       .message-double .side .info {
         width: auto;
