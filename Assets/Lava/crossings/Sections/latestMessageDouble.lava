@@ -135,6 +135,7 @@
     h2 {
       font-size: 1.25rem;
       letter-spacing: 2px;
+      color: #fff;
       font-weight: 300 !important;
       font-family: Georgia,"Times New Roman",Times,serif;
       text-transform: none;
