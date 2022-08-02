@@ -68,9 +68,17 @@
     .message-double {
       display: flex; 
       padding-top: 20px;
+      padding-left: 50px;
+      padding-right: 50px;
     }
     .message-double .side {
       width: 50%
+    }
+    .message-double .side .img {
+      width: 75%
+    }
+    .message-double .side .info {
+      width: 25%
     }
   {% endstylesheet %}
 
@@ -80,10 +88,10 @@
     <div class="container-fluid section latest-message-wrapper message-double">
       <div class="side">
         <div class="latest-message">
-          <div class="" data-aos="fade-in">
+          <div class="img" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
           </div>
-          <div class="latest-message-details" data-aos="fade-up">
+          <div class="latest-message-details info" data-aos="fade-up">
             <h2 class="subheading">{{ title }}</h2>
             <h5>{{ speaker }}</h5>
             <p class="date">{{ date }}</p>
