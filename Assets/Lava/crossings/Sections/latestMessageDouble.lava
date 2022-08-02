@@ -87,6 +87,11 @@
       background-color: #fff;
       color: #313e48;
     }
+    h2 {
+      font-size: 1.25rem;
+      color: #5a7285;
+      letter-spacing: 2px;
+    }
   {% endstylesheet %}
 
   
@@ -98,7 +103,7 @@
           <div class="img" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
             <div class="latest-message-details info" data-aos="fade-up">
-              <h2 class="subheading">{{ title }}</h2>
+              <h2 class="">{{ title }}</h2>
               <h5>{{ speaker }}</h5>
               <p class="date">{{ date }}</p>
               <p>{{ summary }}</p>
