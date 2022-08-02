@@ -151,12 +151,14 @@
         flex-direction: column;
       }
       .message-double .side {
+        width: auto;
       }
       .message-double .latest-message {
         {% comment %} padding-left: 50px; {% endcomment %}
         {% comment %} padding-right: 50px; {% endcomment %}
       }
       .message-double .side .img {
+        width: auto;
       }
       .message-double .side .info {
         width: auto;
