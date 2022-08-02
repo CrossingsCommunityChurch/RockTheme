@@ -147,7 +147,7 @@
   {% endstylesheet %}
 
   
-  <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" style = "height: 100vh !important;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+  <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" style = "height: 1000px !important;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
     <h1 class="heading reverse" style="display: flex; justify-content: center; font-size: 72px;">Latest Messages</h1>
     <div class="container-fluid section latest-message-wrapper message-double">
       <div class="side">
