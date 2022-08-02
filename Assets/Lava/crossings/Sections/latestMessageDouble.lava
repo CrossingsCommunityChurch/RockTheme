@@ -87,6 +87,7 @@
       position: absolute;
       background-color: #fff;
       color: #313e48;
+      width: auto;
     }
     h2 {
       font-size: 1.25rem;
