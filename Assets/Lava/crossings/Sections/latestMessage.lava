@@ -22,9 +22,8 @@
 {%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
 
 {%- assign latestMessages = 'latestmessage' | PersistedDataset -%}
-{%- assign latestMessageDataset = latestMessages | First -%}
+{%- assign message = latestMessages | First -%}
 
-{%- for message in latestMessageDataset -%}
   {%- assign imageUrlPath = message.image -%}
   {% capture expression %}^(http|https):\/\/{% endcapture %}
   {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
@@ -64,4 +63,3 @@
       </div>
     </div>
   </div>
-{%- endfor -%}
