@@ -23,7 +23,7 @@
 
 {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
 
-{%- for message in latestMessageDataset -%}
+{%- for message in latestMessageDataset[0] -%}
   {%- assign imageUrlPath = message.image -%}
   {% capture expression %}^(http|https):\/\/{% endcapture %}
   {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
