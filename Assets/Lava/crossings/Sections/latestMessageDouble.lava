@@ -65,71 +65,61 @@
   {%- assign 2linkUrl = latestMessageDataset[1].link -%}
 
   {% stylesheet id:'message-double' %}
-    @media only screen and (min-width: 1600px) {
-      .message-double {
-        display: flex; 
-        padding-top: 50px;
-        {% comment %} padding-left: 50px; {% endcomment %}
-        {% comment %} padding-right: 50px; {% endcomment %}
-        justify-content: center;
-      }
-      .message-double .side {
-        width: 50%
-      }
-      .message-double .latest-message {
-        {% comment %} padding-left: 50px; {% endcomment %}
-        {% comment %} padding-right: 50px; {% endcomment %}
-        justify-content: center;
-      }
-      .message-double .side .img {
-        width: 80%;
-      }
-      .message-double .side .info {
-        position: absolute;
-        background-color: #fff;
-        color: #313e48;
-        width: auto;
-        right: -4rem;
-        bottom: -4rem;
-        padding-top: 0;
-        padding-bottom: 0;
-      }
-      h1 {
-        display: flex;
-        justify-content: center;
-        font-size: 72px;
-        text-align: center;
-        color: #313e48 !important; 
-      }
-      h2 {
-        font-size: 1.25rem;
-        color: #5a7285;
-        letter-spacing: 2px;
-        font-weight: 300 !important;
-        font-family: Georgia,"Times New Roman",Times,serif;
-        text-transform: none;
-      }
-      h5 {
-        color: #313e48 !important;
-      }
-      .btn-primary {
-        box-shadow: 0 2px 4px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 24%);
-      }
+    .message-double {
+      display: flex; 
+      padding-top: 50px;
+      justify-content: center;
+    }
+    .message-double .side {
+      width: 50%
+    }
+    .message-double .latest-message {
+      justify-content: center;
+    }
+    .message-double .side .img {
+      width: 80%;
+    }
+    .message-double .side .info {
+      position: absolute;
+      background-color: #fff;
+      color: #313e48;
+      width: auto;
+      right: -4rem;
+      bottom: -4rem;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    h1 {
+      display: flex;
+      justify-content: center;
+      font-size: 72px;
+      text-align: center;
+      color: #313e48 !important; 
+    }
+    h2 {
+      font-size: 1.25rem;
+      color: #5a7285;
+      letter-spacing: 2px;
+      font-weight: 300 !important;
+      font-family: Georgia,"Times New Roman",Times,serif;
+      text-transform: none;
+    }
+    h5 {
+      color: #313e48 !important;
+    }
+    .btn-primary {
+      box-shadow: 0 2px 4px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 24%);
     }
     @media only screen and (max-width: 1600px) {
       .message-double {
         display: flex; 
         padding-top: 50px;
-        {% comment %} padding-left: 50px; {% endcomment %}
-        {% comment %} padding-right: 50px; {% endcomment %}
         justify-content: center;
       }
       .message-double .side {
         width: 50%
       }
       .message-double .latest-message {
-        {% comment %} padding-left: 50px; {% endcomment %}
-        {% comment %} padding-right: 50px; {% endcomment %}
         justify-content: center
       }
       .message-double .side .img {
@@ -153,8 +143,6 @@
       .message-double {
         display: flex; 
         padding-top: 50px;
-        {% comment %} padding-left: 50px; {% endcomment %}
-        {% comment %} padding-right: 50px; {% endcomment %}
         flex-direction: column;
       }
       .message-double .side {
@@ -162,8 +150,6 @@
         margin-bottom: 25px;
       }
       .message-double .latest-message {
-        {% comment %} padding-left: 50px; {% endcomment %}
-        {% comment %} padding-right: 50px; {% endcomment %}
         box-shadow: 0 5px 15px rgb(0 0 0 / 25%);
       }
       .message-double .side .img {
