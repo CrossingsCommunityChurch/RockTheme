@@ -112,18 +112,16 @@
     @media only screen and (max-width: 1600px) {
       .message-double {
         display: flex; 
+        flex-direction: column;
         padding-top: 50px;
         {% comment %} padding-left: 50px; {% endcomment %}
         {% comment %} padding-right: 50px; {% endcomment %}
-        justify-content: center;
       }
       .message-double .side {
-        width: 50%
       }
       .message-double .latest-message {
         {% comment %} padding-left: 50px; {% endcomment %}
         {% comment %} padding-right: 50px; {% endcomment %}
-        justify-content: center;
       }
       .message-double .side .img {
         width: 80%;
@@ -132,6 +130,9 @@
         width: auto;
         padding-top: 0;
         padding-bottom: 0;
+      }
+      h1 {
+        color: #313e48 ; 
       }
       h2 {
         font-size: 1.25rem;
