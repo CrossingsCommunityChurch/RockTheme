@@ -74,6 +74,10 @@
     .message-double .side {
       width: 50%
     }
+    .message-double .latest-message {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
     .message-double .side .img {
     }
     .message-double .side .info {
