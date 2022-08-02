@@ -92,6 +92,12 @@
       font-size: 1.25rem;
       color: #5a7285;
       letter-spacing: 2px;
+      font-weight: 300 !important;
+      font-family: Georgia,"Times New Roman",Times,serif;
+      text-transform: none;
+    }
+    h5 {
+      color: #313e48;
     }
   {% endstylesheet %}
 
