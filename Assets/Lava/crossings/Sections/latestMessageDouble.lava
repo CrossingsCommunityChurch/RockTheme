@@ -123,6 +123,7 @@
       .message-double .latest-message {
         {% comment %} padding-left: 50px; {% endcomment %}
         {% comment %} padding-right: 50px; {% endcomment %}
+        justify-content: center
       }
       .message-double .side .img {
         width: 80%;
