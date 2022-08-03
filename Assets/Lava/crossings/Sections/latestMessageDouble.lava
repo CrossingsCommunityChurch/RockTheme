@@ -1,0 +1,211 @@
+{%- comment -%}
+  This displays a section for the Latest Message - Runs at the top of the /media page
+  Used as a shortcode - latestMessage
+  Pulls from the latestmessage persisted dataset
+{%- endcomment -%}
+
+{%- assign contentItemStyle = '' -%}
+{%- assign contentTextColor = '' -%}
+{%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+
+{%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
+
+{%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}
+    {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
+{%- endif -%}
+
+{%- assign item = Items | First -%}
+{%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
+
+  {%- assign parentSeries = message.ParentItems | First | Property:'ContentChannelItem' -%}
+
+  {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+  {%- assign imageSize = ',c_scale,h_600' -%}
+  {%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
+  {%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
+
+  {%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
+
+  {%- assign imageUrlPath = latestMessageDataset[0].image -%}
+  {%- assign 2imageUrlPath = latestMessageDataset[1].image -%}
+
+  {% capture expression %}^(http|https):\/\/{% endcapture %}
+
+  {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
+  {%- if isCloudinary -%}
+    {%- assign imageUrl = latestMessageDataset[0].image -%}
+  {%- else -%}
+    {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
+    {%- if latestMessageDataset[0].useVimeoImage == True -%}
+      {%- assign imageUrl = latestMessageDataset[0].image -%}
+    {%- endif -%}
+  {%- endif -%}
+  {%- assign isCloudinary = 2imageUrlPath | RegExMatch: expression  -%}
+  {%- if isCloudinary -%}
+    {%- assign 2imageUrl = latestMessageDataset[1].image -%}
+  {%- else -%}
+    {%- assign 2imageUrl = imageStorageUrl | Append: imageSize | Append:'/oldweb' | Append: 2imageUrlPath | RemoveFirst:'/Images' | RemoveFirst:'/Web'  -%}
+    {%- if latestMessageDataset[1].useVimeoImage == True -%}
+      {%- assign 2imageUrl = latestMessageDataset[1].image -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- assign title = latestMessageDataset[0].title -%}
+  {%- assign speaker = latestMessageDataset[0].speaker -%}
+  {%- assign seriesTitle = latestMessageDataset[0].parentSeries -%}
+  {%- assign date = latestMessageDataset[0].date -%}
+  {%- assign summary = latestMessageDataset[0].content -%}
+  {%- assign linkUrl = latestMessageDataset[0].link -%}
+
+  {%- assign 2title = latestMessageDataset[1].title -%}
+  {%- assign 2speaker = latestMessageDataset[1].speaker -%}
+  {%- assign 2seriesTitle = latestMessageDataset[1].parentSeries -%}
+  {%- assign 2date = latestMessageDataset[1].date -%}
+  {%- assign 2summary = latestMessageDataset[1].content -%}
+  {%- assign 2linkUrl = latestMessageDataset[1].link -%}
+
+  {% stylesheet id:'message-double' %}
+    @media only screen and (min-width: 1600px) {
+      .message-double {
+        display: flex;
+        padding-top: 50px;
+        justify-content: center;
+      }
+      .message-double .side {
+        width: 50%
+      }
+      .message-double .latest-message {
+        justify-content: center;
+      }
+      .message-double .side .img {
+        width: 80%;
+      }
+      .message-double .side .info {
+        position: absolute;
+        background-color: #fff;
+        color: #313e48;
+        width: auto;
+        right: -4rem;
+        bottom: -4rem;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      h1 {
+        display: flex;
+        justify-content: center;
+        font-size: 72px;
+        text-align: center;
+      }
+      h2 {
+        font-size: 1.25rem;
+        color: #5a7285;
+        letter-spacing: 2px;
+        font-weight: 300 !important;
+        font-family: Georgia,"Times New Roman",Times,serif;
+        text-transform: none;
+      }
+      h5 {
+        color: #313e48 !important;
+      }
+      .btn-primary {
+        box-shadow: 0 2px 4px rgb(0 0 0 / 12%), 0 2px 4px rgb(0 0 0 / 24%);
+      }
+    }
+    @media only screen and (max-width: 1600px) {
+      .message-double {
+        display: flex;
+        padding-top: 50px;
+        justify-content: center;
+      }
+      .message-double .side {
+        width: 50%
+      }
+      .message-double .latest-message {
+        justify-content: center
+      }
+      .message-double .side .img {
+        width: 80%;
+      }
+      .message-double .side .info {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: auto;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+      h1 {
+        display: flex;
+        justify-content: center;
+        font-size: 72px;
+        text-align: center;
+      }
+      h2 {
+        font-size: 1.25rem;
+        letter-spacing: 2px;
+        color: #fff;
+        font-weight: 300 !important;
+        font-family: Georgia,"Times New Roman",Times,serif;
+        text-transform: none;
+      }
+    }
+    @media only screen and (max-width: 992px) {
+      .message-double {
+        flex-direction: column;
+      }
+      .message-double .side {
+        width: auto;
+        margin-bottom: 25px;
+      }
+      .message-double .latest-message {
+        box-shadow: 0 5px 15px rgb(0 0 0 / 25%);
+      }
+      .message-double .side .img {
+        width: auto;
+      }
+      .message-double .side .info {
+        padding-bottom: 25px;
+      }
+      h1 {
+        color: #313e48 !important;
+      }
+      h2 {
+        color: #5a7285;
+      }
+    }
+  {% endstylesheet %}
+
+
+  <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" style = "height: auto;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+    <h1 class="heading reverse" style="">Latest Messages</h1>
+    <div class="container-fluid section latest-message-wrapper message-double">
+      <div class="side">
+        <div class="latest-message">
+          <div class="img" data-aos="fade-in">
+            <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
+            <div class="latest-message-details info" data-aos="fade-up">
+              <h2 class="">{{ title }}</h2>
+              <h5>{{ speaker }}</h5>
+              <p class="date">{{ date }}</p>
+              <p>{{ summary }}</p>
+              <a href="{{linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="latest-message">
+          <div class="img" data-aos="fade-in">
+            <img class="cld-hidpi" src="" data-src="{{ 2imageUrl }}">
+            <div class="latest-message-details info" data-aos="fade-up">
+              <h2 class="">{{ 2title }}</h2>
+              <h5>{{ 2speaker }}</h5>
+              <p class="date">{{ 2date }}</p>
+              <p>{{ 2summary }}</p>
+              <a href="{{2linkUrl}}" class="btn btn-primary"><i class="fas fa-play"></i><span>Watch Now</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
