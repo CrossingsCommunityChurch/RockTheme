@@ -1,0 +1,345 @@
+{%- comment -%}
+  Content Channel View Template
+  Displays Website Ads Content Channel Items
+{%- endcomment -%}
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = ',c_scale,h_600' -%}
+{%- assign adsData = 'ads' | PersistedDataset -%}
+{%- assign audiences = adsData.Audiences | Uniq -%}
+{%- assign daysofWeek = adsData.DaysofWeek | Uniq -%}
+{%- assign campuses = adsData.Campuses | Uniq -%}
+{%- assign adsJson = adsData.Ads | ToJSON -%}
+{%- if CurrentPerson and CurrentPerson != empty%}
+{%- assign personCampus = CurrentPerson | Campus -%}
+{%- else -%}
+  {%- assign personCampus = 'all' -%}
+{%- endif -%}
+
+{%- assign itemsPerPage = 33 -%}
+
+<div id="announcementList" class="announcement-list">
+  <div class="container announcement-list-items" data-aos="fade-up">
+    <div class="event-filter row">
+      <div class="form form-inline">
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="filterLabel">Filter By Category</label>
+          <div class="dropdown">
+            <button type="button" id="audiences" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="eventFilterMenu" id="eventFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All</a></li>
+              <li role="separator" class="divider"></li>
+              {%- for audience in audiences -%}
+                <li><a style="cursor: pointer;">{{audience}}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="filterLabel">Filter By Day</label>
+          <div class="dropdown">
+            <button type="button" id="dayOfWeek" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="evenDaytFilterMenu" id="eventDayFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All</a></li>
+              <li role="separator" class="divider"></li>
+              {%- for day in daysofWeek -%}
+                <li><a style="cursor: pointer;">{{day}}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="filterLabel">Filter By Location</label>
+          <div class="dropdown">
+            <button type="button" id="campuses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
+            <ul aria-labelledby="eventCamptFilterMenu" id="eventCampFilterMenu" class="dropdown-menu">
+              <li><a style="cursor: pointer;">All</a></li>
+              <li role="separator" class="divider"></li>
+              {%- for campus in campuses -%}
+                <li><a style="cursor: pointer;">{{campus}}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row flex-row flex-wrap">
+    </div>
+    <div class="paginate-buttons text-center">
+      <a class="btn btn-default" id="back" role="button">Back</a>
+      <a class="btn btn-default" id="next" role="button">Next</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  $(document).ready(() => {
+
+    const eventsJson = `{{adsJson}}`;
+    const imageStorageUrl = '{{imageStorageUrl}}';
+    const imageSize = '{{imageSize}}';
+    const itemsPerPage = '{{itemsPerPage}}';
+    let personCampus = 'all';
+    if('{{personCampus}}' != 'all')
+    {
+    personCampus = '{{personCampus.Name}}';
+    }
+
+    let events = JSON.parse(eventsJson);
+
+    const compareNumbers = (a,b) => b.Priority-a.Priority;
+
+    events.sort(compareNumbers)
+
+    let curPage = 1;
+    renderFilteredItems(events, curPage);
+
+    $('#audiences').parent().find('li').click(function() {
+      let audience = $(this).text().trim();
+      let day = $('#dayOfWeek').text().trim();
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      let campus = $('#campuses').text().trim();
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
+      $('#audiences').html(`${audience} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(events, 1, audience, day, campus);
+    });
+
+    $('#dayOfWeek').parent().find('li').click(function() {
+      let day = $(this).text().trim();
+      let audience = $('#audiences').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      let campus = $('#campuses').text().trim();
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
+      $('#dayOfWeek').html(`${day} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(events, 1, audience, day, campus);
+    });
+
+    $('#campuses').parent().find('li').click(function() {
+      let campus = $(this).text().trim();
+      let day = $('#dayOfWeek').text().trim();
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      let audience = $('#audiences').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      $('#campuses').html(`${campus} <i class="fas fa-angle-down pull-right"></i>`);
+      renderFilteredItems(events, 1, audience, day, campus);
+    });
+
+    $('#back').click(function() {
+      topOfEvents();
+      let audience = $('#audiences').text().trim();
+      let day = $('#dayOfWeek').text().trim();
+      let campus = $('#campuses').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
+      curPage = curPage - 1;
+      renderFilteredItems(events, curPage, audience, day, campus);
+    });
+
+    $('#next').click(function() {
+      topOfEvents();
+      let audience = $('#audiences').text();
+      let day = $('#dayOfWeek').text().trim();
+      let campus = $('#campuses').text().trim();
+      if (!audience || audience.trim().toLowerCase() === 'select a filter') audience = 'all';
+      if (!day || day.trim().toLowerCase() === 'select a filter') day = 'all';
+      if (!campus || campus.trim().toLowerCase() === 'select a filter') campus = 'all';
+      (`audience is ${audience}`);
+      (`day is ${day}`);
+      (`campus is ${campus}`);
+      curPage = curPage + 1
+      renderFilteredItems(events, curPage, audience, day, campus);
+    });
+
+    function topOfEvents() {
+       $('html, body').animate({
+          scrollTop: $("#announcementList").offset().top
+      }, 300);
+    }
+
+    function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    function renderFilteredItems(events, page, audience, day, campus) {
+      let eventsContainer = $('.row.flex-row.flex-wrap');
+      eventsContainer.empty();
+
+      var filteredEvents1 = events.filter(evt => (!audience || audience.trim().toLowerCase() === 'all' || evt.SecondaryAudience.includes(audience)) && (!day || day.trim().toLowerCase() === 'all' || evt.DayofWeek === day.toString()) && (!campus || campus.trim().toLowerCase() === 'all' || evt.Campus.includes(campus)));
+      if (filteredEvents1.length === 0) {
+        eventsContainer.append('<p>No data exist for the selected filters.</p>');
+        $('#back').hide();
+        $('#next').hide();
+        return;
+      }
+
+      let count = 0;
+      let pgIdx = page - 1;
+      let itemIdxMin = pgIdx * itemsPerPage;
+      let itemsCount = filteredEvents1.length;
+      let pages = Math.ceil(itemsCount / itemsPerPage);
+      let itemsOnLastPage = itemsCount % itemsPerPage;
+      if (itemsOnLastPage === 0) itemsOnLastPage = itemsPerPage;
+      let itemMax = page * itemsPerPage;
+      if (page === pages) {
+        itemMax = itemMax - (itemsPerPage - itemsOnLastPage);
+      }
+
+      for (let i = itemIdxMin; i < itemMax; i++) {
+
+        let ad = filteredEvents1[i];
+
+        let div = $(
+          `<div class="col-sm-6 col-md-4">
+            <div class="card cardShadow">
+              <div class="thumb">
+                <img src="" class="event-img cld-hidpi" data-src="">
+              </div>
+              <div class="row card-content-row">
+                <div class="card-content">
+                  <div class="col relative">
+                    <div>
+                      <div class="day-of-week hidden"><span></span></div>
+                      <h4>Title here</h4>
+                    <h5 class="text-muted">Subheadinghere</h5>
+                  <p class="small"></p>
+                </div>
+              </div>
+                <a class="details info-details" href="{{ detail | StripHtml }}">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Details</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </a>
+                <a class="reg info-reg" href="">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Register</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </a>
+                <a class="content info-details" href="">
+                  <div class="btn icon-button shadowDepth2">
+                    <span>Details</span>
+                    <i class="fas fa-angle-right"></i>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+`
+        );
+        if(ad.AssetImage == ''){
+        div.find('.thumb').hide();
+        }
+        else{
+        div.find('img.event-img').attr('data-src', ad.AssetImage);
+        // div.find('.thumb').css("background-image", `url("${event.AssetImage}")`);
+        }
+        div.find('h4').text(ad.Title);
+        if(ad.DayofWeek != '') {
+          div.find('.day-of-week').removeClass('hidden');
+          div.find('.day-of-week > span').text(ad.DayofWeek);
+        }
+        if(ad.Subheading == ''){
+          div.find('h5').hide();
+        }
+        else{
+          div.find('h5').text(ad.Subheading);
+        }
+        div.find('p').text(ad.Summary);
+        if(ad.DetailsURL == ''){
+          div.find('.details').hide();
+        }
+        else {
+          div.find('.details').attr('href', ad.DetailsURL)
+        }
+         if(ad.RegURL == ''){
+          div.find('.reg').hide();
+        }
+        else {
+          div.find('.reg').attr('href', ad.RegURL)
+        }
+        // TODO: Need to account for the new details link and allow hide show here.
+        if(ad.DetailsHTML == ''){
+          div.find('.content').hide();
+        }
+        else {
+          div.find('.content').attr('href', "/details/"+ad.Id)
+        }
+        eventsContainer.append(div);
+
+        if (page <= 1) {
+          $('#back').hide();
+        }
+        else {
+          $('#back').show();
+        }
+        if (page >= pages) {
+          $('#next').hide();
+        } else {
+          $('#next').show();
+        }
+
+      }
+      cl.responsive();
+    }
+
+    var defaultAudience = getParameterByName('category');
+    var defaultDay = getParameterByName('day');
+    var defaultCampus = getParameterByName('campus');
+    //if(!defaultCampus && personCampus){
+    //  defaultCampus = personCampus
+    //}
+    if(defaultAudience) {
+      $('#audiences').html( defaultAudience + ' <i class="fas fa-angle-down pull-right"></i>');
+      if(defaultDay){
+        $('#dayOfWeek').html( defaultDay+ ' <i class="fas fa-angle-down pull-right"></i>');
+        if(defaultCampus){
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, defaultAudience, defaultDay, defaultCampus);
+        }
+        else{ renderFilteredItems(events, 1, defaultAudience, defaultDay);}
+      }
+      else {
+        if(defaultCampus){
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, defaultAudience, 'all', defaultCampus);
+        }
+        else{ renderFilteredItems(events, 1, defaultAudience, 'all', 'all');}
+      }
+    }
+    else
+    {
+      if(defaultDay)
+      {
+        $('#dayOfWeek').html( defaultDay+ ' <i class="fas fa-angle-down pull-right"></i>');
+        if(defaultCampus)
+        {
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, 'all', defaultDay, defaultCampus);
+        }
+        else{ renderFilteredItems(events, 1, 'all', defaultDay);}
+      }
+      else
+      {
+        if(defaultCampus)
+        {
+          $('#campuses').html( defaultCampus+ ' <i class="fas fa-angle-down pull-right"></i>');
+            renderFilteredItems(events, 1, 'all', 'all', defaultCampus);
+        }
+        else{ renderFilteredItems(events, 1, 'all', 'all', 'all');}
+      }
+    }
+    cl.responsive();
+  });
+
+</script>
