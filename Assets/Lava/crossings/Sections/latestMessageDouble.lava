@@ -67,7 +67,7 @@
   {% stylesheet id:'message-double' %}
     @media only screen and (min-width: 1600px) {
       .message-double {
-        display: flex; 
+        display: flex;
         padding-top: 50px;
         justify-content: center;
       }
@@ -113,7 +113,7 @@
     }
     @media only screen and (max-width: 1600px) {
       .message-double {
-        display: flex; 
+        display: flex;
         padding-top: 50px;
         justify-content: center;
       }
@@ -127,6 +127,9 @@
         width: 80%;
       }
       .message-double .side .info {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
         width: auto;
         padding-top: 0;
         padding-bottom: 0;
@@ -164,7 +167,7 @@
         padding-bottom: 25px;
       }
       h1 {
-        color: #313e48 !important; 
+        color: #313e48 !important;
       }
       h2 {
         color: #5a7285;
@@ -172,7 +175,7 @@
     }
   {% endstylesheet %}
 
-  
+
   <div class="media-hero {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}inline-component{% endif %}" style = "height: auto;" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
     <h1 class="heading reverse" style="">Latest Messages</h1>
     <div class="container-fluid section latest-message-wrapper message-double">
