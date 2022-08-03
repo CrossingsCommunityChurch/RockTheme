@@ -7,11 +7,6 @@
 {%- assign imageSize = ',c_scale,h_600' -%}
 {%- assign baptismsData = 'baptismsPhotosData' | PersistedDataset -%}
 {%- assign baptismsJson = baptismsData.Ads | ToJSON -%}
-{%- if CurrentPerson and CurrentPerson != empty%}
-{%- assign personCampus = CurrentPerson | Campus -%}
-{%- else -%}
-  {%- assign personCampus = 'all' -%}
-{%- endif -%}
 
 {%- assign itemsPerPage = 33 -%}
 
@@ -35,17 +30,8 @@
     const imageStorageUrl = '{{imageStorageUrl}}';
     const imageSize = '{{imageSize}}';
     const itemsPerPage = '{{itemsPerPage}}';
-    let personCampus = 'all';
-    if('{{personCampus}}' != 'all')
-    {
-    personCampus = '{{personCampus.Name}}';
-    }
 
     let events = JSON.parse(eventsJson);
-
-    const compareNumbers = (a,b) => b.Priority-a.Priority;
-
-    events.sort(compareNumbers)
 
     let curPage = 1;
     renderItems(events, curPage);
@@ -66,16 +52,6 @@
        $('html, body').animate({
           scrollTop: $("#announcementList").offset().top
       }, 300);
-    }
-
-    function getParameterByName(name, url) {
-        if (!url) url = window.location.href;
-        name = name.replace(/[\[\]]/g, '\\$&');
-        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
     function renderItems(events, page) {
