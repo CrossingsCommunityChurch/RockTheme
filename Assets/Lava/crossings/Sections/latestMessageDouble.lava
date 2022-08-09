@@ -87,7 +87,7 @@
         padding-top: 0;
         padding-bottom: 0;
       }
-      h2 {
+      .h2 {
         font-size: 1.25rem;
         letter-spacing: 2px;
         color: #fff;
@@ -112,7 +112,7 @@
       .message-double .side .info {
         padding-bottom: 25px;
       }
-      h2 {
+      .h2 {
         color: #5a7285;
       }
     }
@@ -126,7 +126,7 @@
           <div class="img" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ imageUrl }}">
             <div class="latest-message-details info" data-aos="fade-up">
-              <h2 class="">{{ title }}</h2>
+              <h2 class='h2'>{{ title }}</h2>
               <h5>{{ speaker }}</h5>
               <p class="date">{{ date }}</p>
               <p>{{ summary }}</p>
@@ -140,7 +140,7 @@
           <div class="img" data-aos="fade-in">
             <img class="cld-hidpi" src="" data-src="{{ 2imageUrl }}">
             <div class="latest-message-details info" data-aos="fade-up">
-              <h2 class="">{{ 2title }}</h2>
+              <h2 class='h2'>{{ 2title }}</h2>
               <h5>{{ 2speaker }}</h5>
               <p class="date">{{ 2date }}</p>
               <p>{{ 2summary }}</p>
