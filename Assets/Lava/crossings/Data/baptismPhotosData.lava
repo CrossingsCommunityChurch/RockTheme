@@ -1,0 +1,59 @@
+{
+    "Ads":
+  [
+  {%- contentchannel id:'536' -%}
+    {%- for item in contentchannel.Items -%}
+    {%- assign currentDate = 'Now' | Date  -%}
+      {%- if item.StartDateTime >= currentDate -%}
+        {%- continue -%}
+      {%- endif -%}
+      {%- if item.ExpireDateTime <= currentDate -%}
+        {%- continue -%}
+      {%-endif-%}
+      {%-assign summary = item | Attribute:'SummaryText'-%}
+      {%-assign dayOfWeek = item | Attribute:'dayoftheweek'-%}
+      {%-assign detailsURL = item | Attribute:'DetailsURL' | StripHtml-%}
+      {%-assign regURL =  item | Attribute:'RegURL' | StripHtml-%}
+      {%-assign subheading = item | Attribute:'Subheading'-%}
+      {%-assign campus = item | Attribute:'Campuses'-%}
+      {%-assign primaryAudiance = item | Attribute:'PrimaryAudience'-%}
+      {%-assign secondaryAudiance =  item | Attribute:'SecondaryAudiences'-%}
+      {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
+      {%-assign imageSize = ',c_scale,w_400'-%}
+      {%-assign detailsHTML = item.Content | Escape -%}
+      {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+      {%- if clPhoto and clPhoto != empty -%}
+          {%- assign imageAsset = clPhoto -%}
+      {%- else -%}
+        {%-assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://'-%}
+        {%-assign imageSize = ',c_scale,w_400'-%}
+        {%-assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' -%}
+        {%-if imageUrlPath == ''-%}
+          {%-assign imageAsset = ''-%}
+        {%- else -%}
+          {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+          {%-assign imageAsset = imageStorageUrl | Append: imageSize | Append:imageUrlPath-%}
+        {%-endif-%}
+      {%- endif -%}
+      {
+        "Id": {{ item.Id | ToJSON }},
+        "Title": {{ item.Title | ToJSON }},
+        "Summary": {{ summary | StripNewlines | ToJSON}},
+        "DayofWeek": {{ dayOfWeek | ToJSON }},
+        "DetailsURL": {{ detailsURL | ToJSON }},
+        "RegURL": {{ regURL | ToJSON }},
+        "Subheading": {{subheading | ToJSON }},
+        "Campus": {{ campus | ToJSON }},
+        "PrimaryAudience": {{ primaryAudiance | ToJSON }},
+        "SecondaryAudience": {{ secondaryAudiance | ToJSON }},
+        "Priority": {{ item.Priority | ToJSON }},
+        "StartDate": {{ item.StartDateTime | ToJSON }},
+        "EndDate": {{ item.ExpireDateTime | ToJSON }},
+        "AssetImage": {{ imageAsset | ToJSON }},
+        "DetailsHTML": {{ detailsHTML | ToJSON }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+    {%-endfor-%}
+  {%-endcontentchannel-%}
+  ]
+  }
+  

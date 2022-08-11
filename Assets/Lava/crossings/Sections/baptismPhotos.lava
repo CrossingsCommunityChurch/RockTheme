@@ -1,0 +1,180 @@
+{%- comment -%}
+  Content Channel View Template
+  Displays Baptisms Photos Content Channel Items
+{%- endcomment -%}
+
+{%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+{%- assign imageSize = ',c_scale,h_600' -%}
+{%- assign baptismsData = 'baptismsPhotosData' | PersistedDataset -%}
+{%- assign baptismsJson = baptismsData.Ads | ToJSON -%}
+
+{%- assign itemsPerPage = 33 -%}
+
+<div id="announcementList" class="announcement-list">
+  <div class="container announcement-list-items" data-aos="fade-up">
+    <div class="row flex-row flex-wrap">
+    </div>
+    <div class="paginate-buttons text-center">
+      <a class="btn btn-default" id="back" role="button">Back</a>
+      <a class="btn btn-default" id="next" role="button">Next</a>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  $(document).ready(() => {
+
+    const eventsJson = `{{baptismsJson}}`;
+    const imageStorageUrl = '{{imageStorageUrl}}';
+    const imageSize = '{{imageSize}}';
+    const itemsPerPage = '{{itemsPerPage}}';
+
+    let events = JSON.parse(eventsJson);
+
+    const compareNumbers = (a,b) => b.Priority-a.Priority;
+    events.sort(compareNumbers)
+
+    let curPage = 1;
+    renderItems(events, curPage);
+
+    $('#back').click(function() {
+      topOfEvents();
+      curPage = curPage - 1;
+      renderItems(events, curPage);
+    });
+
+    $('#next').click(function() {
+      topOfEvents();
+      curPage = curPage + 1
+      renderItems(events, curPage);
+    });
+
+    function topOfEvents() {
+       $('html, body').animate({
+          scrollTop: $("#announcementList").offset().top
+      }, 300);
+    }
+
+    function renderItems(events, page) {
+      let eventsContainer = $('.row.flex-row.flex-wrap');
+      eventsContainer.empty();
+
+      if (events.length === 0) {
+        eventsContainer.append('<p>No data exists.</p>');
+        $('#back').hide();
+        $('#next').hide();
+        return;
+      }
+
+      let count = 0;
+      let pgIdx = page - 1;
+      let itemIdxMin = pgIdx * itemsPerPage;
+      let itemsCount = events.length;
+      let pages = Math.ceil(itemsCount / itemsPerPage);
+      let itemsOnLastPage = itemsCount % itemsPerPage;
+      if (itemsOnLastPage === 0) itemsOnLastPage = itemsPerPage;
+      let itemMax = page * itemsPerPage;
+      if (page === pages) {
+        itemMax = itemMax - (itemsPerPage - itemsOnLastPage);
+      }
+
+      for (let i = itemIdxMin; i < itemMax; i++) {
+
+        let baptism = events[i];
+
+        let div = $(
+            `<div class="col-sm-6 col-md-4">
+                <div class="card cardShadow">
+                    <div class="thumb">
+                        <img src="" class="event-img cld-hidpi" data-src="">
+                    </div>
+                    <div class="row card-content-row">
+                        <div class="card-content">
+                            <div class="col relative">
+                                <div>
+                                    <h4>Title here</h4>
+                                    <h5 class="text-muted">Subheadinghere</h5>
+                                    <p class="small"></p>
+                                </div>
+                            </div>
+                            <a class="details info-details" href="{{ detail | StripHtml }}">
+                                <div class="btn icon-button shadowDepth2">
+                                    <span>Details</span>
+                                    <i class="fas fa-angle-right"></i>
+                                </div>
+                            </a>
+                            <a class="reg info-reg" href="">
+                                <div class="btn icon-button shadowDepth2">
+                                    <span>Register</span>
+                                    <i class="fas fa-angle-right"></i>
+                                </div>
+                            </a>
+                            <a class="content info-details" href="">
+                                <div class="btn icon-button shadowDepth2">
+                                    <span>Details</span>
+                                    <i class="fas fa-angle-right"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+`
+        );
+        if(baptism.AssetImage == ''){
+        div.find('.thumb').hide();
+        }
+        else{
+        div.find('img.event-img').attr('data-src', baptism.AssetImage);
+        // div.find('.thumb').css("background-image", `url("${event.AssetImage}")`);
+        }
+        div.find('h4').text(baptism.Title);
+        if(baptism.Subheading == ''){
+          div.find('h5').hide();
+        }
+        else{
+          div.find('h5').text(baptism.Subheading);
+        }
+        div.find('p').text(baptism.Summary);
+        if(baptism.DetailsURL == ''){
+          div.find('.details').hide();
+        }
+        else {
+          div.find('.details').attr('href', baptism.DetailsURL)
+        }
+         if(baptism.RegURL == ''){
+          div.find('.reg').hide();
+        }
+        else {
+          div.find('.reg').attr('href', baptism.RegURL)
+        }
+        // TODO: Need to account for the new details link and allow hide show here.
+        if(baptism.DetailsHTML == ''){
+          div.find('.content').hide();
+        }
+        else {
+          div.find('.content').attr('href', "/details/"+baptism.Id)
+        }
+        eventsContainer.append(div);
+
+        if (page <= 1) {
+          $('#back').hide();
+        }
+        else {
+          $('#back').show();
+        }
+        if (page >= pages) {
+          $('#next').hide();
+        } else {
+          $('#next').show();
+        }
+
+      }
+      cl.responsive();
+    }
+    cl.responsive();
+  });
+
+</script>
