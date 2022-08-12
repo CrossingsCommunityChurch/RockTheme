@@ -169,7 +169,7 @@
             "EndDate": {{endDate | ToJSON}},
             "AvgAge": 0,
             "LocationName": {{location.Location.Name | ToJSON}},
-            "LocationAddress": {{locaddress | ToJSON}}
+            "LocationAddress": {{locaddress | StripNewlines | ToJSON}}
         } {%-unless forloop.last-%},{%-endunless-%}
             {%- endfor -%}
         {%- endgroup -%}
