@@ -21,9 +21,9 @@
 {%- assign heroUrlPath = CurrentPage.AssetImage | Url:'localpath' -%}
 {%- assign heroUrl = imageStorageUrl | Append: imageSize | Append:heroUrlPath -%}
 
-{%- assign latestMessageDataset = 'latestmessage' | PersistedDataset -%}
+{%- assign latestMessages = 'latestmessage' | PersistedDataset -%}
+{%- assign message = latestMessages | First -%}
 
-{%- for message in latestMessageDataset -%}
   {%- assign imageUrlPath = message.image -%}
   {% capture expression %}^(http|https):\/\/{% endcapture %}
   {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
@@ -63,4 +63,3 @@
       </div>
     </div>
   </div>
-{%- endfor -%}
