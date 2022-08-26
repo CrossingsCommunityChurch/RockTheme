@@ -3,7 +3,7 @@
 {%- endcomment -%}
 
 <ul class="primary-nav-links">
-        <li class="has-subnav-parent"><a href="#">Locations <i class="fa fa-angle-down"></i></a>
+        <li class="has-subnav-parent"><a href="#">Hello <i class="fa fa-angle-down"></i></a>
             <div class="subnav">
                 <ul>
                     <li><a href="/locations/okc"><span>OKC</span></a></li>
