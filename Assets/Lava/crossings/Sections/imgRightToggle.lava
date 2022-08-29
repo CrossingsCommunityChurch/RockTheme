@@ -1,0 +1,141 @@
+{%- comment -%}
+    Toggle List Content Component
+    A series of items with titles that can be toggled to show their content
+    Use Allow Multiple Content Items
+
+    Section Options (Optional)
+    @SectionTitle
+    @SectionSummary
+    @Background Color
+    @ForegroundColor
+    @Section Anchor
+
+    Item Options
+    @Title (required)
+    @Icon - Font Awesome Class
+    @Subheading - Runs inline next to title
+    @Content (required) - Toggled Viewable Content
+
+{%- endcomment -%}
+
+{% stylesheet id:'contentcomponent-split-toggle' %}
+    @media only screen and (min-width: 992px) {
+        .contentComponent-split-toggle .row {
+            position: relative;
+            min-height: 450px;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .contentComponent-split-toggle .cover-half {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .contentComponent-split-toggle .cover-half.cover-right {
+            left: auto;
+            right: 0;
+        }
+
+        .contentComponent-split-toggle .cover-half img {
+            min-width: 100%;
+            width: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 50%;
+            }
+        .width-50 {
+            width: 50%;
+        }
+    }
+    @media only screen and (max-width: 992px) {
+        .contentComponent-split-toggle .row {
+            position: relative;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        .contentComponent-split-toggle .cover-half img {
+            min-width: 100%;
+            width: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: 50% 50%;
+        }
+    }
+{% endstylesheet %}
+
+{%- assign contentItemStyle = '' -%}
+{%- assign contentTextColor = '' -%}
+
+{%- assign channelBackgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+{%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
+{%- assign channelSectionTitle =  ContentChannel | Attribute:'SectionTitle' -%}
+{%- assign channelSectionSummary =  ContentChannel | Attribute:'SectionSummary' -%}
+{%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
+
+{%- if channelBackgroundColor != empty and useCustomColors == 'Yes' -%}
+    {%- capture contentItemStyle -%}{{ contentItemStyle }}background-color:{{ channelBackgroundColor }};{%- endcapture -%}
+{%- endif -%}
+
+{%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}
+      {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
+  {%- endif -%}
+
+{%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
+{%- if channelAnchor != empty -%} <div id="{{channelAnchor}}"></div> {%- endif -%}
+<div class="contentComponent-split-toggle">
+    <div class="toggle-content-list bg-gray row" {% if channelBackgroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentItemStyle }}'{% endif %}>
+        <div class="width-50 section" style ="display: flex;">
+            <div class="container content-area">
+                <div class="toggle-list-items">
+                    {%- if channelSectionTitle != empty -%}
+                        <h2 class="text-center heading" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>{{ channelSectionTitle }}</h2>
+                        <hr class="sep">
+                    {%- endif -%}
+                    {%- if channelSectionSummary != empty -%}
+                        <div class="summary text-center" {% if channelForegroundColor != empty and useCustomColors == 'Yes' %}style='{{ contentTextColor }}'{% endif %}>
+                        {{ channelSectionSummary }}
+                        </div>
+                    {%- endif -%}
+                    <div>
+                        <div class="col-md-12 panel-group" id="accordionR">
+                            {%- for item in Items -%}
+                                {%- assign title = item.Title -%}
+                                {%- assign content = item.Content | Escape -%}
+                                {%- assign icon = item | Attribute:'Icon' -%}
+                                {%- assign subheading = item | Attribute:'subheading' -%}
+                                {%- capture toggleIdentifier -%}{{title | Remove:' ' | ToCssClass  }}{{ forloop.index }}{%- endcapture -%}
+                                {%- assign name = 'accordionR' -%}
+                                {[ toggleItem title:'{{title}}' content:'{{content}}' subheading:'{{subheading}}' icon:'{{icon}}' identifier:'{{toggleIdentifier}}' name: '{{name}}' ]}
+                            {%- endfor -%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cover-half cover-right">
+            {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
+            {%- assign imageSize = ',c_scale,w_auto' -%}
+            {%- for item in Items -%}
+            {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+            {%- assign title = item.Title -%}
+            {%- if clPhoto and clPhoto != empty -%}
+                {%- assign imageUrl = clPhoto -%}
+            {%- else -%}
+                {%- assign imageUrlPath = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
+                {%- assign imageUrl = imageStorageUrl | Append: imageSize | Append:imageUrlPath -%}
+            {%- endif -%}
+            {%- if imageUrl != empty -%}
+                <img class="img" alt="{{ title }}" src="{{ imageUrl }}" data-src="{{ imageUrl }}">
+                {%- break -%}
+            {%- endif -%}
+            {%- endfor -%}
+        </div>
+    </div>
+</div>

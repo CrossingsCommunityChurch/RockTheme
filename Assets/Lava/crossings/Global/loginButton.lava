@@ -2,12 +2,20 @@
   Simple Login Button. Checks if someone is currently logged in or not.
 {%- endcomment -%}
 
+{% stylesheet id:'nav-acct-login' %}
+  @media (min-width: 992px) and (max-width: 1050px) {
+    .nav-acct-login .leave {
+      display: none;
+    }
+  }
+{% endstylesheet %}
+
 {%- if CurrentPerson -%}
-  <a id="login" href="#" class="account-toggle login-btn btn btn-outline-thin">
-    <i class="fas fa-bars"></i> <span>Account</span>
+  <a id="login" href="#" class="account-toggle login-btn btn btn-outline-thin nav-acct-login">
+    <i class="fas fa-bars"></i> <span class="leave">Account</span>
   </a>
 {%- else -%}
-  <a href="/login" class="login-btn btn btn-outline-thin">
-    <i class="fas fa-user"></i> <span>Login</span>
+  <a href="/login" class="login-btn btn btn-outline-thin nav-acct-login">
+    <i class="fas fa-user"></i> <span class="leave">Login</span>
   </a>
 {%- endif -%}

@@ -204,6 +204,7 @@
 
     .login-btn {
         margin: 0 auto 0 15px;
+
     }
 
     .menu-btn.search {
@@ -241,6 +242,14 @@
                 margin-left: @spacingSmall;
             }
         }
+    }
+}
+
+@media (min-width: 991px) and (max-width: 1050px) {
+    .login-btn {
+        width: 43px;
+        padding: 0;
+        line-height: 41px;
     }
 }
 
@@ -484,6 +493,7 @@
         >li.has-subnav-parent {
             &:hover {
                 background-color: @dark;
+                padding-right: 15px;
             }
         }
     }

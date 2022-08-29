@@ -171,7 +171,7 @@
                         - Need better way to get links
                         - We are duplicating efforts to set images, may be a better way
                       {%- endcomment -%}
-                      {[ cardMedia link:'/dollar-club/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Learn More' date:'{{ date }}' ]}
+                      {[ plainCard link:'/dollar-club/{{ childPrimarySlug }}' title:'{{ title }}' series:'{{ seriesTitle }}' img:'{{ imageUrl }}' actiontext:'Learn More' date:'{{ date }}' ]}
                     {%- endif -%}
                   {%- endfor -%}
                 {%- endfor -%}

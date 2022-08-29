@@ -109,7 +109,7 @@
 	text-decoration: none;
 }
 #signup-container {
-	position: absolute;
+	position: relative;
 	margin: 0px;
 	padding: 0px;
 	width: 100%;
