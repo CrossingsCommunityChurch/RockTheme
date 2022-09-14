@@ -13,10 +13,9 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/patients">Patients</a></li>
         <li><a href="/patient-resources">Resources</a></li>
-        <li><a href="/clinic/volunteer">Clinic Staff & Volunteers</a></li>
+        <li><a href="/clinic/volunteer">Staff & Volunteers</a></li>
         <li><a href="/clinic/support">Support & Partners</a></li>
         <li><a href="/clinic/donate">Donate</a></li>
-        <li><a href="/COVID19">Covid-19</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
