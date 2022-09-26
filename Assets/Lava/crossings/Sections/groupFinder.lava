@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="form-group col-sm-4 col-md-3">
-          <label for="filterLabel">Filter By Campus</label>
+          <label for="filterLabel">Filter By Location</label>
           <div class="dropdown">
             <button type="button" id="campuses" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" class="btn btn-default btn-dropdown dropdown-toggle"> Select a Filter <i class="fas fa-angle-down pull-right"></i></button>
             <ul aria-labelledby="eventCamptFilterMenu" id="eventCampFilterMenu" class="dropdown-menu">
