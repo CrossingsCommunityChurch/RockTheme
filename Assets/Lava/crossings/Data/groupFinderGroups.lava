@@ -18,7 +18,8 @@
     "Campuses":[
         "Crossings OKC",
         "Crossings Edmond",
-        "Crossings Online"
+        "Crossings Online",
+        "Community Center"
     ],
     "Groups":[
         {%- group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' -%}
