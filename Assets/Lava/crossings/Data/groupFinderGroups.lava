@@ -18,7 +18,8 @@
     "Campuses":[
         "Crossings OKC",
         "Crossings Edmond",
-        "Crossings Online"
+        "Crossings Online",
+        "Community Center"
     ],
     "Groups":[
         {%- group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' -%}
@@ -154,8 +155,8 @@
             "Tags": {{tagsArray | ToJSON}},
             "ScheduleId": {{scheduleId | ToJSON}},
             "FriendlyScheduleText": {{friendlyName | ToJSON }},
-            "Details": {{details | Replace:"'","’" | ToJSON | Replace:"\n","\\n" }},
-            "Summary": {{summary | Replace:"'","’" | ToJSON}},
+            "Details": {{details | Replace:"'","’" |  Escape |  ToJSON | Replace:"\n","\\n" }},
+            "Summary": {{summary | Replace:"'","’" |  Escape |  ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
             "Leaders": {{leaders | ToJSON}},
             "DayofWeek": {{dayofweek | ToJSON}},

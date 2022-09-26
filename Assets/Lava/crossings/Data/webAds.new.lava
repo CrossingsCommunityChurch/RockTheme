@@ -5,6 +5,9 @@
       {%- for item in contentchannel.Items -%}
         {%- assign audiences =  item | Attribute:'SecondaryAudiences','Object' -%}
         {%- for audience in audiences -%}
+          {%- if audience.Value == 'Staff' -%}
+            {%- continue -%}
+          {%- else  -%}
           {%- assign curAudience = audience.Value | StripNewlines | ToJSON -%}
             {%- assign match = existing | RegExMatch:curAudience -%}
             {%- if match == false -%}
@@ -15,6 +18,7 @@
               {%-endcomment-%}
               {%- assign existing = existing | Append:curAudience -%}
             {%- endif -%}
+          {%- endif  -%}
         {%- endfor -%}
       {%- endfor -%}
     {%- endcontentchannel -%}
