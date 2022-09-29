@@ -11,6 +11,7 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="https://crossings.church/locations/center">Worship</a></li>
         <li><a href="/club">The Club</a></li>
         <li><a href="/center/programs">Events</a></li>
         <li><a href="https://crossings.church/locations/okc/serve">Volunteer</a></li>
