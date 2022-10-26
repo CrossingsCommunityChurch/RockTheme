@@ -8,7 +8,7 @@
 							<a href="{{partition.Url}}&GroupId={{partition.GroupId}}">
 						{% endif %}
 					{% endif %}
-					<div class="serve-card" style="height: 180px;">
+					<div class="serve-card" style="height: 220px;">
                         <div class="box text-center">
 							<div class="clearfix">
 								<span class="label label-default pull-right" style="margin: 10px">{% if schedule.Limit == null %}Unlimited{% else %}{% if spotsLeft <= 0 %}Full{% else %}{{spotsLeft}} {{ 'Spot' | PluralizeForQuantity:spotsLeft }} Remaining{% endif %}{% endif %}</span>
