@@ -16,12 +16,7 @@
             {%- assign icon = item | Attribute: 'Icon' -%}
             {%- assign subcontent = item | Attribute: 'CardSubcontent' -%}
             {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-            {%- if clPhoto and clPhoto != empty -%}
-                {%- assign imageUrl = clPhoto -%}
-            {%- else -%}
-              {%- assign imageAsset = item | Attribute: 'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
-              {%- assign image = imageStorageUrl | Append: imageSize | Append:imageAsset -%}
-            {%- endif -%}
+            {%- assign image = clPhoto -%}
             {% comment %} TODO: change this to use dynamic photos from cloudinary. {% endcomment %}
             {%- assign modalID = item.Title | ToCssClass -%}
             {%- capture modalIDWithIndex -%}{{modalID}}{{forloop.index}}{%endcapture%}
