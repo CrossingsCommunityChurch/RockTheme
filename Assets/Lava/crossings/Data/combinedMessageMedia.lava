@@ -135,10 +135,7 @@
           {%- assign channelPath = 'ondemand/' -%}
         {%- endif -%}
         {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-        {%- if clPhoto and clPhoto != empty -%}
             {%- assign imageAsset = clPhoto -%}
-        {%- else -%}
-            {%-assign AssetImage = item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
             {%-assign imageUrl = AssetImage-%}
             {%-assign useVimeoImage = False-%}
             {%-assign vimeoImageUrl = item | Attribute:'Image', 'RawValue'-%}
@@ -148,9 +145,8 @@
             {%-endif-%}
             {%if vimeoImageUrl == empty and AssetImage == empty-%}
                 {%-assign parentSeries = item.ParentItems | First-%}
-                {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb'-%}
+                {%-assign imageUrl = parentSeries.ContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto'-%}
             {%-endif-%}
-        {%- endif -%}
         {
             "Id": {{ item.Id }},
             "Title": {{ item.Title | Replace:"'","’" | ToJSON }},
