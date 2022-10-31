@@ -26,13 +26,10 @@
 
   {%- assign imageUrlPath = message.image -%}
   {% capture expression %}^(http|https):\/\/{% endcapture %}
-  {%- assign isCloudinary = imageUrlPath | RegExMatch: expression  -%}
-  {%- if isCloudinary -%}
+
+  {%- assign imageUrl = message.image -%}
+  {%- if message.useVimeoImage == True -%}
     {%- assign imageUrl = message.image -%}
-  {%- else -%}
-    {%- if message.useVimeoImage == True -%}
-      {%- assign imageUrl = message.image -%}
-    {%- endif -%}
   {%- endif -%}
 
 
