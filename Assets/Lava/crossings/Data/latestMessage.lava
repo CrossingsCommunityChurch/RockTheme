@@ -19,6 +19,8 @@
   {%- assign 2speaker = 2latestMessage | Attribute:'Speaker' -%}
 
   {% assign clPhoto = latestMessage | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+  {% assign myVal = latestMessage | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
+
   {%- assign imageUrl = clPhoto -%}
     {%- if vimeoImageUrl != empty -%}
       {%- assign imageUrl = vimeoImageUrl -%}
@@ -48,11 +50,12 @@
 
   {
       "title" : {{ latestMessage.Title | ToJSON }},
-      "image" : {{ imageUrl | ToJSON }},
+      "image" : {{ myVal | ToJSON }},
       "useVimeoImage" : {{ useVimeoImage | ToJSON }},
       "date" : {{ latestMessage.StartDateTime | Date:'MMM d, yyyy' | ToJSON }},
       "content" : {{ latestMessage.Content | ToJSON }},
       "speaker" : {{ speaker | ToJSON }},
+      "test" : {{ myVal | ToJSON}},
       "parentSeries" : {{ parentSeries.Title | ToJSON }},
       "parentSlug" : {{ parentSlug | ToJSON }},
       "link" : {{ '/media/sermons/' | Append: parentSlug | Append: '/' | Append: latestMessage.PrimarySlug | ToJSON }}
