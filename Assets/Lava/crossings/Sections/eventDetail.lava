@@ -14,7 +14,7 @@
   {%- assign eventimageUrl = clPhoto -%}
 
   {%- if eventimageUrl and eventimageUrl != empty -%}
-    {%- eventcalendaritem where:'EventItemId == {{9o.EventItemId}}' -%}
+    {%- eventcalendaritem where:'EventItemId == {{eventitemoccurrence.EventItemId}}' -%}
       {% assign clPhoto = eventcalendaritem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
       {%- assign eventimageUrl = clPhoto -%}
     {%- endeventcalendaritem -%}
