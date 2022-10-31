@@ -8,7 +8,7 @@
 							<a href="{{partition.Url}}&GroupId={{partition.GroupId}}">
 						{% endif %}
 					{% endif %}
-					<div class="serve-card" style="height: 180px">
+					<div class="serve-card" style="height: 220px">
                     <a href="#" onclick="doSlide('#{{divId}}_{{campus.Value}}'); return false;">
                         <div class="box text-center">
 							<div class="clearfix">

@@ -164,7 +164,6 @@
                       {%if imageUrl == empty-%}
                         {%- assign imageUrl = seriesLogo -%}
                       {%- endif -%}
-                      {%- assign imageUrl = seriesLogo -%}
                       {%- assign childPrimarySlug = child.ChildContentChannelItem.PrimarySlug | Trim -%}
                       {%- assign parentPrimarySlug = parent.PrimarySlug | Trim -%}
                       {%- comment -%}

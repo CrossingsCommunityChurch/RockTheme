@@ -8,54 +8,40 @@
   {%- assign now = 'Now' | Date -%}
   {%- assign contentChannelId = channelid -%}
   {%- contentchannelitem | where:'(Status == 1 || Status == 2) && ContentChannelId == 21 && StartDateTime < "{{now}}"' sort:'StartDateTime desc' iterator:'contentChannelItems' securityenabled:'false' -%}
-  
+
   {%- assign latestMessage = contentChannelItems | First -%}
   {%- assign 2latestMessage = contentChannelItems | Index:1 -%}
 
   {%- assign parentSeries = latestMessage.ParentItems | First | Property:'ContentChannelItem' -%}
   {%- assign parentSlug = parentSeries.PrimarySlug -%}
-  
+
   {%- assign speaker = latestMessage | Attribute:'Speaker' -%}
   {%- assign 2speaker = 2latestMessage | Attribute:'Speaker' -%}
 
   {% assign clPhoto = latestMessage | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-  {%- if clPhoto and clPhoto != empty -%}
-      {%- assign imageUrl = clPhoto -%}
-  {%- else -%}
-    {%- assign AssetImage = latestMessage | Attribute:'AssetImage' | Url:'localpath' -%}
-    {%- assign imageUrl = AssetImage -%}
-    {%- assign useVimeoImage = False -%}
-    {%- assign vimeoImageUrl = latestMessage | Attribute:'Image', 'RawValue' -%}
+  {%- assign imageUrl = clPhoto -%}
     {%- if vimeoImageUrl != empty -%}
       {%- assign imageUrl = vimeoImageUrl -%}
       {%- assign useVimeoImage = True -%}
     {%- endif -%}
     {%- if vimeoImageUrl == empty and AssetImage == empty -%}
         {%- assign parentSeries = latestMessage.ParentItems | First -%}
-        {%- assign imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' -%}
+        {%- assign imageUrl = parentSeries.ContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' -%}
     {%- endif -%}
-  {%- endif -%}
   {%- if parentSlug == null -%}
     {%- assign parentSlug = 'no-series' -%}
   {%- endif -%}
 
   {% assign 2clPhoto = 2latestMessage | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-  {%- if 2clPhoto and 2clPhoto != empty -%}
-      {%- assign 2imageUrl = 2clPhoto -%}
-  {%- else -%}
-    {%- assign 2AssetImage = 2latestMessage | Attribute:'AssetImage' | Url:'localpath' -%}
-    {%- assign 2imageUrl = 2AssetImage -%}
-    {%- assign 2useVimeoImage = False -%}
-    {%- assign 2vimeoImageUrl = 2latestMessage | Attribute:'Image', 'RawValue' -%}
+  {%- assign 2imageUrl = 2clPhoto -%}
     {%- if 2vimeoImageUrl != empty -%}
       {%- assign 2imageUrl = 2vimeoImageUrl -%}
       {%- assign 2useVimeoImage = True -%}
     {%- endif -%}
     {%- if 2vimeoImageUrl == empty and 2AssetImage == empty -%}
         {%- assign parentSeries = latestMessage.ParentItems | First -%}
-        {%- assign 2imageUrl = parentSeries.ContentChannelItem | Attribute:'Serieslogo' | Url:'localpath' -%}
+        {%- assign 2imageUrl = parentSeries.ContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' -%}
     {%- endif -%}
-  {%- endif -%}
   {%- if parentSlug == null -%}
     {%- assign parentSlug = 'no-series' -%}
   {%- endif -%}
