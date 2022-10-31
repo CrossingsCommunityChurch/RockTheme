@@ -24,7 +24,7 @@
       {%- assign imageUrl = vimeoImageUrl -%}
       {%- assign useVimeoImage = True -%}
     {%- endif -%}
-    {%- if vimeoImageUrl == empty and AssetImage == empty -%}
+    {%- if vimeoImageUrl == empty and imageUrl == empty -%}
         {%- assign parentSeries = latestMessage.ParentItems | First -%}
         {%- assign imageUrl = parentSeries.ContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' -%}
     {%- endif -%}
@@ -38,7 +38,7 @@
       {%- assign 2imageUrl = 2vimeoImageUrl -%}
       {%- assign 2useVimeoImage = True -%}
     {%- endif -%}
-    {%- if 2vimeoImageUrl == empty and 2AssetImage == empty -%}
+    {%- if 2vimeoImageUrl == empty and 2imageUrl == empty -%}
         {%- assign parentSeries = latestMessage.ParentItems | First -%}
         {%- assign 2imageUrl = parentSeries.ContentChannelItem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' -%}
     {%- endif -%}
