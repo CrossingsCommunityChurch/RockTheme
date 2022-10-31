@@ -26,6 +26,11 @@
   {%- assign questionsUrlPath = questions | Url:'localpath' -%}
   {%- assign notesUrl = docStorageUrl | Append:notesUrlPath -%}
   {%- assign questionsUrl = docStorageUrl | Append:questionsUrlPath -%}
+
+  {%- if item.Title == 'Kindness' -%}
+    {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Sermon%20PDFs/Sermon%20discussion%20Questions/MDQ_10302022.pdf" -%}
+  {%- endif -%}
+
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
   {%- capture pageTitle -%}{{ speaker }} - {{ title }} | {{ org }} {%- endcapture%}
   {%- capture metaDesc -%}{{ summary | StripHtml }} {{ speaker }}. {{ title }}{%- endcapture -%}
