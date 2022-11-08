@@ -6,7 +6,7 @@
 
 <div class='well margin-t-md'>
     <div class='row'>
-        <div class='col-md-9'>
+        <div class='col-md-12'>
             <img src='{{ GroupMember.Person.PhotoUrl }}' width='75px' class='pull-left margin-r-md img-circle' />
             <label>
                 Fundraising Progress
@@ -26,11 +26,15 @@
         </div>
      </div>
      <div class='row'>
-        <div class='col-md-12'>
+        <div class='col-md-3'>
             <div class='pull-right'>
                 <a href='{{ ParticipantPageUrl }}' class='btn btn-lg btn-block btn-primary'>Participant Page</a>
-                <a href='{{ MakeDonationUrl }}' class='btn btn-lg btn-block btn-primary'>{{ MakeDonationButtonText }}</a>
-            </div>
         </div>
+            </div>
+            <div class='col-md-3'>
+              <div class='pull-right'>
+                <a href='{{ MakeDonationUrl }}' class='btn btn-lg btn-block btn-primary'>{{ MakeDonationButtonText }}</a>
+              </div>
+           </div>
     </div>
 </div>
