@@ -29,10 +29,8 @@
         <div class='col-md-3'>
             <div class='pull-right'>
                 <a href='{{ ParticipantPageUrl }}' class='btn btn-lg btn-block btn-primary'>Participant Page</a>
-        </div>
-              <div class='col-md-3'>
                 <a href='{{ MakeDonationUrl }}' class='btn btn-lg btn-block btn-primary'>{{ MakeDonationButtonText }}</a>
               </div>
-           </div>
+         </div>
     </div>
 </div>
