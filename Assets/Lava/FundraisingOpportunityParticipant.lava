@@ -24,11 +24,12 @@
                 </div>
             </div>
         </div>
-
-        <div class='col-md-3'>
+     </div>
+     <div class='row'>
+        <div class='col-md-12'>
             <div class='pull-right'>
-                <a href='{{ ParticipantPageUrl }}' class='btn btn-xs btn-block btn-primary'>Participant Page</a>
-                <a href='{{ MakeDonationUrl }}' class='btn btn-xs btn-block btn-default'>{{ MakeDonationButtonText }}</a>
+                <a href='{{ ParticipantPageUrl }}' class='btn btn-lg btn-block btn-primary'>Participant Page</a>
+                <a href='{{ MakeDonationUrl }}' class='btn btn-lg btn-block btn-primary'>{{ MakeDonationButtonText }}</a>
             </div>
         </div>
     </div>
