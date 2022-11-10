@@ -33,6 +33,15 @@
   {%- if item.Title == 'Goodness' -%}
     {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Sermon%20PDFs/Sermon%20discussion%20Questions/MDQ_11062022%20.pdf" -%}
   {%- endif -%}
+  {%- if item.Title == 'November 9, 2022' -%}
+    {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/1Thessalonians2022Lesson4.docx" -%}
+  {%- endif -%}
+  {%- if item.Title == 'November 2, 2022' -%}
+    {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/1Thessalonians2022Lesson3.docx" -%}
+  {%- endif -%}
+  {%- if item.Title == 'October 26, 2022' -%}
+    {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/1Thessalonians2022Lesson2.docx" -%}
+  {%- endif -%}
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
   {%- capture pageTitle -%}{{ speaker }} - {{ title }} | {{ org }} {%- endcapture%}
