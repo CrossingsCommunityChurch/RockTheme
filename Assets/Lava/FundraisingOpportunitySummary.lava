@@ -36,11 +36,6 @@
         </a>
     </li>
     <li>
-        <a href='https://twitter.com/intent/tweet?text={{ Group | Attribute:'OpportunityTitle' | EscapeDataString }}&url={{ 'Global' | Page:'Url' | EscapeDataString }}' class='socialicon socialicon-twitter' title='' data-original-title='Share via Twitter'>
-            <i class='fa fa-fw fa-twitter'></i>
-        </a>
-    </li>
-    <li>
         <a href='mailto:?subject={{ Group | Attribute:'OpportunityTitle' | EscapeDataString }}&body=%0D%0A{{ 'Global' | Page:'Url' | EscapeDataString }}' class='socialicon socialicon-email' title='' data-original-title='Share via Email'>
             <i class='fa fa-fw fa-envelope-o'></i>
         </a>
