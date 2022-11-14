@@ -43,7 +43,7 @@
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/1Thessalonians2022Lesson2.docx" -%}
   {%- endif -%}
   {%- if item.Title == 'Faithfulness' -%}
-    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Sermon%20PDFs/Sermon%20discussion%20Questions/MDQ_11132022%20.pdf" -%}
+    {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Sermon%20PDFs/Sermon%20discussion%20Questions/MDQ_11132022%20.pdf" -%}
   {%- endif -%}
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
