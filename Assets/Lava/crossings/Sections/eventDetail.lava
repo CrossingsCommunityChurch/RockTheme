@@ -10,15 +10,11 @@
   {%- capture pageTitleBrowser -%}{{eventitemoccurrence.EventItem.Name}} | {{ org }}{%- endcapture%}
   {{ pageTitle | SetPageTitle:'PageTitle' }}
   {{ pageTitleBrowser | SetPageTitle:'BrowserTitle' }}
-  {% assign clPhoto = eventitemoccurrence | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
-  {%- assign eventimageUrl = clPhoto -%}
 
-  {%- if eventimageUrl and eventimageUrl != empty -%}
     {%- eventcalendaritem where:'EventItemId == {{eventitemoccurrence.EventItemId}}' -%}
       {% assign clPhoto = eventcalendaritem | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
       {%- assign eventimageUrl = clPhoto -%}
     {%- endeventcalendaritem -%}
-  {%- endif -%}
 
   <div class="event-page">
       <div class="section page-title reverse">
