@@ -28,7 +28,7 @@
     {{ Group | Attribute:'OpportunitySummary' }}
 </div>
 
-<script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
+{% comment %} <script>function fbs_click() { u = location.href; t = document.title; window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(u) + '&t=' + encodeURIComponent(t), 'sharer', 'toolbar=0,status=0,width=626,height=436'); return false; }</script>
 <ul class='socialsharing margin-b-lg'>
     <li>
         <a href='https://www.facebook.com/sharer/sharer.php?u={{ 'Global' | Page:'Url' | EscapeDataString }}' onclick='return fbs_click()' target='_blank' class='socialicon socialicon-facebook' title='' data-original-title='Share via Facebook'>
@@ -40,4 +40,4 @@
             <i class='fa fa-fw fa-envelope-o'></i>
         </a>
     </li>
-</ul>
+</ul> {% endcomment %}
