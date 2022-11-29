@@ -27,10 +27,10 @@
                 </div>
             </div>
         </div>
-        <div class='row'>
-            <div class='col-md-12'>
+        <div class='row flexCenter'>
+            <div>
                 <div class='actions pull-right'>
-                    <a href='{{ MakeDonationUrl }}' class='btn btn-sm btn-primary' >{{ MakeDonationButtonText }}</a>
+                    <a href='{{ MakeDonationUrl }}' class='btn btn-lg btn-primary' >{{ MakeDonationButtonText }}</a>
                 </div>
             </div>
         </div>
