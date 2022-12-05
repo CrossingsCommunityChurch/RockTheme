@@ -48,6 +48,9 @@
   {%- if item.Title == 'November 16, 2022' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/1Thessalonians2022Lesson5.docx" -%}
   {%- endif -%}
+  {%- if item.Title == 'November 30, 2022' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/StoryBehindChristmas22Lesson1.docx" -%}
+  {%- endif -%}
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
   {%- capture pageTitle -%}{{ speaker }} - {{ title }} | {{ org }} {%- endcapture%}
