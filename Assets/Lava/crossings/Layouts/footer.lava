@@ -79,9 +79,9 @@
             <li>
             <a href="https://www.paycomonline.net/v4/ats/web.php/jobs?clientkey=BB5BBDC81EFC132E8B6CA382258DEFB3">Careers</a>
             </li>
-            {% comment %} <li>
+            <li>
               <a href="https://crossings.church/page/941">Receive Updates</a>
-            </li> {% endcomment %}
+            </li>
           </ul>
           <div class="row reverse social-row footerSpacing">
             <div class="col-md-4">
