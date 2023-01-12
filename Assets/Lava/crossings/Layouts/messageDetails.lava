@@ -57,6 +57,9 @@
   {%- if item.Title == 'December 14, 2022' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/StoryBehindChristmas22Lesson3.docx" -%}
   {%- endif -%}
+  {%- if item.Title == 'January 11, 2023' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%201%20Intro%20-%20Handout.docx" -%}
+  {%- endif -%}
 
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
