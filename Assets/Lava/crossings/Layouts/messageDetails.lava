@@ -57,13 +57,16 @@
   {%- if item.Title == 'December 14, 2022' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/StoryBehindChristmas22Lesson3.docx" -%}
   {%- endif -%}
-  {%- if item.Title == 'January 11, 2023' -%}
+  {%- if item.Title == 'INTRODUCTION AND CHAPTER 1' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%201%20Intro%20-%20Handout.docx" -%}
   {%- endif -%}
-  {%- if item.Title == 'January 18, 2023' -%}
+  {%- if item.Title == 'JESUS SPEAKS TO THE CHURCHES (PART 1)' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%202%20-%20Handout.docx" -%}
   {%- endif -%}
-  {%- if item.Title == 'January 25, 2023' -%}
+  {%- if item.Title == 'JESUS SPEAKS TO THE CHURCHES (PART 2)' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%203%20-%20Handout.docx" -%}
+  {%- endif -%}
+  {%- if item.Title == 'THE THRONE IN HEAVEN    ' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%203%20-%20Handout.docx" -%}
   {%- endif -%}
 
