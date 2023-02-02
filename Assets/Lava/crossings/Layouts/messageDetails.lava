@@ -63,11 +63,11 @@
   {%- if item.Title == 'JESUS SPEAKS TO THE CHURCHES (PART 1)' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%202%20-%20Handout.docx" -%}
   {%- endif -%}
-  {%- if item.Title == 'JESUS SPEAKS TO THE CHURCHES (PART 2)' -%}
+  {%- if item.Title == 'Jesus Speaks to the Churches (part 2)' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%203%20-%20Handout.docx" -%}
   {%- endif -%}
-  {%- if item.Title == 'THE THRONE IN HEAVEN    ' -%}
-    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%203%20-%20Handout.docx" -%}
+  {%- if item.Title == 'The Throne in Heaven' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%204-5%20-%20Handout.pdf" -%}
   {%- endif -%}
 
 
