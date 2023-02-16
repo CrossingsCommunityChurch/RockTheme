@@ -72,6 +72,9 @@
   {%- if item.Title == 'The Seven Seals' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%206-7%20-%20Handout.pdf" -%}
   {%- endif -%}
+  {%- if item.Title == 'Seven Archangels' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%208-10%20-%20Handout.docx" -%}
+  {%- endif -%}
 
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
