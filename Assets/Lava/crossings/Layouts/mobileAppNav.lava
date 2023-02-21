@@ -32,9 +32,10 @@
     </div>
     <div class="sub-headings">
       <div id="collapseLocs" class="collapse">
-        <h5><a href="https://prisons.crossings.church" target="_blank" rel="noopener">Crossings Prison Ministry</a></h5>
+        <h5><a href="/locations/bethany" target="_blank" rel="noopener">Bethany Children's Center</a></h5>
+        <h5><a href="/prisons" target="_blank" rel="noopener">Crossings Prison Ministry</a></h5>
         <h5><a href="https://clinic.crossings.church" target="_blank" rel="noopener">Crossings Clinic</a></h5>
-        <h5><a href="https://center.crossings.church" target="_blank" rel="noopener">Crossings Community Center</a></h5>
+        <h5><a href="/locations/center" target="_blank" rel="noopener">Crossings Community Center</a></h5>
         <h5><a href="https://www.crossingsschool.org" target="_blank" rel="noopener">Crossings Christian School</a></h5>
       </div>
       <a role="button" data-toggle="collapse" href="#collapseLocs" aria-expanded="false" aria-controls="collapseLocs" class="btn btn-link nopadding"> More Locations <i class="fa fa-plus"></i></a>
