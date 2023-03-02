@@ -75,6 +75,9 @@
   {%- if item.Title == 'Seven Archangels' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%208-10%20-%20Handout.docx" -%}
   {%- endif -%}
+  {%- if item.Title == 'The Two Witnesses' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2011%20-%20Handout.docx" -%}
+  {%- endif -%}
 
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
