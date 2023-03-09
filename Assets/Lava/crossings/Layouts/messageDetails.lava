@@ -78,6 +78,9 @@
   {%- if item.Title == 'The Two Witnesses' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2011%20-%20Handout.docx" -%}
   {%- endif -%}
+  {%- if item.Title == 'War In Heaven' -%}
+    {%- assign notesUrl = "https://docs.crossings.church//cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2012%20-%20Handout.docx" -%}
+  {%- endif -%}
 
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
