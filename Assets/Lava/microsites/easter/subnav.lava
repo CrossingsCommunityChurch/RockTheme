@@ -15,6 +15,7 @@
         {% comment %} <li><a href="https://easter.crossings.church/#palmsunday">Palm Sunday</a></li> {% endcomment %}
         {% comment %} <li><a href="https://easter.crossings.church/#maundythursday">Maundy Thursday</a></li>
         <li><a href="https://easter.crossings.church/#goodfriday">Good Friday Experience</a></li> {% endcomment %}
+        <li><a href="/#volunteer">Volunteer</a></li>
         <li><a href="/#devotions">Lent Devotions</a></li>
         <li><a href="/#holyweek">Holy Week</a></li>
       </ul>
