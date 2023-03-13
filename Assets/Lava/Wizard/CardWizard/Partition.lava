@@ -41,7 +41,7 @@
 							{% if forloop.first %}<h3 class="section-header">Please select your schedule:</h3>{% endif %}
 							{% include '~/Plugins/org_secc/Connection/CardWizard/CardSchedule.lava' %}
 						{% elseif partition.PartitionType == 'Campus' %}
-							{% if forloop.first %}<h3 class="section-header">Please select your campus:</h3>{% endif %}
+							{% if forloop.first %}<h3 class="section-header">Please select your location:</h3>{% endif %}
 							{% comment %} {% include '~/Plugins/org_secc/Connection/CardWizard/CardCampus.lava' %} {% endcomment %}
 							{% include '~~/Assets/Lava/Wizard/CardWizard/CardCampus.lava' %}
 						{% elseif partition.PartitionType == 'Role' %}
