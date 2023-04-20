@@ -91,7 +91,7 @@
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2017-18%20-%20Handout.docx" -%}
   {%- endif -%}
   {%- if item.Title == 'Armageddon' -%}
-    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2019%20-%20Handout.docx" -%}
+    {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2019%20-%20Handout.docx" -%}
   {%- endif -%}
 
 
