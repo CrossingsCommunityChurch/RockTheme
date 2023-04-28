@@ -93,6 +93,9 @@
   {%- if item.Title == 'Armageddon' -%}
     {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2019%20-%20Handout.docx" -%}
   {%- endif -%}
+  {%- if item.Title == 'The Millennium' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2020%20Pt%201%20-%20Handout.pdf" -%}
+  {%- endif -%}
 
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
