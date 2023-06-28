@@ -1,0 +1,21 @@
+[
+    {%- contentchannel where:'Name == "Gathering Alerts"' iterator:'gatheringAlerts' -%}
+    {%- assign gatheringAlertsId = gatheringAlerts | First | Property:'Id' -%}
+    {%- endcontentchannel -%}
+    {%- if gatheringAlertsId != empty -%}
+    {%- contentchannelitem where:'ContentChannelId == {{gatheringAlertsId}}' limit:'1000' sort:'StartDateTime desc' iterator:'alerts' -%}
+    {%- for alert in alerts -%}
+    {%- assign url = alert | Attribute:'Url', 'RawValue' -%}
+    {%- assign active = alert | Attribute:'Active', 'RawValue' -%}
+    {
+        "Id": {{ alert.Id | ToJSON }},
+        "Title": {{ alert.Title | ToJSON }},
+        "Content": {{ alert.Content | ToJSON }},
+        "Url": {{ url | ToJSON }},
+        "Active": {{ active | ToJSON }}
+        
+    }
+    {%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
+    {%- endcontentchannelitem -%}
+    {%- endif -%}
+]
