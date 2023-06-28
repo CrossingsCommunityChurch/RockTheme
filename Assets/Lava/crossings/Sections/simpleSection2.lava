@@ -45,7 +45,7 @@
 {%- assign buttons = item | Attribute: 'lava' | HtmlDecode -%}
 
 {% javascript %}
-  console.log({{content}})
+  console.log("content: " + {{content}})
 {% endjavascript %}
 
 <div class="bgcolor container-fluid section simple-section {% if useBackground == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}">
