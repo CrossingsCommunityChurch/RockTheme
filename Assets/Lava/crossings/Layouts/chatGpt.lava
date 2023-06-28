@@ -1,0 +1,18 @@
+{%- if blockContent != empty and blockContent != null -%}
+    {%- assign openAIKey = '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'  -%}
+
+    {%- capture aiwebrequestbodycapture -%}
+        {
+          "model": "gpt-3.5-turbo",
+          "messages": [{"role": "user", "content": "{{ blockContent | StripNewlines | Escape }}"}]
+        }
+    {%- endcapture -%}
+
+    {%- assign aiwebrequestbodytrimmed = aiwebrequestbodycapture | Trim -%}
+
+    {%- webrequest url:'https://api.openai.com/v1/chat/completions' headers:'Authorization^Bearer {{ openAIKey }}' method:'POST' body:'{{aiwebrequestbodytrimmed }}' requestcontenttype:'application/json' timeout:'60000' -%}
+        {% for choice in results.choices %}
+            {{- choice.message.content | Trim | NewlineToBr  -}}
+        {% endfor %}
+    {%- endwebrequest -%}
+{% endif %}

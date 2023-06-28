@@ -87,6 +87,18 @@
   {%- if item.Title == 'Seven Bowels of Wrath' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2014-16%20-%20Handout.docx" -%}
   {%- endif -%}
+  {%- if item.Title == 'The Woman and the Beast' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2017-18%20-%20Handout.docx" -%}
+  {%- endif -%}
+  {%- if item.Title == 'Armageddon' -%}
+    {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2019%20-%20Handout.docx" -%}
+  {%- endif -%}
+  {%- if item.Title == 'The Millennium' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2020%20Pt%201%20-%20Handout.pdf" -%}
+  {%- endif -%}
+  {%- if item.Title == 'A New Heaven and New Earth' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2021-22%20-%20Handout.docx" -%}
+  {%- endif -%}
 
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
