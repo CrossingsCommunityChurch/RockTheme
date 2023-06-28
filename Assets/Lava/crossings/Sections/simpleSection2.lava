@@ -16,9 +16,10 @@
 {%- if channelAnchor != '' -%} <div class="anchor" id="{{channelAnchor}}"></div> {%- endif -%}
 
 {%- assign contentTextColor = '' -%}
-
 {%- assign backgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
 {%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
+{%- assign useCustomColors =  ContentChannel | Attribute:'UseCustomColors' -%}
+
 {%- if backgroundColor != '' -%} <style>.bgcolor{background-color: {{backgroundColor}};}</style> {%- endif -%}
 
 {%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}
