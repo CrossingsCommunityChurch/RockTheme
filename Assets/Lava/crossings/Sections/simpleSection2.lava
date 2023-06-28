@@ -15,8 +15,15 @@
 {%- assign channelAnchor =  ContentChannel | Attribute:'SectionAnchor' -%}
 {%- if channelAnchor != '' -%} <div class="anchor" id="{{channelAnchor}}"></div> {%- endif -%}
 
+{%- assign contentTextColor = '' -%}
+
 {%- assign backgroundColor =  ContentChannel | Attribute:'BackgroundColor' -%}
+{%- assign channelForegroundColor  =  ContentChannel | Attribute:'ForegroundColor' -%}
 {%- if backgroundColor != '' -%} <style>.bgcolor{background-color: {{backgroundColor}};}</style> {%- endif -%}
+
+{%- if channelForegroundColor != empty and useCustomColors == 'Yes' -%}
+  {%- capture contentTextColor -%}color:{{ channelForegroundColor }};{%- endcapture -%}
+{%- endif -%}
 
 {%- for item in Items -%}
 {% assign clPhoto = item | Attribute:'FeatureImage','Object' | CloudinaryTransform:'c_scale,w_auto,dpr_auto,f_auto,q_auto' %}
@@ -45,13 +52,13 @@
               <div class="row">
                   <div class="col-md-12">
                       {%- if subheading -%}
-                        <h4 class="subheading">{{ subheading }}</h4>
+                        <h4 class="subheading" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ subheading }}</h4>
                       {%- endif -%}
                       {%- if title -%}
-                      <h2 class="heading">{{ title }}</h2>
+                      <h2 class="heading" {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ title }}</h2>
                       {%- endif -%}
                       <hr class="sep">
-                      <p>{{ content }}</p>
+                      <p {% if contentTextColor != '' %}style='{{ contentTextColor }}'{% endif %}>{{ content }}</p>
                       {%- comment -%} This may be the simplest way to add multiple buttons since there doesn't seem to be an array option to add muliple buttons.{%- endcomment -%}
                       {%- if buttons != empty -%}
                         <div class="buttons" data-aos="fade-up">
