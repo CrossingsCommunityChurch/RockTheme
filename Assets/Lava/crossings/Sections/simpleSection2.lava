@@ -44,6 +44,10 @@
 {%- assign content = item.Content -%}
 {%- assign buttons = item | Attribute: 'lava' | HtmlDecode -%}
 
+{% javascript %}
+  console.log({{content}})
+{% endjavascript %}
+
 <div class="bgcolor container-fluid section simple-section {% if useBackground == 'Yes' %}bgimg reverse simple-section-with-image{% endif %}">
       {%- if useBackground == 'Yes' and imageUrl -%}
         <div class="img" style="background-image: url('{{ imageUrl }}')"></div>
