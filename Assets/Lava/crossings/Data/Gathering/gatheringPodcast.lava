@@ -31,8 +31,8 @@
         "ChildChannelId": {{ childchannelid | ToJSON }},
         "UseCloudinary": {{ usecl | ToJSON }},
         "messages": [
-            {%- assign childItems = item.ChildItems Property:'ChildContentChannelItem' Sort:'StartDateTime' -%}
-            {% for message in childItems reversed %}
+            {%- assign childItems = item.ChildItems Property:'ChildContentChannelItem' Sort:'StartDateTime desc' -%}
+            {% for message in childItems %}
                 {
                     "Title": {{ message.ChildContentChannelItem.Title | ToJSON }},
                     "StartDateTime": {{ message.ChildContentChannelItem.StartDateTime | ToJSON }},
