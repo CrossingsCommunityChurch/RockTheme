@@ -3,7 +3,7 @@
     {%- assign gatheringSeriesItemId = gatheringSeriesItems | First | Property:'Id' -%}
     {%- endcontentchannel -%}
     {%- if teachingSeriesItemId != empty -%}
-    {%- contentchannelitem where:'ContentChannelId == {{gatheringSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
+    {%- contentchannelitem where:'ContentChannelId == {{gatheringSeriesItemId}}' limit:'1000' sort:'StartDateTime' iterator:'items' -%}
     {%- for item in items -%}
     {% if item.Title != 'So What? Podcast' %}{% continue %}{% endif %}
     {%- assign channelPath = '/messages/' -%}
@@ -40,7 +40,7 @@
                 }
             {%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
         ]
-        
+
     }
     {%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}
     {%- endcontentchannelitem -%}
