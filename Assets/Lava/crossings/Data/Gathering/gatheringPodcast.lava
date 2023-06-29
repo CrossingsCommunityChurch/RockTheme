@@ -3,7 +3,7 @@
     {%- assign gatheringSeriesItemId = gatheringSeriesItems | First | Property:'Id' -%}
     {%- endcontentchannel -%}
     {%- if teachingSeriesItemId != empty -%}
-    {%- contentchannelitem where:'ContentChannelId == {{gatheringSeriesItemId}}' limit:'1000' sort:'StartDateTime' iterator:'items' -%}
+    {%- contentchannelitem where:'ContentChannelId == {{gatheringSeriesItemId}}' limit:'1000' sort:'StartDateTime desc' iterator:'items' -%}
     {%- for item in items -%}
     {% if item.Title != 'So What? Podcast' %}{% continue %}{% endif %}
     {%- assign channelPath = '/messages/' -%}
@@ -31,8 +31,8 @@
         "ChildChannelId": {{ childchannelid | ToJSON }},
         "UseCloudinary": {{ usecl | ToJSON }},
         "messages": [
-            {%- assign childItems = item.ChildItems Property:'ChildContentChannelItem' -%}
-            {% for message in childItems %}
+            {%- assign childItems = item.ChildItems Property:'ChildContentChannelItem' Sort:'StartDateTime' -%}
+            {% for message in childItems reversed %}
                 {
                     "Title": {{ message.ChildContentChannelItem.Title | ToJSON }},
                     "StartDateTime": {{ message.ChildContentChannelItem.StartDateTime | ToJSON }},
