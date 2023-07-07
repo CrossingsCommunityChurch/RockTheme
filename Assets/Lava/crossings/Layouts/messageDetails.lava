@@ -99,6 +99,9 @@
   {%- if item.Title == 'A New Heaven and New Earth' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2021-22%20-%20Handout.docx" -%}
   {%- endif -%}
+  {%- if item.Title == 'Part 1' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Intertestament%20-%20400%20Year%20Road%20Part%201%20-%20Handout.docx" -%}
+  {%- endif -%}
 
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
