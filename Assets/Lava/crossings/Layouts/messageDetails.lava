@@ -102,6 +102,12 @@
   {%- if item.Title == 'Part 1' -%}
     {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Intertestament%20-%20400%20Year%20Road%20Part%201%20-%20Handout.docx" -%}
   {%- endif -%}
+  {%- if item.Title == 'The Millennium and Judgement' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/Apocalypse%202023%20-%20Ch%2020%20Pt%202%20-%20Handout.docx" -%}
+  {%- endif -%}
+  {%- if item.Title == 'Part 2' -%}
+    {%- assign notesUrl = "https://docs.crossings.church/cccprod/Documents/ClassNotes/400YearRoadPart2.docx" -%}
+  {%- endif -%}
 
 
   {%- assign org = 'Global' | Attribute:'OrganizationName' -%}
