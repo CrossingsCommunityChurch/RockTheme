@@ -155,7 +155,7 @@
             "Tags": {{tagsArray | ToJSON}},
             "ScheduleId": {{scheduleId | ToJSON}},
             "FriendlyScheduleText": {{friendlyName | ToJSON }},
-            "Details": {{details | Replace:"'","’" |  Escape |  ToJSON | Replace:"\n","\\n" | Replace:"\t","" }},
+            "Details": {{details | Replace:"'","’" |  Escape |  ToJSON | Replace:"\n","\\n" | Replace:"\t",""| Replace:"\t\n","\\n"}},
             "Summary": {{summary | Replace:"'","’" |  Escape |  ToJSON}},
             "ImageAsset": {{imageAsset | ToJSON}},
             "Leaders": {{leaders | ToJSON}},
