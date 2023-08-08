@@ -63,6 +63,9 @@
                         {%-elseif campusShortcode == "EDM"-%}
                             {%-assign childLink = "https://crossings.church/edmkands"-%}
                             {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Edmond' -%}
+                        {%-elseif campusShortcode == "CEN"-%}
+                            {%-assign childLink = ""-%}
+                            {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Community Center' -%}
                         {%-endif-%}
                         {%-assign location = group.GroupLocations | First -%}
                     {%- else -%}
