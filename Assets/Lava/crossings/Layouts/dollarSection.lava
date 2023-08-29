@@ -7,7 +7,7 @@
 {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
 {%- assign imageSize = ',c_scale,h_640' -%}
 
-{%- contentchannelitem where:'ContentChannelId == 483' iterator:'items' sort:'Priority desc' -%}
+{%- contentchannelitem where:'ContentChannelId == 517' iterator:'items' sort:'Priority desc' -%}
 {%- for item in items -%}
 {%- if item -%}
   {%- assign item = Item -%}
