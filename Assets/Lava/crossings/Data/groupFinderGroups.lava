@@ -92,7 +92,7 @@
                                     {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Community Center' -%}
                                 {%-elseif campusShortcode == "MAY"-%}
                                     {%-assign childLink = ""-%}
-                                    {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Mayfair' -
+                                    {%-assign friendlyName = friendlyName | ReplaceFirst:'Weekly:', 'Mayfair' -%}
                                 {%-endif-%}
                                 {%assign location = loc %}
                             {%- endfor -%}
