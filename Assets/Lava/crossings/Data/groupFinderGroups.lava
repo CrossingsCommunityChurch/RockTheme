@@ -19,8 +19,8 @@
         "Crossings OKC",
         "Crossings Edmond",
         "Crossings Online",
-        "Community Center",
-        "Mayfair"
+        "Crossings Mayfair",
+        "Community Center"
     ],
     "Groups":[
         {%- group where:'(GroupTypeId == 206 || GroupTypeId == 131) && IsPublic == True' securityenabled:'false' -%}
