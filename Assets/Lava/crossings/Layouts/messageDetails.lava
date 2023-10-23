@@ -27,12 +27,12 @@
   {%- assign notesUrl = docStorageUrl | Append:notesUrlPath -%}
   {%- assign questionsUrl = docStorageUrl | Append:questionsUrlPath -%}
 
-  {%- if notesUrl | contains "cccprod/cccprod/" -%}
-    {%- assign notesUrl = notesUrl | replace: "cccprod/cccprod/", "cccprod/" -%}
+  {%- if notesUrl contains "cccprod/cccprod/" -%}
+    {%- assign notesUrl = notesUrl | Replace: "cccprod/cccprod/", "cccprod/" -%}
   {%- endif -%}
 
-  {%- if questionsUrl | contains "cccprod/cccprod/" -%}
-    {%- assign questionsUrl = questionsUrl | replace: "cccprod/cccprod/", "cccprod/" -%}
+  {%- if questionsUrl contains "cccprod/cccprod/" -%}
+    {%- assign questionsUrl = questionsUrl | Replace: "cccprod/cccprod/", "cccprod/" -%}
   {%- endif -%}
 
   {% comment %} {%- if item.Title == 'Kindness' -%}
