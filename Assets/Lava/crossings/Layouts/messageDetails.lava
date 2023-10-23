@@ -27,11 +27,11 @@
   {%- assign notesUrl = docStorageUrl | Append:notesUrlPath -%}
   {%- assign questionsUrl = docStorageUrl | Append:questionsUrlPath -%}
 
-  {%- if notesUrl contains "cccprod/cccprod/" -%}
+  {%- if notesUrl | contains "cccprod/cccprod/" -%}
     {%- assign notesUrl = notesUrl | replace: "cccprod/cccprod/", "cccprod/" -%}
   {%- endif -%}
 
-  {%- if questionsUrl contains "cccprod/cccprod/" -%}
+  {%- if questionsUrl | contains "cccprod/cccprod/" -%}
     {%- assign questionsUrl = questionsUrl | replace: "cccprod/cccprod/", "cccprod/" -%}
   {%- endif -%}
 
