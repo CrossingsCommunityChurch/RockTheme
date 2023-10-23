@@ -27,8 +27,8 @@
   {% comment %} {%- assign notesUrl = docStorageUrl | Append:notesUrlPath -%}
   {%- assign questionsUrl = docStorageUrl | Append:questionsUrlPath -%} {% endcomment %}
 
-  {%- assign trimmedNotesPath = notesUrlPath | replace: "cccprod/", "" -%}
-  {%- assign trimmedQuestionsPath = questionsUrlPath | replace: "cccprod/", "" -%}
+  {%- assign trimmedNotesPath = notesUrlPath | replace: "cccprod", "" -%}
+  {%- assign trimmedQuestionsPath = questionsUrlPath | replace: "cccprod", "" -%}
 
   {%- assign notesUrl = docStorageUrl | Append:trimmedNotesPath -%}
   {%- assign questionsUrl = docStorageUrl | Append:trimmedQuestionsPath -%}
