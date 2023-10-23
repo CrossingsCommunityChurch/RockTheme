@@ -27,24 +27,11 @@
   {% comment %} {%- assign notesUrl = docStorageUrl | Append:notesUrlPath -%}
   {%- assign questionsUrl = docStorageUrl | Append:questionsUrlPath -%} {% endcomment %}
 
-  {%- capture trimmedNotesPath -%}
-  {%- if notesUrlPath contains "cccprod/" -%}
-    {{ notesUrlPath | remove_first: "cccprod/" }}
-  {%- else -%}
-    {{ notesUrlPath }}
-  {%- endif -%}
-{%- endcapture -%}
+  {%- assign trimmedNotesPath = notesUrlPath | replace: "cccprod/", "" -%}
+  {%- assign trimmedQuestionsPath = questionsUrlPath | replace: "cccprod/", "" -%}
 
-{%- capture trimmedQuestionsPath -%}
-  {%- if questionsUrlPath contains "cccprod/" -%}
-    {{ questionsUrlPath | remove_first: "cccprod/" }}
-  {%- else -%}
-    {{ questionsUrlPath }}
-  {%- endif -%}
-{%- endcapture -%}
-
-{%- assign notesUrl = docStorageUrl | Append:trimmedNotesPath -%}
-{%- assign questionsUrl = docStorageUrl | Append:trimmedQuestionsPath -%}
+  {%- assign notesUrl = docStorageUrl | Append:trimmedNotesPath -%}
+  {%- assign questionsUrl = docStorageUrl | Append:trimmedQuestionsPath -%}
 
   {% comment %} {%- if item.Title == 'Kindness' -%}
     {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Sermon%20PDFs/Sermon%20discussion%20Questions/MDQ_10302022.pdf" -%}
