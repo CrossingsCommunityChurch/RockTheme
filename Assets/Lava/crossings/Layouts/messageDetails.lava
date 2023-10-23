@@ -24,14 +24,16 @@
   {%- assign questions = item | Attribute:'DiscussionQuestions', 'Url' -%}
   {%- assign notesUrlPath = notes | Url:'localpath' -%}
   {%- assign questionsUrlPath = questions | Url:'localpath' -%}
-  {% comment %} {%- assign notesUrl = docStorageUrl | Append:notesUrlPath -%}
-  {%- assign questionsUrl = docStorageUrl | Append:questionsUrlPath -%} {% endcomment %}
+  {%- assign notesUrl = docStorageUrl | Append:notesUrlPath -%}
+  {%- assign questionsUrl = docStorageUrl | Append:questionsUrlPath -%}
 
-  {%- assign trimmedNotesPath = notesUrlPath | replace: "cccprod", "" -%}
-  {%- assign trimmedQuestionsPath = questionsUrlPath | replace: "cccprod", "" -%}
+  {%- if notesUrl contains "cccprod/cccprod/" -%}
+    {%- assign notesUrl = notesUrl | replace: "cccprod/cccprod/", "cccprod/" -%}
+  {%- endif -%}
 
-  {%- assign notesUrl = docStorageUrl | Append:trimmedNotesPath -%}
-  {%- assign questionsUrl = docStorageUrl | Append:trimmedQuestionsPath -%}
+  {%- if questionsUrl contains "cccprod/cccprod/" -%}
+    {%- assign questionsUrl = questionsUrl | replace: "cccprod/cccprod/", "cccprod/" -%}
+  {%- endif -%}
 
   {% comment %} {%- if item.Title == 'Kindness' -%}
     {%- assign questionsUrl = "https://docs.crossings.church/cccprod/Sermon%20PDFs/Sermon%20discussion%20Questions/MDQ_10302022.pdf" -%}
