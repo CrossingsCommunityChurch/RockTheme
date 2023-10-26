@@ -156,9 +156,9 @@
                     		{%-endif-%}
                         {%- endif -%}
                     {%-if location.Location.Name and location.Location.Name != empty-%}
-                        {%-assign locaddress = location.Location.FormattedAddress %}
+                        {%- assign locaddress = location.Location.FormattedAddress | Replace: 'Rd', 'Rd ' | Replace: 'St', 'St ' | Replace: 'Ave', 'Ave ' -%}
                     {%-else-%}
-                        {%- assign locaddress = location.Location.FormattedAddress -%}
+                        {%- assign locaddress = location.Location.FormattedAddress | Replace: 'Rd', 'Rd ' | Replace: 'St', 'St ' | Replace: 'Ave', 'Ave ' -%}
                     {%-endif-%}
         {
             "Id": {{id | ToJSON}},
