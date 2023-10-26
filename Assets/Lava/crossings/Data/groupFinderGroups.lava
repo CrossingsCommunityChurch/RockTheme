@@ -156,9 +156,9 @@
                     		{%-endif-%}
                         {%- endif -%}
                     {%-if location.Location.Name and location.Location.Name != empty-%}
-                        {%- assign locaddress = location.Location.FormattedAddress | Replace: 'Rd', 'Rd ' | Replace: 'St', 'St ' | Replace: 'Ave', 'Ave ' -%}
+                        {%- assign locaddress = location.Location.FormattedAddress | Replace: 'Rd', 'Rd ' | Replace: 'St', 'St ' | Replace: 'Ave', 'Ave ' | Replace: 'Broadway', 'Broadway ' -%}
                     {%-else-%}
-                        {%- assign locaddress = location.Location.FormattedAddress | Replace: 'Rd', 'Rd ' | Replace: 'St', 'St ' | Replace: 'Ave', 'Ave ' -%}
+                        {%- assign locaddress = location.Location.FormattedAddress | Replace: 'Rd', 'Rd ' | Replace: 'St', 'St ' | Replace: 'Ave', 'Ave ' | Replace: 'Broadway', 'Broadway ' -%}
                     {%-endif-%}
         {
             "Id": {{id | ToJSON}},
