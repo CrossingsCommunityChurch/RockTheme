@@ -15,7 +15,6 @@
         <li><a href="/info">Events</a></li>
         {% comment %} <li><a href="/#volunteer">Volunteer</a></li> {% endcomment %}
         <li><a href="/contact-us">Contact Us</a></li>
-        <li><a href="/christmas-worship">Worship</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
