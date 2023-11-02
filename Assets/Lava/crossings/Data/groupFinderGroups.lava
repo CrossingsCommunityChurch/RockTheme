@@ -126,7 +126,9 @@
                         {%-endif-%}
                     {%-endcase-%}
                     {%-assign leaderArray = members | Where:'GroupRoleId', 624 | Select:'Person' -%}
-                    {%-if leaderArray != empty -%}
+                    {%-if leaderArray != empty && group.Id == 399391-%}
+                        {%- assign leaders = ['Deidre Franklin','Shari Murphy','Mark Filson','Skip McKinstry'] -%}
+                    {%-elseif leaderArray != empty -%}
                         {%- assign leaders = leaderArray | Select:'FullName' -%}
                     {% else %}
                         {%-assign leaderArray = members | Where:'GroupRoleId', 700 | Select:'Person' -%}
