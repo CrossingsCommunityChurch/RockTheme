@@ -12,7 +12,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/#times">Candlelight Services</a></li>
-        <li><a href="/info">Events</a></li>
+        <li><a href="https://crossings.church/info">Events</a></li>
         {% comment %} <li><a href="/#volunteer">Volunteer</a></li> {% endcomment %}
         <li><a href="/contact-us">Contact Us</a></li>
       </ul>
