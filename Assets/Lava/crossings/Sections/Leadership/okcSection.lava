@@ -33,7 +33,7 @@
             <div class="tab-pane fade active in" id="pastors">
               <div class="row flex-row flex-wrap justify-center location-content">
                 {%- person dataview:'118' where:'StaffLocation *= {{location}}' Sort:'LastName' -%}
-                    <div class="col-md-6 mb-2">
+                    {% comment %} <div class="col-md-6 mb-2">
                       <div class="person-item">
                         <div class="person-image">
                           <img src="https://res.cloudinary.com/crossings-community-church/image/upload/v1645545447/rock-person-photo/owjd3xbt9whyutghvbbp.jpg">
@@ -43,7 +43,7 @@
                           <p class="lead mb-0">Senior Pastor</p>
                         </div>
                       </div>
-                    </div>
+                    </div> {% endcomment %}
                   {%- for person in personItems -%}
                     {%- if person.FullName == "Marty Grubbs" -%}
                       {%- continue -%}
