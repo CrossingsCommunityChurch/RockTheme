@@ -7,7 +7,6 @@
         {%- for audience in audiences -%}
           {%comment%} Get rid of internal categories {%endcomment%}
           {% assign isInternal = audience |  Attribute:'InternalFilter' %}
-          {% if isInternal == 'Yes' %}{% continue %}{% endif %}
           {%- if isInternal == 'Yes' -%}
             {%- continue -%}
           {%- else  -%}
