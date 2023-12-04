@@ -5,7 +5,7 @@
       {%- for item in contentchannel.Items -%}
         {%- assign audiences =  item | Attribute:'SecondaryAudiences','Object' -%}
         {%- for audience in audiences -%}
-          {%- if audience.Value == 'Staff' -%}
+          {%- if audience.Value == 'Staff' or audience.Value == 'Holiday' -%}
             {%- continue -%}
           {%- else  -%}
           {%- assign curAudience = audience.Value | StripNewlines | ToJSON -%}
