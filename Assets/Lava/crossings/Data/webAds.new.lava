@@ -5,7 +5,9 @@
       {%- for item in contentchannel.Items -%}
         {%- assign audiences =  item | Attribute:'SecondaryAudiences','Object' -%}
         {%- for audience in audiences -%}
-          {%- if audience.Value == 'Staff' -%}
+          {%comment%} Get rid of internal categories {%endcomment%}
+          {% assign isInternal = audience |  Attribute:'InternalFilter' %}
+          {%- if isInternal == 'Yes' -%}
             {%- continue -%}
           {%- else  -%}
           {%- assign curAudience = audience.Value | StripNewlines | ToJSON -%}
