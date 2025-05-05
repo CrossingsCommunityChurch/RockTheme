@@ -20,7 +20,7 @@
   {%- if clPhoto and clPhoto != empty -%}
       {%- assign imageUrl = clPhoto -%}
     {%- else -%}
-    {%- if item | Attribute:'AssetImage' -%}
+    {%- if item | Attribute:'AssetImage' != empty -%}
       {%- assign imageStorageUrl = 'Global' | Attribute:'ImageURL' | Prepend:'https://' -%}
       {%- assign imageSize = ',c_scale,w_auto' -%}
       {%- assign imageUrlPath =  item | Attribute:'AssetImage' | Url:'localpath' | RemoveFirst:'/Images' | RemoveFirst:'/Web' | Prepend:'/oldweb' -%}
